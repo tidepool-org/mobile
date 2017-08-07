@@ -1,4 +1,4 @@
-package org.tidepool.expo_blip_notes;
+package org.tidepool.ExpoTidepoolMobile;
 
 import android.os.Bundle;
 
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.tidepool.expo_blip_notes.generated.ExponentBuildConstants;
+import org.tidepool.ExpoTidepoolMobile.generated.ExponentBuildConstants;
 import host.exp.expoview.ExponentActivity;
 
 public class MainActivity extends ExponentActivity {

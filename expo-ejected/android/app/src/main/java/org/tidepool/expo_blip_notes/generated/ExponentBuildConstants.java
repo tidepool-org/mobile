@@ -1,4 +1,4 @@
-package org.tidepool.expo_blip_notes.generated;
+package org.tidepool.ExpoTidepoolMobile.generated;
 
 // This file is auto-generated. Please don't rename!
 public class ExponentBuildConstants {
