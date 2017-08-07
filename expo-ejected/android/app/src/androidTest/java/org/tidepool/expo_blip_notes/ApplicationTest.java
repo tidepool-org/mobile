@@ -1,4 +1,4 @@
-package org.tidepool.expo_blip_notes;
+package org.tidepool.ExpoTidepoolMobile;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

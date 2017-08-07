@@ -2,10 +2,10 @@
   "expo": {
     "sdkVersion": "19.0.0",
     "ios": {
-      "bundleIdentifier": "org.tidepool.expo_blip_notes"
+      "bundleIdentifier": "org.tidepool.ExpoTidepoolMobile"
     },
     "android": {
-      "package": "org.tidepool.expo_blip_notes"
+      "package": "org.tidepool.ExpoTidepoolMobile"
     },
     "name": "tidepool-mobile",
     "slug": "tidepool-mobile",
