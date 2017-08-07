@@ -1,0 +1,20 @@
+{
+  "expo": {
+    "sdkVersion": "19.0.0",
+    "ios": {
+      "bundleIdentifier": "org.tidepool.expo_blip_notes"
+    },
+    "android": {
+      "package": "org.tidepool.expo_blip_notes"
+    },
+    "name": "tidepool-mobile",
+    "slug": "tidepool-mobile",
+    "version": "0.1.0",
+    "isDetached": true,
+    "detach": {
+      "scheme": "expba3fc2589648466cbd888dc964086d4a",
+      "iosExpoViewUrl": "https://s3.amazonaws.com/exp-exponent-view-code/ios-v1.18.2-sdk19.0.0-3fabbbb7-61b3-4a1e-9932-12d0aa6af276.tar.gz",
+      "androidExpoViewUrl": "https://s3.amazonaws.com/exp-exponent-view-code/android-v1.18.4-sdk19.0.0-3fb414c9-8696-4966-a0ac-9ca424242424.tar.gz"
+    }
+  }
+}
