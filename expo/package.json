@@ -14,6 +14,8 @@
     "flow-bin": "^0.47.0",
     "jest-expo": "~20.0.0",
     "prettier": "^1.7.0",
+    "prettier-eslint": "^8.1.1",
+    "prettier-eslint-cli": "^4.3.2",
     "react-native-scripts": "1.2.1",
     "react-test-renderer": "16.0.0-alpha.12"
   },
@@ -24,7 +26,8 @@
     "android": "react-native-scripts android",
     "ios": "react-native-scripts ios",
     "test": "node node_modules/jest/bin/jest.js --watch",
-    "flow": "flow"
+    "flow": "flow",
+    "format": "prettier-eslint \"src/**/*.js\""
   },
   "jest": {
     "preset": "jest-expo"
