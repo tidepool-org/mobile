@@ -1,3 +1,4 @@
 node_modules/
 .expo/
 npm-debug.*
+App.js # Don't commit this, just switch between build time versions via script
