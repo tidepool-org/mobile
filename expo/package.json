@@ -17,7 +17,12 @@
     "prettier-eslint": "^8.1.1",
     "prettier-eslint-cli": "^4.3.2",
     "react-native-scripts": "1.2.1",
-    "react-test-renderer": "16.0.0-alpha.12"
+    "react-test-renderer": "16.0.0-alpha.12",
+    "@storybook/react-native": "^3.2.10",
+    "@storybook/addon-actions": "^3.2.10",
+    "@storybook/addon-links": "^3.2.10",
+    "react-dom": "16.0.0-rc.2",
+    "prop-types": "^15.6.0"
   },
   "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
   "scripts": {
@@ -27,7 +32,9 @@
     "ios": "react-native-scripts ios",
     "test": "node node_modules/jest/bin/jest.js --watch",
     "flow": "flow",
-    "format": "prettier-eslint \"src/**/*.js\""
+    "format": "prettier-eslint \"src/**/*.js\"",
+    "storybook": "cp AppStorybook.js App.js && storybook start -p 7007",
+    "no-storybook": "cp AppMain.js App.js"
   },
   "jest": {
     "preset": "jest-expo"
