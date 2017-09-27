@@ -3,6 +3,12 @@
   "rules": {
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
 
+    // Disable this rule for stories
+    "import/no-extraneous-dependencies": [
+      "error",
+      { "devDependencies": ["**/__stories__/*"] }
+    ],
+
     // For React Native images
     "global-require": "off",
 
