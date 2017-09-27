@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "@storybook/addon-actions": "^3.2.10",
+    "@storybook/addon-links": "^3.2.10",
+    "@storybook/react-native": "^3.2.10",
     "eslint": "^4.7.2",
     "eslint-config-airbnb": "^15.1.0",
     "eslint-config-prettier": "^2.6.0",
@@ -16,13 +19,10 @@
     "prettier": "^1.7.0",
     "prettier-eslint": "^8.1.1",
     "prettier-eslint-cli": "^4.3.2",
-    "react-native-scripts": "1.2.1",
-    "react-test-renderer": "16.0.0-alpha.12",
-    "@storybook/react-native": "^3.2.10",
-    "@storybook/addon-actions": "^3.2.10",
-    "@storybook/addon-links": "^3.2.10",
+    "prop-types": "^15.6.0",
     "react-dom": "16.0.0",
-    "prop-types": "^15.6.0"
+    "react-native-scripts": "1.2.1",
+    "react-test-renderer": "16.0.0-alpha.12"
   },
   "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
   "scripts": {
@@ -37,10 +37,12 @@
     "no-storybook": "cp AppMain.js App.js"
   },
   "jest": {
-    "preset": "jest-expo"
+    "preset": "jest-expo",
+    "transformIgnorePatterns": ["node_modules/(?!jest-expo|glamorous-native)"]
   },
   "dependencies": {
     "expo": "21.0.2",
+    "glamorous-native": "^1.2.0",
     "react": "16.0.0",
     "react-native": "0.48.4"
   }
