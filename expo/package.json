@@ -22,6 +22,7 @@
     "prop-types": "^15.6.0",
     "react-dom": "16.0.0",
     "react-native-scripts": "1.2.1",
+    "react-native-storybook-loader": "^1.5.1",
     "react-test-renderer": "16.0.0-alpha.12"
   },
   "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
@@ -34,11 +35,19 @@
     "flow": "flow",
     "format": "prettier-eslint \"src/**/*.js\"",
     "storybook": "cp AppStorybook.js App.js && storybook start -p 7007",
-    "no-storybook": "cp AppMain.js App.js"
+    "no-storybook": "cp AppMain.js App.js",
+    "prestorybook": "rnstl"
   },
   "jest": {
     "preset": "jest-expo",
     "transformIgnorePatterns": ["node_modules/(?!jest-expo|glamorous-native)"]
+  },
+  "config": {
+    "react-native-storybook-loader": {
+      "searchDir": ["./src"],
+      "pattern": "**/__stories__/index.js",
+      "outputFile": "./storybook/storyLoader.js"
+    }
   },
   "dependencies": {
     "expo": "21.0.2",
