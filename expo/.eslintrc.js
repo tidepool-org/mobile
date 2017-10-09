@@ -9,6 +9,11 @@ module.exports = {
   rules: {
     "react/jsx-filename-extension": [1, { extensions: [".js", ".jsx"] }],
 
+    "react/no-did-mount-set-state": OFF,
+
+    // Disable for now, latest version of eslint-plugin-react is confused. Revisit this.
+    "react/no-typos": OFF,
+
     // Disable this rule for stories
     "import/no-extraneous-dependencies": [
       "error",
@@ -16,9 +21,9 @@ module.exports = {
     ],
 
     // For React Native images
-    "global-require": "off",
+    "global-require": OFF,
 
     // For React Native images
-    "import/no-unresolved": "off",
+    "import/no-unresolved": OFF,
   },
 };

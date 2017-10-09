@@ -7,23 +7,22 @@
     "@storybook/addon-links": "^3.2.10",
     "@storybook/react-native": "^3.2.10",
     "eslint": "^4.7.2",
-    "eslint-config-airbnb": "^15.1.0",
+    "eslint-config-airbnb": "^16.0.0",
     "eslint-config-prettier": "^2.6.0",
     "eslint-plugin-import": "^2.7.0",
-    "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-prettier": "^2.3.1",
     "eslint-plugin-react": "^7.4.0",
     "eslint-plugin-react-native": "^3.1.0",
-    "flow-bin": "^0.47.0",
+    "flow-bin": "^0.56.0",
     "jest-expo": "21.0.2",
     "prettier": "^1.7.0",
     "prettier-eslint": "^8.1.1",
     "prettier-eslint-cli": "^4.3.2",
-    "prop-types": "^15.6.0",
-    "react-dom": "16.0.0-alpha.12",
-    "react-native-scripts": "1.2.1",
+    "react-dom": "16.0.0",
+    "react-native-scripts": "1.5.0",
     "react-native-storybook-loader": "^1.5.1",
-    "react-test-renderer": "16.0.0-alpha.12"
+    "react-test-renderer": "16.0.0"
   },
   "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
   "scripts": {
@@ -35,7 +34,7 @@
     "flow": "flow",
     "format": "prettier-eslint \"src/**/*.js\"",
     "storybook": "cp AppStorybook.js App.js && storybook start -p 7007",
-    "no-storybook": "cp AppMain.js App.js",
+    "no-storybook": "cp AppExpo.js App.js",
     "prestorybook": "rnstl"
   },
   "jest": {
@@ -47,14 +46,15 @@
   "config": {
     "react-native-storybook-loader": {
       "searchDir": ["./src"],
-      "pattern": "**/__stories__/index.js",
+      "pattern": "**/__stories__/*.js",
       "outputFile": "./storybook/storyLoader.js"
     }
   },
   "dependencies": {
     "expo": "21.0.2",
     "glamorous-native": "^1.2.0",
-    "react": "16.0.0-alpha.12",
+    "prop-types": "^15.6.0",
+    "react": "16.0.0",
     "react-native": "0.48.4"
   }
 }

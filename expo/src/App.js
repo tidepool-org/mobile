@@ -1,19 +1,9 @@
 import React from "react";
-import { StyleSheet, View, Image } from "react-native";
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
+import withThemeProvider from "./enhancers/withThemeProvider";
+import PrimaryTheme from "./themes/PrimaryTheme";
+import SignInScreen from "./screens/SignInScreen";
 
-const App = () => (
-  <View style={styles.container}>
-    <Image source={require("../assets/images/Tidepool_Logo_Light.png")} />
-  </View>
-);
+const App = () => <SignInScreen />;
 
-export default App;
+export default withThemeProvider(App, PrimaryTheme);
