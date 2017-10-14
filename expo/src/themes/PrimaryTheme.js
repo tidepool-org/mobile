@@ -1,5 +1,7 @@
 import { Platform } from "react-native";
 
+import makeFontStyle from "../utils/makeFontStyle";
+
 const PrimaryTheme = {
   colors: {
     lightBackgroundColor: "#f7f7f8",
@@ -12,31 +14,49 @@ const PrimaryTheme = {
   },
   versionStringStyle: {
     color: "#9B9B9B",
-    fontFamily: "OpenSans-Regular",
-    fontSize: 17,
+    ...makeFontStyle({
+      fontFamilyBaseName: "OpenSans",
+      fontWeightName: "Regular",
+      fontSize: 17,
+    }),
   },
   madePossibleByTextStyle: {
     color: "#9B9B9B",
-    fontFamily: "OpenSans-Semibold",
-    fontSize: 17,
+    ...makeFontStyle({
+      fontFamilyBaseName: "OpenSans",
+      fontWeightName: "Semibold",
+      fontSize: 17,
+    }),
   },
   wrongEmailOrPasswordTextStyle: {
     color: "#ff354e",
-    fontFamily: "OpenSans-Semibold",
-    fontSize: 17,
+    ...makeFontStyle({
+      fontFamilyBaseName: "OpenSans",
+      fontWeightName: "Semibold",
+      fontSize: 17,
+    }),
   },
   forgotPasswordTextStyle: {
     color: "#9B9B9B",
-    fontFamily: "OpenSans-Regular",
-    fontSize: 17,
+    ...makeFontStyle({
+      fontFamilyBaseName: "OpenSans",
+      fontWeightName: "Regular",
+      fontSize: 17,
+    }),
   },
   signUpTextStyle: {
-    fontFamily: "OpenSans-Bold",
-    fontSize: 17,
+    ...makeFontStyle({
+      fontFamilyBaseName: "OpenSans",
+      fontWeightName: "Bold",
+      fontSize: 17,
+    }),
   },
   signInEditFieldStyle: {
-    fontFamily: "OpenSans-Regular",
-    fontSize: 18,
+    ...makeFontStyle({
+      fontFamilyBaseName: "OpenSans",
+      fontWeightName: "Regular",
+      fontSize: 18,
+    }),
     ...Platform.select({
       ios: {
         backgroundColor: "white",

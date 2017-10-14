@@ -1,0 +1,9 @@
+node_modules/
+.expo/
+npm-debug.*
+
+# Don't commit these, just switch between build time copied versions of App.js via package.json scripts
+/src
+/assets
+/ios/build
+/android/build

@@ -2,5 +2,6 @@ node_modules/
 .expo/
 npm-debug.*
 
-# Don't commit this, just switch between build time copied versions of App.js via package.json scripts
+# Don't commit this, just switch between build time copied versions via package.json scripts
 /App.js
+/src/utils/environment.js
