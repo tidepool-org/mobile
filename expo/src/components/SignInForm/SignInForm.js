@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Platform, View } from "react-native";
+import { KeyboardAvoidingView, Platform, View } from "react-native";
 import glamorous, { withTheme } from "glamorous-native";
 
 import ThemePropTypes from "../../themes/ThemePropTypes";
@@ -29,7 +29,12 @@ class SignInForm extends Component {
   render() {
     const { theme, style } = this.props;
     return (
-      <glamorous.View style={style} behavior="padding">
+      <KeyboardAvoidingView
+        style={style}
+        behavior="padding"
+        keyboardVerticalOffset={-95}
+        backgroundColor={theme.colors.lightBackgroundColor}
+      >
         <glamorous.Image
           source={require("../../../assets/images/tidepool-logo-horizontal.png")}
           width={262}
@@ -43,7 +48,6 @@ class SignInForm extends Component {
             this.emailTextInput = textInput;
           }}
           style={theme.signInEditFieldStyle}
-          autoFocus={typeof jest === "undefined"} // TODO: jest - Don't autofocus under test. Revisit this. See https://github.com/facebook/jest/issues/3707
           returnKeyType="next"
           selectionColor="#657ef6"
           underlineColorAndroid="#657ef6"
@@ -93,7 +97,7 @@ class SignInForm extends Component {
         <glamorous.View flexDirection="row" justifyContent="flex-end">
           <Button onPress={() => {}} title="Log in" />
         </glamorous.View>
-      </glamorous.View>
+      </KeyboardAvoidingView>
     );
   }
 }
