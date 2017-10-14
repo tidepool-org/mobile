@@ -6,6 +6,7 @@
     "@storybook/addon-actions": "^3.2.10",
     "@storybook/addon-links": "^3.2.10",
     "@storybook/react-native": "^3.2.10",
+    "babel-preset-react-native-stage-0": "^1.0.1",
     "eslint": "^4.7.2",
     "eslint-config-airbnb": "^16.0.0",
     "eslint-config-prettier": "^2.6.0",
@@ -20,23 +21,18 @@
     "prettier-eslint": "^8.1.1",
     "prettier-eslint-cli": "^4.3.2",
     "react-dom": "16.0.0",
-    "react-native-scripts": "1.5.0",
     "react-native-storybook-loader": "^1.5.1",
     "react-test-renderer": "16.0.0"
   },
-  "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
   "scripts": {
-    "start": "react-native-scripts start",
-    "eject": "react-native-scripts eject",
-    "android": "react-native-scripts android",
-    "ios": "react-native-scripts ios",
+    "start": "react-native start",
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
     "test": "node node_modules/jest/bin/jest.js --watch",
     "flow": "flow",
     "format": "prettier-eslint \"src/**/*.js\"",
     "pre":
-      "cp AppExpo.js App.js && cp src/utils/environmentExpo.js src/utils/environment.js",
-    "prestorybook": "cp AppStorybook.js App.js && rnstl",
-    "storybook": "storybook start -p 7007"
+      "cp -fR ../expo/src/ src && cp -fR ../expo/assets/ assets && cp src/utils/environmentReactNative.js src/utils/environment.js"
   },
   "jest": {
     "preset": "jest-expo",
@@ -52,10 +48,12 @@
     }
   },
   "dependencies": {
-    "expo": "21.0.2",
     "glamorous-native": "^1.2.0",
     "prop-types": "^15.6.0",
     "react": "16.0.0",
     "react-native": "0.48.4"
+  },
+  "rnpm": {
+    "assets": ["./assets/fonts"]
   }
 }
