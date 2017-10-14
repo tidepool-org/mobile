@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Platform, KeyboardAvoidingView } from "react-native";
 import glamorous, { withTheme } from "glamorous-native";
 
 import MadePossibleBy from "../../components/MadePossibleBy";
