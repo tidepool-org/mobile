@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { KeyboardAvoidingView } from "react-native";
+import { Platform, KeyboardAvoidingView } from "react-native";
 import glamorous, { withTheme } from "glamorous-native";
 
 import MadePossibleBy from "../../components/MadePossibleBy";
@@ -14,10 +14,8 @@ const SignInScreen = ({ theme, errorMessage }) => {
   const environment = "staging"; // TODO: redux - move to redux state
 
   return (
-    <KeyboardAvoidingView
+    <glamorous.View
       flex={1}
-      behavior="padding"
-      keyboardVerticalOffset={-95}
       backgroundColor={theme.colors.lightBackgroundColor}
       justifyContent="center"
       alignItems="center"
@@ -42,7 +40,7 @@ const SignInScreen = ({ theme, errorMessage }) => {
           <VersionAndEnvironment version={version} environment={environment} />
         </glamorous.View>
       </glamorous.View>
-    </KeyboardAvoidingView>
+    </glamorous.View>
   );
 };
 
