@@ -31,8 +31,7 @@
     "test": "node node_modules/jest/bin/jest.js --watch",
     "flow": "flow",
     "format": "prettier-eslint \"src/**/*.js\"",
-    "pre":
-      "cp -fR ../expo/src/ src && cp -fR ../expo/assets/ assets && cp src/utils/environmentReactNative.js src/utils/environment.js"
+    "pre": "cp -fR ../expo/src/ src && cp -fR ../expo/assets/ assets && cp src/utils/environmentReactNative.js src/utils/environment.js"
   },
   "jest": {
     "preset": "jest-expo",
@@ -42,7 +41,9 @@
   },
   "config": {
     "react-native-storybook-loader": {
-      "searchDir": ["./src"],
+      "searchDir": [
+        "./src"
+      ],
       "pattern": "**/__stories__/*.js",
       "outputFile": "./storybook/storyLoader.js"
     }
@@ -51,9 +52,12 @@
     "glamorous-native": "^1.2.0",
     "prop-types": "^15.6.0",
     "react": "16.0.0",
-    "react-native": "0.48.4"
+    "react-native": "0.48.4",
+    "react-native-iphone-x-helper": "^1.0.1"
   },
   "rnpm": {
-    "assets": ["./assets/fonts"]
+    "assets": [
+      "./assets/fonts"
+    ]
   }
 }
