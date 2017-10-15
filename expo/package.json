@@ -33,8 +33,7 @@
     "test": "node node_modules/jest/bin/jest.js --watch",
     "flow": "flow",
     "format": "prettier-eslint \"src/**/*.js\"",
-    "pre":
-      "cp AppExpo.js App.js && cp src/utils/environmentExpo.js src/utils/environment.js",
+    "pre": "cp AppExpo.js App.js && cp src/utils/environmentExpo.js src/utils/environment.js",
     "prestorybook": "cp AppStorybook.js App.js && rnstl",
     "storybook": "storybook start -p 7007"
   },
@@ -46,7 +45,9 @@
   },
   "config": {
     "react-native-storybook-loader": {
-      "searchDir": ["./src"],
+      "searchDir": [
+        "./src"
+      ],
       "pattern": "**/__stories__/*.js",
       "outputFile": "./storybook/storyLoader.js"
     }
@@ -56,6 +57,7 @@
     "glamorous-native": "^1.2.0",
     "prop-types": "^15.6.0",
     "react": "16.0.0",
-    "react-native": "0.48.4"
+    "react-native": "0.48.4",
+    "react-native-iphone-x-helper": "^1.0.1"
   }
 }

@@ -33,7 +33,6 @@ class SignInForm extends Component {
         style={style}
         behavior="padding"
         keyboardVerticalOffset={-95}
-        backgroundColor={theme.colors.lightBackgroundColor}
       >
         <glamorous.Image
           source={require("../../../assets/images/tidepool-logo-horizontal.png")}
