@@ -3,16 +3,18 @@ This project was bootstrapped with [Create React Native App](https://github.com/
 ## Table of Contents
 
 * [Available Scripts](#available-scripts)
-  * [yarn start](#npm-start)
-  * [yarn test](#npm-test)
-  * [yarn run ios](#npm-run-ios)
-  * [yarn run android](#npm-run-android)
+  * [yarn run pre](#yarn-run-pre)
+  * [yarn run storybook](#yarn-run-storybook)
+  * [yarn start](#yarn-start)
+  * [yarn test](#yarn-test)
+  * [yarn run ios](#yarn-run-ios)
+  * [yarn run android](#yarn-run-android)
 
-## Available Scripts
+## Scripts
 
 ### `yarn run pre`
 
-This must be used once before trying to run the packager, or when switching from storybook. This copies the Expo variant of some files like App.js and environment.js into place. When running storybook, the storybook variants of these files will be copied into place. The ejected version of the app also has a pre comment which serves a similar purpose.
+This must be used once before trying to run the packager, or when switching from storybook. This copies the Expo variant of some files like App.js and environment.js into place. When running storybook, the storybook variants of these files will be copied into place. The ejected version of the app also has a `pre` script which serves a similar purpose.
 
 ### `yarn run storybook`
 
