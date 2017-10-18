@@ -17,7 +17,7 @@ class SignInForm extends Component {
         marginTop={-15}
         marginBottom={Platform.OS === "android" ? -3 : 8}
       >
-        {errorMessage}
+        {errorMessage || " "}
       </glamorous.Text>
     );
   }
@@ -89,7 +89,11 @@ class SignInForm extends Component {
             </glamorous.Text>
           </glamorous.TouchableOpacity>
         </glamorous.View>
-        <glamorous.View flexDirection="row" justifyContent="flex-end">
+        <glamorous.View
+          marginTop={-5}
+          flexDirection="row"
+          justifyContent="flex-end"
+        >
           <Button onPress={() => {}} title="Log in" />
         </glamorous.View>
       </KeyboardAvoidingView>
