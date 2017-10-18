@@ -9,21 +9,17 @@ import Button from "../Button";
 class SignInForm extends Component {
   renderErrorMessage() {
     const { theme, errorMessage } = this.props;
-    let result = null;
-    if (errorMessage) {
-      result = (
-        <glamorous.Text
-          style={theme.wrongEmailOrPasswordTextStyle}
-          alignSelf="flex-start"
-          paddingLeft={3}
-          marginTop={-15}
-          marginBottom={Platform.OS === "android" ? -3 : 8}
-        >
-          {errorMessage}
-        </glamorous.Text>
-      );
-    }
-    return result;
+    return (
+      <glamorous.Text
+        style={theme.wrongEmailOrPasswordTextStyle}
+        alignSelf="flex-start"
+        paddingLeft={3}
+        marginTop={-15}
+        marginBottom={Platform.OS === "android" ? -3 : 8}
+      >
+        {errorMessage}
+      </glamorous.Text>
+    );
   }
 
   render() {
@@ -38,7 +34,7 @@ class SignInForm extends Component {
           source={require("../../../assets/images/tidepool-logo-horizontal.png")}
           width={262}
           height={28.5}
-          marginBottom={35}
+          marginBottom={25}
           alignSelf="center"
         />
         {this.renderErrorMessage()}
