@@ -6,6 +6,7 @@ const ERROR = 2;
 
 module.exports = {
   extends: ["airbnb", "prettier"],
+  parser: "babel-eslint",
   rules: {
     "react/jsx-filename-extension": [1, { extensions: [".js", ".jsx"] }],
 
@@ -17,13 +18,13 @@ module.exports = {
     // Disable this rule for stories
     "import/no-extraneous-dependencies": [
       "error",
-      { devDependencies: ["**/__stories__/*"] },
+      { devDependencies: ["**/__stories__/*"] }
     ],
 
     // For React Native images
     "global-require": OFF,
 
     // For React Native images
-    "import/no-unresolved": OFF,
-  },
+    "import/no-unresolved": OFF
+  }
 };
