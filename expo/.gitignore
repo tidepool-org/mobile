@@ -1,6 +1,9 @@
 node_modules/
 .expo/
 npm-debug.*
+yarn-debug.log*
+yarn-error.log*
+.vscode/.react/debuggerWorker.js
 
 # Don't commit this, just switch between build time copied versions via package.json scripts
 /App.js

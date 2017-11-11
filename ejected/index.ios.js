@@ -1,3 +1,3 @@
 import { AppRegistry } from "react-native";
-import App from "./src/App";
-AppRegistry.registerComponent("Tidepool", () => App);
+import RootNavigator from "./src/navigators/RootNavigator";
+AppRegistry.registerComponent("Tidepool", () => RootNavigator);

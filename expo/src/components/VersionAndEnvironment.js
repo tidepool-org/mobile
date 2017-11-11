@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import glamorous, { withTheme } from "glamorous-native";
 
-import ThemePropTypes from "../../themes/ThemePropTypes";
+import ThemePropTypes from "../themes/ThemePropTypes";
 
 const VersionAndEnvironment = ({ theme, environment, version }) => (
   <glamorous.View

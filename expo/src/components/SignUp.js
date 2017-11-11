@@ -1,19 +1,18 @@
 import React from "react";
-import { View } from "react-native";
+import { ViewStylePropTypes } from "react-native";
 import glamorous, { withTheme } from "glamorous-native";
 
-import ThemePropTypes from "../../themes/ThemePropTypes";
+import ThemePropTypes from "../themes/ThemePropTypes";
 
 const SignUp = ({ theme, style }) => (
   <glamorous.View style={style}>
     <glamorous.TouchableOpacity
       flexDirection="row"
-      justifyContent="flex-end"
       alignItems="center"
       padding={8}
     >
       <glamorous.Image
-        source={require("../../../assets/images/signup-plus.png")}
+        source={require("../../assets/images/signup-plus.png")}
         width={20}
         height={20}
         marginRight={10}
@@ -25,7 +24,7 @@ const SignUp = ({ theme, style }) => (
 
 SignUp.propTypes = {
   theme: ThemePropTypes.isRequired,
-  style: View.propTypes.style,
+  style: ViewStylePropTypes,
 };
 
 SignUp.defaultProps = {
