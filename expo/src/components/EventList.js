@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { RefreshControl } from "react-native";
 import glamorous, { withTheme } from "glamorous-native";
 
-import NoteListItem from "../NoteListItem";
+import NoteListItem from "./NoteListItem";
 
 class EventList extends React.PureComponent {
   state = { selected: new Map(), refreshing: false };

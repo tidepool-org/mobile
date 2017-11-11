@@ -1,7 +1,7 @@
 import React from "react";
 import glamorous, { withTheme } from "glamorous-native";
 
-import ThemePropTypes from "../../themes/ThemePropTypes";
+import ThemePropTypes from "../themes/ThemePropTypes";
 
 const MadePossibleBy = ({ theme }) => (
   <glamorous.View
@@ -13,7 +13,7 @@ const MadePossibleBy = ({ theme }) => (
       Made possible by
     </glamorous.Text>
     <glamorous.Image
-      source={require("../../../assets/images/jdrf-logo.png")}
+      source={require("../../assets/images/jdrf-logo.png")}
       width={97.5}
       height={25}
       alignSelf="center"

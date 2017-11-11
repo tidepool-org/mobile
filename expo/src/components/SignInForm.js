@@ -1,12 +1,27 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { KeyboardAvoidingView, Platform, View } from "react-native";
+import {
+  KeyboardAvoidingView,
+  Platform,
+  ViewStylePropTypes,
+} from "react-native";
 import glamorous, { withTheme } from "glamorous-native";
+import { NavigationActions } from "react-navigation";
 
-import ThemePropTypes from "../../themes/ThemePropTypes";
-import Button from "../Button";
+import ThemePropTypes from "../themes/ThemePropTypes";
+import Button from "./Button";
 
 class SignInForm extends Component {
+  onPressLogIn = () => {
+    this.props.navigation.dispatch(
+      NavigationActions.reset({
+        index: 0,
+        key: null,
+        actions: [NavigationActions.navigate({ routeName: "MainDrawer" })],
+      }),
+    );
+  };
+
   renderErrorMessage() {
     const { theme, errorMessage } = this.props;
     return (
@@ -31,7 +46,7 @@ class SignInForm extends Component {
         keyboardVerticalOffset={-95}
       >
         <glamorous.Image
-          source={require("../../../assets/images/tidepool-logo-horizontal.png")}
+          source={require("../../assets/images/tidepool-logo-horizontal.png")}
           width={262}
           height={28.5}
           marginBottom={25}
@@ -94,7 +109,7 @@ class SignInForm extends Component {
           flexDirection="row"
           justifyContent="flex-end"
         >
-          <Button onPress={() => {}} title="Log in" />
+          <Button onPress={this.onPressLogIn} title="Log in" />
         </glamorous.View>
       </KeyboardAvoidingView>
     );
@@ -104,12 +119,20 @@ class SignInForm extends Component {
 SignInForm.propTypes = {
   errorMessage: PropTypes.string,
   theme: ThemePropTypes.isRequired,
-  style: View.propTypes.style,
+  style: ViewStylePropTypes,
 };
 
 SignInForm.defaultProps = {
   errorMessage: null,
   style: null,
+};
+
+SignInForm.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+    dispatch: PropTypes.func.isRequired,
+    goBack: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 export default withTheme(SignInForm);

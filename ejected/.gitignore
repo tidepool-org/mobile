@@ -1,6 +1,8 @@
 node_modules/
 .expo/
 npm-debug.*
+yarn-debug.log*
+yarn-error.log*
 
 # Don't commit these, just switch between build time copied versions of App.js via package.json scripts
 /src

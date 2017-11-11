@@ -5,26 +5,22 @@
 // https://github.com/elderfo/react-native-storybook-loader.git
 
 function loadStories() {
-  require('../src/components/Button/__stories__/ButtonStory.js');
-  require('../src/components/EventList/__stories__/EventListStory.js');
-  require('../src/components/MadePossibleBy/__stories__/SignUpStory.js');
-  require('../src/components/NoteListItem/__stories__/NoteListItemStory.js');
-  require('../src/components/SignInForm/__stories__/SignInForm.js');
-  require('../src/components/SignUp/__stories__/SignUpStory.js');
-  require('../src/components/VersionAndEnvironment/__stories__/VersionAndEnvironmentStory.js');
-  require('../src/screens/SignInScreen/__stories__/SignInScreenStory.js');
+  require('../__stories__/components/Button.story.js');
+  require('../__stories__/components/EventList.story.js');
+  require('../__stories__/components/MadePossible.story.js');
+  require('../__stories__/components/NoteListItem.story.js');
+  require('../__stories__/components/SignInForm.story.js');
+  require('../__stories__/components/VersionAndEnvironment.story.js');
   
 }
 
 const stories = [
-  '../src/components/Button/__stories__/ButtonStory.js',
-  '../src/components/EventList/__stories__/EventListStory.js',
-  '../src/components/MadePossibleBy/__stories__/SignUpStory.js',
-  '../src/components/NoteListItem/__stories__/NoteListItemStory.js',
-  '../src/components/SignInForm/__stories__/SignInForm.js',
-  '../src/components/SignUp/__stories__/SignUpStory.js',
-  '../src/components/VersionAndEnvironment/__stories__/VersionAndEnvironmentStory.js',
-  '../src/screens/SignInScreen/__stories__/SignInScreenStory.js',
+  '../__stories__/components/Button.story.js',
+  '../__stories__/components/EventList.story.js',
+  '../__stories__/components/MadePossible.story.js',
+  '../__stories__/components/NoteListItem.story.js',
+  '../__stories__/components/SignInForm.story.js',
+  '../__stories__/components/VersionAndEnvironment.story.js',
   
 ];
 

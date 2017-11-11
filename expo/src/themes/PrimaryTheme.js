@@ -12,6 +12,15 @@ const PrimaryTheme = {
     "OpenSans-Regular": require("../../assets/fonts/OpenSans-Regular.ttf"),
     "OpenSans-Semibold": require("../../assets/fonts/OpenSans-Semibold.ttf"),
   },
+  navHeaderTitleStyle: {
+    color: "white",
+    ...makeFontStyle({
+      fontFamilyBaseName: "OpenSans",
+      fontWeightName: "Regular",
+      fontSize: 17.5,
+    }),
+    alignSelf: "center",
+  },
   noteListItemTextStyle: {
     color: "#000",
     ...makeFontStyle({

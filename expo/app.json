@@ -1,7 +1,8 @@
 {
   "expo": {
     "sdkVersion": "22.0.0",
-    "name": "Tidepool"
+    "name": "Tidepool",
+    "slug": "Tidepool"
   },
   "name": "Tidepool",
   "displayName": "Tidepool"
