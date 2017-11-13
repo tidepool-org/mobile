@@ -1,5 +1,5 @@
 import React from "react";
-import { ViewStylePropTypes } from "react-native";
+import { ViewPropTypes } from "react-native";
 import glamorous, { withTheme } from "glamorous-native";
 
 import ThemePropTypes from "../themes/ThemePropTypes";
@@ -24,7 +24,7 @@ const SignUp = ({ theme, style }) => (
 
 SignUp.propTypes = {
   theme: ThemePropTypes.isRequired,
-  style: ViewStylePropTypes,
+  style: ViewPropTypes.style,
 };
 
 SignUp.defaultProps = {

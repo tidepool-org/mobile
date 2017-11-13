@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { ViewStylePropTypes } from "react-native";
+import { ViewPropTypes } from "react-native";
 import glamorous, { withTheme } from "glamorous-native";
 
 import ThemePropTypes from "../themes/ThemePropTypes";
@@ -13,7 +13,7 @@ const NoteListItem = ({ theme, style, text }) => (
 
 NoteListItem.propTypes = {
   theme: ThemePropTypes.isRequired,
-  style: ViewStylePropTypes,
+  style: ViewPropTypes.style,
   text: PropTypes.string.isRequired,
 };
 

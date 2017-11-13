@@ -1,10 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import {
-  KeyboardAvoidingView,
-  Platform,
-  ViewStylePropTypes,
-} from "react-native";
+import { KeyboardAvoidingView, Platform, ViewPropTypes } from "react-native";
 import glamorous, { withTheme } from "glamorous-native";
 import { NavigationActions } from "react-navigation";
 
@@ -119,7 +115,7 @@ class SignInForm extends Component {
 SignInForm.propTypes = {
   errorMessage: PropTypes.string,
   theme: ThemePropTypes.isRequired,
-  style: ViewStylePropTypes,
+  style: ViewPropTypes.style,
 };
 
 SignInForm.defaultProps = {
