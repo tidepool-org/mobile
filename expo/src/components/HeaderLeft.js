@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Image, TouchableOpacity } from "react-native";
+import { Platform, Image, StatusBar, TouchableOpacity } from "react-native";
 
 class HeaderLeft extends React.Component {
   onPressMenu = () => {
@@ -9,9 +9,15 @@ class HeaderLeft extends React.Component {
 
   render() {
     return (
-      <TouchableOpacity onPress={this.onPressMenu}>
+      <TouchableOpacity
+        style={{
+          padding: 10,
+          marginLeft: 6,
+          marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+        }}
+        onPress={this.onPressMenu}
+      >
         <Image
-          style={{ marginLeft: 16 }}
           tintColor="white"
           source={require("../../assets/images/menu-button.png")}
         />
