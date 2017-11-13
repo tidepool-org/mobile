@@ -28,10 +28,6 @@ class HomeScreen extends React.Component {
           Jill Jellyfish
         </Text>
       ),
-      headerTitleStyle: [
-        PrimaryTheme.navHeaderTitleStyle,
-        { fontFamily: "OpenSans-Light" },
-      ],
       headerLeft: <HeaderLeft navigation={navigation} />,
       headerRight: <HeaderRight navigation={navigation} />,
     };
