@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Button, StatusBar, Text, View } from "react-native";
+import { Platform, Button, StatusBar, Text, View } from "react-native";
 import { NavigationActions } from "react-navigation";
 
 import PrimaryTheme from "../themes/PrimaryTheme";
@@ -8,18 +8,34 @@ import HeaderLeft from "../components/HeaderLeft";
 import HeaderRight from "../components/HeaderRight";
 
 class HomeScreen extends React.Component {
-  static navigationOptions = ({ navigation }) => ({
-    headerStyle: { backgroundColor: "#281946" },
-    headerTitle: (
-      <Text style={PrimaryTheme.navHeaderTitleStyle}>Jill Jellyfish</Text>
-    ),
-    headerTitleStyle: [
-      PrimaryTheme.navHeaderTitleStyle,
-      { fontFamily: "OpenSans-Light" },
-    ],
-    headerLeft: <HeaderLeft navigation={navigation} />,
-    headerRight: <HeaderRight navigation={navigation} />,
-  });
+  static navigationOptions = ({ navigation }) => {
+    const headerStyle = { backgroundColor: "#281946" };
+    if (Platform.OS === "android") {
+      headerStyle.height = 80;
+    }
+    return {
+      headerStyle,
+      headerTitle: (
+        <Text
+          style={[
+            PrimaryTheme.navHeaderTitleStyle,
+            {
+              marginTop:
+                Platform.OS === "android" ? StatusBar.currentHeight : 0,
+            },
+          ]}
+        >
+          Jill Jellyfish
+        </Text>
+      ),
+      headerTitleStyle: [
+        PrimaryTheme.navHeaderTitleStyle,
+        { fontFamily: "OpenSans-Light" },
+      ],
+      headerLeft: <HeaderLeft navigation={navigation} />,
+      headerRight: <HeaderRight navigation={navigation} />,
+    };
+  };
 
   onPressSignOut = () => {
     this.props.navigation.dispatch(
