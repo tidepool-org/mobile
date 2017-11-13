@@ -16,7 +16,7 @@ const PrimaryTheme = {
     color: "white",
     ...makeFontStyle({
       fontFamilyBaseName: "OpenSans",
-      fontWeightName: "Regular",
+      fontWeightName: "Light",
       fontSize: 17.5,
     }),
     alignSelf: "center",
