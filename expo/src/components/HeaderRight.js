@@ -1,5 +1,5 @@
 import React from "react";
-import { Platform, Image, StatusBar, TouchableOpacity } from "react-native";
+import { Image, TouchableOpacity } from "react-native";
 
 class HeaderRight extends React.PureComponent {
   render() {
@@ -8,7 +8,6 @@ class HeaderRight extends React.PureComponent {
         style={{
           padding: 10,
           marginRight: 6,
-          marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
         }}
       >
         <Image source={require("../../assets/images/add-button.png")} />
