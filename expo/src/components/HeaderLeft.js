@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Platform, Image, StatusBar, TouchableOpacity } from "react-native";
+import { Image, TouchableOpacity } from "react-native";
 
 class HeaderLeft extends React.Component {
   onPressMenu = () => {
@@ -13,7 +13,6 @@ class HeaderLeft extends React.Component {
         style={{
           padding: 10,
           marginLeft: 6,
-          marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
         }}
         onPress={this.onPressMenu}
       >
