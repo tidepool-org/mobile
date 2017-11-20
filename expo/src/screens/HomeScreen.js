@@ -1,9 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Button, StatusBar, Text, View } from "react-native";
+import { StatusBar, Text } from "react-native";
 import { NavigationActions } from "react-navigation";
+import glamorous from "glamorous-native";
 
 import PrimaryTheme from "../themes/PrimaryTheme";
+import Button from "../components/Button";
 import HeaderLeft from "../components/HeaderLeft";
 import HeaderRight from "../components/HeaderRight";
 
@@ -37,12 +39,12 @@ class HomeScreen extends React.Component {
 
   render() {
     return (
-      <View style={{ flex: 1, alignItems: "center" }}>
+      <glamorous.View flex={1} alignItems="center">
         <StatusBar barStyle="light-content" />
-        <View style={{ width: 100, marginTop: 20 }}>
+        <glamorous.View marginTop={20}>
           <Button onPress={this.onPressSignOut} title="Log out" />
-        </View>
-      </View>
+        </glamorous.View>
+      </glamorous.View>
     );
   }
 }
