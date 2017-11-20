@@ -89,18 +89,41 @@ def enableSeparateBuildPerCPUArchitecture = false
  */
 def enableProguardInReleaseBuilds = false
 
+def getPassword(String keyChain) {
+    def stdout = new ByteArrayOutputStream()
+    def stderr = new ByteArrayOutputStream()
+    exec {
+        commandLine 'security', '-q', 'find-generic-password', '-s', keyChain, '-w'
+        standardOutput = stdout
+        errorOutput = stderr
+        ignoreExitValue true
+    }
+    stdout.toString().trim()
+}
+
+def tidepoolKeystoreStorePassword = getPassword("tidepool_keystore_store_password")
+def tidepoolKeystoreKeyPassword = getPassword("tidepool_keystore_key_password")
+
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.1"
 
     defaultConfig {
-        applicationId "io.tidepool.urchin"
+        applicationId "io.tidepool.urchinRN"
         minSdkVersion 16
         targetSdkVersion 22
         versionCode 1
         versionName "3.0"
         ndk {
             abiFilters "armeabi-v7a", "x86"
+        }
+    }
+    signingConfigs {
+        release {
+            storeFile file(System.getenv("TIDEPOOL_KEYSTORE_FILE"))
+            storePassword tidepoolKeystoreStorePassword
+            keyAlias System.getenv("TIDEPOOL_KEYSTORE_KEY_ALIAS")
+            keyPassword tidepoolKeystoreKeyPassword
         }
     }
     splits {
@@ -115,6 +138,7 @@ android {
         release {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            signingConfig signingConfigs.release
         }
     }
     // applicationVariants are e.g. debug, release
