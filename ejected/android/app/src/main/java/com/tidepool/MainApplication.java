@@ -1,4 +1,4 @@
-package io.tidepool.urchin;
+package io.tidepool.urchinRN;
 
 import android.app.Application;
 
