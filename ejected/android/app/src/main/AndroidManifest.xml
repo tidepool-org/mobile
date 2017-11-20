@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="io.tidepool.urchin"
+    package="io.tidepool.urchinRN"
     android:versionCode="1"
     android:versionName="3.0">
 
