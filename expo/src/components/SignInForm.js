@@ -22,6 +22,7 @@ class SignInForm extends Component {
     const { theme, errorMessage } = this.props;
     return (
       <glamorous.Text
+        allowFontScaling={false}
         style={theme.wrongEmailOrPasswordTextStyle}
         alignSelf="flex-start"
         paddingLeft={3}
@@ -50,6 +51,7 @@ class SignInForm extends Component {
         />
         {this.renderErrorMessage()}
         <glamorous.TextInput
+          allowFontScaling={false}
           innerRef={textInput => {
             this.emailTextInput = textInput;
           }}
@@ -72,6 +74,7 @@ class SignInForm extends Component {
           }}
         />
         <glamorous.TextInput
+          allowFontScaling={false}
           innerRef={textInput => {
             this.passwordTextInput = textInput;
           }}
@@ -92,6 +95,7 @@ class SignInForm extends Component {
         <glamorous.View flexDirection="row" marginLeft={-8}>
           <glamorous.TouchableOpacity padding={8}>
             <glamorous.Text
+              allowFontScaling={false}
               style={theme.forgotPasswordTextStyle}
               alignSelf="flex-start"
               paddingLeft={3}
@@ -116,19 +120,16 @@ SignInForm.propTypes = {
   errorMessage: PropTypes.string,
   theme: ThemePropTypes.isRequired,
   style: ViewPropTypes.style,
-};
-
-SignInForm.defaultProps = {
-  errorMessage: null,
-  style: null,
-};
-
-SignInForm.propTypes = {
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired,
     dispatch: PropTypes.func.isRequired,
     goBack: PropTypes.func.isRequired,
   }).isRequired,
+};
+
+SignInForm.defaultProps = {
+  errorMessage: null,
+  style: null,
 };
 
 export default withTheme(SignInForm);

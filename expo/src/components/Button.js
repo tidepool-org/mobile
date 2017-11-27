@@ -53,7 +53,7 @@ class Button extends Component {
     const formattedTitle =
       Platform.OS === "android" ? title.toUpperCase() : title;
     const Touchable = TouchableOpacity;
-    // TODO: Revisit this. Do we want native feedback for Android? Or consistency/parity between iOS and Android
+    // TODO: android - Revisit this. Do we want native feedback for Android? Or consistency/parity between iOS and Android
     // const Touchable =
     //   Platform.OS === "android" ? TouchableNativeFeedback : TouchableOpacity;
     return (
@@ -63,7 +63,7 @@ class Button extends Component {
         onPress={onPress}
       >
         <View style={buttonStyles}>
-          <Text style={textStyles} disabled={disabled}>
+          <Text style={textStyles} disabled={disabled} allowFontScaling={false}>
             {formattedTitle}
           </Text>
         </View>

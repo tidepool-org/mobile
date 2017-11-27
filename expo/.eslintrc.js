@@ -27,4 +27,7 @@ module.exports = {
     // For React Native images
     "import/no-unresolved": OFF,
   },
+  settings: {
+    "import/resolver": "reactnative",
+  },
 };

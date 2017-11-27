@@ -10,7 +10,7 @@ const VersionAndEnvironment = ({ theme, environment, version }) => (
     justifyContent="center"
     alignItems="center"
   >
-    <glamorous.Text style={theme.versionStringStyle}>
+    <glamorous.Text allowFontScaling={false} style={theme.versionStringStyle}>
       {version}
       {environment !== "production" ? ` on ${environment}` : ""}
     </glamorous.Text>
