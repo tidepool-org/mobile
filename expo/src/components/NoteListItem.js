@@ -7,7 +7,12 @@ import ThemePropTypes from "../themes/ThemePropTypes";
 
 const NoteListItem = ({ theme, style, text }) => (
   <glamorous.View style={style} flexDirection="row" padding={8}>
-    <glamorous.Text style={theme.noteListItemTextStyle}>{text}</glamorous.Text>
+    <glamorous.Text
+      allowFontScaling={false}
+      style={theme.noteListItemTextStyle}
+    >
+      {text}
+    </glamorous.Text>
   </glamorous.View>
 );
 

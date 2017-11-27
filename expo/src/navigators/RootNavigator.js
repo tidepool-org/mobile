@@ -1,9 +1,9 @@
 import { StackNavigator } from "react-navigation";
 
-import withThemeProvider from "../enhancers/withThemeProvider";
-import PrimaryTheme from "../themes/PrimaryTheme";
 import SignInScreen from "../screens/SignInScreen";
 import MainDrawerNavigator from "./MainDrawerNavigator";
+import withThemeProvider from "../enhancers/withThemeProvider";
+import PrimaryTheme from "../themes/PrimaryTheme";
 
 const RootNavigator = StackNavigator(
   {

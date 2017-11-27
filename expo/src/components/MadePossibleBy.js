@@ -9,7 +9,11 @@ const MadePossibleBy = ({ theme }) => (
     justifyContent="center"
     alignItems="center"
   >
-    <glamorous.Text style={theme.madePossibleByTextStyle} marginRight={3}>
+    <glamorous.Text
+      allowFontScaling={false}
+      style={theme.madePossibleByTextStyle}
+      marginRight={3}
+    >
       Made possible by
     </glamorous.Text>
     <glamorous.Image

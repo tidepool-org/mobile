@@ -1,36 +1,29 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { StatusBar, Text } from "react-native";
-import { NavigationActions } from "react-navigation";
 import glamorous from "glamorous-native";
 
 import PrimaryTheme from "../themes/PrimaryTheme";
-import Button from "../components/Button";
+import Colors from "../constants/Colors";
 import HeaderLeft from "../components/HeaderLeft";
 import HeaderRight from "../components/HeaderRight";
 
+// TODO: redux - profile - need to remove hardcoded profile name ("Jill Jellyfish") and use proper app state from redux
+
 class HomeScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
-    const headerStyle = { backgroundColor: "#281946" };
+    const headerStyle = { backgroundColor: Colors.darkPurple };
 
     return {
       headerStyle,
       headerTitle: (
-        <Text style={PrimaryTheme.navHeaderTitleStyle}>Jill Jellyfish</Text>
+        <Text style={PrimaryTheme.navHeaderTitleStyle} allowFontScaling={false}>
+          Jill Jellyfish
+        </Text>
       ),
       headerLeft: <HeaderLeft navigation={navigation} />,
       headerRight: <HeaderRight navigation={navigation} />,
     };
-  };
-
-  onPressSignOut = () => {
-    this.props.navigation.dispatch(
-      NavigationActions.reset({
-        index: 0,
-        key: null,
-        actions: [NavigationActions.navigate({ routeName: "SignIn" })],
-      }),
-    );
   };
 
   onPressOpenMenu = () => {
@@ -41,9 +34,6 @@ class HomeScreen extends React.Component {
     return (
       <glamorous.View flex={1} alignItems="center">
         <StatusBar barStyle="light-content" />
-        <glamorous.View marginTop={20}>
-          <Button onPress={this.onPressSignOut} title="Log out" />
-        </glamorous.View>
       </glamorous.View>
     );
   }

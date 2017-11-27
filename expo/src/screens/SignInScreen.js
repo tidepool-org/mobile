@@ -15,8 +15,8 @@ const safeAreaBottomInset = isIphoneX() ? 20 : 0;
 class SignInScreen extends React.Component {
   render() {
     const { theme, errorMessage } = this.props;
-    const version = "2.0.1"; // TODO: redux - move to redux state
-    const environment = "staging"; // TODO: redux - move to redux state
+    const version = "2.0.1"; // TODO: redux
+    const environment = "staging"; // TODO: redux
     return (
       <glamorous.View
         flex={1}

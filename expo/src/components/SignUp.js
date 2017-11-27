@@ -17,7 +17,9 @@ const SignUp = ({ theme, style }) => (
         height={20}
         marginRight={10}
       />
-      <glamorous.Text style={theme.signUpTextStyle}>Sign up</glamorous.Text>
+      <glamorous.Text allowFontScaling={false} style={theme.signUpTextStyle}>
+        Sign up
+      </glamorous.Text>
     </glamorous.TouchableOpacity>
   </glamorous.View>
 );

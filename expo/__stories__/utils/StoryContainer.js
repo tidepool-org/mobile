@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { View } from "react-native";
+import { SafeAreaView, View } from "react-native";
 
 import withThemeProvider from "../../src/enhancers/withThemeProvider";
 import withExpoFontPreload from "../../src/enhancers/withExpoFontPreload";
@@ -20,21 +20,39 @@ const StoryContainerComponent = props => {
     ),
     PrimaryTheme,
   );
+
+  const shouldCenter = props.behaviors.includes("center");
+  const shouldOutline = props.behaviors.includes("outline");
+
+  const safeAreaViewStyle = { flex: 1 };
+  const containerStyle = {};
+
+  if (shouldCenter) {
+    safeAreaViewStyle.justifyContent = "center";
+    safeAreaViewStyle.alignItems = "center";
+  }
+
+  if (shouldOutline) {
+    containerStyle.margin = 5;
+    containerStyle.padding = 5;
+    containerStyle.alignSelf = shouldCenter ? "center" : "flex-start";
+    containerStyle.borderWidth = 1;
+  }
+
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      {enhanced()}
-    </View>
+    <SafeAreaView style={safeAreaViewStyle}>
+      <View style={containerStyle}>{enhanced()}</View>
+    </SafeAreaView>
   );
 };
 
 StoryContainerComponent.propTypes = {
   children: PropTypes.element.isRequired,
+  behaviors: PropTypes.arrayOf(PropTypes.string.isRequired),
+};
+
+StoryContainerComponent.defaultProps = {
+  behaviors: ["center", "outline"],
 };
 
 const StoryContainerScreen = props => {
