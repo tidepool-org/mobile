@@ -2,22 +2,14 @@ import React from "react";
 import PropTypes from "prop-types";
 import { SafeAreaView, View } from "react-native";
 
+import Fonts from "../../src/constants/Fonts";
 import withThemeProvider from "../../src/enhancers/withThemeProvider";
 import withExpoFontPreload from "../../src/enhancers/withExpoFontPreload";
 import PrimaryTheme from "../../src/themes/PrimaryTheme";
 
-const navigation = {
-  navigate: () => {},
-  dispatch: () => {},
-  goBack: () => {},
-};
-
 const StoryContainerComponent = props => {
   const enhanced = withThemeProvider(
-    withExpoFontPreload(
-      () => React.cloneElement(props.children, { navigation, ...props }),
-      PrimaryTheme.fonts,
-    ),
+    withExpoFontPreload(() => props.children, Fonts),
     PrimaryTheme,
   );
 
@@ -57,21 +49,10 @@ StoryContainerComponent.defaultProps = {
 
 const StoryContainerScreen = props => {
   const enhanced = withThemeProvider(
-    withExpoFontPreload(
-      () => React.cloneElement(props.children, { navigation, ...props }),
-      PrimaryTheme.fonts,
-    ),
+    withExpoFontPreload(() => props.children, Fonts),
     PrimaryTheme,
   );
-  return (
-    <View
-      style={{
-        flex: 1,
-      }}
-    >
-      {enhanced()}
-    </View>
-  );
+  return <SafeAreaView style={{ flex: 1 }}>{enhanced()}</SafeAreaView>;
 };
 
 StoryContainerScreen.propTypes = {

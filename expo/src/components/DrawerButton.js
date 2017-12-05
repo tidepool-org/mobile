@@ -26,9 +26,7 @@ class DrawerButton extends Component {
         marginRight={15}
         alignSelf="center"
         color={
-          this.state.isUnderlayVisible
-            ? theme.drawerMenuButtonStyle.titleColorActive
-            : titleColor
+          this.state.isUnderlayVisible ? theme.titleColorActive : titleColor
         }
       >
         {title}
@@ -52,9 +50,7 @@ class DrawerButton extends Component {
         alignSelf="center"
         marginRight={15}
         color={
-          this.state.isUnderlayVisible
-            ? theme.drawerMenuButtonStyle.titleColorActive
-            : titleColor
+          this.state.isUnderlayVisible ? theme.titleColorActive : titleColor
         }
       >
         {subtitle}
@@ -82,7 +78,7 @@ class DrawerButton extends Component {
 
     return (
       <glamorous.TouchableHighlight
-        underlayColor={theme.drawerMenuButtonStyle.underlayColor}
+        underlayColor={theme.underlayColor}
         onPress={onPress}
         onShowUnderlay={() => {
           this.setState({ isUnderlayVisible: true });
@@ -91,16 +87,14 @@ class DrawerButton extends Component {
           this.setState({ isUnderlayVisible: false });
         }}
       >
-        <glamorous.View>
-          <glamorous.View
-            flexDirection="row"
-            justifyContent="space-between"
-            height={38}
-          >
-            {this.renderTitle()}
-            {this.renderSubtitle()}
-            {this.renderDisclosureIndicator()}
-          </glamorous.View>
+        <glamorous.View
+          flexDirection="row"
+          justifyContent="space-between"
+          height={38}
+        >
+          {this.renderTitle()}
+          {this.renderSubtitle()}
+          {this.renderDisclosureIndicator()}
         </glamorous.View>
       </glamorous.TouchableHighlight>
     );

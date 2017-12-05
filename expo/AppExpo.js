@@ -2,6 +2,6 @@
 
 import withExpoFontPreload from "./src/enhancers/withExpoFontPreload";
 import RootNavigator from "./src/navigators/RootNavigator";
-import PrimaryTheme from "./src/themes/PrimaryTheme";
+import Fonts from "./src/constants/Fonts";
 
-export default withExpoFontPreload(RootNavigator, PrimaryTheme.fonts);
+export default withExpoFontPreload(RootNavigator, Fonts);

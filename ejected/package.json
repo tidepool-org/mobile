@@ -31,8 +31,7 @@
     "test": "node node_modules/jest/bin/jest.js --watch",
     "flow": "flow",
     "format": "prettier-eslint \"src/**/*.js\"",
-    "pre":
-      "rm -fR src && cp -fR ../expo/src/ src && rm -fR assets && cp -fR ../expo/assets/ assets && cp src/utils/environmentReactNative.js src/utils/environment.js"
+    "pre": "rm -fR src && cp -fR ../expo/src/ src && rm -fR assets && cp -fR ../expo/assets/ assets && cp src/utils/environmentReactNative.js src/utils/environment.js && cp react-native-exclusive-components/LinearGradient.js src/components/LinearGradient.js"
   },
   "jest": {
     "preset": "jest-expo",
@@ -42,7 +41,9 @@
   },
   "config": {
     "react-native-storybook-loader": {
-      "searchDir": ["./src"],
+      "searchDir": [
+        "./src"
+      ],
       "pattern": "**/__stories__/*.js",
       "outputFile": "./storybook/storyLoader.js"
     }
@@ -53,9 +54,13 @@
     "react": "16.0.0",
     "react-native": "0.50",
     "react-native-iphone-x-helper": "1.0.1",
-    "react-navigation": "^1.0.0-beta.19"
+    "react-native-linear-gradient": "^2.3.0",
+    "react-navigation": "^1.0.0-beta.19",
+    "twitter-text": "^1.14.7"
   },
   "rnpm": {
-    "assets": ["./assets/fonts"]
+    "assets": [
+      "./assets/fonts"
+    ]
   }
 }
