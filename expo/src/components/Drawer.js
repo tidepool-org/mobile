@@ -28,7 +28,9 @@ class Drawer extends Component {
                   key: "currentUser",
                 },
               ],
-              renderItem: () => <DrawerCurrentUser />,
+              renderItem: () => (
+                <DrawerCurrentUser navigation={this.props.navigation} />
+              ),
             },
             {
               data: [

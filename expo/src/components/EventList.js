@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { RefreshControl } from "react-native";
 import glamorous, { withTheme } from "glamorous-native";
 
+import Colors from "../constants/Colors";
 import NoteListItem from "./NoteListItem";
 
 class EventList extends React.PureComponent {
@@ -29,6 +30,7 @@ class EventList extends React.PureComponent {
       id={item.id}
       onPressItem={this.onPressItem}
       selected={!!this.state.selected.get(item.id)}
+      time={item.time}
       text={item.text}
     />
   );
@@ -40,6 +42,7 @@ class EventList extends React.PureComponent {
         extraData={this.state}
         keyExtractor={this.keyExtractor}
         renderItem={this.renderItem}
+        backgroundColor={Colors.veryLightGrey} // TODO: use theme rather than color directly
         refreshControl={
           <RefreshControl
             refreshing={this.state.refreshing}
@@ -54,6 +57,7 @@ class EventList extends React.PureComponent {
 EventList.propTypes = {
   data: PropTypes.arrayOf(
     PropTypes.shape({
+      time: PropTypes.string.isRequired,
       text: PropTypes.string.isRequired,
       id: PropTypes.string.isRequired,
     }),

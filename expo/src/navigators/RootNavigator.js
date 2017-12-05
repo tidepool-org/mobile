@@ -1,14 +1,19 @@
+import React from "react";
 import { StackNavigator } from "react-navigation";
+import { ThemeProvider } from "glamorous-native";
 
 import SignInScreen from "../screens/SignInScreen";
 import MainDrawerNavigator from "./MainDrawerNavigator";
-import withThemeProvider from "../enhancers/withThemeProvider";
 import PrimaryTheme from "../themes/PrimaryTheme";
 
 const RootNavigator = StackNavigator(
   {
     SignIn: {
-      screen: withThemeProvider(SignInScreen, PrimaryTheme),
+      screen: props => (
+        <ThemeProvider theme={PrimaryTheme}>
+          <SignInScreen {...props} />
+        </ThemeProvider>
+      ),
     },
     MainDrawer: {
       screen: MainDrawerNavigator,

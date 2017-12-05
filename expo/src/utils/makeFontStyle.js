@@ -16,6 +16,7 @@ const fonts = {
 function makeFontStyle({ fontFamilyBaseName, fontWeightName, fontSize }) {
   const { fontWeights } = fonts[fontFamilyBaseName];
 
+  // TODO: use preprocessing?
   if (environment.useExpo || Platform.OS === "android") {
     const suffix = fontWeights[fontWeightName] ? `-${fontWeightName}` : "";
     const fontFamily = `${fontFamilyBaseName}${suffix}`;

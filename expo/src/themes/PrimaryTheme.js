@@ -1,116 +1,74 @@
 import { Platform } from "react-native";
 
-import makeFontStyle from "../utils/makeFontStyle";
+import FontStyles from "../constants/FontStyles";
 import Colors from "../constants/Colors";
 
 const PrimaryTheme = {
   colors: {
-    lightBackgroundColor: Colors.veryLightGrey,
-  },
-  fonts: {
-    "OpenSans-Bold": require("../../assets/fonts/OpenSans-Bold.ttf"),
-    "OpenSans-Light": require("../../assets/fonts/OpenSans-Light.ttf"),
-    "OpenSans-Regular": require("../../assets/fonts/OpenSans-Regular.ttf"),
-    "OpenSans-Semibold": require("../../assets/fonts/OpenSans-Semibold.ttf"),
+    lightBackground: Colors.veryLightGrey,
   },
   navHeaderTitleStyle: {
     color: "white",
-    ...makeFontStyle({
-      fontFamilyBaseName: "OpenSans",
-      fontWeightName: "Light",
-      fontSize: 17.5,
-    }),
+    ...FontStyles.navTitleFont,
     alignSelf: "center",
   },
+  noteListItemTimeStyle: {
+    color: Colors.altDarkGreyColor,
+    ...FontStyles.smallRegularFont,
+  },
   noteListItemTextStyle: {
-    color: "black",
-    ...makeFontStyle({
-      fontFamilyBaseName: "OpenSans",
-      fontWeightName: "Regular",
-      fontSize: 15,
-    }),
+    color: Colors.blackish,
+    ...FontStyles.mediumSmallRegularFont,
+  },
+  noteListItemHashtagStyle: {
+    color: Colors.blackish,
+    ...FontStyles.mediumSmallBoldFont,
   },
   versionStringStyle: {
     color: Colors.warmGrey,
-    ...makeFontStyle({
-      fontFamilyBaseName: "OpenSans",
-      fontWeightName: "Regular",
-      fontSize: 17,
-    }),
+    ...FontStyles.mediumRegularFont,
   },
   madePossibleByTextStyle: {
     color: Colors.warmGrey,
-    ...makeFontStyle({
-      fontFamilyBaseName: "OpenSans",
-      fontWeightName: "Semibold",
-      fontSize: 17,
-    }),
+    ...FontStyles.mediumSemiboldFont,
+  },
+  profileListItemName: {
+    color: Colors.darkPurple,
+    ...FontStyles.mediumSmallRegularFont,
   },
   drawerMenuConnectToHealthTextStyle: {
     color: Colors.darkPurple,
-    ...makeFontStyle({
-      fontFamilyBaseName: "OpenSans",
-      fontWeightName: "Regular",
-      fontSize: 15,
-    }),
+    ...FontStyles.mediumSmallRegularFont,
   },
   drawerMenuCurrentUserTextStyle: {
     color: Colors.brightBlue,
-    ...makeFontStyle({
-      fontFamilyBaseName: "OpenSans",
-      fontWeightName: "Semibold",
-      fontSize: 15,
-    }),
+    ...FontStyles.mediumSmallSemiboldFont,
   },
+  titleColorActive: "white",
+  underlayColor: Colors.brightBlue,
   drawerMenuButtonStyle: {
     titleColorGrey: Colors.mediumLightGrey,
     titleColorBlue: Colors.brightBlue,
-    titleColorActive: "white",
     titleFontStyle: {
-      ...makeFontStyle({
-        fontFamilyBaseName: "OpenSans",
-        fontWeightName: "Regular",
-        fontSize: 15,
-      }),
+      ...FontStyles.mediumSmallRegularFont,
     },
     subtitleFontStyle: {
-      ...makeFontStyle({
-        fontFamilyBaseName: "OpenSans",
-        fontWeightName: "Semibold",
-        fontSize: 10,
-      }),
+      ...FontStyles.verySmallSemiboldFont,
     },
-    underlayColor: Colors.brightBlue,
   },
   wrongEmailOrPasswordTextStyle: {
     color: Colors.redError,
-    ...makeFontStyle({
-      fontFamilyBaseName: "OpenSans",
-      fontWeightName: "Semibold",
-      fontSize: 17,
-    }),
+    ...FontStyles.mediumSemiboldFont,
   },
   forgotPasswordTextStyle: {
     color: Colors.warmGrey,
-    ...makeFontStyle({
-      fontFamilyBaseName: "OpenSans",
-      fontWeightName: "Regular",
-      fontSize: 17,
-    }),
+    ...FontStyles.mediumRegularFont,
   },
   signUpTextStyle: {
-    ...makeFontStyle({
-      fontFamilyBaseName: "OpenSans",
-      fontWeightName: "Bold",
-      fontSize: 17,
-    }),
+    ...FontStyles.mediumBoldFont,
   },
   signInEditFieldStyle: {
-    ...makeFontStyle({
-      fontFamilyBaseName: "OpenSans",
-      fontWeightName: "Regular",
-      fontSize: 18,
-    }),
+    ...FontStyles.largeRegularFont,
     ...Platform.select({
       ios: {
         backgroundColor: "white",

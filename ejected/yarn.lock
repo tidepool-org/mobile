@@ -6182,6 +6182,12 @@ react-native-iphone-x-helper@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/react-native-iphone-x-helper/-/react-native-iphone-x-helper-1.0.1.tgz#950dbdaca66f458689a7e9697c5beb9bd53f98f2"
 
+react-native-linear-gradient@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/react-native-linear-gradient/-/react-native-linear-gradient-2.3.0.tgz#757997197e35edf52e290891a11566e462845da1"
+  dependencies:
+    prop-types "^15.5.10"
+
 react-native-storybook-loader@^1.5.1:
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/react-native-storybook-loader/-/react-native-storybook-loader-1.5.1.tgz#4d02167db71a034ce81962c87a1b7abb6e66b2b3"
@@ -7260,6 +7266,10 @@ tunnel-agent@^0.6.0:
 tweetnacl@^0.14.3, tweetnacl@~0.14.0:
   version "0.14.5"
   resolved "https://registry.yarnpkg.com/tweetnacl/-/tweetnacl-0.14.5.tgz#5ae68177f192d4456269d108afa93ff8743f4f64"
+
+twitter-text@^1.14.7:
+  version "1.14.7"
+  resolved "https://registry.yarnpkg.com/twitter-text/-/twitter-text-1.14.7.tgz#77877342ec61bb0c5397b8163f4d5d31478a40e4"
 
 type-check@~0.3.2:
   version "0.3.2"

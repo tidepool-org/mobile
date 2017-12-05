@@ -5,10 +5,13 @@ import faker from "faker";
 import { StoryContainerComponent } from "../../__stories__/utils/StoryContainer";
 import NoteListItem from "../../src/components/NoteListItem";
 
-const noteText = faker.fake("{{lorem.paragraph}}");
+faker.seed(123);
+
+const time = "Nov 7 at 11:12 am";
+const text = faker.fake("{{lorem.paragraph}}");
 
 storiesOf("NoteListItem", module).add("default", () => (
   <StoryContainerComponent>
-    <NoteListItem text={noteText} />
+    <NoteListItem time={time} text={text} />
   </StoryContainerComponent>
 ));

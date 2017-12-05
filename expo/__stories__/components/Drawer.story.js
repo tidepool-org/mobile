@@ -5,11 +5,22 @@ import { storiesOf } from "@storybook/react-native";
 import { StoryContainerComponent } from "../../__stories__/utils/StoryContainer";
 import Drawer from "../../src/components/Drawer";
 
-const currentUser = {
-  username: "foo@bar.com", // TODO: redux
+const navigation = {
+  navigate: () => {},
+  dispatch: () => {},
+  goBack: () => {},
 };
+
+const currentUser = {
+  username: "email@gmail.com", // TODO: redux
+};
+
 storiesOf("Drawer", module).add("default", () => (
   <StoryContainerComponent>
-    <Drawer style={{ width: 270 }} currentUser={currentUser} />
+    <Drawer
+      style={{ width: 270 }}
+      currentUser={currentUser}
+      navigation={navigation}
+    />
   </StoryContainerComponent>
 ));

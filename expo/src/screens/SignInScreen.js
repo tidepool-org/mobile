@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { StatusBar } from "react-native";
 import glamorous, { withTheme } from "glamorous-native";
 import { isIphoneX } from "react-native-iphone-x-helper";
 
@@ -20,10 +21,11 @@ class SignInScreen extends React.Component {
     return (
       <glamorous.View
         flex={1}
-        backgroundColor={theme.colors.lightBackgroundColor}
+        backgroundColor={theme.colors.lightBackground}
         justifyContent="center"
         alignItems="center"
       >
+        <StatusBar barStyle="dark-content" />
         <glamorous.View justifyContent="center" alignItems="center">
           <SignUp
             style={{
