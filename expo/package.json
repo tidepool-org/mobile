@@ -23,7 +23,7 @@
     "prettier-eslint": "^8.1.1",
     "prettier-eslint-cli": "^4.3.2",
     "react-dom": "16.0.0",
-    "react-native-scripts": "1.5.0",
+    "react-native-scripts": "^1.5.0",
     "react-native-storybook-loader": "^1.5.1",
     "react-test-renderer": "16.0.0"
   },
@@ -36,8 +36,10 @@
     "test": "node node_modules/jest/bin/jest.js --watch",
     "flow": "flow",
     "format": "prettier-eslint \"src/**/*.js\"",
-    "pre": "cp AppExpo.js App.js && cp src/utils/environmentExpo.js src/utils/environment.js && cp expo-exclusive-components/LinearGradient.js src/components/LinearGradient.js",
-    "prestorybook": "cp AppStorybook.js App.js && cp expo-exclusive-components/LinearGradient.js src/components/LinearGradient.js && rnstl",
+    "pre":
+      "cp AppExpo.js App.js && cp src/utils/environmentExpo.js src/utils/environment.js && cp expo-exclusive-components/LinearGradient.js src/components/LinearGradient.js",
+    "prestorybook":
+      "cp AppStorybook.js App.js && cp expo-exclusive-components/LinearGradient.js src/components/LinearGradient.js && rnstl",
     "storybook": "storybook start -p 7007"
   },
   "jest": {
@@ -48,9 +50,7 @@
   },
   "config": {
     "react-native-storybook-loader": {
-      "searchDir": [
-        "./__stories__"
-      ],
+      "searchDir": ["./__stories__"],
       "pattern": "**/*.story.js",
       "outputFile": "./storybook/storyLoader.js"
     }
@@ -60,9 +60,10 @@
     "glamorous-native": "1.2.0",
     "prop-types": "15.6.0",
     "react": "16.0.0",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-23.0.0.tar.gz",
+    "react-native":
+      "https://github.com/expo/react-native/archive/sdk-23.0.0.tar.gz",
     "react-native-iphone-x-helper": "1.0.1",
-    "react-navigation": "^1.0.0-beta.19",
+    "react-navigation": "^1.0.0-beta.21",
     "twitter-text": "^1.14.7"
   }
 }
