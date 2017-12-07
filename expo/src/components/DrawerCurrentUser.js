@@ -17,7 +17,7 @@ class DrawerCurrentUser extends Component {
     const { theme, style } = this.props;
 
     return (
-      <glamorous.TouchableWithoutFeedback onPress={this.onPress}>
+      <glamorous.TouchableOpacity activeOpacity={1} onPress={this.onPress}>
         <glamorous.View
           style={style}
           flexDirection="row"
@@ -39,7 +39,7 @@ class DrawerCurrentUser extends Component {
             Current User
           </glamorous.Text>
         </glamorous.View>
-      </glamorous.TouchableWithoutFeedback>
+      </glamorous.TouchableOpacity>
     );
   }
 }
