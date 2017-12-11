@@ -5,7 +5,6 @@ import { StoryContainerScreen } from "../../__stories__/utils/StoryContainer";
 import SwitchProfileScreen from "../../src/screens/SwitchProfileScreen";
 
 const navigation = {
-  navigate: () => {},
   dispatch: () => {},
   goBack: () => {},
 };

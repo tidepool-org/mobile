@@ -4,7 +4,7 @@ import { Image, TouchableOpacity } from "react-native";
 
 class HeaderLeft extends React.Component {
   onPressMenu = () => {
-    this.props.navigation.navigate("DrawerOpen");
+    this.props.navigation.dispatch({ type: "DrawerOpen" });
   };
 
   render() {
@@ -27,9 +27,7 @@ class HeaderLeft extends React.Component {
 
 HeaderLeft.propTypes = {
   navigation: PropTypes.shape({
-    navigate: PropTypes.func.isRequired,
     dispatch: PropTypes.func.isRequired,
-    goBack: PropTypes.func.isRequired,
   }).isRequired,
 };
 

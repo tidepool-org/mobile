@@ -2,20 +2,13 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { KeyboardAvoidingView, Platform, ViewPropTypes } from "react-native";
 import glamorous, { withTheme } from "glamorous-native";
-import { NavigationActions } from "react-navigation";
 
 import ThemePropTypes from "../themes/ThemePropTypes";
 import Button from "./Button";
 
 class SignInForm extends Component {
-  onPressLogIn = () => {
-    this.props.navigation.dispatch(
-      NavigationActions.reset({
-        index: 0,
-        key: null,
-        actions: [NavigationActions.navigate({ routeName: "MainDrawer" })],
-      }),
-    );
+  onPressSignIn = () => {
+    this.props.navigation.dispatch({ type: "SignIn" });
   };
 
   renderErrorMessage() {
@@ -109,7 +102,7 @@ class SignInForm extends Component {
           flexDirection="row"
           justifyContent="flex-end"
         >
-          <Button onPress={this.onPressLogIn} title="Log in" />
+          <Button onPress={this.onPressSignIn} title="Log in" />
         </glamorous.View>
       </KeyboardAvoidingView>
     );
@@ -121,9 +114,7 @@ SignInForm.propTypes = {
   theme: ThemePropTypes.isRequired,
   style: ViewPropTypes.style,
   navigation: PropTypes.shape({
-    navigate: PropTypes.func.isRequired,
     dispatch: PropTypes.func.isRequired,
-    goBack: PropTypes.func.isRequired,
   }).isRequired,
 };
 
