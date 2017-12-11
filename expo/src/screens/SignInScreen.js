@@ -15,7 +15,7 @@ const safeAreaBottomInset = isIphoneX() ? 20 : 0;
 
 class SignInScreen extends React.Component {
   render() {
-    const { theme, errorMessage } = this.props;
+    const { theme, errorMessage, navigation } = this.props;
     const version = "2.0.1"; // TODO: redux
     const environment = "staging"; // TODO: redux
     return (
@@ -34,6 +34,7 @@ class SignInScreen extends React.Component {
               zIndex: 1,
               position: "absolute",
             }}
+            navigation={navigation}
           />
           <SignInForm
             style={{ width: 300, flex: 1, justifyContent: "center" }}

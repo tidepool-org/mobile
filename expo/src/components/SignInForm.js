@@ -11,6 +11,10 @@ class SignInForm extends Component {
     this.props.navigation.dispatch({ type: "SignIn" });
   };
 
+  onPressForgotPassword = () => {
+    this.props.navigation.dispatch({ type: "ForgotPassword" });
+  };
+
   renderErrorMessage() {
     const { theme, errorMessage } = this.props;
     return (
@@ -86,7 +90,10 @@ class SignInForm extends Component {
           marginTop={15}
         />
         <glamorous.View flexDirection="row" marginLeft={-8}>
-          <glamorous.TouchableOpacity padding={8}>
+          <glamorous.TouchableOpacity
+            padding={8}
+            onPress={this.onPressForgotPassword}
+          >
             <glamorous.Text
               allowFontScaling={false}
               style={theme.forgotPasswordTextStyle}
