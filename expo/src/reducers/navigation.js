@@ -49,6 +49,12 @@ function navigation(state = initialNavState, action) {
     case "Support":
       Linking.openURL(Urls.support);
       break;
+    case "ForgotPassword":
+      Linking.openURL(Urls.forgotPassword);
+      break;
+    case "SignUp":
+      Linking.openURL(Urls.signUp);
+      break;
     case "DrawerOpen":
       nextState = AppNavigator.router.getStateForAction(
         NavigationActions.navigate({ routeName: "DrawerOpen" }),
