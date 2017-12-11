@@ -5,9 +5,7 @@ import { StoryContainerScreen } from "../../__stories__/utils/StoryContainer";
 import SignInScreen from "../../src/screens/SignInScreen";
 
 const navigation = {
-  navigate: () => {},
   dispatch: () => {},
-  goBack: () => {},
 };
 
 storiesOf("SignInScreen", module).add("default", () => (
@@ -16,7 +14,7 @@ storiesOf("SignInScreen", module).add("default", () => (
   </StoryContainerScreen>
 ));
 
-storiesOf("SignInScreen", module).add("login error", () => (
+storiesOf("SignInScreen", module).add("sign in error", () => (
   <StoryContainerScreen>
     <SignInScreen
       navigation={navigation}

@@ -74,7 +74,6 @@ class SwitchProfileScreen extends React.Component {
 
 SwitchProfileScreen.propTypes = {
   navigation: PropTypes.shape({
-    navigate: PropTypes.func.isRequired,
     dispatch: PropTypes.func.isRequired,
     goBack: PropTypes.func.isRequired,
   }).isRequired,

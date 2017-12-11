@@ -1,14 +1,11 @@
 import React, { Component } from "react";
-import { Linking } from "react-native";
+import PropTypes from "prop-types";
 
-import Urls from "../constants/Urls";
 import DrawerButton from "./DrawerButton";
 
 class DrawerPrivacyAndTermsButton extends Component {
   onPress = () => {
-    // TODO: metrics
-    // console.log("privacy/tos button tapped");
-    Linking.openURL(Urls.privacyAndTerms);
+    this.props.navigation.dispatch({ type: "PrivacyAndTerms" });
   };
 
   render() {
@@ -20,5 +17,11 @@ class DrawerPrivacyAndTermsButton extends Component {
     );
   }
 }
+
+DrawerPrivacyAndTermsButton.propTypes = {
+  navigation: PropTypes.shape({
+    dispatch: PropTypes.func.isRequired,
+  }).isRequired,
+};
 
 export default DrawerPrivacyAndTermsButton;

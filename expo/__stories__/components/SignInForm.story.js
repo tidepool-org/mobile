@@ -5,9 +5,7 @@ import { StoryContainerComponent } from "../../__stories__/utils/StoryContainer"
 import SignInForm from "../../src/components/SignInForm";
 
 const navigation = {
-  navigate: () => {},
   dispatch: () => {},
-  goBack: () => {},
 };
 
 storiesOf("SignInForm", module).add("default", () => (
@@ -16,7 +14,7 @@ storiesOf("SignInForm", module).add("default", () => (
   </StoryContainerComponent>
 ));
 
-storiesOf("SignInForm", module).add("login error", () => (
+storiesOf("SignInForm", module).add("sign in error", () => (
   <StoryContainerComponent>
     <SignInForm
       errorMessage="Wrong email or password!"

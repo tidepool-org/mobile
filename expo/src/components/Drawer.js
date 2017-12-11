@@ -116,9 +116,7 @@ Drawer.propTypes = {
     username: PropTypes.string.isRequired,
   }).isRequired,
   navigation: PropTypes.shape({
-    navigate: PropTypes.func.isRequired,
     dispatch: PropTypes.func.isRequired,
-    goBack: PropTypes.func.isRequired,
   }).isRequired,
 };
 

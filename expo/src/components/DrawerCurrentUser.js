@@ -10,7 +10,7 @@ import ThemePropTypes from "../themes/ThemePropTypes";
 class DrawerCurrentUser extends Component {
   onPress = () => {
     // TODO: switch profile when selecting current user from drawer and closing drawer
-    this.props.navigation.navigate("DrawerClose");
+    this.props.navigation.dispatch({ type: "DrawerClose" });
   };
 
   render() {
@@ -48,9 +48,7 @@ DrawerCurrentUser.propTypes = {
   theme: ThemePropTypes.isRequired,
   style: ViewPropTypes.style,
   navigation: PropTypes.shape({
-    navigate: PropTypes.func.isRequired,
     dispatch: PropTypes.func.isRequired,
-    goBack: PropTypes.func.isRequired,
   }).isRequired,
 };
 
