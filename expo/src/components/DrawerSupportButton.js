@@ -5,7 +5,7 @@ import DrawerButton from "./DrawerButton";
 
 class DrawerSupportButton extends Component {
   onPress = () => {
-    this.props.navigation.dispatch({ type: "Support" });
+    this.props.navigateSupport();
   };
 
   render() {
@@ -14,9 +14,7 @@ class DrawerSupportButton extends Component {
 }
 
 DrawerSupportButton.propTypes = {
-  navigation: PropTypes.shape({
-    dispatch: PropTypes.func.isRequired,
-  }).isRequired,
+  navigateSupport: PropTypes.func.isRequired,
 };
 
 export default DrawerSupportButton;

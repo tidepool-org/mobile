@@ -1,6 +1,6 @@
 const initialAuthState = { isSignedIn: false };
 
-function auth(state = initialAuthState, action) {
+function authentication(state = initialAuthState, action) {
   switch (action.type) {
     case "SignIn":
       return { ...state, isSignedIn: true };
@@ -11,4 +11,4 @@ function auth(state = initialAuthState, action) {
   }
 }
 
-export default auth;
+export default authentication;

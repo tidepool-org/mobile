@@ -7,7 +7,7 @@ import ThemePropTypes from "../themes/ThemePropTypes";
 
 class SignUp extends PureComponent {
   onPressSignUp = () => {
-    this.props.navigation.dispatch({ type: "SignUp" });
+    this.props.navigateSignUp();
   };
 
   render() {
@@ -42,9 +42,7 @@ class SignUp extends PureComponent {
 SignUp.propTypes = {
   theme: ThemePropTypes.isRequired,
   style: ViewPropTypes.style,
-  navigation: PropTypes.shape({
-    dispatch: PropTypes.func.isRequired,
-  }).isRequired,
+  navigateSignUp: PropTypes.func.isRequired,
 };
 
 SignUp.defaultProps = {

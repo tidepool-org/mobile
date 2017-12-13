@@ -1,11 +1,10 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { StatusBar, Text } from "react-native";
 import glamorous, { ThemeProvider } from "glamorous-native";
 
 import PrimaryTheme from "../themes/PrimaryTheme";
 import Colors from "../constants/Colors";
-import HeaderLeft from "../components/HeaderLeft";
+import HeaderLeft from "../containers/HeaderLeft";
 import HeaderRight from "../components/HeaderRight";
 import EventList from "../components/EventList";
 
@@ -30,7 +29,7 @@ const eventListData = [
 ];
 
 class HomeScreen extends React.Component {
-  static navigationOptions = ({ navigation }) => {
+  static navigationOptions = () => {
     const headerStyle = { backgroundColor: Colors.darkPurple };
 
     return {
@@ -44,13 +43,9 @@ class HomeScreen extends React.Component {
           Jill Jellyfish
         </Text>
       ),
-      headerLeft: <HeaderLeft navigation={navigation} />,
-      headerRight: <HeaderRight navigation={navigation} />,
+      headerLeft: <HeaderLeft />,
+      headerRight: <HeaderRight />,
     };
-  };
-
-  onPressOpenMenu = () => {
-    this.props.navigation.dispatch({ type: "DrawerOpen" });
   };
 
   render() {
@@ -64,11 +59,5 @@ class HomeScreen extends React.Component {
     );
   }
 }
-
-HomeScreen.propTypes = {
-  navigation: PropTypes.shape({
-    dispatch: PropTypes.func.isRequired,
-  }).isRequired,
-};
 
 export default HomeScreen;

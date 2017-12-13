@@ -8,11 +8,11 @@ import Button from "./Button";
 
 class SignInForm extends Component {
   onPressSignIn = () => {
-    this.props.navigation.dispatch({ type: "SignIn" });
+    this.props.navigateHome();
   };
 
   onPressForgotPassword = () => {
-    this.props.navigation.dispatch({ type: "ForgotPassword" });
+    this.props.navigateForgotPassword();
   };
 
   renderErrorMessage() {
@@ -120,9 +120,8 @@ SignInForm.propTypes = {
   errorMessage: PropTypes.string,
   theme: ThemePropTypes.isRequired,
   style: ViewPropTypes.style,
-  navigation: PropTypes.shape({
-    dispatch: PropTypes.func.isRequired,
-  }).isRequired,
+  navigateHome: PropTypes.func.isRequired,
+  navigateForgotPassword: PropTypes.func.isRequired,
 };
 
 SignInForm.defaultProps = {

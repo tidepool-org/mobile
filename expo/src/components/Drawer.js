@@ -29,7 +29,9 @@ class Drawer extends Component {
                 },
               ],
               renderItem: () => (
-                <DrawerCurrentUser navigation={this.props.navigation} />
+                <DrawerCurrentUser
+                  navigateDrawerClose={this.props.navigateDrawerClose}
+                />
               ),
             },
             {
@@ -52,7 +54,9 @@ class Drawer extends Component {
                 },
               ],
               renderItem: () => (
-                <DrawerSwitchProfileButton navigation={this.props.navigation} />
+                <DrawerSwitchProfileButton
+                  navigateSwitchProfile={this.props.navigateSwitchProfile}
+                />
               ),
             },
             {
@@ -64,7 +68,9 @@ class Drawer extends Component {
                 { currentUser: this.props.currentUser, key: "supportButton" },
               ],
               renderItem: () => (
-                <DrawerSupportButton navigation={this.props.navigation} />
+                <DrawerSupportButton
+                  navigateSupport={this.props.navigateSupport}
+                />
               ),
             },
             {
@@ -80,7 +86,7 @@ class Drawer extends Component {
               ],
               renderItem: () => (
                 <DrawerPrivacyAndTermsButton
-                  navigation={this.props.navigation}
+                  navigatePrivacyAndTerms={this.props.navigatePrivacyAndTerms}
                 />
               ),
             },
@@ -95,7 +101,7 @@ class Drawer extends Component {
               renderItem: ({ item }) => (
                 <DrawerSignOutButton
                   currentUser={item.currentUser}
-                  navigation={this.props.navigation}
+                  navigateSignIn={this.props.navigateSignIn}
                 />
               ),
             },
@@ -115,9 +121,11 @@ Drawer.propTypes = {
   currentUser: PropTypes.shape({
     username: PropTypes.string.isRequired,
   }).isRequired,
-  navigation: PropTypes.shape({
-    dispatch: PropTypes.func.isRequired,
-  }).isRequired,
+  navigateDrawerClose: PropTypes.func.isRequired,
+  navigateSignIn: PropTypes.func.isRequired,
+  navigateSwitchProfile: PropTypes.func.isRequired,
+  navigateSupport: PropTypes.func.isRequired,
+  navigatePrivacyAndTerms: PropTypes.func.isRequired,
 };
 
 Drawer.defaultProps = {
