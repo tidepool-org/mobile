@@ -1,5 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
 import { StatusBar } from "react-native";
 import glamorous, { withTheme } from "glamorous-native";
 import { isIphoneX } from "react-native-iphone-x-helper";
@@ -9,15 +11,22 @@ import SignUp from "../components/SignUp";
 import SignInForm from "../components/SignInForm";
 import ThemePropTypes from "../themes/ThemePropTypes";
 import VersionAndEnvironment from "../components/VersionAndEnvironment";
+import {
+  navigateSignUp,
+  navigateForgotPassword,
+  navigateHome,
+} from "../actions/navigation";
 
 const safeAreaTopInset = isIphoneX() ? 24 : 0;
 const safeAreaBottomInset = isIphoneX() ? 20 : 0;
 
 class SignInScreen extends React.Component {
   render() {
-    const { theme, errorMessage, navigation } = this.props;
+    const { theme, errorMessage } = this.props;
+
     const version = "2.0.1"; // TODO: redux
     const environment = "staging"; // TODO: redux
+
     return (
       <glamorous.View
         flex={1}
@@ -34,12 +43,13 @@ class SignInScreen extends React.Component {
               zIndex: 1,
               position: "absolute",
             }}
-            navigation={navigation}
+            navigateSignUp={this.props.navigateSignUp}
           />
           <SignInForm
             style={{ width: 300, flex: 1, justifyContent: "center" }}
             errorMessage={errorMessage}
-            navigation={this.props.navigation}
+            navigateHome={this.props.navigateHome}
+            navigateForgotPassword={this.props.navigateForgotPassword}
           />
           <glamorous.View position="absolute" bottom={45 + safeAreaBottomInset}>
             <MadePossibleBy />
@@ -59,13 +69,24 @@ class SignInScreen extends React.Component {
 SignInScreen.propTypes = {
   errorMessage: PropTypes.string,
   theme: ThemePropTypes.isRequired,
-  navigation: PropTypes.shape({
-    dispatch: PropTypes.func.isRequired,
-  }).isRequired,
+  navigateSignUp: PropTypes.func.isRequired,
+  navigateForgotPassword: PropTypes.func.isRequired,
+  navigateHome: PropTypes.func.isRequired,
 };
 
 SignInScreen.defaultProps = {
   errorMessage: null,
 };
 
-export default withTheme(SignInScreen);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(
+    {
+      navigateSignUp,
+      navigateForgotPassword,
+      navigateHome,
+    },
+    dispatch,
+  );
+}
+
+export default connect(null, mapDispatchToProps)(withTheme(SignInScreen));

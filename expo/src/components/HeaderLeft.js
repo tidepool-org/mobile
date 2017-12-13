@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import { Image, TouchableOpacity } from "react-native";
 
 class HeaderLeft extends React.Component {
-  onPressMenu = () => {
-    this.props.navigation.dispatch({ type: "DrawerOpen" });
+  onPress = () => {
+    this.props.navigateDrawerOpen();
   };
 
   render() {
@@ -14,7 +14,7 @@ class HeaderLeft extends React.Component {
           padding: 10,
           marginLeft: 6,
         }}
-        onPress={this.onPressMenu}
+        onPress={this.onPress}
       >
         <Image
           tintColor="white"
@@ -26,9 +26,7 @@ class HeaderLeft extends React.Component {
 }
 
 HeaderLeft.propTypes = {
-  navigation: PropTypes.shape({
-    dispatch: PropTypes.func.isRequired,
-  }).isRequired,
+  navigateDrawerOpen: PropTypes.func.isRequired,
 };
 
 export default HeaderLeft;

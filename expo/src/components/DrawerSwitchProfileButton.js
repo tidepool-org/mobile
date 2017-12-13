@@ -5,7 +5,7 @@ import DrawerButton from "./DrawerButton";
 
 class DrawerSwitchProfileButton extends Component {
   onPress = () => {
-    this.props.navigation.dispatch({ type: "SwitchProfile" });
+    this.props.navigateSwitchProfile();
   };
 
   render() {
@@ -20,9 +20,7 @@ class DrawerSwitchProfileButton extends Component {
 }
 
 DrawerSwitchProfileButton.propTypes = {
-  navigation: PropTypes.shape({
-    dispatch: PropTypes.func.isRequired,
-  }).isRequired,
+  navigateSwitchProfile: PropTypes.func.isRequired,
 };
 
 export default DrawerSwitchProfileButton;

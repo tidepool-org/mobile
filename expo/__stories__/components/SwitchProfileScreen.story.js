@@ -4,13 +4,12 @@ import { storiesOf } from "@storybook/react-native";
 import { StoryContainerScreen } from "../../__stories__/utils/StoryContainer";
 import SwitchProfileScreen from "../../src/screens/SwitchProfileScreen";
 
-const navigation = {
-  dispatch: () => {},
-  goBack: () => {},
+const props = {
+  navigateGoBack: () => {},
 };
 
 storiesOf("SwitchProfileScreen", module).add("default", () => (
   <StoryContainerScreen>
-    <SwitchProfileScreen navigation={navigation} />
+    <SwitchProfileScreen {...props} />
   </StoryContainerScreen>
 ));

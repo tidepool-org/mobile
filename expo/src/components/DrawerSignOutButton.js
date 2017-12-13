@@ -5,7 +5,7 @@ import DrawerButton from "./DrawerButton";
 
 class DrawerSignOutButton extends Component {
   onPress = () => {
-    this.props.navigation.dispatch({ type: "SignOut" });
+    this.props.navigateSignIn();
   };
 
   render() {
@@ -25,9 +25,7 @@ DrawerSignOutButton.propTypes = {
   currentUser: PropTypes.shape({
     username: PropTypes.string.isRequired,
   }).isRequired,
-  navigation: PropTypes.shape({
-    dispatch: PropTypes.func.isRequired,
-  }).isRequired,
+  navigateSignIn: PropTypes.func.isRequired,
 };
 
 export default DrawerSignOutButton;

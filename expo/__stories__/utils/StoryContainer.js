@@ -1,11 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { createStore } from "redux";
+import { Provider } from "react-redux";
 import { SafeAreaView, View } from "react-native";
 
 import Fonts from "../../src/constants/Fonts";
 import withThemeProvider from "../../src/enhancers/withThemeProvider";
 import withExpoFontPreload from "../../src/enhancers/withExpoFontPreload";
+import AppReducer from "../..//src/reducers";
 import PrimaryTheme from "../../src/themes/PrimaryTheme";
+
+const store = createStore(AppReducer);
 
 const StoryContainerComponent = props => {
   const enhanced = withThemeProvider(
@@ -32,9 +37,11 @@ const StoryContainerComponent = props => {
   }
 
   return (
-    <SafeAreaView style={safeAreaViewStyle}>
-      <View style={containerStyle}>{enhanced()}</View>
-    </SafeAreaView>
+    <Provider store={store}>
+      <SafeAreaView style={safeAreaViewStyle}>
+        <View style={containerStyle}>{enhanced()}</View>
+      </SafeAreaView>
+    </Provider>
   );
 };
 
@@ -52,7 +59,11 @@ const StoryContainerScreen = props => {
     withExpoFontPreload(() => props.children, Fonts),
     PrimaryTheme,
   );
-  return <SafeAreaView style={{ flex: 1 }}>{enhanced()}</SafeAreaView>;
+  return (
+    <Provider store={store}>
+      <SafeAreaView style={{ flex: 1 }}>{enhanced()}</SafeAreaView>
+    </Provider>
+  );
 };
 
 StoryContainerScreen.propTypes = {

@@ -5,7 +5,7 @@ import DrawerButton from "./DrawerButton";
 
 class DrawerPrivacyAndTermsButton extends Component {
   onPress = () => {
-    this.props.navigation.dispatch({ type: "PrivacyAndTerms" });
+    this.props.navigatePrivacyAndTerms();
   };
 
   render() {
@@ -19,9 +19,7 @@ class DrawerPrivacyAndTermsButton extends Component {
 }
 
 DrawerPrivacyAndTermsButton.propTypes = {
-  navigation: PropTypes.shape({
-    dispatch: PropTypes.func.isRequired,
-  }).isRequired,
+  navigatePrivacyAndTerms: PropTypes.func.isRequired,
 };
 
 export default DrawerPrivacyAndTermsButton;

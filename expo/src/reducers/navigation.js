@@ -4,20 +4,32 @@ import { Linking } from "react-native";
 import Urls from "../constants/Urls";
 import { AppNavigator } from "../navigators/AppNavigator";
 import getCurrentRouteAndIndex from "../helpers/getCurrentRouteAndIndex";
+import {
+  NAVIGATE_HOME,
+  NAVIGATE_SIGN_IN,
+  NAVIGATE_SIGN_UP,
+  NAVIGATE_FORGOT_PASSWORD,
+  NAVIGATE_SWITCH_PROFILE,
+  NAVIGATE_PRIVACY_AND_TERMS,
+  NAVIGATE_SUPPORT,
+  NAVIGATE_SIGN_DRAWER_OPEN,
+  NAVIGATE_SIGN_DRAWER_CLOSE,
+  NAVIGATE_GO_BACK,
+} from "../actions/navigation";
 
 // TODO: metrics
 
 const signInAction = AppNavigator.router.getActionForPathAndParams("SignIn");
 const SignInActionState = AppNavigator.router.getStateForAction(signInAction);
-const initialNavState = AppNavigator.router.getStateForAction(
+const initialState = AppNavigator.router.getStateForAction(
   signInAction,
   SignInActionState,
 );
 
-function navigation(state = initialNavState, action) {
+function navigation(state = initialState, action) {
   let nextState;
   switch (action.type) {
-    case "SignIn":
+    case NAVIGATE_HOME:
       nextState = AppNavigator.router.getStateForAction(
         NavigationActions.reset({
           index: 0,
@@ -27,7 +39,7 @@ function navigation(state = initialNavState, action) {
         state,
       );
       break;
-    case "SignOut":
+    case NAVIGATE_SIGN_IN:
       nextState = AppNavigator.router.getStateForAction(
         NavigationActions.reset({
           index: 0,
@@ -37,33 +49,39 @@ function navigation(state = initialNavState, action) {
         state,
       );
       break;
-    case "SwitchProfile":
+    case NAVIGATE_SWITCH_PROFILE:
       nextState = AppNavigator.router.getStateForAction(
         NavigationActions.navigate({ routeName: "SwitchProfile" }),
         state,
       );
       break;
-    case "PrivacyAndTerms":
+    case NAVIGATE_PRIVACY_AND_TERMS:
       Linking.openURL(Urls.privacyAndTerms);
       break;
-    case "Support":
+    case NAVIGATE_SUPPORT:
       Linking.openURL(Urls.support);
       break;
-    case "ForgotPassword":
+    case NAVIGATE_FORGOT_PASSWORD:
       Linking.openURL(Urls.forgotPassword);
       break;
-    case "SignUp":
+    case NAVIGATE_SIGN_UP:
       Linking.openURL(Urls.signUp);
       break;
-    case "DrawerOpen":
+    case NAVIGATE_SIGN_DRAWER_OPEN:
       nextState = AppNavigator.router.getStateForAction(
         NavigationActions.navigate({ routeName: "DrawerOpen" }),
         state,
       );
       break;
-    case "DrawerClose":
+    case NAVIGATE_SIGN_DRAWER_CLOSE:
       nextState = AppNavigator.router.getStateForAction(
         NavigationActions.navigate({ routeName: "DrawerClose" }),
+        state,
+      );
+      break;
+    case NAVIGATE_GO_BACK:
+      nextState = AppNavigator.router.getStateForAction(
+        NavigationActions.back(),
         state,
       );
       break;
