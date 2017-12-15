@@ -1,16 +1,17 @@
 // NOTE: this file is copied via build script to App.js
 
 import React from "react";
+import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
-import { createStore } from "redux";
+import thunk from "redux-thunk";
 
 import withExpoFontPreload from "./src/enhancers/withExpoFontPreload";
 import AppWithNavigationState from "./src/navigators/AppNavigator";
 import Fonts from "./src/constants/Fonts";
-import AppReducer from "./src/reducers";
+import reducers from "./src/reducers";
 
 class App extends React.Component {
-  store = createStore(AppReducer);
+  store = createStore(reducers, applyMiddleware(thunk));
 
   render() {
     return (

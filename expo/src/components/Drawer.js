@@ -101,7 +101,7 @@ class Drawer extends Component {
               renderItem: ({ item }) => (
                 <DrawerSignOutButton
                   currentUser={item.currentUser}
-                  navigateSignIn={this.props.navigateSignIn}
+                  authSignOutAsync={this.props.authSignOutAsync}
                 />
               ),
             },
@@ -122,10 +122,10 @@ Drawer.propTypes = {
     username: PropTypes.string.isRequired,
   }).isRequired,
   navigateDrawerClose: PropTypes.func.isRequired,
-  navigateSignIn: PropTypes.func.isRequired,
   navigateSwitchProfile: PropTypes.func.isRequired,
   navigateSupport: PropTypes.func.isRequired,
   navigatePrivacyAndTerms: PropTypes.func.isRequired,
+  authSignOutAsync: PropTypes.func.isRequired,
 };
 
 Drawer.defaultProps = {

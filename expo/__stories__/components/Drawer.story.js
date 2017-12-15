@@ -10,10 +10,10 @@ const props = {
     username: "email@gmail.com", // TODO: redux
   },
   navigateDrawerClose: () => {},
-  navigateSignIn: () => {},
   navigateSwitchProfile: () => {},
   navigateSupport: () => {},
   navigatePrivacyAndTerms: () => {},
+  authSignOutAsync: () => {},
 };
 
 storiesOf("Drawer", module).add("default", () => (

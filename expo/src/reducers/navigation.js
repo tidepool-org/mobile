@@ -3,7 +3,7 @@ import { Linking } from "react-native";
 
 import Urls from "../constants/Urls";
 import { AppNavigator } from "../navigators/AppNavigator";
-import getCurrentRouteAndIndex from "../helpers/getCurrentRouteAndIndex";
+import getCurrentRouteAndIndex from "../utils/getCurrentRouteAndIndex";
 import {
   NAVIGATE_HOME,
   NAVIGATE_SIGN_IN,
@@ -17,7 +17,7 @@ import {
   NAVIGATE_GO_BACK,
 } from "../actions/navigation";
 
-// TODO: metrics
+// TODO: metrics - need metrics for navigation
 
 const signInAction = AppNavigator.router.getActionForPathAndParams("SignIn");
 const SignInActionState = AppNavigator.router.getStateForAction(signInAction);

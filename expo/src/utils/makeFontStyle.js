@@ -16,7 +16,7 @@ const fonts = {
 function makeFontStyle({ fontFamilyBaseName, fontWeightName, fontSize }) {
   const { fontWeights } = fonts[fontFamilyBaseName];
 
-  // TODO: use some sort of conditional #ifdef preprocessing as a build step instead?? (Also consider same for the "pre" scripts in package.json)
+  // TODO: build - use some sort of conditional #ifdef preprocessing as a build step instead?? (Also consider same for the "pre" scripts in package.json)
   if (environment.useExpo || Platform.OS === "android") {
     const suffix = fontWeights[fontWeightName] ? `-${fontWeightName}` : "";
     const fontFamily = `${fontFamilyBaseName}${suffix}`;

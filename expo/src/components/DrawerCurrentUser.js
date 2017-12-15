@@ -9,7 +9,7 @@ import ThemePropTypes from "../themes/ThemePropTypes";
 
 class DrawerCurrentUser extends Component {
   onPress = () => {
-    // TODO: switch profile when selecting current user from drawer and closing drawer
+    // TODO: profile - switch profile when selecting current user from drawer and closing drawer
     this.props.navigateDrawerClose();
   };
 

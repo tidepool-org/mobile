@@ -6,6 +6,7 @@ import Colors from "../constants/Colors";
 const PrimaryTheme = {
   colors: {
     lightBackground: Colors.veryLightGrey,
+    activityIndicator: Platform.OS === "android" ? Colors.brightBlue : "grey",
   },
   navHeaderTitleStyle: {
     color: "white",

@@ -1,14 +1,37 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { KeyboardAvoidingView, Platform, ViewPropTypes } from "react-native";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import {
+  ActivityIndicator,
+  KeyboardAvoidingView,
+  Platform,
+  ViewPropTypes,
+} from "react-native";
 import glamorous, { withTheme } from "glamorous-native";
 
 import ThemePropTypes from "../themes/ThemePropTypes";
+import { navigateForgotPassword } from "../actions/navigation";
+import { authSignInReset, authSignInAsync } from "../actions/auth";
 import Button from "./Button";
 
+// TODO: polish - look at fixing flashing on Android with dismissal of keyboard when hitting next button. Fixed in later RN?
+// TODO: polish - the error message doesn't seem to scroll in sync with the rest of the form with KeyboardAvoidingView? But, only on iOS, it seems
+
 class SignInForm extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      username: "",
+      password: "",
+    };
+  }
   onPressSignIn = () => {
-    this.props.navigateHome();
+    this.props.authSignInAsync({
+      username: this.state.username,
+      password: this.state.password,
+    });
   };
 
   onPressForgotPassword = () => {
@@ -32,12 +55,13 @@ class SignInForm extends Component {
   }
 
   render() {
-    const { theme, style } = this.props;
+    const { theme, style, signingIn } = this.props;
+
     return (
       <KeyboardAvoidingView
         style={style}
         behavior="padding"
-        keyboardVerticalOffset={-95}
+        keyboardVerticalOffset={-140}
       >
         <glamorous.Image
           source={require("../../assets/images/tidepool-logo-horizontal.png")}
@@ -48,6 +72,7 @@ class SignInForm extends Component {
         />
         {this.renderErrorMessage()}
         <glamorous.TextInput
+          value={this.state.username}
           allowFontScaling={false}
           innerRef={textInput => {
             this.emailTextInput = textInput;
@@ -69,8 +94,13 @@ class SignInForm extends Component {
           onSubmitEditing={() => {
             this.passwordTextInput.focus();
           }}
+          onChangeText={username => {
+            this.setState({ username });
+            this.props.authSignInReset();
+          }}
         />
         <glamorous.TextInput
+          value={this.state.password}
           allowFontScaling={false}
           innerRef={textInput => {
             this.passwordTextInput = textInput;
@@ -88,6 +118,11 @@ class SignInForm extends Component {
           borderWidth={Platform.OS === "android" ? 0 : 1}
           paddingLeft={Platform.OS === "android" ? 3 : 12}
           marginTop={15}
+          onChangeText={password => {
+            this.setState({ password });
+            this.props.authSignInReset();
+          }}
+          onSubmitEditing={this.onPressSignIn}
         />
         <glamorous.View flexDirection="row" marginLeft={-8}>
           <glamorous.TouchableOpacity
@@ -109,7 +144,35 @@ class SignInForm extends Component {
           flexDirection="row"
           justifyContent="flex-end"
         >
-          <Button onPress={this.onPressSignIn} title="Log in" />
+          <Button
+            onPress={this.onPressSignIn}
+            title="Log in"
+            disabled={signingIn}
+          />
+        </glamorous.View>
+        {/* Keep this wrapper view with same height as the ActivityIndicator to avoid layout shift when showing and
+            hiding ActivityIndicator. Don't render ActivityIndicator unless signingIn is true. Ideally we should be
+            able to remove wrapper view and just set animating property based on signingIn, but, this React Native
+            bug for Android prevents that:
+            https://github.com/facebook/react-native/issues/9023
+            https://github.com/facebook/react-native/issues/11682
+            */}
+        <glamorous.View
+          style={{
+            height: 62,
+          }}
+        >
+          {this.props.signingIn && (
+            <ActivityIndicator
+              style={{
+                height: 62,
+                alignSelf: "center",
+              }}
+              size="large"
+              color={theme.colors.activityIndicator}
+              animating
+            />
+          )}
         </glamorous.View>
       </KeyboardAvoidingView>
     );
@@ -120,13 +183,33 @@ SignInForm.propTypes = {
   errorMessage: PropTypes.string,
   theme: ThemePropTypes.isRequired,
   style: ViewPropTypes.style,
-  navigateHome: PropTypes.func.isRequired,
+  authSignInReset: PropTypes.func.isRequired,
+  authSignInAsync: PropTypes.func.isRequired,
   navigateForgotPassword: PropTypes.func.isRequired,
+  signingIn: PropTypes.bool.isRequired,
 };
 
 SignInForm.defaultProps = {
-  errorMessage: null,
+  errorMessage: "",
   style: null,
 };
 
-export default withTheme(SignInForm);
+const mapStateToProps = state => ({
+  signingIn: state.auth.signingIn,
+  errorMessage: state.auth.errorMessage,
+});
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(
+    {
+      authSignInReset,
+      authSignInAsync,
+      navigateForgotPassword,
+    },
+    dispatch,
+  );
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withTheme(SignInForm),
+);
