@@ -5,7 +5,7 @@ const ENVIRONMENT_STAGING = "Staging";
 const ENVIRONMENT_INTEGRATION = "Integration";
 const ENVIRONMENT_DEVELOPMENT = "Development";
 
-const BASE_URL_PRODUCTION = "https://dev-api.tidepool.org";
+const BASE_URL_PRODUCTION = "https://api.tidepool.org";
 const BASE_URL_STAGING = "https://stg-api.tidepool.org";
 const BASE_URL_INTEGRATION = "https://int-api.tidepool.org";
 const BASE_URL_DEVELOPMENT = "https://dev-api.tidepool.org";
@@ -42,7 +42,7 @@ function api() {
 
 // TODO: api - this should default to what was last used, using AsyncStorage
 // TODO: api - probably should defer this to clients, rather than calling here
-switchEnvironment(ENVIRONMENT_STAGING);
+switchEnvironment(ENVIRONMENT_PRODUCTION);
 
 export {
   api as default,
