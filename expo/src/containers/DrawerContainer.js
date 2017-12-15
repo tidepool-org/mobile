@@ -8,11 +8,11 @@ import Drawer from "../components/Drawer";
 import PrimaryTheme from "../themes/PrimaryTheme";
 import {
   navigateDrawerClose,
-  navigateSignIn,
   navigateSwitchProfile,
   navigateSupport,
   navigatePrivacyAndTerms,
 } from "../actions/navigation";
+import { authSignOutAsync } from "../actions/auth";
 
 const DrawerContainer = props => (
   <ThemeProvider theme={PrimaryTheme}>
@@ -23,30 +23,30 @@ const DrawerContainer = props => (
       }}
       currentUser={{ username: "email@gmail.com" }} // TODO: redux
       navigateDrawerClose={props.navigateDrawerClose}
-      navigateSignIn={props.navigateSignIn}
       navigateSwitchProfile={props.navigateSwitchProfile}
       navigateSupport={props.navigateSupport}
       navigatePrivacyAndTerms={props.navigatePrivacyAndTerms}
+      authSignOutAsync={props.authSignOutAsync}
     />
   </ThemeProvider>
 );
 
 DrawerContainer.propTypes = {
   navigateDrawerClose: PropTypes.func.isRequired,
-  navigateSignIn: PropTypes.func.isRequired,
   navigateSwitchProfile: PropTypes.func.isRequired,
   navigateSupport: PropTypes.func.isRequired,
   navigatePrivacyAndTerms: PropTypes.func.isRequired,
+  authSignOutAsync: PropTypes.func.isRequired,
 };
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
     {
       navigateDrawerClose,
-      navigateSignIn,
       navigateSwitchProfile,
       navigateSupport,
       navigatePrivacyAndTerms,
+      authSignOutAsync,
     },
     dispatch,
   );

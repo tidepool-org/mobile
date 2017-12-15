@@ -11,11 +11,7 @@ import SignUp from "../components/SignUp";
 import SignInForm from "../components/SignInForm";
 import ThemePropTypes from "../themes/ThemePropTypes";
 import VersionAndEnvironment from "../components/VersionAndEnvironment";
-import {
-  navigateSignUp,
-  navigateForgotPassword,
-  navigateHome,
-} from "../actions/navigation";
+import { navigateSignUp } from "../actions/navigation";
 
 const safeAreaTopInset = isIphoneX() ? 24 : 0;
 const safeAreaBottomInset = isIphoneX() ? 20 : 0;
@@ -48,8 +44,6 @@ class SignInScreen extends React.Component {
           <SignInForm
             style={{ width: 300, flex: 1, justifyContent: "center" }}
             errorMessage={errorMessage}
-            navigateHome={this.props.navigateHome}
-            navigateForgotPassword={this.props.navigateForgotPassword}
           />
           <glamorous.View position="absolute" bottom={45 + safeAreaBottomInset}>
             <MadePossibleBy />
@@ -70,8 +64,6 @@ SignInScreen.propTypes = {
   errorMessage: PropTypes.string,
   theme: ThemePropTypes.isRequired,
   navigateSignUp: PropTypes.func.isRequired,
-  navigateForgotPassword: PropTypes.func.isRequired,
-  navigateHome: PropTypes.func.isRequired,
 };
 
 SignInScreen.defaultProps = {
@@ -82,8 +74,6 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(
     {
       navigateSignUp,
-      navigateForgotPassword,
-      navigateHome,
     },
     dispatch,
   );

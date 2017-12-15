@@ -9,7 +9,7 @@ import {
 import { ThemeProvider } from "glamorous-native";
 import { connect } from "react-redux";
 
-import getCurrentRouteAndIndex from "../helpers/getCurrentRouteAndIndex";
+import getCurrentRouteAndIndex from "../utils/getCurrentRouteAndIndex";
 import SignInScreen from "../screens/SignInScreen";
 import MainDrawerNavigator from "./MainDrawerNavigator";
 import PrimaryTheme from "../themes/PrimaryTheme";
