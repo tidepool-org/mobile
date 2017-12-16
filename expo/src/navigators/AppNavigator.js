@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Animated, Easing, BackHandler } from "react-native";
 import {
@@ -6,13 +6,11 @@ import {
   NavigationActions,
   StackNavigator,
 } from "react-navigation";
-import { ThemeProvider } from "glamorous-native";
 import { connect } from "react-redux";
 
 import getCurrentRouteAndIndex from "../utils/getCurrentRouteAndIndex";
-import SignInScreen from "../screens/SignInScreen";
+import SignInScreenContainer from "../containers/SignInScreenContainer";
 import MainDrawerNavigator from "./MainDrawerNavigator";
-import PrimaryTheme from "../themes/PrimaryTheme";
 
 const noTransitionConfig = () => ({
   transitionSpec: {
@@ -25,11 +23,7 @@ const noTransitionConfig = () => ({
 export const AppNavigator = StackNavigator(
   {
     SignIn: {
-      screen: props => (
-        <ThemeProvider theme={PrimaryTheme}>
-          <SignInScreen {...props} />
-        </ThemeProvider>
-      ),
+      screen: props => <SignInScreenContainer {...props} />,
     },
     MainDrawer: {
       screen: MainDrawerNavigator,
@@ -42,7 +36,7 @@ export const AppNavigator = StackNavigator(
   },
 );
 
-class AppWithNavigationState extends Component {
+class AppWithNavigationState extends PureComponent {
   componentDidMount() {
     BackHandler.addEventListener("hardwareBackPress", this.onBackPress);
   }

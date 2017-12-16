@@ -11,6 +11,7 @@ import {
 
 const initialAuthState = {
   sessionToken: "",
+  userId: "",
   username: "",
   signingIn: false,
   errorMessage: "",
@@ -22,14 +23,18 @@ function auth(state = initialAuthState, action) {
       return initialAuthState;
     case AUTH_SIGN_IN_DID_START:
       return { ...state, signingIn: true };
-    case AUTH_SIGN_IN_DID_SUCCEED:
+    case AUTH_SIGN_IN_DID_SUCCEED: {
+      const { sessionToken, userId, username, fullName } = action.payload;
       return {
         ...state,
-        sessionToken: action.payload.sessionToken,
-        username: action.payload.username,
+        sessionToken,
+        userId,
+        username,
+        fullName,
         signingIn: false,
         errorMessage: "",
       };
+    }
     case AUTH_SIGN_IN_DID_FAIL: {
       return {
         ...state,

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { RefreshControl } from "react-native";
 import glamorous, { withTheme } from "glamorous-native";
@@ -6,7 +6,7 @@ import glamorous, { withTheme } from "glamorous-native";
 import Colors from "../constants/Colors";
 import NoteListItem from "./NoteListItem";
 
-class EventList extends React.PureComponent {
+class EventList extends PureComponent {
   state = { selected: new Map(), refreshing: false };
 
   onPressItem = id => {

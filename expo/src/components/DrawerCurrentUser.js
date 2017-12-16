@@ -1,20 +1,18 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { ViewPropTypes } from "react-native";
 import glamorous, { withTheme } from "glamorous-native";
 
 import ThemePropTypes from "../themes/ThemePropTypes";
 
-// TODO: redux - need to remove hardcoded user fullname ("Current User") and use proper app state from redux
-
-class DrawerCurrentUser extends Component {
+class DrawerCurrentUser extends PureComponent {
   onPress = () => {
     // TODO: profile - switch profile when selecting current user from drawer and closing drawer
     this.props.navigateDrawerClose();
   };
 
   render() {
-    const { theme, style } = this.props;
+    const { theme, style, currentUser: { fullName } } = this.props;
 
     return (
       <glamorous.TouchableOpacity activeOpacity={1} onPress={this.onPress}>
@@ -36,7 +34,7 @@ class DrawerCurrentUser extends Component {
             numberOfLines={1}
             style={theme.drawerMenuCurrentUserTextStyle}
           >
-            Current User
+            {fullName}
           </glamorous.Text>
         </glamorous.View>
       </glamorous.TouchableOpacity>
@@ -48,6 +46,9 @@ DrawerCurrentUser.propTypes = {
   theme: ThemePropTypes.isRequired,
   style: ViewPropTypes.style,
   navigateDrawerClose: PropTypes.func.isRequired,
+  currentUser: PropTypes.shape({
+    fullName: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 DrawerCurrentUser.defaultProps = {

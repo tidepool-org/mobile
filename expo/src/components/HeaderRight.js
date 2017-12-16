@@ -1,7 +1,7 @@
-import React from "react";
+import React, { PureComponent } from "react";
 import { Image, TouchableOpacity } from "react-native";
 
-class HeaderRight extends React.PureComponent {
+class HeaderRight extends PureComponent {
   render() {
     return (
       <TouchableOpacity

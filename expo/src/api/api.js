@@ -12,7 +12,7 @@ const BASE_URL_DEVELOPMENT = "https://dev-api.tidepool.org";
 
 let tidepoolApi = null;
 
-function switchEnvironment(environment) {
+const switchEnvironment = environment => {
   let baseUrl;
 
   switch (environment) {
@@ -34,21 +34,19 @@ function switchEnvironment(environment) {
   }
 
   tidepoolApi = new TidepoolApi({ baseUrl });
-}
+};
 
-function api() {
-  return tidepoolApi;
-}
-
-// TODO: api - this should default to what was last used, using AsyncStorage
-// TODO: api - probably should defer this to clients, rather than calling here
-switchEnvironment(ENVIRONMENT_PRODUCTION);
+const api = () => tidepoolApi;
 
 export {
   api as default,
-  switchEnvironment,
   ENVIRONMENT_PRODUCTION,
   ENVIRONMENT_STAGING,
   ENVIRONMENT_INTEGRATION,
   ENVIRONMENT_DEVELOPMENT,
+  switchEnvironment,
 };
+
+// TODO: api - this should default to what was last used, using AsyncStorage
+// TODO: api - probably should defer this to clients, rather than calling here
+switchEnvironment(ENVIRONMENT_PRODUCTION); // TODO: my 0 - only staging for now, don't check this in

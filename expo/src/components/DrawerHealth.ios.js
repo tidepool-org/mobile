@@ -1,13 +1,11 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { ViewPropTypes, Switch } from "react-native";
 import glamorous, { withTheme } from "glamorous-native";
 
 import Colors from "../constants/Colors";
 import ThemePropTypes from "../themes/ThemePropTypes";
 
-// TODO: redux - need to remove hardcoded user fullname ("Current User") and use proper app state from redux
-
-class DrawerHealth extends Component {
+class DrawerHealth extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {

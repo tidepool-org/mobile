@@ -1,11 +1,15 @@
-import React from "react";
+import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { ViewPropTypes } from "react-native";
 import { LinearGradient } from "expo";
 
-const LinearGradientExpo = ({ style, colors }) => (
-  <LinearGradient style={style} colors={colors} />
-);
+class LinearGradientExpo extends PureComponent {
+  render() {
+    const { style, colors } = this.props;
+
+    return <LinearGradient style={style} colors={colors} />;
+  }
+}
 
 LinearGradientExpo.propTypes = {
   style: ViewPropTypes.style,

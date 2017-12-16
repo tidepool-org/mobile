@@ -1,6 +1,6 @@
 // NOTE: this file is copied via build script to App.js
 
-import React from "react";
+import React, { PureComponent } from "react";
 import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
@@ -10,7 +10,7 @@ import AppWithNavigationState from "./src/navigators/AppNavigator";
 import Fonts from "./src/constants/Fonts";
 import reducers from "./src/reducers";
 
-class App extends React.Component {
+class App extends PureComponent {
   store = createStore(reducers, applyMiddleware(thunk));
 
   render() {

@@ -1,9 +1,9 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 
 import DrawerButton from "./DrawerButton";
 
-class DrawerSwitchProfileButton extends Component {
+class DrawerSwitchProfileButton extends PureComponent {
   onPress = () => {
     this.props.navigateSwitchProfile();
   };

@@ -1,7 +1,5 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
 import {
   ActivityIndicator,
   KeyboardAvoidingView,
@@ -11,14 +9,12 @@ import {
 import glamorous, { withTheme } from "glamorous-native";
 
 import ThemePropTypes from "../themes/ThemePropTypes";
-import { navigateForgotPassword } from "../actions/navigation";
-import { authSignInReset, authSignInAsync } from "../actions/auth";
 import Button from "./Button";
 
 // TODO: polish - look at fixing flashing on Android with dismissal of keyboard when hitting next button. Fixed in later RN?
 // TODO: polish - the error message doesn't seem to scroll in sync with the rest of the form with KeyboardAvoidingView? But, only on iOS, it seems
 
-class SignInForm extends Component {
+class SignInForm extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -180,13 +176,13 @@ class SignInForm extends Component {
 }
 
 SignInForm.propTypes = {
-  errorMessage: PropTypes.string,
   theme: ThemePropTypes.isRequired,
   style: ViewPropTypes.style,
   authSignInReset: PropTypes.func.isRequired,
   authSignInAsync: PropTypes.func.isRequired,
   navigateForgotPassword: PropTypes.func.isRequired,
   signingIn: PropTypes.bool.isRequired,
+  errorMessage: PropTypes.string,
 };
 
 SignInForm.defaultProps = {
@@ -194,22 +190,4 @@ SignInForm.defaultProps = {
   style: null,
 };
 
-const mapStateToProps = state => ({
-  signingIn: state.auth.signingIn,
-  errorMessage: state.auth.errorMessage,
-});
-
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators(
-    {
-      authSignInReset,
-      authSignInAsync,
-      navigateForgotPassword,
-    },
-    dispatch,
-  );
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(
-  withTheme(SignInForm),
-);
+export default withTheme(SignInForm);

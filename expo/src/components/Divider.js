@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import glamorous from "glamorous-native";
 
-class Divider extends Component {
+class Divider extends PureComponent {
   render() {
     return (
       <glamorous.View

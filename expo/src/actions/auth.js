@@ -1,3 +1,4 @@
+import { profileSetCurrentProfile } from "../actions/profile";
 import { navigateHome, navigateSignIn } from "../actions/navigation";
 import api from "../api";
 
@@ -10,9 +11,14 @@ export const authSignInDidStart = () => ({
   type: AUTH_SIGN_IN_DID_START,
 });
 
-export const authSignInDidSucceed = ({ sessionToken, username }) => ({
+export const authSignInDidSucceed = ({
+  sessionToken,
+  userId,
+  username,
+  fullName,
+}) => ({
   type: AUTH_SIGN_IN_DID_SUCCEED,
-  payload: { sessionToken, username },
+  payload: { sessionToken, userId, username, fullName },
 });
 
 export const authSignInDidFail = errorMessage => ({
@@ -32,24 +38,33 @@ export const authSignOutAsync = () => async dispatch => {
 export const authSignInAsync = ({ username, password }) => async dispatch => {
   dispatch(authSignInDidStart());
 
-  const { sessionToken, errorMessage } = await api()
-    .signIn({
-      username,
-      password,
-    })
-    .then(sessionTokenResponse => ({
-      sessionToken: sessionTokenResponse,
-      errorMessage: "",
-    }))
-    .catch(errorResponse => ({
-      sessionToken: "",
-      errorMessage: errorResponse.message,
-    }));
+  const {
+    sessionToken,
+    userId,
+    errorMessage: signInErrorMessage,
+  } = await api().signInAsync({
+    username,
+    password,
+  });
 
-  if (sessionToken) {
-    dispatch(authSignInDidSucceed({ sessionToken, username }));
-    dispatch(navigateHome());
+  if (!sessionToken) {
+    dispatch(authSignInDidFail(signInErrorMessage));
   } else {
-    dispatch(authSignInDidFail(errorMessage));
+    const {
+      fullName,
+      errorMessage: fetchProfileErrorMessage,
+    } = await api().fetchProfileAsync({
+      userId,
+    });
+
+    if (fetchProfileErrorMessage) {
+      dispatch(authSignInDidFail(fetchProfileErrorMessage));
+    } else {
+      dispatch(
+        authSignInDidSucceed({ sessionToken, userId, username, fullName }),
+      );
+      dispatch(profileSetCurrentProfile({ userId, fullName }));
+      dispatch(navigateHome());
+    }
   }
 };

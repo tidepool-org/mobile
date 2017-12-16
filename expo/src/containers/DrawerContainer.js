@@ -1,11 +1,9 @@
-import React from "react";
+import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { ThemeProvider } from "glamorous-native";
 
 import Drawer from "../components/Drawer";
-import PrimaryTheme from "../themes/PrimaryTheme";
 import {
   navigateDrawerClose,
   navigateSwitchProfile,
@@ -14,22 +12,26 @@ import {
 } from "../actions/navigation";
 import { authSignOutAsync } from "../actions/auth";
 
-const DrawerContainer = props => (
-  <ThemeProvider theme={PrimaryTheme}>
-    <Drawer
-      style={{
-        flex: 1,
-        marginTop: 0,
-      }}
-      currentUser={{ username: "email@gmail.com" }} // TODO: redux
-      navigateDrawerClose={props.navigateDrawerClose}
-      navigateSwitchProfile={props.navigateSwitchProfile}
-      navigateSupport={props.navigateSupport}
-      navigatePrivacyAndTerms={props.navigatePrivacyAndTerms}
-      authSignOutAsync={props.authSignOutAsync}
-    />
-  </ThemeProvider>
-);
+class DrawerContainer extends PureComponent {
+  render() {
+    const { currentUser } = this.props;
+
+    return (
+      <Drawer
+        style={{
+          flex: 1,
+          marginTop: 0,
+        }}
+        currentUser={currentUser}
+        navigateDrawerClose={this.props.navigateDrawerClose}
+        navigateSwitchProfile={this.props.navigateSwitchProfile}
+        navigateSupport={this.props.navigateSupport}
+        navigatePrivacyAndTerms={this.props.navigatePrivacyAndTerms}
+        authSignOutAsync={this.props.authSignOutAsync}
+      />
+    );
+  }
+}
 
 DrawerContainer.propTypes = {
   navigateDrawerClose: PropTypes.func.isRequired,
@@ -37,10 +39,20 @@ DrawerContainer.propTypes = {
   navigateSupport: PropTypes.func.isRequired,
   navigatePrivacyAndTerms: PropTypes.func.isRequired,
   authSignOutAsync: PropTypes.func.isRequired,
+  currentUser: PropTypes.shape({
+    username: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators(
+const mapStateToProps = state => ({
+  currentUser: {
+    username: state.auth.username,
+    fullName: state.auth.fullName,
+  },
+});
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
     {
       navigateDrawerClose,
       navigateSwitchProfile,
@@ -50,6 +62,5 @@ function mapDispatchToProps(dispatch) {
     },
     dispatch,
   );
-}
 
-export default connect(null, mapDispatchToProps)(DrawerContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(DrawerContainer);

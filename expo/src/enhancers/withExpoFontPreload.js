@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { Font } from "expo";
 
 function withExpoFontPreload(WrappedComponent, fonts) {
-  return class extends Component {
+  return class extends PureComponent {
     constructor(props) {
       super(props);
       this.state = {
