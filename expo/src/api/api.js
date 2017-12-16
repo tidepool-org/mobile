@@ -49,4 +49,4 @@ export {
 
 // TODO: api - this should default to what was last used, using AsyncStorage
 // TODO: api - probably should defer this to clients, rather than calling here
-switchEnvironment(ENVIRONMENT_PRODUCTION); // TODO: my 0 - only staging for now, don't check this in
+switchEnvironment(ENVIRONMENT_STAGING);
