@@ -1,15 +1,15 @@
 import { StackNavigator } from "react-navigation";
 
-import HomeScreen from "../screens/HomeScreen";
-import SwitchProfileScreen from "../screens/SwitchProfileScreen";
+import HomeScreenContainer from "../containers/HomeScreenContainer";
+import SwitchProfileScreenContainer from "../containers/SwitchProfileScreenContainer";
 
 const MainStackNavigator = StackNavigator(
   {
     Home: {
-      screen: HomeScreen,
+      screen: HomeScreenContainer,
     },
     SwitchProfile: {
-      screen: SwitchProfileScreen,
+      screen: SwitchProfileScreenContainer,
     },
   },
   {

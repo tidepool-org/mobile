@@ -1,8 +1,8 @@
-import React from "react";
+import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Image, TouchableOpacity } from "react-native";
 
-class HeaderLeft extends React.Component {
+class HeaderLeft extends PureComponent {
   onPress = () => {
     this.props.navigateDrawerOpen();
   };

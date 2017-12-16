@@ -1,11 +1,11 @@
-import React from "react";
+import React, { PureComponent } from "react";
 
 import PropTypes from "prop-types";
 import glamorous, { withTheme } from "glamorous-native";
 
 import ProfileListItem from "./ProfileListItem";
 
-class ProfileList extends React.PureComponent {
+class ProfileList extends PureComponent {
   constructor(props) {
     super(props);
     this.state = { selected: new Map() };

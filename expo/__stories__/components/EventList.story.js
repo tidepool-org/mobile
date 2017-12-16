@@ -2,7 +2,7 @@ import React from "react";
 import { storiesOf } from "@storybook/react-native";
 import faker from "faker";
 
-import { StoryContainerComponent } from "../../__stories__/utils/StoryContainer";
+import StoryContainerComponent from "../../__stories__/utils/StoryContainerComponent";
 import EventList from "../../src/components/EventList";
 
 faker.seed(123);

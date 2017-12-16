@@ -1,10 +1,10 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import glamorous, { withTheme } from "glamorous-native";
 
 import ThemePropTypes from "../themes/ThemePropTypes";
 
-class DrawerButton extends Component {
+class DrawerButton extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {

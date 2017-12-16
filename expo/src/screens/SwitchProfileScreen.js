@@ -1,16 +1,13 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
 import { StatusBar, Text } from "react-native";
 import glamorous, { ThemeProvider } from "glamorous-native";
 
 import ProfileList from "../components/ProfileList";
 import PrimaryTheme from "../themes/PrimaryTheme";
 import Colors from "../constants/Colors";
-import { navigateGoBack } from "../actions/navigation";
 
-// TODO: redux - profile list - need to remove hardcoded profile list and use proper app state from redux
+// TODO: redux - profile list - need to remove hardcoded profile list and use proper app state from redux (in container)
 
 const items = [
   {
@@ -39,7 +36,7 @@ const items = [
   },
 ];
 
-class SwitchProfileScreen extends Component {
+class SwitchProfileScreen extends PureComponent {
   static navigationOptions = () => {
     const headerStyle = { backgroundColor: Colors.darkPurple };
 
@@ -79,13 +76,4 @@ SwitchProfileScreen.propTypes = {
   navigateGoBack: PropTypes.func.isRequired,
 };
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators(
-    {
-      navigateGoBack,
-    },
-    dispatch,
-  );
-}
-
-export default connect(null, mapDispatchToProps)(SwitchProfileScreen);
+export default SwitchProfileScreen;

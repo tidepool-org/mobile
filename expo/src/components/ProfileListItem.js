@@ -1,11 +1,11 @@
-import React from "react";
+import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { ViewPropTypes } from "react-native";
 import glamorous, { withTheme } from "glamorous-native";
 
 import ThemePropTypes from "../themes/ThemePropTypes";
 
-class ProfileListItem extends React.PureComponent {
+class ProfileListItem extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
