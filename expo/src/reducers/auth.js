@@ -13,6 +13,7 @@ const initialAuthState = {
   sessionToken: "",
   userId: "",
   username: "",
+  fullName: "",
   signingIn: false,
   errorMessage: "",
 };

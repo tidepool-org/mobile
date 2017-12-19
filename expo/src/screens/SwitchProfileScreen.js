@@ -55,6 +55,12 @@ class SwitchProfileScreen extends PureComponent {
     };
   };
 
+  constructor(props) {
+    super(props);
+
+    this.theme = PrimaryTheme;
+  }
+
   onPress = () => {
     // TODO: profile - switch profile when selecting profile from list and navigating back
     this.props.navigateGoBack();
@@ -62,7 +68,7 @@ class SwitchProfileScreen extends PureComponent {
 
   render() {
     return (
-      <ThemeProvider theme={PrimaryTheme}>
+      <ThemeProvider theme={this.theme}>
         <glamorous.View flex={1}>
           <StatusBar barStyle="light-content" />
           <ProfileList onPress={this.onPress} items={items} />

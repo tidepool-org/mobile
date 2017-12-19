@@ -3,9 +3,28 @@ import { storiesOf } from "@storybook/react-native";
 
 import StoryContainerScreen from "../../__stories__/utils/StoryContainerScreen";
 import SignInScreen from "../../src/screens/SignInScreen";
+import { ENVIRONMENT_STAGING } from "../../src/api";
 
 const props = {
-  navigateSignUp: () => {},
+  navigateSignUp: () => {
+    console.log("navigateSignUp");
+  },
+  navigateDebugSettings: () => {
+    console.log("navigateDebugSettings");
+  },
+  navigateForgotPassword: () => {
+    console.log("navigateForgotPassword");
+  },
+  authSignInReset: () => {
+    console.log("authSignInReset");
+  },
+  authSignInAsync: () => {
+    console.log("authSignInAsync");
+  },
+  signingIn: false,
+  version: "3.0.0",
+  environment: ENVIRONMENT_STAGING,
+  errorMessage: "",
 };
 
 storiesOf("SignInScreen", module).add("default", () => (
@@ -14,11 +33,14 @@ storiesOf("SignInScreen", module).add("default", () => (
   </StoryContainerScreen>
 ));
 
-// TODO: storybook - SignInScreen currently has a SignInFormContainer which gets errorMessage from redux. Need to revisit
-// this to better test in storybook. Either handle this in storybook via actions, or maybe look at lifting the state
-// from SignInForm to SignInScreen and getting rid of SignInFormContainer, or something like that
-storiesOf("SignInScreen", module).add("sign in error", () => (
+storiesOf("SignInScreen", module).add("Sign in error", () => (
   <StoryContainerScreen>
     <SignInScreen {...props} errorMessage="Wrong email or password!" />
+  </StoryContainerScreen>
+));
+
+storiesOf("SignInScreen", module).add("Signing in", () => (
+  <StoryContainerScreen>
+    <SignInScreen {...props} signingIn />
   </StoryContainerScreen>
 ));

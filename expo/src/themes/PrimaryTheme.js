@@ -33,7 +33,7 @@ const PrimaryTheme = {
     color: Colors.warmGrey,
     ...FontStyles.mediumSemiboldFont,
   },
-  profileListItemName: {
+  listItemName: {
     color: Colors.darkPurple,
     ...FontStyles.mediumSmallRegularFont,
   },
@@ -78,6 +78,19 @@ const PrimaryTheme = {
   },
   signInEditFieldExtra: {
     keyboardAppearance: "dark",
+  },
+  debugSettingsHeaderTitleStyle: {
+    color: Colors.blackish,
+    ...FontStyles.navTitleFont,
+    alignSelf: "center",
+  },
+  debugSettingsSectionTitleStyle: {
+    color: Colors.altDarkGreyColor,
+    ...FontStyles.mediumSmallRegularFont,
+  },
+  debugSettingsListItemTextStyle: {
+    color: Colors.blackish,
+    ...FontStyles.mediumSmallRegularFont,
   },
 };
 

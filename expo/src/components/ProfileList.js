@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-
+import { StyleSheet } from "react-native";
 import PropTypes from "prop-types";
 import glamorous, { withTheme } from "glamorous-native";
 
@@ -18,7 +18,11 @@ class ProfileList extends PureComponent {
   keyExtractor = item => item.profile.userid;
 
   renderSeparator = () => (
-    <glamorous.View height={1} marginLeft={8} backgroundColor="#CED0CE" />
+    <glamorous.View
+      height={StyleSheet.hairlineWidth}
+      marginLeft={8}
+      backgroundColor="#CED0CE"
+    />
   );
 
   renderItem = ({ item }) => (

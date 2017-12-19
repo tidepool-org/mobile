@@ -7,6 +7,7 @@ export const NAVIGATE_PRIVACY_AND_TERMS = "NAVIGATE_PRIVACY_AND_TERMS";
 export const NAVIGATE_SUPPORT = "NAVIGATE_SUPPORT";
 export const NAVIGATE_SIGN_DRAWER_OPEN = "NAVIGATE_SIGN_DRAWER_OPEN";
 export const NAVIGATE_SIGN_DRAWER_CLOSE = "NAVIGATE_SIGN_DRAWER_CLOSE";
+export const NAVIGATE_DEBUG_SETTINGS = "NAVIGATE_DEBUG_SETTINGS";
 export const NAVIGATE_GO_BACK = "NAVIGATE_GO_BACK";
 
 export function navigateHome() {
@@ -43,6 +44,10 @@ export function navigateDrawerOpen() {
 
 export function navigateDrawerClose() {
   return { type: NAVIGATE_SIGN_DRAWER_CLOSE };
+}
+
+export function navigateDebugSettings() {
+  return { type: NAVIGATE_DEBUG_SETTINGS };
 }
 
 export function navigateGoBack() {

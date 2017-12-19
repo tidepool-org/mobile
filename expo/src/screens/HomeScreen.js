@@ -22,11 +22,13 @@ class HomeScreen extends PureComponent {
     };
   };
 
+  theme = PrimaryTheme;
+
   render() {
     const { eventListData } = this.props;
 
     return (
-      <ThemeProvider theme={PrimaryTheme}>
+      <ThemeProvider theme={this.theme}>
         <glamorous.View flex={1}>
           <StatusBar barStyle="light-content" />
           <EventList data={eventListData} />

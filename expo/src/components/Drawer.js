@@ -14,9 +14,11 @@ import DrawerSignOutButton from "./DrawerSignOutButton";
 import Divider from "./Divider";
 
 class Drawer extends PureComponent {
+  theme = PrimaryTheme;
+
   render() {
     return (
-      <ThemeProvider theme={PrimaryTheme}>
+      <ThemeProvider theme={this.theme}>
         <SafeAreaView
           style={[this.props.style, { backgroundColor: Colors.veryLightGrey }]}
         >
