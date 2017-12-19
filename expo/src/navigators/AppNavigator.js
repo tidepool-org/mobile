@@ -11,6 +11,7 @@ import { connect } from "react-redux";
 import getCurrentRouteAndIndex from "../utils/getCurrentRouteAndIndex";
 import SignInScreenContainer from "../containers/SignInScreenContainer";
 import MainDrawerNavigator from "./MainDrawerNavigator";
+import DebugSettingsScreenContainer from "../containers/DebugSettingsScreenContainer";
 
 const noTransitionConfig = () => ({
   transitionSpec: {
@@ -24,6 +25,9 @@ export const AppNavigator = StackNavigator(
   {
     SignIn: {
       screen: props => <SignInScreenContainer {...props} />,
+    },
+    DebugSettings: {
+      screen: () => <DebugSettingsScreenContainer />,
     },
     MainDrawer: {
       screen: MainDrawerNavigator,

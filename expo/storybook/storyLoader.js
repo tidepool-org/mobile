@@ -6,6 +6,7 @@
 
 function loadStories() {
   require('../__stories__/components/Button.story.js');
+  require('../__stories__/components/DebugSettings.story.js');
   require('../__stories__/components/Drawer.story.js');
   require('../__stories__/components/EventList.story.js');
   require('../__stories__/components/HashtagText.story.js');
@@ -22,6 +23,7 @@ function loadStories() {
 
 const stories = [
   '../__stories__/components/Button.story.js',
+  '../__stories__/components/DebugSettings.story.js',
   '../__stories__/components/Drawer.story.js',
   '../__stories__/components/EventList.story.js',
   '../__stories__/components/HashtagText.story.js',

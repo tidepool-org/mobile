@@ -5,7 +5,7 @@ import glamorous, { withTheme } from "glamorous-native";
 
 import ThemePropTypes from "../themes/ThemePropTypes";
 
-class ProfileListItem extends PureComponent {
+class DebugSettingsEnvironmentListItem extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -14,29 +14,11 @@ class ProfileListItem extends PureComponent {
   }
 
   onPress = () => {
-    const { item: { profile } } = this.props;
-    this.props.onPress(profile.userid);
+    this.props.onPress(this.props.environmentName);
   };
-  theme;
-  renderCurrentUserProfileIcon() {
-    const { item: { profile }, item: { currentUserId } } = this.props;
-
-    if (currentUserId === profile.userid) {
-      return (
-        <glamorous.Image
-          source={require("../../assets/images/profile-black.png")}
-          width={24}
-          height={24}
-          marginRight={6}
-        />
-      );
-    }
-
-    return null;
-  }
 
   renderName() {
-    const { theme, item: { profile }, item: { currentUserId } } = this.props;
+    const { theme, environmentName } = this.props;
     const titleColor = this.state.isUnderlayVisible
       ? theme.titleColorActive
       : theme.listItemName.color;
@@ -49,23 +31,18 @@ class ProfileListItem extends PureComponent {
         numberOfLines={1}
         color={titleColor}
       >
-        {currentUserId === profile.userid ? "(You) " : null}
-        {profile.fullname}
+        {environmentName}
       </glamorous.Text>
     );
   }
 
   renderSelectedCheckMark() {
-    const {
-      theme,
-      item: { profile },
-      item: { selectedProfileUserId },
-    } = this.props;
+    const { theme, selected } = this.props;
     const borderColor = this.state.isUnderlayVisible
       ? theme.titleColorActive
       : theme.underlayColor;
 
-    if (selectedProfileUserId === profile.userid) {
+    if (selected) {
       return (
         <glamorous.View
           width={13}
@@ -109,7 +86,6 @@ class ProfileListItem extends PureComponent {
           flexDirection="row"
           justifyContent="space-between"
         >
-          {this.renderCurrentUserProfileIcon()}
           {this.renderName()}
           {this.renderSelectedCheckMark()}
         </glamorous.View>
@@ -118,21 +94,17 @@ class ProfileListItem extends PureComponent {
   }
 }
 
-ProfileListItem.propTypes = {
+DebugSettingsEnvironmentListItem.propTypes = {
   theme: ThemePropTypes.isRequired,
   style: ViewPropTypes.style,
-  item: PropTypes.shape({
-    currentUserId: PropTypes.string.isRequired,
-    selectedProfileUserId: PropTypes.string.isRequired,
-    profile: PropTypes.shape({
-      userid: PropTypes.string.isRequired,
-    }).isRequired,
-  }).isRequired,
+  environmentName: PropTypes.string.isRequired,
+  selected: PropTypes.bool,
   onPress: PropTypes.func.isRequired,
 };
 
-ProfileListItem.defaultProps = {
+DebugSettingsEnvironmentListItem.defaultProps = {
   style: null,
+  selected: false,
 };
 
-export default withTheme(ProfileListItem);
+export default withTheme(DebugSettingsEnvironmentListItem);

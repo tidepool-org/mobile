@@ -14,6 +14,7 @@ import {
   NAVIGATE_SUPPORT,
   NAVIGATE_SIGN_DRAWER_OPEN,
   NAVIGATE_SIGN_DRAWER_CLOSE,
+  NAVIGATE_DEBUG_SETTINGS,
   NAVIGATE_GO_BACK,
 } from "../actions/navigation";
 
@@ -76,6 +77,12 @@ function navigation(state = initialState, action) {
     case NAVIGATE_SIGN_DRAWER_CLOSE:
       nextState = AppNavigator.router.getStateForAction(
         NavigationActions.navigate({ routeName: "DrawerClose" }),
+        state,
+      );
+      break;
+    case NAVIGATE_DEBUG_SETTINGS:
+      nextState = AppNavigator.router.getStateForAction(
+        NavigationActions.navigate({ routeName: "DebugSettings" }),
         state,
       );
       break;

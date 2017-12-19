@@ -8,10 +8,19 @@ import thunk from "redux-thunk";
 import withExpoFontPreload from "./src/enhancers/withExpoFontPreload";
 import AppWithNavigationState from "./src/navigators/AppNavigator";
 import Fonts from "./src/constants/Fonts";
+import { environmentSetCurrentEnvironment } from "./src/actions/environment";
+import { ENVIRONMENT_STAGING } from "./src/api";
 import reducers from "./src/reducers";
 
 class App extends PureComponent {
-  store = createStore(reducers, applyMiddleware(thunk));
+  constructor(props) {
+    super(props);
+
+    this.store = createStore(reducers, applyMiddleware(thunk));
+
+    // TODO: api - this should default to what was last used, using AsyncStorage
+    this.store.dispatch(environmentSetCurrentEnvironment(ENVIRONMENT_STAGING));
+  }
 
   render() {
     return (

@@ -24,10 +24,12 @@ class SignInForm extends PureComponent {
     };
   }
   onPressSignIn = () => {
-    this.props.authSignInAsync({
-      username: this.state.username,
-      password: this.state.password,
-    });
+    if (this.state.username.length > 0 && this.state.password.length > 0) {
+      this.props.authSignInAsync({
+        username: this.state.username,
+        password: this.state.password,
+      });
+    }
   };
 
   onPressForgotPassword = () => {
@@ -143,7 +145,11 @@ class SignInForm extends PureComponent {
           <Button
             onPress={this.onPressSignIn}
             title="Log in"
-            disabled={signingIn}
+            disabled={
+              signingIn ||
+              this.state.username.length === 0 ||
+              this.state.password.length === 0
+            }
           />
         </glamorous.View>
         {/* Keep this wrapper view with same height as the ActivityIndicator to avoid layout shift when showing and

@@ -7,25 +7,33 @@ import { isIphoneX } from "react-native-iphone-x-helper";
 import PrimaryTheme from "../themes/PrimaryTheme";
 import MadePossibleBy from "../components/MadePossibleBy";
 import SignUp from "../components/SignUp";
-import SignInFormContainer from "../containers/SignInFormContainer";
+import SignInForm from "../components/SignInForm";
 import VersionAndEnvironment from "../components/VersionAndEnvironment";
+import DebugSettingsTouchable from "../components/DebugSettingsTouchable";
 
 const safeAreaTopInset = isIphoneX() ? 24 : 0;
 const safeAreaBottomInset = isIphoneX() ? 20 : 0;
 
 class SignInScreen extends PureComponent {
-  render() {
-    const { errorMessage } = this.props;
+  theme = PrimaryTheme;
 
-    const version = "2.0.1"; // TODO: redux
-    const environment = "staging"; // TODO: redux
-    const theme = PrimaryTheme;
+  render() {
+    const {
+      errorMessage,
+      version,
+      environment,
+      navigateDebugSettings,
+      navigateForgotPassword,
+      authSignInReset,
+      authSignInAsync,
+      signingIn,
+    } = this.props;
 
     return (
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={this.theme}>
         <glamorous.View
           flex={1}
-          backgroundColor={theme.colors.lightBackground}
+          backgroundColor={this.theme.colors.lightBackground}
           justifyContent="center"
           alignItems="center"
         >
@@ -40,25 +48,33 @@ class SignInScreen extends PureComponent {
               }}
               navigateSignUp={this.props.navigateSignUp}
             />
-            <SignInFormContainer
+            <SignInForm
               style={{ width: 300, flex: 1, justifyContent: "center" }}
               errorMessage={errorMessage}
+              navigateForgotPassword={navigateForgotPassword}
+              authSignInReset={authSignInReset}
+              authSignInAsync={authSignInAsync}
+              signingIn={signingIn}
             />
-            <glamorous.View
-              position="absolute"
-              bottom={45 + safeAreaBottomInset}
+            <DebugSettingsTouchable
+              style={{
+                position: "absolute",
+                bottom: 15 + safeAreaBottomInset,
+              }}
+              navigateDebugSettings={navigateDebugSettings}
             >
-              <MadePossibleBy />
-            </glamorous.View>
-            <glamorous.View
-              position="absolute"
-              bottom={15 + safeAreaBottomInset}
-            >
-              <VersionAndEnvironment
-                version={version}
-                environment={environment}
-              />
-            </glamorous.View>
+              <glamorous.View
+                flexDirection="column"
+                justifyContent="center"
+                alignItems="center"
+              >
+                <MadePossibleBy />
+                <VersionAndEnvironment
+                  version={version}
+                  environment={environment}
+                />
+              </glamorous.View>
+            </DebugSettingsTouchable>
           </glamorous.View>
         </glamorous.View>
       </ThemeProvider>
@@ -68,7 +84,14 @@ class SignInScreen extends PureComponent {
 
 SignInScreen.propTypes = {
   navigateSignUp: PropTypes.func.isRequired,
+  navigateDebugSettings: PropTypes.func.isRequired,
+  navigateForgotPassword: PropTypes.func.isRequired,
+  authSignInReset: PropTypes.func.isRequired,
+  authSignInAsync: PropTypes.func.isRequired,
+  signingIn: PropTypes.bool.isRequired,
   errorMessage: PropTypes.string,
+  version: PropTypes.string.isRequired,
+  environment: PropTypes.string.isRequired,
 };
 
 SignInScreen.defaultProps = {

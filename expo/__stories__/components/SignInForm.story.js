@@ -17,8 +17,14 @@ storiesOf("SignInForm", module).add("default", () => (
   </StoryContainerComponent>
 ));
 
-storiesOf("SignInForm", module).add("sign in error", () => (
+storiesOf("SignInForm", module).add("Sign in error", () => (
   <StoryContainerComponent>
-    <SignInForm errorMessage="Wrong email or password!" {...props} />
+    <SignInForm {...props} errorMessage="Wrong email or password!" />
+  </StoryContainerComponent>
+));
+
+storiesOf("SignInForm", module).add("Signing in", () => (
+  <StoryContainerComponent>
+    <SignInForm {...props} signingIn />
   </StoryContainerComponent>
 ));
