@@ -12,6 +12,7 @@ class DebugSettingsTouchable extends PureComponent {
       touchCount: 0,
     };
   }
+
   onPress = () => {
     const touchTime = new Date().getTime();
     const millisecondsSinceLastTouch = touchTime - this.state.lastTouchTime;

@@ -24,7 +24,7 @@ const signInAction = AppNavigator.router.getActionForPathAndParams("SignIn");
 const SignInActionState = AppNavigator.router.getStateForAction(signInAction);
 const initialState = AppNavigator.router.getStateForAction(
   signInAction,
-  SignInActionState,
+  SignInActionState
 );
 
 function navigation(state = initialState, action) {
@@ -37,7 +37,7 @@ function navigation(state = initialState, action) {
           key: null,
           actions: [NavigationActions.navigate({ routeName: "MainDrawer" })],
         }),
-        state,
+        state
       );
       break;
     case NAVIGATE_SIGN_IN:
@@ -47,13 +47,13 @@ function navigation(state = initialState, action) {
           key: null,
           actions: [NavigationActions.navigate({ routeName: "SignIn" })],
         }),
-        state,
+        state
       );
       break;
     case NAVIGATE_SWITCH_PROFILE:
       nextState = AppNavigator.router.getStateForAction(
         NavigationActions.navigate({ routeName: "SwitchProfile" }),
-        state,
+        state
       );
       break;
     case NAVIGATE_PRIVACY_AND_TERMS:
@@ -71,25 +71,25 @@ function navigation(state = initialState, action) {
     case NAVIGATE_SIGN_DRAWER_OPEN:
       nextState = AppNavigator.router.getStateForAction(
         NavigationActions.navigate({ routeName: "DrawerOpen" }),
-        state,
+        state
       );
       break;
     case NAVIGATE_SIGN_DRAWER_CLOSE:
       nextState = AppNavigator.router.getStateForAction(
         NavigationActions.navigate({ routeName: "DrawerClose" }),
-        state,
+        state
       );
       break;
     case NAVIGATE_DEBUG_SETTINGS:
       nextState = AppNavigator.router.getStateForAction(
         NavigationActions.navigate({ routeName: "DebugSettings" }),
-        state,
+        state
       );
       break;
     case NAVIGATE_GO_BACK:
       nextState = AppNavigator.router.getStateForAction(
         NavigationActions.back(),
-        state,
+        state
       );
       break;
     default:

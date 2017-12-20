@@ -7,7 +7,7 @@ import { ENVIRONMENT_PRODUCTION } from "../api";
 
 class VersionAndEnvironment extends PureComponent {
   render() {
-    const { theme, environment, version } = this.props;
+    const { theme, environment, version, small } = this.props;
 
     return (
       <glamorous.View
@@ -17,7 +17,9 @@ class VersionAndEnvironment extends PureComponent {
       >
         <glamorous.Text
           allowFontScaling={false}
-          style={theme.versionStringStyle}
+          style={
+            small ? theme.smallVersionStringStyle : theme.versionStringStyle
+          }
         >
           v{version}
           {environment !== ENVIRONMENT_PRODUCTION ? ` on ${environment}` : ""}
@@ -31,6 +33,11 @@ VersionAndEnvironment.propTypes = {
   theme: ThemePropTypes.isRequired,
   version: PropTypes.string.isRequired,
   environment: PropTypes.string.isRequired,
+  small: PropTypes.bool,
+};
+
+VersionAndEnvironment.defaultProps = {
+  small: false,
 };
 
 export default withTheme(VersionAndEnvironment);

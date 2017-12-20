@@ -12,8 +12,8 @@ import { authSignInAsync, authSignInReset } from "../actions/auth";
 const mapStateToProps = state => ({
   signingIn: state.auth.signingIn,
   errorMessage: state.auth.errorMessage,
-  environment: state.environment,
   version: state.appVersion,
+  environment: state.environment,
 });
 
 const mapDispatchToProps = dispatch =>

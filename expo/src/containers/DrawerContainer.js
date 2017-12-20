@@ -9,12 +9,13 @@ import {
   navigateSwitchProfile,
   navigateSupport,
   navigatePrivacyAndTerms,
+  navigateDebugSettings,
 } from "../actions/navigation";
 import { authSignOutAsync } from "../actions/auth";
 
 class DrawerContainer extends PureComponent {
   render() {
-    const { currentUser } = this.props;
+    const { currentUser, version, environment } = this.props;
 
     return (
       <Drawer
@@ -22,12 +23,15 @@ class DrawerContainer extends PureComponent {
           flex: 1,
           marginTop: 0,
         }}
-        currentUser={currentUser}
         navigateDrawerClose={this.props.navigateDrawerClose}
         navigateSwitchProfile={this.props.navigateSwitchProfile}
         navigateSupport={this.props.navigateSupport}
         navigatePrivacyAndTerms={this.props.navigatePrivacyAndTerms}
+        navigateDebugSettings={this.props.navigateDebugSettings}
         authSignOutAsync={this.props.authSignOutAsync}
+        currentUser={currentUser}
+        version={version}
+        environment={environment}
       />
     );
   }
@@ -38,10 +42,13 @@ DrawerContainer.propTypes = {
   navigateSwitchProfile: PropTypes.func.isRequired,
   navigateSupport: PropTypes.func.isRequired,
   navigatePrivacyAndTerms: PropTypes.func.isRequired,
+  navigateDebugSettings: PropTypes.func.isRequired,
   authSignOutAsync: PropTypes.func.isRequired,
   currentUser: PropTypes.shape({
     username: PropTypes.string.isRequired,
   }).isRequired,
+  version: PropTypes.string.isRequired,
+  environment: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -49,6 +56,8 @@ const mapStateToProps = state => ({
     username: state.auth.username,
     fullName: state.auth.fullName,
   },
+  version: state.appVersion,
+  environment: state.environment,
 });
 
 const mapDispatchToProps = dispatch =>
@@ -58,6 +67,7 @@ const mapDispatchToProps = dispatch =>
       navigateSwitchProfile,
       navigateSupport,
       navigatePrivacyAndTerms,
+      navigateDebugSettings,
       authSignOutAsync,
     },
     dispatch
