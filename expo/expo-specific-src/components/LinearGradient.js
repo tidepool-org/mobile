@@ -1,3 +1,5 @@
+// NOTE: This file is copied via build script to src/components/LinearGradient.js
+
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { ViewPropTypes } from "react-native";
@@ -13,11 +15,11 @@ class LinearGradientExpo extends PureComponent {
 
 LinearGradientExpo.propTypes = {
   style: ViewPropTypes.style,
-  colors: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  colors: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired
 };
 
 LinearGradientExpo.defaultProps = {
-  style: null,
+  style: null
 };
 
 export default LinearGradientExpo;

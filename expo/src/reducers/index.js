@@ -1,15 +1,17 @@
 import { combineReducers } from "redux";
 
-import navigation from "./navigation";
+import appVersion from "./appVersion";
 import auth from "./auth";
-import profile from "./profile";
 import environment from "./environment";
+import navigation from "./navigation";
+import profile from "./profile";
 
 const reducers = combineReducers({
-  navigation,
+  appVersion,
   auth,
-  profile,
   environment,
+  navigation,
+  profile,
 });
 
 export default reducers;

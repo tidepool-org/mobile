@@ -15,9 +15,9 @@ const mapDispatchToProps = dispatch =>
       navigateGoBack,
       environmentSignOutAndSetCurrentEnvironmentAsync,
     },
-    dispatch,
+    dispatch
   );
 
 export default connect(mapStateToProps, mapDispatchToProps)(
-  DebugSettingsScreen,
+  DebugSettingsScreen
 );
