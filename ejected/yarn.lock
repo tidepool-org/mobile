@@ -6312,6 +6312,10 @@ react-native-tab-view@^0.0.70:
   dependencies:
     prop-types "^15.5.10"
 
+react-native-version-number@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/react-native-version-number/-/react-native-version-number-0.3.0.tgz#49ee70140420946ca8a88c4ed50f31412ee0e227"
+
 react-native@0.50:
   version "0.50.3"
   resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.50.3.tgz#91282bd5356cc7d794969cdc443cc764389b9af4"
