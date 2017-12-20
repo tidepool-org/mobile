@@ -16,8 +16,6 @@ import Divider from "./Divider";
 import DebugSettingsTouchable from "../components/DebugSettingsTouchable";
 import VersionAndEnvironment from "../components/VersionAndEnvironment";
 
-const safeAreaBottomInset = isIphoneX() ? 20 : 0;
-
 class Drawer extends PureComponent {
   theme = PrimaryTheme;
 
@@ -121,7 +119,7 @@ class Drawer extends PureComponent {
           />
           <DebugSettingsTouchable
             style={{
-              bottom: 15 + safeAreaBottomInset,
+              bottom: 15,
               flexDirection: "column",
               justifyContent: "center",
               alignItems: "center",
