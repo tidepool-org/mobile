@@ -60,7 +60,7 @@ const mapDispatchToProps = dispatch =>
       navigatePrivacyAndTerms,
       authSignOutAsync,
     },
-    dispatch,
+    dispatch
   );
 
 export default connect(mapStateToProps, mapDispatchToProps)(DrawerContainer);

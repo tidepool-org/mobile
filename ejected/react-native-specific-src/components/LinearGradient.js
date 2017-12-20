@@ -1,3 +1,5 @@
+// NOTE: This file is copied via build script to src/components/LinearGradient.js
+
 import React from "react";
 import PropTypes from "prop-types";
 import { ViewPropTypes } from "react-native";
@@ -9,11 +11,11 @@ const LinearGradientReactNative = ({ style, colors }) => (
 
 LinearGradientReactNative.propTypes = {
   style: ViewPropTypes.style,
-  colors: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired
+  colors: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
 };
 
 LinearGradientReactNative.defaultProps = {
-  style: null
+  style: null,
 };
 
 export default LinearGradientReactNative;

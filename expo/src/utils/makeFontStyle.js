@@ -1,6 +1,6 @@
 import { Platform } from "react-native";
 
-import environment from "../utils/environment";
+import environment from "../utils/runtimeEnvironment";
 
 const fonts = {
   OpenSans: {

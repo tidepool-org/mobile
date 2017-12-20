@@ -13,7 +13,7 @@ const mapStateToProps = state => ({
   signingIn: state.auth.signingIn,
   errorMessage: state.auth.errorMessage,
   environment: state.environment,
-  version: "3.0.0", // TODO: version - get this from the bundle somehow
+  version: state.appVersion,
 });
 
 const mapDispatchToProps = dispatch =>
@@ -25,7 +25,7 @@ const mapDispatchToProps = dispatch =>
       authSignInAsync,
       navigateForgotPassword,
     },
-    dispatch,
+    dispatch
   );
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignInScreen);
