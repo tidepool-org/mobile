@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { ViewPropTypes, SafeAreaView } from "react-native";
 import glamorous, { ThemeProvider } from "glamorous-native";
+import { isIphoneX } from "react-native-iphone-x-helper";
 
 import PrimaryTheme from "../themes/PrimaryTheme";
 import Colors from "../constants/Colors";
@@ -12,11 +13,17 @@ import DrawerSupportButton from "./DrawerSupportButton";
 import DrawerPrivacyAndTermsButton from "./DrawerPrivacyAndTermsButton";
 import DrawerSignOutButton from "./DrawerSignOutButton";
 import Divider from "./Divider";
+import DebugSettingsTouchable from "../components/DebugSettingsTouchable";
+import VersionAndEnvironment from "../components/VersionAndEnvironment";
+
+const safeAreaBottomInset = isIphoneX() ? 20 : 0;
 
 class Drawer extends PureComponent {
   theme = PrimaryTheme;
 
   render() {
+    const { version, environment, navigateDebugSettings } = this.props;
+
     return (
       <ThemeProvider theme={this.theme}>
         <SafeAreaView
@@ -112,6 +119,21 @@ class Drawer extends PureComponent {
               },
             ]}
           />
+          <DebugSettingsTouchable
+            style={{
+              bottom: 15 + safeAreaBottomInset,
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+            navigateDebugSettings={navigateDebugSettings}
+          >
+            <VersionAndEnvironment
+              version={version}
+              environment={environment}
+              small
+            />
+          </DebugSettingsTouchable>
         </SafeAreaView>
       </ThemeProvider>
     );
@@ -120,15 +142,18 @@ class Drawer extends PureComponent {
 
 Drawer.propTypes = {
   style: ViewPropTypes.style,
-  currentUser: PropTypes.shape({
-    username: PropTypes.string.isRequired,
-    fullName: PropTypes.string.isRequired,
-  }).isRequired,
   navigateDrawerClose: PropTypes.func.isRequired,
   navigateSwitchProfile: PropTypes.func.isRequired,
   navigateSupport: PropTypes.func.isRequired,
   navigatePrivacyAndTerms: PropTypes.func.isRequired,
+  navigateDebugSettings: PropTypes.func.isRequired,
   authSignOutAsync: PropTypes.func.isRequired,
+  currentUser: PropTypes.shape({
+    username: PropTypes.string.isRequired,
+    fullName: PropTypes.string.isRequired,
+  }).isRequired,
+  version: PropTypes.string.isRequired,
+  environment: PropTypes.string.isRequired,
 };
 
 Drawer.defaultProps = {

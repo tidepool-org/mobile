@@ -29,6 +29,10 @@ const PrimaryTheme = {
     color: Colors.warmGrey,
     ...FontStyles.mediumRegularFont,
   },
+  smallVersionStringStyle: {
+    color: Colors.warmGrey,
+    ...FontStyles.smallRegularFont,
+  },
   madePossibleByTextStyle: {
     color: Colors.warmGrey,
     ...FontStyles.mediumSemiboldFont,
