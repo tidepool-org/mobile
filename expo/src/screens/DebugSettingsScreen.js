@@ -5,7 +5,7 @@ import glamorous, { ThemeProvider } from "glamorous-native";
 
 import PrimaryTheme from "../themes/PrimaryTheme";
 import Colors from "../constants/Colors";
-import DebugSettingsEnvironmentList from "../components/DebugSettingsEnvironmentList";
+import DebugSettingsApiEnvironmentList from "../components/DebugSettingsApiEnvironmentList";
 
 class DebugSettingsScreen extends PureComponent {
   theme = PrimaryTheme;
@@ -30,8 +30,8 @@ class DebugSettingsScreen extends PureComponent {
   render() {
     const {
       navigateGoBack,
-      environmentSignOutAndSetCurrentEnvironmentAsync,
-      selectedEnvironment,
+      apiEnvironmentSetAndSaveAsync,
+      selectedApiEnvironment,
     } = this.props;
 
     return (
@@ -45,12 +45,10 @@ class DebugSettingsScreen extends PureComponent {
         >
           <StatusBar barStyle="dark-content" />
           <SafeAreaView
-            style={[
-              {
-                flex: 1,
-                backgroundColor: Colors.veryLightGrey,
-              },
-            ]}
+            style={{
+              flex: 1,
+              backgroundColor: Colors.veryLightGrey,
+            }}
           >
             <glamorous.View
               flexDirection="row"
@@ -69,11 +67,9 @@ class DebugSettingsScreen extends PureComponent {
               </glamorous.Text>
               <glamorous.View width={32} height={32} />
             </glamorous.View>
-            <DebugSettingsEnvironmentList
-              environmentSignOutAndSetCurrentEnvironmentAsync={
-                environmentSignOutAndSetCurrentEnvironmentAsync
-              }
-              selectedEnvironment={selectedEnvironment}
+            <DebugSettingsApiEnvironmentList
+              apiEnvironmentSetAndSaveAsync={apiEnvironmentSetAndSaveAsync}
+              selectedApiEnvironment={selectedApiEnvironment}
             />
           </SafeAreaView>
         </Modal>
@@ -84,12 +80,12 @@ class DebugSettingsScreen extends PureComponent {
 
 DebugSettingsScreen.propTypes = {
   navigateGoBack: PropTypes.func.isRequired,
-  environmentSignOutAndSetCurrentEnvironmentAsync: PropTypes.func.isRequired,
-  selectedEnvironment: PropTypes.string,
+  apiEnvironmentSetAndSaveAsync: PropTypes.func.isRequired,
+  selectedApiEnvironment: PropTypes.string,
 };
 
 DebugSettingsScreen.defaultProps = {
-  selectedEnvironment: "",
+  selectedApiEnvironment: "",
 };
 
 export default DebugSettingsScreen;

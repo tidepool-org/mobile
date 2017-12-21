@@ -3,7 +3,7 @@ import { storiesOf } from "@storybook/react-native";
 
 import StoryContainerScreen from "../../__stories__/utils/StoryContainerScreen";
 import SignInScreen from "../../src/screens/SignInScreen";
-import { ENVIRONMENT_STAGING } from "../../src/api";
+import { API_ENVIRONMENT_STAGING } from "../../src/api";
 
 const props = {
   navigateSignUp: () => {
@@ -23,7 +23,7 @@ const props = {
   },
   signingIn: false,
   version: "3.0.0",
-  environment: ENVIRONMENT_STAGING,
+  apiEnvironment: API_ENVIRONMENT_STAGING,
   errorMessage: "",
 };
 

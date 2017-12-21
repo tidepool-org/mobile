@@ -17,7 +17,7 @@ function loadStories() {
   require('../__stories__/components/SignInForm.story.js');
   require('../__stories__/components/SignInScreen.story.js');
   require('../__stories__/components/SwitchProfileScreen.story.js');
-  require('../__stories__/components/VersionAndEnvironment.story.js');
+  require('../__stories__/components/VersionAndApiEnvironment.story.js');
   
 }
 
@@ -34,7 +34,7 @@ const stories = [
   '../__stories__/components/SignInForm.story.js',
   '../__stories__/components/SignInScreen.story.js',
   '../__stories__/components/SwitchProfileScreen.story.js',
-  '../__stories__/components/VersionAndEnvironment.story.js',
+  '../__stories__/components/VersionAndApiEnvironment.story.js',
   
 ];
 

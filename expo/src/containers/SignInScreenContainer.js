@@ -13,7 +13,7 @@ const mapStateToProps = state => ({
   signingIn: state.auth.signingIn,
   errorMessage: state.auth.errorMessage,
   version: state.appVersion,
-  environment: state.environment,
+  apiEnvironment: state.apiEnvironment,
 });
 
 const mapDispatchToProps = dispatch =>

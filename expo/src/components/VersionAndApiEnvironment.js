@@ -3,11 +3,11 @@ import PropTypes from "prop-types";
 import glamorous, { withTheme } from "glamorous-native";
 
 import ThemePropTypes from "../themes/ThemePropTypes";
-import { ENVIRONMENT_PRODUCTION } from "../api";
+import { API_ENVIRONMENT_PRODUCTION } from "../api";
 
-class VersionAndEnvironment extends PureComponent {
+class VersionAndApiEnvironment extends PureComponent {
   render() {
-    const { theme, environment, version, small } = this.props;
+    const { theme, apiEnvironment, version, small } = this.props;
 
     return (
       <glamorous.View
@@ -22,22 +22,22 @@ class VersionAndEnvironment extends PureComponent {
           }
         >
           v{version}
-          {environment !== ENVIRONMENT_PRODUCTION ? ` on ${environment}` : ""}
+          {apiEnvironment !== API_ENVIRONMENT_PRODUCTION ? ` on ${apiEnvironment}` : ""}
         </glamorous.Text>
       </glamorous.View>
     );
   }
 }
 
-VersionAndEnvironment.propTypes = {
+VersionAndApiEnvironment.propTypes = {
   theme: ThemePropTypes.isRequired,
   version: PropTypes.string.isRequired,
-  environment: PropTypes.string.isRequired,
+  apiEnvironment: PropTypes.string.isRequired,
   small: PropTypes.bool,
 };
 
-VersionAndEnvironment.defaultProps = {
+VersionAndApiEnvironment.defaultProps = {
   small: false,
 };
 
-export default withTheme(VersionAndEnvironment);
+export default withTheme(VersionAndApiEnvironment);

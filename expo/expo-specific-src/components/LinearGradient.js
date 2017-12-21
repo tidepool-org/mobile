@@ -15,11 +15,11 @@ class LinearGradientExpo extends PureComponent {
 
 LinearGradientExpo.propTypes = {
   style: ViewPropTypes.style,
-  colors: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired
+  colors: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
 };
 
 LinearGradientExpo.defaultProps = {
-  style: null
+  style: null,
 };
 
 export default LinearGradientExpo;

@@ -5,7 +5,7 @@ import glamorous, { withTheme } from "glamorous-native";
 
 import ThemePropTypes from "../themes/ThemePropTypes";
 
-class DebugSettingsEnvironmentListItem extends PureComponent {
+class DebugSettingsApiEnvironmentListItem extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -14,11 +14,11 @@ class DebugSettingsEnvironmentListItem extends PureComponent {
   }
 
   onPress = () => {
-    this.props.onPress(this.props.environmentName);
+    this.props.onPress(this.props.apiEnvironmentName);
   };
 
   renderName() {
-    const { theme, environmentName } = this.props;
+    const { theme, apiEnvironmentName } = this.props;
     const titleColor = this.state.isUnderlayVisible
       ? theme.titleColorActive
       : theme.listItemName.color;
@@ -31,7 +31,7 @@ class DebugSettingsEnvironmentListItem extends PureComponent {
         numberOfLines={1}
         color={titleColor}
       >
-        {environmentName}
+        {apiEnvironmentName}
       </glamorous.Text>
     );
   }
@@ -94,17 +94,17 @@ class DebugSettingsEnvironmentListItem extends PureComponent {
   }
 }
 
-DebugSettingsEnvironmentListItem.propTypes = {
+DebugSettingsApiEnvironmentListItem.propTypes = {
   theme: ThemePropTypes.isRequired,
   style: ViewPropTypes.style,
-  environmentName: PropTypes.string.isRequired,
+  apiEnvironmentName: PropTypes.string.isRequired,
   selected: PropTypes.bool,
   onPress: PropTypes.func.isRequired,
 };
 
-DebugSettingsEnvironmentListItem.defaultProps = {
+DebugSettingsApiEnvironmentListItem.defaultProps = {
   style: null,
   selected: false,
 };
 
-export default withTheme(DebugSettingsEnvironmentListItem);
+export default withTheme(DebugSettingsApiEnvironmentListItem);

@@ -5,24 +5,24 @@ import glamorous, { withTheme } from "glamorous-native";
 
 import ThemePropTypes from "../themes/ThemePropTypes";
 import Colors from "../constants/Colors";
-import DebugSettingsEnvironmentListItem from "./DebugSettingsEnvironmentListItem";
+import DebugSettingsApiEnvironmentListItem from "./DebugSettingsApiEnvironmentListItem";
 import {
-  ENVIRONMENT_PRODUCTION,
-  ENVIRONMENT_INTEGRATION,
-  ENVIRONMENT_STAGING,
-  ENVIRONMENT_DEVELOPMENT,
+  API_ENVIRONMENT_PRODUCTION,
+  API_ENVIRONMENT_INTEGRATION,
+  API_ENVIRONMENT_STAGING,
+  API_ENVIRONMENT_DEVELOPMENT,
 } from "../api";
 
-const environments = [
-  { name: ENVIRONMENT_DEVELOPMENT },
-  { name: ENVIRONMENT_STAGING },
-  { name: ENVIRONMENT_INTEGRATION },
-  { name: ENVIRONMENT_PRODUCTION },
+const apiEnvironments = [
+  { name: API_ENVIRONMENT_DEVELOPMENT },
+  { name: API_ENVIRONMENT_STAGING },
+  { name: API_ENVIRONMENT_INTEGRATION },
+  { name: API_ENVIRONMENT_PRODUCTION },
 ];
 
-class DebugSettingsEnvironmentList extends PureComponent {
-  onPress = environmentName => {
-    this.props.environmentSignOutAndSetCurrentEnvironmentAsync(environmentName);
+class DebugSettingsApiEnvironmentList extends PureComponent {
+  onPress = apiEnvironmentName => {
+    this.props.apiEnvironmentSetAndSaveAsync(apiEnvironmentName);
   };
 
   renderSeparator = () => (
@@ -33,11 +33,11 @@ class DebugSettingsEnvironmentList extends PureComponent {
   );
 
   renderItem = ({ item }) => (
-    <DebugSettingsEnvironmentListItem
+    <DebugSettingsApiEnvironmentListItem
       key={item.name}
-      environmentName={item.name}
+      apiEnvironmentName={item.name}
       onPress={this.onPress}
-      selected={item.name === this.props.selectedEnvironment}
+      selected={item.name === this.props.selectedApiEnvironment}
     />
   );
 
@@ -48,7 +48,7 @@ class DebugSettingsEnvironmentList extends PureComponent {
       <glamorous.View>
         <glamorous.Text
           style={theme.debugSettingsSectionTitleStyle}
-          marginTop={15}
+          marginTop={8}
           marginLeft={15}
           marginBottom={8}
         >
@@ -60,7 +60,7 @@ class DebugSettingsEnvironmentList extends PureComponent {
           borderColor={Colors.warmGrey}
           backgroundColor="white"
           scrollEnabled={false}
-          data={environments}
+          data={apiEnvironments}
           extraData={this.state}
           keyExtractor={item => item.name}
           renderItem={this.renderItem}
@@ -71,14 +71,14 @@ class DebugSettingsEnvironmentList extends PureComponent {
   }
 }
 
-DebugSettingsEnvironmentList.propTypes = {
+DebugSettingsApiEnvironmentList.propTypes = {
   theme: ThemePropTypes.isRequired,
-  environmentSignOutAndSetCurrentEnvironmentAsync: PropTypes.func.isRequired,
-  selectedEnvironment: PropTypes.string,
+  apiEnvironmentSetAndSaveAsync: PropTypes.func.isRequired,
+  selectedApiEnvironment: PropTypes.string,
 };
 
-DebugSettingsEnvironmentList.defaultProps = {
-  selectedEnvironment: "",
+DebugSettingsApiEnvironmentList.defaultProps = {
+  selectedApiEnvironment: "",
 };
 
-export default withTheme(DebugSettingsEnvironmentList);
+export default withTheme(DebugSettingsApiEnvironmentList);

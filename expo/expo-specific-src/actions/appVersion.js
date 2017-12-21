@@ -1,8 +1,8 @@
 // NOTE: This file is copied via build script to src/actions/appVersion.js
 
-export const APP_VERSION_SET_VERSION = "APP_VERSION_SET_VERSION";
+export const APP_VERSION_LOAD = "APP_VERSION_LOAD";
 
-export const appVersionSetVersion = () => ({
-  type: APP_VERSION_SET_VERSION,
-  payload: "3.0 (Expo)"
+export const appVersionLoad = () => ({
+  type: APP_VERSION_LOAD,
+  payload: "3.0 (Expo)",
 });

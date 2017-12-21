@@ -17,6 +17,21 @@ class TidepoolApi {
   // Async helpers
   //
 
+  async refreshTokenAsync({ sessionToken: previousSessionToken }) {
+    const { sessionToken, userId, errorMessage } = await this.refreshToken({
+      sessionToken: previousSessionToken,
+    })
+      .then(response => ({
+        sessionToken: response.sessionToken,
+        userId: response.userId,
+      }))
+      .catch(error => ({
+        errorMessage: error.message,
+      }));
+
+    return { sessionToken, userId, errorMessage };
+  }
+
   async signInAsync({ username, password }) {
     const { sessionToken, userId, errorMessage } = await this.signIn({
       username,
@@ -51,6 +66,42 @@ class TidepoolApi {
   // Lower-level promise-based methods
   //
 
+  refreshToken({ sessionToken: previousSessionToken }) {
+    const method = "get";
+    const url = "/auth/login";
+    const baseURL = this.baseUrl;
+    const headers = { "x-tidepool-session-token": previousSessionToken };
+
+    return new Promise((resolve, reject) => {
+      axios({ method, url, baseURL, headers })
+        .then(response => {
+          this.sessionToken =
+            response.headers["x-tidepool-session-token"] || "";
+          const userId = response.data.userid;
+
+          if (this.sessionToken) {
+            resolve({ sessionToken: this.sessionToken, userId });
+          } else {
+            reject(
+              new Error(
+                "No x-tidepool-session-token was found in the response headers."
+              )
+            );
+          }
+        })
+        .catch(error => {
+          if (
+            error.response &&
+            (error.response.status === 400 || error.response.status === 401)
+          ) {
+            reject(new Error("Unable to refresh token."));
+          } else {
+            reject(new Error("Check your Internet connection!"));
+          }
+        });
+    });
+  }
+
   signIn({ username, password }) {
     const method = "post";
     const url = "/auth/login";
@@ -73,8 +124,8 @@ class TidepoolApi {
           } else {
             reject(
               new Error(
-                "No x-tidepool-session-token was found in the response headers",
-              ),
+                "No x-tidepool-session-token was found in the response headers"
+              )
             );
           }
         })

@@ -2,14 +2,14 @@ import { combineReducers } from "redux";
 
 import appVersion from "./appVersion";
 import auth from "./auth";
-import environment from "./environment";
+import apiEnvironment from "./apiEnvironment";
 import navigation from "./navigation";
 import profile from "./profile";
 
 const reducers = combineReducers({
   appVersion,
   auth,
-  environment,
+  apiEnvironment,
   navigation,
   profile,
 });

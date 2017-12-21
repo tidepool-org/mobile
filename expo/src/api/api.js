@@ -1,9 +1,9 @@
 import TidepoolApi from "./TidepoolApi";
 
-const ENVIRONMENT_PRODUCTION = "Production";
-const ENVIRONMENT_INTEGRATION = "Integration";
-const ENVIRONMENT_STAGING = "Staging";
-const ENVIRONMENT_DEVELOPMENT = "Development";
+const API_ENVIRONMENT_PRODUCTION = "Production";
+const API_ENVIRONMENT_INTEGRATION = "Integration";
+const API_ENVIRONMENT_STAGING = "Staging";
+const API_ENVIRONMENT_DEVELOPMENT = "Development";
 
 const BASE_URL_PRODUCTION = "https://api.tidepool.org";
 const BASE_URL_INTEGRATION = "https://int-api.tidepool.org";
@@ -12,20 +12,22 @@ const BASE_URL_DEVELOPMENT = "https://dev-api.tidepool.org";
 
 let tidepoolApi = null;
 
-const switchEnvironment = environment => {
+const switchApiEnvironment = apiEnvironment => {
+  // console.log(`switchApiEnvironment: ${apiEnvironment}`);
+
   let baseUrl;
 
-  switch (environment) {
-    case ENVIRONMENT_PRODUCTION:
+  switch (apiEnvironment) {
+    case API_ENVIRONMENT_PRODUCTION:
       baseUrl = BASE_URL_PRODUCTION;
       break;
-    case ENVIRONMENT_INTEGRATION:
+    case API_ENVIRONMENT_INTEGRATION:
       baseUrl = BASE_URL_INTEGRATION;
       break;
-    case ENVIRONMENT_STAGING:
+    case API_ENVIRONMENT_STAGING:
       baseUrl = BASE_URL_STAGING;
       break;
-    case ENVIRONMENT_DEVELOPMENT:
+    case API_ENVIRONMENT_DEVELOPMENT:
       baseUrl = BASE_URL_DEVELOPMENT;
       break;
     default:
@@ -40,9 +42,9 @@ const api = () => tidepoolApi;
 
 export {
   api as default,
-  ENVIRONMENT_PRODUCTION,
-  ENVIRONMENT_INTEGRATION,
-  ENVIRONMENT_STAGING,
-  ENVIRONMENT_DEVELOPMENT,
-  switchEnvironment,
+  API_ENVIRONMENT_PRODUCTION,
+  API_ENVIRONMENT_INTEGRATION,
+  API_ENVIRONMENT_STAGING,
+  API_ENVIRONMENT_DEVELOPMENT,
+  switchApiEnvironment,
 };

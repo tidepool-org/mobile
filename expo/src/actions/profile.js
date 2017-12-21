@@ -1,6 +1,6 @@
-export const PROFILE_SET_CURRENT_PROFILE = "PROFILE_SET_CURRENT_PROFILE";
+export const PROFILE_SET = "PROFILE_SET";
 
-export const profileSetCurrentProfile = ({ userId, fullName }) => ({
-  type: PROFILE_SET_CURRENT_PROFILE,
+export const profileSet = ({ userId, fullName }) => ({
+  type: PROFILE_SET,
   payload: { userId, fullName },
 });

@@ -8,7 +8,7 @@ import PrimaryTheme from "../themes/PrimaryTheme";
 import MadePossibleBy from "../components/MadePossibleBy";
 import SignUp from "../components/SignUp";
 import SignInForm from "../components/SignInForm";
-import VersionAndEnvironment from "../components/VersionAndEnvironment";
+import VersionAndApiEnvironment from "../components/VersionAndApiEnvironment";
 import DebugSettingsTouchable from "../components/DebugSettingsTouchable";
 
 const safeAreaTopInset = isIphoneX() ? 24 : 0;
@@ -21,7 +21,7 @@ class SignInScreen extends PureComponent {
     const {
       errorMessage,
       version,
-      environment,
+      apiEnvironment,
       navigateDebugSettings,
       navigateForgotPassword,
       authSignInReset,
@@ -69,9 +69,9 @@ class SignInScreen extends PureComponent {
                 alignItems="center"
               >
                 <MadePossibleBy />
-                <VersionAndEnvironment
+                <VersionAndApiEnvironment
                   version={version}
-                  environment={environment}
+                  apiEnvironment={apiEnvironment}
                 />
               </glamorous.View>
             </DebugSettingsTouchable>
@@ -91,7 +91,7 @@ SignInScreen.propTypes = {
   signingIn: PropTypes.bool.isRequired,
   errorMessage: PropTypes.string,
   version: PropTypes.string.isRequired,
-  environment: PropTypes.string.isRequired,
+  apiEnvironment: PropTypes.string.isRequired,
 };
 
 SignInScreen.defaultProps = {

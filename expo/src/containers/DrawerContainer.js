@@ -15,7 +15,7 @@ import { authSignOutAsync } from "../actions/auth";
 
 class DrawerContainer extends PureComponent {
   render() {
-    const { currentUser, version, environment } = this.props;
+    const { currentUser, version, apiEnvironment } = this.props;
 
     return (
       <Drawer
@@ -31,7 +31,7 @@ class DrawerContainer extends PureComponent {
         authSignOutAsync={this.props.authSignOutAsync}
         currentUser={currentUser}
         version={version}
-        environment={environment}
+        apiEnvironment={apiEnvironment}
       />
     );
   }
@@ -48,7 +48,7 @@ DrawerContainer.propTypes = {
     username: PropTypes.string.isRequired,
   }).isRequired,
   version: PropTypes.string.isRequired,
-  environment: PropTypes.string.isRequired,
+  apiEnvironment: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -57,7 +57,7 @@ const mapStateToProps = state => ({
     fullName: state.auth.fullName,
   },
   version: state.appVersion,
-  environment: state.environment,
+  apiEnvironment: state.apiEnvironment,
 });
 
 const mapDispatchToProps = dispatch =>
