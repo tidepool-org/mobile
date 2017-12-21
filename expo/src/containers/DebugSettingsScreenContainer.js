@@ -3,17 +3,17 @@ import { connect } from "react-redux";
 
 import DebugSettingsScreen from "../screens/DebugSettingsScreen";
 import { navigateGoBack } from "../actions/navigation";
-import { environmentSignOutAndSetCurrentEnvironmentAsync } from "../actions/environment";
+import { apiEnvironmentSetAndSaveAsync } from "../actions/apiEnvironment";
 
 const mapStateToProps = state => ({
-  selectedEnvironment: state.environment,
+  selectedApiEnvironment: state.apiEnvironment,
 });
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       navigateGoBack,
-      environmentSignOutAndSetCurrentEnvironmentAsync,
+      apiEnvironmentSetAndSaveAsync,
     },
     dispatch
   );

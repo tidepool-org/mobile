@@ -1,10 +1,9 @@
 import React from "react";
-import View from "react-native";
 import { storiesOf } from "@storybook/react-native";
 
 import StoryContainerComponent from "../../__stories__/utils/StoryContainerComponent";
 import Drawer from "../../src/components/Drawer";
-import { ENVIRONMENT_STAGING } from "../../src/api";
+import { API_ENVIRONMENT_STAGING } from "../../src/api";
 
 const props = {
   navigateDrawerClose: () => {},
@@ -18,7 +17,7 @@ const props = {
     fullName: "Current User",
   },
   version: "3.0.0",
-  environment: ENVIRONMENT_STAGING,
+  apiEnvironment: API_ENVIRONMENT_STAGING,
 };
 
 storiesOf("Drawer", module).add("default", () => (

@@ -2,14 +2,14 @@
 
 import VersionNumber from "react-native-version-number";
 
-export const APP_VERSION_SET_VERSION = "APP_VERSION_SET_VERSION";
+export const APP_VERSION_LOAD = "APP_VERSION_LOAD";
 
 // TODO: app version - use react-native-device-info
-export const appVersionSetVersion = () => {
+export const appVersionLoad = () => {
   const version = `${VersionNumber.appVersion}`;
 
   return {
-    type: APP_VERSION_SET_VERSION,
+    type: APP_VERSION_LOAD,
     payload: version,
   };
 };

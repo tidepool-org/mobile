@@ -1,4 +1,4 @@
-import { PROFILE_SET_CURRENT_PROFILE } from "../actions/profile";
+import { PROFILE_SET } from "../actions/profile";
 
 const initialProfileState = {
   currentProfile: {
@@ -9,7 +9,7 @@ const initialProfileState = {
 
 function profile(state = initialProfileState, action) {
   switch (action.type) {
-    case PROFILE_SET_CURRENT_PROFILE:
+    case PROFILE_SET:
       return { currentProfile: action.payload };
     default:
       return state;

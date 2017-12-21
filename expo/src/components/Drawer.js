@@ -2,7 +2,6 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { ViewPropTypes, SafeAreaView } from "react-native";
 import glamorous, { ThemeProvider } from "glamorous-native";
-import { isIphoneX } from "react-native-iphone-x-helper";
 
 import PrimaryTheme from "../themes/PrimaryTheme";
 import Colors from "../constants/Colors";
@@ -14,13 +13,13 @@ import DrawerPrivacyAndTermsButton from "./DrawerPrivacyAndTermsButton";
 import DrawerSignOutButton from "./DrawerSignOutButton";
 import Divider from "./Divider";
 import DebugSettingsTouchable from "../components/DebugSettingsTouchable";
-import VersionAndEnvironment from "../components/VersionAndEnvironment";
+import VersionAndApiEnvironment from "../components/VersionAndApiEnvironment";
 
 class Drawer extends PureComponent {
   theme = PrimaryTheme;
 
   render() {
-    const { version, environment, navigateDebugSettings } = this.props;
+    const { version, apiEnvironment, navigateDebugSettings } = this.props;
 
     return (
       <ThemeProvider theme={this.theme}>
@@ -126,9 +125,9 @@ class Drawer extends PureComponent {
             }}
             navigateDebugSettings={navigateDebugSettings}
           >
-            <VersionAndEnvironment
+            <VersionAndApiEnvironment
               version={version}
-              environment={environment}
+              apiEnvironment={apiEnvironment}
               small
             />
           </DebugSettingsTouchable>
@@ -151,7 +150,7 @@ Drawer.propTypes = {
     fullName: PropTypes.string.isRequired,
   }).isRequired,
   version: PropTypes.string.isRequired,
-  environment: PropTypes.string.isRequired,
+  apiEnvironment: PropTypes.string.isRequired,
 };
 
 Drawer.defaultProps = {
