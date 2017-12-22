@@ -6,21 +6,11 @@ import SignInScreen from "../../src/screens/SignInScreen";
 import { API_ENVIRONMENT_STAGING } from "../../src/api";
 
 const props = {
-  navigateSignUp: () => {
-    console.log("navigateSignUp");
-  },
-  navigateDebugSettings: () => {
-    console.log("navigateDebugSettings");
-  },
-  navigateForgotPassword: () => {
-    console.log("navigateForgotPassword");
-  },
-  authSignInReset: () => {
-    console.log("authSignInReset");
-  },
-  authSignInAsync: () => {
-    console.log("authSignInAsync");
-  },
+  navigateSignUp: () => {},
+  navigateDebugSettings: () => {},
+  navigateForgotPassword: () => {},
+  authSignInReset: () => {},
+  authSignInAsync: () => {},
   signingIn: false,
   version: "3.0.0",
   apiEnvironment: API_ENVIRONMENT_STAGING,

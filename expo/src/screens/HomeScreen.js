@@ -25,6 +25,8 @@ class HomeScreen extends PureComponent {
   theme = PrimaryTheme;
 
   render() {
+    // console.log("HomeScreen: render");
+
     const { eventListData } = this.props;
 
     return (
@@ -44,7 +46,7 @@ HomeScreen.propTypes = {
       time: PropTypes.string.isRequired,
       text: PropTypes.string.isRequired,
       id: PropTypes.string.isRequired,
-    }),
+    })
   ).isRequired,
 };
 

@@ -9,6 +9,7 @@ import {
 import { connect } from "react-redux";
 
 import getCurrentRouteAndIndex from "../utils/getCurrentRouteAndIndex";
+import LaunchScreen from "../screens/LaunchScreen";
 import SignInScreenContainer from "../containers/SignInScreenContainer";
 import MainDrawerNavigator from "./MainDrawerNavigator";
 import DebugSettingsScreenContainer from "../containers/DebugSettingsScreenContainer";
@@ -23,6 +24,9 @@ const noTransitionConfig = () => ({
 
 export const AppNavigator = StackNavigator(
   {
+    Launch: {
+      screen: LaunchScreen,
+    },
     SignIn: {
       screen: props => <SignInScreenContainer {...props} />,
     },
@@ -35,9 +39,8 @@ export const AppNavigator = StackNavigator(
   },
   {
     headerMode: "none",
-    initialRouteName: "SignIn",
     transitionConfig: noTransitionConfig,
-  },
+  }
 );
 
 class AppWithNavigationState extends PureComponent {
@@ -59,7 +62,9 @@ class AppWithNavigationState extends PureComponent {
   };
 
   render() {
+    // console.log("AppWithNavigationState: render");
     const { dispatch, navigation } = this.props;
+
     return (
       <AppNavigator
         navigation={addNavigationHelpers({
@@ -79,7 +84,7 @@ AppWithNavigationState.propTypes = {
       PropTypes.shape({
         routeName: PropTypes.string.isRequired,
         key: PropTypes.string,
-      }),
+      })
     ).isRequired,
   }).isRequired,
 };

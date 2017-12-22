@@ -5,6 +5,7 @@ import Urls from "../constants/Urls";
 import { AppNavigator } from "../navigators/AppNavigator";
 import getCurrentRouteAndIndex from "../utils/getCurrentRouteAndIndex";
 import {
+  NAVIGATE_LAUNCH,
   NAVIGATE_HOME,
   NAVIGATE_SIGN_IN,
   NAVIGATE_SIGN_UP,
@@ -30,6 +31,16 @@ const initialState = AppNavigator.router.getStateForAction(
 function navigation(state = initialState, action) {
   let nextState;
   switch (action.type) {
+    case NAVIGATE_LAUNCH:
+      nextState = AppNavigator.router.getStateForAction(
+        NavigationActions.reset({
+          index: 0,
+          key: null,
+          actions: [NavigationActions.navigate({ routeName: "Launch" })],
+        }),
+        state
+      );
+      break;
     case NAVIGATE_HOME:
       nextState = AppNavigator.router.getStateForAction(
         NavigationActions.reset({

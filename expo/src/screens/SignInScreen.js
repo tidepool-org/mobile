@@ -18,6 +18,8 @@ class SignInScreen extends PureComponent {
   theme = PrimaryTheme;
 
   render() {
+    // console.log("SignInScreen: render");
+
     const {
       errorMessage,
       version,

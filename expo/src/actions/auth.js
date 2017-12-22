@@ -140,7 +140,9 @@ export const authRefreshTokenOrSignInAsync = () => async dispatch => {
       // console.log(`authRefreshTokenOrSignInAsync: Error: ${errorMessage}`);
       dispatch(authRefreshTokenDidFail(errorMessage));
 
-      // console.log(`authRefreshTokenOrSignInAsync: Navigate to sign in due to error`); // TODO: sign in - what about client side errors? Should that
+      // console.log(
+      //   `authRefreshTokenOrSignInAsync: Navigate to sign in due to error`
+      // ); // TODO: sign in - what about client side errors? Should that result in reset / sign in?
       dispatch(authSignInReset());
       dispatch(navigateSignIn());
     } else {
