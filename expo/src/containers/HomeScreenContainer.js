@@ -21,7 +21,7 @@ const eventListData = [
   },
 ];
 
-const mapStateToProps = () => ({
+const mapStateToProps = state => ({
   eventListData,
 });
 

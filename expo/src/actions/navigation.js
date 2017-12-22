@@ -1,3 +1,4 @@
+export const NAVIGATE_LAUNCH = "NAVIGATE_LAUNCH";
 export const NAVIGATE_HOME = "NAVIGATE_HOME";
 export const NAVIGATE_SIGN_IN = "NAVIGATE_SIGN_IN";
 export const NAVIGATE_SIGN_UP = "NAVIGATE_SIGN_UP";
@@ -9,6 +10,10 @@ export const NAVIGATE_SIGN_DRAWER_OPEN = "NAVIGATE_SIGN_DRAWER_OPEN";
 export const NAVIGATE_SIGN_DRAWER_CLOSE = "NAVIGATE_SIGN_DRAWER_CLOSE";
 export const NAVIGATE_DEBUG_SETTINGS = "NAVIGATE_DEBUG_SETTINGS";
 export const NAVIGATE_GO_BACK = "NAVIGATE_GO_BACK";
+
+export function navigateLaunch() {
+  return { type: NAVIGATE_LAUNCH };
+}
 
 export function navigateHome() {
   return { type: NAVIGATE_HOME };

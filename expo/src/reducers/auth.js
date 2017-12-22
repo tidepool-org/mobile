@@ -7,6 +7,7 @@ import {
   AUTH_SIGN_IN_DID_START,
   AUTH_SIGN_IN_DID_SUCCEED,
   AUTH_SIGN_IN_DID_FAIL,
+  AUTH_REFRESH_SESSION_TOKEN_DID_SUCCEED,
 } from "../actions/auth";
 
 const initialAuthState = {
@@ -27,7 +28,17 @@ function auth(state = initialAuthState, action) {
     case AUTH_SIGN_IN_DID_SUCCEED: {
       const { sessionToken, userId, username, fullName } = action.payload;
       return {
-        ...state,
+        sessionToken,
+        userId,
+        username,
+        fullName,
+        signingIn: false,
+        errorMessage: "",
+      };
+    }
+    case AUTH_REFRESH_SESSION_TOKEN_DID_SUCCEED: {
+      const { sessionToken, userId, username, fullName } = action.payload;
+      return {
         sessionToken,
         userId,
         username,

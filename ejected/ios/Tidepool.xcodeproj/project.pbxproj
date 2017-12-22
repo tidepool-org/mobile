@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -34,6 +35,8 @@
 		2D02E4C91E0B4AEC006451C7 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
 		2DCD954D1E0B4F2C00145EB5 /* TidepoolTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* TidepoolTests.m */; };
 		4D15C03C1F92741B00AE7E43 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D15C01B1F92741B00AE7E43 /* LaunchScreen.storyboard */; };
+		4D507B771FEC3D9400FBAB9A /* LaunchScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D507B761FEC3D9400FBAB9A /* LaunchScreen.m */; };
+		4D507B781FEC3D9400FBAB9A /* LaunchScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D507B761FEC3D9400FBAB9A /* LaunchScreen.m */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		6BD399F7318041AABDAB8F97 /* libRNVersionNumber.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D27ECEBA50B6421C82121B3D /* libRNVersionNumber.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
@@ -357,6 +360,8 @@
 		2D02E4901E0B4A5D006451C7 /* Tidepool-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tidepool-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4384750EC1F54FA98B29F147 /* OpenSans-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Light.ttf"; path = "../assets/fonts/OpenSans-Light.ttf"; sourceTree = "<group>"; };
 		4D15C01C1F92741B00AE7E43 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Tidepool/Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		4D507B761FEC3D9400FBAB9A /* LaunchScreen.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = LaunchScreen.m; path = Tidepool/LaunchScreen.m; sourceTree = "<group>"; };
+		4D507BA01FEC3DB400FBAB9A /* LaunchScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LaunchScreen.h; path = Tidepool/LaunchScreen.h; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		716B328E313F4DF7B47C5200 /* RNVersionNumber.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVersionNumber.xcodeproj; path = "../node_modules/react-native-version-number/ios/RNVersionNumber.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
@@ -511,6 +516,8 @@
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
+				4D507BA01FEC3DB400FBAB9A /* LaunchScreen.h */,
+				4D507B761FEC3D9400FBAB9A /* LaunchScreen.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				4D15C01B1F92741B00AE7E43 /* LaunchScreen.storyboard */,
@@ -1205,6 +1212,7 @@
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				4D507B771FEC3D9400FBAB9A /* LaunchScreen.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1214,6 +1222,7 @@
 			files = (
 				2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */,
 				2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */,
+				4D507B781FEC3D9400FBAB9A /* LaunchScreen.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
