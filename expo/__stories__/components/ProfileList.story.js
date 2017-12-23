@@ -1,3 +1,4 @@
+/* eslint import/no-extraneous-dependencies: 0 */
 import React from "react";
 import { storiesOf } from "@storybook/react-native";
 import glamorous from "glamorous-native";

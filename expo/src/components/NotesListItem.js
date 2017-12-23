@@ -7,24 +7,24 @@ import HashtagText from "./HashtagText";
 import ThemePropTypes from "../themes/ThemePropTypes";
 import LinearGradient from "./LinearGradient";
 
-class NoteListItem extends PureComponent {
+class NotesListItem extends PureComponent {
   render() {
-    const { theme, style, time, text } = this.props;
+    const { theme, style, timestampFormatted, messageText } = this.props;
 
     return (
       <glamorous.View style={style} backgroundColor="white">
         <glamorous.Text
           allowFontScaling={false}
-          style={theme.noteListItemTimeStyle}
+          style={theme.notesListItemTimeStyle}
           marginTop={7}
           marginLeft={12}
           marginRight={12}
         >
-          {time}
+          {timestampFormatted}
         </glamorous.Text>
         <glamorous.Text
           allowFontScaling={false}
-          style={theme.noteListItemTextStyle}
+          style={theme.notesListItemTextStyle}
           flexDirection="row"
           marginTop={7}
           marginLeft={12}
@@ -32,9 +32,9 @@ class NoteListItem extends PureComponent {
           marginBottom={7}
         >
           <HashtagText
-            boldStyle={theme.noteListItemHashtagStyle}
-            normalStyle={theme.noteListItemTextStyle}
-            text={text}
+            boldStyle={theme.notesListItemHashtagStyle}
+            normalStyle={theme.notesListItemTextStyle}
+            text={messageText}
           />
         </glamorous.Text>
         <LinearGradient
@@ -46,15 +46,15 @@ class NoteListItem extends PureComponent {
   }
 }
 
-NoteListItem.propTypes = {
+NotesListItem.propTypes = {
   theme: ThemePropTypes.isRequired,
   style: ViewPropTypes.style,
-  time: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired,
+  timestampFormatted: PropTypes.string.isRequired,
+  messageText: PropTypes.string.isRequired,
 };
 
-NoteListItem.defaultProps = {
+NotesListItem.defaultProps = {
   style: null,
 };
 
-export default withTheme(NoteListItem);
+export default withTheme(NotesListItem);

@@ -36,10 +36,8 @@
     "test": "node node_modules/jest/bin/jest.js --watch",
     "flow": "flow",
     "format": "prettier-eslint \"src/**/*.js\"",
-    "pre":
-      "cp expo-specific-App.js App.js && cp expo-specific-src/utils/runtimeEnvironment.js src/utils/runtimeEnvironment.js && cp expo-specific-src/components/LinearGradient.js src/components/LinearGradient.js && cp expo-specific-src/actions/appVersion.js src/actions/appVersion.js && cp expo-specific-src/reducers/appVersion.js src/reducers/appVersion.js",
-    "prestorybook":
-      "cp storybook-specific-App.js App.js && cp expo-specific-src/utils/runtimeEnvironment.js src/utils/runtimeEnvironment.js && cp expo-specific-src/components/LinearGradient.js src/components/LinearGradient.js && cp expo-specific-src/actions/appVersion.js src/actions/appVersion.js && cp expo-specific-src/reducers/appVersion.js src/reducers/appVersion.js && rnstl",
+    "pre": "cp expo-specific-App.js App.js && cp expo-specific-src/utils/runtimeEnvironment.js src/utils/runtimeEnvironment.js && cp expo-specific-src/components/LinearGradient.js src/components/LinearGradient.js && cp expo-specific-src/actions/appVersion.js src/actions/appVersion.js && cp expo-specific-src/reducers/appVersion.js src/reducers/appVersion.js",
+    "prestorybook": "cp storybook-specific-App.js App.js && cp expo-specific-src/utils/runtimeEnvironment.js src/utils/runtimeEnvironment.js && cp expo-specific-src/components/LinearGradient.js src/components/LinearGradient.js && cp expo-specific-src/actions/appVersion.js src/actions/appVersion.js && cp expo-specific-src/reducers/appVersion.js src/reducers/appVersion.js && rnstl",
     "storybook": "storybook start -p 7007"
   },
   "jest": {
@@ -50,19 +48,21 @@
   },
   "config": {
     "react-native-storybook-loader": {
-      "searchDir": ["./__stories__"],
+      "searchDir": [
+        "./__stories__"
+      ],
       "pattern": "**/*.story.js",
       "outputFile": "./storybook/storyLoader.js"
     }
   },
   "dependencies": {
     "axios": "^0.17.1",
+    "date-fns": "^1.29.0",
     "expo": "^23.0.0",
     "glamorous-native": "1.2.0",
     "prop-types": "15.6.0",
     "react": "16.0.0",
-    "react-native":
-      "https://github.com/expo/react-native/archive/sdk-23.0.0.tar.gz",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-23.0.0.tar.gz",
     "react-native-iphone-x-helper": "1.0.1",
     "react-navigation": "^1.0.0-beta.21",
     "react-redux": "^5.0.6",

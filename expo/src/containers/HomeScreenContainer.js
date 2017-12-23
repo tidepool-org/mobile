@@ -1,28 +1,22 @@
+import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
 import HomeScreen from "../screens/HomeScreen";
-
-// TODO: notes - get this from redux state
-const eventListData = [
-  {
-    id: "1",
-    time: "December 2, 7:00 pm",
-    text: "Note text #testing #sitechange",
-  },
-  {
-    id: "2",
-    time: "October 26, 2:00 pm",
-    text: "#meal Note text 2",
-  },
-  {
-    id: "3",
-    time: "July 10, 12:00 pm",
-    text: "#exercise #meal Note text 3",
-  },
-];
+import { notesFetchAsync } from "../actions/notesFetch";
 
 const mapStateToProps = state => ({
-  eventListData,
+  notes: state.notesFetch.notes,
+  errorMessage: state.notesFetch.errorMessage,
+  fetching: state.notesFetch.fetching,
+  currentProfileUserId: state.profile.currentProfile.userId,
 });
 
-export default connect(mapStateToProps)(HomeScreen);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      notesFetchAsync,
+    },
+    dispatch
+  );
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);

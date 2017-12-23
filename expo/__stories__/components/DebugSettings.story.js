@@ -1,5 +1,5 @@
+/* eslint import/no-extraneous-dependencies: 0 */
 import React from "react";
-import View from "react-native";
 import { storiesOf } from "@storybook/react-native";
 
 import StoryContainerScreen from "../../__stories__/utils/StoryContainerScreen";

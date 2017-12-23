@@ -37,7 +37,7 @@ RCT_EXPORT_METHOD(showActivityIndicator) {
     return;
   }
   
-  gActivityIndicatorView.hidden = NO;
+  gActivityIndicatorView.alpha = 1.0;
   [gActivityIndicatorView startAnimating];
 }
 

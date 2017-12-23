@@ -3,7 +3,7 @@ import { appVersionLoad } from "../actions/appVersion";
 import { authRefreshTokenOrSignInAsync } from "../actions/auth";
 import { apiEnvironmentLoadAndSetAsync } from "../actions/apiEnvironment";
 import { navigateLaunch } from "../actions/navigation";
-import environment from "../utils/runtimeEnvironment";
+import runTimeEnvironment from "../utils/runtimeEnvironment";
 
 export const APP_INIT_DID_FINISH = "APP_INIT_DID_FINISH";
 
@@ -13,7 +13,7 @@ export const appInitDidFinish = () => ({
 });
 
 export const appInitAsync = () => async dispatch => {
-  if (!environment.useExpo) {
+  if (!runTimeEnvironment.useExpo) {
     NativeModules.LaunchScreen.showActivityIndicator();
   }
 
@@ -23,7 +23,7 @@ export const appInitAsync = () => async dispatch => {
   await dispatch(authRefreshTokenOrSignInAsync());
   dispatch(appInitDidFinish());
 
-  if (!environment.useExpo) {
+  if (!runTimeEnvironment.useExpo) {
     NativeModules.LaunchScreen.hide();
   }
 };
