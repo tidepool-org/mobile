@@ -1,5 +1,7 @@
 import axios from "axios";
 
+import formatDate from "../utils/formatDate";
+
 // TODO: api - default timeout for requests
 
 // TODO: api - update User-Agent in the header for all requests to indicate the app name and version, build info,
@@ -60,6 +62,32 @@ class TidepoolApi {
       }));
 
     return { fullName, errorMessage };
+  }
+
+  async fetchNotesAsync({ userId }) {
+    const { notes, errorMessage } = await this.fetchNotes({
+      userId,
+    })
+      .then(response => {
+        // Map notes add timestampFormatted
+        const sortedNotes = response.notes.map(responseNote => {
+          const mappedNote = {
+            id: responseNote.id,
+            timestamp: new Date(new Date(responseNote.timestamp)),
+            messageText: responseNote.messagetext,
+          };
+          mappedNote.timestampFormatted = formatDate(mappedNote.timestamp);
+          return mappedNote;
+        });
+        // Sort notes reverse chronologically by timestamp
+        sortedNotes.sort((note1, note2) => note2.timestamp - note1.timestamp);
+        return { notes: sortedNotes };
+      })
+      .catch(error => ({
+        errorMessage: error.message,
+      }));
+
+    return { notes, errorMessage };
   }
 
   //
@@ -154,6 +182,24 @@ class TidepoolApi {
           const profile = response.data;
           const { fullName } = profile;
           resolve({ fullName });
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+  }
+
+  fetchNotes({ userId }) {
+    const method = "get";
+    const url = `/message/notes/${userId}`;
+    const baseURL = this.baseUrl;
+    const headers = { "x-tidepool-session-token": this.sessionToken };
+
+    return new Promise((resolve, reject) => {
+      axios({ method, url, baseURL, headers })
+        .then(response => {
+          const notes = response.data.messages;
+          resolve({ notes });
         })
         .catch(error => {
           reject(error);

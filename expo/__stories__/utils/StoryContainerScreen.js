@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
-import { SafeAreaView, View } from "react-native";
+import { SafeAreaView } from "react-native";
 
 import Fonts from "../../src/constants/Fonts";
 import withThemeProvider from "../../src/enhancers/withThemeProvider";
@@ -20,7 +20,7 @@ class StoryContainerScreen extends PureComponent {
 
     const enhanced = withThemeProvider(
       withExpoFontPreload(() => children, Fonts),
-      PrimaryTheme,
+      PrimaryTheme
     );
     return (
       <Provider store={store}>

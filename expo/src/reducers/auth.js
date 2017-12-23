@@ -1,5 +1,3 @@
-// TODO: api - store sessionToken in async storage, and on startup, try to use that first to bypass sign in screen
-// TODO: api - refresh token support
 // TODO: api - use secure storage for session token
 
 import {

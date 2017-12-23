@@ -5,6 +5,7 @@ import appVersion from "./appVersion";
 import auth from "./auth";
 import apiEnvironment from "./apiEnvironment";
 import navigation from "./navigation";
+import notesFetch from "./notesFetch";
 import profile from "./profile";
 
 const reducers = combineReducers({
@@ -13,6 +14,7 @@ const reducers = combineReducers({
   auth,
   apiEnvironment,
   navigation,
+  notesFetch,
   profile,
 });
 

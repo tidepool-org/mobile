@@ -13,15 +13,15 @@ const PrimaryTheme = {
     ...FontStyles.navTitleFont,
     alignSelf: "center",
   },
-  noteListItemTimeStyle: {
+  notesListItemTimeStyle: {
     color: Colors.altDarkGreyColor,
     ...FontStyles.smallRegularFont,
   },
-  noteListItemTextStyle: {
+  notesListItemTextStyle: {
     color: Colors.blackish,
     ...FontStyles.mediumSmallRegularFont,
   },
-  noteListItemHashtagStyle: {
+  notesListItemHashtagStyle: {
     color: Colors.blackish,
     ...FontStyles.mediumSmallBoldFont,
   },
