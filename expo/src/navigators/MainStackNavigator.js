@@ -3,12 +3,15 @@ import { StackNavigator } from "react-navigation";
 import HomeScreenContainer from "../containers/HomeScreenContainer";
 import SwitchProfileScreenContainer from "../containers/SwitchProfileScreenContainer";
 
+export const HOME_ROUTE_NAME = "Home";
+export const SWITCH_PROFILE_ROUTE_NAME = "SwitchProfile";
+
 const MainStackNavigator = StackNavigator(
   {
-    Home: {
+    [HOME_ROUTE_NAME]: {
       screen: HomeScreenContainer,
     },
-    SwitchProfile: {
+    [SWITCH_PROFILE_ROUTE_NAME]: {
       screen: SwitchProfileScreenContainer,
     },
   },
@@ -16,7 +19,7 @@ const MainStackNavigator = StackNavigator(
     headerMode: "screen",
     headerBackTitle: "",
     headerTruncatedBackTitle: "",
-  },
+  }
 );
 
 export default MainStackNavigator;

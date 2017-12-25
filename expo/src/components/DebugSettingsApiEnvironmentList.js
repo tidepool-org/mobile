@@ -22,7 +22,7 @@ const apiEnvironments = [
 
 class DebugSettingsApiEnvironmentList extends PureComponent {
   onPress = apiEnvironmentName => {
-    this.props.apiEnvironmentSetAndSaveAsync(apiEnvironmentName);
+    this.props.onApiEnvironmentSelected(apiEnvironmentName);
   };
 
   renderSeparator = () => (
@@ -73,7 +73,7 @@ class DebugSettingsApiEnvironmentList extends PureComponent {
 
 DebugSettingsApiEnvironmentList.propTypes = {
   theme: ThemePropTypes.isRequired,
-  apiEnvironmentSetAndSaveAsync: PropTypes.func.isRequired,
+  onApiEnvironmentSelected: PropTypes.func.isRequired,
   selectedApiEnvironment: PropTypes.string,
 };
 

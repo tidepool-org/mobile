@@ -8,7 +8,19 @@ import Colors from "../constants/Colors";
 import DebugSettingsApiEnvironmentList from "../components/DebugSettingsApiEnvironmentList";
 
 class DebugSettingsScreen extends PureComponent {
-  theme = PrimaryTheme;
+  constructor(props) {
+    super(props);
+
+    this.theme = PrimaryTheme;
+  }
+
+  onApiEnvironmentSelected = selectedApiEnvironment => {
+    if (selectedApiEnvironment !== this.props.selectedApiEnvironment) {
+      this.props.apiEnvironmentSetAndSaveAsync(selectedApiEnvironment);
+    } else {
+      this.props.navigateGoBack();
+    }
+  };
 
   renderSeparator = () => (
     <glamorous.View
@@ -28,11 +40,7 @@ class DebugSettingsScreen extends PureComponent {
   );
 
   render() {
-    const {
-      navigateGoBack,
-      apiEnvironmentSetAndSaveAsync,
-      selectedApiEnvironment,
-    } = this.props;
+    const { navigateGoBack, selectedApiEnvironment } = this.props;
 
     return (
       <ThemeProvider theme={this.theme}>
@@ -68,7 +76,7 @@ class DebugSettingsScreen extends PureComponent {
               <glamorous.View width={32} height={32} />
             </glamorous.View>
             <DebugSettingsApiEnvironmentList
-              apiEnvironmentSetAndSaveAsync={apiEnvironmentSetAndSaveAsync}
+              onApiEnvironmentSelected={this.onApiEnvironmentSelected}
               selectedApiEnvironment={selectedApiEnvironment}
             />
           </SafeAreaView>

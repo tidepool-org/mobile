@@ -8,7 +8,7 @@ import {
   AUTH_REFRESH_SESSION_TOKEN_DID_SUCCEED,
 } from "../actions/auth";
 
-const initialAuthState = {
+const initialState = {
   sessionToken: "",
   userId: "",
   username: "",
@@ -17,15 +17,19 @@ const initialAuthState = {
   errorMessage: "",
 };
 
-function auth(state = initialAuthState, action) {
+function auth(state = initialState, action) {
+  let nextState = state;
+
   switch (action.type) {
     case AUTH_SIGN_IN_RESET:
-      return initialAuthState;
+      nextState = initialState;
+      break;
     case AUTH_SIGN_IN_DID_START:
-      return { ...state, signingIn: true };
+      nextState = { ...state, signingIn: true };
+      break;
     case AUTH_SIGN_IN_DID_SUCCEED: {
       const { sessionToken, userId, username, fullName } = action.payload;
-      return {
+      nextState = {
         sessionToken,
         userId,
         username,
@@ -33,10 +37,11 @@ function auth(state = initialAuthState, action) {
         signingIn: false,
         errorMessage: "",
       };
+      break;
     }
     case AUTH_REFRESH_SESSION_TOKEN_DID_SUCCEED: {
       const { sessionToken, userId, username, fullName } = action.payload;
-      return {
+      nextState = {
         sessionToken,
         userId,
         username,
@@ -44,17 +49,21 @@ function auth(state = initialAuthState, action) {
         signingIn: false,
         errorMessage: "",
       };
+      break;
     }
     case AUTH_SIGN_IN_DID_FAIL: {
-      return {
+      nextState = {
         ...state,
         signingIn: false,
         errorMessage: action.payload,
       };
+      break;
     }
     default:
-      return state;
+      break;
   }
+
+  return nextState;
 }
 
 export default auth;

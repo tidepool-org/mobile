@@ -66,7 +66,7 @@ HomeScreen.propTypes = {
   notes: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
-      timestampFormatted: PropTypes.string.isRequired,
+      timestamp: PropTypes.instanceOf(Date),
       messageText: PropTypes.string.isRequired,
     })
   ).isRequired,

@@ -1,7 +1,5 @@
 import axios from "axios";
 
-import formatDate from "../utils/formatDate";
-
 // TODO: api - default timeout for requests
 
 // TODO: api - update User-Agent in the header for all requests to indicate the app name and version, build info,
@@ -61,7 +59,7 @@ class TidepoolApi {
         errorMessage: error.message,
       }));
 
-    return { fullName, errorMessage };
+    return { userId, fullName, errorMessage };
   }
 
   async fetchNotesAsync({ userId }) {
@@ -69,14 +67,13 @@ class TidepoolApi {
       userId,
     })
       .then(response => {
-        // Map notes add timestampFormatted
+        // Map notes
         const sortedNotes = response.notes.map(responseNote => {
           const mappedNote = {
             id: responseNote.id,
             timestamp: new Date(new Date(responseNote.timestamp)),
             messageText: responseNote.messagetext,
           };
-          mappedNote.timestampFormatted = formatDate(mappedNote.timestamp);
           return mappedNote;
         });
         // Sort notes reverse chronologically by timestamp
@@ -88,6 +85,56 @@ class TidepoolApi {
       }));
 
     return { notes, errorMessage };
+  }
+
+  async fetchViewableUserProfilesAsync({ userId, fullName }) {
+    let errorMessage;
+    let profiles = [];
+
+    // Get other viewable user ids
+    const {
+      userIds,
+      errorMessage: fetchOtherViewableUserIdsErrorMessage,
+    } = await this.fetchOtherViewableUserIds({
+      userId,
+    })
+      .then(response => ({
+        userIds: response.userIds,
+      }))
+      .catch(error => ({
+        errorMessage: error.message,
+      }));
+
+    errorMessage = fetchOtherViewableUserIdsErrorMessage;
+
+    // Get profiles for other viewable user ids
+    if (!errorMessage) {
+      const fetchProfilePromises = userIds.map(fetchProfileUserId =>
+        this.fetchProfile({ userId: fetchProfileUserId })
+      );
+
+      const {
+        profiles: fetchProfilePromisesProfiles,
+        errorMessage: fetchProfilePromisesErrorMessage,
+      } = await Promise.all(fetchProfilePromises)
+        .then(response => ({
+          profiles: response,
+        }))
+        .catch(error => ({ fetchProfilePromisesErrorMessage: error.message }));
+
+      errorMessage = fetchProfilePromisesErrorMessage;
+      profiles = fetchProfilePromisesProfiles;
+    }
+
+    // Sort profiles by fullName
+    profiles.sort((profile1, profile2) =>
+      profile1.fullName.localeCompare(profile2.fullName)
+    );
+
+    // Add the specified user profile to front of list
+    const viewableUserProfiles = [{ userId, fullName }, ...profiles];
+
+    return { profiles: viewableUserProfiles, errorMessage };
   }
 
   //
@@ -105,10 +152,12 @@ class TidepoolApi {
         .then(response => {
           this.sessionToken =
             response.headers["x-tidepool-session-token"] || "";
-          const userId = response.data.userid;
 
           if (this.sessionToken) {
-            resolve({ sessionToken: this.sessionToken, userId });
+            resolve({
+              sessionToken: this.sessionToken,
+              userId: response.data.userid,
+            });
           } else {
             reject(
               new Error(
@@ -181,7 +230,7 @@ class TidepoolApi {
         .then(response => {
           const profile = response.data;
           const { fullName } = profile;
-          resolve({ fullName });
+          resolve({ userId, fullName });
         })
         .catch(error => {
           reject(error);
@@ -200,6 +249,31 @@ class TidepoolApi {
         .then(response => {
           const notes = response.data.messages;
           resolve({ notes });
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+  }
+
+  fetchOtherViewableUserIds({ userId }) {
+    const method = "get";
+    const url = `/access/groups/${userId}`;
+    const baseURL = this.baseUrl;
+    const headers = { "x-tidepool-session-token": this.sessionToken };
+
+    return new Promise((resolve, reject) => {
+      axios({ method, url, baseURL, headers })
+        .then(response => {
+          const userIds = Object.keys(response.data);
+
+          // Remove userId, if exists, since we're only looking for other users
+          const userIdIndex = userIds.indexOf(userId);
+          if (userIdIndex !== -1) {
+            userIds.splice(userIdIndex, 1);
+          }
+
+          resolve({ userIds });
         })
         .catch(error => {
           reject(error);

@@ -7,6 +7,7 @@ import apiEnvironment from "./apiEnvironment";
 import navigation from "./navigation";
 import notesFetch from "./notesFetch";
 import profile from "./profile";
+import profilesFetch from "./profilesFetch";
 
 const reducers = combineReducers({
   appInitDidFinish,
@@ -16,6 +17,7 @@ const reducers = combineReducers({
   navigation,
   notesFetch,
   profile,
+  profilesFetch,
 });
 
 export default reducers;

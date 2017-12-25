@@ -7,7 +7,8 @@ import ThemePropTypes from "../themes/ThemePropTypes";
 
 class DrawerCurrentUser extends PureComponent {
   onPress = () => {
-    // TODO: profile - switch profile when selecting current user from drawer and closing drawer
+    this.props.profileSet(this.props.currentUser);
+    this.props.notesFetchAsync(this.props.currentUser);
     this.props.navigateDrawerClose();
   };
 
@@ -15,7 +16,7 @@ class DrawerCurrentUser extends PureComponent {
     const { theme, style, currentUser: { fullName } } = this.props;
 
     return (
-      <glamorous.TouchableOpacity activeOpacity={1} onPress={this.onPress}>
+      <glamorous.TouchableOpacity onPress={this.onPress}>
         <glamorous.View
           style={style}
           flexDirection="row"
@@ -45,10 +46,13 @@ class DrawerCurrentUser extends PureComponent {
 DrawerCurrentUser.propTypes = {
   theme: ThemePropTypes.isRequired,
   style: ViewPropTypes.style,
-  navigateDrawerClose: PropTypes.func.isRequired,
   currentUser: PropTypes.shape({
+    userId: PropTypes.string.isRequired,
     fullName: PropTypes.string.isRequired,
   }).isRequired,
+  navigateDrawerClose: PropTypes.func.isRequired,
+  notesFetchAsync: PropTypes.func.isRequired,
+  profileSet: PropTypes.func.isRequired,
 };
 
 DrawerCurrentUser.defaultProps = {

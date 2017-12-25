@@ -7,35 +7,6 @@ import ProfileList from "../components/ProfileList";
 import PrimaryTheme from "../themes/PrimaryTheme";
 import Colors from "../constants/Colors";
 
-// TODO: redux - profile list - need to remove hardcoded profile list and use proper app state from redux (in container)
-
-const items = [
-  {
-    currentUserId: "1",
-    selectedProfileUserId: "2",
-    profile: {
-      userid: "1",
-      fullname: "Current User",
-    },
-  },
-  {
-    currentUserId: "1",
-    selectedProfileUserId: "2",
-    profile: {
-      userid: "2",
-      fullname: "Jill Jellyfish",
-    },
-  },
-  {
-    currentUserId: "1",
-    selectedProfileUserId: "2",
-    profile: {
-      userid: "3",
-      fullname: "Jill Jellyfish the Second",
-    },
-  },
-];
-
 class SwitchProfileScreen extends PureComponent {
   static navigationOptions = () => {
     const headerStyle = { backgroundColor: Colors.darkPurple };
@@ -61,17 +32,42 @@ class SwitchProfileScreen extends PureComponent {
     this.theme = PrimaryTheme;
   }
 
-  onPress = () => {
-    // TODO: profile - switch profile when selecting profile from list and navigating back
+  componentDidMount() {
+    const { profilesFetchAsync, profileListData, fetching } = this.props;
+    if (profileListData.length === 0 && !fetching) {
+      profilesFetchAsync({ ...this.props.currentUser });
+    }
+  }
+
+  onPress = user => {
+    this.props.profileSet(user);
+    this.props.notesFetchAsync({ userId: user.userId });
     this.props.navigateGoBack();
   };
 
   render() {
+    const {
+      errorMessage,
+      fetching,
+      profileListData,
+      currentUser,
+      profilesFetchAsync,
+      profileSet,
+    } = this.props;
+
     return (
       <ThemeProvider theme={this.theme}>
         <glamorous.View flex={1}>
           <StatusBar barStyle="light-content" />
-          <ProfileList onPress={this.onPress} items={items} />
+          <ProfileList
+            onPress={this.onPress}
+            profileListData={profileListData}
+            errorMessage={errorMessage}
+            fetching={fetching}
+            user={currentUser}
+            profilesFetchAsync={profilesFetchAsync}
+            profileSet={profileSet}
+          />
         </glamorous.View>
       </ThemeProvider>
     );
@@ -79,7 +75,29 @@ class SwitchProfileScreen extends PureComponent {
 }
 
 SwitchProfileScreen.propTypes = {
+  profileListData: PropTypes.arrayOf(
+    PropTypes.shape({
+      currentUserId: PropTypes.string.isRequired,
+      selectedProfileUserId: PropTypes.string.isRequired,
+      userId: PropTypes.string.isRequired,
+      fullName: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  errorMessage: PropTypes.string,
+  fetching: PropTypes.bool,
+  profilesFetchAsync: PropTypes.func.isRequired,
+  notesFetchAsync: PropTypes.func.isRequired,
+  profileSet: PropTypes.func.isRequired,
+  currentUser: PropTypes.shape({
+    userId: PropTypes.string.isRequired,
+    fullName: PropTypes.string.isRequired,
+  }).isRequired,
   navigateGoBack: PropTypes.func.isRequired,
+};
+
+SwitchProfileScreen.defaultProps = {
+  errorMessage: "",
+  fetching: false,
 };
 
 export default SwitchProfileScreen;
