@@ -7,6 +7,8 @@ import Drawer from "../../src/components/Drawer";
 import { API_ENVIRONMENT_STAGING } from "../../src/api";
 
 const props = {
+  notesFetchAsync: () => {},
+  profileSet: () => {},
   navigateDrawerClose: () => {},
   navigateSwitchProfile: () => {},
   navigateSupport: () => {},
@@ -14,6 +16,7 @@ const props = {
   navigateDebugSettings: () => {},
   authSignOutAsync: () => {},
   currentUser: {
+    userId: "1",
     username: "email@gmail.com",
     fullName: "Current User",
   },

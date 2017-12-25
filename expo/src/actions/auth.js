@@ -128,8 +128,6 @@ export const authRefreshTokenOrSignInAsync = () => async dispatch => {
   } else {
     // console.log("authRefreshTokenOrSignInAsync: We have a session token");
 
-    // TODO: refresh token - we are still briefly showing the sign in screen even when we successfully refresh the token since sign in is the initial route. We need a splash screen for initial route to handle refresh token case and other app init.
-
     const {
       sessionToken,
       userId,

@@ -9,27 +9,35 @@ import ProfileList from "../../src/components/ProfileList";
 
 faker.seed(123);
 
-const currentUserId = "1";
+const currentUser = {
+  userId: "1",
+  fullName: "Current User",
+};
 const selectedProfileUserId = "3";
-const profiles = [];
+const profileListData = [];
 for (let i = 1; i <= 10; i += 1) {
-  profiles.push({
-    userid: i.toString(),
-    fullname: faker.fake("{{lorem.sentence}}") || faker.name.findName(),
+  profileListData.push({
+    currentUserId: currentUser.userId,
+    selectedProfileUserId,
+    userId: i.toString(),
+    fullName: faker.fake("{{lorem.sentence}}") || faker.name.findName(),
   });
 }
-const items = profiles.map(profile => ({
-  currentUserId,
-  selectedProfileUserId,
-  profile,
-}));
 
 const onPress = () => {};
+const profilesFetchAsync = () => {};
+
+const props = {
+  profileListData,
+  onPress,
+  profilesFetchAsync,
+  user: currentUser,
+};
 
 storiesOf("ProfileList", module).add("default", () => (
   <StoryContainerComponent>
     <glamorous.View width={270}>
-      <ProfileList items={items} onPress={onPress} />
+      <ProfileList {...props} />
     </glamorous.View>
   </StoryContainerComponent>
 ));

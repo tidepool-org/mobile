@@ -6,8 +6,8 @@ export const NAVIGATE_FORGOT_PASSWORD = "NAVIGATE_FORGOT_PASSWORD";
 export const NAVIGATE_SWITCH_PROFILE = "NAVIGATE_SWITCH_PROFILE";
 export const NAVIGATE_PRIVACY_AND_TERMS = "NAVIGATE_PRIVACY_AND_TERMS";
 export const NAVIGATE_SUPPORT = "NAVIGATE_SUPPORT";
-export const NAVIGATE_SIGN_DRAWER_OPEN = "NAVIGATE_SIGN_DRAWER_OPEN";
-export const NAVIGATE_SIGN_DRAWER_CLOSE = "NAVIGATE_SIGN_DRAWER_CLOSE";
+export const NAVIGATE_DRAWER_OPEN = "NAVIGATE_DRAWER_OPEN";
+export const NAVIGATE_DRAWER_CLOSE = "NAVIGATE_DRAWER_CLOSE";
 export const NAVIGATE_DEBUG_SETTINGS = "NAVIGATE_DEBUG_SETTINGS";
 export const NAVIGATE_GO_BACK = "NAVIGATE_GO_BACK";
 
@@ -44,11 +44,11 @@ export function navigateSupport() {
 }
 
 export function navigateDrawerOpen() {
-  return { type: NAVIGATE_SIGN_DRAWER_OPEN };
+  return { type: NAVIGATE_DRAWER_OPEN };
 }
 
 export function navigateDrawerClose() {
-  return { type: NAVIGATE_SIGN_DRAWER_CLOSE };
+  return { type: NAVIGATE_DRAWER_CLOSE };
 }
 
 export function navigateDebugSettings() {

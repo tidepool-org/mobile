@@ -1,46 +1,46 @@
 import {
-  NOTES_FETCH_DID_START,
-  NOTES_FETCH_DID_SUCCEED,
-  NOTES_FETCH_DID_FAIL,
-} from "../actions/notesFetch";
+  PROFILES_FETCH_DID_START,
+  PROFILES_FETCH_DID_SUCCEED,
+  PROFILES_FETCH_DID_FAIL,
+} from "../actions/profilesFetch";
 import { AUTH_SIGN_IN_RESET } from "../actions/auth";
 
 const initialState = {
   userId: "",
-  notes: [],
+  profiles: [],
   errorMessage: "",
   fetching: false,
 };
 
-function notesFetch(state = initialState, action) {
+function profilesFetch(state = initialState, action) {
   let nextState = state;
 
   switch (action.type) {
     case AUTH_SIGN_IN_RESET:
       nextState = initialState;
       break;
-    case NOTES_FETCH_DID_START: {
+    case PROFILES_FETCH_DID_START: {
       nextState = {
         userId: action.payload.userId,
-        notes: [],
+        profiles: [],
         errorMessage: "",
         fetching: true,
       };
       break;
     }
-    case NOTES_FETCH_DID_SUCCEED: {
+    case PROFILES_FETCH_DID_SUCCEED: {
       nextState = {
         userId: action.payload.userId,
-        notes: action.payload.notes,
+        profiles: action.payload.profiles,
         errorMessage: "",
         fetching: false,
       };
       break;
     }
-    case NOTES_FETCH_DID_FAIL: {
+    case PROFILES_FETCH_DID_FAIL: {
       nextState = {
         userId: action.payload.userId,
-        notes: [],
+        profiles: [],
         errorMessage: action.payload.errorMessage,
         fetching: false,
       };
@@ -53,4 +53,4 @@ function notesFetch(state = initialState, action) {
   return nextState;
 }
 
-export default notesFetch;
+export default profilesFetch;

@@ -39,6 +39,8 @@ class Drawer extends PureComponent {
                 renderItem: ({ item }) => (
                   <DrawerCurrentUser
                     navigateDrawerClose={this.props.navigateDrawerClose}
+                    notesFetchAsync={this.props.notesFetchAsync}
+                    profileSet={this.props.profileSet}
                     currentUser={item.currentUser}
                   />
                 ),
@@ -64,6 +66,7 @@ class Drawer extends PureComponent {
                 renderItem: () => (
                   <DrawerSwitchProfileButton
                     navigateSwitchProfile={this.props.navigateSwitchProfile}
+                    navigateDrawerClose={this.props.navigateDrawerClose}
                   />
                 ),
               },
@@ -139,6 +142,8 @@ class Drawer extends PureComponent {
 
 Drawer.propTypes = {
   style: ViewPropTypes.style,
+  notesFetchAsync: PropTypes.func.isRequired,
+  profileSet: PropTypes.func.isRequired,
   navigateDrawerClose: PropTypes.func.isRequired,
   navigateSwitchProfile: PropTypes.func.isRequired,
   navigateSupport: PropTypes.func.isRequired,
@@ -146,6 +151,7 @@ Drawer.propTypes = {
   navigateDebugSettings: PropTypes.func.isRequired,
   authSignOutAsync: PropTypes.func.isRequired,
   currentUser: PropTypes.shape({
+    userId: PropTypes.string.isRequired,
     username: PropTypes.string.isRequired,
     fullName: PropTypes.string.isRequired,
   }).isRequired,

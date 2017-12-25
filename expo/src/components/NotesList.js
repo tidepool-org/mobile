@@ -16,16 +16,25 @@ class NotesList extends PureComponent {
     );
   }
 
-  state = { selected: new Map() };
+  constructor(props) {
+    super(props);
+
+    this.state = { selected: new Map(), refreshing: false };
+  }
 
   componentDidMount() {
     if (this.props.errorMessage) {
       NotesList.showErrorMessageAlert();
     }
   }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.errorMessage && !this.props.errorMessage) {
       NotesList.showErrorMessageAlert();
+    }
+
+    if (!nextProps.fetching && this.props.fetching) {
+      this.setState({ refreshing: false });
     }
   }
 
@@ -40,6 +49,8 @@ class NotesList extends PureComponent {
   onRefresh = () => {
     const { notesFetchAsync, userId } = this.props;
 
+    this.setState({ refreshing: true });
+
     notesFetchAsync({ userId });
   };
 
@@ -50,13 +61,13 @@ class NotesList extends PureComponent {
       notes={item.notes}
       onPressItem={this.onPressItem}
       selected={!!this.state.selected.get(item.id)}
-      timestampFormatted={item.timestampFormatted}
+      timestamp={item.timestamp}
       messageText={item.messageText}
     />
   );
 
   render() {
-    const { notes, fetching } = this.props;
+    const { notes } = this.props;
 
     return (
       <glamorous.FlatList
@@ -66,7 +77,10 @@ class NotesList extends PureComponent {
         renderItem={this.renderItem}
         backgroundColor={Colors.veryLightGrey} // TODO: use theme rather than color directly
         refreshControl={
-          <RefreshControl refreshing={fetching} onRefresh={this.onRefresh} />
+          <RefreshControl
+            refreshing={this.state.refreshing}
+            onRefresh={this.onRefresh}
+          />
         }
       />
     );
@@ -77,7 +91,7 @@ NotesList.propTypes = {
   notes: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
-      timestampFormatted: PropTypes.string.isRequired,
+      timestamp: PropTypes.instanceOf(Date),
       messageText: PropTypes.string.isRequired,
     })
   ).isRequired,

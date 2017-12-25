@@ -3,7 +3,9 @@ import { Linking } from "react-native";
 
 import Urls from "../constants/Urls";
 import { AppNavigator } from "../navigators/AppNavigator";
-import getCurrentRouteAndIndex from "../utils/getCurrentRouteAndIndex";
+import { SWITCH_PROFILE_ROUTE_NAME } from "../navigators/MainStackNavigator";
+import isRouteNameOnStack from "../utils/isRouteNameOnStack";
+import getRouteName from "../utils/getRouteName";
 import {
   NAVIGATE_LAUNCH,
   NAVIGATE_HOME,
@@ -13,8 +15,8 @@ import {
   NAVIGATE_SWITCH_PROFILE,
   NAVIGATE_PRIVACY_AND_TERMS,
   NAVIGATE_SUPPORT,
-  NAVIGATE_SIGN_DRAWER_OPEN,
-  NAVIGATE_SIGN_DRAWER_CLOSE,
+  NAVIGATE_DRAWER_OPEN,
+  NAVIGATE_DRAWER_CLOSE,
   NAVIGATE_DEBUG_SETTINGS,
   NAVIGATE_GO_BACK,
 } from "../actions/navigation";
@@ -30,6 +32,7 @@ const initialState = AppNavigator.router.getStateForAction(
 
 function navigation(state = initialState, action) {
   let nextState;
+
   switch (action.type) {
     case NAVIGATE_LAUNCH:
       nextState = AppNavigator.router.getStateForAction(
@@ -63,7 +66,7 @@ function navigation(state = initialState, action) {
       break;
     case NAVIGATE_SWITCH_PROFILE:
       nextState = AppNavigator.router.getStateForAction(
-        NavigationActions.navigate({ routeName: "SwitchProfile" }),
+        NavigationActions.navigate({ routeName: SWITCH_PROFILE_ROUTE_NAME }),
         state
       );
       break;
@@ -79,13 +82,13 @@ function navigation(state = initialState, action) {
     case NAVIGATE_SIGN_UP:
       Linking.openURL(Urls.signUp);
       break;
-    case NAVIGATE_SIGN_DRAWER_OPEN:
+    case NAVIGATE_DRAWER_OPEN:
       nextState = AppNavigator.router.getStateForAction(
         NavigationActions.navigate({ routeName: "DrawerOpen" }),
         state
       );
       break;
-    case NAVIGATE_SIGN_DRAWER_CLOSE:
+    case NAVIGATE_DRAWER_CLOSE:
       nextState = AppNavigator.router.getStateForAction(
         NavigationActions.navigate({ routeName: "DrawerClose" }),
         state
@@ -110,11 +113,20 @@ function navigation(state = initialState, action) {
 
   nextState = nextState || state;
 
-  // Prevent navigating to same route twice
-  const currentRoute = getCurrentRouteAndIndex(state);
-  const nextRoute = getCurrentRouteAndIndex(nextState);
-  if (currentRoute.routeName === nextRoute.routeName) {
-    nextState = state;
+  if (nextState !== state) {
+    const nextRouteName = getRouteName({
+      navigationState: nextState,
+    });
+    if (
+      nextRouteName &&
+      nextRouteName === SWITCH_PROFILE_ROUTE_NAME &&
+      isRouteNameOnStack({
+        routeName: nextRouteName,
+        navigationState: state,
+      })
+    ) {
+      nextState = state;
+    }
   }
 
   return nextState;

@@ -12,6 +12,8 @@ import {
   navigateDebugSettings,
 } from "../actions/navigation";
 import { authSignOutAsync } from "../actions/auth";
+import { notesFetchAsync } from "../actions/notesFetch";
+import { profileSet } from "../actions/profile";
 
 class DrawerContainer extends PureComponent {
   render() {
@@ -23,6 +25,8 @@ class DrawerContainer extends PureComponent {
           flex: 1,
           marginTop: 0,
         }}
+        profileSet={this.props.profileSet}
+        notesFetchAsync={this.props.notesFetchAsync}
         navigateDrawerClose={this.props.navigateDrawerClose}
         navigateSwitchProfile={this.props.navigateSwitchProfile}
         navigateSupport={this.props.navigateSupport}
@@ -38,6 +42,8 @@ class DrawerContainer extends PureComponent {
 }
 
 DrawerContainer.propTypes = {
+  notesFetchAsync: PropTypes.func.isRequired,
+  profileSet: PropTypes.func.isRequired,
   navigateDrawerClose: PropTypes.func.isRequired,
   navigateSwitchProfile: PropTypes.func.isRequired,
   navigateSupport: PropTypes.func.isRequired,
@@ -52,10 +58,7 @@ DrawerContainer.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  currentUser: {
-    username: state.auth.username,
-    fullName: state.auth.fullName,
-  },
+  currentUser: state.auth,
   version: state.appVersion,
   apiEnvironment: state.apiEnvironment,
 });
@@ -63,6 +66,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
+      notesFetchAsync,
+      profileSet,
       navigateDrawerClose,
       navigateSwitchProfile,
       navigateSupport,

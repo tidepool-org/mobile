@@ -14,14 +14,13 @@ class ProfileListItem extends PureComponent {
   }
 
   onPress = () => {
-    const { item: { profile } } = this.props;
-    this.props.onPress(profile.userid);
+    this.props.onPress(this.props.item);
   };
-  theme;
-  renderCurrentUserProfileIcon() {
-    const { item: { profile }, item: { currentUserId } } = this.props;
 
-    if (currentUserId === profile.userid) {
+  renderCurrentUserProfileIcon() {
+    const { item: { currentUserId, userId } } = this.props;
+
+    if (currentUserId === userId) {
       return (
         <glamorous.Image
           source={require("../../assets/images/profile-black.png")}
@@ -36,7 +35,7 @@ class ProfileListItem extends PureComponent {
   }
 
   renderName() {
-    const { theme, item: { profile }, item: { currentUserId } } = this.props;
+    const { theme, item: { currentUserId, userId, fullName } } = this.props;
     const titleColor = this.state.isUnderlayVisible
       ? theme.titleColorActive
       : theme.listItemName.color;
@@ -49,23 +48,19 @@ class ProfileListItem extends PureComponent {
         numberOfLines={1}
         color={titleColor}
       >
-        {currentUserId === profile.userid ? "(You) " : null}
-        {profile.fullname}
+        {currentUserId === userId ? "(You) " : null}
+        {fullName}
       </glamorous.Text>
     );
   }
 
   renderSelectedCheckMark() {
-    const {
-      theme,
-      item: { profile },
-      item: { selectedProfileUserId },
-    } = this.props;
+    const { theme, item: { selectedProfileUserId, userId } } = this.props;
     const borderColor = this.state.isUnderlayVisible
       ? theme.titleColorActive
       : theme.underlayColor;
 
-    if (selectedProfileUserId === profile.userid) {
+    if (selectedProfileUserId === userId) {
       return (
         <glamorous.View
           width={13}
@@ -124,9 +119,8 @@ ProfileListItem.propTypes = {
   item: PropTypes.shape({
     currentUserId: PropTypes.string.isRequired,
     selectedProfileUserId: PropTypes.string.isRequired,
-    profile: PropTypes.shape({
-      userid: PropTypes.string.isRequired,
-    }).isRequired,
+    userId: PropTypes.string.isRequired,
+    fullName: PropTypes.string.isRequired,
   }).isRequired,
   onPress: PropTypes.func.isRequired,
 };

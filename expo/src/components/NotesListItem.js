@@ -6,10 +6,11 @@ import glamorous, { withTheme } from "glamorous-native";
 import HashtagText from "./HashtagText";
 import ThemePropTypes from "../themes/ThemePropTypes";
 import LinearGradient from "./LinearGradient";
+import formatDate from "../utils/formatDate";
 
 class NotesListItem extends PureComponent {
   render() {
-    const { theme, style, timestampFormatted, messageText } = this.props;
+    const { theme, style, timestamp, messageText } = this.props;
 
     return (
       <glamorous.View style={style} backgroundColor="white">
@@ -20,7 +21,7 @@ class NotesListItem extends PureComponent {
           marginLeft={12}
           marginRight={12}
         >
-          {timestampFormatted}
+          {formatDate(timestamp)}
         </glamorous.Text>
         <glamorous.Text
           allowFontScaling={false}
@@ -49,7 +50,7 @@ class NotesListItem extends PureComponent {
 NotesListItem.propTypes = {
   theme: ThemePropTypes.isRequired,
   style: ViewPropTypes.style,
-  timestampFormatted: PropTypes.string.isRequired,
+  timestamp: PropTypes.instanceOf(Date).isRequired,
   messageText: PropTypes.string.isRequired,
 };
 

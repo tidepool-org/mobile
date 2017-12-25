@@ -1,19 +1,28 @@
 import { PROFILE_SET } from "../actions/profile";
+import { AUTH_SIGN_IN_RESET } from "../actions/auth";
 
-const initialProfileState = {
+const initialState = {
   currentProfile: {
     userId: "",
     fullName: "",
   },
 };
 
-function profile(state = initialProfileState, action) {
+function profile(state = initialState, action) {
+  let nextState = state;
+
   switch (action.type) {
+    case AUTH_SIGN_IN_RESET:
+      nextState = initialState;
+      break;
     case PROFILE_SET:
-      return { currentProfile: action.payload };
+      nextState = { currentProfile: action.payload };
+      break;
     default:
-      return state;
+      break;
   }
+
+  return nextState;
 }
 
 export default profile;

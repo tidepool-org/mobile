@@ -5,6 +5,7 @@ import DrawerButton from "./DrawerButton";
 
 class DrawerSwitchProfileButton extends PureComponent {
   onPress = () => {
+    this.props.navigateDrawerClose();
     this.props.navigateSwitchProfile();
   };
 
@@ -21,6 +22,7 @@ class DrawerSwitchProfileButton extends PureComponent {
 
 DrawerSwitchProfileButton.propTypes = {
   navigateSwitchProfile: PropTypes.func.isRequired,
+  navigateDrawerClose: PropTypes.func.isRequired,
 };
 
 export default DrawerSwitchProfileButton;

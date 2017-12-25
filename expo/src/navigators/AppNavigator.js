@@ -8,11 +8,11 @@ import {
 } from "react-navigation";
 import { connect } from "react-redux";
 
-import getCurrentRouteAndIndex from "../utils/getCurrentRouteAndIndex";
 import LaunchScreen from "../screens/LaunchScreen";
 import SignInScreenContainer from "../containers/SignInScreenContainer";
 import MainDrawerNavigator from "./MainDrawerNavigator";
 import DebugSettingsScreenContainer from "../containers/DebugSettingsScreenContainer";
+import getRouteName from "../utils/getRouteName";
 
 const noTransitionConfig = () => ({
   transitionSpec: {
@@ -54,7 +54,8 @@ class AppWithNavigationState extends PureComponent {
 
   onBackPress = () => {
     const { dispatch, navigation } = this.props;
-    if (getCurrentRouteAndIndex(navigation).index === 0) {
+    const routeName = getRouteName({ navigationState: navigation });
+    if (routeName === "Home" || routeName === "SignIn") {
       return false;
     }
     dispatch(NavigationActions.back());

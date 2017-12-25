@@ -4,6 +4,9 @@ export const NOTES_FETCH_DID_START = "NOTES_FETCH_DID_START";
 export const NOTES_FETCH_DID_SUCCEED = "NOTES_FETCH_DID_SUCCEED";
 export const NOTES_FETCH_DID_FAIL = "NOTES_FETCH_DID_FAIL";
 
+// TODO: fetch - cancel outstanding request if we get another request to start fetching while one is in progress.
+// TODO: fetch - cancel outstanding request if we sign out while fetch is in progress
+
 export const notesFetchDidStart = ({ userId }) => ({
   type: NOTES_FETCH_DID_START,
   payload: { userId },
