@@ -12,6 +12,7 @@ class SwitchProfileScreen extends PureComponent {
     const headerStyle = { backgroundColor: Colors.darkPurple };
 
     return {
+      drawerLockMode: "locked-closed",
       headerStyle,
       headerTintColor: "white",
       headerTitle: (
