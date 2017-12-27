@@ -24,6 +24,14 @@ class SwitchProfileScreen extends PureComponent {
           Switch Profile
         </Text>
       ),
+      headerRight: (
+        <glamorous.View
+          style={{
+            padding: 10,
+            marginRight: 6,
+          }}
+        />
+      ),
     };
   };
 
