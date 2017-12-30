@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { Animated, Easing, BackHandler } from "react-native";
+import { Animated, Easing, BackHandler, UIManager } from "react-native";
 import {
   addNavigationHelpers,
   NavigationActions,
@@ -45,6 +45,10 @@ export const AppNavigator = StackNavigator(
 
 class AppWithNavigationState extends PureComponent {
   componentDidMount() {
+    if (UIManager.setLayoutAnimationEnabledExperimental) {
+      UIManager.setLayoutAnimationEnabledExperimental(true);
+    }
+
     BackHandler.addEventListener("hardwareBackPress", this.onBackPress);
   }
 

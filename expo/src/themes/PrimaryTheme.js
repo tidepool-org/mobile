@@ -96,6 +96,30 @@ const PrimaryTheme = {
     color: Colors.blackish,
     ...FontStyles.mediumSmallRegularFont,
   },
+  addCommentTextStyle: {
+    color: Colors.mediumLightGrey,
+    ...FontStyles.mediumSmallSemiboldFont,
+  },
+  notesListItemUserFullNameStyle: {
+    color: Colors.darkGreyColor,
+    ...FontStyles.smallSemiboldFont,
+  },
+  notesListItemCommentTimeStyle: {
+    color: Colors.altLightGreyColor,
+    ...FontStyles.smallRegularFont,
+  },
+  notesListItemCommentTextStyle: {
+    color: "#8c8c8c",
+    ...FontStyles.smallRegularFont,
+  },
+  notesListItemCommentHashtagStyle: {
+    color: "#8c8c8c",
+    ...FontStyles.smallBoldFont,
+  },
+  editButtonTextStyle: {
+    color: Colors.brightBlue,
+    ...FontStyles.smallRegularFont,
+  },
 };
 
 export default PrimaryTheme;

@@ -8,6 +8,7 @@ import HomeScreen from "../../src/screens/HomeScreen";
 
 const currentProfileUserId = "";
 const notesFetchAsync = () => {};
+const commentsFetchAsync = () => {};
 const notes = [
   {
     id: "1",
@@ -50,6 +51,7 @@ const props = {
   notes,
   notesFetchAsync,
   currentProfileUserId,
+  commentsFetchAsync,
 };
 
 storiesOf("HomeScreen", module).add("default", () => (

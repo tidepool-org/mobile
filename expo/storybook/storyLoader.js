@@ -13,6 +13,8 @@ function loadStories() {
   require('../__stories__/components/MadePossible.story.js');
   require('../__stories__/components/NotesList.story.js');
   require('../__stories__/components/NotesListItem.story.js');
+  require('../__stories__/components/NotesListItemAddComment.story.js');
+  require('../__stories__/components/NotesListItemComment.story.js');
   require('../__stories__/components/ProfileList.story.js');
   require('../__stories__/components/SignInForm.story.js');
   require('../__stories__/components/SignInScreen.story.js');
@@ -30,6 +32,8 @@ const stories = [
   '../__stories__/components/MadePossible.story.js',
   '../__stories__/components/NotesList.story.js',
   '../__stories__/components/NotesListItem.story.js',
+  '../__stories__/components/NotesListItemAddComment.story.js',
+  '../__stories__/components/NotesListItemComment.story.js',
   '../__stories__/components/ProfileList.story.js',
   '../__stories__/components/SignInForm.story.js',
   '../__stories__/components/SignInScreen.story.js',

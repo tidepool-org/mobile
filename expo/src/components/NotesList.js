@@ -61,8 +61,11 @@ class NotesList extends PureComponent {
       notes={item.notes}
       onPressItem={this.onPressItem}
       selected={!!this.state.selected.get(item.id)}
+      id={item.id}
       timestamp={item.timestamp}
       messageText={item.messageText}
+      commentsFetchData={this.props.commentsFetchDataByMessageId[item.id]}
+      commentsFetchAsync={this.props.commentsFetchAsync}
     />
   );
 
@@ -97,13 +100,29 @@ NotesList.propTypes = {
   ).isRequired,
   errorMessage: PropTypes.string,
   fetching: PropTypes.bool,
-  notesFetchAsync: PropTypes.func.isRequired,
   userId: PropTypes.string.isRequired,
+  notesFetchAsync: PropTypes.func.isRequired,
+  commentsFetchAsync: PropTypes.func.isRequired,
+  commentsFetchDataByMessageId: PropTypes.objectOf(
+    PropTypes.shape({
+      errorMessage: PropTypes.string,
+      fetching: PropTypes.bool,
+      comments: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.string.isRequired,
+          timestamp: PropTypes.instanceOf(Date),
+          messageText: PropTypes.string.isRequired,
+          userFullName: PropTypes.string.isRequired,
+        })
+      ),
+    })
+  ),
 };
 
 NotesList.defaultProps = {
   errorMessage: "",
   fetching: false,
+  commentsFetchDataByMessageId: {},
 };
 
 export default withTheme(NotesList);

@@ -38,6 +38,8 @@ class HomeScreen extends PureComponent {
     // console.log("HomeScreen: render");
 
     const {
+      commentsFetchDataByMessageId,
+      commentsFetchAsync,
       currentProfileUserId,
       errorMessage,
       fetching,
@@ -53,8 +55,10 @@ class HomeScreen extends PureComponent {
             notes={notes}
             fetching={fetching}
             errorMessage={errorMessage}
-            notesFetchAsync={notesFetchAsync}
             userId={currentProfileUserId}
+            notesFetchAsync={notesFetchAsync}
+            commentsFetchAsync={commentsFetchAsync}
+            commentsFetchDataByMessageId={commentsFetchDataByMessageId}
           />
         </glamorous.View>
       </ThemeProvider>
@@ -72,13 +76,29 @@ HomeScreen.propTypes = {
   ).isRequired,
   errorMessage: PropTypes.string,
   fetching: PropTypes.bool,
-  notesFetchAsync: PropTypes.func.isRequired,
   currentProfileUserId: PropTypes.string.isRequired,
+  notesFetchAsync: PropTypes.func.isRequired,
+  commentsFetchAsync: PropTypes.func.isRequired,
+  commentsFetchDataByMessageId: PropTypes.objectOf(
+    PropTypes.shape({
+      errorMessage: PropTypes.string,
+      fetching: PropTypes.bool,
+      comments: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.string.isRequired,
+          timestamp: PropTypes.instanceOf(Date),
+          messageText: PropTypes.string.isRequired,
+          userFullName: PropTypes.string.isRequired,
+        })
+      ),
+    })
+  ),
 };
 
 HomeScreen.defaultProps = {
   errorMessage: "",
   fetching: false,
+  commentsFetchDataByMessageId: {},
 };
 
 export default HomeScreen;
