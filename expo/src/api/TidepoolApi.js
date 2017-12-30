@@ -195,6 +195,7 @@ class TidepoolApi {
           }
         })
         .catch(error => {
+          // console.log(`refreshToken error: ${error}`);
           if (
             error.response &&
             (error.response.status === 400 || error.response.status === 401)

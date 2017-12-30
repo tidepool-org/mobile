@@ -26,9 +26,12 @@ for (let i = 0; i < 100; i += 1) {
     });
   }
 }
-const userId = "";
+const profile = {
+  userId: "1",
+  fullName: "Jill Jellyfish",
+};
 
-const props = { notes, userId, notesFetchAsync, commentsFetchAsync };
+const props = { notes, profile, notesFetchAsync, commentsFetchAsync };
 
 storiesOf("NotesList", module).add("default", () => (
   <StoryContainerComponent>

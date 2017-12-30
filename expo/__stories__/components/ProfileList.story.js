@@ -11,6 +11,7 @@ faker.seed(123);
 
 const currentUser = {
   userId: "1",
+  username: "username",
   fullName: "Current User",
 };
 const selectedProfileUserId = "3";

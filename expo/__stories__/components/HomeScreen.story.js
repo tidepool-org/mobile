@@ -6,7 +6,10 @@ import subDays from "date-fns/sub_days";
 import StoryContainerScreen from "../../__stories__/utils/StoryContainerScreen";
 import HomeScreen from "../../src/screens/HomeScreen";
 
-const currentProfileUserId = "";
+const currentProfile = {
+  userId: "1",
+  fullName: "Jill Jellyfish",
+};
 const notesFetchAsync = () => {};
 const commentsFetchAsync = () => {};
 const notes = [
@@ -50,7 +53,7 @@ const notes = [
 const props = {
   notes,
   notesFetchAsync,
-  currentProfileUserId,
+  currentProfile,
   commentsFetchAsync,
 };
 

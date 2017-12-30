@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import glamorous, { withTheme } from "glamorous-native";
 
-import ThemePropTypes from "../themes/ThemePropTypes";
+import { ThemePropType } from "../prop-types/theme";
 import { API_ENVIRONMENT_PRODUCTION } from "../api";
 
 class VersionAndApiEnvironment extends PureComponent {
@@ -30,7 +30,7 @@ class VersionAndApiEnvironment extends PureComponent {
 }
 
 VersionAndApiEnvironment.propTypes = {
-  theme: ThemePropTypes.isRequired,
+  theme: ThemePropType.isRequired,
   version: PropTypes.string.isRequired,
   apiEnvironment: PropTypes.string.isRequired,
   small: PropTypes.bool,

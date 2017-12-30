@@ -9,11 +9,13 @@ import NotesListItem from "../../src/components/NotesListItem";
 
 faker.seed(123);
 
-const id = "1";
-const timestamp = faker.date.recent(2);
-const messageText = `#hashtag1 This should not show up in comments. ${faker.fake(
-  "{{lorem.paragraph}}"
-)}`;
+const note = {
+  id: "1",
+  timestamp: faker.date.recent(2),
+  messageText: `#hashtag1 This should not show up in comments. ${faker.fake(
+    "{{lorem.paragraph}}"
+  )}`,
+};
 const commentsFetchData = {
   comments: [
     {
@@ -42,14 +44,12 @@ const commentsFetchData = {
       timestamp: new Date(),
       userFullName: "Some other person",
     },
-    { id: "1", messageText, timestamp, userFullName: "Jill Jellyfish" },
+    { ...note, userFullName: "Jill Jellyfish" },
   ],
 };
 const commentsFetchAsync = () => {};
 const props = {
-  id,
-  timestamp,
-  messageText,
+  note,
   commentsFetchAsync,
   commentsFetchData,
 };

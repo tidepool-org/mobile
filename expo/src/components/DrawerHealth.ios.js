@@ -3,7 +3,7 @@ import { ViewPropTypes, Switch } from "react-native";
 import glamorous, { withTheme } from "glamorous-native";
 
 import Colors from "../constants/Colors";
-import ThemePropTypes from "../themes/ThemePropTypes";
+import { ThemePropType } from "../prop-types/theme";
 
 class DrawerHealth extends PureComponent {
   constructor(props) {
@@ -43,7 +43,7 @@ class DrawerHealth extends PureComponent {
 }
 
 DrawerHealth.propTypes = {
-  theme: ThemePropTypes.isRequired,
+  theme: ThemePropType.isRequired,
   style: ViewPropTypes.style,
 };
 

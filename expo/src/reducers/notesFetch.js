@@ -21,7 +21,7 @@ function notesFetch(state = initialState, action) {
       break;
     case NOTES_FETCH_DID_START: {
       nextState = {
-        userId: action.payload.userId,
+        userId: action.payload.profile.userId,
         notes: [],
         errorMessage: "",
         fetching: true,
@@ -30,7 +30,7 @@ function notesFetch(state = initialState, action) {
     }
     case NOTES_FETCH_DID_SUCCEED: {
       nextState = {
-        userId: action.payload.userId,
+        userId: action.payload.profile.userId,
         notes: action.payload.notes,
         errorMessage: "",
         fetching: false,
@@ -39,7 +39,7 @@ function notesFetch(state = initialState, action) {
     }
     case NOTES_FETCH_DID_FAIL: {
       nextState = {
-        userId: action.payload.userId,
+        userId: action.payload.profile.userId,
         notes: [],
         errorMessage: action.payload.errorMessage,
         fetching: false,

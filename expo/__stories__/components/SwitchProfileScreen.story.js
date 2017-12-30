@@ -29,10 +29,10 @@ const props = {
   errorMessage: "",
   fetching: false,
   profilesFetchAsync: () => {},
-  notesFetchAsync: () => {},
-  profileSet: () => {},
+  notesSwitchProfileAndFetchAsync: () => {},
   currentUser: {
     userId: "1",
+    username: "username",
     fullName: "Current User",
   },
 

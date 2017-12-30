@@ -7,8 +7,7 @@ import Drawer from "../../src/components/Drawer";
 import { API_ENVIRONMENT_STAGING } from "../../src/api";
 
 const props = {
-  notesFetchAsync: () => {},
-  profileSet: () => {},
+  notesSwitchProfileAndFetchAsync: () => {},
   navigateDrawerClose: () => {},
   navigateSwitchProfile: () => {},
   navigateSupport: () => {},
