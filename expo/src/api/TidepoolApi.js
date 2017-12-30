@@ -87,6 +87,34 @@ class TidepoolApi {
     return { notes, errorMessage };
   }
 
+  async fetchCommentsAsync({ messageId }) {
+    const { comments, errorMessage } = await this.fetchComments({
+      messageId,
+    })
+      .then(response => {
+        // Map comments
+        const sortedComments = response.comments.map(responseComment => {
+          const mappedComment = {
+            id: responseComment.id,
+            timestamp: new Date(new Date(responseComment.timestamp)),
+            messageText: responseComment.messagetext,
+            userFullName: responseComment.user.fullName,
+          };
+          return mappedComment;
+        });
+        // Sort comments chronologically by timestamp
+        sortedComments.sort(
+          (comment1, comment2) => comment1.timestamp - comment2.timestamp
+        );
+        return { comments: sortedComments };
+      })
+      .catch(error => ({
+        errorMessage: error.message,
+      }));
+
+    return { comments, errorMessage };
+  }
+
   async fetchViewableUserProfilesAsync({ userId, fullName }) {
     let errorMessage;
     let profiles = [];
@@ -249,6 +277,24 @@ class TidepoolApi {
         .then(response => {
           const notes = response.data.messages;
           resolve({ notes });
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+  }
+
+  fetchComments({ messageId }) {
+    const method = "get";
+    const url = `/message/thread/${messageId}`;
+    const baseURL = this.baseUrl;
+    const headers = { "x-tidepool-session-token": this.sessionToken };
+
+    return new Promise((resolve, reject) => {
+      axios({ method, url, baseURL, headers })
+        .then(response => {
+          const comments = response.data.messages;
+          resolve({ comments });
         })
         .catch(error => {
           reject(error);

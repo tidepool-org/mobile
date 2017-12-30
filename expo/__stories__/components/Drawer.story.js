@@ -26,6 +26,20 @@ const props = {
 
 storiesOf("Drawer", module).add("default", () => (
   <StoryContainerComponent>
-    <Drawer style={{ width: 270 }} {...props} />
+    <Drawer style={{ width: 270, height: 400 }} {...props} />
+  </StoryContainerComponent>
+));
+
+storiesOf("Drawer", module).add("long user full name", () => (
+  <StoryContainerComponent>
+    <Drawer
+      style={{ width: 270, height: 400 }}
+      {...props}
+      currentUser={{
+        userId: "1",
+        username: "email@gmail.com",
+        fullName: "This is a really long full name for a user",
+      }}
+    />
   </StoryContainerComponent>
 ));

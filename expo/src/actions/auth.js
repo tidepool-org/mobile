@@ -63,6 +63,7 @@ export const authSignInAsync = ({ username, password }) => async dispatch => {
   });
 
   if (!sessionToken) {
+    // console.log(`authSignInAsync: Error: ${errorMessage}`)
     dispatch(authSignInDidFail(signInErrorMessage));
   } else {
     const {
@@ -114,7 +115,7 @@ export const authRefreshTokenOrSignInAsync = () => async dispatch => {
   try {
     authUser = JSON.parse(await AsyncStorage.getItem(AUTH_USER_KEY)) || {};
   } catch (error) {
-    // console.log(`error: ${error}`);
+    // console.log(`authRefreshTokenOrSignInAsync: error: ${error}`);
   }
 
   if (!authUser.sessionToken) {

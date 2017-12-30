@@ -9,6 +9,7 @@ import NotesList from "../../src/components/NotesList";
 faker.seed(123);
 
 const notesFetchAsync = () => {};
+const commentsFetchAsync = () => {};
 const notes = [];
 for (let i = 0; i < 100; i += 1) {
   if (i < 2) {
@@ -27,7 +28,7 @@ for (let i = 0; i < 100; i += 1) {
 }
 const userId = "";
 
-const props = { notes, notesFetchAsync, userId };
+const props = { notes, userId, notesFetchAsync, commentsFetchAsync };
 
 storiesOf("NotesList", module).add("default", () => (
   <StoryContainerComponent>

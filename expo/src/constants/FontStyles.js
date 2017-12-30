@@ -15,10 +15,24 @@ const FontStyles = {
       fontSize: 10,
     }),
   },
+  smallSemiboldFont: {
+    ...makeFontStyle({
+      fontFamilyBaseName: "OpenSans",
+      fontWeightName: "Semibold",
+      fontSize: 12.5,
+    }),
+  },
   smallRegularFont: {
     ...makeFontStyle({
       fontFamilyBaseName: "OpenSans",
       fontWeightName: "Regular",
+      fontSize: 12.5,
+    }),
+  },
+  smallBoldFont: {
+    ...makeFontStyle({
+      fontFamilyBaseName: "OpenSans",
+      fontWeightName: "Bold",
       fontSize: 12.5,
     }),
   },

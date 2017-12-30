@@ -21,6 +21,7 @@ class DrawerCurrentUser extends PureComponent {
           style={style}
           flexDirection="row"
           alignItems="center"
+          justifyContent="space-between"
           height={54}
         >
           <glamorous.Image
@@ -31,12 +32,14 @@ class DrawerCurrentUser extends PureComponent {
             marginRight={10}
           />
           <glamorous.Text
+            flex={1}
             allowFontScaling={false}
             numberOfLines={1}
             style={theme.drawerMenuCurrentUserTextStyle}
           >
             {fullName}
           </glamorous.Text>
+          <glamorous.View width={10} height={10} />
         </glamorous.View>
       </glamorous.TouchableOpacity>
     );
