@@ -12,8 +12,7 @@ import {
   navigateDebugSettings,
 } from "../actions/navigation";
 import { authSignOutAsync } from "../actions/auth";
-import { notesFetchAsync } from "../actions/notesFetch";
-import { profileSet } from "../actions/profile";
+import { notesSwitchProfileAndFetchAsync } from "../actions/notesFetch";
 
 class DrawerContainer extends PureComponent {
   render() {
@@ -25,8 +24,9 @@ class DrawerContainer extends PureComponent {
           flex: 1,
           marginTop: 0,
         }}
-        profileSet={this.props.profileSet}
-        notesFetchAsync={this.props.notesFetchAsync}
+        notesSwitchProfileAndFetchAsync={
+          this.props.notesSwitchProfileAndFetchAsync
+        }
         navigateDrawerClose={this.props.navigateDrawerClose}
         navigateSwitchProfile={this.props.navigateSwitchProfile}
         navigateSupport={this.props.navigateSupport}
@@ -42,8 +42,7 @@ class DrawerContainer extends PureComponent {
 }
 
 DrawerContainer.propTypes = {
-  notesFetchAsync: PropTypes.func.isRequired,
-  profileSet: PropTypes.func.isRequired,
+  notesSwitchProfileAndFetchAsync: PropTypes.func.isRequired,
   navigateDrawerClose: PropTypes.func.isRequired,
   navigateSwitchProfile: PropTypes.func.isRequired,
   navigateSupport: PropTypes.func.isRequired,
@@ -66,8 +65,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      notesFetchAsync,
-      profileSet,
+      notesSwitchProfileAndFetchAsync,
       navigateDrawerClose,
       navigateSwitchProfile,
       navigateSupport,

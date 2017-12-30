@@ -3,12 +3,15 @@ import PropTypes from "prop-types";
 import { ViewPropTypes } from "react-native";
 import glamorous, { withTheme } from "glamorous-native";
 
-import ThemePropTypes from "../themes/ThemePropTypes";
+import { ThemePropType } from "../prop-types/theme";
+import { UserPropType } from "../prop-types/user";
 
 class DrawerCurrentUser extends PureComponent {
   onPress = () => {
-    this.props.profileSet(this.props.currentUser);
-    this.props.notesFetchAsync(this.props.currentUser);
+    this.props.notesSwitchProfileAndFetchAsync({
+      authUser: this.props.currentUser,
+      profile: this.props.currentUser,
+    });
     this.props.navigateDrawerClose();
   };
 
@@ -47,15 +50,11 @@ class DrawerCurrentUser extends PureComponent {
 }
 
 DrawerCurrentUser.propTypes = {
-  theme: ThemePropTypes.isRequired,
+  theme: ThemePropType.isRequired,
   style: ViewPropTypes.style,
-  currentUser: PropTypes.shape({
-    userId: PropTypes.string.isRequired,
-    fullName: PropTypes.string.isRequired,
-  }).isRequired,
+  currentUser: UserPropType.isRequired,
   navigateDrawerClose: PropTypes.func.isRequired,
-  notesFetchAsync: PropTypes.func.isRequired,
-  profileSet: PropTypes.func.isRequired,
+  notesSwitchProfileAndFetchAsync: PropTypes.func.isRequired,
 };
 
 DrawerCurrentUser.defaultProps = {

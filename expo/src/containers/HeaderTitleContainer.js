@@ -1,15 +1,13 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { ThemeProvider } from "glamorous-native";
 
 import PrimaryTheme from "../themes/PrimaryTheme";
 import HeaderTitle from "../components/HeaderTitle";
+import { ProfilePropType } from "../prop-types/profile";
 
 const mapStateToProps = state => ({
-  currentProfile: {
-    fullName: state.profile.currentProfile.fullName,
-  },
+  currentProfile: state.profile.currentProfile,
 });
 
 const HeaderTitleWithTheme = ({ currentProfile }) => (
@@ -19,9 +17,7 @@ const HeaderTitleWithTheme = ({ currentProfile }) => (
 );
 
 HeaderTitleWithTheme.propTypes = {
-  currentProfile: PropTypes.shape({
-    fullName: PropTypes.string.isRequired,
-  }).isRequired,
+  currentProfile: ProfilePropType.isRequired,
 };
 
 export default connect(mapStateToProps)(HeaderTitleWithTheme);

@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 import { ViewPropTypes } from "react-native";
 import glamorous, { withTheme } from "glamorous-native";
 
-import ThemePropTypes from "../themes/ThemePropTypes";
+import { ThemePropType } from "../prop-types/theme";
+import { ProfileListItemPropType } from "../prop-types/profile";
 
 class ProfileListItem extends PureComponent {
   constructor(props) {
@@ -114,14 +115,9 @@ class ProfileListItem extends PureComponent {
 }
 
 ProfileListItem.propTypes = {
-  theme: ThemePropTypes.isRequired,
+  theme: ThemePropType.isRequired,
   style: ViewPropTypes.style,
-  item: PropTypes.shape({
-    currentUserId: PropTypes.string.isRequired,
-    selectedProfileUserId: PropTypes.string.isRequired,
-    userId: PropTypes.string.isRequired,
-    fullName: PropTypes.string.isRequired,
-  }).isRequired,
+  item: ProfileListItemPropType.isRequired,
   onPress: PropTypes.func.isRequired,
 };
 

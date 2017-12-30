@@ -1,11 +1,11 @@
 import React, { PureComponent } from "react";
-import PropTypes from "prop-types";
-import { ViewPropTypes, TouchableOpacity } from "react-native";
+import { ViewPropTypes } from "react-native";
 import glamorous, { withTheme } from "glamorous-native";
 
 import HashtagText from "./HashtagText";
-import ThemePropTypes from "../themes/ThemePropTypes";
+import { ThemePropType } from "../prop-types/theme";
 import formatDate from "../utils/formatDate";
+import { CommentPropType } from "../prop-types/comment";
 
 class NotesListItemComment extends PureComponent {
   render() {
@@ -74,14 +74,9 @@ class NotesListItemComment extends PureComponent {
 }
 
 NotesListItemComment.propTypes = {
-  theme: ThemePropTypes.isRequired,
+  theme: ThemePropType.isRequired,
   style: ViewPropTypes.style,
-  comment: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    timestamp: PropTypes.instanceOf(Date),
-    messageText: PropTypes.string.isRequired,
-    userFullName: PropTypes.string.isRequired,
-  }).isRequired,
+  comment: CommentPropType.isRequired,
 };
 
 NotesListItemComment.defaultProps = {

@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import glamorous, { withTheme } from "glamorous-native";
 
-import ThemePropTypes from "../themes/ThemePropTypes";
+import { ThemePropType } from "../prop-types/theme";
 import Button from "./Button";
 
 // TODO: polish - look at fixing flashing on Android with dismissal of keyboard when hitting next button. Fixed in later RN?
@@ -182,7 +182,7 @@ class SignInForm extends PureComponent {
 }
 
 SignInForm.propTypes = {
-  theme: ThemePropTypes.isRequired,
+  theme: ThemePropType.isRequired,
   style: ViewPropTypes.style,
   authSignInReset: PropTypes.func.isRequired,
   authSignInAsync: PropTypes.func.isRequired,

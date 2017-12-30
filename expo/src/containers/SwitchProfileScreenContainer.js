@@ -3,9 +3,8 @@ import { connect } from "react-redux";
 
 import SwitchProfileScreen from "../screens/SwitchProfileScreen";
 import { navigateGoBack } from "../actions/navigation";
-import { notesFetchAsync } from "../actions/notesFetch";
+import { notesSwitchProfileAndFetchAsync } from "../actions/notesFetch";
 import { profilesFetchAsync } from "../actions/profilesFetch";
-import { profileSet } from "../actions/profile";
 
 const mapStateToProps = state => {
   let profileListData = [];
@@ -32,8 +31,7 @@ const mapDispatchToProps = dispatch =>
     {
       navigateGoBack,
       profilesFetchAsync,
-      notesFetchAsync,
-      profileSet,
+      notesSwitchProfileAndFetchAsync,
     },
     dispatch
   );

@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import glamorous, { withTheme } from "glamorous-native";
 
-import ThemePropTypes from "../themes/ThemePropTypes";
+import { ThemePropType } from "../prop-types/theme";
 
 class MadePossibleBy extends PureComponent {
   render() {
@@ -32,7 +32,7 @@ class MadePossibleBy extends PureComponent {
 }
 
 MadePossibleBy.propTypes = {
-  theme: ThemePropTypes.isRequired,
+  theme: ThemePropType.isRequired,
 };
 
 export default withTheme(MadePossibleBy);

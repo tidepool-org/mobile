@@ -10,7 +10,7 @@ const mapStateToProps = state => ({
   commentsFetchDataByMessageId: state.commentsFetch,
   errorMessage: state.notesFetch.errorMessage,
   fetching: state.notesFetch.fetching,
-  currentProfileUserId: state.profile.currentProfile.userId,
+  currentProfile: state.profile.currentProfile,
 });
 
 const mapDispatchToProps = dispatch =>

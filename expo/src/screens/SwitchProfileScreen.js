@@ -6,6 +6,8 @@ import glamorous, { ThemeProvider } from "glamorous-native";
 import ProfileList from "../components/ProfileList";
 import PrimaryTheme from "../themes/PrimaryTheme";
 import Colors from "../constants/Colors";
+import { UserPropType } from "../prop-types/user";
+import { ProfileListItemPropType } from "../prop-types/profile";
 
 class SwitchProfileScreen extends PureComponent {
   static navigationOptions = () => {
@@ -49,9 +51,17 @@ class SwitchProfileScreen extends PureComponent {
   }
 
   onPress = user => {
-    this.props.profileSet(user);
-    this.props.notesFetchAsync({ userId: user.userId });
-    this.props.navigateGoBack();
+    const {
+      currentUser,
+      notesSwitchProfileAndFetchAsync,
+      navigateGoBack,
+    } = this.props;
+
+    notesSwitchProfileAndFetchAsync({
+      authUser: currentUser,
+      profile: user,
+    });
+    navigateGoBack();
   };
 
   render() {
@@ -61,7 +71,6 @@ class SwitchProfileScreen extends PureComponent {
       profileListData,
       currentUser,
       profilesFetchAsync,
-      profileSet,
     } = this.props;
 
     return (
@@ -75,7 +84,6 @@ class SwitchProfileScreen extends PureComponent {
             fetching={fetching}
             user={currentUser}
             profilesFetchAsync={profilesFetchAsync}
-            profileSet={profileSet}
           />
         </glamorous.View>
       </ThemeProvider>
@@ -84,23 +92,12 @@ class SwitchProfileScreen extends PureComponent {
 }
 
 SwitchProfileScreen.propTypes = {
-  profileListData: PropTypes.arrayOf(
-    PropTypes.shape({
-      currentUserId: PropTypes.string.isRequired,
-      selectedProfileUserId: PropTypes.string.isRequired,
-      userId: PropTypes.string.isRequired,
-      fullName: PropTypes.string.isRequired,
-    })
-  ).isRequired,
+  profileListData: PropTypes.arrayOf(ProfileListItemPropType).isRequired,
   errorMessage: PropTypes.string,
   fetching: PropTypes.bool,
   profilesFetchAsync: PropTypes.func.isRequired,
-  notesFetchAsync: PropTypes.func.isRequired,
-  profileSet: PropTypes.func.isRequired,
-  currentUser: PropTypes.shape({
-    userId: PropTypes.string.isRequired,
-    fullName: PropTypes.string.isRequired,
-  }).isRequired,
+  notesSwitchProfileAndFetchAsync: PropTypes.func.isRequired,
+  currentUser: UserPropType.isRequired,
   navigateGoBack: PropTypes.func.isRequired,
 };
 

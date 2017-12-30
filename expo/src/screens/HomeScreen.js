@@ -9,6 +9,8 @@ import HeaderTitleContainer from "../containers/HeaderTitleContainer";
 import HeaderLeftContainer from "../containers/HeaderLeftContainer";
 import HeaderRight from "../components/HeaderRight";
 import NotesList from "../components/NotesList";
+import { ProfilePropType } from "../prop-types/profile";
+import { CommentPropType } from "../prop-types/comment";
 
 // TODO: notes - we need to handle empty notes list with the "add note" tip
 
@@ -31,7 +33,9 @@ class HomeScreen extends PureComponent {
   }
 
   componentDidMount() {
-    this.props.notesFetchAsync({ userId: this.props.currentProfileUserId });
+    this.props.notesFetchAsync({
+      profile: this.props.currentProfile,
+    });
   }
 
   render() {
@@ -40,7 +44,7 @@ class HomeScreen extends PureComponent {
     const {
       commentsFetchDataByMessageId,
       commentsFetchAsync,
-      currentProfileUserId,
+      currentProfile,
       errorMessage,
       fetching,
       notes,
@@ -55,7 +59,7 @@ class HomeScreen extends PureComponent {
             notes={notes}
             fetching={fetching}
             errorMessage={errorMessage}
-            userId={currentProfileUserId}
+            profile={currentProfile}
             notesFetchAsync={notesFetchAsync}
             commentsFetchAsync={commentsFetchAsync}
             commentsFetchDataByMessageId={commentsFetchDataByMessageId}
@@ -76,21 +80,14 @@ HomeScreen.propTypes = {
   ).isRequired,
   errorMessage: PropTypes.string,
   fetching: PropTypes.bool,
-  currentProfileUserId: PropTypes.string.isRequired,
+  currentProfile: ProfilePropType.isRequired,
   notesFetchAsync: PropTypes.func.isRequired,
   commentsFetchAsync: PropTypes.func.isRequired,
   commentsFetchDataByMessageId: PropTypes.objectOf(
     PropTypes.shape({
       errorMessage: PropTypes.string,
       fetching: PropTypes.bool,
-      comments: PropTypes.arrayOf(
-        PropTypes.shape({
-          id: PropTypes.string.isRequired,
-          timestamp: PropTypes.instanceOf(Date),
-          messageText: PropTypes.string.isRequired,
-          userFullName: PropTypes.string.isRequired,
-        })
-      ),
+      comments: PropTypes.arrayOf(CommentPropType),
     })
   ),
 };

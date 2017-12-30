@@ -1,8 +1,8 @@
 import React, { PureComponent } from "react";
-import PropTypes from "prop-types";
 import glamorous, { withTheme } from "glamorous-native";
 
-import ThemePropTypes from "../themes/ThemePropTypes";
+import { ProfilePropType } from "../prop-types/profile";
+import { ThemePropType } from "../prop-types/theme";
 
 class HeaderTitle extends PureComponent {
   render() {
@@ -21,10 +21,8 @@ class HeaderTitle extends PureComponent {
 }
 
 HeaderTitle.propTypes = {
-  theme: ThemePropTypes.isRequired,
-  currentProfile: PropTypes.shape({
-    fullName: PropTypes.string.isRequired,
-  }).isRequired,
+  theme: ThemePropType.isRequired,
+  currentProfile: ProfilePropType.isRequired,
 };
 
 export default withTheme(HeaderTitle);

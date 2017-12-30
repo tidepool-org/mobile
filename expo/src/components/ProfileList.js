@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 import glamorous, { withTheme } from "glamorous-native";
 
 import ProfileListItem from "./ProfileListItem";
+import { UserPropType } from "../prop-types/user";
+import { ProfileListItemPropType } from "../prop-types/profile";
 
 class ProfileList extends PureComponent {
   static showErrorMessageAlert() {
@@ -37,8 +39,8 @@ class ProfileList extends PureComponent {
     }
   }
 
-  onPress = user => {
-    this.props.onPress(user);
+  onPress = profile => {
+    this.props.onPress(profile);
   };
 
   onRefresh = () => {
@@ -91,22 +93,12 @@ class ProfileList extends PureComponent {
 }
 
 ProfileList.propTypes = {
-  profileListData: PropTypes.arrayOf(
-    PropTypes.shape({
-      currentUserId: PropTypes.string.isRequired,
-      selectedProfileUserId: PropTypes.string.isRequired,
-      userId: PropTypes.string.isRequired,
-      fullName: PropTypes.string.isRequired,
-    })
-  ).isRequired,
+  profileListData: PropTypes.arrayOf(ProfileListItemPropType).isRequired,
   onPress: PropTypes.func.isRequired,
   profilesFetchAsync: PropTypes.func.isRequired,
   errorMessage: PropTypes.string,
   fetching: PropTypes.bool,
-  user: PropTypes.shape({
-    userId: PropTypes.string.isRequired,
-    fullName: PropTypes.string.isRequired,
-  }).isRequired,
+  user: UserPropType.isRequired,
 };
 
 ProfileList.defaultProps = {

@@ -9,13 +9,13 @@ import {
 import glamorous, { withTheme } from "glamorous-native";
 
 import HashtagText from "./HashtagText";
-import ThemePropTypes from "../themes/ThemePropTypes";
 import LinearGradient from "./LinearGradient";
 import NotesListItemAddComment from "./NotesListItemAddComment";
 import NotesListItemComment from "./NotesListItemComment";
 import formatDate from "../utils/formatDate";
+import { ThemePropType } from "../prop-types/theme";
+import { CommentPropType } from "../prop-types/comment";
 
-// TODO: ideally the id, timestamp, and messageText props should be part of a note object (similar to comment in NotesListItemComment, rather than split out as separate properties
 // TODO: when resetting comments (via reload of messages, or sign out), we should cancel outstanding fetch requests
 // TODO: consider showing an activity indicator for the loading of graph and comments data, and then animate all of that (graph and comments) together when loaded
 
@@ -62,7 +62,7 @@ class NotesListItem extends PureComponent {
 
   onPress = () => {
     this.setState({ expanded: !this.state.expanded });
-    this.props.commentsFetchAsync({ messageId: this.props.id });
+    this.props.commentsFetchAsync({ messageId: this.props.note.id });
     LayoutAnimation.configureNext({
       ...LayoutAnimation.Presets.easeInEaseOut,
       duration: 150,
@@ -97,7 +97,8 @@ class NotesListItem extends PureComponent {
     if (this.state.expanded) {
       const { theme, commentsFetchData: { comments } } = this.props;
       return comments.map(comment => {
-        if (comment.id !== this.props.id) {
+        // Skip rendering the comment that has same id as the note
+        if (comment.id !== this.props.note.id) {
           return (
             <NotesListItemComment
               key={comment.id}
@@ -122,7 +123,7 @@ class NotesListItem extends PureComponent {
   }
 
   render() {
-    const { theme, style, timestamp, messageText } = this.props;
+    const { theme, style, note } = this.props;
 
     return (
       <glamorous.View style={style} backgroundColor="white">
@@ -139,7 +140,7 @@ class NotesListItem extends PureComponent {
               marginLeft={12}
               marginRight={12}
             >
-              {formatDate(timestamp)}
+              {formatDate(note.timestamp)}
             </glamorous.Text>
             {this.renderEditButton()}
           </glamorous.View>
@@ -155,7 +156,7 @@ class NotesListItem extends PureComponent {
             <HashtagText
               boldStyle={theme.notesListItemHashtagStyle}
               normalStyle={theme.notesListItemTextStyle}
-              text={messageText}
+              text={note.messageText}
             />
           </glamorous.Text>
         </TouchableOpacity>
@@ -171,24 +172,19 @@ class NotesListItem extends PureComponent {
 }
 
 NotesListItem.propTypes = {
-  theme: ThemePropTypes.isRequired,
+  theme: ThemePropType.isRequired,
   style: ViewPropTypes.style,
   initiallyExpanded: PropTypes.bool,
-  id: PropTypes.string.isRequired,
-  timestamp: PropTypes.instanceOf(Date).isRequired,
-  messageText: PropTypes.string.isRequired,
+  note: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    timestamp: PropTypes.instanceOf(Date),
+    messageText: PropTypes.string.isRequired,
+  }).isRequired,
   commentsFetchAsync: PropTypes.func.isRequired,
   commentsFetchData: PropTypes.shape({
     errorMessage: PropTypes.string,
     fetching: PropTypes.bool,
-    comments: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        timestamp: PropTypes.instanceOf(Date),
-        messageText: PropTypes.string.isRequired,
-        userFullName: PropTypes.string.isRequired,
-      })
-    ),
+    comments: PropTypes.arrayOf(CommentPropType),
   }),
 };
 

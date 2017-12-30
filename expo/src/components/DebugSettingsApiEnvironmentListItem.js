@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { ViewPropTypes } from "react-native";
 import glamorous, { withTheme } from "glamorous-native";
 
-import ThemePropTypes from "../themes/ThemePropTypes";
+import { ThemePropType } from "../prop-types/theme";
 
 class DebugSettingsApiEnvironmentListItem extends PureComponent {
   constructor(props) {
@@ -95,7 +95,7 @@ class DebugSettingsApiEnvironmentListItem extends PureComponent {
 }
 
 DebugSettingsApiEnvironmentListItem.propTypes = {
-  theme: ThemePropTypes.isRequired,
+  theme: ThemePropType.isRequired,
   style: ViewPropTypes.style,
   apiEnvironmentName: PropTypes.string.isRequired,
   selected: PropTypes.bool,

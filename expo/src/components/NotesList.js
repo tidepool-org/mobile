@@ -5,6 +5,8 @@ import glamorous, { withTheme } from "glamorous-native";
 
 import Colors from "../constants/Colors";
 import NotesListItem from "./NotesListItem";
+import { ProfilePropType } from "../prop-types/profile";
+import { CommentPropType } from "../prop-types/comment";
 
 class NotesList extends PureComponent {
   static showErrorMessageAlert() {
@@ -47,23 +49,20 @@ class NotesList extends PureComponent {
   };
 
   onRefresh = () => {
-    const { notesFetchAsync, userId } = this.props;
+    const { notesFetchAsync, profile } = this.props;
 
     this.setState({ refreshing: true });
 
-    notesFetchAsync({ userId });
+    notesFetchAsync({ profile });
   };
 
   keyExtractor = item => item.id;
 
   renderItem = ({ item }) => (
     <NotesListItem
-      notes={item.notes}
       onPressItem={this.onPressItem}
       selected={!!this.state.selected.get(item.id)}
-      id={item.id}
-      timestamp={item.timestamp}
-      messageText={item.messageText}
+      note={item}
       commentsFetchData={this.props.commentsFetchDataByMessageId[item.id]}
       commentsFetchAsync={this.props.commentsFetchAsync}
     />
@@ -100,21 +99,14 @@ NotesList.propTypes = {
   ).isRequired,
   errorMessage: PropTypes.string,
   fetching: PropTypes.bool,
-  userId: PropTypes.string.isRequired,
+  profile: ProfilePropType.isRequired,
   notesFetchAsync: PropTypes.func.isRequired,
   commentsFetchAsync: PropTypes.func.isRequired,
   commentsFetchDataByMessageId: PropTypes.objectOf(
     PropTypes.shape({
       errorMessage: PropTypes.string,
       fetching: PropTypes.bool,
-      comments: PropTypes.arrayOf(
-        PropTypes.shape({
-          id: PropTypes.string.isRequired,
-          timestamp: PropTypes.instanceOf(Date),
-          messageText: PropTypes.string.isRequired,
-          userFullName: PropTypes.string.isRequired,
-        })
-      ),
+      comments: PropTypes.arrayOf(CommentPropType),
     })
   ),
 };

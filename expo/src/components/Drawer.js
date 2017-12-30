@@ -14,6 +14,7 @@ import DrawerSignOutButton from "./DrawerSignOutButton";
 import Divider from "./Divider";
 import DebugSettingsTouchable from "../components/DebugSettingsTouchable";
 import VersionAndApiEnvironment from "../components/VersionAndApiEnvironment";
+import { UserPropType } from "../prop-types/user";
 
 class Drawer extends PureComponent {
   theme = PrimaryTheme;
@@ -39,8 +40,9 @@ class Drawer extends PureComponent {
                 renderItem: ({ item }) => (
                   <DrawerCurrentUser
                     navigateDrawerClose={this.props.navigateDrawerClose}
-                    notesFetchAsync={this.props.notesFetchAsync}
-                    profileSet={this.props.profileSet}
+                    notesSwitchProfileAndFetchAsync={
+                      this.props.notesSwitchProfileAndFetchAsync
+                    }
                     currentUser={item.currentUser}
                   />
                 ),
@@ -142,19 +144,14 @@ class Drawer extends PureComponent {
 
 Drawer.propTypes = {
   style: ViewPropTypes.style,
-  notesFetchAsync: PropTypes.func.isRequired,
-  profileSet: PropTypes.func.isRequired,
+  notesSwitchProfileAndFetchAsync: PropTypes.func.isRequired,
   navigateDrawerClose: PropTypes.func.isRequired,
   navigateSwitchProfile: PropTypes.func.isRequired,
   navigateSupport: PropTypes.func.isRequired,
   navigatePrivacyAndTerms: PropTypes.func.isRequired,
   navigateDebugSettings: PropTypes.func.isRequired,
   authSignOutAsync: PropTypes.func.isRequired,
-  currentUser: PropTypes.shape({
-    userId: PropTypes.string.isRequired,
-    username: PropTypes.string.isRequired,
-    fullName: PropTypes.string.isRequired,
-  }).isRequired,
+  currentUser: UserPropType.isRequired,
   version: PropTypes.string.isRequired,
   apiEnvironment: PropTypes.string.isRequired,
 };

@@ -1,5 +1,5 @@
 import { AsyncStorage } from "react-native";
-import { profileSet } from "../actions/profile";
+import { profileRestoreAndSetAsync } from "../actions/profile";
 import { navigateHome, navigateSignIn } from "../actions/navigation";
 import api from "../api";
 
@@ -24,7 +24,9 @@ export const authSignOutAsync = () => async dispatch => {
   try {
     await AsyncStorage.removeItem(AUTH_USER_KEY);
   } catch (error) {
-    // TODO: log AsyncStore.setItem error
+    // console.log(
+    //   `authSignOutAsync: failed to remove auth token on sign out, error:${error}`
+    // );
   }
 
   dispatch(authSignInReset());
@@ -36,10 +38,7 @@ export const authSignInDidStart = () => ({
 });
 
 export const authSignInDidSucceed = ({
-  sessionToken,
-  userId,
-  username,
-  fullName,
+  authUser: { sessionToken, userId, username, fullName },
 }) => ({
   type: AUTH_SIGN_IN_DID_SUCCEED,
   payload: { sessionToken, userId, username, fullName },
@@ -79,8 +78,8 @@ export const authSignInAsync = ({ username, password }) => async dispatch => {
       const authUser = { sessionToken, userId, username, fullName };
       try {
         await AsyncStorage.setItem(AUTH_USER_KEY, JSON.stringify(authUser));
-        dispatch(authSignInDidSucceed(authUser));
-        dispatch(profileSet(authUser));
+        dispatch(authSignInDidSucceed({ authUser }));
+        await dispatch(profileRestoreAndSetAsync({ authUser }));
         dispatch(navigateHome());
       } catch (error) {
         dispatch(authSignInDidFail(error.errorMessage));
@@ -94,10 +93,7 @@ export const authRefreshTokenDidStart = () => ({
 });
 
 export const authRefreshTokenDidSucceed = ({
-  sessionToken,
-  userId,
-  username,
-  fullName,
+  authUser: { sessionToken, userId, username, fullName },
 }) => ({
   type: AUTH_REFRESH_SESSION_TOKEN_DID_SUCCEED,
   payload: { sessionToken, userId, username, fullName },
@@ -123,7 +119,7 @@ export const authRefreshTokenOrSignInAsync = () => async dispatch => {
     //   "authRefreshTokenOrSignInAsync: No session token exists, navigate to sign in"
     // );
 
-    dispatch(authRefreshTokenDidSucceed(authUser));
+    dispatch(authRefreshTokenDidSucceed({ authUser }));
     dispatch(authSignInReset());
     dispatch(navigateSignIn());
   } else {
@@ -141,16 +137,15 @@ export const authRefreshTokenOrSignInAsync = () => async dispatch => {
 
       // console.log(
       //   `authRefreshTokenOrSignInAsync: Navigate to sign in due to error`
-      // ); // TODO: sign in - what about client side errors? Should that result in reset / sign in?
+      // ); // TODO: sign in - what about client side errors? Those should not result in reset / sign in
       dispatch(authSignInReset());
       dispatch(navigateSignIn());
     } else {
+      // console.log(`authRefreshTokenOrSignInAsync: Success!`);
       authUser.sessionToken = sessionToken;
       authUser.userId = userId;
-
-      // console.log(`authRefreshTokenOrSignInAsync: Success! Navigate home`);
-      dispatch(authRefreshTokenDidSucceed(authUser));
-      dispatch(profileSet(authUser));
+      dispatch(authRefreshTokenDidSucceed({ authUser }));
+      await dispatch(profileRestoreAndSetAsync({ authUser }));
       dispatch(navigateHome());
     }
   }

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { StyleSheet } from "react-native";
 import glamorous, { withTheme } from "glamorous-native";
 
-import ThemePropTypes from "../themes/ThemePropTypes";
+import { ThemePropType } from "../prop-types/theme";
 import Colors from "../constants/Colors";
 import DebugSettingsApiEnvironmentListItem from "./DebugSettingsApiEnvironmentListItem";
 import {
@@ -72,7 +72,7 @@ class DebugSettingsApiEnvironmentList extends PureComponent {
 }
 
 DebugSettingsApiEnvironmentList.propTypes = {
-  theme: ThemePropTypes.isRequired,
+  theme: ThemePropType.isRequired,
   onApiEnvironmentSelected: PropTypes.func.isRequired,
   selectedApiEnvironment: PropTypes.string,
 };

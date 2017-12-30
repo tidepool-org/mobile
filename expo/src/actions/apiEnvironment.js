@@ -33,7 +33,6 @@ export const apiEnvironmentLoadAndSetAsync = () => async dispatch => {
     // console.log(
     //   `Failed to load apiEnvironment, defaulting to ${API_ENVIRONMENT_PRODUCTION}, error: ${error}`
     // );
-    apiEnvironment = API_ENVIRONMENT_PRODUCTION;
   }
 
   dispatch(apiEnvironmentSet(apiEnvironment));

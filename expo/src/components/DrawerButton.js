@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import glamorous, { withTheme } from "glamorous-native";
 
-import ThemePropTypes from "../themes/ThemePropTypes";
+import { ThemePropType } from "../prop-types/theme";
 
 class DrawerButton extends PureComponent {
   constructor(props) {
@@ -106,7 +106,7 @@ DrawerButton.propTypes = {
   title: PropTypes.string.isRequired,
   subtitle: PropTypes.string,
   hasDisclosureIndicator: PropTypes.bool,
-  theme: ThemePropTypes.isRequired,
+  theme: ThemePropType.isRequired,
 };
 
 DrawerButton.defaultProps = {
