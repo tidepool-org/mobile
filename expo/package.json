@@ -3,28 +3,29 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
-    "@storybook/addon-actions": "^3.2.10",
-    "@storybook/addon-links": "^3.2.10",
-    "@storybook/react-native": "^3.2.10",
-    "babel-eslint": "^8.0.1",
-    "eslint": "^4.7.2",
-    "eslint-config-airbnb": "^16.0.0",
-    "eslint-config-prettier": "^2.6.0",
-    "eslint-import-resolver-reactnative": "^1.0.2",
-    "eslint-plugin-import": "^2.7.0",
-    "eslint-plugin-jsx-a11y": "^6.0.2",
-    "eslint-plugin-prettier": "^2.3.1",
-    "eslint-plugin-react": "^7.4.0",
-    "eslint-plugin-react-native": "^3.1.0",
-    "faker": "^4.1.0",
-    "flow-bin": "^0.56.0",
-    "jest-expo": "^23.0.0",
-    "prettier": "^1.7.0",
-    "prettier-eslint": "^8.1.1",
-    "prettier-eslint-cli": "^4.3.2",
+    "@storybook/addons": "3.3.3",
+    "@storybook/addon-actions": "3.3.3",
+    "@storybook/addon-links": "3.3.3",
+    "@storybook/react-native": "3.3.3",
+    "babel-eslint": "8.1.2",
+    "eslint": "4.14.0",
+    "eslint-config-airbnb": "16.1.0",
+    "eslint-config-prettier": "2.9.0",
+    "eslint-import-resolver-reactnative": "1.0.2",
+    "eslint-plugin-import": "2.8.0",
+    "eslint-plugin-jsx-a11y": "6.0.3",
+    "eslint-plugin-prettier": "2.4.0",
+    "eslint-plugin-react": "7.5.1",
+    "eslint-plugin-react-native": "3.2.0",
+    "faker": "4.1.0",
+    "flow-bin": "0.62.0",
+    "jest-expo": "23.0.0",
+    "prettier": "1.9.2",
+    "prettier-eslint": "8.7.0",
+    "prettier-eslint-cli": "4.7.0",
     "react-dom": "16.0.0",
-    "react-native-scripts": "^1.5.0",
-    "react-native-storybook-loader": "^1.5.1",
+    "react-native-scripts": "1.8.1",
+    "react-native-storybook-loader": "1.7.0",
     "react-test-renderer": "16.0.0"
   },
   "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
@@ -36,8 +37,10 @@
     "test": "node node_modules/jest/bin/jest.js --watch",
     "flow": "flow",
     "format": "prettier-eslint \"src/**/*.js\"",
-    "pre": "cp expo-specific-App.js App.js && cp expo-specific-src/utils/runtimeEnvironment.js src/utils/runtimeEnvironment.js && cp expo-specific-src/components/LinearGradient.js src/components/LinearGradient.js && cp expo-specific-src/actions/appVersion.js src/actions/appVersion.js && cp expo-specific-src/reducers/appVersion.js src/reducers/appVersion.js",
-    "prestorybook": "cp storybook-specific-App.js App.js && cp expo-specific-src/utils/runtimeEnvironment.js src/utils/runtimeEnvironment.js && cp expo-specific-src/components/LinearGradient.js src/components/LinearGradient.js && cp expo-specific-src/actions/appVersion.js src/actions/appVersion.js && cp expo-specific-src/reducers/appVersion.js src/reducers/appVersion.js && rnstl",
+    "pre":
+      "cp expo-specific-App.js App.js && cp expo-specific-src/utils/runtimeEnvironment.js src/utils/runtimeEnvironment.js && cp expo-specific-src/components/LinearGradient.js src/components/LinearGradient.js && cp expo-specific-src/actions/appVersion.js src/actions/appVersion.js && cp expo-specific-src/reducers/appVersion.js src/reducers/appVersion.js",
+    "prestorybook":
+      "cp storybook-specific-App.js App.js && cp expo-specific-src/utils/runtimeEnvironment.js src/utils/runtimeEnvironment.js && cp expo-specific-src/components/LinearGradient.js src/components/LinearGradient.js && cp expo-specific-src/actions/appVersion.js src/actions/appVersion.js && cp expo-specific-src/reducers/appVersion.js src/reducers/appVersion.js && rnstl",
     "storybook": "storybook start -p 7007"
   },
   "jest": {
@@ -48,26 +51,25 @@
   },
   "config": {
     "react-native-storybook-loader": {
-      "searchDir": [
-        "./__stories__"
-      ],
+      "searchDir": ["./__stories__"],
       "pattern": "**/*.story.js",
       "outputFile": "./storybook/storyLoader.js"
     }
   },
   "dependencies": {
-    "axios": "^0.17.1",
-    "date-fns": "^1.29.0",
-    "expo": "^23.0.0",
-    "glamorous-native": "1.2.0",
+    "axios": "0.17.1",
+    "date-fns": "1.29.0",
+    "expo": "23.0.0",
+    "glamorous-native": "1.2.1",
     "prop-types": "15.6.0",
     "react": "16.0.0",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-23.0.0.tar.gz",
+    "react-native":
+      "https://github.com/expo/react-native/archive/sdk-23.0.0.tar.gz",
     "react-native-iphone-x-helper": "1.0.1",
-    "react-navigation": "^1.0.0-beta.21",
-    "react-redux": "^5.0.6",
-    "redux": "^3.7.2",
-    "redux-thunk": "^2.2.0",
-    "twitter-text": "^1.14.7"
+    "react-navigation": "1.0.0-beta.22",
+    "react-redux": "5.0.6",
+    "redux": "3.7.2",
+    "redux-thunk": "2.2.0",
+    "twitter-text": "2.0.2"
   }
 }
