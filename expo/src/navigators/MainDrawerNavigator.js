@@ -10,9 +10,12 @@ const MainDrawerNavigator = DrawerNavigator(
     },
   },
   {
+    drawerOpenRoute: "DrawerOpen",
+    drawerCloseRoute: "DrawerClose",
+    drawerToggleRoute: "DrawerToggle",
     drawerWidth: 270,
     contentComponent: DrawerContainer,
-  },
+  }
 );
 
 export default MainDrawerNavigator;
