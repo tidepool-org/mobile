@@ -27,6 +27,11 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(new MainReactPackage(), new RNVersionNumberPackage(),
           new LinearGradientPackage(), new LaunchScreenReactPackage());
     }
+
+    @Override
+    protected String getJSMainModuleName() {
+      return "index";
+    }
   };
 
   @Override
