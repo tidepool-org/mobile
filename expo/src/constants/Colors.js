@@ -10,6 +10,7 @@ const Colors = {
   warmGrey: "#9b9b9b",
   mediumLightGrey: "#7e7e7e",
   darkGreyColor: "#4a4a4a",
+  darkestGreyColor: "#989898",
   blackish: "#3c3c3c",
 
   redError: "#ff354e",

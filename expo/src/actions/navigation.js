@@ -4,6 +4,8 @@ export const NAVIGATE_SIGN_IN = "NAVIGATE_SIGN_IN";
 export const NAVIGATE_SIGN_UP = "NAVIGATE_SIGN_UP";
 export const NAVIGATE_FORGOT_PASSWORD = "NAVIGATE_FORGOT_PASSWORD";
 export const NAVIGATE_SWITCH_PROFILE = "NAVIGATE_SWITCH_PROFILE";
+export const NAVIGATE_ADD_NOTE = "NAVIGATE_ADD_NOTE";
+export const NAVIGATE_EDIT_NOTE = "NAVIGATE_EDIT_NOTE";
 export const NAVIGATE_PRIVACY_AND_TERMS = "NAVIGATE_PRIVACY_AND_TERMS";
 export const NAVIGATE_SUPPORT = "NAVIGATE_SUPPORT";
 export const NAVIGATE_DRAWER_OPEN = "NAVIGATE_DRAWER_OPEN";
@@ -33,6 +35,14 @@ export function navigateForgotPassword() {
 
 export function navigateSwitchProfile() {
   return { type: NAVIGATE_SWITCH_PROFILE };
+}
+
+export function navigateAddNote() {
+  return { type: NAVIGATE_ADD_NOTE, payload: { note: null } };
+}
+
+export function navigateEditNote({ note }) {
+  return { type: NAVIGATE_EDIT_NOTE, payload: { note } };
 }
 
 export function navigatePrivacyAndTerms() {

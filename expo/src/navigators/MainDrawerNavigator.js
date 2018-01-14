@@ -1,12 +1,12 @@
 import { DrawerNavigator } from "react-navigation";
 
-import MainStackNavigator from "./MainStackNavigator";
+import MainModalNavigator from "./MainModalNavigator";
 import DrawerContainer from "../containers/DrawerContainer";
 
 const MainDrawerNavigator = DrawerNavigator(
   {
     MainStack: {
-      screen: MainStackNavigator,
+      screen: MainModalNavigator,
     },
   },
   {

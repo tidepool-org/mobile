@@ -8,12 +8,12 @@ const PrimaryTheme = {
     lightBackground: Colors.veryLightGrey,
     activityIndicator: Platform.OS === "android" ? Colors.brightBlue : "grey",
   },
-  navHeaderTitleStyle: {
+  screenHeaderTitleStyle: {
     color: "white",
     ...FontStyles.navTitleFont,
     alignSelf: "center",
   },
-  notesListItemTimeStyle: {
+  notesListItemMetadataStyle: {
     color: Colors.altDarkGreyColor,
     ...FontStyles.smallRegularFont,
   },
@@ -119,6 +119,22 @@ const PrimaryTheme = {
   editButtonTextStyle: {
     color: Colors.brightBlue,
     ...FontStyles.smallRegularFont,
+  },
+  modalScreenHeaderRightTextStyle: {
+    color: Colors.brightBlue,
+    ...FontStyles.mediumRegularFont,
+  },
+  modalScreenHeaderRightDisabledTextStyle: {
+    color: "white",
+    ...FontStyles.mediumRegularFont,
+  },
+  addOrEditNoteDateTextStyle: {
+    color: Colors.blackish,
+    ...FontStyles.smallRegularFont,
+  },
+  addOrEditNoteTimeTextStyle: {
+    color: Colors.blackish,
+    ...FontStyles.smallBoldFont,
   },
 };
 

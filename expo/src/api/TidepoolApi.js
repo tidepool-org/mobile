@@ -1,4 +1,5 @@
 import axios from "axios";
+import uuidv4 from "uuid/v4";
 
 // TODO: api - default timeout for requests
 
@@ -69,10 +70,20 @@ class TidepoolApi {
       .then(response => {
         // Map notes
         const sortedNotes = response.notes.map(responseNote => {
+          let userFullName = "";
+          if (responseNote.user && responseNote.user.fullName) {
+            userFullName = responseNote.user.fullName;
+          }
+
           const mappedNote = {
             id: responseNote.id,
             timestamp: new Date(new Date(responseNote.timestamp)),
             messageText: responseNote.messagetext,
+            parentMessageId: responseNote.parentmessage,
+            userId: responseNote.userid,
+            userFullName,
+            groupId: responseNote.groupid,
+            createdTime: responseNote.createdtime,
           };
           return mappedNote;
         });
@@ -98,6 +109,10 @@ class TidepoolApi {
             id: responseComment.id,
             timestamp: new Date(new Date(responseComment.timestamp)),
             messageText: responseComment.messagetext,
+            parentMessageId: responseComment.parentmessage,
+            userId: responseComment.userid,
+            groupId: responseComment.groupid,
+            createdTime: responseComment.createdtime,
             userFullName: responseComment.user.fullName,
           };
           return mappedComment;
@@ -165,6 +180,35 @@ class TidepoolApi {
     return { profiles: viewableUserProfiles, errorMessage };
   }
 
+  async addNoteAsync({ currentUser, currentProfile, messageText, timestamp }) {
+    const { errorMessage, note } = await this.addNote({
+      currentUser,
+      currentProfile,
+      messageText,
+      timestamp,
+    })
+      .then(response => ({
+        note: response.note,
+      }))
+      .catch(error => ({
+        errorMessage: error.message,
+      }));
+
+    return { errorMessage, note };
+  }
+
+  async updateNoteAsync({ note }) {
+    const { errorMessage } = await this.updateNote({
+      note,
+    })
+      .then(() => ({}))
+      .catch(error => ({
+        errorMessage: error.message,
+      }));
+
+    return { errorMessage };
+  }
+
   //
   // Lower-level promise-based methods
   //
@@ -180,11 +224,12 @@ class TidepoolApi {
         .then(response => {
           this.sessionToken =
             response.headers["x-tidepool-session-token"] || "";
+          this.userId = response.data.userid;
 
           if (this.sessionToken) {
             resolve({
               sessionToken: this.sessionToken,
-              userId: response.data.userid,
+              userId: this.userId,
             });
           } else {
             reject(
@@ -223,10 +268,10 @@ class TidepoolApi {
         .then(response => {
           this.sessionToken =
             response.headers["x-tidepool-session-token"] || "";
-          const userId = response.data.userid;
+          this.userId = response.data.userid;
 
           if (this.sessionToken) {
-            resolve({ sessionToken: this.sessionToken, userId });
+            resolve({ sessionToken: this.sessionToken, userId: this.userId });
           } else {
             reject(
               new Error(
@@ -321,6 +366,66 @@ class TidepoolApi {
           }
 
           resolve({ userIds });
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+  }
+
+  addNote({ currentUser, currentProfile, messageText, timestamp }) {
+    const method = "post";
+    const groupId = currentProfile.userId;
+    const url = `/message/send/${groupId}`;
+    const baseURL = this.baseUrl;
+    const headers = { "x-tidepool-session-token": this.sessionToken };
+    const note = {
+      groupId,
+      parentMessage: null,
+      userId: this.userId,
+      timestamp,
+      messageText,
+      userFullName: currentUser.fullName,
+    };
+
+    return new Promise((resolve, reject) => {
+      const data = {
+        message: {
+          groupid: note.groupId,
+          parentmessage: note.parentMessage,
+          guid: uuidv4(),
+          userid: note.userId,
+          timestamp: note.timestamp.toISOString(),
+          messagetext: note.messageText,
+        },
+      };
+      axios({ method, url, baseURL, headers, data })
+        .then(response => {
+          note.id = response.data.id;
+          resolve({ note });
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+  }
+
+  updateNote({ note }) {
+    const method = "put";
+    const url = `/message/edit/${note.id}`;
+    const baseURL = this.baseUrl;
+    const headers = { "x-tidepool-session-token": this.sessionToken };
+    const data = {
+      message: {
+        timestamp: note.timestamp,
+        messagetext: note.messageText,
+      },
+    };
+
+    return new Promise((resolve, reject) => {
+      axios({ method, url, baseURL, headers, data })
+        .then(() => {
+          resolve({});
         })
         .catch(error => {
           reject(error);

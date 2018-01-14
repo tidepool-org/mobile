@@ -10,6 +10,7 @@ faker.seed(123);
 
 const notesFetchAsync = () => {};
 const commentsFetchAsync = () => {};
+const navigateEditNote = () => {};
 const notes = [];
 for (let i = 0; i < 100; i += 1) {
   if (i < 2) {
@@ -17,21 +18,31 @@ for (let i = 0; i < 100; i += 1) {
       id: i.toString(),
       timestamp: faker.date.recent(i * 2),
       messageText: faker.fake("{{lorem.paragraph}} #exercise #meal"),
+      userId: "1",
     });
   } else {
     notes.push({
       id: i.toString(),
       timestamp: faker.date.recent(i * 275),
       messageText: faker.fake("{{lorem.paragraph}} #exercise #meal"),
+      userId: "1",
     });
   }
 }
-const profile = {
+const currentUser = {
   userId: "1",
+  username: "email@gmail.com",
   fullName: "Jill Jellyfish",
 };
 
-const props = { notes, profile, notesFetchAsync, commentsFetchAsync };
+const props = {
+  currentUser,
+  currentProfile: currentUser,
+  notes,
+  notesFetchAsync,
+  commentsFetchAsync,
+  navigateEditNote,
+};
 
 storiesOf("NotesList", module).add("default", () => (
   <StoryContainerComponent>

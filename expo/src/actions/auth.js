@@ -22,7 +22,7 @@ export const authSignInReset = () => ({
 
 export const authSignOutAsync = () => async dispatch => {
   try {
-    await AsyncStorage.removeItem(AUTH_USER_KEY);
+    AsyncStorage.removeItem(AUTH_USER_KEY);
   } catch (error) {
     // console.log(
     //   `authSignOutAsync: failed to remove auth token on sign out, error:${error}`
@@ -77,7 +77,7 @@ export const authSignInAsync = ({ username, password }) => async dispatch => {
     } else {
       const authUser = { sessionToken, userId, username, fullName };
       try {
-        await AsyncStorage.setItem(AUTH_USER_KEY, JSON.stringify(authUser));
+        AsyncStorage.setItem(AUTH_USER_KEY, JSON.stringify(authUser));
         dispatch(authSignInDidSucceed({ authUser }));
         await dispatch(profileRestoreAndSetAsync({ authUser }));
         dispatch(navigateHome());

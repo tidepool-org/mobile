@@ -1,13 +1,39 @@
 import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
 import { ViewPropTypes } from "react-native";
 import glamorous, { withTheme } from "glamorous-native";
 
 import HashtagText from "./HashtagText";
 import { ThemePropType } from "../prop-types/theme";
-import formatDate from "../utils/formatDate";
+import { formatDateForNoteList } from "../utils/formatDate";
 import { CommentPropType } from "../prop-types/comment";
 
 class NotesListItemComment extends PureComponent {
+  renderEdit() {
+    const { theme, currentUserId, comment } = this.props;
+
+    if (comment.userId === currentUserId) {
+      return (
+        <glamorous.TouchableOpacity
+          marginLeft="auto"
+          marginRight={10}
+          marginTop={7}
+          hitSlop={{ left: 10, right: 10, top: 10, bottom: 10 }}
+        >
+          <glamorous.Text
+            style={theme.editButtonTextStyle}
+            allowFontScaling={false}
+            numberOfLines={1}
+          >
+            Edit
+          </glamorous.Text>
+        </glamorous.TouchableOpacity>
+      );
+    }
+
+    return null;
+  }
+
   render() {
     const { theme, style, comment } = this.props;
 
@@ -36,22 +62,9 @@ class NotesListItemComment extends PureComponent {
             marginRight={10}
             marginTop={7}
           >
-            {formatDate(comment.timestamp)}
+            {formatDateForNoteList(comment.timestamp)}
           </glamorous.Text>
-          <glamorous.TouchableOpacity
-            marginLeft="auto"
-            marginRight={10}
-            marginTop={7}
-            hitSlop={{ left: 10, right: 10, top: 10, bottom: 10 }}
-          >
-            <glamorous.Text
-              style={theme.editButtonTextStyle}
-              allowFontScaling={false}
-              numberOfLines={1}
-            >
-              Edit
-            </glamorous.Text>
-          </glamorous.TouchableOpacity>
+          {this.renderEdit()}
         </glamorous.View>
         <glamorous.Text
           allowFontScaling={false}
@@ -76,6 +89,7 @@ class NotesListItemComment extends PureComponent {
 NotesListItemComment.propTypes = {
   theme: ThemePropType.isRequired,
   style: ViewPropTypes.style,
+  currentUserId: PropTypes.string.isRequired,
   comment: CommentPropType.isRequired,
 };
 

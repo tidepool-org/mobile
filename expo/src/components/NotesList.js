@@ -7,6 +7,9 @@ import Colors from "../constants/Colors";
 import NotesListItem from "./NotesListItem";
 import { ProfilePropType } from "../prop-types/profile";
 import { CommentPropType } from "../prop-types/comment";
+import { UserPropType } from "../prop-types/user";
+
+// TODO: use NotePropType for notes and add full schema for it
 
 class NotesList extends PureComponent {
   static showErrorMessageAlert() {
@@ -21,7 +24,10 @@ class NotesList extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.state = { selected: new Map(), refreshing: false };
+    this.state = {
+      selected: new Map(),
+      refreshing: false,
+    };
   }
 
   componentDidMount() {
@@ -49,11 +55,11 @@ class NotesList extends PureComponent {
   };
 
   onRefresh = () => {
-    const { notesFetchAsync, profile } = this.props;
+    const { notesFetchAsync, currentProfile } = this.props;
 
     this.setState({ refreshing: true });
 
-    notesFetchAsync({ profile });
+    notesFetchAsync({ profile: currentProfile });
   };
 
   keyExtractor = item => item.id;
@@ -63,8 +69,11 @@ class NotesList extends PureComponent {
       onPressItem={this.onPressItem}
       selected={!!this.state.selected.get(item.id)}
       note={item}
+      currentUser={this.props.currentUser}
+      currentProfile={this.props.currentProfile}
       commentsFetchData={this.props.commentsFetchDataByMessageId[item.id]}
       commentsFetchAsync={this.props.commentsFetchAsync}
+      navigateEditNote={this.props.navigateEditNote}
     />
   );
 
@@ -90,6 +99,8 @@ class NotesList extends PureComponent {
 }
 
 NotesList.propTypes = {
+  currentUser: UserPropType.isRequired,
+  currentProfile: ProfilePropType.isRequired,
   notes: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
@@ -99,7 +110,6 @@ NotesList.propTypes = {
   ).isRequired,
   errorMessage: PropTypes.string,
   fetching: PropTypes.bool,
-  profile: ProfilePropType.isRequired,
   notesFetchAsync: PropTypes.func.isRequired,
   commentsFetchAsync: PropTypes.func.isRequired,
   commentsFetchDataByMessageId: PropTypes.objectOf(
@@ -109,6 +119,7 @@ NotesList.propTypes = {
       comments: PropTypes.arrayOf(CommentPropType),
     })
   ),
+  navigateEditNote: PropTypes.func.isRequired,
 };
 
 NotesList.defaultProps = {

@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Image, TouchableOpacity } from "react-native";
 
-class HeaderLeft extends PureComponent {
+class HomeScreenHeaderLeft extends PureComponent {
   onPress = () => {
     this.props.navigateDrawerOpen();
   };
@@ -25,8 +25,8 @@ class HeaderLeft extends PureComponent {
   }
 }
 
-HeaderLeft.propTypes = {
+HomeScreenHeaderLeft.propTypes = {
   navigateDrawerOpen: PropTypes.func.isRequired,
 };
 
-export default HeaderLeft;
+export default HomeScreenHeaderLeft;

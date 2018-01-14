@@ -1,28 +1,28 @@
 import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
 import glamorous, { withTheme } from "glamorous-native";
 
-import { ProfilePropType } from "../prop-types/profile";
 import { ThemePropType } from "../prop-types/theme";
 
-class HeaderTitle extends PureComponent {
+class ModalScreenHeaderTitle extends PureComponent {
   render() {
-    const { theme, currentProfile: { fullName } } = this.props;
+    const { theme, title } = this.props;
 
     return (
       <glamorous.Text
-        style={theme.navHeaderTitleStyle}
+        style={theme.screenHeaderTitleStyle}
         allowFontScaling={false}
         numberOfLines={1}
       >
-        {fullName}
+        {title}
       </glamorous.Text>
     );
   }
 }
 
-HeaderTitle.propTypes = {
+ModalScreenHeaderTitle.propTypes = {
   theme: ThemePropType.isRequired,
-  currentProfile: ProfilePropType.isRequired,
+  title: PropTypes.string.isRequired,
 };
 
-export default withTheme(HeaderTitle);
+export default withTheme(ModalScreenHeaderTitle);

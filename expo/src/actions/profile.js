@@ -35,10 +35,7 @@ export const profileSaveAndSetAsync = ({
   profile,
 }) => async dispatch => {
   try {
-    await AsyncStorage.setItem(
-      getProfileKey({ authUser }),
-      JSON.stringify(profile)
-    );
+    AsyncStorage.setItem(getProfileKey({ authUser }), JSON.stringify(profile));
   } catch (error) {
     // console.log(`profileSaveAndSetAsync: error: ${error}`);
   }

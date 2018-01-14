@@ -9,12 +9,22 @@ import NotesListItem from "../../src/components/NotesListItem";
 
 faker.seed(123);
 
+const currentUser = {
+  userId: "1",
+  username: "email@gmail.com",
+  fullName: "Jill Jellyfish",
+};
+const currentProfile = {
+  userId: "1",
+  fullName: "Jill Jellyfish",
+};
 const note = {
   id: "1",
   timestamp: faker.date.recent(2),
   messageText: `#hashtag1 This should not show up in comments. ${faker.fake(
     "{{lorem.paragraph}}"
   )}`,
+  userId: "1",
 };
 const commentsFetchData = {
   comments: [
@@ -48,10 +58,14 @@ const commentsFetchData = {
   ],
 };
 const commentsFetchAsync = () => {};
+const navigateEditNote = () => {};
 const props = {
+  currentUser,
+  currentProfile,
   note,
   commentsFetchAsync,
   commentsFetchData,
+  navigateEditNote,
 };
 
 storiesOf("NotesListItem", module).add("default", () => (
