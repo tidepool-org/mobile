@@ -6,12 +6,18 @@ import subDays from "date-fns/sub_days";
 import StoryContainerScreen from "../../__stories__/utils/StoryContainerScreen";
 import HomeScreen from "../../src/screens/HomeScreen";
 
+const currentUser = {
+  userId: "1",
+  username: "email@gmail.com",
+  fullName: "Jill Jellyfish",
+};
 const currentProfile = {
   userId: "1",
   fullName: "Jill Jellyfish",
 };
 const notesFetchAsync = () => {};
 const commentsFetchAsync = () => {};
+const navigateEditNote = () => {};
 const notes = [
   {
     id: "1",
@@ -51,10 +57,12 @@ const notes = [
 ];
 
 const props = {
+  currentUser,
   notes,
   notesFetchAsync,
   currentProfile,
   commentsFetchAsync,
+  navigateEditNote,
 };
 
 storiesOf("HomeScreen", module).add("default", () => (

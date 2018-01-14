@@ -1,7 +1,12 @@
 import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
 import { Image, TouchableOpacity } from "react-native";
 
-class HeaderRight extends PureComponent {
+class HomeScreenHeaderRight extends PureComponent {
+  onPress = () => {
+    this.props.navigateAddNote();
+  };
+
   render() {
     return (
       <TouchableOpacity
@@ -9,6 +14,7 @@ class HeaderRight extends PureComponent {
           padding: 10,
           marginRight: 6,
         }}
+        onPress={this.onPress}
       >
         <Image source={require("../../assets/images/add-button.png")} />
       </TouchableOpacity>
@@ -16,4 +22,8 @@ class HeaderRight extends PureComponent {
   }
 }
 
-export default HeaderRight;
+HomeScreenHeaderRight.propTypes = {
+  navigateAddNote: PropTypes.func.isRequired,
+};
+
+export default HomeScreenHeaderRight;

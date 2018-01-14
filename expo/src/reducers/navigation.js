@@ -4,6 +4,10 @@ import { Linking } from "react-native";
 import Urls from "../constants/Urls";
 import { AppNavigator } from "../navigators/AppNavigator";
 import { SWITCH_PROFILE_ROUTE_NAME } from "../navigators/MainStackNavigator";
+import {
+  ADD_NOTE_ROUTE_NAME,
+  EDIT_NOTE_ROUTE_NAME,
+} from "../navigators/MainModalNavigator";
 import isRouteNameOnStack from "../utils/isRouteNameOnStack";
 import getRouteName from "../utils/getRouteName";
 import {
@@ -13,6 +17,8 @@ import {
   NAVIGATE_SIGN_UP,
   NAVIGATE_FORGOT_PASSWORD,
   NAVIGATE_SWITCH_PROFILE,
+  NAVIGATE_ADD_NOTE,
+  NAVIGATE_EDIT_NOTE,
   NAVIGATE_PRIVACY_AND_TERMS,
   NAVIGATE_SUPPORT,
   NAVIGATE_DRAWER_OPEN,
@@ -22,6 +28,34 @@ import {
 } from "../actions/navigation";
 
 // TODO: metrics - need metrics for navigation
+
+const shouldIgnoreNextNavigate = ({ nextState, state }) => {
+  // Prevent double navigation for some routes (e.g. when tapping UI elements that cause navigation quickly)
+  // TODO: Revisit this. It's kind of hacky / fragile
+  if (nextState !== state) {
+    const nextRouteName = getRouteName({
+      navigationState: nextState,
+    });
+
+    const routeNames = [
+      SWITCH_PROFILE_ROUTE_NAME,
+      ADD_NOTE_ROUTE_NAME,
+      EDIT_NOTE_ROUTE_NAME,
+    ];
+    if (
+      nextRouteName &&
+      routeNames.includes(nextRouteName) &&
+      isRouteNameOnStack({
+        routeName: nextRouteName,
+        navigationState: state,
+      })
+    ) {
+      return true;
+    }
+  }
+
+  return false;
+};
 
 const signInAction = AppNavigator.router.getActionForPathAndParams("SignIn");
 const SignInActionState = AppNavigator.router.getStateForAction(signInAction);
@@ -70,6 +104,24 @@ function navigation(state = initialState, action) {
         state
       );
       break;
+    case NAVIGATE_ADD_NOTE:
+      nextState = AppNavigator.router.getStateForAction(
+        NavigationActions.navigate({
+          routeName: ADD_NOTE_ROUTE_NAME,
+          params: { note: action.payload.note },
+        }),
+        state
+      );
+      break;
+    case NAVIGATE_EDIT_NOTE:
+      nextState = AppNavigator.router.getStateForAction(
+        NavigationActions.navigate({
+          routeName: EDIT_NOTE_ROUTE_NAME,
+          params: { note: action.payload.note },
+        }),
+        state
+      );
+      break;
     case NAVIGATE_PRIVACY_AND_TERMS:
       Linking.openURL(Urls.privacyAndTerms);
       break;
@@ -112,21 +164,8 @@ function navigation(state = initialState, action) {
   }
 
   nextState = nextState || state;
-
-  if (nextState !== state) {
-    const nextRouteName = getRouteName({
-      navigationState: nextState,
-    });
-    if (
-      nextRouteName &&
-      nextRouteName === SWITCH_PROFILE_ROUTE_NAME &&
-      isRouteNameOnStack({
-        routeName: nextRouteName,
-        navigationState: state,
-      })
-    ) {
-      nextState = state;
-    }
+  if (shouldIgnoreNextNavigate({ nextState, state })) {
+    nextState = state;
   }
 
   return nextState;

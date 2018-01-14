@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import {
   Alert,
+  Animated,
   ViewPropTypes,
   TouchableOpacity,
   LayoutAnimation,
@@ -12,10 +13,13 @@ import HashtagText from "./HashtagText";
 import LinearGradient from "./LinearGradient";
 import NotesListItemAddComment from "./NotesListItemAddComment";
 import NotesListItemComment from "./NotesListItemComment";
-import formatDate from "../utils/formatDate";
+import { formatDateForNoteList } from "../utils/formatDate";
 import { ThemePropType } from "../prop-types/theme";
 import { CommentPropType } from "../prop-types/comment";
+import { UserPropType } from "../prop-types/user";
+import { ProfilePropType } from "../prop-types/profile";
 
+// TODO: use NotePropType for note and add full schema for it
 // TODO: when resetting comments (via reload of messages, or sign out), we should cancel outstanding fetch requests
 // TODO: consider showing an activity indicator for the loading of graph and comments data, and then animate all of that (graph and comments) together when loaded
 
@@ -32,10 +36,19 @@ class NotesListItem extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.state = { expanded: props.initiallyExpanded };
+    this.state = {
+      expanded: props.initiallyExpanded,
+      fadeAnimation: new Animated.Value(0),
+    };
   }
 
   componentDidMount() {
+    Animated.timing(this.state.fadeAnimation, {
+      toValue: 1,
+      duration: 250,
+      useNativeDriver: true,
+    }).start();
+
     if (this.props.commentsFetchData.errorMessage) {
       NotesListItem.showErrorMessageAlert();
     }
@@ -55,30 +68,43 @@ class NotesListItem extends PureComponent {
     ) {
       LayoutAnimation.configureNext({
         ...LayoutAnimation.Presets.easeInEaseOut,
-        duration: 150,
+        duration: 175,
+        useNativeDriver: true,
       });
     }
   }
 
-  onPress = () => {
+  onPressNote = () => {
     this.setState({ expanded: !this.state.expanded });
     this.props.commentsFetchAsync({ messageId: this.props.note.id });
     LayoutAnimation.configureNext({
       ...LayoutAnimation.Presets.easeInEaseOut,
-      duration: 150,
+      duration: 175,
+      useNativeDriver: true,
     });
   };
 
-  renderEditButton() {
-    const { theme } = this.props;
+  onPressEdit = () => {
+    const { note } = this.props;
+    this.props.navigateEditNote({ note });
+  };
 
-    if (this.state.expanded) {
+  shouldRenderUserLabelSection() {
+    const { note } = this.props;
+    return note.userId !== note.groupId && note.userFullName;
+  }
+
+  renderEditButton() {
+    const { theme, note, currentUser } = this.props;
+
+    if (this.state.expanded && note.userId === currentUser.userId) {
       return (
         <glamorous.TouchableOpacity
           marginLeft="auto"
           marginRight={10}
           marginTop={7}
           hitSlop={{ left: 10, right: 10, top: 10, bottom: 10 }}
+          onPress={this.onPressEdit}
         >
           <glamorous.Text
             style={theme.editButtonTextStyle}
@@ -93,7 +119,88 @@ class NotesListItem extends PureComponent {
 
     return null;
   }
+
+  renderUserLabelSection() {
+    const { theme, currentProfile, note } = this.props;
+
+    if (this.shouldRenderUserLabelSection()) {
+      const userLabelText = `${note.userFullName} to ${
+        currentProfile.fullName
+      }`;
+
+      return (
+        <glamorous.View
+          flexDirection="row"
+          justifyContent="space-between"
+          zIndex={1}
+        >
+          <glamorous.Text
+            allowFontScaling={false}
+            numberOfLines={1}
+            style={theme.notesListItemMetadataStyle}
+            marginTop={7}
+            marginLeft={12}
+            marginRight={12}
+            flexShrink={1}
+          >
+            {userLabelText}
+          </glamorous.Text>
+          {this.renderEditButton()}
+        </glamorous.View>
+      );
+    }
+
+    return null;
+  }
+
+  renderDateSection() {
+    const { theme, note } = this.props;
+
+    return (
+      <glamorous.View
+        flexDirection="row"
+        justifyContent="flex-start"
+        zIndex={1}
+      >
+        <glamorous.Text
+          allowFontScaling={false}
+          style={theme.notesListItemMetadataStyle}
+          marginTop={7}
+          marginLeft={12}
+          marginRight={12}
+        >
+          {formatDateForNoteList(note.timestamp)}
+        </glamorous.Text>
+        {!this.shouldRenderUserLabelSection() && this.renderEditButton()}
+      </glamorous.View>
+    );
+  }
+
+  renderNote() {
+    const { theme, note } = this.props;
+
+    return (
+      <glamorous.Text
+        allowFontScaling={false}
+        style={theme.notesListItemTextStyle}
+        flexDirection="row"
+        marginTop={7}
+        marginLeft={12}
+        marginRight={12}
+        marginBottom={7}
+      >
+        <HashtagText
+          boldStyle={theme.notesListItemHashtagStyle}
+          normalStyle={theme.notesListItemTextStyle}
+          text={note.messageText}
+        />
+      </glamorous.Text>
+    );
+  }
+
   renderComments() {
+    const { currentUser } = this.props;
+
     if (this.state.expanded) {
       const { theme, commentsFetchData: { comments } } = this.props;
       return comments.map(comment => {
@@ -103,6 +210,7 @@ class NotesListItem extends PureComponent {
             <NotesListItemComment
               key={comment.id}
               theme={theme}
+              currentUserId={currentUser.userId}
               comment={comment}
             />
           );
@@ -123,42 +231,19 @@ class NotesListItem extends PureComponent {
   }
 
   render() {
-    const { theme, style, note } = this.props;
+    const { style } = this.props;
 
     return (
-      <glamorous.View style={style} backgroundColor="white">
-        <TouchableOpacity activeOpacity={1} onPress={this.onPress}>
-          <glamorous.View
-            flexDirection="row"
-            justifyContent="flex-start"
-            zIndex={1}
-          >
-            <glamorous.Text
-              allowFontScaling={false}
-              style={theme.notesListItemTimeStyle}
-              marginTop={7}
-              marginLeft={12}
-              marginRight={12}
-            >
-              {formatDate(note.timestamp)}
-            </glamorous.Text>
-            {this.renderEditButton()}
-          </glamorous.View>
-          <glamorous.Text
-            allowFontScaling={false}
-            style={theme.notesListItemTextStyle}
-            flexDirection="row"
-            marginTop={7}
-            marginLeft={12}
-            marginRight={12}
-            marginBottom={7}
-          >
-            <HashtagText
-              boldStyle={theme.notesListItemHashtagStyle}
-              normalStyle={theme.notesListItemTextStyle}
-              text={note.messageText}
-            />
-          </glamorous.Text>
+      <Animated.View
+        style={[
+          style,
+          { backgroundColor: "white", opacity: this.state.fadeAnimation },
+        ]}
+      >
+        <TouchableOpacity activeOpacity={1} onPress={this.onPressNote}>
+          {this.renderUserLabelSection()}
+          {this.renderDateSection()}
+          {this.renderNote()}
         </TouchableOpacity>
         {this.renderComments()}
         {this.renderNotesListItemAddComment()}
@@ -166,7 +251,7 @@ class NotesListItem extends PureComponent {
           colors={["#e4e4e5", "#ededee", "#f7f7f8"]}
           style={{ height: 10 }}
         />
-      </glamorous.View>
+      </Animated.View>
     );
   }
 }
@@ -174,6 +259,8 @@ class NotesListItem extends PureComponent {
 NotesListItem.propTypes = {
   theme: ThemePropType.isRequired,
   style: ViewPropTypes.style,
+  currentUser: UserPropType.isRequired,
+  currentProfile: ProfilePropType.isRequired,
   initiallyExpanded: PropTypes.bool,
   note: PropTypes.shape({
     id: PropTypes.string.isRequired,
@@ -186,6 +273,7 @@ NotesListItem.propTypes = {
     fetching: PropTypes.bool,
     comments: PropTypes.arrayOf(CommentPropType),
   }),
+  navigateEditNote: PropTypes.func.isRequired,
 };
 
 NotesListItem.defaultProps = {

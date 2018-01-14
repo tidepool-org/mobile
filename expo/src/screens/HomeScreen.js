@@ -5,12 +5,13 @@ import glamorous, { ThemeProvider } from "glamorous-native";
 
 import PrimaryTheme from "../themes/PrimaryTheme";
 import Colors from "../constants/Colors";
-import HeaderTitleContainer from "../containers/HeaderTitleContainer";
-import HeaderLeftContainer from "../containers/HeaderLeftContainer";
-import HeaderRight from "../components/HeaderRight";
+import HomeScreenHeaderTitleContainer from "../containers/HomeScreenHeaderTitleContainer";
+import HomeScreenHeaderLeftContainer from "../containers/HomeScreenHeaderLeftContainer";
+import HomeScreenHeaderRightContainer from "../containers/HomeScreenHeaderRightContainer";
 import NotesList from "../components/NotesList";
 import { ProfilePropType } from "../prop-types/profile";
 import { CommentPropType } from "../prop-types/comment";
+import { UserPropType } from "../prop-types/user";
 
 // TODO: notes - we need to handle empty notes list with the "add note" tip
 
@@ -20,9 +21,9 @@ class HomeScreen extends PureComponent {
 
     return {
       headerStyle,
-      headerTitle: <HeaderTitleContainer />,
-      headerLeft: <HeaderLeftContainer />,
-      headerRight: <HeaderRight />,
+      headerTitle: <HomeScreenHeaderTitleContainer />,
+      headerLeft: <HomeScreenHeaderLeftContainer />,
+      headerRight: <HomeScreenHeaderRightContainer />,
     };
   };
 
@@ -42,6 +43,7 @@ class HomeScreen extends PureComponent {
     // console.log("HomeScreen: render");
 
     const {
+      currentUser,
       commentsFetchDataByMessageId,
       commentsFetchAsync,
       currentProfile,
@@ -49,6 +51,7 @@ class HomeScreen extends PureComponent {
       fetching,
       notes,
       notesFetchAsync,
+      navigateEditNote,
     } = this.props;
 
     return (
@@ -56,13 +59,15 @@ class HomeScreen extends PureComponent {
         <glamorous.View flex={1}>
           <StatusBar barStyle="light-content" />
           <NotesList
+            currentUser={currentUser}
             notes={notes}
             fetching={fetching}
             errorMessage={errorMessage}
-            profile={currentProfile}
+            currentProfile={currentProfile}
             notesFetchAsync={notesFetchAsync}
             commentsFetchAsync={commentsFetchAsync}
             commentsFetchDataByMessageId={commentsFetchDataByMessageId}
+            navigateEditNote={navigateEditNote}
           />
         </glamorous.View>
       </ThemeProvider>
@@ -71,6 +76,7 @@ class HomeScreen extends PureComponent {
 }
 
 HomeScreen.propTypes = {
+  currentUser: UserPropType.isRequired,
   notes: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
@@ -90,6 +96,7 @@ HomeScreen.propTypes = {
       comments: PropTypes.arrayOf(CommentPropType),
     })
   ),
+  navigateEditNote: PropTypes.func.isRequired,
 };
 
 HomeScreen.defaultProps = {

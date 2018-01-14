@@ -3,21 +3,21 @@ import { connect } from "react-redux";
 import { ThemeProvider } from "glamorous-native";
 
 import PrimaryTheme from "../themes/PrimaryTheme";
-import HeaderTitle from "../components/HeaderTitle";
+import HomeScreenHeaderTitle from "../components/HomeScreenHeaderTitle";
 import { ProfilePropType } from "../prop-types/profile";
 
 const mapStateToProps = state => ({
   currentProfile: state.profile.currentProfile,
 });
 
-const HeaderTitleWithTheme = ({ currentProfile }) => (
+const HomeScreenHeaderTitleWithTheme = ({ currentProfile }) => (
   <ThemeProvider theme={PrimaryTheme}>
-    <HeaderTitle currentProfile={currentProfile} />
+    <HomeScreenHeaderTitle currentProfile={currentProfile} />
   </ThemeProvider>
 );
 
-HeaderTitleWithTheme.propTypes = {
+HomeScreenHeaderTitleWithTheme.propTypes = {
   currentProfile: ProfilePropType.isRequired,
 };
 
-export default connect(mapStateToProps)(HeaderTitleWithTheme);
+export default connect(mapStateToProps)(HomeScreenHeaderTitleWithTheme);

@@ -19,7 +19,7 @@ class SwitchProfileScreen extends PureComponent {
       headerTintColor: "white",
       headerTitle: (
         <Text
-          style={PrimaryTheme.navHeaderTitleStyle}
+          style={PrimaryTheme.screenHeaderTitleStyle}
           allowFontScaling={false}
           numberOfLines={1}
         >

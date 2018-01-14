@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { ViewPropTypes } from "react-native";
+import { Animated, ViewPropTypes } from "react-native";
 import glamorous, { withTheme } from "glamorous-native";
 
 import { ThemePropType } from "../prop-types/theme";
@@ -11,7 +11,16 @@ class ProfileListItem extends PureComponent {
     super(props);
     this.state = {
       isUnderlayVisible: false,
+      fadeAnimation: new Animated.Value(0),
     };
+  }
+
+  componentDidMount() {
+    Animated.timing(this.state.fadeAnimation, {
+      toValue: 1,
+      duration: 250,
+      useNativeDriver: true,
+    }).start();
   }
 
   onPress = () => {
@@ -88,28 +97,30 @@ class ProfileListItem extends PureComponent {
     const { style, theme } = this.props;
 
     return (
-      <glamorous.TouchableHighlight
-        onPress={this.onPress}
-        underlayColor={theme.underlayColor}
-        onShowUnderlay={() => {
-          this.setState({ isUnderlayVisible: true });
-        }}
-        onHideUnderlay={() => {
-          this.setState({ isUnderlayVisible: false });
-        }}
-      >
-        <glamorous.View
-          style={style}
-          padding={8}
-          paddingLeft={16}
-          flexDirection="row"
-          justifyContent="space-between"
+      <Animated.View style={[style, { opacity: this.state.fadeAnimation }]}>
+        <glamorous.TouchableHighlight
+          onPress={this.onPress}
+          underlayColor={theme.underlayColor}
+          onShowUnderlay={() => {
+            this.setState({ isUnderlayVisible: true });
+          }}
+          onHideUnderlay={() => {
+            this.setState({ isUnderlayVisible: false });
+          }}
         >
-          {this.renderCurrentUserProfileIcon()}
-          {this.renderName()}
-          {this.renderSelectedCheckMark()}
-        </glamorous.View>
-      </glamorous.TouchableHighlight>
+          <glamorous.View
+            style={style}
+            padding={8}
+            paddingLeft={16}
+            flexDirection="row"
+            justifyContent="space-between"
+          >
+            {this.renderCurrentUserProfileIcon()}
+            {this.renderName()}
+            {this.renderSelectedCheckMark()}
+          </glamorous.View>
+        </glamorous.TouchableHighlight>
+      </Animated.View>
     );
   }
 }

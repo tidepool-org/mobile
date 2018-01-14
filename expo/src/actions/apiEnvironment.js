@@ -42,7 +42,7 @@ export const apiEnvironmentSetAndSaveAsync = apiEnvironment => async dispatch =>
   dispatch(authSignOutAsync());
 
   try {
-    await AsyncStorage.setItem(API_ENVIRONMENT_KEY, apiEnvironment);
+    AsyncStorage.setItem(API_ENVIRONMENT_KEY, apiEnvironment);
     // console.log(
     //   `apiEnvironmentSetAndSaveAsync save succeeded, apiEnvironment: ${apiEnvironment}`
     // );

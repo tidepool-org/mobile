@@ -16,7 +16,7 @@ const MainStackNavigator = StackNavigator(
     },
   },
   {
-    headerMode: "screen",
+    headerMode: "float",
     headerBackTitle: "",
     headerTruncatedBackTitle: "",
   }
