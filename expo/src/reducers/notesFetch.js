@@ -85,7 +85,6 @@ function notesFetch(state = initialState, action) {
             errorMessage: "",
             fetching: false,
           };
-          console.log(`notes: ${sortedNotes}`);
         } else {
           // console.log(
           //   `Could not find the edited note in current notes, this is unexpected`
