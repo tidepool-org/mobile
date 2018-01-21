@@ -5,8 +5,10 @@ import { storiesOf } from "@storybook/react-native";
 import StoryContainerComponent from "../../__stories__/utils/StoryContainerComponent";
 import NotesListItemAddComment from "../../src/components/NotesListItemAddComment";
 
+const onPress = () => {};
+
 storiesOf("NotesListItemAddComment", module).add("default", () => (
   <StoryContainerComponent>
-    <NotesListItemAddComment />
+    <NotesListItemAddComment onPress={onPress} />
   </StoryContainerComponent>
 ));

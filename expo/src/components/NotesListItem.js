@@ -1,12 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import {
-  Alert,
-  Animated,
-  ViewPropTypes,
-  TouchableOpacity,
-  LayoutAnimation,
-} from "react-native";
+import { Alert, Animated, ViewPropTypes, LayoutAnimation } from "react-native";
 import glamorous, { withTheme } from "glamorous-native";
 
 import HashtagText from "./HashtagText";
@@ -18,6 +12,8 @@ import { ThemePropType } from "../prop-types/theme";
 import { CommentPropType } from "../prop-types/comment";
 import { UserPropType } from "../prop-types/user";
 import { ProfilePropType } from "../prop-types/profile";
+
+// FIXME: Initial tap after having done a pull-to-refresh is ignored?? We don't even get the onPress event! Tapping again then works (and continues to work) throughout the list. NB: Android doesn't seem to have this issue! Only iOS!
 
 // TODO: use NotePropType for note and add full schema for it
 // TODO: when resetting comments (via reload of messages, or sign out), we should cancel outstanding fetch requests
@@ -75,18 +71,29 @@ class NotesListItem extends PureComponent {
   }
 
   onPressNote = () => {
-    this.setState({ expanded: !this.state.expanded });
-    this.props.commentsFetchAsync({ messageId: this.props.note.id });
-    LayoutAnimation.configureNext({
-      ...LayoutAnimation.Presets.easeInEaseOut,
-      duration: 175,
-      useNativeDriver: true,
-    });
+    if (this.props.allowExpansionToggle) {
+      const wasExpanded = this.state.expanded;
+      this.setState({ expanded: !wasExpanded });
+      if (!wasExpanded && !this.props.commentsFetchData.fetched) {
+        this.props.commentsFetchAsync({ messageId: this.props.note.id });
+      }
+      LayoutAnimation.configureNext({
+        ...LayoutAnimation.Presets.easeInEaseOut,
+        duration: 175,
+        useNativeDriver: true,
+      });
+    }
   };
 
-  onPressEdit = () => {
+  onPressEditNote = () => {
     const { note } = this.props;
     this.props.navigateEditNote({ note });
+  };
+
+  onPressAddComment = () => {
+    // TODO: If comments are still loading and user taps Add Comment, then the existing comments won't be shown on the Add Comment screen, even once commentsFetch has completed. We should probably fix that so that the while commentsFetch is in fetching state, and completes, while Add Comment screen is current, that it loads those comments? Should probably also have a comments loading indicator both in notes list and in Add Comment screen?
+    const { note, commentsFetchData } = this.props;
+    this.props.navigateAddComment({ note, commentsFetchData });
   };
 
   shouldRenderUserLabelSection() {
@@ -97,14 +104,18 @@ class NotesListItem extends PureComponent {
   renderEditButton() {
     const { theme, note, currentUser } = this.props;
 
-    if (this.state.expanded && note.userId === currentUser.userId) {
+    if (
+      this.props.allowEditing &&
+      this.state.expanded &&
+      note.userId === currentUser.userId
+    ) {
       return (
         <glamorous.TouchableOpacity
           marginLeft="auto"
           marginRight={10}
           marginTop={7}
           hitSlop={{ left: 10, right: 10, top: 10, bottom: 10 }}
-          onPress={this.onPressEdit}
+          onPress={this.onPressEditNote}
         >
           <glamorous.Text
             style={theme.editButtonTextStyle}
@@ -199,7 +210,7 @@ class NotesListItem extends PureComponent {
   }
 
   renderComments() {
-    const { currentUser } = this.props;
+    const { currentUser, allowEditing } = this.props;
 
     if (this.state.expanded) {
       const { theme, commentsFetchData: { comments } } = this.props;
@@ -212,6 +223,7 @@ class NotesListItem extends PureComponent {
               theme={theme}
               currentUserId={currentUser.userId}
               comment={comment}
+              allowEditing={allowEditing}
             />
           );
         }
@@ -223,8 +235,23 @@ class NotesListItem extends PureComponent {
   }
 
   renderNotesListItemAddComment() {
-    if (this.state.expanded) {
-      return <NotesListItemAddComment />;
+    if (this.props.allowEditing && this.state.expanded) {
+      return <NotesListItemAddComment onPress={this.onPressAddComment} />;
+    }
+
+    return null;
+  }
+
+  renderSeparator() {
+    const { includeSeparator } = this.props;
+
+    if (includeSeparator) {
+      return (
+        <LinearGradient
+          colors={["#e4e4e5", "#ededee", "#f7f7f8"]}
+          style={{ height: 10 }}
+        />
+      );
     }
 
     return null;
@@ -240,17 +267,20 @@ class NotesListItem extends PureComponent {
           { backgroundColor: "white", opacity: this.state.fadeAnimation },
         ]}
       >
-        <TouchableOpacity activeOpacity={1} onPress={this.onPressNote}>
+        <glamorous.TouchableOpacity
+          activeOpacity={1}
+          onPress={() => {
+            console.log("pressed");
+            this.onPressNote();
+          }}
+        >
           {this.renderUserLabelSection()}
           {this.renderDateSection()}
           {this.renderNote()}
-        </TouchableOpacity>
+        </glamorous.TouchableOpacity>
         {this.renderComments()}
         {this.renderNotesListItemAddComment()}
-        <LinearGradient
-          colors={["#e4e4e5", "#ededee", "#f7f7f8"]}
-          style={{ height: 10 }}
-        />
+        {this.renderSeparator()}
       </Animated.View>
     );
   }
@@ -259,9 +289,12 @@ class NotesListItem extends PureComponent {
 NotesListItem.propTypes = {
   theme: ThemePropType.isRequired,
   style: ViewPropTypes.style,
+  allowEditing: PropTypes.bool,
+  initiallyExpanded: PropTypes.bool,
+  allowExpansionToggle: PropTypes.bool,
+  includeSeparator: PropTypes.bool,
   currentUser: UserPropType.isRequired,
   currentProfile: ProfilePropType.isRequired,
-  initiallyExpanded: PropTypes.bool,
   note: PropTypes.shape({
     id: PropTypes.string.isRequired,
     timestamp: PropTypes.instanceOf(Date),
@@ -269,20 +302,26 @@ NotesListItem.propTypes = {
   }).isRequired,
   commentsFetchAsync: PropTypes.func.isRequired,
   commentsFetchData: PropTypes.shape({
+    comments: PropTypes.arrayOf(CommentPropType),
     errorMessage: PropTypes.string,
     fetching: PropTypes.bool,
-    comments: PropTypes.arrayOf(CommentPropType),
+    fetched: PropTypes.bool,
   }),
   navigateEditNote: PropTypes.func.isRequired,
+  navigateAddComment: PropTypes.func.isRequired,
 };
 
 NotesListItem.defaultProps = {
   style: null,
+  allowEditing: true,
   initiallyExpanded: false,
+  allowExpansionToggle: true,
+  includeSeparator: true,
   commentsFetchData: {
+    comments: [],
     errorMessage: "",
     fetching: false,
-    comments: [],
+    fetched: false,
   },
 };
 

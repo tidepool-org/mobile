@@ -209,6 +209,42 @@ class TidepoolApi {
     return { errorMessage };
   }
 
+  async addCommentAsync({
+    currentUser,
+    currentProfile,
+    note,
+    messageText,
+    timestamp,
+  }) {
+    const { errorMessage, comment } = await this.addComment({
+      currentUser,
+      currentProfile,
+      note,
+      messageText,
+      timestamp,
+    })
+      .then(response => ({
+        comment: response.comment,
+      }))
+      .catch(error => ({
+        errorMessage: error.message,
+      }));
+
+    return { errorMessage, comment };
+  }
+
+  async updateCommentAsync({ comment }) {
+    const { errorMessage } = await this.updateComment({
+      comment,
+    })
+      .then(() => ({}))
+      .catch(error => ({
+        errorMessage: error.message,
+      }));
+
+    return { errorMessage };
+  }
+
   //
   // Lower-level promise-based methods
   //
@@ -419,6 +455,66 @@ class TidepoolApi {
       message: {
         timestamp: note.timestamp,
         messagetext: note.messageText,
+      },
+    };
+
+    return new Promise((resolve, reject) => {
+      axios({ method, url, baseURL, headers, data })
+        .then(() => {
+          resolve({});
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+  }
+
+  addComment({ currentUser, currentProfile, note, messageText, timestamp }) {
+    const method = "post";
+    const groupId = currentProfile.userId;
+    const url = `/message/reply/${note.id}`;
+    const baseURL = this.baseUrl;
+    const headers = { "x-tidepool-session-token": this.sessionToken };
+    const comment = {
+      groupId,
+      parentMessage: note.id,
+      userId: this.userId,
+      timestamp,
+      messageText,
+      userFullName: currentUser.fullName,
+    };
+
+    return new Promise((resolve, reject) => {
+      const data = {
+        message: {
+          groupid: comment.groupId,
+          parentmessage: comment.parentMessage,
+          guid: uuidv4(),
+          userid: comment.userId,
+          timestamp: comment.timestamp.toISOString(),
+          messagetext: comment.messageText,
+        },
+      };
+      axios({ method, url, baseURL, headers, data })
+        .then(response => {
+          comment.id = response.data.id;
+          resolve({ comment });
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+  }
+
+  updateComment({ comment }) {
+    const method = "put";
+    const url = `/message/edit/${comment.id}`;
+    const baseURL = this.baseUrl;
+    const headers = { "x-tidepool-session-token": this.sessionToken };
+    const data = {
+      message: {
+        timestamp: comment.timestamp,
+        messagetext: comment.messageText,
       },
     };
 

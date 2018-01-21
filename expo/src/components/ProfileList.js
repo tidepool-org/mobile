@@ -20,7 +20,7 @@ class ProfileList extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.state = { selected: new Map(), refreshing: false };
+    this.state = { refreshing: false };
   }
 
   componentDidMount() {
@@ -62,12 +62,7 @@ class ProfileList extends PureComponent {
   );
 
   renderItem = ({ item }) => (
-    <ProfileListItem
-      key={item.userId}
-      item={item}
-      onPress={this.onPress}
-      selected={!!this.state.selected.get(item.userId)}
-    />
+    <ProfileListItem key={item.userId} item={item} onPress={this.onPress} />
   );
 
   render() {

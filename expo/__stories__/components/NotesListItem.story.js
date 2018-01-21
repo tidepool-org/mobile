@@ -56,9 +56,12 @@ const commentsFetchData = {
     },
     { ...note, userFullName: "Jill Jellyfish" },
   ],
+  fetching: false,
+  fetched: true,
 };
 const commentsFetchAsync = () => {};
 const navigateEditNote = () => {};
+const navigateAddComment = () => {};
 const props = {
   currentUser,
   currentProfile,
@@ -66,11 +69,14 @@ const props = {
   commentsFetchAsync,
   commentsFetchData,
   navigateEditNote,
+  navigateAddComment,
 };
 
 storiesOf("NotesListItem", module).add("default", () => (
   <StoryContainerComponent>
-    <NotesListItem {...props} commentsFetchData={{ comments: [] }} />
+    <glamorous.ScrollView>
+      <NotesListItem {...props} />
+    </glamorous.ScrollView>
   </StoryContainerComponent>
 ));
 
@@ -78,6 +84,19 @@ storiesOf("NotesListItem", module).add("initially expanded", () => (
   <StoryContainerComponent>
     <glamorous.ScrollView>
       <NotesListItem {...props} initiallyExpanded />
+    </glamorous.ScrollView>
+  </StoryContainerComponent>
+));
+
+storiesOf("NotesListItem", module).add("for add/edit comment screen", () => (
+  <StoryContainerComponent>
+    <glamorous.ScrollView>
+      <NotesListItem
+        {...props}
+        initiallyExpanded
+        allowExpansionToggle={false}
+        allowEditing={false}
+      />
     </glamorous.ScrollView>
   </StoryContainerComponent>
 ));

@@ -10,9 +10,9 @@ import { CommentPropType } from "../prop-types/comment";
 
 class NotesListItemComment extends PureComponent {
   renderEdit() {
-    const { theme, currentUserId, comment } = this.props;
+    const { theme, currentUserId, comment, allowEditing } = this.props;
 
-    if (comment.userId === currentUserId) {
+    if (allowEditing && comment.userId === currentUserId) {
       return (
         <glamorous.TouchableOpacity
           marginLeft="auto"
@@ -91,10 +91,12 @@ NotesListItemComment.propTypes = {
   style: ViewPropTypes.style,
   currentUserId: PropTypes.string.isRequired,
   comment: CommentPropType.isRequired,
+  allowEditing: PropTypes.bool,
 };
 
 NotesListItemComment.defaultProps = {
   style: null,
+  allowEditing: true,
 };
 
 export default withTheme(NotesListItemComment);

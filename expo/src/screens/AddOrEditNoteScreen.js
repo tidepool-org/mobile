@@ -40,9 +40,9 @@ import { UserPropType } from "../prop-types/user";
 
 // TODO: polish - animation - The animation between "Edit" and "Done" for iOS doesn't look great (compare with iOS Tidepool Mobile spp)
 // TODO: polish - android - Style the date and time pickers with better theme colors?
-// TODO: polish - ios - (also android?) - when presenting modal, there's sometimes kind of a flash (white?)
+// TODO: polish - ios - (also android?) - when presenting modal, there's sometimes kind of a flash (white?) .. this seems to be the DrawerNavigator rendering briefly during the presentation of the modal?
 
-// FIXME: Track this issue affecting scrolling of TextInput on Android: https://github.com/facebook/react-native/issues/12799
+// FIXME: Android doesn't auto-scroll as text for the TextInput goes beyond the fixed height. This is apparently fixed in 0.52, which we're not on yet. See: https://github.com/facebook/react-native/issues/12799. Confirmed this is fixed in 0.52. The ejected app will move to 0.52, but expo is still behind. Once that catches up we can remove this FIXME since it will be fixed in both ejected and expo.
 // FIXME: Currently we're handling keyboard hide/show events to ajust size of the TextInput. Ideally should be able to simplify with KeyboardAvoidingView, but, see: https://github.com/facebook/react-native/issues/16826
 // FIXME: We're importing Header directly and rendering in this modal, rather than getting that for free as part of navigator. This is needed due to bugs in React Navigation related to double headers with nested navigators. We have to set headerMode to 'none' for the modal stack navigator (like the one presenting this screen), which prevents the double header on the parent navigator, but, also removes it from the nested one.
 
@@ -65,10 +65,10 @@ class AddOrEditNoteScreen extends PureComponent {
     this.state = {
       isDirty: false,
       isEditingTimestamp: false,
-      isKeyboardVisible: false,
       timestamp,
       messageText,
-      textInputY: null,
+      isKeyboardVisible: false,
+      containerViewY: null,
       keyboardY: null,
     };
   }
@@ -84,16 +84,11 @@ class AddOrEditNoteScreen extends PureComponent {
       "keyboardDidHide",
       this.keyboardDidHide
     );
-    this.keyboardWillChangeFrame = Keyboard.addListener(
-      "keyboardWillChangeFrame",
-      this.keyboardWillChangeFrame
-    );
 
-    // TODO: This duration is meant to match the duration of the animation when presenting the modal. We should probably have that transition spec as a property of the screen and have the modal navigator use the specified transition spec for the screen, so this would be guaranteed to be in sync
     if (this.textInput) {
       this.focusTimer = setTimeout(() => {
         this.textInput.focus();
-      }, 250);
+      }, 450);
     }
   }
 
@@ -102,7 +97,6 @@ class AddOrEditNoteScreen extends PureComponent {
 
     this.keyboardDidShowListener.remove();
     this.keyboardDidHideListener.remove();
-    this.keyboardWillChangeFrame.remove();
 
     if (this.focusTimer) {
       clearTimeout(this.focusTimer);
@@ -148,11 +142,11 @@ class AddOrEditNoteScreen extends PureComponent {
     }
   };
 
-  onTextInputLayout = event => {
+  onContainerViewLayout = event => {
     const { y } = event.nativeEvent.layout;
     if (!this.state.isKeyboardVisible) {
       this.setState({
-        textInputY: y,
+        containerViewY: y,
       });
     }
   };
@@ -302,21 +296,16 @@ class AddOrEditNoteScreen extends PureComponent {
     return !!this.props.note;
   }
 
-  keyboardDidShow = () => {
+  keyboardDidShow = event => {
     this.setState({
       isKeyboardVisible: true,
+      keyboardY: event.endCoordinates.screenY,
     });
   };
 
   keyboardDidHide = () => {
     this.setState({
       isKeyboardVisible: false,
-    });
-  };
-
-  keyboardWillChangeFrame = event => {
-    this.setState({
-      keyboardY: event.endCoordinates.screenY,
     });
   };
 
@@ -351,6 +340,7 @@ class AddOrEditNoteScreen extends PureComponent {
         hour: getHours(this.state.timestamp),
         minute: getMinutes(this.state.timestamp),
         is24Hour: false, // TODO: android - Should use something locale specific, respecting system settings?
+        mode: "default",
       });
       if (action !== TimePickerAndroid.dismissedAction) {
         const timestamp = setMinutes(
@@ -549,11 +539,6 @@ class AddOrEditNoteScreen extends PureComponent {
           this.textInput = textInput;
         }}
         flex={flex}
-        height={
-          this.state.isKeyboardVisible
-            ? this.state.keyboardY - this.state.textInputY
-            : null
-        }
         style={this.theme.notesListItemTextStyle}
         paddingTop={7}
         paddingLeft={16}
@@ -569,9 +554,8 @@ class AddOrEditNoteScreen extends PureComponent {
         keyboardAppearance="dark"
         keyboardType="default"
         returnKeyType="default"
-        onLayout={this.onTextInputLayout}
         onChangeText={this.onChangeText}
-        onContentSizeChange={this.onContentSizeChange}
+        onContentSizeChange={undefined}
         placeholder={"What\u2019s going on?"}
         onFocus={() => {
           this.stopEditingTimestamp();
@@ -631,6 +615,10 @@ class AddOrEditNoteScreen extends PureComponent {
   }
 
   render() {
+    const containerViewHeight = this.state.isKeyboardVisible
+      ? this.state.keyboardY - this.state.containerViewY
+      : null;
+
     return (
       <ThemeProvider theme={this.theme}>
         <glamorous.View
@@ -641,7 +629,13 @@ class AddOrEditNoteScreen extends PureComponent {
           {this.renderHeader()}
           {Platform.OS === "ios" ? this.renderDateSectionIOS() : null}
           {Platform.OS === "android" ? this.renderDateSectionAndroid() : null}
-          {this.renderNote()}
+          <glamorous.View
+            flex={this.state.isKeyboardVisible ? null : 1}
+            onLayout={this.onContainerViewLayout}
+            height={containerViewHeight}
+          >
+            {this.renderNote()}
+          </glamorous.View>
           {Platform.OS === "ios" ? this.renderDummyTextInputIOS() : null}
         </glamorous.View>
       </ThemeProvider>

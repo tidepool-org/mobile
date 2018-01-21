@@ -1,4 +1,5 @@
 import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
 import { ViewPropTypes } from "react-native";
 import glamorous, { withTheme } from "glamorous-native";
 
@@ -6,7 +7,7 @@ import { ThemePropType } from "../prop-types/theme";
 
 class NotesListItemAddComment extends PureComponent {
   onPress = () => {
-    // TODO: navigate - add comment
+    this.props.onPress();
   };
 
   render() {
@@ -41,6 +42,7 @@ class NotesListItemAddComment extends PureComponent {
 NotesListItemAddComment.propTypes = {
   theme: ThemePropType.isRequired,
   style: ViewPropTypes.style,
+  onPress: PropTypes.func.isRequired,
 };
 
 NotesListItemAddComment.defaultProps = {
