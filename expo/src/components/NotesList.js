@@ -25,7 +25,6 @@ class NotesList extends PureComponent {
     super(props);
 
     this.state = {
-      selected: new Map(),
       refreshing: false,
     };
   }
@@ -46,14 +45,6 @@ class NotesList extends PureComponent {
     }
   }
 
-  onPressItem = id => {
-    this.setState(state => {
-      const selected = new Map(state.selected);
-      selected.set(id, !selected.get(id));
-      return { selected };
-    });
-  };
-
   onRefresh = () => {
     const { notesFetchAsync, currentProfile } = this.props;
 
@@ -64,16 +55,15 @@ class NotesList extends PureComponent {
 
   keyExtractor = item => item.id;
 
-  renderItem = ({ item }) => (
+  renderNote = ({ item }) => (
     <NotesListItem
-      onPressItem={this.onPressItem}
-      selected={!!this.state.selected.get(item.id)}
       note={item}
       currentUser={this.props.currentUser}
       currentProfile={this.props.currentProfile}
       commentsFetchData={this.props.commentsFetchDataByMessageId[item.id]}
       commentsFetchAsync={this.props.commentsFetchAsync}
       navigateEditNote={this.props.navigateEditNote}
+      navigateAddComment={this.props.navigateAddComment}
     />
   );
 
@@ -85,7 +75,7 @@ class NotesList extends PureComponent {
         data={notes}
         extraData={this.state}
         keyExtractor={this.keyExtractor}
-        renderItem={this.renderItem}
+        renderItem={this.renderNote}
         backgroundColor={Colors.veryLightGrey} // TODO: use theme rather than color directly
         refreshControl={
           <RefreshControl
@@ -114,12 +104,14 @@ NotesList.propTypes = {
   commentsFetchAsync: PropTypes.func.isRequired,
   commentsFetchDataByMessageId: PropTypes.objectOf(
     PropTypes.shape({
+      comments: PropTypes.arrayOf(CommentPropType),
       errorMessage: PropTypes.string,
       fetching: PropTypes.bool,
-      comments: PropTypes.arrayOf(CommentPropType),
+      fetched: PropTypes.bool,
     })
   ),
   navigateEditNote: PropTypes.func.isRequired,
+  navigateAddComment: PropTypes.func.isRequired,
 };
 
 NotesList.defaultProps = {

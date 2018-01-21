@@ -11,6 +11,7 @@ faker.seed(123);
 const notesFetchAsync = () => {};
 const commentsFetchAsync = () => {};
 const navigateEditNote = () => {};
+const navigateAddComment = () => {};
 const notes = [];
 for (let i = 0; i < 100; i += 1) {
   if (i < 2) {
@@ -42,6 +43,7 @@ const props = {
   notesFetchAsync,
   commentsFetchAsync,
   navigateEditNote,
+  navigateAddComment,
 };
 
 storiesOf("NotesList", module).add("default", () => (

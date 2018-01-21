@@ -1,27 +1,29 @@
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { navigateGoBack } from "../actions/navigation";
-import { noteUpdateAsync } from "../actions/noteUpdate";
-import { noteAddAsync } from "../actions/noteAdd";
+import { commentUpdateAsync } from "../actions/commentUpdate";
+import { commentAddAsync } from "../actions/commentAdd";
 
-import AddOrEditNoteScreen from "../screens/AddOrEditNoteScreen";
+import AddOrEditCommentScreen from "../screens/AddOrEditCommentScreen";
 
 const mapStateToProps = (state, ownProps) => ({
   currentUser: state.auth,
   currentProfile: state.profile.currentProfile,
   note: ownProps.navigation.state.params.note,
+  comment: ownProps.navigation.state.params.comment,
+  commentsFetchData: ownProps.navigation.state.params.commentsFetchData,
 });
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       navigateGoBack,
-      noteUpdateAsync,
-      noteAddAsync,
+      commentUpdateAsync,
+      commentAddAsync,
     },
     dispatch
   );
 
 export default connect(mapStateToProps, mapDispatchToProps)(
-  AddOrEditNoteScreen
+  AddOrEditCommentScreen
 );

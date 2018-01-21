@@ -5,6 +5,7 @@
 // https://github.com/elderfo/react-native-storybook-loader.git
 
 function loadStories() {
+  require('../__stories__/components/AddOrEditCommentScreen.story');
   require('../__stories__/components/AddOrEditNoteScreen.story');
   require('../__stories__/components/Button.story');
   require('../__stories__/components/DebugSettings.story');
@@ -25,6 +26,7 @@ function loadStories() {
 }
 
 const stories = [
+  '../__stories__/components/AddOrEditCommentScreen.story',
   '../__stories__/components/AddOrEditNoteScreen.story',
   '../__stories__/components/Button.story',
   '../__stories__/components/DebugSettings.story',

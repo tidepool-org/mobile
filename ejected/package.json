@@ -34,7 +34,8 @@
     "test": "node node_modules/jest/bin/jest.js --watch",
     "flow": "flow",
     "format": "prettier-eslint \"src/**/*.js\"",
-    "pre": "rm -fR src && cp -fR ../expo/src/ src && rm -fR assets && cp -fR ../expo/assets/ assets && cp react-native-specific-src/utils/runtimeEnvironment.js src/utils/runtimeEnvironment.js && cp react-native-specific-src/components/LinearGradient.js src/components/LinearGradient.js && cp react-native-specific-src/actions/appVersion.js src/actions/appVersion.js && cp react-native-specific-src/reducers/appVersion.js src/reducers/appVersion.js"
+    "pre":
+      "rm -fR src && cp -fR ../expo/src/ src && rm -fR assets && cp -fR ../expo/assets/ assets && cp react-native-specific-src/utils/runtimeEnvironment.js src/utils/runtimeEnvironment.js && cp react-native-specific-src/components/LinearGradient.js src/components/LinearGradient.js && cp react-native-specific-src/actions/appVersion.js src/actions/appVersion.js && cp react-native-specific-src/reducers/appVersion.js src/reducers/appVersion.js"
   },
   "jest": {
     "preset": "jest-expo",
@@ -44,9 +45,7 @@
   },
   "config": {
     "react-native-storybook-loader": {
-      "searchDir": [
-        "./src"
-      ],
+      "searchDir": ["./src"],
       "pattern": "**/__stories__/*.js",
       "outputFile": "./storybook/storyLoader.js"
     }
@@ -56,8 +55,8 @@
     "date-fns": "1.29.0",
     "glamorous-native": "1.2.1",
     "prop-types": "15.6.0",
-    "react": "16.0.0",
-    "react-native": "0.50.3",
+    "react": "16.2.0",
+    "react-native": "0.52",
     "react-native-iphone-x-helper": "1.0.1",
     "react-native-linear-gradient": "2.4.0",
     "react-native-version-number": "0.3.0",
@@ -69,8 +68,6 @@
     "uuid": "^3.1.0"
   },
   "rnpm": {
-    "assets": [
-      "./assets/fonts"
-    ]
+    "assets": ["./assets/fonts"]
   }
 }

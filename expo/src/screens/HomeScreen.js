@@ -52,6 +52,7 @@ class HomeScreen extends PureComponent {
       notes,
       notesFetchAsync,
       navigateEditNote,
+      navigateAddComment,
     } = this.props;
 
     return (
@@ -68,6 +69,7 @@ class HomeScreen extends PureComponent {
             commentsFetchAsync={commentsFetchAsync}
             commentsFetchDataByMessageId={commentsFetchDataByMessageId}
             navigateEditNote={navigateEditNote}
+            navigateAddComment={navigateAddComment}
           />
         </glamorous.View>
       </ThemeProvider>
@@ -91,12 +93,14 @@ HomeScreen.propTypes = {
   commentsFetchAsync: PropTypes.func.isRequired,
   commentsFetchDataByMessageId: PropTypes.objectOf(
     PropTypes.shape({
+      comments: PropTypes.arrayOf(CommentPropType),
       errorMessage: PropTypes.string,
       fetching: PropTypes.bool,
-      comments: PropTypes.arrayOf(CommentPropType),
+      fetched: PropTypes.bool,
     })
   ),
   navigateEditNote: PropTypes.func.isRequired,
+  navigateAddComment: PropTypes.func.isRequired,
 };
 
 HomeScreen.defaultProps = {
