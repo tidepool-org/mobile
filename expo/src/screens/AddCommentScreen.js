@@ -10,8 +10,6 @@ import {
 } from "react-native";
 import glamorous, { ThemeProvider } from "glamorous-native";
 import { Header } from "react-navigation";
-import setSeconds from "date-fns/set_seconds";
-import setMilliseconds from "date-fns/set_milliseconds";
 
 import PrimaryTheme from "../themes/PrimaryTheme";
 import Colors from "../constants/Colors";
@@ -25,14 +23,11 @@ import { CommentPropType } from "../prop-types/comment";
 import { ProfilePropType } from "../prop-types/profile";
 import { UserPropType } from "../prop-types/user";
 
-export const ADD_OR_EDIT_SCREEN_ADD_COMMENT_TITLE = "Add Comment";
-export const ADD_OR_EDIT_SCREEN_EDIT_COMMENT_TITLE = "Edit Comment";
-
 // TODO: navigation - should we use a non-modal stack navigator for comments?
 
 // FIXME: Android doesn't auto-scroll as text for the TextInput goes beyond the fixed height. This is apparently fixed in 0.52, which we're not on yet. See: https://github.com/facebook/react-native/issues/12799. Confirmed this is fixed in 0.52. The ejected app will move to 0.52, but expo is still behind. Once that catches up we can remove this FIXME since it will be fixed in both ejected and expo.
 
-class AddOrEditCommentScreen extends PureComponent {
+class AddCommentScreen extends PureComponent {
   static navigationOptions = () => ({
     gesturesEnabled: false, // Disable the pull down gesture for dismissing the modal screen
   });
@@ -46,6 +41,10 @@ class AddOrEditCommentScreen extends PureComponent {
         backgroundColor="#CED0CE"
       />
     );
+  }
+
+  static getDirtyState(newState) {
+    return !!newState.messageText;
   }
 
   constructor(props) {
@@ -113,24 +112,20 @@ class AddOrEditCommentScreen extends PureComponent {
   onChangeText = messageText => {
     this.setState(prevState => ({
       messageText,
-      isDirty: this.getDirtyState({ ...prevState, messageText }),
+      isDirty: AddCommentScreen.getDirtyState({ ...prevState, messageText }),
     }));
   };
 
   onDateChangeIOS = timestamp => {
     this.setState(prevState => ({
       timestamp,
-      isDirty: this.getDirtyState({ ...prevState, timestamp }),
+      isDirty: AddCommentScreen.getDirtyState({ ...prevState, timestamp }),
     }));
   };
 
   onCloseAction = () => {
     if (this.state.isDirty) {
-      if (this.isAddCommentMode()) {
-        this.showDiscardCommentAlert();
-      } else {
-        this.showSaveChangesAlert();
-      }
+      this.showDiscardCommentAlert();
     } else {
       this.discardAndGoBack();
     }
@@ -160,66 +155,21 @@ class AddOrEditCommentScreen extends PureComponent {
     this.scrollView.scrollToEnd({ animated: false });
   };
 
-  getDirtyState(newState) {
-    let isDirty;
-
-    if (this.isAddCommentMode()) {
-      // For Add Comment we just care whether there is some text entered
-      isDirty = !!newState.messageText;
-    } else {
-      const { comment } = this.props;
-
-      // Get isDirty state for time
-      const newCommentTime = setMilliseconds(
-        setSeconds(newState.timestamp, 0),
-        0
-      ).getTime();
-      const commentTime = comment
-        ? setMilliseconds(setSeconds(comment.timestamp, 0), 0).getTime()
-        : 0;
-      isDirty = newCommentTime !== commentTime;
-
-      // Get isDirty state for messageText
-      if (!isDirty) {
-        if (comment) {
-          isDirty = newState.messageText !== comment.messageText;
-        } else {
-          isDirty = !!newState.messageText;
-        }
-      }
-    }
-
-    return isDirty;
-  }
-
   discardAndGoBack = () => {
     this.props.navigateGoBack();
     this.textInput.blur();
   };
 
   saveAndGoBack = () => {
-    const { currentUser, currentProfile, note, comment } = this.props;
+    const { currentUser, currentProfile, note } = this.props;
 
-    if (this.isEditCommentMode()) {
-      const editedComment = {
-        ...comment,
-        messageText: this.state.messageText,
-        timestamp: this.state.timestamp,
-      };
-      this.props.commentUpdateAsync({
-        currentUser,
-        currentProfile,
-        comment: editedComment,
-      });
-    } else {
-      this.props.commentAddAsync({
-        currentUser,
-        currentProfile,
-        note,
-        messageText: this.state.messageText,
-        timestamp: this.state.timestamp,
-      });
-    }
+    this.props.commentAddAsync({
+      currentUser,
+      currentProfile,
+      note,
+      messageText: this.state.messageText,
+      timestamp: this.state.timestamp,
+    });
     this.props.navigateGoBack();
     this.textInput.blur();
   };
@@ -257,14 +207,6 @@ class AddOrEditCommentScreen extends PureComponent {
     );
   };
 
-  isAddCommentMode() {
-    return !this.props.comment;
-  }
-
-  isEditCommentMode() {
-    return !!this.props.comment;
-  }
-
   keyboardDidShow = event => {
     this.setState({
       isKeyboardVisible: true,
@@ -279,9 +221,7 @@ class AddOrEditCommentScreen extends PureComponent {
   };
 
   renderHeader() {
-    const title = this.isEditCommentMode()
-      ? ADD_OR_EDIT_SCREEN_EDIT_COMMENT_TITLE
-      : ADD_OR_EDIT_SCREEN_ADD_COMMENT_TITLE;
+    const title = "Add Comment";
 
     return (
       <Header
@@ -334,6 +274,7 @@ class AddOrEditCommentScreen extends PureComponent {
         commentsFetchAsync={() => {}}
         navigateEditNote={() => {}}
         navigateAddComment={() => {}}
+        navigateEditComment={() => {}}
         initiallyExpanded
         allowExpansionToggle={false}
         allowEditing={false}
@@ -418,7 +359,7 @@ class AddOrEditCommentScreen extends PureComponent {
                 {this.renderNote()}
               </glamorous.ScrollView>
             </glamorous.View>
-            {AddOrEditCommentScreen.renderSeparator()}
+            {AddCommentScreen.renderSeparator()}
             <glamorous.View flex={1}>{this.renderComment()}</glamorous.View>
           </glamorous.View>
         </glamorous.View>
@@ -427,13 +368,12 @@ class AddOrEditCommentScreen extends PureComponent {
   }
 }
 
-AddOrEditCommentScreen.propTypes = {
+AddCommentScreen.propTypes = {
   currentUser: UserPropType.isRequired,
   currentProfile: ProfilePropType.isRequired,
   note: NotePropType.isRequired,
   comment: CommentPropType,
   navigateGoBack: PropTypes.func.isRequired,
-  commentUpdateAsync: PropTypes.func.isRequired,
   commentAddAsync: PropTypes.func.isRequired,
   commentsFetchData: PropTypes.shape({
     comments: PropTypes.arrayOf(CommentPropType),
@@ -443,7 +383,7 @@ AddOrEditCommentScreen.propTypes = {
   }),
 };
 
-AddOrEditCommentScreen.defaultProps = {
+AddCommentScreen.defaultProps = {
   commentsFetchData: {
     comments: [],
     errorMessage: "",
@@ -453,4 +393,4 @@ AddOrEditCommentScreen.defaultProps = {
   comment: null,
 };
 
-export default AddOrEditCommentScreen;
+export default AddCommentScreen;

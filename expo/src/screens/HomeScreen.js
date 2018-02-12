@@ -53,6 +53,7 @@ class HomeScreen extends PureComponent {
       notesFetchAsync,
       navigateEditNote,
       navigateAddComment,
+      navigateEditComment,
     } = this.props;
 
     return (
@@ -70,6 +71,7 @@ class HomeScreen extends PureComponent {
             commentsFetchDataByMessageId={commentsFetchDataByMessageId}
             navigateEditNote={navigateEditNote}
             navigateAddComment={navigateAddComment}
+            navigateEditComment={navigateEditComment}
           />
         </glamorous.View>
       </ThemeProvider>
@@ -101,6 +103,7 @@ HomeScreen.propTypes = {
   ),
   navigateEditNote: PropTypes.func.isRequired,
   navigateAddComment: PropTypes.func.isRequired,
+  navigateEditComment: PropTypes.func.isRequired,
 };
 
 HomeScreen.defaultProps = {

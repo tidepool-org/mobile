@@ -4,7 +4,11 @@ import { connect } from "react-redux";
 import HomeScreen from "../screens/HomeScreen";
 import { notesFetchAsync } from "../actions/notesFetch";
 import { commentsFetchAsync } from "../actions/commentsFetch";
-import { navigateEditNote, navigateAddComment } from "../actions/navigation";
+import {
+  navigateEditNote,
+  navigateAddComment,
+  navigateEditComment,
+} from "../actions/navigation";
 
 const mapStateToProps = state => ({
   currentUser: state.auth,
@@ -22,6 +26,7 @@ const mapDispatchToProps = dispatch =>
       commentsFetchAsync,
       navigateEditNote,
       navigateAddComment,
+      navigateEditComment,
     },
     dispatch
   );

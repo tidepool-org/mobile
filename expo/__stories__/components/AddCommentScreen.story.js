@@ -4,7 +4,7 @@ import { storiesOf } from "@storybook/react-native";
 import faker from "faker";
 
 import StoryContainerScreen from "../../__stories__/utils/StoryContainerScreen";
-import AddOrEditCommentScreen from "../../src/screens/AddOrEditCommentScreen";
+import AddCommentScreen from "../../src/screens/AddCommentScreen";
 
 faker.seed(123);
 
@@ -66,14 +66,12 @@ const commentsFetchData = {
   fetched: true,
 };
 const navigateGoBack = () => {};
-const commentUpdateAsync = () => {};
 const commentAddAsync = () => {};
 
-storiesOf("AddOrEditCommentScreen", module).add("Add", () => (
+storiesOf("AddCommentScreen", module).add("default", () => (
   <StoryContainerScreen>
-    <AddOrEditCommentScreen
+    <AddCommentScreen
       navigateGoBack={navigateGoBack}
-      commentUpdateAsync={commentUpdateAsync}
       commentAddAsync={commentAddAsync}
       currentUser={currentProfile}
       currentProfile={currentProfile}
@@ -82,17 +80,3 @@ storiesOf("AddOrEditCommentScreen", module).add("Add", () => (
     />
   </StoryContainerScreen>
 ));
-
-// storiesOf("AddOrEditCommentScreen", module).add("Edit", () => (
-//   <StoryContainerScreen>
-//     <AddOrEditCommentScreen
-//       navigateGoBack={navigateGoBack}
-//       commentUpdateAsync={commentUpdateAsync}
-//       commentAddAsync={commentAddAsync}
-//       currentUser={currentProfile}
-//       currentProfile={currentProfile}
-//       note={note}
-//       comment={comment}
-//     />
-//   </StoryContainerScreen>
-// ));

@@ -62,6 +62,7 @@ const commentsFetchData = {
 const commentsFetchAsync = () => {};
 const navigateEditNote = () => {};
 const navigateAddComment = () => {};
+const navigateEditComment = () => {};
 const props = {
   currentUser,
   currentProfile,
@@ -70,6 +71,7 @@ const props = {
   commentsFetchData,
   navigateEditNote,
   navigateAddComment,
+  navigateEditComment,
 };
 
 storiesOf("NotesListItem", module).add("default", () => (

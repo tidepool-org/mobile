@@ -9,6 +9,8 @@ import { ProfilePropType } from "../prop-types/profile";
 import { CommentPropType } from "../prop-types/comment";
 import { UserPropType } from "../prop-types/user";
 
+// TODO: notes list - the refresh pattern from Tidepool Mobile seems to be that we always refresh the comments when toggling the note!
+
 // TODO: use NotePropType for notes and add full schema for it
 
 class NotesList extends PureComponent {
@@ -64,6 +66,7 @@ class NotesList extends PureComponent {
       commentsFetchAsync={this.props.commentsFetchAsync}
       navigateEditNote={this.props.navigateEditNote}
       navigateAddComment={this.props.navigateAddComment}
+      navigateEditComment={this.props.navigateEditComment}
     />
   );
 
@@ -112,6 +115,7 @@ NotesList.propTypes = {
   ),
   navigateEditNote: PropTypes.func.isRequired,
   navigateAddComment: PropTypes.func.isRequired,
+  navigateEditComment: PropTypes.func.isRequired,
 };
 
 NotesList.defaultProps = {
