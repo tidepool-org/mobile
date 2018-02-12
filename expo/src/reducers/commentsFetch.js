@@ -3,6 +3,7 @@ import {
   COMMENTS_FETCH_DID_SUCCEED,
   COMMENTS_FETCH_DID_FAIL,
   COMMENTS_FETCH_ADD_COMMENT,
+  COMMENTS_FETCH_UPDATE_COMMENT,
 } from "../actions/commentsFetch";
 import { AUTH_SIGN_IN_RESET } from "../actions/auth";
 import { NOTES_FETCH_DID_START } from "../actions/notesFetch";
@@ -72,6 +73,10 @@ function commentsFetch(state = initialState, action) {
           comments: sortedComments,
         },
       };
+      break;
+    }
+    case COMMENTS_FETCH_UPDATE_COMMENT: {
+      // TODO: edit comment - find the comment and update it!
       break;
     }
     default:

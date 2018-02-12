@@ -8,6 +8,7 @@ import {
   ADD_NOTE_ROUTE_NAME,
   EDIT_NOTE_ROUTE_NAME,
   ADD_COMMENT_ROUTE_NAME,
+  EDIT_COMMENT_ROUTE_NAME,
 } from "../navigators/MainModalNavigator";
 import isRouteNameOnStack from "../utils/isRouteNameOnStack";
 import getRouteName from "../utils/getRouteName";
@@ -21,6 +22,7 @@ import {
   NAVIGATE_ADD_NOTE,
   NAVIGATE_EDIT_NOTE,
   NAVIGATE_ADD_COMMENT,
+  NAVIGATE_EDIT_COMMENT,
   NAVIGATE_PRIVACY_AND_TERMS,
   NAVIGATE_SUPPORT,
   NAVIGATE_DRAWER_OPEN,
@@ -44,6 +46,7 @@ const shouldIgnoreNextNavigate = ({ nextState, state }) => {
       ADD_NOTE_ROUTE_NAME,
       EDIT_NOTE_ROUTE_NAME,
       ADD_COMMENT_ROUTE_NAME,
+      EDIT_COMMENT_ROUTE_NAME,
     ];
     if (
       nextRouteName &&
@@ -132,6 +135,19 @@ function navigation(state = initialState, action) {
           params: {
             note: action.payload.note,
             commentsFetchData: action.payload.commentsFetchData,
+          },
+        }),
+        state
+      );
+      break;
+    case NAVIGATE_EDIT_COMMENT:
+      nextState = AppNavigator.router.getStateForAction(
+        NavigationActions.navigate({
+          routeName: EDIT_COMMENT_ROUTE_NAME,
+          params: {
+            note: action.payload.note,
+            commentsFetchData: action.payload.commentsFetchData,
+            comment: action.payload.comment,
           },
         }),
         state

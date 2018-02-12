@@ -9,6 +9,11 @@ import { formatDateForNoteList } from "../utils/formatDate";
 import { CommentPropType } from "../prop-types/comment";
 
 class NotesListItemComment extends PureComponent {
+  onPressEditComment = () => {
+    const { comment } = this.props;
+    this.props.onPressEditComment({ comment });
+  };
+
   renderEdit() {
     const { theme, currentUserId, comment, allowEditing } = this.props;
 
@@ -19,6 +24,7 @@ class NotesListItemComment extends PureComponent {
           marginRight={10}
           marginTop={7}
           hitSlop={{ left: 10, right: 10, top: 10, bottom: 10 }}
+          onPress={this.onPressEditComment}
         >
           <glamorous.Text
             style={theme.editButtonTextStyle}
@@ -92,6 +98,7 @@ NotesListItemComment.propTypes = {
   currentUserId: PropTypes.string.isRequired,
   comment: CommentPropType.isRequired,
   allowEditing: PropTypes.bool,
+  onPressEditComment: PropTypes.func.isRequired,
 };
 
 NotesListItemComment.defaultProps = {

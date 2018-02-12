@@ -96,6 +96,12 @@ class NotesListItem extends PureComponent {
     this.props.navigateAddComment({ note, commentsFetchData });
   };
 
+  onPressEditComment = ({ comment }) => {
+    // TODO: If comments are still loading and user taps Add Comment, then the existing comments won't be shown on the Add Comment screen, even once commentsFetch has completed. We should probably fix that so that the while commentsFetch is in fetching state, and completes, while Add Comment screen is current, that it loads those comments? Should probably also have a comments loading indicator both in notes list and in Add Comment screen?
+    const { note, commentsFetchData } = this.props;
+    this.props.navigateEditComment({ note, commentsFetchData, comment });
+  };
+
   shouldRenderUserLabelSection() {
     const { note } = this.props;
     return note.userId !== note.groupId && note.userFullName;
@@ -224,6 +230,7 @@ class NotesListItem extends PureComponent {
               currentUserId={currentUser.userId}
               comment={comment}
               allowEditing={allowEditing}
+              onPressEditComment={this.onPressEditComment}
             />
           );
         }
@@ -270,7 +277,6 @@ class NotesListItem extends PureComponent {
         <glamorous.TouchableOpacity
           activeOpacity={1}
           onPress={() => {
-            console.log("pressed");
             this.onPressNote();
           }}
         >
@@ -309,6 +315,7 @@ NotesListItem.propTypes = {
   }),
   navigateEditNote: PropTypes.func.isRequired,
   navigateAddComment: PropTypes.func.isRequired,
+  navigateEditComment: PropTypes.func.isRequired,
 };
 
 NotesListItem.defaultProps = {

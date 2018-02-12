@@ -19,6 +19,7 @@ const notesFetchAsync = () => {};
 const commentsFetchAsync = () => {};
 const navigateEditNote = () => {};
 const navigateAddComment = () => {};
+const navigateEditComment = () => {};
 const notes = [
   {
     id: "1",
@@ -65,6 +66,7 @@ const props = {
   commentsFetchAsync,
   navigateEditNote,
   navigateAddComment,
+  navigateEditComment,
 };
 
 storiesOf("HomeScreen", module).add("default", () => (

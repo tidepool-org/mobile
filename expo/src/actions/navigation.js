@@ -7,6 +7,7 @@ export const NAVIGATE_SWITCH_PROFILE = "NAVIGATE_SWITCH_PROFILE";
 export const NAVIGATE_ADD_NOTE = "NAVIGATE_ADD_NOTE";
 export const NAVIGATE_EDIT_NOTE = "NAVIGATE_EDIT_NOTE";
 export const NAVIGATE_ADD_COMMENT = "NAVIGATE_ADD_COMMENT";
+export const NAVIGATE_EDIT_COMMENT = "NAVIGATE_EDIT_COMMENT";
 export const NAVIGATE_PRIVACY_AND_TERMS = "NAVIGATE_PRIVACY_AND_TERMS";
 export const NAVIGATE_SUPPORT = "NAVIGATE_SUPPORT";
 export const NAVIGATE_DRAWER_OPEN = "NAVIGATE_DRAWER_OPEN";
@@ -48,6 +49,13 @@ export function navigateEditNote({ note }) {
 
 export function navigateAddComment({ note, commentsFetchData }) {
   return { type: NAVIGATE_ADD_COMMENT, payload: { note, commentsFetchData } };
+}
+
+export function navigateEditComment({ note, commentsFetchData, comment }) {
+  return {
+    type: NAVIGATE_EDIT_COMMENT,
+    payload: { note, commentsFetchData, comment },
+  };
 }
 
 export function navigatePrivacyAndTerms() {

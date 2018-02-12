@@ -16,13 +16,15 @@ const comment = {
   userId: "1",
   userFullName: "Jell Jellyfish",
 };
+const onPressEditComment = () => {};
 
 storiesOf("NotesListItemComment", module).add("default", () => (
   <StoryContainerComponent>
     <NotesListItemComment
       style={{ width: 300 }}
-      comment={comment}
       currentUserId={currentUserId}
+      comment={comment}
+      onPressEditComment={onPressEditComment}
     />
   </StoryContainerComponent>
 ));
@@ -41,6 +43,7 @@ storiesOf("NotesListItemComment", module).add("long user full name", () => (
       style={{ width: 300 }}
       currentUserId={currentUserId}
       comment={commentWithLongUserFullName}
+      onPressEditComment={onPressEditComment}
     />
   </StoryContainerComponent>
 ));
