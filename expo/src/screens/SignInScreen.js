@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { StatusBar } from "react-native";
+import { Keyboard, LayoutAnimation, Platform, StatusBar } from "react-native";
 import glamorous, { ThemeProvider } from "glamorous-native";
 import { isIphoneX } from "react-native-iphone-x-helper";
 
@@ -15,11 +15,97 @@ const safeAreaTopInset = isIphoneX() ? 24 : 0;
 const safeAreaBottomInset = isIphoneX() ? 20 : 0;
 
 class SignInScreen extends PureComponent {
+  state = {};
+
+  componentDidMount() {
+    this.keyboardDidShowListener = Keyboard.addListener(
+      "keyboardDidShow",
+      this.keyboardDidShow
+    );
+    this.keyboardDidHideListener = Keyboard.addListener(
+      "keyboardDidHide",
+      this.keyboardDidHide
+    );
+    this.keyboardWillChangeFrameListener = Keyboard.addListener(
+      "keyboardWillChangeFrame",
+      this.keyboardWillChangeFrame
+    );
+  }
+
+  componentWillUnmount() {
+    this.keyboardDidShowListener.remove();
+    this.keyboardDidHideListener.remove();
+    this.keyboardWillChangeFrameListener.remove();
+  }
+
+  onSignInFormLayout = event => {
+    const { layout } = event.nativeEvent;
+    const signInFormY = layout.y;
+    this.setState({ signInFormY });
+  };
+
+  onKeyboardAvoidingViewHeight = height => {
+    this.setState({ signInFormKeyboardAvoidingViewHeight: height });
+  };
+
+  scrollToAvoidKeyboard(event) {
+    // Configure next LayoutAnimation
+    let animationConfig;
+    if (event && event.easing && event.duration) {
+      animationConfig = LayoutAnimation.create(
+        event.duration,
+        LayoutAnimation.Types[event.easing]
+      );
+    } else {
+      animationConfig = { ...LayoutAnimation.Presets.easeInEaseOut };
+    }
+    LayoutAnimation.configureNext({
+      ...animationConfig,
+      duration: 175,
+      useNativeDriver: true,
+    });
+
+    // Calculate scrollY
+    let scrollY = 0;
+    if (event) {
+      const keyboardY = event ? event.endCoordinates.screenY : 0;
+      const paddingY = 10;
+      scrollY =
+        this.state.signInFormY +
+        this.state.signInFormKeyboardAvoidingViewHeight +
+        paddingY -
+        keyboardY;
+      if (scrollY < 0) {
+        scrollY = 0;
+      }
+    }
+
+    // Scroll
+    this.setState({ signInFormContainerTop: -scrollY });
+  }
+
+  keyboardDidShow = event => {
+    if (Platform.OS === "android") {
+      this.scrollToAvoidKeyboard(event);
+    }
+  };
+
+  keyboardDidHide = event => {
+    if (Platform.OS === "android") {
+      this.scrollToAvoidKeyboard(event);
+    }
+  };
+
+  keyboardWillChangeFrame = event => {
+    // Currently using adjustResize for Android, so, Android won't get keyboardWillChangeFrame. We should revisit this.
+    if (Platform.OS === "ios") {
+      this.scrollToAvoidKeyboard(event);
+    }
+  };
+
   theme = PrimaryTheme;
 
   render() {
-    // console.log("SignInScreen: render");
-
     const {
       errorMessage,
       version,
@@ -38,46 +124,50 @@ class SignInScreen extends PureComponent {
           backgroundColor={this.theme.colors.lightBackground}
           justifyContent="center"
           alignItems="center"
+          onLayout={this.onContainerViewLayout}
         >
           <StatusBar barStyle="dark-content" />
-          <glamorous.View justifyContent="center" alignItems="center">
-            <SignUp
-              style={{
-                alignSelf: "flex-end",
-                top: 44 + safeAreaTopInset,
-                zIndex: 1,
-                position: "absolute",
-              }}
-              navigateSignUp={this.props.navigateSignUp}
-            />
+          <SignUp
+            style={{
+              alignSelf: "flex-end",
+              top: 44 + safeAreaTopInset,
+              zIndex: 1,
+              position: "absolute",
+            }}
+            navigateSignUp={this.props.navigateSignUp}
+          />
+          <glamorous.View
+            onLayout={this.onSignInFormLayout}
+            top={this.state.signInFormContainerTop}
+          >
             <SignInForm
-              style={{ width: 300, flex: 1, justifyContent: "center" }}
               errorMessage={errorMessage}
               navigateForgotPassword={navigateForgotPassword}
               authSignInReset={authSignInReset}
               authSignInAsync={authSignInAsync}
               signingIn={signingIn}
+              onKeyboardAvoidingViewHeight={this.onKeyboardAvoidingViewHeight}
             />
-            <DebugSettingsTouchable
-              style={{
-                position: "absolute",
-                bottom: 15 + safeAreaBottomInset,
-              }}
-              navigateDebugSettings={navigateDebugSettings}
-            >
-              <glamorous.View
-                flexDirection="column"
-                justifyContent="center"
-                alignItems="center"
-              >
-                <MadePossibleBy />
-                <VersionAndApiEnvironment
-                  version={version}
-                  apiEnvironment={apiEnvironment}
-                />
-              </glamorous.View>
-            </DebugSettingsTouchable>
           </glamorous.View>
+          <DebugSettingsTouchable
+            style={{
+              position: "absolute",
+              bottom: 15 + safeAreaBottomInset,
+            }}
+            navigateDebugSettings={navigateDebugSettings}
+          >
+            <glamorous.View
+              flexDirection="column"
+              justifyContent="center"
+              alignItems="center"
+            >
+              <MadePossibleBy />
+              <VersionAndApiEnvironment
+                version={version}
+                apiEnvironment={apiEnvironment}
+              />
+            </glamorous.View>
+          </DebugSettingsTouchable>
         </glamorous.View>
       </ThemeProvider>
     );

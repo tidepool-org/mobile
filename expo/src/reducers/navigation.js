@@ -3,12 +3,14 @@ import { Linking } from "react-native";
 
 import Urls from "../constants/Urls";
 import { AppNavigator } from "../navigators/AppNavigator";
-import { SWITCH_PROFILE_ROUTE_NAME } from "../navigators/MainStackNavigator";
+import {
+  SWITCH_PROFILE_ROUTE_NAME,
+  ADD_COMMENT_ROUTE_NAME,
+  EDIT_COMMENT_ROUTE_NAME,
+} from "../navigators/MainStackNavigator";
 import {
   ADD_NOTE_ROUTE_NAME,
   EDIT_NOTE_ROUTE_NAME,
-  ADD_COMMENT_ROUTE_NAME,
-  EDIT_COMMENT_ROUTE_NAME,
 } from "../navigators/MainModalNavigator";
 import isRouteNameOnStack from "../utils/isRouteNameOnStack";
 import getRouteName from "../utils/getRouteName";

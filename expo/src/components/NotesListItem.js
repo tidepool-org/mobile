@@ -5,7 +5,7 @@ import glamorous, { withTheme } from "glamorous-native";
 
 import HashtagText from "./HashtagText";
 import LinearGradient from "./LinearGradient";
-import NotesListItemAddComment from "./NotesListItemAddComment";
+import AddCommentButton from "./AddCommentButton";
 import NotesListItemComment from "./NotesListItemComment";
 import { formatDateForNoteList } from "../utils/formatDate";
 import { ThemePropType } from "../prop-types/theme";
@@ -26,6 +26,15 @@ class NotesListItem extends PureComponent {
       "Unknown Error Occurred",
       "An unknown error occurred. We are working hard to resolve this issue.",
       [{ text: "OK" }]
+    );
+  }
+
+  static renderSeparator() {
+    return (
+      <LinearGradient
+        colors={["#e4e4e5", "#ededee", "#f7f7f8"]}
+        style={{ height: 10 }}
+      />
     );
   }
 
@@ -241,24 +250,9 @@ class NotesListItem extends PureComponent {
     return null;
   }
 
-  renderNotesListItemAddComment() {
+  renderAddCommentButton() {
     if (this.props.allowEditing && this.state.expanded) {
-      return <NotesListItemAddComment onPress={this.onPressAddComment} />;
-    }
-
-    return null;
-  }
-
-  renderSeparator() {
-    const { includeSeparator } = this.props;
-
-    if (includeSeparator) {
-      return (
-        <LinearGradient
-          colors={["#e4e4e5", "#ededee", "#f7f7f8"]}
-          style={{ height: 10 }}
-        />
-      );
+      return <AddCommentButton onPress={this.onPressAddComment} />;
     }
 
     return null;
@@ -285,8 +279,8 @@ class NotesListItem extends PureComponent {
           {this.renderNote()}
         </glamorous.TouchableOpacity>
         {this.renderComments()}
-        {this.renderNotesListItemAddComment()}
-        {this.renderSeparator()}
+        {this.renderAddCommentButton()}
+        {NotesListItem.renderSeparator()}
       </Animated.View>
     );
   }
@@ -298,7 +292,6 @@ NotesListItem.propTypes = {
   allowEditing: PropTypes.bool,
   initiallyExpanded: PropTypes.bool,
   allowExpansionToggle: PropTypes.bool,
-  includeSeparator: PropTypes.bool,
   currentUser: UserPropType.isRequired,
   currentProfile: ProfilePropType.isRequired,
   note: PropTypes.shape({
@@ -323,7 +316,6 @@ NotesListItem.defaultProps = {
   allowEditing: true,
   initiallyExpanded: false,
   allowExpansionToggle: true,
-  includeSeparator: true,
   commentsFetchData: {
     comments: [],
     errorMessage: "",

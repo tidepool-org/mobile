@@ -3,12 +3,12 @@ import React from "react";
 import { storiesOf } from "@storybook/react-native";
 
 import StoryContainerComponent from "../../__stories__/utils/StoryContainerComponent";
-import NotesListItemAddComment from "../../src/components/NotesListItemAddComment";
+import AddCommentButton from "../../src/components/AddCommentButton";
 
 const onPress = () => {};
 
-storiesOf("NotesListItemAddComment", module).add("default", () => (
+storiesOf("AddCommentButton", module).add("default", () => (
   <StoryContainerComponent>
-    <NotesListItemAddComment onPress={onPress} />
+    <AddCommentButton onPress={onPress} />
   </StoryContainerComponent>
 ));

@@ -13,6 +13,8 @@ const Colors = {
   darkestGreyColor: "#989898",
   blackish: "#3c3c3c",
 
+  white: "#ffffff",
+
   redError: "#ff354e",
 };
 

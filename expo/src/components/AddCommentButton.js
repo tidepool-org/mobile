@@ -5,7 +5,7 @@ import glamorous, { withTheme } from "glamorous-native";
 
 import { ThemePropType } from "../prop-types/theme";
 
-class NotesListItemAddComment extends PureComponent {
+class AddCommentButton extends PureComponent {
   onPress = () => {
     this.props.onPress();
   };
@@ -39,14 +39,14 @@ class NotesListItemAddComment extends PureComponent {
   }
 }
 
-NotesListItemAddComment.propTypes = {
+AddCommentButton.propTypes = {
   theme: ThemePropType.isRequired,
   style: ViewPropTypes.style,
   onPress: PropTypes.func.isRequired,
 };
 
-NotesListItemAddComment.defaultProps = {
+AddCommentButton.defaultProps = {
   style: null,
 };
 
-export default withTheme(NotesListItemAddComment);
+export default withTheme(AddCommentButton);
