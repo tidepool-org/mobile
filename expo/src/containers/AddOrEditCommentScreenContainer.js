@@ -2,8 +2,9 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { navigateGoBack } from "../actions/navigation";
 import { commentAddAsync } from "../actions/commentAdd";
+import { commentUpdateAsync } from "../actions/commentUpdate";
 
-import AddCommentScreen from "../screens/AddCommentScreen";
+import AddOrEditCommentScreen from "../screens/AddOrEditCommentScreen";
 
 const mapStateToProps = (state, ownProps) => ({
   currentUser: state.auth,
@@ -18,8 +19,11 @@ const mapDispatchToProps = dispatch =>
     {
       navigateGoBack,
       commentAddAsync,
+      commentUpdateAsync,
     },
     dispatch
   );
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddCommentScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(
+  AddOrEditCommentScreen
+);

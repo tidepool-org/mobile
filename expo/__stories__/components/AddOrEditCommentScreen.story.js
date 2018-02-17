@@ -4,7 +4,7 @@ import { storiesOf } from "@storybook/react-native";
 import faker from "faker";
 
 import StoryContainerScreen from "../../__stories__/utils/StoryContainerScreen";
-import AddCommentScreen from "../../src/screens/AddCommentScreen";
+import AddOrEditCommentScreen from "../../src/screens/AddOrEditCommentScreen";
 
 faker.seed(123);
 
@@ -39,9 +39,7 @@ const commentsFetchData = {
     },
     {
       id: "4",
-      messageText: `This is comment 3 #hashtag. This is a long comment. ${faker.fake(
-        "{{lorem.paragraph}}"
-      )}`,
+      messageText: `This is comment 3 #hashtag.`,
       timestamp: new Date(),
       userFullName: "Some other person",
     },
@@ -67,16 +65,54 @@ const commentsFetchData = {
 };
 const navigateGoBack = () => {};
 const commentAddAsync = () => {};
+const commentUpdateAsync = () => {};
 
-storiesOf("AddCommentScreen", module).add("default", () => (
+storiesOf("AddOrEditCommentScreen", module).add("edit first comment", () => (
   <StoryContainerScreen>
-    <AddCommentScreen
-      navigateGoBack={navigateGoBack}
-      commentAddAsync={commentAddAsync}
+    <AddOrEditCommentScreen
       currentUser={currentProfile}
       currentProfile={currentProfile}
-      note={note}
       commentsFetchData={commentsFetchData}
+      note={note}
+      comment={commentsFetchData.comments[0]}
+      navigateGoBack={navigateGoBack}
+      commentAddAsync={commentAddAsync}
+      commentUpdateAsync={commentUpdateAsync}
+    />
+  </StoryContainerScreen>
+));
+
+storiesOf("AddOrEditCommentScreen", module).add(
+  "edit comment in middle",
+  () => (
+    <StoryContainerScreen>
+      <AddOrEditCommentScreen
+        currentUser={currentProfile}
+        currentProfile={currentProfile}
+        commentsFetchData={commentsFetchData}
+        note={note}
+        comment={commentsFetchData.comments[2]}
+        navigateGoBack={navigateGoBack}
+        commentAddAsync={commentAddAsync}
+        commentUpdateAsync={commentUpdateAsync}
+      />
+    </StoryContainerScreen>
+  )
+);
+
+storiesOf("AddOrEditCommentScreen", module).add("edit last comment", () => (
+  <StoryContainerScreen>
+    <AddOrEditCommentScreen
+      currentUser={currentProfile}
+      currentProfile={currentProfile}
+      commentsFetchData={commentsFetchData}
+      note={note}
+      comment={
+        commentsFetchData.comments[commentsFetchData.comments.length - 1]
+      }
+      navigateGoBack={navigateGoBack}
+      commentAddAsync={commentAddAsync}
+      commentUpdateAsync={commentUpdateAsync}
     />
   </StoryContainerScreen>
 ));

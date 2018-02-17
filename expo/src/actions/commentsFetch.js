@@ -43,7 +43,7 @@ export const commentsFetchAddComment = ({ note, comment, profile }) => ({
   payload: { note, comment, profile },
 });
 
-export const commentsFetchUpdateComment = ({ comment, profile }) => ({
+export const commentsFetchUpdateComment = ({ note, comment, profile }) => ({
   type: COMMENTS_FETCH_UPDATE_COMMENT,
-  payload: { comment, profile },
+  payload: { note, comment, profile },
 });

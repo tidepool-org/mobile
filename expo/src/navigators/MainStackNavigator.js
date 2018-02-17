@@ -2,9 +2,12 @@ import { StackNavigator } from "react-navigation";
 
 import HomeScreenContainer from "../containers/HomeScreenContainer";
 import SwitchProfileScreenContainer from "../containers/SwitchProfileScreenContainer";
+import AddOrEditCommentScreenContainer from "../containers/AddOrEditCommentScreenContainer";
 
-export const HOME_ROUTE_NAME = "Home";
-export const SWITCH_PROFILE_ROUTE_NAME = "SwitchProfile";
+export const HOME_ROUTE_NAME = "HOME_ROUTE_NAME";
+export const SWITCH_PROFILE_ROUTE_NAME = "SWITCH_PROFILE_ROUTE_NAME";
+export const ADD_COMMENT_ROUTE_NAME = "ADD_COMMENT_ROUTE_NAME";
+export const EDIT_COMMENT_ROUTE_NAME = "EDIT_COMMENT_ROUTE_NAME";
 
 const MainStackNavigator = StackNavigator(
   {
@@ -13,6 +16,12 @@ const MainStackNavigator = StackNavigator(
     },
     [SWITCH_PROFILE_ROUTE_NAME]: {
       screen: SwitchProfileScreenContainer,
+    },
+    [ADD_COMMENT_ROUTE_NAME]: {
+      screen: AddOrEditCommentScreenContainer,
+    },
+    [EDIT_COMMENT_ROUTE_NAME]: {
+      screen: AddOrEditCommentScreenContainer,
     },
   },
   {

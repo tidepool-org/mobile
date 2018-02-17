@@ -120,6 +120,10 @@ const PrimaryTheme = {
     color: Colors.brightBlue,
     ...FontStyles.smallRegularFont,
   },
+  editButtonTextDisabledStyle: {
+    color: Colors.altLightGreyColor,
+    ...FontStyles.smallRegularFont,
+  },
   modalScreenHeaderRightTextStyle: {
     color: Colors.brightBlue,
     ...FontStyles.mediumRegularFont,

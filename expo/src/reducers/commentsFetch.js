@@ -76,7 +76,30 @@ function commentsFetch(state = initialState, action) {
       break;
     }
     case COMMENTS_FETCH_UPDATE_COMMENT: {
-      // TODO: edit comment - find the comment and update it!
+      const { note, comment } = action.payload;
+      // Find the comment
+      const commentIndex = state[note.id].comments.findIndex(
+        subjectComment => comment.id === subjectComment.id
+      );
+      if (commentIndex !== -1) {
+        // Replace the comment with the new edited comment
+        const previousComments = state[note.id].comments;
+        const comments = [
+          ...previousComments.slice(0, commentIndex),
+          action.payload.comment,
+          ...previousComments.slice(commentIndex + 1),
+        ];
+        nextState = {
+          ...state,
+          [note.id]: {
+            comments,
+          },
+        };
+      } else {
+        // console.log(
+        //   `commentsFetch COMMENTS_FETCH_UPDATE_COMMENT reducer: Comment wasn't found, this is unexpected`
+        // );
+      }
       break;
     }
     default:

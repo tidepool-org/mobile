@@ -1,11 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import {
-  ActivityIndicator,
-  KeyboardAvoidingView,
-  Platform,
-  ViewPropTypes,
-} from "react-native";
+import { ActivityIndicator, Platform } from "react-native";
 import glamorous, { withTheme } from "glamorous-native";
 
 import { ThemePropType } from "../prop-types/theme";
@@ -15,6 +10,8 @@ import Button from "./Button";
 // TODO: polish - the error message doesn't seem to scroll in sync with the rest of the form with KeyboardAvoidingView? But, only on iOS, it seems
 
 class SignInForm extends PureComponent {
+  static ACTIVITY_INDICATOR_VIEW_HEIGHT = 62;
+
   constructor(props) {
     super(props);
 
@@ -23,6 +20,14 @@ class SignInForm extends PureComponent {
       password: "",
     };
   }
+
+  onContainerViewLayout = event => {
+    this.props.onKeyboardAvoidingViewHeight(
+      event.nativeEvent.layout.height -
+        SignInForm.ACTIVITY_INDICATOR_VIEW_HEIGHT
+    );
+  };
+
   onPressSignIn = () => {
     if (this.state.username.length > 0 && this.state.password.length > 0) {
       this.props.authSignInAsync({
@@ -53,14 +58,10 @@ class SignInForm extends PureComponent {
   }
 
   render() {
-    const { theme, style, signingIn } = this.props;
+    const { theme, signingIn } = this.props;
 
     return (
-      <KeyboardAvoidingView
-        style={style}
-        behavior="padding"
-        keyboardVerticalOffset={-140}
-      >
+      <glamorous.View onLayout={this.onContainerViewLayout}>
         <glamorous.Image
           source={require("../../assets/images/tidepool-logo-horizontal.png")}
           width={262}
@@ -161,13 +162,13 @@ class SignInForm extends PureComponent {
             */}
         <glamorous.View
           style={{
-            height: 62,
+            height: SignInForm.ACTIVITY_INDICATOR_VIEW_HEIGHT,
           }}
         >
           {this.props.signingIn && (
             <ActivityIndicator
               style={{
-                height: 62,
+                height: SignInForm.ACTIVITY_INDICATOR_VIEW_HEIGHT,
                 alignSelf: "center",
               }}
               size="large"
@@ -176,24 +177,24 @@ class SignInForm extends PureComponent {
             />
           )}
         </glamorous.View>
-      </KeyboardAvoidingView>
+      </glamorous.View>
     );
   }
 }
 
 SignInForm.propTypes = {
   theme: ThemePropType.isRequired,
-  style: ViewPropTypes.style,
   authSignInReset: PropTypes.func.isRequired,
   authSignInAsync: PropTypes.func.isRequired,
   navigateForgotPassword: PropTypes.func.isRequired,
   signingIn: PropTypes.bool.isRequired,
   errorMessage: PropTypes.string,
+  onKeyboardAvoidingViewHeight: PropTypes.func,
 };
 
 SignInForm.defaultProps = {
   errorMessage: "",
-  style: null,
+  onKeyboardAvoidingViewHeight: () => {},
 };
 
 export default withTheme(SignInForm);

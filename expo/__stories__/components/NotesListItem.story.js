@@ -89,16 +89,3 @@ storiesOf("NotesListItem", module).add("initially expanded", () => (
     </glamorous.ScrollView>
   </StoryContainerComponent>
 ));
-
-storiesOf("NotesListItem", module).add("for add/edit comment screen", () => (
-  <StoryContainerComponent>
-    <glamorous.ScrollView>
-      <NotesListItem
-        {...props}
-        initiallyExpanded
-        allowExpansionToggle={false}
-        allowEditing={false}
-      />
-    </glamorous.ScrollView>
-  </StoryContainerComponent>
-));

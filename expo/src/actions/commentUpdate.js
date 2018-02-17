@@ -23,6 +23,7 @@ export const commentUpdateDidFail = ({ comment, errorMessage }) => ({
 });
 
 export const commentUpdateAsync = ({
+  note,
   comment,
   currentProfile,
 }) => async dispatch => {
@@ -34,6 +35,8 @@ export const commentUpdateAsync = ({
     dispatch(commentUpdateDidFail({ comment, errorMessage }));
   } else {
     dispatch(commentUpdateDidSucceed({ comment }));
-    dispatch(commentsFetchUpdateComment({ comment, profile: currentProfile }));
+    dispatch(
+      commentsFetchUpdateComment({ note, comment, profile: currentProfile })
+    );
   }
 };
