@@ -52,10 +52,12 @@ class SignInScreen extends PureComponent {
     // Configure next LayoutAnimation
     let animationConfig;
     if (event && event.easing && event.duration) {
-      animationConfig = LayoutAnimation.create(
-        event.duration,
-        LayoutAnimation.Types[event.easing]
-      );
+      animationConfig = {
+        duration: event.duration,
+        update: {
+          type: LayoutAnimation.Types[event.easing],
+        },
+      };
     } else {
       animationConfig = { ...LayoutAnimation.Presets.easeInEaseOut };
     }
