@@ -151,7 +151,7 @@ class AddOrEditCommentScreen extends PureComponent {
       this.scrollView.scrollTo({
         x: 0,
         y: scrollY,
-        animated: true,
+        animated: this.state.isKeyboardVisible,
       });
     }
   }
@@ -161,6 +161,7 @@ class AddOrEditCommentScreen extends PureComponent {
       isKeyboardVisible: true,
       keyboardHeight: event.endCoordinates.height,
     });
+    this.scrollToEditableComment();
   };
 
   keyboardDidHide = () => {

@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { ViewPropTypes } from "react-native";
+import { Keyboard, ViewPropTypes } from "react-native";
 import glamorous, { withTheme } from "glamorous-native";
 
 import HashtagText from "./HashtagText";
@@ -21,6 +21,20 @@ class AddOrEditCommentScreenComment extends PureComponent {
     this.originalMessageText = messageText;
     this.isEditMode = !!props.comment;
     this.isAddMode = !this.isEditMode;
+  }
+
+  componentDidMount() {
+    if (this.textInput) {
+      this.focusTimer = setTimeout(() => {
+        this.textInput.focus();
+      }, 450);
+    }
+  }
+
+  componentWillUnmount() {
+    if (this.focusTimer) {
+      clearTimeout(this.focusTimer);
+    }
   }
 
   onPressSave = () => {
@@ -106,6 +120,9 @@ class AddOrEditCommentScreenComment extends PureComponent {
     return (
       <glamorous.View flex={1}>
         <glamorous.TextInput
+          innerRef={textInput => {
+            this.textInput = textInput;
+          }}
           style={theme.commentsListItemTextStyle}
           flex={1}
           paddingTop={7}
@@ -118,7 +135,6 @@ class AddOrEditCommentScreenComment extends PureComponent {
           underlineColorAndroid="transparent"
           autoCapitalize="sentences"
           autoCorrect
-          autoFocus
           keyboardAppearance="dark"
           keyboardType="default"
           returnKeyType="default"
