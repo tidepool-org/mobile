@@ -45,7 +45,7 @@ class SwitchProfileScreen extends PureComponent {
 
   componentDidMount() {
     const { profilesFetchAsync, profileListData, fetching } = this.props;
-    if (profileListData.length === 0 && !fetching) {
+    if (!fetching) {
       profilesFetchAsync({ ...this.props.currentUser });
     }
   }
