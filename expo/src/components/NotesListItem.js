@@ -83,7 +83,7 @@ class NotesListItem extends PureComponent {
     if (this.props.allowExpansionToggle) {
       const wasExpanded = this.state.expanded;
       this.setState({ expanded: !wasExpanded });
-      if (!wasExpanded && !this.props.commentsFetchData.fetched) {
+      if (!wasExpanded && !this.props.commentsFetchData.fetching) {
         this.props.commentsFetchAsync({ messageId: this.props.note.id });
       }
       LayoutAnimation.configureNext({
