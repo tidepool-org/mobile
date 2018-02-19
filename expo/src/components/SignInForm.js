@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { ActivityIndicator, Platform } from "react-native";
+import { ActivityIndicator, Keyboard, Platform } from "react-native";
 import glamorous, { withTheme } from "glamorous-native";
 
 import { ThemePropType } from "../prop-types/theme";
@@ -30,6 +30,7 @@ class SignInForm extends PureComponent {
 
   onPressSignIn = () => {
     if (this.state.username.length > 0 && this.state.password.length > 0) {
+      Keyboard.dismiss();
       this.props.authSignInAsync({
         username: this.state.username,
         password: this.state.password,
