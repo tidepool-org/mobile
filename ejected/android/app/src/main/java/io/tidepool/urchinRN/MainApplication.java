@@ -2,13 +2,13 @@ package io.tidepool.urchinRN;
 
 import android.app.Application;
 
-import com.apsl.versionnumber.RNVersionNumberPackage;
 import com.facebook.react.ReactApplication;
+import com.apsl.versionnumber.RNVersionNumberPackage;
+import com.BV.LinearGradient.LinearGradientPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
-import com.BV.LinearGradient.LinearGradientPackage;
 import io.tidepool.urchinRN.LaunchScreen.LaunchScreenReactPackage;
 
 import java.util.Arrays;
