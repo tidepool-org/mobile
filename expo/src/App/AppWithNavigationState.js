@@ -1,0 +1,67 @@
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import { BackHandler, UIManager } from "react-native";
+import { addNavigationHelpers, NavigationActions } from "react-navigation";
+import { connect } from "react-redux";
+
+import AppNavigator from "../navigators/AppNavigator";
+import getRouteName from "../utils/getRouteName";
+
+class AppWithNavigationState extends PureComponent {
+  componentDidMount() {
+    if (UIManager.setLayoutAnimationEnabledExperimental) {
+      UIManager.setLayoutAnimationEnabledExperimental(true);
+    }
+
+    BackHandler.addEventListener("hardwareBackPress", this.onBackPress);
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener("hardwareBackPress", this.onBackPress);
+  }
+
+  onBackPress = () => {
+    const { dispatch, navigation } = this.props;
+    const routeName = getRouteName({ navigationState: navigation });
+    if (routeName === "Home" || routeName === "SignIn") {
+      return false;
+    }
+    dispatch(NavigationActions.back());
+    return true;
+  };
+
+  render() {
+    // console.log("AppWithNavigationState: render");
+    const { addListener, dispatch, navigation } = this.props;
+
+    return (
+      <AppNavigator
+        navigation={addNavigationHelpers({
+          dispatch,
+          state: navigation,
+          addListener,
+        })}
+      />
+    );
+  }
+}
+
+AppWithNavigationState.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  navigation: PropTypes.shape({
+    index: PropTypes.number.isRequired,
+    routes: PropTypes.arrayOf(
+      PropTypes.shape({
+        routeName: PropTypes.string.isRequired,
+        key: PropTypes.string,
+      })
+    ).isRequired,
+  }).isRequired,
+  addListener: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = state => ({
+  navigation: state.navigation,
+});
+
+export default connect(mapStateToProps)(AppWithNavigationState);
