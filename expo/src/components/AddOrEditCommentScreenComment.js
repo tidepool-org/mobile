@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { Keyboard, ViewPropTypes } from "react-native";
+import { ViewPropTypes } from "react-native";
 import glamorous, { withTheme } from "glamorous-native";
 
 import HashtagText from "./HashtagText";
@@ -131,6 +131,7 @@ class AddOrEditCommentScreenComment extends PureComponent {
           paddingBottom={7}
           allowFontScaling={false}
           multiline
+          autoFocus={false}
           selectionColor="#657ef6"
           underlineColorAndroid="transparent"
           autoCapitalize="sentences"
