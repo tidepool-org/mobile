@@ -15,14 +15,3 @@ class LaunchScreen extends PureComponent {
 }
 
 export default LaunchScreen;
-
-// TODO: FIXME: HACK: In RCTRootView.m we need to remove the center layout for the loadingview on iOS in RCTRootView.m! It's causing a layout shift
-// - (void)layoutSubviews
-// {
-//   [super layoutSubviews];
-//   _contentView.frame = self.bounds;
-//   _loadingView.center = (CGPoint){
-//     CGRectGetMidX(self.bounds),
-//     CGRectGetMidY(self.bounds)
-//   };
-// }
