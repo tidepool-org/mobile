@@ -15,7 +15,7 @@ const noTransitionConfig = () => ({
   },
 });
 
-export const AppNavigator = StackNavigator(
+const AppNavigator = StackNavigator(
   {
     Launch: {
       screen: LaunchScreen,
@@ -36,4 +36,4 @@ export const AppNavigator = StackNavigator(
   }
 );
 
-export default AppNavigator;
+export { AppNavigator };

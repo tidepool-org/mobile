@@ -23,7 +23,9 @@
     "prettier": "1.10.2",
     "prettier-eslint": "8.8.1",
     "prettier-eslint-cli": "4.7.1",
+    "react-devtools": "^3.1.0",
     "react-dom": "16.2.0",
+    "react-native-debugger-open": "^0.3.17",
     "react-native-scripts": "1.11.1",
     "react-native-storybook-loader": "1.7.0",
     "react-test-renderer": "16.2.0"
@@ -41,7 +43,9 @@
       "cp expo-specific-src/utils/runtimeEnvironment.js src/utils/runtimeEnvironment.js && cp expo-specific-src/components/LinearGradient.js src/components/LinearGradient.js && cp expo-specific-src/actions/appVersion.js src/actions/appVersion.js && cp expo-specific-src/reducers/appVersion.js src/reducers/appVersion.js",
     "prestorybook":
       "cp storybook-specific-App.js App.js && cp expo-specific-src/utils/runtimeEnvironment.js src/utils/runtimeEnvironment.js && cp expo-specific-src/components/LinearGradient.js src/components/LinearGradient.js && cp expo-specific-src/actions/appVersion.js src/actions/appVersion.js && cp expo-specific-src/reducers/appVersion.js src/reducers/appVersion.js && rnstl",
-    "storybook": "storybook start -p 7007"
+    "storybook": "storybook start -p 7007",
+    "react-devtools": "react-devtools",
+    "postinstall": "rndebugger-open"
   },
   "jest": {
     "preset": "jest-expo",
