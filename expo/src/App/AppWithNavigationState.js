@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 
 import { AppNavigator } from "../navigators/AppNavigator";
 import { HOME_ROUTE_NAME, SIGN_IN_ROUTE_NAME } from "../navigators/routeNames";
-import getRouteName from "../utils/getRouteName";
+import getRouteName from "../navigators/getRouteName";
 
 class AppWithNavigationState extends PureComponent {
   componentDidMount() {

@@ -3,8 +3,8 @@ import { Linking } from "react-native";
 
 import Urls from "../constants/Urls";
 import { AppNavigator } from "../navigators/AppNavigator";
-import isRouteNameOnStack from "../utils/isRouteNameOnStack";
-import getRouteName from "../utils/getRouteName";
+import isRouteNameOnStack from "../navigators/isRouteNameOnStack";
+import getRouteName from "../navigators/getRouteName";
 import {
   ADD_COMMENT_ROUTE_NAME,
   ADD_NOTE_ROUTE_NAME,
