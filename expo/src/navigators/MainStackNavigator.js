@@ -27,6 +27,7 @@ const MainStackNavigator = StackNavigator(
   },
   {
     headerMode: "float",
+    headerTransitionPreset: "uikit",
     headerBackTitle: "",
     headerTruncatedBackTitle: "",
   }
