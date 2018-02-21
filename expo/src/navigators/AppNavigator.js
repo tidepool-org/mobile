@@ -6,6 +6,12 @@ import LaunchScreen from "../screens/LaunchScreen";
 import SignInScreenContainer from "../containers/SignInScreenContainer";
 import MainDrawerNavigator from "./MainDrawerNavigator";
 import DebugSettingsScreenContainer from "../containers/DebugSettingsScreenContainer";
+import {
+  LAUNCH_ROUTE_NAME,
+  SIGN_IN_ROUTE_NAME,
+  DEBUG_SETTINGS_ROUTE_NAME,
+  MAIN_DRAWER_ROUTE_NAME,
+} from "./routeNames";
 
 const noTransitionConfig = () => ({
   transitionSpec: {
@@ -17,16 +23,16 @@ const noTransitionConfig = () => ({
 
 const AppNavigator = StackNavigator(
   {
-    Launch: {
+    [LAUNCH_ROUTE_NAME]: {
       screen: LaunchScreen,
     },
-    SignIn: {
+    [SIGN_IN_ROUTE_NAME]: {
       screen: props => <SignInScreenContainer {...props} />,
     },
-    DebugSettings: {
+    [DEBUG_SETTINGS_ROUTE_NAME]: {
       screen: () => <DebugSettingsScreenContainer />,
     },
-    MainDrawer: {
+    [MAIN_DRAWER_ROUTE_NAME]: {
       screen: MainDrawerNavigator,
     },
   },
