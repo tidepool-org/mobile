@@ -2,9 +2,7 @@ import { StackNavigator } from "react-navigation";
 
 import MainStackNavigator from "./MainStackNavigator";
 import AddOrEditNoteScreenContainer from "../containers/AddOrEditNoteScreenContainer";
-
-export const ADD_NOTE_ROUTE_NAME = "ADD_NOTE_ROUTE_NAME";
-export const EDIT_NOTE_ROUTE_NAME = "EDIT_NOTE_ROUTE_NAME";
+import { ADD_NOTE_ROUTE_NAME, EDIT_NOTE_ROUTE_NAME } from "./routeNames";
 
 const transitionConfig = () => ({
   transitionSpec: {

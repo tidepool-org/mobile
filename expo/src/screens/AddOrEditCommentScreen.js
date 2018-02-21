@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { Alert, BackHandler, Keyboard, StatusBar } from "react-native";
+import { Alert, Keyboard, StatusBar } from "react-native";
 import glamorous, { ThemeProvider } from "glamorous-native";
 
 import PrimaryTheme from "../themes/PrimaryTheme";
@@ -81,7 +81,6 @@ class AddOrEditCommentScreen extends PureComponent {
       AddOrEditCommentScreen.showErrorMessageAlert();
     }
 
-    BackHandler.addEventListener("hardwareBackPress", this.onBackPress);
     this.keyboardDidShowListener = Keyboard.addListener(
       "keyboardDidShow",
       this.keyboardDidShow
@@ -102,8 +101,6 @@ class AddOrEditCommentScreen extends PureComponent {
   }
 
   componentWillUnmount() {
-    BackHandler.removeEventListener("hardwareBackPress", this.onBackPress);
-
     this.keyboardDidShowListener.remove();
     this.keyboardDidHideListener.remove();
   }

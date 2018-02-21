@@ -5,6 +5,7 @@ import { addNavigationHelpers, NavigationActions } from "react-navigation";
 import { connect } from "react-redux";
 
 import { AppNavigator } from "../navigators/AppNavigator";
+import { HOME_ROUTE_NAME, SIGN_IN_ROUTE_NAME } from "../navigators/routeNames";
 import getRouteName from "../utils/getRouteName";
 
 class AppWithNavigationState extends PureComponent {
@@ -23,7 +24,7 @@ class AppWithNavigationState extends PureComponent {
   onBackPress = () => {
     const { dispatch, navigation } = this.props;
     const routeName = getRouteName({ navigationState: navigation });
-    if (routeName === "Home" || routeName === "SignIn") {
+    if (routeName === HOME_ROUTE_NAME || routeName === SIGN_IN_ROUTE_NAME) {
       return false;
     }
     dispatch(NavigationActions.back());

@@ -3,17 +3,19 @@ import { Linking } from "react-native";
 
 import Urls from "../constants/Urls";
 import { AppNavigator } from "../navigators/AppNavigator";
-import {
-  SWITCH_PROFILE_ROUTE_NAME,
-  ADD_COMMENT_ROUTE_NAME,
-  EDIT_COMMENT_ROUTE_NAME,
-} from "../navigators/MainStackNavigator";
-import {
-  ADD_NOTE_ROUTE_NAME,
-  EDIT_NOTE_ROUTE_NAME,
-} from "../navigators/MainModalNavigator";
 import isRouteNameOnStack from "../utils/isRouteNameOnStack";
 import getRouteName from "../utils/getRouteName";
+import {
+  ADD_COMMENT_ROUTE_NAME,
+  ADD_NOTE_ROUTE_NAME,
+  DEBUG_SETTINGS_ROUTE_NAME,
+  EDIT_COMMENT_ROUTE_NAME,
+  EDIT_NOTE_ROUTE_NAME,
+  LAUNCH_ROUTE_NAME,
+  MAIN_DRAWER_ROUTE_NAME,
+  SIGN_IN_ROUTE_NAME,
+  SWITCH_PROFILE_ROUTE_NAME,
+} from "../navigators/routeNames";
 import {
   NAVIGATE_LAUNCH,
   NAVIGATE_HOME,
@@ -65,7 +67,9 @@ const shouldIgnoreNextNavigate = ({ nextState, state }) => {
   return false;
 };
 
-const signInAction = AppNavigator.router.getActionForPathAndParams("SignIn");
+const signInAction = AppNavigator.router.getActionForPathAndParams(
+  SIGN_IN_ROUTE_NAME
+);
 const SignInActionState = AppNavigator.router.getStateForAction(signInAction);
 const initialState = AppNavigator.router.getStateForAction(
   signInAction,
@@ -81,7 +85,9 @@ function navigation(state = initialState, action) {
         NavigationActions.reset({
           index: 0,
           key: null,
-          actions: [NavigationActions.navigate({ routeName: "Launch" })],
+          actions: [
+            NavigationActions.navigate({ routeName: LAUNCH_ROUTE_NAME }),
+          ],
         }),
         state
       );
@@ -91,7 +97,9 @@ function navigation(state = initialState, action) {
         NavigationActions.reset({
           index: 0,
           key: null,
-          actions: [NavigationActions.navigate({ routeName: "MainDrawer" })],
+          actions: [
+            NavigationActions.navigate({ routeName: MAIN_DRAWER_ROUTE_NAME }),
+          ],
         }),
         state
       );
@@ -101,7 +109,9 @@ function navigation(state = initialState, action) {
         NavigationActions.reset({
           index: 0,
           key: null,
-          actions: [NavigationActions.navigate({ routeName: "SignIn" })],
+          actions: [
+            NavigationActions.navigate({ routeName: SIGN_IN_ROUTE_NAME }),
+          ],
         }),
         state
       );
@@ -181,7 +191,7 @@ function navigation(state = initialState, action) {
       break;
     case NAVIGATE_DEBUG_SETTINGS:
       nextState = AppNavigator.router.getStateForAction(
-        NavigationActions.navigate({ routeName: "DebugSettings" }),
+        NavigationActions.navigate({ routeName: DEBUG_SETTINGS_ROUTE_NAME }),
         state
       );
       break;
