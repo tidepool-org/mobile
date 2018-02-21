@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { createStore, applyMiddleware } from "redux";
+import { createStore, applyMiddleware, compose } from "redux";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import {
@@ -22,10 +22,14 @@ class AppWithStore extends PureComponent {
   constructor(props) {
     super(props);
 
+    /* eslint-disable no-undef, no-underscore-dangle */
+    const composeEnhancers =
+      window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
     this.store = createStore(
       reducers,
-      applyMiddleware(thunk, reactNavigationMiddleware)
+      composeEnhancers(applyMiddleware(thunk, reactNavigationMiddleware))
     );
+    /* eslint-enable no-undef, no-underscore-dangle */
     this.store.dispatch(appInitAsync());
   }
 

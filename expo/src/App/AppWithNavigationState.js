@@ -4,7 +4,7 @@ import { BackHandler, UIManager } from "react-native";
 import { addNavigationHelpers, NavigationActions } from "react-navigation";
 import { connect } from "react-redux";
 
-import AppNavigator from "../navigators/AppNavigator";
+import { AppNavigator } from "../navigators/AppNavigator";
 import getRouteName from "../utils/getRouteName";
 
 class AppWithNavigationState extends PureComponent {
