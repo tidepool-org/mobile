@@ -30,19 +30,22 @@
     "react-native-storybook-loader": "1.7.0",
     "react-test-renderer": "16.2.0"
   },
-  "main": "./crna-entry.js",
   "scripts": {
-    "start": "react-native-scripts start",
+    "start": "yarn run pre && react-native-scripts start",
+    "start-storybook": "yarn run prestorybook && react-native-scripts start",
     "eject": "react-native-scripts eject",
-    "android": "react-native-scripts android",
-    "ios": "react-native-scripts ios",
+    "android": "yarn run pre && react-native-scripts android",
+    "android-storybook":
+      "yarn run prestorybook && react-native-scripts android",
+    "ios": "yarn run pre && react-native-scripts ios",
+    "ios-storybook": "yarn run prestorybook && react-native-scripts ios",
     "test": "node node_modules/jest/bin/jest.js --watch",
     "flow": "flow",
     "format": "prettier-eslint \"src/**/*.js\"",
     "pre":
-      "cp expo-specific-src/utils/runtimeEnvironment.js src/utils/runtimeEnvironment.js && cp expo-specific-src/components/LinearGradient.js src/components/LinearGradient.js && cp expo-specific-src/actions/appVersion.js src/actions/appVersion.js && cp expo-specific-src/reducers/appVersion.js src/reducers/appVersion.js",
+      "cp crna-entry.js index.js && cp expo-specific-src/utils/runtimeEnvironment.js src/utils/runtimeEnvironment.js && cp expo-specific-src/components/LinearGradient.js src/components/LinearGradient.js && cp expo-specific-src/actions/appVersion.js src/actions/appVersion.js && cp expo-specific-src/reducers/appVersion.js src/reducers/appVersion.js",
     "prestorybook":
-      "cp storybook-specific-App.js App.js && cp expo-specific-src/utils/runtimeEnvironment.js src/utils/runtimeEnvironment.js && cp expo-specific-src/components/LinearGradient.js src/components/LinearGradient.js && cp expo-specific-src/actions/appVersion.js src/actions/appVersion.js && cp expo-specific-src/reducers/appVersion.js src/reducers/appVersion.js && rnstl",
+      "cp storybook-entry.js index.js && cp expo-specific-src/utils/runtimeEnvironment.js src/utils/runtimeEnvironment.js && cp expo-specific-src/components/LinearGradient.js src/components/LinearGradient.js && cp expo-specific-src/actions/appVersion.js src/actions/appVersion.js && cp expo-specific-src/reducers/appVersion.js src/reducers/appVersion.js && rnstl",
     "storybook": "storybook start -p 7007",
     "react-devtools": "react-devtools",
     "postinstall": "rndebugger-open"
