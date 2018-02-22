@@ -1,20 +1,18 @@
 import React from "react";
-import { createStore } from "redux";
-import { Provider } from "react-redux";
 import renderer from "react-test-renderer";
 
-import AppWithNavigationState from "../src/navigators/AppNavigator";
-import AppReducer from "../src/reducers";
+import App from "../src/App";
+
+// Stub console.error and console.warn to workaround useless(?) react-test-renderer console.error
+// FIXME: See https://github.com/facebook/react/issues/11098
+console.error = error => {
+  throw new Error(error);
+};
+console.warn = warning => {
+  throw new Error(warning);
+};
 
 it("renders without crashing", () => {
-  const store = createStore(AppReducer);
-
-  const rendered = renderer
-    .create(
-      <Provider store={store}>
-        <AppWithNavigationState />
-      </Provider>,
-    )
-    .toJSON();
+  const rendered = renderer.create(<App />).toJSON();
   expect(rendered).toBeTruthy();
 });
