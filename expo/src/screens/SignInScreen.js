@@ -1,8 +1,13 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { Keyboard, LayoutAnimation, Platform, StatusBar } from "react-native";
+import {
+  Keyboard,
+  LayoutAnimation,
+  Platform,
+  SafeAreaView,
+  StatusBar,
+} from "react-native";
 import glamorous, { ThemeProvider } from "glamorous-native";
-import { isIphoneX } from "react-native-iphone-x-helper";
 
 import PrimaryTheme from "../themes/PrimaryTheme";
 import MadePossibleBy from "../components/MadePossibleBy";
@@ -10,9 +15,6 @@ import SignUp from "../components/SignUp";
 import SignInForm from "../components/SignInForm";
 import VersionAndApiEnvironment from "../components/VersionAndApiEnvironment";
 import DebugSettingsTouchable from "../components/DebugSettingsTouchable";
-
-const safeAreaTopInset = isIphoneX() ? 24 : 0;
-const safeAreaBottomInset = isIphoneX() ? 20 : 0;
 
 class SignInScreen extends PureComponent {
   state = {};
@@ -37,6 +39,14 @@ class SignInScreen extends PureComponent {
     this.keyboardDidHideListener.remove();
     this.keyboardWillChangeFrameListener.remove();
   }
+
+  onContainerViewLayout = event => {
+    if (!this.state.isKeyboardVisible) {
+      const { layout } = event.nativeEvent;
+      const containerViewHeightWithoutKeyboard = layout.height;
+      this.setState({ containerViewHeightWithoutKeyboard });
+    }
+  };
 
   onSignInFormLayout = event => {
     const { layout } = event.nativeEvent;
@@ -86,13 +96,16 @@ class SignInScreen extends PureComponent {
     this.setState({ signInFormContainerTop: -scrollY });
   }
 
+  // FIXME: Not called on Android with adjustNothing windowSoftInputMode. See: https://github.com/facebook/react-native/issues/3468#issuecomment-329603915 and https://github.com/facebook/react-native/issues/2852. Ideally we want adjustNothing and manage the keyboard avoidance ourselves, rather than adjustResize
   keyboardDidShow = event => {
+    this.setState({ isKeyboardVisible: true });
     if (Platform.OS === "android") {
       this.scrollToAvoidKeyboard(event);
     }
   };
 
   keyboardDidHide = event => {
+    this.setState({ isKeyboardVisible: false });
     if (Platform.OS === "android") {
       this.scrollToAvoidKeyboard(event);
     }
@@ -107,12 +120,46 @@ class SignInScreen extends PureComponent {
 
   theme = PrimaryTheme;
 
-  render() {
+  renderHeader() {
+    return (
+      <SignUp
+        style={{
+          alignSelf: "flex-end",
+          marginTop: 30,
+        }}
+        navigateSignUp={this.props.navigateSignUp}
+      />
+    );
+  }
+
+  renderFooter() {
+    const { version, apiEnvironment, navigateDebugSettings } = this.props;
+
+    return (
+      <DebugSettingsTouchable
+        style={{
+          marginBottom: 15,
+        }}
+        navigateDebugSettings={navigateDebugSettings}
+      >
+        <glamorous.View
+          flexDirection="column"
+          justifyContent="center"
+          alignItems="center"
+        >
+          <MadePossibleBy />
+          <VersionAndApiEnvironment
+            version={version}
+            apiEnvironment={apiEnvironment}
+          />
+        </glamorous.View>
+      </DebugSettingsTouchable>
+    );
+  }
+
+  renderSignInForm() {
     const {
       errorMessage,
-      version,
-      apiEnvironment,
-      navigateDebugSettings,
       navigateForgotPassword,
       authSignInReset,
       authSignInAsync,
@@ -120,56 +167,43 @@ class SignInScreen extends PureComponent {
     } = this.props;
 
     return (
+      <SignInForm
+        errorMessage={errorMessage}
+        navigateForgotPassword={navigateForgotPassword}
+        authSignInReset={authSignInReset}
+        authSignInAsync={authSignInAsync}
+        signingIn={signingIn}
+        onKeyboardAvoidingViewHeight={this.onKeyboardAvoidingViewHeight}
+      />
+    );
+  }
+
+  render() {
+    return (
       <ThemeProvider theme={this.theme}>
         <glamorous.View
           flex={1}
+          // FIXME: This minHeight is needed to work around Android issue where adjustResize windowSoftInputMode causes the window size to change, thus squishing the view and revealing the footer rather than obscuring it. See: https://github.com/facebook/react-native/issues/3468#issuecomment-329603915 and https://github.com/facebook/react-native/issues/2852. Ideally we want adjustNothing and manage the keyboard avoidance ourselves, rather than adjustResize
+          minHeight={this.state.containerViewHeightWithoutKeyboard}
           backgroundColor={this.theme.colors.lightBackground}
-          justifyContent="center"
-          alignItems="center"
           onLayout={this.onContainerViewLayout}
         >
           <StatusBar barStyle="dark-content" />
-          <SignUp
-            style={{
-              alignSelf: "flex-end",
-              top: 44 + safeAreaTopInset,
-              zIndex: 1,
-              position: "absolute",
-            }}
-            navigateSignUp={this.props.navigateSignUp}
-          />
-          <glamorous.View
-            onLayout={this.onSignInFormLayout}
-            top={this.state.signInFormContainerTop}
+          <SafeAreaView
+            flex={1}
+            justifyContent="space-between"
+            marginLeft={20}
+            marginRight={20}
           >
-            <SignInForm
-              errorMessage={errorMessage}
-              navigateForgotPassword={navigateForgotPassword}
-              authSignInReset={authSignInReset}
-              authSignInAsync={authSignInAsync}
-              signingIn={signingIn}
-              onKeyboardAvoidingViewHeight={this.onKeyboardAvoidingViewHeight}
-            />
-          </glamorous.View>
-          <DebugSettingsTouchable
-            style={{
-              position: "absolute",
-              bottom: 15 + safeAreaBottomInset,
-            }}
-            navigateDebugSettings={navigateDebugSettings}
-          >
+            {this.renderHeader()}
             <glamorous.View
-              flexDirection="column"
-              justifyContent="center"
-              alignItems="center"
+              onLayout={this.onSignInFormLayout}
+              top={this.state.signInFormContainerTop}
             >
-              <MadePossibleBy />
-              <VersionAndApiEnvironment
-                version={version}
-                apiEnvironment={apiEnvironment}
-              />
+              {this.renderSignInForm()}
             </glamorous.View>
-          </DebugSettingsTouchable>
+            {this.renderFooter()}
+          </SafeAreaView>
         </glamorous.View>
       </ThemeProvider>
     );

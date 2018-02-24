@@ -19,7 +19,7 @@ class SignUp extends PureComponent {
           flexDirection="row"
           alignItems="center"
           onPress={this.onPressSignUp}
-          padding={8}
+          hitSlop={{ left: 10, right: 10, top: 10, bottom: 10 }}
         >
           <glamorous.Image
             source={require("../../assets/images/signup-plus.png")}
