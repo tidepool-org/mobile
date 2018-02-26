@@ -5,6 +5,7 @@
   "devDependencies": {
     "@storybook/addon-actions": "3.3.14",
     "@storybook/addon-links": "3.3.14",
+    "@storybook/addon-storyshots": "^3.3.14",
     "@storybook/addons": "3.3.14",
     "@storybook/react-native": "3.3.14",
     "babel-eslint": "8.2.2",
@@ -35,17 +36,14 @@
     "start-storybook": "yarn run prestorybook && react-native-scripts start",
     "eject": "react-native-scripts eject",
     "android": "yarn run pre && react-native-scripts android",
-    "android-storybook":
-      "yarn run prestorybook && react-native-scripts android",
+    "android-storybook": "yarn run prestorybook && react-native-scripts android",
     "ios": "yarn run pre && react-native-scripts ios",
     "ios-storybook": "yarn run prestorybook && react-native-scripts ios",
     "test": "node node_modules/jest/bin/jest.js --watch",
     "flow": "flow",
     "format": "prettier-eslint \"src/**/*.js\"",
-    "pre":
-      "cp crna-entry.js index.js && cp expo-specific-src/utils/runtimeEnvironment.js src/utils/runtimeEnvironment.js && cp expo-specific-src/components/LinearGradient.js src/components/LinearGradient.js && cp expo-specific-src/actions/appVersion.js src/actions/appVersion.js && cp expo-specific-src/reducers/appVersion.js src/reducers/appVersion.js",
-    "prestorybook":
-      "cp storybook-entry.js index.js && cp expo-specific-src/utils/runtimeEnvironment.js src/utils/runtimeEnvironment.js && cp expo-specific-src/components/LinearGradient.js src/components/LinearGradient.js && cp expo-specific-src/actions/appVersion.js src/actions/appVersion.js && cp expo-specific-src/reducers/appVersion.js src/reducers/appVersion.js && rnstl",
+    "pre": "cp crna-entry.js index.js && cp expo-specific-src/utils/runtimeEnvironment.js src/utils/runtimeEnvironment.js && cp expo-specific-src/components/LinearGradient.js src/components/LinearGradient.js && cp expo-specific-src/actions/appVersion.js src/actions/appVersion.js && cp expo-specific-src/reducers/appVersion.js src/reducers/appVersion.js",
+    "prestorybook": "cp storybook-entry.js index.js && cp expo-specific-src/utils/runtimeEnvironment.js src/utils/runtimeEnvironment.js && cp expo-specific-src/components/LinearGradient.js src/components/LinearGradient.js && cp expo-specific-src/actions/appVersion.js src/actions/appVersion.js && cp expo-specific-src/reducers/appVersion.js src/reducers/appVersion.js && rnstl",
     "storybook": "storybook start -p 7007",
     "react-devtools": "react-devtools",
     "postinstall": "rndebugger-open"
@@ -53,12 +51,19 @@
   "jest": {
     "preset": "jest-expo",
     "transformIgnorePatterns": [
-      "node_modules/(?!(jest-)?react-native|expo|glamorous-native|react-navigation)"
-    ]
+      "node_modules/(?!(jest-)?react-native|expo|react-navigation|glamorous-native)"
+    ],
+    "moduleNameMapper": {
+      "^image![a-zA-Z0-9$_-]+$": "GlobalImageStub",
+      "^[@./a-zA-Z0-9$_-]+\\.(png|gif)$": "RelativeImageStub"
+    },
+    "setupTestFrameworkScriptFile": "./jest-setupTestFramework.js"
   },
   "config": {
     "react-native-storybook-loader": {
-      "searchDir": ["./__stories__"],
+      "searchDir": [
+        "./__stories__"
+      ],
       "pattern": "**/*.story.js",
       "outputFile": "./storybook/storyLoader.js"
     }

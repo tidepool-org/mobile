@@ -1,0 +1,3888 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots AddOrEditCommentScreen add comment 1`] = `
+<RCTSafeAreaView
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Array [
+        Object {
+          "backgroundColor": "white",
+          "flex": 1,
+        },
+      ]
+    }
+  >
+    <View
+      onLayout={[Function]}
+      style={
+        Array [
+          Object {
+            "flex": 1,
+            "height": null,
+          },
+        ]
+      }
+    >
+      <RCTScrollView
+        keyboardShouldPersistTaps="always"
+        onContentSizeChange={[Function]}
+        style={null}
+      >
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "backgroundColor": "#ffffff",
+                },
+              ]
+            }
+          >
+            <View
+              style={null}
+            >
+              <View
+                style={
+                  Array [
+                    Object {
+                      "flexDirection": "row",
+                      "justifyContent": "flex-start",
+                      "zIndex": 1,
+                    },
+                  ]
+                }
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={false}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "#4d4e4c",
+                        "fontFamily": "OpenSans-Regular",
+                        "fontSize": 12.5,
+                      },
+                      Object {
+                        "marginLeft": 12,
+                        "marginRight": 12,
+                        "marginTop": 7,
+                      },
+                    ]
+                  }
+                >
+                  Yesterday at 9:41 am
+                </Text>
+              </View>
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#3c3c3c",
+                      "fontFamily": "OpenSans-Regular",
+                      "fontSize": 15,
+                    },
+                    Object {
+                      "flexDirection": "row",
+                      "marginBottom": 7,
+                      "marginLeft": 12,
+                      "marginRight": 12,
+                      "marginTop": 7,
+                    },
+                  ]
+                }
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={false}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "#3c3c3c",
+                        "fontFamily": "OpenSans-Bold",
+                        "fontSize": 15,
+                      },
+                    ]
+                  }
+                >
+                  #note
+                </Text>
+                <Text
+                  accessible={true}
+                  allowFontScaling={false}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "#3c3c3c",
+                        "fontFamily": "OpenSans-Regular",
+                        "fontSize": 15,
+                      },
+                    ]
+                  }
+                >
+                   This is a note. Quis molestiae tempora eligendi omnis quisquam quisquam quos. Dolor voluptatibus velit nobis culpa deleniti. Reprehenderit in nisi et. Quia odio et inventore eligendi in deserunt id. Sit odio quia vitae provident quo provident molestiae.
+                </Text>
+              </Text>
+            </View>
+          </View>
+          <View
+            style={
+              Array [
+                Object {
+                  "backgroundColor": "#ffffff",
+                },
+              ]
+            }
+          >
+            <View
+              style={null}
+            >
+              <View
+                style={
+                  Array [
+                    Object {
+                      "backgroundColor": "white",
+                    },
+                  ]
+                }
+              >
+                <View
+                  style={
+                    Array [
+                      Object {
+                        "flexDirection": "row",
+                        "justifyContent": "flex-start",
+                        "zIndex": 1,
+                      },
+                    ]
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    numberOfLines={1}
+                    style={
+                      Array [
+                        Object {
+                          "color": "#4a4a4a",
+                          "fontFamily": "OpenSans-Semibold",
+                          "fontSize": 12.5,
+                        },
+                        Object {
+                          "flexShrink": 1,
+                          "marginLeft": 12,
+                          "marginTop": 7,
+                        },
+                      ]
+                    }
+                  >
+                    Some other person
+                  </Text>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    numberOfLines={1}
+                    style={
+                      Array [
+                        Object {
+                          "color": "#c9c9c9",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                        Object {
+                          "marginLeft": 10,
+                          "marginRight": 10,
+                          "marginTop": 7,
+                        },
+                      ]
+                    }
+                  >
+                    Yesterday at 10:41 am
+                  </Text>
+                </View>
+                <Text
+                  accessible={true}
+                  allowFontScaling={false}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "#8c8c8c",
+                        "fontFamily": "OpenSans-Regular",
+                        "fontSize": 12.5,
+                      },
+                      Object {
+                        "flexDirection": "row",
+                        "marginBottom": 7,
+                        "marginLeft": 12,
+                        "marginRight": 12,
+                        "marginTop": 0,
+                      },
+                    ]
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#8c8c8c",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                      ]
+                    }
+                  >
+                    This is comment 1 
+                  </Text>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#8c8c8c",
+                          "fontFamily": "OpenSans-Bold",
+                          "fontSize": 12.5,
+                        },
+                      ]
+                    }
+                  >
+                    #hashtag
+                  </Text>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#8c8c8c",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                      ]
+                    }
+                  >
+                    . This is a long comment. Pariatur quos est quod laborum. Quisquam esse quia expedita commodi. Tempora ut exercitationem doloribus harum. Sunt omnis et accusantium et quia quos sequi molestiae. Enim necessitatibus molestiae.
+                  </Text>
+                </Text>
+              </View>
+            </View>
+            <View
+              style={null}
+            >
+              <View
+                style={
+                  Array [
+                    Object {
+                      "backgroundColor": "white",
+                    },
+                  ]
+                }
+              >
+                <View
+                  style={
+                    Array [
+                      Object {
+                        "flexDirection": "row",
+                        "justifyContent": "flex-start",
+                        "zIndex": 1,
+                      },
+                    ]
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    numberOfLines={1}
+                    style={
+                      Array [
+                        Object {
+                          "color": "#4a4a4a",
+                          "fontFamily": "OpenSans-Semibold",
+                          "fontSize": 12.5,
+                        },
+                        Object {
+                          "flexShrink": 1,
+                          "marginLeft": 12,
+                          "marginTop": 7,
+                        },
+                      ]
+                    }
+                  >
+                    Some other person
+                  </Text>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    numberOfLines={1}
+                    style={
+                      Array [
+                        Object {
+                          "color": "#c9c9c9",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                        Object {
+                          "marginLeft": 10,
+                          "marginRight": 10,
+                          "marginTop": 7,
+                        },
+                      ]
+                    }
+                  >
+                    Today at 9:41 am
+                  </Text>
+                </View>
+                <Text
+                  accessible={true}
+                  allowFontScaling={false}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "#8c8c8c",
+                        "fontFamily": "OpenSans-Regular",
+                        "fontSize": 12.5,
+                      },
+                      Object {
+                        "flexDirection": "row",
+                        "marginBottom": 7,
+                        "marginLeft": 12,
+                        "marginRight": 12,
+                        "marginTop": 0,
+                      },
+                    ]
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#8c8c8c",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                      ]
+                    }
+                  >
+                    This is comment 2 
+                  </Text>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#8c8c8c",
+                          "fontFamily": "OpenSans-Bold",
+                          "fontSize": 12.5,
+                        },
+                      ]
+                    }
+                  >
+                    #hashtag
+                  </Text>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#8c8c8c",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                      ]
+                    }
+                  >
+                    . This is a long comment. Eligendi rerum excepturi et laudantium fuga similique fugit corporis voluptatem. Esse nobis et sint magnam aut. Dolores maiores incidunt occaecati iusto laborum. Quia deleniti dolorem quibusdam id veniam perspiciatis et nisi. Corporis laboriosam esse. Soluta accusamus officiis ut excepturi blanditiis libero ut.
+                  </Text>
+                </Text>
+              </View>
+            </View>
+            <View
+              style={null}
+            >
+              <View
+                style={
+                  Array [
+                    Object {
+                      "backgroundColor": "white",
+                    },
+                  ]
+                }
+              >
+                <View
+                  style={
+                    Array [
+                      Object {
+                        "flexDirection": "row",
+                        "justifyContent": "flex-start",
+                        "zIndex": 1,
+                      },
+                    ]
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    numberOfLines={1}
+                    style={
+                      Array [
+                        Object {
+                          "color": "#4a4a4a",
+                          "fontFamily": "OpenSans-Semibold",
+                          "fontSize": 12.5,
+                        },
+                        Object {
+                          "flexShrink": 1,
+                          "marginLeft": 12,
+                          "marginTop": 7,
+                        },
+                      ]
+                    }
+                  >
+                    Some other person
+                  </Text>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    numberOfLines={1}
+                    style={
+                      Array [
+                        Object {
+                          "color": "#c9c9c9",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                        Object {
+                          "marginLeft": 10,
+                          "marginRight": 10,
+                          "marginTop": 7,
+                        },
+                      ]
+                    }
+                  >
+                    Today at 10:41 am
+                  </Text>
+                </View>
+                <Text
+                  accessible={true}
+                  allowFontScaling={false}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "#8c8c8c",
+                        "fontFamily": "OpenSans-Regular",
+                        "fontSize": 12.5,
+                      },
+                      Object {
+                        "flexDirection": "row",
+                        "marginBottom": 7,
+                        "marginLeft": 12,
+                        "marginRight": 12,
+                        "marginTop": 0,
+                      },
+                    ]
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#8c8c8c",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                      ]
+                    }
+                  >
+                    This is comment 3 
+                  </Text>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#8c8c8c",
+                          "fontFamily": "OpenSans-Bold",
+                          "fontSize": 12.5,
+                        },
+                      ]
+                    }
+                  >
+                    #hashtag
+                  </Text>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#8c8c8c",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                      ]
+                    }
+                  >
+                    .
+                  </Text>
+                </Text>
+              </View>
+            </View>
+            <View
+              style={null}
+            >
+              <View
+                style={
+                  Array [
+                    Object {
+                      "backgroundColor": "white",
+                    },
+                  ]
+                }
+              >
+                <View
+                  style={
+                    Array [
+                      Object {
+                        "flexDirection": "row",
+                        "justifyContent": "flex-start",
+                        "zIndex": 1,
+                      },
+                    ]
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    numberOfLines={1}
+                    style={
+                      Array [
+                        Object {
+                          "color": "#4a4a4a",
+                          "fontFamily": "OpenSans-Semibold",
+                          "fontSize": 12.5,
+                        },
+                        Object {
+                          "flexShrink": 1,
+                          "marginLeft": 12,
+                          "marginTop": 7,
+                        },
+                      ]
+                    }
+                  >
+                    Some other person
+                  </Text>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    numberOfLines={1}
+                    style={
+                      Array [
+                        Object {
+                          "color": "#c9c9c9",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                        Object {
+                          "marginLeft": 10,
+                          "marginRight": 10,
+                          "marginTop": 7,
+                        },
+                      ]
+                    }
+                  >
+                    Today at 11:41 am
+                  </Text>
+                </View>
+                <Text
+                  accessible={true}
+                  allowFontScaling={false}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "#8c8c8c",
+                        "fontFamily": "OpenSans-Regular",
+                        "fontSize": 12.5,
+                      },
+                      Object {
+                        "flexDirection": "row",
+                        "marginBottom": 7,
+                        "marginLeft": 12,
+                        "marginRight": 12,
+                        "marginTop": 0,
+                      },
+                    ]
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#8c8c8c",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                      ]
+                    }
+                  >
+                    This is comment 4 
+                  </Text>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#8c8c8c",
+                          "fontFamily": "OpenSans-Bold",
+                          "fontSize": 12.5,
+                        },
+                      ]
+                    }
+                  >
+                    #hashtag
+                  </Text>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#8c8c8c",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                      ]
+                    }
+                  >
+                    . This is a long comment. Fuga enim tempore non voluptas quia vitae ipsam voluptas. Et dolor adipisci dolores sunt non explicabo occaecati rerum nesciunt. Sint est asperiores sit voluptatum mollitia enim iste. Nesciunt minima sequi voluptas optio aut voluptatem. Eligendi voluptates iste eius iure commodi molestiae.
+                  </Text>
+                </Text>
+              </View>
+            </View>
+            <View
+              style={null}
+            >
+              <View
+                style={
+                  Array [
+                    Object {
+                      "backgroundColor": "white",
+                    },
+                  ]
+                }
+              >
+                <View
+                  style={
+                    Array [
+                      Object {
+                        "flexDirection": "row",
+                        "justifyContent": "flex-start",
+                        "zIndex": 1,
+                      },
+                    ]
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    numberOfLines={1}
+                    style={
+                      Array [
+                        Object {
+                          "color": "#4a4a4a",
+                          "fontFamily": "OpenSans-Semibold",
+                          "fontSize": 12.5,
+                        },
+                        Object {
+                          "flexShrink": 1,
+                          "marginLeft": 12,
+                          "marginTop": 7,
+                        },
+                      ]
+                    }
+                  >
+                    Some other person
+                  </Text>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    numberOfLines={1}
+                    style={
+                      Array [
+                        Object {
+                          "color": "#c9c9c9",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                        Object {
+                          "marginLeft": 10,
+                          "marginRight": 10,
+                          "marginTop": 7,
+                        },
+                      ]
+                    }
+                  >
+                    Today at 12:41 pm
+                  </Text>
+                </View>
+                <Text
+                  accessible={true}
+                  allowFontScaling={false}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "#8c8c8c",
+                        "fontFamily": "OpenSans-Regular",
+                        "fontSize": 12.5,
+                      },
+                      Object {
+                        "flexDirection": "row",
+                        "marginBottom": 7,
+                        "marginLeft": 12,
+                        "marginRight": 12,
+                        "marginTop": 0,
+                      },
+                    ]
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#8c8c8c",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                      ]
+                    }
+                  >
+                    This is comment 5 
+                  </Text>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#8c8c8c",
+                          "fontFamily": "OpenSans-Bold",
+                          "fontSize": 12.5,
+                        },
+                      ]
+                    }
+                  >
+                    #hashtag
+                  </Text>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#8c8c8c",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                      ]
+                    }
+                  >
+                    . This is a long comment. Quo ex reprehenderit ipsa incidunt corporis vel in unde. Iste asperiores consequatur ex quidem omnis inventore deserunt. Eligendi officiis voluptatem. In omnis labore consequatur nisi. Excepturi doloremque nam omnis odit labore magni rerum quia. Distinctio adipisci nulla exercitationem omnis illum.
+                  </Text>
+                </Text>
+              </View>
+            </View>
+            <View
+              onLayout={[Function]}
+              style={null}
+            >
+              <View
+                style={
+                  Array [
+                    Object {
+                      "backgroundColor": "#CED0CE",
+                      "height": 0.5,
+                      "marginBottom": 7,
+                      "marginTop": 7,
+                    },
+                  ]
+                }
+              />
+              <View
+                style={
+                  Array [
+                    Object {
+                      "height": 125,
+                    },
+                  ]
+                }
+              >
+                <View
+                  style={
+                    Array [
+                      Object {
+                        "flex": 1,
+                      },
+                    ]
+                  }
+                >
+                  <TextInput
+                    allowFontScaling={false}
+                    autoCapitalize="sentences"
+                    autoCorrect={true}
+                    keyboardAppearance="dark"
+                    keyboardType="default"
+                    multiline={true}
+                    onChangeText={[Function]}
+                    returnKeyType="default"
+                    selectionColor="#657ef6"
+                    style={
+                      Array [
+                        Object {
+                          "flex": 1,
+                          "paddingBottom": 7,
+                          "paddingLeft": 12,
+                          "paddingRight": 12,
+                          "paddingTop": 7,
+                        },
+                      ]
+                    }
+                    underlineColorAndroid="transparent"
+                  />
+                  <View
+                    style={
+                      Array [
+                        Object {
+                          "flexDirection": "row",
+                          "justifyContent": "flex-end",
+                        },
+                      ]
+                    }
+                  >
+                    <View
+                      accessibilityComponentType={undefined}
+                      accessibilityLabel={undefined}
+                      accessibilityTraits={undefined}
+                      accessible={true}
+                      collapsable={undefined}
+                      hasTVPreferredFocus={undefined}
+                      hitSlop={
+                        Object {
+                          "bottom": 10,
+                          "left": 10,
+                          "right": 10,
+                          "top": 10,
+                        }
+                      }
+                      isTVSelectable={true}
+                      nativeID={undefined}
+                      onLayout={undefined}
+                      onResponderGrant={[Function]}
+                      onResponderMove={[Function]}
+                      onResponderRelease={[Function]}
+                      onResponderTerminate={[Function]}
+                      onResponderTerminationRequest={[Function]}
+                      onStartShouldSetResponder={[Function]}
+                      style={
+                        Object {
+                          "marginRight": 10,
+                          "marginTop": 7,
+                          "opacity": 1,
+                        }
+                      }
+                      testID={undefined}
+                      tvParallaxProperties={undefined}
+                    >
+                      <Text
+                        accessible={true}
+                        allowFontScaling={false}
+                        ellipsizeMode="tail"
+                        numberOfLines={1}
+                        style={
+                          Array [
+                            Object {
+                              "color": "#627cff",
+                              "fontFamily": "OpenSans-Regular",
+                              "fontSize": 12.5,
+                            },
+                          ]
+                        }
+                      >
+                        Cancel
+                      </Text>
+                    </View>
+                    <View
+                      accessibilityComponentType={undefined}
+                      accessibilityLabel={undefined}
+                      accessibilityTraits={undefined}
+                      accessible={true}
+                      collapsable={undefined}
+                      hasTVPreferredFocus={undefined}
+                      hitSlop={
+                        Object {
+                          "bottom": 10,
+                          "left": 10,
+                          "right": 10,
+                          "top": 10,
+                        }
+                      }
+                      isTVSelectable={true}
+                      nativeID={undefined}
+                      onLayout={undefined}
+                      onResponderGrant={[Function]}
+                      onResponderMove={[Function]}
+                      onResponderRelease={[Function]}
+                      onResponderTerminate={[Function]}
+                      onResponderTerminationRequest={[Function]}
+                      onStartShouldSetResponder={[Function]}
+                      style={
+                        Object {
+                          "marginRight": 10,
+                          "marginTop": 7,
+                          "opacity": 1,
+                        }
+                      }
+                      testID={undefined}
+                      tvParallaxProperties={undefined}
+                    >
+                      <Text
+                        accessible={true}
+                        allowFontScaling={false}
+                        ellipsizeMode="tail"
+                        numberOfLines={1}
+                        style={
+                          Array [
+                            Object {
+                              "color": "#c9c9c9",
+                              "fontFamily": "OpenSans-Regular",
+                              "fontSize": 12.5,
+                            },
+                          ]
+                        }
+                      >
+                        Post
+                      </Text>
+                    </View>
+                  </View>
+                </View>
+              </View>
+              <View
+                style={
+                  Array [
+                    Object {
+                      "backgroundColor": "#CED0CE",
+                      "height": 0.5,
+                      "marginBottom": 7,
+                      "marginTop": 7,
+                    },
+                  ]
+                }
+              />
+            </View>
+          </View>
+        </View>
+      </RCTScrollView>
+    </View>
+  </View>
+</RCTSafeAreaView>
+`;
+
+exports[`Storyshots AddOrEditCommentScreen edit comment in middle 1`] = `
+<RCTSafeAreaView
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Array [
+        Object {
+          "backgroundColor": "white",
+          "flex": 1,
+        },
+      ]
+    }
+  >
+    <View
+      onLayout={[Function]}
+      style={
+        Array [
+          Object {
+            "flex": 1,
+            "height": null,
+          },
+        ]
+      }
+    >
+      <RCTScrollView
+        keyboardShouldPersistTaps="always"
+        onContentSizeChange={[Function]}
+        style={null}
+      >
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "backgroundColor": "#ffffff",
+                },
+              ]
+            }
+          >
+            <View
+              style={null}
+            >
+              <View
+                style={
+                  Array [
+                    Object {
+                      "flexDirection": "row",
+                      "justifyContent": "flex-start",
+                      "zIndex": 1,
+                    },
+                  ]
+                }
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={false}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "#4d4e4c",
+                        "fontFamily": "OpenSans-Regular",
+                        "fontSize": 12.5,
+                      },
+                      Object {
+                        "marginLeft": 12,
+                        "marginRight": 12,
+                        "marginTop": 7,
+                      },
+                    ]
+                  }
+                >
+                  Yesterday at 9:41 am
+                </Text>
+              </View>
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#3c3c3c",
+                      "fontFamily": "OpenSans-Regular",
+                      "fontSize": 15,
+                    },
+                    Object {
+                      "flexDirection": "row",
+                      "marginBottom": 7,
+                      "marginLeft": 12,
+                      "marginRight": 12,
+                      "marginTop": 7,
+                    },
+                  ]
+                }
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={false}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "#3c3c3c",
+                        "fontFamily": "OpenSans-Bold",
+                        "fontSize": 15,
+                      },
+                    ]
+                  }
+                >
+                  #note
+                </Text>
+                <Text
+                  accessible={true}
+                  allowFontScaling={false}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "#3c3c3c",
+                        "fontFamily": "OpenSans-Regular",
+                        "fontSize": 15,
+                      },
+                    ]
+                  }
+                >
+                   This is a note. Quis molestiae tempora eligendi omnis quisquam quisquam quos. Dolor voluptatibus velit nobis culpa deleniti. Reprehenderit in nisi et. Quia odio et inventore eligendi in deserunt id. Sit odio quia vitae provident quo provident molestiae.
+                </Text>
+              </Text>
+            </View>
+          </View>
+          <View
+            style={
+              Array [
+                Object {
+                  "backgroundColor": "#ffffff",
+                },
+              ]
+            }
+          >
+            <View
+              style={null}
+            >
+              <View
+                style={
+                  Array [
+                    Object {
+                      "backgroundColor": "white",
+                    },
+                  ]
+                }
+              >
+                <View
+                  style={
+                    Array [
+                      Object {
+                        "flexDirection": "row",
+                        "justifyContent": "flex-start",
+                        "zIndex": 1,
+                      },
+                    ]
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    numberOfLines={1}
+                    style={
+                      Array [
+                        Object {
+                          "color": "#4a4a4a",
+                          "fontFamily": "OpenSans-Semibold",
+                          "fontSize": 12.5,
+                        },
+                        Object {
+                          "flexShrink": 1,
+                          "marginLeft": 12,
+                          "marginTop": 7,
+                        },
+                      ]
+                    }
+                  >
+                    Some other person
+                  </Text>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    numberOfLines={1}
+                    style={
+                      Array [
+                        Object {
+                          "color": "#c9c9c9",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                        Object {
+                          "marginLeft": 10,
+                          "marginRight": 10,
+                          "marginTop": 7,
+                        },
+                      ]
+                    }
+                  >
+                    Yesterday at 10:41 am
+                  </Text>
+                </View>
+                <Text
+                  accessible={true}
+                  allowFontScaling={false}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "#8c8c8c",
+                        "fontFamily": "OpenSans-Regular",
+                        "fontSize": 12.5,
+                      },
+                      Object {
+                        "flexDirection": "row",
+                        "marginBottom": 7,
+                        "marginLeft": 12,
+                        "marginRight": 12,
+                        "marginTop": 0,
+                      },
+                    ]
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#8c8c8c",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                      ]
+                    }
+                  >
+                    This is comment 1 
+                  </Text>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#8c8c8c",
+                          "fontFamily": "OpenSans-Bold",
+                          "fontSize": 12.5,
+                        },
+                      ]
+                    }
+                  >
+                    #hashtag
+                  </Text>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#8c8c8c",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                      ]
+                    }
+                  >
+                    . This is a long comment. Pariatur quos est quod laborum. Quisquam esse quia expedita commodi. Tempora ut exercitationem doloribus harum. Sunt omnis et accusantium et quia quos sequi molestiae. Enim necessitatibus molestiae.
+                  </Text>
+                </Text>
+              </View>
+            </View>
+            <View
+              style={null}
+            >
+              <View
+                style={
+                  Array [
+                    Object {
+                      "backgroundColor": "white",
+                    },
+                  ]
+                }
+              >
+                <View
+                  style={
+                    Array [
+                      Object {
+                        "flexDirection": "row",
+                        "justifyContent": "flex-start",
+                        "zIndex": 1,
+                      },
+                    ]
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    numberOfLines={1}
+                    style={
+                      Array [
+                        Object {
+                          "color": "#4a4a4a",
+                          "fontFamily": "OpenSans-Semibold",
+                          "fontSize": 12.5,
+                        },
+                        Object {
+                          "flexShrink": 1,
+                          "marginLeft": 12,
+                          "marginTop": 7,
+                        },
+                      ]
+                    }
+                  >
+                    Some other person
+                  </Text>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    numberOfLines={1}
+                    style={
+                      Array [
+                        Object {
+                          "color": "#c9c9c9",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                        Object {
+                          "marginLeft": 10,
+                          "marginRight": 10,
+                          "marginTop": 7,
+                        },
+                      ]
+                    }
+                  >
+                    Today at 9:41 am
+                  </Text>
+                </View>
+                <Text
+                  accessible={true}
+                  allowFontScaling={false}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "#8c8c8c",
+                        "fontFamily": "OpenSans-Regular",
+                        "fontSize": 12.5,
+                      },
+                      Object {
+                        "flexDirection": "row",
+                        "marginBottom": 7,
+                        "marginLeft": 12,
+                        "marginRight": 12,
+                        "marginTop": 0,
+                      },
+                    ]
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#8c8c8c",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                      ]
+                    }
+                  >
+                    This is comment 2 
+                  </Text>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#8c8c8c",
+                          "fontFamily": "OpenSans-Bold",
+                          "fontSize": 12.5,
+                        },
+                      ]
+                    }
+                  >
+                    #hashtag
+                  </Text>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#8c8c8c",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                      ]
+                    }
+                  >
+                    . This is a long comment. Eligendi rerum excepturi et laudantium fuga similique fugit corporis voluptatem. Esse nobis et sint magnam aut. Dolores maiores incidunt occaecati iusto laborum. Quia deleniti dolorem quibusdam id veniam perspiciatis et nisi. Corporis laboriosam esse. Soluta accusamus officiis ut excepturi blanditiis libero ut.
+                  </Text>
+                </Text>
+              </View>
+            </View>
+            <View
+              onLayout={[Function]}
+              style={null}
+            >
+              <View
+                style={
+                  Array [
+                    Object {
+                      "backgroundColor": "#CED0CE",
+                      "height": 0.5,
+                      "marginBottom": 7,
+                      "marginTop": 7,
+                    },
+                  ]
+                }
+              />
+              <View
+                style={
+                  Array [
+                    Object {
+                      "height": 125,
+                    },
+                  ]
+                }
+              >
+                <View
+                  style={
+                    Array [
+                      Object {
+                        "flex": 1,
+                      },
+                    ]
+                  }
+                >
+                  <TextInput
+                    allowFontScaling={false}
+                    autoCapitalize="sentences"
+                    autoCorrect={true}
+                    keyboardAppearance="dark"
+                    keyboardType="default"
+                    multiline={true}
+                    onChangeText={[Function]}
+                    returnKeyType="default"
+                    selectionColor="#657ef6"
+                    style={
+                      Array [
+                        Object {
+                          "flex": 1,
+                          "paddingBottom": 7,
+                          "paddingLeft": 12,
+                          "paddingRight": 12,
+                          "paddingTop": 7,
+                        },
+                      ]
+                    }
+                    underlineColorAndroid="transparent"
+                  >
+                    <Text
+                      accessible={true}
+                      allowFontScaling={false}
+                      ellipsizeMode="tail"
+                      style={
+                        Array [
+                          Object {
+                            "color": "#3c3c3c",
+                            "fontFamily": "OpenSans-Regular",
+                            "fontSize": 15,
+                          },
+                        ]
+                      }
+                    >
+                      This is comment 3 
+                    </Text>
+                    <Text
+                      accessible={true}
+                      allowFontScaling={false}
+                      ellipsizeMode="tail"
+                      style={
+                        Array [
+                          Object {
+                            "color": "#3c3c3c",
+                            "fontFamily": "OpenSans-Bold",
+                            "fontSize": 15,
+                          },
+                        ]
+                      }
+                    >
+                      #hashtag
+                    </Text>
+                    <Text
+                      accessible={true}
+                      allowFontScaling={false}
+                      ellipsizeMode="tail"
+                      style={
+                        Array [
+                          Object {
+                            "color": "#3c3c3c",
+                            "fontFamily": "OpenSans-Regular",
+                            "fontSize": 15,
+                          },
+                        ]
+                      }
+                    >
+                      .
+                    </Text>
+                  </TextInput>
+                  <View
+                    style={
+                      Array [
+                        Object {
+                          "flexDirection": "row",
+                          "justifyContent": "flex-end",
+                        },
+                      ]
+                    }
+                  >
+                    <View
+                      accessibilityComponentType={undefined}
+                      accessibilityLabel={undefined}
+                      accessibilityTraits={undefined}
+                      accessible={true}
+                      collapsable={undefined}
+                      hasTVPreferredFocus={undefined}
+                      hitSlop={
+                        Object {
+                          "bottom": 10,
+                          "left": 10,
+                          "right": 10,
+                          "top": 10,
+                        }
+                      }
+                      isTVSelectable={true}
+                      nativeID={undefined}
+                      onLayout={undefined}
+                      onResponderGrant={[Function]}
+                      onResponderMove={[Function]}
+                      onResponderRelease={[Function]}
+                      onResponderTerminate={[Function]}
+                      onResponderTerminationRequest={[Function]}
+                      onStartShouldSetResponder={[Function]}
+                      style={
+                        Object {
+                          "marginRight": 10,
+                          "marginTop": 7,
+                          "opacity": 1,
+                        }
+                      }
+                      testID={undefined}
+                      tvParallaxProperties={undefined}
+                    >
+                      <Text
+                        accessible={true}
+                        allowFontScaling={false}
+                        ellipsizeMode="tail"
+                        numberOfLines={1}
+                        style={
+                          Array [
+                            Object {
+                              "color": "#627cff",
+                              "fontFamily": "OpenSans-Regular",
+                              "fontSize": 12.5,
+                            },
+                          ]
+                        }
+                      >
+                        Cancel
+                      </Text>
+                    </View>
+                    <View
+                      accessibilityComponentType={undefined}
+                      accessibilityLabel={undefined}
+                      accessibilityTraits={undefined}
+                      accessible={true}
+                      collapsable={undefined}
+                      hasTVPreferredFocus={undefined}
+                      hitSlop={
+                        Object {
+                          "bottom": 10,
+                          "left": 10,
+                          "right": 10,
+                          "top": 10,
+                        }
+                      }
+                      isTVSelectable={true}
+                      nativeID={undefined}
+                      onLayout={undefined}
+                      onResponderGrant={[Function]}
+                      onResponderMove={[Function]}
+                      onResponderRelease={[Function]}
+                      onResponderTerminate={[Function]}
+                      onResponderTerminationRequest={[Function]}
+                      onStartShouldSetResponder={[Function]}
+                      style={
+                        Object {
+                          "marginRight": 10,
+                          "marginTop": 7,
+                          "opacity": 1,
+                        }
+                      }
+                      testID={undefined}
+                      tvParallaxProperties={undefined}
+                    >
+                      <Text
+                        accessible={true}
+                        allowFontScaling={false}
+                        ellipsizeMode="tail"
+                        numberOfLines={1}
+                        style={
+                          Array [
+                            Object {
+                              "color": "#c9c9c9",
+                              "fontFamily": "OpenSans-Regular",
+                              "fontSize": 12.5,
+                            },
+                          ]
+                        }
+                      >
+                        Save
+                      </Text>
+                    </View>
+                  </View>
+                </View>
+              </View>
+              <View
+                style={
+                  Array [
+                    Object {
+                      "backgroundColor": "#CED0CE",
+                      "height": 0.5,
+                      "marginBottom": 7,
+                      "marginTop": 7,
+                    },
+                  ]
+                }
+              />
+            </View>
+            <View
+              style={null}
+            >
+              <View
+                style={
+                  Array [
+                    Object {
+                      "backgroundColor": "white",
+                    },
+                  ]
+                }
+              >
+                <View
+                  style={
+                    Array [
+                      Object {
+                        "flexDirection": "row",
+                        "justifyContent": "flex-start",
+                        "zIndex": 1,
+                      },
+                    ]
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    numberOfLines={1}
+                    style={
+                      Array [
+                        Object {
+                          "color": "#4a4a4a",
+                          "fontFamily": "OpenSans-Semibold",
+                          "fontSize": 12.5,
+                        },
+                        Object {
+                          "flexShrink": 1,
+                          "marginLeft": 12,
+                          "marginTop": 7,
+                        },
+                      ]
+                    }
+                  >
+                    Some other person
+                  </Text>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    numberOfLines={1}
+                    style={
+                      Array [
+                        Object {
+                          "color": "#c9c9c9",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                        Object {
+                          "marginLeft": 10,
+                          "marginRight": 10,
+                          "marginTop": 7,
+                        },
+                      ]
+                    }
+                  >
+                    Today at 11:41 am
+                  </Text>
+                </View>
+                <Text
+                  accessible={true}
+                  allowFontScaling={false}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "#8c8c8c",
+                        "fontFamily": "OpenSans-Regular",
+                        "fontSize": 12.5,
+                      },
+                      Object {
+                        "flexDirection": "row",
+                        "marginBottom": 7,
+                        "marginLeft": 12,
+                        "marginRight": 12,
+                        "marginTop": 0,
+                      },
+                    ]
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#8c8c8c",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                      ]
+                    }
+                  >
+                    This is comment 4 
+                  </Text>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#8c8c8c",
+                          "fontFamily": "OpenSans-Bold",
+                          "fontSize": 12.5,
+                        },
+                      ]
+                    }
+                  >
+                    #hashtag
+                  </Text>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#8c8c8c",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                      ]
+                    }
+                  >
+                    . This is a long comment. Fuga enim tempore non voluptas quia vitae ipsam voluptas. Et dolor adipisci dolores sunt non explicabo occaecati rerum nesciunt. Sint est asperiores sit voluptatum mollitia enim iste. Nesciunt minima sequi voluptas optio aut voluptatem. Eligendi voluptates iste eius iure commodi molestiae.
+                  </Text>
+                </Text>
+              </View>
+            </View>
+            <View
+              style={null}
+            >
+              <View
+                style={
+                  Array [
+                    Object {
+                      "backgroundColor": "white",
+                    },
+                  ]
+                }
+              >
+                <View
+                  style={
+                    Array [
+                      Object {
+                        "flexDirection": "row",
+                        "justifyContent": "flex-start",
+                        "zIndex": 1,
+                      },
+                    ]
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    numberOfLines={1}
+                    style={
+                      Array [
+                        Object {
+                          "color": "#4a4a4a",
+                          "fontFamily": "OpenSans-Semibold",
+                          "fontSize": 12.5,
+                        },
+                        Object {
+                          "flexShrink": 1,
+                          "marginLeft": 12,
+                          "marginTop": 7,
+                        },
+                      ]
+                    }
+                  >
+                    Some other person
+                  </Text>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    numberOfLines={1}
+                    style={
+                      Array [
+                        Object {
+                          "color": "#c9c9c9",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                        Object {
+                          "marginLeft": 10,
+                          "marginRight": 10,
+                          "marginTop": 7,
+                        },
+                      ]
+                    }
+                  >
+                    Today at 12:41 pm
+                  </Text>
+                </View>
+                <Text
+                  accessible={true}
+                  allowFontScaling={false}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "#8c8c8c",
+                        "fontFamily": "OpenSans-Regular",
+                        "fontSize": 12.5,
+                      },
+                      Object {
+                        "flexDirection": "row",
+                        "marginBottom": 7,
+                        "marginLeft": 12,
+                        "marginRight": 12,
+                        "marginTop": 0,
+                      },
+                    ]
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#8c8c8c",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                      ]
+                    }
+                  >
+                    This is comment 5 
+                  </Text>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#8c8c8c",
+                          "fontFamily": "OpenSans-Bold",
+                          "fontSize": 12.5,
+                        },
+                      ]
+                    }
+                  >
+                    #hashtag
+                  </Text>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#8c8c8c",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                      ]
+                    }
+                  >
+                    . This is a long comment. Quo ex reprehenderit ipsa incidunt corporis vel in unde. Iste asperiores consequatur ex quidem omnis inventore deserunt. Eligendi officiis voluptatem. In omnis labore consequatur nisi. Excepturi doloremque nam omnis odit labore magni rerum quia. Distinctio adipisci nulla exercitationem omnis illum.
+                  </Text>
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+      </RCTScrollView>
+    </View>
+  </View>
+</RCTSafeAreaView>
+`;
+
+exports[`Storyshots AddOrEditCommentScreen edit first comment 1`] = `
+<RCTSafeAreaView
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Array [
+        Object {
+          "backgroundColor": "white",
+          "flex": 1,
+        },
+      ]
+    }
+  >
+    <View
+      onLayout={[Function]}
+      style={
+        Array [
+          Object {
+            "flex": 1,
+            "height": null,
+          },
+        ]
+      }
+    >
+      <RCTScrollView
+        keyboardShouldPersistTaps="always"
+        onContentSizeChange={[Function]}
+        style={null}
+      >
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "backgroundColor": "#ffffff",
+                },
+              ]
+            }
+          >
+            <View
+              style={null}
+            >
+              <View
+                style={
+                  Array [
+                    Object {
+                      "flexDirection": "row",
+                      "justifyContent": "flex-start",
+                      "zIndex": 1,
+                    },
+                  ]
+                }
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={false}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "#4d4e4c",
+                        "fontFamily": "OpenSans-Regular",
+                        "fontSize": 12.5,
+                      },
+                      Object {
+                        "marginLeft": 12,
+                        "marginRight": 12,
+                        "marginTop": 7,
+                      },
+                    ]
+                  }
+                >
+                  Yesterday at 9:41 am
+                </Text>
+              </View>
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#3c3c3c",
+                      "fontFamily": "OpenSans-Regular",
+                      "fontSize": 15,
+                    },
+                    Object {
+                      "flexDirection": "row",
+                      "marginBottom": 7,
+                      "marginLeft": 12,
+                      "marginRight": 12,
+                      "marginTop": 7,
+                    },
+                  ]
+                }
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={false}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "#3c3c3c",
+                        "fontFamily": "OpenSans-Bold",
+                        "fontSize": 15,
+                      },
+                    ]
+                  }
+                >
+                  #note
+                </Text>
+                <Text
+                  accessible={true}
+                  allowFontScaling={false}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "#3c3c3c",
+                        "fontFamily": "OpenSans-Regular",
+                        "fontSize": 15,
+                      },
+                    ]
+                  }
+                >
+                   This is a note. Quis molestiae tempora eligendi omnis quisquam quisquam quos. Dolor voluptatibus velit nobis culpa deleniti. Reprehenderit in nisi et. Quia odio et inventore eligendi in deserunt id. Sit odio quia vitae provident quo provident molestiae.
+                </Text>
+              </Text>
+            </View>
+          </View>
+          <View
+            style={
+              Array [
+                Object {
+                  "backgroundColor": "#ffffff",
+                },
+              ]
+            }
+          >
+            <View
+              onLayout={[Function]}
+              style={null}
+            >
+              <View
+                style={
+                  Array [
+                    Object {
+                      "backgroundColor": "#CED0CE",
+                      "height": 0.5,
+                      "marginBottom": 7,
+                      "marginTop": 7,
+                    },
+                  ]
+                }
+              />
+              <View
+                style={
+                  Array [
+                    Object {
+                      "height": 125,
+                    },
+                  ]
+                }
+              >
+                <View
+                  style={
+                    Array [
+                      Object {
+                        "flex": 1,
+                      },
+                    ]
+                  }
+                >
+                  <TextInput
+                    allowFontScaling={false}
+                    autoCapitalize="sentences"
+                    autoCorrect={true}
+                    keyboardAppearance="dark"
+                    keyboardType="default"
+                    multiline={true}
+                    onChangeText={[Function]}
+                    returnKeyType="default"
+                    selectionColor="#657ef6"
+                    style={
+                      Array [
+                        Object {
+                          "flex": 1,
+                          "paddingBottom": 7,
+                          "paddingLeft": 12,
+                          "paddingRight": 12,
+                          "paddingTop": 7,
+                        },
+                      ]
+                    }
+                    underlineColorAndroid="transparent"
+                  >
+                    <Text
+                      accessible={true}
+                      allowFontScaling={false}
+                      ellipsizeMode="tail"
+                      style={
+                        Array [
+                          Object {
+                            "color": "#3c3c3c",
+                            "fontFamily": "OpenSans-Regular",
+                            "fontSize": 15,
+                          },
+                        ]
+                      }
+                    >
+                      This is comment 1 
+                    </Text>
+                    <Text
+                      accessible={true}
+                      allowFontScaling={false}
+                      ellipsizeMode="tail"
+                      style={
+                        Array [
+                          Object {
+                            "color": "#3c3c3c",
+                            "fontFamily": "OpenSans-Bold",
+                            "fontSize": 15,
+                          },
+                        ]
+                      }
+                    >
+                      #hashtag
+                    </Text>
+                    <Text
+                      accessible={true}
+                      allowFontScaling={false}
+                      ellipsizeMode="tail"
+                      style={
+                        Array [
+                          Object {
+                            "color": "#3c3c3c",
+                            "fontFamily": "OpenSans-Regular",
+                            "fontSize": 15,
+                          },
+                        ]
+                      }
+                    >
+                      . This is a long comment. Pariatur quos est quod laborum. Quisquam esse quia expedita commodi. Tempora ut exercitationem doloribus harum. Sunt omnis et accusantium et quia quos sequi molestiae. Enim necessitatibus molestiae.
+                    </Text>
+                  </TextInput>
+                  <View
+                    style={
+                      Array [
+                        Object {
+                          "flexDirection": "row",
+                          "justifyContent": "flex-end",
+                        },
+                      ]
+                    }
+                  >
+                    <View
+                      accessibilityComponentType={undefined}
+                      accessibilityLabel={undefined}
+                      accessibilityTraits={undefined}
+                      accessible={true}
+                      collapsable={undefined}
+                      hasTVPreferredFocus={undefined}
+                      hitSlop={
+                        Object {
+                          "bottom": 10,
+                          "left": 10,
+                          "right": 10,
+                          "top": 10,
+                        }
+                      }
+                      isTVSelectable={true}
+                      nativeID={undefined}
+                      onLayout={undefined}
+                      onResponderGrant={[Function]}
+                      onResponderMove={[Function]}
+                      onResponderRelease={[Function]}
+                      onResponderTerminate={[Function]}
+                      onResponderTerminationRequest={[Function]}
+                      onStartShouldSetResponder={[Function]}
+                      style={
+                        Object {
+                          "marginRight": 10,
+                          "marginTop": 7,
+                          "opacity": 1,
+                        }
+                      }
+                      testID={undefined}
+                      tvParallaxProperties={undefined}
+                    >
+                      <Text
+                        accessible={true}
+                        allowFontScaling={false}
+                        ellipsizeMode="tail"
+                        numberOfLines={1}
+                        style={
+                          Array [
+                            Object {
+                              "color": "#627cff",
+                              "fontFamily": "OpenSans-Regular",
+                              "fontSize": 12.5,
+                            },
+                          ]
+                        }
+                      >
+                        Cancel
+                      </Text>
+                    </View>
+                    <View
+                      accessibilityComponentType={undefined}
+                      accessibilityLabel={undefined}
+                      accessibilityTraits={undefined}
+                      accessible={true}
+                      collapsable={undefined}
+                      hasTVPreferredFocus={undefined}
+                      hitSlop={
+                        Object {
+                          "bottom": 10,
+                          "left": 10,
+                          "right": 10,
+                          "top": 10,
+                        }
+                      }
+                      isTVSelectable={true}
+                      nativeID={undefined}
+                      onLayout={undefined}
+                      onResponderGrant={[Function]}
+                      onResponderMove={[Function]}
+                      onResponderRelease={[Function]}
+                      onResponderTerminate={[Function]}
+                      onResponderTerminationRequest={[Function]}
+                      onStartShouldSetResponder={[Function]}
+                      style={
+                        Object {
+                          "marginRight": 10,
+                          "marginTop": 7,
+                          "opacity": 1,
+                        }
+                      }
+                      testID={undefined}
+                      tvParallaxProperties={undefined}
+                    >
+                      <Text
+                        accessible={true}
+                        allowFontScaling={false}
+                        ellipsizeMode="tail"
+                        numberOfLines={1}
+                        style={
+                          Array [
+                            Object {
+                              "color": "#c9c9c9",
+                              "fontFamily": "OpenSans-Regular",
+                              "fontSize": 12.5,
+                            },
+                          ]
+                        }
+                      >
+                        Save
+                      </Text>
+                    </View>
+                  </View>
+                </View>
+              </View>
+              <View
+                style={
+                  Array [
+                    Object {
+                      "backgroundColor": "#CED0CE",
+                      "height": 0.5,
+                      "marginBottom": 7,
+                      "marginTop": 7,
+                    },
+                  ]
+                }
+              />
+            </View>
+            <View
+              style={null}
+            >
+              <View
+                style={
+                  Array [
+                    Object {
+                      "backgroundColor": "white",
+                    },
+                  ]
+                }
+              >
+                <View
+                  style={
+                    Array [
+                      Object {
+                        "flexDirection": "row",
+                        "justifyContent": "flex-start",
+                        "zIndex": 1,
+                      },
+                    ]
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    numberOfLines={1}
+                    style={
+                      Array [
+                        Object {
+                          "color": "#4a4a4a",
+                          "fontFamily": "OpenSans-Semibold",
+                          "fontSize": 12.5,
+                        },
+                        Object {
+                          "flexShrink": 1,
+                          "marginLeft": 12,
+                          "marginTop": 7,
+                        },
+                      ]
+                    }
+                  >
+                    Some other person
+                  </Text>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    numberOfLines={1}
+                    style={
+                      Array [
+                        Object {
+                          "color": "#c9c9c9",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                        Object {
+                          "marginLeft": 10,
+                          "marginRight": 10,
+                          "marginTop": 7,
+                        },
+                      ]
+                    }
+                  >
+                    Today at 9:41 am
+                  </Text>
+                </View>
+                <Text
+                  accessible={true}
+                  allowFontScaling={false}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "#8c8c8c",
+                        "fontFamily": "OpenSans-Regular",
+                        "fontSize": 12.5,
+                      },
+                      Object {
+                        "flexDirection": "row",
+                        "marginBottom": 7,
+                        "marginLeft": 12,
+                        "marginRight": 12,
+                        "marginTop": 0,
+                      },
+                    ]
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#8c8c8c",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                      ]
+                    }
+                  >
+                    This is comment 2 
+                  </Text>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#8c8c8c",
+                          "fontFamily": "OpenSans-Bold",
+                          "fontSize": 12.5,
+                        },
+                      ]
+                    }
+                  >
+                    #hashtag
+                  </Text>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#8c8c8c",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                      ]
+                    }
+                  >
+                    . This is a long comment. Eligendi rerum excepturi et laudantium fuga similique fugit corporis voluptatem. Esse nobis et sint magnam aut. Dolores maiores incidunt occaecati iusto laborum. Quia deleniti dolorem quibusdam id veniam perspiciatis et nisi. Corporis laboriosam esse. Soluta accusamus officiis ut excepturi blanditiis libero ut.
+                  </Text>
+                </Text>
+              </View>
+            </View>
+            <View
+              style={null}
+            >
+              <View
+                style={
+                  Array [
+                    Object {
+                      "backgroundColor": "white",
+                    },
+                  ]
+                }
+              >
+                <View
+                  style={
+                    Array [
+                      Object {
+                        "flexDirection": "row",
+                        "justifyContent": "flex-start",
+                        "zIndex": 1,
+                      },
+                    ]
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    numberOfLines={1}
+                    style={
+                      Array [
+                        Object {
+                          "color": "#4a4a4a",
+                          "fontFamily": "OpenSans-Semibold",
+                          "fontSize": 12.5,
+                        },
+                        Object {
+                          "flexShrink": 1,
+                          "marginLeft": 12,
+                          "marginTop": 7,
+                        },
+                      ]
+                    }
+                  >
+                    Some other person
+                  </Text>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    numberOfLines={1}
+                    style={
+                      Array [
+                        Object {
+                          "color": "#c9c9c9",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                        Object {
+                          "marginLeft": 10,
+                          "marginRight": 10,
+                          "marginTop": 7,
+                        },
+                      ]
+                    }
+                  >
+                    Today at 10:41 am
+                  </Text>
+                </View>
+                <Text
+                  accessible={true}
+                  allowFontScaling={false}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "#8c8c8c",
+                        "fontFamily": "OpenSans-Regular",
+                        "fontSize": 12.5,
+                      },
+                      Object {
+                        "flexDirection": "row",
+                        "marginBottom": 7,
+                        "marginLeft": 12,
+                        "marginRight": 12,
+                        "marginTop": 0,
+                      },
+                    ]
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#8c8c8c",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                      ]
+                    }
+                  >
+                    This is comment 3 
+                  </Text>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#8c8c8c",
+                          "fontFamily": "OpenSans-Bold",
+                          "fontSize": 12.5,
+                        },
+                      ]
+                    }
+                  >
+                    #hashtag
+                  </Text>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#8c8c8c",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                      ]
+                    }
+                  >
+                    .
+                  </Text>
+                </Text>
+              </View>
+            </View>
+            <View
+              style={null}
+            >
+              <View
+                style={
+                  Array [
+                    Object {
+                      "backgroundColor": "white",
+                    },
+                  ]
+                }
+              >
+                <View
+                  style={
+                    Array [
+                      Object {
+                        "flexDirection": "row",
+                        "justifyContent": "flex-start",
+                        "zIndex": 1,
+                      },
+                    ]
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    numberOfLines={1}
+                    style={
+                      Array [
+                        Object {
+                          "color": "#4a4a4a",
+                          "fontFamily": "OpenSans-Semibold",
+                          "fontSize": 12.5,
+                        },
+                        Object {
+                          "flexShrink": 1,
+                          "marginLeft": 12,
+                          "marginTop": 7,
+                        },
+                      ]
+                    }
+                  >
+                    Some other person
+                  </Text>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    numberOfLines={1}
+                    style={
+                      Array [
+                        Object {
+                          "color": "#c9c9c9",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                        Object {
+                          "marginLeft": 10,
+                          "marginRight": 10,
+                          "marginTop": 7,
+                        },
+                      ]
+                    }
+                  >
+                    Today at 11:41 am
+                  </Text>
+                </View>
+                <Text
+                  accessible={true}
+                  allowFontScaling={false}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "#8c8c8c",
+                        "fontFamily": "OpenSans-Regular",
+                        "fontSize": 12.5,
+                      },
+                      Object {
+                        "flexDirection": "row",
+                        "marginBottom": 7,
+                        "marginLeft": 12,
+                        "marginRight": 12,
+                        "marginTop": 0,
+                      },
+                    ]
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#8c8c8c",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                      ]
+                    }
+                  >
+                    This is comment 4 
+                  </Text>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#8c8c8c",
+                          "fontFamily": "OpenSans-Bold",
+                          "fontSize": 12.5,
+                        },
+                      ]
+                    }
+                  >
+                    #hashtag
+                  </Text>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#8c8c8c",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                      ]
+                    }
+                  >
+                    . This is a long comment. Fuga enim tempore non voluptas quia vitae ipsam voluptas. Et dolor adipisci dolores sunt non explicabo occaecati rerum nesciunt. Sint est asperiores sit voluptatum mollitia enim iste. Nesciunt minima sequi voluptas optio aut voluptatem. Eligendi voluptates iste eius iure commodi molestiae.
+                  </Text>
+                </Text>
+              </View>
+            </View>
+            <View
+              style={null}
+            >
+              <View
+                style={
+                  Array [
+                    Object {
+                      "backgroundColor": "white",
+                    },
+                  ]
+                }
+              >
+                <View
+                  style={
+                    Array [
+                      Object {
+                        "flexDirection": "row",
+                        "justifyContent": "flex-start",
+                        "zIndex": 1,
+                      },
+                    ]
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    numberOfLines={1}
+                    style={
+                      Array [
+                        Object {
+                          "color": "#4a4a4a",
+                          "fontFamily": "OpenSans-Semibold",
+                          "fontSize": 12.5,
+                        },
+                        Object {
+                          "flexShrink": 1,
+                          "marginLeft": 12,
+                          "marginTop": 7,
+                        },
+                      ]
+                    }
+                  >
+                    Some other person
+                  </Text>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    numberOfLines={1}
+                    style={
+                      Array [
+                        Object {
+                          "color": "#c9c9c9",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                        Object {
+                          "marginLeft": 10,
+                          "marginRight": 10,
+                          "marginTop": 7,
+                        },
+                      ]
+                    }
+                  >
+                    Today at 12:41 pm
+                  </Text>
+                </View>
+                <Text
+                  accessible={true}
+                  allowFontScaling={false}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "#8c8c8c",
+                        "fontFamily": "OpenSans-Regular",
+                        "fontSize": 12.5,
+                      },
+                      Object {
+                        "flexDirection": "row",
+                        "marginBottom": 7,
+                        "marginLeft": 12,
+                        "marginRight": 12,
+                        "marginTop": 0,
+                      },
+                    ]
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#8c8c8c",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                      ]
+                    }
+                  >
+                    This is comment 5 
+                  </Text>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#8c8c8c",
+                          "fontFamily": "OpenSans-Bold",
+                          "fontSize": 12.5,
+                        },
+                      ]
+                    }
+                  >
+                    #hashtag
+                  </Text>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#8c8c8c",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                      ]
+                    }
+                  >
+                    . This is a long comment. Quo ex reprehenderit ipsa incidunt corporis vel in unde. Iste asperiores consequatur ex quidem omnis inventore deserunt. Eligendi officiis voluptatem. In omnis labore consequatur nisi. Excepturi doloremque nam omnis odit labore magni rerum quia. Distinctio adipisci nulla exercitationem omnis illum.
+                  </Text>
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+      </RCTScrollView>
+    </View>
+  </View>
+</RCTSafeAreaView>
+`;
+
+exports[`Storyshots AddOrEditCommentScreen edit last comment 1`] = `
+<RCTSafeAreaView
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Array [
+        Object {
+          "backgroundColor": "white",
+          "flex": 1,
+        },
+      ]
+    }
+  >
+    <View
+      onLayout={[Function]}
+      style={
+        Array [
+          Object {
+            "flex": 1,
+            "height": null,
+          },
+        ]
+      }
+    >
+      <RCTScrollView
+        keyboardShouldPersistTaps="always"
+        onContentSizeChange={[Function]}
+        style={null}
+      >
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "backgroundColor": "#ffffff",
+                },
+              ]
+            }
+          >
+            <View
+              style={null}
+            >
+              <View
+                style={
+                  Array [
+                    Object {
+                      "flexDirection": "row",
+                      "justifyContent": "flex-start",
+                      "zIndex": 1,
+                    },
+                  ]
+                }
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={false}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "#4d4e4c",
+                        "fontFamily": "OpenSans-Regular",
+                        "fontSize": 12.5,
+                      },
+                      Object {
+                        "marginLeft": 12,
+                        "marginRight": 12,
+                        "marginTop": 7,
+                      },
+                    ]
+                  }
+                >
+                  Yesterday at 9:41 am
+                </Text>
+              </View>
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#3c3c3c",
+                      "fontFamily": "OpenSans-Regular",
+                      "fontSize": 15,
+                    },
+                    Object {
+                      "flexDirection": "row",
+                      "marginBottom": 7,
+                      "marginLeft": 12,
+                      "marginRight": 12,
+                      "marginTop": 7,
+                    },
+                  ]
+                }
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={false}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "#3c3c3c",
+                        "fontFamily": "OpenSans-Bold",
+                        "fontSize": 15,
+                      },
+                    ]
+                  }
+                >
+                  #note
+                </Text>
+                <Text
+                  accessible={true}
+                  allowFontScaling={false}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "#3c3c3c",
+                        "fontFamily": "OpenSans-Regular",
+                        "fontSize": 15,
+                      },
+                    ]
+                  }
+                >
+                   This is a note. Quis molestiae tempora eligendi omnis quisquam quisquam quos. Dolor voluptatibus velit nobis culpa deleniti. Reprehenderit in nisi et. Quia odio et inventore eligendi in deserunt id. Sit odio quia vitae provident quo provident molestiae.
+                </Text>
+              </Text>
+            </View>
+          </View>
+          <View
+            style={
+              Array [
+                Object {
+                  "backgroundColor": "#ffffff",
+                },
+              ]
+            }
+          >
+            <View
+              style={null}
+            >
+              <View
+                style={
+                  Array [
+                    Object {
+                      "backgroundColor": "white",
+                    },
+                  ]
+                }
+              >
+                <View
+                  style={
+                    Array [
+                      Object {
+                        "flexDirection": "row",
+                        "justifyContent": "flex-start",
+                        "zIndex": 1,
+                      },
+                    ]
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    numberOfLines={1}
+                    style={
+                      Array [
+                        Object {
+                          "color": "#4a4a4a",
+                          "fontFamily": "OpenSans-Semibold",
+                          "fontSize": 12.5,
+                        },
+                        Object {
+                          "flexShrink": 1,
+                          "marginLeft": 12,
+                          "marginTop": 7,
+                        },
+                      ]
+                    }
+                  >
+                    Some other person
+                  </Text>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    numberOfLines={1}
+                    style={
+                      Array [
+                        Object {
+                          "color": "#c9c9c9",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                        Object {
+                          "marginLeft": 10,
+                          "marginRight": 10,
+                          "marginTop": 7,
+                        },
+                      ]
+                    }
+                  >
+                    Yesterday at 10:41 am
+                  </Text>
+                </View>
+                <Text
+                  accessible={true}
+                  allowFontScaling={false}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "#8c8c8c",
+                        "fontFamily": "OpenSans-Regular",
+                        "fontSize": 12.5,
+                      },
+                      Object {
+                        "flexDirection": "row",
+                        "marginBottom": 7,
+                        "marginLeft": 12,
+                        "marginRight": 12,
+                        "marginTop": 0,
+                      },
+                    ]
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#8c8c8c",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                      ]
+                    }
+                  >
+                    This is comment 1 
+                  </Text>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#8c8c8c",
+                          "fontFamily": "OpenSans-Bold",
+                          "fontSize": 12.5,
+                        },
+                      ]
+                    }
+                  >
+                    #hashtag
+                  </Text>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#8c8c8c",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                      ]
+                    }
+                  >
+                    . This is a long comment. Pariatur quos est quod laborum. Quisquam esse quia expedita commodi. Tempora ut exercitationem doloribus harum. Sunt omnis et accusantium et quia quos sequi molestiae. Enim necessitatibus molestiae.
+                  </Text>
+                </Text>
+              </View>
+            </View>
+            <View
+              style={null}
+            >
+              <View
+                style={
+                  Array [
+                    Object {
+                      "backgroundColor": "white",
+                    },
+                  ]
+                }
+              >
+                <View
+                  style={
+                    Array [
+                      Object {
+                        "flexDirection": "row",
+                        "justifyContent": "flex-start",
+                        "zIndex": 1,
+                      },
+                    ]
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    numberOfLines={1}
+                    style={
+                      Array [
+                        Object {
+                          "color": "#4a4a4a",
+                          "fontFamily": "OpenSans-Semibold",
+                          "fontSize": 12.5,
+                        },
+                        Object {
+                          "flexShrink": 1,
+                          "marginLeft": 12,
+                          "marginTop": 7,
+                        },
+                      ]
+                    }
+                  >
+                    Some other person
+                  </Text>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    numberOfLines={1}
+                    style={
+                      Array [
+                        Object {
+                          "color": "#c9c9c9",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                        Object {
+                          "marginLeft": 10,
+                          "marginRight": 10,
+                          "marginTop": 7,
+                        },
+                      ]
+                    }
+                  >
+                    Today at 9:41 am
+                  </Text>
+                </View>
+                <Text
+                  accessible={true}
+                  allowFontScaling={false}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "#8c8c8c",
+                        "fontFamily": "OpenSans-Regular",
+                        "fontSize": 12.5,
+                      },
+                      Object {
+                        "flexDirection": "row",
+                        "marginBottom": 7,
+                        "marginLeft": 12,
+                        "marginRight": 12,
+                        "marginTop": 0,
+                      },
+                    ]
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#8c8c8c",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                      ]
+                    }
+                  >
+                    This is comment 2 
+                  </Text>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#8c8c8c",
+                          "fontFamily": "OpenSans-Bold",
+                          "fontSize": 12.5,
+                        },
+                      ]
+                    }
+                  >
+                    #hashtag
+                  </Text>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#8c8c8c",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                      ]
+                    }
+                  >
+                    . This is a long comment. Eligendi rerum excepturi et laudantium fuga similique fugit corporis voluptatem. Esse nobis et sint magnam aut. Dolores maiores incidunt occaecati iusto laborum. Quia deleniti dolorem quibusdam id veniam perspiciatis et nisi. Corporis laboriosam esse. Soluta accusamus officiis ut excepturi blanditiis libero ut.
+                  </Text>
+                </Text>
+              </View>
+            </View>
+            <View
+              style={null}
+            >
+              <View
+                style={
+                  Array [
+                    Object {
+                      "backgroundColor": "white",
+                    },
+                  ]
+                }
+              >
+                <View
+                  style={
+                    Array [
+                      Object {
+                        "flexDirection": "row",
+                        "justifyContent": "flex-start",
+                        "zIndex": 1,
+                      },
+                    ]
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    numberOfLines={1}
+                    style={
+                      Array [
+                        Object {
+                          "color": "#4a4a4a",
+                          "fontFamily": "OpenSans-Semibold",
+                          "fontSize": 12.5,
+                        },
+                        Object {
+                          "flexShrink": 1,
+                          "marginLeft": 12,
+                          "marginTop": 7,
+                        },
+                      ]
+                    }
+                  >
+                    Some other person
+                  </Text>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    numberOfLines={1}
+                    style={
+                      Array [
+                        Object {
+                          "color": "#c9c9c9",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                        Object {
+                          "marginLeft": 10,
+                          "marginRight": 10,
+                          "marginTop": 7,
+                        },
+                      ]
+                    }
+                  >
+                    Today at 10:41 am
+                  </Text>
+                </View>
+                <Text
+                  accessible={true}
+                  allowFontScaling={false}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "#8c8c8c",
+                        "fontFamily": "OpenSans-Regular",
+                        "fontSize": 12.5,
+                      },
+                      Object {
+                        "flexDirection": "row",
+                        "marginBottom": 7,
+                        "marginLeft": 12,
+                        "marginRight": 12,
+                        "marginTop": 0,
+                      },
+                    ]
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#8c8c8c",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                      ]
+                    }
+                  >
+                    This is comment 3 
+                  </Text>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#8c8c8c",
+                          "fontFamily": "OpenSans-Bold",
+                          "fontSize": 12.5,
+                        },
+                      ]
+                    }
+                  >
+                    #hashtag
+                  </Text>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#8c8c8c",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                      ]
+                    }
+                  >
+                    .
+                  </Text>
+                </Text>
+              </View>
+            </View>
+            <View
+              style={null}
+            >
+              <View
+                style={
+                  Array [
+                    Object {
+                      "backgroundColor": "white",
+                    },
+                  ]
+                }
+              >
+                <View
+                  style={
+                    Array [
+                      Object {
+                        "flexDirection": "row",
+                        "justifyContent": "flex-start",
+                        "zIndex": 1,
+                      },
+                    ]
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    numberOfLines={1}
+                    style={
+                      Array [
+                        Object {
+                          "color": "#4a4a4a",
+                          "fontFamily": "OpenSans-Semibold",
+                          "fontSize": 12.5,
+                        },
+                        Object {
+                          "flexShrink": 1,
+                          "marginLeft": 12,
+                          "marginTop": 7,
+                        },
+                      ]
+                    }
+                  >
+                    Some other person
+                  </Text>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    numberOfLines={1}
+                    style={
+                      Array [
+                        Object {
+                          "color": "#c9c9c9",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                        Object {
+                          "marginLeft": 10,
+                          "marginRight": 10,
+                          "marginTop": 7,
+                        },
+                      ]
+                    }
+                  >
+                    Today at 11:41 am
+                  </Text>
+                </View>
+                <Text
+                  accessible={true}
+                  allowFontScaling={false}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "#8c8c8c",
+                        "fontFamily": "OpenSans-Regular",
+                        "fontSize": 12.5,
+                      },
+                      Object {
+                        "flexDirection": "row",
+                        "marginBottom": 7,
+                        "marginLeft": 12,
+                        "marginRight": 12,
+                        "marginTop": 0,
+                      },
+                    ]
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#8c8c8c",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                      ]
+                    }
+                  >
+                    This is comment 4 
+                  </Text>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#8c8c8c",
+                          "fontFamily": "OpenSans-Bold",
+                          "fontSize": 12.5,
+                        },
+                      ]
+                    }
+                  >
+                    #hashtag
+                  </Text>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#8c8c8c",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                      ]
+                    }
+                  >
+                    . This is a long comment. Fuga enim tempore non voluptas quia vitae ipsam voluptas. Et dolor adipisci dolores sunt non explicabo occaecati rerum nesciunt. Sint est asperiores sit voluptatum mollitia enim iste. Nesciunt minima sequi voluptas optio aut voluptatem. Eligendi voluptates iste eius iure commodi molestiae.
+                  </Text>
+                </Text>
+              </View>
+            </View>
+            <View
+              onLayout={[Function]}
+              style={null}
+            >
+              <View
+                style={
+                  Array [
+                    Object {
+                      "backgroundColor": "#CED0CE",
+                      "height": 0.5,
+                      "marginBottom": 7,
+                      "marginTop": 7,
+                    },
+                  ]
+                }
+              />
+              <View
+                style={
+                  Array [
+                    Object {
+                      "height": 125,
+                    },
+                  ]
+                }
+              >
+                <View
+                  style={
+                    Array [
+                      Object {
+                        "flex": 1,
+                      },
+                    ]
+                  }
+                >
+                  <TextInput
+                    allowFontScaling={false}
+                    autoCapitalize="sentences"
+                    autoCorrect={true}
+                    keyboardAppearance="dark"
+                    keyboardType="default"
+                    multiline={true}
+                    onChangeText={[Function]}
+                    returnKeyType="default"
+                    selectionColor="#657ef6"
+                    style={
+                      Array [
+                        Object {
+                          "flex": 1,
+                          "paddingBottom": 7,
+                          "paddingLeft": 12,
+                          "paddingRight": 12,
+                          "paddingTop": 7,
+                        },
+                      ]
+                    }
+                    underlineColorAndroid="transparent"
+                  >
+                    <Text
+                      accessible={true}
+                      allowFontScaling={false}
+                      ellipsizeMode="tail"
+                      style={
+                        Array [
+                          Object {
+                            "color": "#3c3c3c",
+                            "fontFamily": "OpenSans-Regular",
+                            "fontSize": 15,
+                          },
+                        ]
+                      }
+                    >
+                      This is comment 5 
+                    </Text>
+                    <Text
+                      accessible={true}
+                      allowFontScaling={false}
+                      ellipsizeMode="tail"
+                      style={
+                        Array [
+                          Object {
+                            "color": "#3c3c3c",
+                            "fontFamily": "OpenSans-Bold",
+                            "fontSize": 15,
+                          },
+                        ]
+                      }
+                    >
+                      #hashtag
+                    </Text>
+                    <Text
+                      accessible={true}
+                      allowFontScaling={false}
+                      ellipsizeMode="tail"
+                      style={
+                        Array [
+                          Object {
+                            "color": "#3c3c3c",
+                            "fontFamily": "OpenSans-Regular",
+                            "fontSize": 15,
+                          },
+                        ]
+                      }
+                    >
+                      . This is a long comment. Quo ex reprehenderit ipsa incidunt corporis vel in unde. Iste asperiores consequatur ex quidem omnis inventore deserunt. Eligendi officiis voluptatem. In omnis labore consequatur nisi. Excepturi doloremque nam omnis odit labore magni rerum quia. Distinctio adipisci nulla exercitationem omnis illum.
+                    </Text>
+                  </TextInput>
+                  <View
+                    style={
+                      Array [
+                        Object {
+                          "flexDirection": "row",
+                          "justifyContent": "flex-end",
+                        },
+                      ]
+                    }
+                  >
+                    <View
+                      accessibilityComponentType={undefined}
+                      accessibilityLabel={undefined}
+                      accessibilityTraits={undefined}
+                      accessible={true}
+                      collapsable={undefined}
+                      hasTVPreferredFocus={undefined}
+                      hitSlop={
+                        Object {
+                          "bottom": 10,
+                          "left": 10,
+                          "right": 10,
+                          "top": 10,
+                        }
+                      }
+                      isTVSelectable={true}
+                      nativeID={undefined}
+                      onLayout={undefined}
+                      onResponderGrant={[Function]}
+                      onResponderMove={[Function]}
+                      onResponderRelease={[Function]}
+                      onResponderTerminate={[Function]}
+                      onResponderTerminationRequest={[Function]}
+                      onStartShouldSetResponder={[Function]}
+                      style={
+                        Object {
+                          "marginRight": 10,
+                          "marginTop": 7,
+                          "opacity": 1,
+                        }
+                      }
+                      testID={undefined}
+                      tvParallaxProperties={undefined}
+                    >
+                      <Text
+                        accessible={true}
+                        allowFontScaling={false}
+                        ellipsizeMode="tail"
+                        numberOfLines={1}
+                        style={
+                          Array [
+                            Object {
+                              "color": "#627cff",
+                              "fontFamily": "OpenSans-Regular",
+                              "fontSize": 12.5,
+                            },
+                          ]
+                        }
+                      >
+                        Cancel
+                      </Text>
+                    </View>
+                    <View
+                      accessibilityComponentType={undefined}
+                      accessibilityLabel={undefined}
+                      accessibilityTraits={undefined}
+                      accessible={true}
+                      collapsable={undefined}
+                      hasTVPreferredFocus={undefined}
+                      hitSlop={
+                        Object {
+                          "bottom": 10,
+                          "left": 10,
+                          "right": 10,
+                          "top": 10,
+                        }
+                      }
+                      isTVSelectable={true}
+                      nativeID={undefined}
+                      onLayout={undefined}
+                      onResponderGrant={[Function]}
+                      onResponderMove={[Function]}
+                      onResponderRelease={[Function]}
+                      onResponderTerminate={[Function]}
+                      onResponderTerminationRequest={[Function]}
+                      onStartShouldSetResponder={[Function]}
+                      style={
+                        Object {
+                          "marginRight": 10,
+                          "marginTop": 7,
+                          "opacity": 1,
+                        }
+                      }
+                      testID={undefined}
+                      tvParallaxProperties={undefined}
+                    >
+                      <Text
+                        accessible={true}
+                        allowFontScaling={false}
+                        ellipsizeMode="tail"
+                        numberOfLines={1}
+                        style={
+                          Array [
+                            Object {
+                              "color": "#c9c9c9",
+                              "fontFamily": "OpenSans-Regular",
+                              "fontSize": 12.5,
+                            },
+                          ]
+                        }
+                      >
+                        Save
+                      </Text>
+                    </View>
+                  </View>
+                </View>
+              </View>
+              <View
+                style={
+                  Array [
+                    Object {
+                      "backgroundColor": "#CED0CE",
+                      "height": 0.5,
+                      "marginBottom": 7,
+                      "marginTop": 7,
+                    },
+                  ]
+                }
+              />
+            </View>
+          </View>
+        </View>
+      </RCTScrollView>
+    </View>
+  </View>
+</RCTSafeAreaView>
+`;

@@ -10,6 +10,7 @@ const mapStateToProps = (state, ownProps) => ({
   currentUser: state.auth,
   currentProfile: state.profile.currentProfile,
   note: ownProps.navigation.state.params.note,
+  timestampAddNote: new Date(),
 });
 
 const mapDispatchToProps = dispatch =>

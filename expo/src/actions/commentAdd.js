@@ -32,8 +32,8 @@ export const commentAddAsync = ({
   currentProfile,
   note,
   messageText,
+  timestamp,
 }) => async dispatch => {
-  const timestamp = new Date();
   dispatch(
     commentAddDidStart({ currentUser, currentProfile, messageText, timestamp })
   );

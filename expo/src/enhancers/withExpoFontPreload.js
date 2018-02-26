@@ -11,7 +11,10 @@ function withExpoFontPreload(WrappedComponent, fonts) {
     }
 
     async componentDidMount() {
-      await Font.loadAsync(fonts);
+      if (process.env.NODE_ENV !== "test") {
+        await Font.loadAsync(fonts);
+      }
+
       this.setState({
         isLoaded: true,
       });

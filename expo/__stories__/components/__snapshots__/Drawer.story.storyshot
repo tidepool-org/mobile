@@ -1,0 +1,1119 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Drawer default 1`] = `
+<RCTSafeAreaView
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignSelf": "center",
+        "borderWidth": 1,
+        "margin": 5,
+        "padding": 5,
+      }
+    }
+  >
+    <RCTSafeAreaView
+      style={
+        Array [
+          Object {
+            "height": 400,
+            "width": 270,
+          },
+          Object {
+            "backgroundColor": "#f7f7f8",
+          },
+        ]
+      }
+    >
+      <RCTScrollView
+        ItemSeparatorComponent={undefined}
+        data={
+          Array [
+            Object {
+              "data": Array [
+                Object {
+                  "currentUser": Object {
+                    "fullName": "Current User",
+                    "userId": "1",
+                    "username": "email@gmail.com",
+                  },
+                  "key": "currentUser",
+                },
+              ],
+              "renderItem": [Function],
+            },
+            Object {
+              "data": Array [
+                Object {
+                  "key": "health",
+                },
+              ],
+              "renderItem": [Function],
+            },
+            Object {
+              "data": Array [
+                Object {
+                  "key": "switchProfileButtonDivider",
+                },
+              ],
+              "renderItem": [Function],
+            },
+            Object {
+              "data": Array [
+                Object {
+                  "key": "switchProfileButton",
+                },
+              ],
+              "renderItem": [Function],
+            },
+            Object {
+              "data": Array [
+                Object {
+                  "key": "switchProfileButtonDivider",
+                },
+              ],
+              "renderItem": [Function],
+            },
+            Object {
+              "data": Array [
+                Object {
+                  "key": "supportButton",
+                },
+              ],
+              "renderItem": [Function],
+            },
+            Object {
+              "data": Array [
+                Object {
+                  "key": "supportButtonDivider",
+                },
+              ],
+              "renderItem": [Function],
+            },
+            Object {
+              "data": Array [
+                Object {
+                  "key": "privacyAndTermsButton",
+                },
+              ],
+              "renderItem": [Function],
+            },
+            Object {
+              "data": Array [
+                Object {
+                  "key": "privacyAndTermsButtonDivider",
+                },
+              ],
+              "renderItem": [Function],
+            },
+            Object {
+              "data": Array [
+                Object {
+                  "currentUser": Object {
+                    "fullName": "Current User",
+                    "userId": "1",
+                    "username": "email@gmail.com",
+                  },
+                  "key": "signOutButton",
+                },
+              ],
+              "renderItem": [Function],
+            },
+            Object {
+              "data": Array [
+                Object {
+                  "key": "signOutButtonDivider",
+                },
+              ],
+              "renderItem": [Function],
+            },
+          ]
+        }
+        disableVirtualization={false}
+        getItem={[Function]}
+        getItemCount={[Function]}
+        horizontal={false}
+        initialNumToRender={10}
+        keyExtractor={[Function]}
+        maxToRenderPerBatch={10}
+        onContentSizeChange={[Function]}
+        onEndReachedThreshold={2}
+        onLayout={[Function]}
+        onMomentumScrollEnd={[Function]}
+        onScroll={[Function]}
+        onScrollBeginDrag={[Function]}
+        onScrollEndDrag={[Function]}
+        onViewableItemsChanged={undefined}
+        renderItem={[Function]}
+        scrollEnabled={false}
+        scrollEventThrottle={50}
+        sections={
+          Array [
+            Object {
+              "data": Array [
+                Object {
+                  "currentUser": Object {
+                    "fullName": "Current User",
+                    "userId": "1",
+                    "username": "email@gmail.com",
+                  },
+                  "key": "currentUser",
+                },
+              ],
+              "renderItem": [Function],
+            },
+            Object {
+              "data": Array [
+                Object {
+                  "key": "health",
+                },
+              ],
+              "renderItem": [Function],
+            },
+            Object {
+              "data": Array [
+                Object {
+                  "key": "switchProfileButtonDivider",
+                },
+              ],
+              "renderItem": [Function],
+            },
+            Object {
+              "data": Array [
+                Object {
+                  "key": "switchProfileButton",
+                },
+              ],
+              "renderItem": [Function],
+            },
+            Object {
+              "data": Array [
+                Object {
+                  "key": "switchProfileButtonDivider",
+                },
+              ],
+              "renderItem": [Function],
+            },
+            Object {
+              "data": Array [
+                Object {
+                  "key": "supportButton",
+                },
+              ],
+              "renderItem": [Function],
+            },
+            Object {
+              "data": Array [
+                Object {
+                  "key": "supportButtonDivider",
+                },
+              ],
+              "renderItem": [Function],
+            },
+            Object {
+              "data": Array [
+                Object {
+                  "key": "privacyAndTermsButton",
+                },
+              ],
+              "renderItem": [Function],
+            },
+            Object {
+              "data": Array [
+                Object {
+                  "key": "privacyAndTermsButtonDivider",
+                },
+              ],
+              "renderItem": [Function],
+            },
+            Object {
+              "data": Array [
+                Object {
+                  "currentUser": Object {
+                    "fullName": "Current User",
+                    "userId": "1",
+                    "username": "email@gmail.com",
+                  },
+                  "key": "signOutButton",
+                },
+              ],
+              "renderItem": [Function],
+            },
+            Object {
+              "data": Array [
+                Object {
+                  "key": "signOutButtonDivider",
+                },
+              ],
+              "renderItem": [Function],
+            },
+          ]
+        }
+        stickyHeaderIndices={
+          Array [
+            0,
+            3,
+            6,
+            9,
+          ]
+        }
+        stickySectionHeadersEnabled={true}
+        style={null}
+        updateCellsBatchingPeriod={50}
+        windowSize={21}
+      >
+        <View>
+          <View
+            onLayout={[Function]}
+            style={null}
+          />
+          <View
+            onLayout={[Function]}
+            style={null}
+          >
+            <View
+              accessibilityComponentType={undefined}
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
+              accessible={true}
+              collapsable={undefined}
+              hasTVPreferredFocus={undefined}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              nativeID={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "opacity": 1,
+                }
+              }
+              testID={undefined}
+              tvParallaxProperties={undefined}
+            >
+              <View
+                style={
+                  Array [
+                    Object {
+                      "alignItems": "center",
+                      "flexDirection": "row",
+                      "height": 54,
+                      "justifyContent": "space-between",
+                    },
+                  ]
+                }
+              >
+                <Image
+                  source={1}
+                  style={
+                    Array [
+                      Object {
+                        "height": 24,
+                        "marginLeft": 16,
+                        "marginRight": 10,
+                        "width": 24,
+                      },
+                    ]
+                  }
+                />
+                <Text
+                  accessible={true}
+                  allowFontScaling={false}
+                  ellipsizeMode="tail"
+                  numberOfLines={1}
+                  style={
+                    Array [
+                      Object {
+                        "color": "#627cff",
+                        "fontFamily": "OpenSans-Semibold",
+                        "fontSize": 15,
+                      },
+                      Object {
+                        "flex": 1,
+                      },
+                    ]
+                  }
+                >
+                  Current User
+                </Text>
+                <View
+                  style={
+                    Array [
+                      Object {
+                        "height": 10,
+                        "width": 10,
+                      },
+                    ]
+                  }
+                />
+              </View>
+            </View>
+          </View>
+          <View
+            onLayout={[Function]}
+            style={null}
+          />
+          <View
+            onLayout={[Function]}
+            style={null}
+          />
+          <View
+            onLayout={[Function]}
+            style={null}
+          >
+            <View
+              style={
+                Array [
+                  Object {
+                    "height": 80,
+                  },
+                ]
+              }
+            >
+              <View
+                style={
+                  Array [
+                    Object {
+                      "alignItems": "center",
+                      "flexDirection": "row",
+                      "marginLeft": 16,
+                    },
+                  ]
+                }
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={false}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "#281946",
+                        "fontFamily": "OpenSans-Regular",
+                        "fontSize": 15,
+                      },
+                      Object {
+                        "marginRight": 8,
+                      },
+                    ]
+                  }
+                >
+                  Connect to Health
+                </Text>
+                <RCTSwitch
+                  disabled={false}
+                  onChange={[Function]}
+                  onResponderTerminationRequest={[Function]}
+                  onStartShouldSetResponder={[Function]}
+                  onTintColor="#627cff"
+                  onValueChange={[Function]}
+                  style={
+                    Array [
+                      Object {
+                        "height": 31,
+                        "width": 51,
+                      },
+                      Object {
+                        "transform": Array [
+                          Object {
+                            "scaleX": 0.75,
+                          },
+                          Object {
+                            "scaleY": 0.75,
+                          },
+                        ],
+                      },
+                    ]
+                  }
+                  value={false}
+                />
+              </View>
+            </View>
+          </View>
+          <View
+            onLayout={[Function]}
+            style={null}
+          />
+          <View
+            onLayout={[Function]}
+            style={null}
+          />
+          <View
+            onLayout={[Function]}
+            style={null}
+          >
+            <View
+              style={
+                Array [
+                  Object {
+                    "borderBottomColor": "#caccd0",
+                    "borderBottomWidth": 1,
+                    "flex": 1,
+                    "height": 1,
+                  },
+                ]
+              }
+            />
+          </View>
+          <View
+            onLayout={[Function]}
+            style={null}
+          />
+          <View
+            onLayout={[Function]}
+            style={null}
+          />
+          <View
+            style={
+              Object {
+                "height": 0,
+              }
+            }
+          />
+        </View>
+      </RCTScrollView>
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "bottom": 15,
+              "flexDirection": "column",
+              "justifyContent": "center",
+            },
+          ]
+        }
+      >
+        <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
+          accessible={true}
+          collapsable={undefined}
+          hasTVPreferredFocus={undefined}
+          hitSlop={undefined}
+          isTVSelectable={true}
+          nativeID={undefined}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "justifyContent": "center",
+                },
+              ]
+            }
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={false}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  Object {
+                    "color": "#9b9b9b",
+                    "fontFamily": "OpenSans-Regular",
+                    "fontSize": 12.5,
+                  },
+                ]
+              }
+            >
+              v
+              3.0.0
+               on Staging
+            </Text>
+          </View>
+        </View>
+      </View>
+    </RCTSafeAreaView>
+  </View>
+</RCTSafeAreaView>
+`;
+
+exports[`Storyshots Drawer long user full name 1`] = `
+<RCTSafeAreaView
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignSelf": "center",
+        "borderWidth": 1,
+        "margin": 5,
+        "padding": 5,
+      }
+    }
+  >
+    <RCTSafeAreaView
+      style={
+        Array [
+          Object {
+            "height": 400,
+            "width": 270,
+          },
+          Object {
+            "backgroundColor": "#f7f7f8",
+          },
+        ]
+      }
+    >
+      <RCTScrollView
+        ItemSeparatorComponent={undefined}
+        data={
+          Array [
+            Object {
+              "data": Array [
+                Object {
+                  "currentUser": Object {
+                    "fullName": "This is a really long full name for a user",
+                    "userId": "1",
+                    "username": "email@gmail.com",
+                  },
+                  "key": "currentUser",
+                },
+              ],
+              "renderItem": [Function],
+            },
+            Object {
+              "data": Array [
+                Object {
+                  "key": "health",
+                },
+              ],
+              "renderItem": [Function],
+            },
+            Object {
+              "data": Array [
+                Object {
+                  "key": "switchProfileButtonDivider",
+                },
+              ],
+              "renderItem": [Function],
+            },
+            Object {
+              "data": Array [
+                Object {
+                  "key": "switchProfileButton",
+                },
+              ],
+              "renderItem": [Function],
+            },
+            Object {
+              "data": Array [
+                Object {
+                  "key": "switchProfileButtonDivider",
+                },
+              ],
+              "renderItem": [Function],
+            },
+            Object {
+              "data": Array [
+                Object {
+                  "key": "supportButton",
+                },
+              ],
+              "renderItem": [Function],
+            },
+            Object {
+              "data": Array [
+                Object {
+                  "key": "supportButtonDivider",
+                },
+              ],
+              "renderItem": [Function],
+            },
+            Object {
+              "data": Array [
+                Object {
+                  "key": "privacyAndTermsButton",
+                },
+              ],
+              "renderItem": [Function],
+            },
+            Object {
+              "data": Array [
+                Object {
+                  "key": "privacyAndTermsButtonDivider",
+                },
+              ],
+              "renderItem": [Function],
+            },
+            Object {
+              "data": Array [
+                Object {
+                  "currentUser": Object {
+                    "fullName": "This is a really long full name for a user",
+                    "userId": "1",
+                    "username": "email@gmail.com",
+                  },
+                  "key": "signOutButton",
+                },
+              ],
+              "renderItem": [Function],
+            },
+            Object {
+              "data": Array [
+                Object {
+                  "key": "signOutButtonDivider",
+                },
+              ],
+              "renderItem": [Function],
+            },
+          ]
+        }
+        disableVirtualization={false}
+        getItem={[Function]}
+        getItemCount={[Function]}
+        horizontal={false}
+        initialNumToRender={10}
+        keyExtractor={[Function]}
+        maxToRenderPerBatch={10}
+        onContentSizeChange={[Function]}
+        onEndReachedThreshold={2}
+        onLayout={[Function]}
+        onMomentumScrollEnd={[Function]}
+        onScroll={[Function]}
+        onScrollBeginDrag={[Function]}
+        onScrollEndDrag={[Function]}
+        onViewableItemsChanged={undefined}
+        renderItem={[Function]}
+        scrollEnabled={false}
+        scrollEventThrottle={50}
+        sections={
+          Array [
+            Object {
+              "data": Array [
+                Object {
+                  "currentUser": Object {
+                    "fullName": "This is a really long full name for a user",
+                    "userId": "1",
+                    "username": "email@gmail.com",
+                  },
+                  "key": "currentUser",
+                },
+              ],
+              "renderItem": [Function],
+            },
+            Object {
+              "data": Array [
+                Object {
+                  "key": "health",
+                },
+              ],
+              "renderItem": [Function],
+            },
+            Object {
+              "data": Array [
+                Object {
+                  "key": "switchProfileButtonDivider",
+                },
+              ],
+              "renderItem": [Function],
+            },
+            Object {
+              "data": Array [
+                Object {
+                  "key": "switchProfileButton",
+                },
+              ],
+              "renderItem": [Function],
+            },
+            Object {
+              "data": Array [
+                Object {
+                  "key": "switchProfileButtonDivider",
+                },
+              ],
+              "renderItem": [Function],
+            },
+            Object {
+              "data": Array [
+                Object {
+                  "key": "supportButton",
+                },
+              ],
+              "renderItem": [Function],
+            },
+            Object {
+              "data": Array [
+                Object {
+                  "key": "supportButtonDivider",
+                },
+              ],
+              "renderItem": [Function],
+            },
+            Object {
+              "data": Array [
+                Object {
+                  "key": "privacyAndTermsButton",
+                },
+              ],
+              "renderItem": [Function],
+            },
+            Object {
+              "data": Array [
+                Object {
+                  "key": "privacyAndTermsButtonDivider",
+                },
+              ],
+              "renderItem": [Function],
+            },
+            Object {
+              "data": Array [
+                Object {
+                  "currentUser": Object {
+                    "fullName": "This is a really long full name for a user",
+                    "userId": "1",
+                    "username": "email@gmail.com",
+                  },
+                  "key": "signOutButton",
+                },
+              ],
+              "renderItem": [Function],
+            },
+            Object {
+              "data": Array [
+                Object {
+                  "key": "signOutButtonDivider",
+                },
+              ],
+              "renderItem": [Function],
+            },
+          ]
+        }
+        stickyHeaderIndices={
+          Array [
+            0,
+            3,
+            6,
+            9,
+          ]
+        }
+        stickySectionHeadersEnabled={true}
+        style={null}
+        updateCellsBatchingPeriod={50}
+        windowSize={21}
+      >
+        <View>
+          <View
+            onLayout={[Function]}
+            style={null}
+          />
+          <View
+            onLayout={[Function]}
+            style={null}
+          >
+            <View
+              accessibilityComponentType={undefined}
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
+              accessible={true}
+              collapsable={undefined}
+              hasTVPreferredFocus={undefined}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              nativeID={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "opacity": 1,
+                }
+              }
+              testID={undefined}
+              tvParallaxProperties={undefined}
+            >
+              <View
+                style={
+                  Array [
+                    Object {
+                      "alignItems": "center",
+                      "flexDirection": "row",
+                      "height": 54,
+                      "justifyContent": "space-between",
+                    },
+                  ]
+                }
+              >
+                <Image
+                  source={1}
+                  style={
+                    Array [
+                      Object {
+                        "height": 24,
+                        "marginLeft": 16,
+                        "marginRight": 10,
+                        "width": 24,
+                      },
+                    ]
+                  }
+                />
+                <Text
+                  accessible={true}
+                  allowFontScaling={false}
+                  ellipsizeMode="tail"
+                  numberOfLines={1}
+                  style={
+                    Array [
+                      Object {
+                        "color": "#627cff",
+                        "fontFamily": "OpenSans-Semibold",
+                        "fontSize": 15,
+                      },
+                      Object {
+                        "flex": 1,
+                      },
+                    ]
+                  }
+                >
+                  This is a really long full name for a user
+                </Text>
+                <View
+                  style={
+                    Array [
+                      Object {
+                        "height": 10,
+                        "width": 10,
+                      },
+                    ]
+                  }
+                />
+              </View>
+            </View>
+          </View>
+          <View
+            onLayout={[Function]}
+            style={null}
+          />
+          <View
+            onLayout={[Function]}
+            style={null}
+          />
+          <View
+            onLayout={[Function]}
+            style={null}
+          >
+            <View
+              style={
+                Array [
+                  Object {
+                    "height": 80,
+                  },
+                ]
+              }
+            >
+              <View
+                style={
+                  Array [
+                    Object {
+                      "alignItems": "center",
+                      "flexDirection": "row",
+                      "marginLeft": 16,
+                    },
+                  ]
+                }
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={false}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "#281946",
+                        "fontFamily": "OpenSans-Regular",
+                        "fontSize": 15,
+                      },
+                      Object {
+                        "marginRight": 8,
+                      },
+                    ]
+                  }
+                >
+                  Connect to Health
+                </Text>
+                <RCTSwitch
+                  disabled={false}
+                  onChange={[Function]}
+                  onResponderTerminationRequest={[Function]}
+                  onStartShouldSetResponder={[Function]}
+                  onTintColor="#627cff"
+                  onValueChange={[Function]}
+                  style={
+                    Array [
+                      Object {
+                        "height": 31,
+                        "width": 51,
+                      },
+                      Object {
+                        "transform": Array [
+                          Object {
+                            "scaleX": 0.75,
+                          },
+                          Object {
+                            "scaleY": 0.75,
+                          },
+                        ],
+                      },
+                    ]
+                  }
+                  value={false}
+                />
+              </View>
+            </View>
+          </View>
+          <View
+            onLayout={[Function]}
+            style={null}
+          />
+          <View
+            onLayout={[Function]}
+            style={null}
+          />
+          <View
+            onLayout={[Function]}
+            style={null}
+          >
+            <View
+              style={
+                Array [
+                  Object {
+                    "borderBottomColor": "#caccd0",
+                    "borderBottomWidth": 1,
+                    "flex": 1,
+                    "height": 1,
+                  },
+                ]
+              }
+            />
+          </View>
+          <View
+            onLayout={[Function]}
+            style={null}
+          />
+          <View
+            onLayout={[Function]}
+            style={null}
+          />
+          <View
+            style={
+              Object {
+                "height": 0,
+              }
+            }
+          />
+        </View>
+      </RCTScrollView>
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "bottom": 15,
+              "flexDirection": "column",
+              "justifyContent": "center",
+            },
+          ]
+        }
+      >
+        <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
+          accessible={true}
+          collapsable={undefined}
+          hasTVPreferredFocus={undefined}
+          hitSlop={undefined}
+          isTVSelectable={true}
+          nativeID={undefined}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "justifyContent": "center",
+                },
+              ]
+            }
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={false}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  Object {
+                    "color": "#9b9b9b",
+                    "fontFamily": "OpenSans-Regular",
+                    "fontSize": 12.5,
+                  },
+                ]
+              }
+            >
+              v
+              3.0.0
+               on Staging
+            </Text>
+          </View>
+        </View>
+      </View>
+    </RCTSafeAreaView>
+  </View>
+</RCTSafeAreaView>
+`;

@@ -60,8 +60,8 @@ class AddOrEditNoteScreen extends PureComponent {
 
     this.theme = PrimaryTheme;
 
-    const { note } = props;
-    const timestamp = note ? note.timestamp : new Date();
+    const { note, timestampAddNote } = props;
+    const timestamp = note ? note.timestamp : timestampAddNote;
     const messageText = note ? note.messageText : "";
     this.state = {
       isDirty: false,
@@ -652,6 +652,7 @@ AddOrEditNoteScreen.propTypes = {
     timestamp: PropTypes.instanceOf(Date),
     messageText: PropTypes.string.isRequired,
   }),
+  timestampAddNote: PropTypes.instanceOf(Date),
   navigateGoBack: PropTypes.func.isRequired,
   noteUpdateAsync: PropTypes.func.isRequired,
   noteAddAsync: PropTypes.func.isRequired,
@@ -659,6 +660,7 @@ AddOrEditNoteScreen.propTypes = {
 
 AddOrEditNoteScreen.defaultProps = {
   note: null,
+  timestampAddNote: null,
 };
 
 export default AddOrEditNoteScreen;

@@ -11,6 +11,7 @@ const mapStateToProps = (state, ownProps) => ({
   currentProfile: state.profile.currentProfile,
   note: ownProps.navigation.state.params.note,
   comment: ownProps.navigation.state.params.comment,
+  timestampAddComment: new Date(),
   commentsFetchData: ownProps.navigation.state.params.commentsFetchData,
 });
 

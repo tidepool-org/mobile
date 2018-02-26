@@ -6,14 +6,17 @@ import faker from "faker";
 import StoryContainerScreen from "../../__stories__/utils/StoryContainerScreen";
 import AddOrEditNoteScreen from "../../src/screens/AddOrEditNoteScreen";
 
+faker.seed(123);
+
 const currentProfile = {
   userId: "1",
   username: "email@gmail.com",
   fullName: "Jill Jellyfish",
 };
+const timestampAddNote = new Date("01/01/2018 9:41 AM");
 const note = {
   id: "1",
-  timestamp: faker.date.recent(2),
+  timestamp: new Date("01/01/2018 9:41 AM"),
   messageText: `#hashtag1 This should not show up in comments. ${faker.fake(
     "{{lorem.paragraph}}"
   )}`,
@@ -30,6 +33,7 @@ storiesOf("AddOrEditNoteScreen", module).add("Add", () => (
       noteAddAsync={noteAddAsync}
       currentUser={currentProfile}
       currentProfile={currentProfile}
+      timestampAddNote={timestampAddNote}
     />
   </StoryContainerScreen>
 ));

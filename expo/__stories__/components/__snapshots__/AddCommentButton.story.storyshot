@@ -1,0 +1,86 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots AddCommentButton default 1`] = `
+<RCTSafeAreaView
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignSelf": "center",
+        "borderWidth": 1,
+        "margin": 5,
+        "padding": 5,
+      }
+    }
+  >
+    <View
+      style={null}
+    >
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hasTVPreferredFocus={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "opacity": 1,
+            "padding": 8,
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          source={1}
+          style={
+            Array [
+              Object {
+                "height": 19,
+                "marginRight": 10,
+                "width": 23,
+              },
+            ]
+          }
+        />
+        <Text
+          accessible={true}
+          allowFontScaling={false}
+          ellipsizeMode="tail"
+          style={
+            Array [
+              Object {
+                "color": "#7e7e7e",
+                "fontFamily": "OpenSans-Semibold",
+                "fontSize": 15,
+              },
+            ]
+          }
+        >
+          Add Comment
+        </Text>
+      </View>
+    </View>
+  </View>
+</RCTSafeAreaView>
+`;

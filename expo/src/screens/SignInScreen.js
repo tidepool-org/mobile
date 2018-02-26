@@ -184,7 +184,11 @@ class SignInScreen extends PureComponent {
         <glamorous.View
           flex={1}
           // FIXME: This minHeight is needed to work around Android issue where adjustResize windowSoftInputMode causes the window size to change, thus squishing the view and revealing the footer rather than obscuring it. See: https://github.com/facebook/react-native/issues/3468#issuecomment-329603915 and https://github.com/facebook/react-native/issues/2852. Ideally we want adjustNothing and manage the keyboard avoidance ourselves, rather than adjustResize
-          minHeight={this.state.containerViewHeightWithoutKeyboard}
+          minHeight={
+            Platform.OS === "android"
+              ? this.state.containerViewHeightWithoutKeyboard
+              : null
+          }
           backgroundColor={this.theme.colors.lightBackground}
           onLayout={this.onContainerViewLayout}
         >
