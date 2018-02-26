@@ -38,8 +38,9 @@ class AddOrEditCommentScreenComment extends PureComponent {
   }
 
   onPressSave = () => {
+    const { timestampAddComment } = this.props;
     const messageText = this.state.messageText.trim();
-    this.props.onPressSave({ messageText });
+    this.props.onPressSave({ messageText, timestampAddComment });
   };
 
   onPressCancel = () => {
@@ -131,7 +132,6 @@ class AddOrEditCommentScreenComment extends PureComponent {
           paddingBottom={7}
           allowFontScaling={false}
           multiline
-          autoFocus={false}
           selectionColor="#657ef6"
           underlineColorAndroid="transparent"
           autoCapitalize="sentences"
@@ -220,6 +220,7 @@ AddOrEditCommentScreenComment.propTypes = {
   theme: ThemePropType.isRequired,
   style: ViewPropTypes.style,
   comment: CommentPropType,
+  timestampAddComment: PropTypes.instanceOf(Date),
   allowEditing: PropTypes.bool,
   onPressSave: PropTypes.func,
   onPressCancel: PropTypes.func,
@@ -231,6 +232,7 @@ AddOrEditCommentScreenComment.defaultProps = {
   onPressSave: null,
   onPressCancel: null,
   comment: null,
+  timestampAddComment: null,
 };
 
 export default withTheme(AddOrEditCommentScreenComment);

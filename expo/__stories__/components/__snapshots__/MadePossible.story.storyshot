@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots MadePossibleBy default 1`] = `
+<RCTSafeAreaView
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignSelf": "center",
+        "borderWidth": 1,
+        "margin": 5,
+        "padding": 5,
+      }
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "justifyContent": "center",
+          },
+        ]
+      }
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={false}
+        ellipsizeMode="tail"
+        style={
+          Array [
+            Object {
+              "color": "#9b9b9b",
+              "fontFamily": "OpenSans-Semibold",
+              "fontSize": 17,
+            },
+            Object {
+              "marginRight": 3,
+            },
+          ]
+        }
+      >
+        Made possible by
+      </Text>
+      <Image
+        source={1}
+        style={
+          Array [
+            Object {
+              "alignSelf": "center",
+              "height": 25,
+              "width": 97.5,
+            },
+          ]
+        }
+      />
+    </View>
+  </View>
+</RCTSafeAreaView>
+`;

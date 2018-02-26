@@ -21,8 +21,8 @@ class AddOrEditCommentScreenCommentsList extends PureComponent {
     );
   }
 
-  onPressSave = ({ messageText }) => {
-    this.props.onPressSave({ messageText });
+  onPressSave = ({ messageText, timestampAddComment }) => {
+    this.props.onPressSave({ messageText, timestampAddComment });
   };
 
   onPressCancel = () => {
@@ -33,7 +33,7 @@ class AddOrEditCommentScreenCommentsList extends PureComponent {
     this.props.onEditableCommentLayout(event);
   };
 
-  renderEditableComment({ comment }) {
+  renderEditableComment({ comment, timestampAddComment }) {
     const { theme, currentUser } = this.props;
     const key = comment ? comment.id : "add-comment";
 
@@ -45,6 +45,7 @@ class AddOrEditCommentScreenCommentsList extends PureComponent {
             theme={theme}
             currentUserId={currentUser.userId}
             comment={comment}
+            timestampAddComment={timestampAddComment}
             allowEditing
             onPressSave={this.onPressSave}
             onPressCancel={this.onPressCancel}
@@ -71,7 +72,7 @@ class AddOrEditCommentScreenCommentsList extends PureComponent {
   }
 
   renderComments() {
-    const { commentsFetchData, commentsFetchData: { comments } } = this.props;
+    const { commentsFetchData, commentsFetchData: { comments }, timestampAddComment } = this.props;
 
     const renderedComments = comments.map(comment => {
       // Don't render the comment that has same id as the note
@@ -90,7 +91,7 @@ class AddOrEditCommentScreenCommentsList extends PureComponent {
 
     // If no comment was provided to edit, then we're adding a comment, so append an editable comment to end of the rendered comments
     if (!commentsFetchData.errorMessage && !this.props.comment) {
-      renderedComments.push(this.renderEditableComment({ comment: null }));
+      renderedComments.push(this.renderEditableComment({ comment: null, timestampAddComment }));
     }
 
     return renderedComments;
@@ -114,6 +115,7 @@ AddOrEditCommentScreenCommentsList.propTypes = {
     messageText: PropTypes.string.isRequired,
   }).isRequired,
   comment: CommentPropType,
+  timestampAddComment: PropTypes.instanceOf(Date),
   commentsFetchData: PropTypes.shape({
     comments: PropTypes.arrayOf(CommentPropType),
     errorMessage: PropTypes.string,
@@ -133,6 +135,7 @@ AddOrEditCommentScreenCommentsList.defaultProps = {
     fetched: false,
   },
   comment: null,
+  timestampAddComment: null,
   onPressSave: null,
   onPressCancel: null,
 };

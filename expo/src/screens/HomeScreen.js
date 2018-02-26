@@ -40,8 +40,6 @@ class HomeScreen extends PureComponent {
   }
 
   render() {
-    // console.log("HomeScreen: render");
-
     const {
       currentUser,
       commentsFetchDataByMessageId,

@@ -176,7 +176,7 @@ class AddOrEditCommentScreen extends PureComponent {
     this.goBack();
   };
 
-  addOrSaveAndGoBack = ({ messageText }) => {
+  addOrSaveAndGoBack = ({ messageText, timestampAddComment }) => {
     const { currentUser, currentProfile, comment, note } = this.props;
 
     if (comment) {
@@ -192,6 +192,7 @@ class AddOrEditCommentScreen extends PureComponent {
         currentProfile,
         note,
         messageText,
+        timestamp: timestampAddComment,
       });
     }
     this.goBack();
@@ -218,13 +219,20 @@ class AddOrEditCommentScreen extends PureComponent {
   }
 
   renderComments() {
-    const { comment, note, currentUser, commentsFetchData } = this.props;
+    const {
+      comment,
+      note,
+      currentUser,
+      commentsFetchData,
+      timestampAddComment,
+    } = this.props;
 
     return (
       <AddOrEditCommentScreenCommentsList
         currentUser={currentUser}
         note={note}
         comment={comment}
+        timestampAddComment={timestampAddComment}
         commentsFetchData={commentsFetchData}
         onEditableCommentLayout={this.onEditableCommentLayout}
         onPressSave={this.addOrSaveAndGoBack}
@@ -279,6 +287,7 @@ AddOrEditCommentScreen.propTypes = {
     fetching: PropTypes.bool,
     fetched: PropTypes.bool,
   }),
+  timestampAddComment: PropTypes.instanceOf(Date),
 };
 
 AddOrEditCommentScreen.defaultProps = {
@@ -289,6 +298,7 @@ AddOrEditCommentScreen.defaultProps = {
     fetched: false,
   },
   comment: null,
+  timestampAddComment: null,
 };
 
 export default AddOrEditCommentScreen;
