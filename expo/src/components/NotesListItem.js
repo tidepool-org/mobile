@@ -94,6 +94,11 @@ class NotesListItem extends PureComponent {
     }
   };
 
+  onPressDeleteNote = () => {
+    const { note } = this.props;
+    this.props.onDeleteNotePressed({ note });
+  };
+
   onPressEditNote = () => {
     const { note } = this.props;
     this.props.navigateEditNote({ note });
@@ -116,7 +121,7 @@ class NotesListItem extends PureComponent {
     return note.userId !== note.groupId && note.userFullName;
   }
 
-  renderEditButton() {
+  renderDeleteButton() {
     const { theme, note, currentUser } = this.props;
 
     if (
@@ -127,6 +132,35 @@ class NotesListItem extends PureComponent {
       return (
         <glamorous.TouchableOpacity
           marginLeft="auto"
+          marginRight={10}
+          marginTop={7}
+          hitSlop={{ left: 10, right: 10, top: 10, bottom: 10 }}
+          onPress={this.onPressDeleteNote}
+        >
+          <glamorous.Text
+            style={theme.editButtonTextStyle}
+            allowFontScaling={false}
+            numberOfLines={1}
+          >
+            Delete
+          </glamorous.Text>
+        </glamorous.TouchableOpacity>
+      );
+    }
+
+    return null;
+  }
+
+  renderEditButton() {
+    const { theme, note, currentUser } = this.props;
+
+    if (
+      this.props.allowEditing &&
+      this.state.expanded &&
+      note.userId === currentUser.userId
+    ) {
+      return (
+        <glamorous.TouchableOpacity
           marginRight={10}
           marginTop={7}
           hitSlop={{ left: 10, right: 10, top: 10, bottom: 10 }}
@@ -197,6 +231,7 @@ class NotesListItem extends PureComponent {
         >
           {formatDateForNoteList(note.timestamp)}
         </glamorous.Text>
+        {!this.shouldRenderUserLabelSection() && this.renderDeleteButton()}
         {!this.shouldRenderUserLabelSection() && this.renderEditButton()}
       </glamorous.View>
     );
@@ -307,6 +342,7 @@ NotesListItem.propTypes = {
     fetched: PropTypes.bool,
   }),
   navigateEditNote: PropTypes.func.isRequired,
+  onDeleteNotePressed: PropTypes.func.isRequired,
   navigateAddComment: PropTypes.func.isRequired,
   navigateEditComment: PropTypes.func.isRequired,
 };

@@ -1,9 +1,6 @@
 /* eslint import/no-extraneous-dependencies: 0 */
 import React from "react";
 import { storiesOf } from "@storybook/react-native";
-import startOfToday from "date-fns/start_of_today";
-import setHours from "date-fns/set_hours";
-import setMinutes from "date-fns/set_minutes";
 import subDays from "date-fns/sub_days";
 import faker from "faker";
 
@@ -17,7 +14,6 @@ const currentUser = {
   username: "email@gmail.com",
   fullName: "Jill Jellyfish",
 };
-const timestampEarlierToday = setMinutes(setHours(startOfToday(), 9), 41);
 const currentProfile = {
   userId: "1",
   fullName: "Jill Jellyfish",
@@ -27,18 +23,12 @@ const commentsFetchAsync = () => {};
 const navigateEditNote = () => {};
 const navigateAddComment = () => {};
 const navigateEditComment = () => {};
+const noteDeleteAsync = () => {};
 const notes = [];
 for (let i = 0; i < 100; i += 1) {
-  let timestamp;
-  if (i < 2) {
-    // Test relative date format ("Today", "Yesterday")
-    timestamp = subDays(timestampEarlierToday, i);
-  } else {
-    timestamp = subDays(new Date("01/17/2018 9:41 AM"), i);
-  }
   notes.push({
     id: i.toString(),
-    timestamp,
+    timestamp: subDays(new Date("01/17/2018 9:41 AM"), i),
     messageText: faker.fake("{{lorem.paragraph}} #exercise #meal"),
     userId: "1",
   });
@@ -53,6 +43,7 @@ const props = {
   navigateEditNote,
   navigateAddComment,
   navigateEditComment,
+  noteDeleteAsync,
 };
 
 storiesOf("HomeScreen", module).add("default", () => (

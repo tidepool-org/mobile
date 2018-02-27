@@ -88,7 +88,7 @@ exports[`Storyshots NotesListItem default 1`] = `
                   ]
                 }
               >
-                Today at 9:41 am
+                Jan 1 at 9:41 am
               </Text>
             </View>
             <Text
@@ -258,7 +258,7 @@ exports[`Storyshots NotesListItem initially expanded 1`] = `
                   ]
                 }
               >
-                Today at 9:41 am
+                Jan 1 at 9:41 am
               </Text>
               <View
                 accessibilityComponentType={undefined}
@@ -287,6 +287,58 @@ exports[`Storyshots NotesListItem initially expanded 1`] = `
                 style={
                   Object {
                     "marginLeft": "auto",
+                    "marginRight": 10,
+                    "marginTop": 7,
+                    "opacity": 1,
+                  }
+                }
+                testID={undefined}
+                tvParallaxProperties={undefined}
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={false}
+                  ellipsizeMode="tail"
+                  numberOfLines={1}
+                  style={
+                    Array [
+                      Object {
+                        "color": "#627cff",
+                        "fontFamily": "OpenSans-Regular",
+                        "fontSize": 12.5,
+                      },
+                    ]
+                  }
+                >
+                  Delete
+                </Text>
+              </View>
+              <View
+                accessibilityComponentType={undefined}
+                accessibilityLabel={undefined}
+                accessibilityTraits={undefined}
+                accessible={true}
+                collapsable={undefined}
+                hasTVPreferredFocus={undefined}
+                hitSlop={
+                  Object {
+                    "bottom": 10,
+                    "left": 10,
+                    "right": 10,
+                    "top": 10,
+                  }
+                }
+                isTVSelectable={true}
+                nativeID={undefined}
+                onLayout={undefined}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  Object {
                     "marginRight": 10,
                     "marginTop": 7,
                     "opacity": 1,
@@ -501,7 +553,7 @@ exports[`Storyshots NotesListItem initially expanded 1`] = `
                   ]
                 }
               >
-                . This is a long comment. Pariatur quos est quod laborum. Quisquam esse quia expedita commodi. Tempora ut exercitationem doloribus harum. Sunt omnis et accusantium et quia quos sequi molestiae. Enim necessitatibus molestiae.
+                . This is a long comment. Fuga enim tempore non voluptas quia vitae ipsam voluptas. Et dolor adipisci dolores sunt non explicabo occaecati rerum nesciunt. Sint est asperiores sit voluptatum mollitia enim iste. Nesciunt minima sequi voluptas optio aut voluptatem. Eligendi voluptates iste eius iure commodi molestiae.
               </Text>
             </Text>
           </View>
@@ -925,6 +977,346 @@ exports[`Storyshots NotesListItem initially expanded 1`] = `
                 Add Comment
               </Text>
             </View>
+          </View>
+          <ExponentLinearGradient
+            colors={
+              Array [
+                4293190885,
+                4293783022,
+                4294440952,
+              ]
+            }
+            endPoint={undefined}
+            locations={null}
+            startPoint={undefined}
+            style={
+              Object {
+                "height": 10,
+              }
+            }
+          />
+        </View>
+      </View>
+    </RCTScrollView>
+  </View>
+</RCTSafeAreaView>
+`;
+
+exports[`Storyshots NotesListItem today 1`] = `
+<RCTSafeAreaView
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignSelf": "center",
+        "borderWidth": 1,
+        "margin": 5,
+        "padding": 5,
+      }
+    }
+  >
+    <RCTScrollView
+      style={null}
+    >
+      <View>
+        <View
+          collapsable={undefined}
+          style={
+            Object {
+              "backgroundColor": "white",
+              "opacity": 0,
+            }
+          }
+        >
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            collapsable={undefined}
+            hasTVPreferredFocus={undefined}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            nativeID={undefined}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "opacity": 1,
+              }
+            }
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <View
+              style={
+                Array [
+                  Object {
+                    "flexDirection": "row",
+                    "justifyContent": "flex-start",
+                    "zIndex": 1,
+                  },
+                ]
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#4d4e4c",
+                      "fontFamily": "OpenSans-Regular",
+                      "fontSize": 12.5,
+                    },
+                    Object {
+                      "marginLeft": 12,
+                      "marginRight": 12,
+                      "marginTop": 7,
+                    },
+                  ]
+                }
+              >
+                Today at 9:41 am
+              </Text>
+            </View>
+            <Text
+              accessible={true}
+              allowFontScaling={false}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  Object {
+                    "color": "#3c3c3c",
+                    "fontFamily": "OpenSans-Regular",
+                    "fontSize": 15,
+                  },
+                  Object {
+                    "flexDirection": "row",
+                    "marginBottom": 7,
+                    "marginLeft": 12,
+                    "marginRight": 12,
+                    "marginTop": 7,
+                  },
+                ]
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#3c3c3c",
+                      "fontFamily": "OpenSans-Bold",
+                      "fontSize": 15,
+                    },
+                  ]
+                }
+              >
+                #hashtag1
+              </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#3c3c3c",
+                      "fontFamily": "OpenSans-Regular",
+                      "fontSize": 15,
+                    },
+                  ]
+                }
+              >
+                 This should not show up in comments. Pariatur quos est quod laborum. Quisquam esse quia expedita commodi. Tempora ut exercitationem doloribus harum. Sunt omnis et accusantium et quia quos sequi molestiae. Enim necessitatibus molestiae.
+              </Text>
+            </Text>
+          </View>
+          <ExponentLinearGradient
+            colors={
+              Array [
+                4293190885,
+                4293783022,
+                4294440952,
+              ]
+            }
+            endPoint={undefined}
+            locations={null}
+            startPoint={undefined}
+            style={
+              Object {
+                "height": 10,
+              }
+            }
+          />
+        </View>
+      </View>
+    </RCTScrollView>
+  </View>
+</RCTSafeAreaView>
+`;
+
+exports[`Storyshots NotesListItem yesterday 1`] = `
+<RCTSafeAreaView
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignSelf": "center",
+        "borderWidth": 1,
+        "margin": 5,
+        "padding": 5,
+      }
+    }
+  >
+    <RCTScrollView
+      style={null}
+    >
+      <View>
+        <View
+          collapsable={undefined}
+          style={
+            Object {
+              "backgroundColor": "white",
+              "opacity": 0,
+            }
+          }
+        >
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            collapsable={undefined}
+            hasTVPreferredFocus={undefined}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            nativeID={undefined}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "opacity": 1,
+              }
+            }
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <View
+              style={
+                Array [
+                  Object {
+                    "flexDirection": "row",
+                    "justifyContent": "flex-start",
+                    "zIndex": 1,
+                  },
+                ]
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#4d4e4c",
+                      "fontFamily": "OpenSans-Regular",
+                      "fontSize": 12.5,
+                    },
+                    Object {
+                      "marginLeft": 12,
+                      "marginRight": 12,
+                      "marginTop": 7,
+                    },
+                  ]
+                }
+              >
+                Yesterday at 9:41 am
+              </Text>
+            </View>
+            <Text
+              accessible={true}
+              allowFontScaling={false}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  Object {
+                    "color": "#3c3c3c",
+                    "fontFamily": "OpenSans-Regular",
+                    "fontSize": 15,
+                  },
+                  Object {
+                    "flexDirection": "row",
+                    "marginBottom": 7,
+                    "marginLeft": 12,
+                    "marginRight": 12,
+                    "marginTop": 7,
+                  },
+                ]
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#3c3c3c",
+                      "fontFamily": "OpenSans-Bold",
+                      "fontSize": 15,
+                    },
+                  ]
+                }
+              >
+                #hashtag1
+              </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#3c3c3c",
+                      "fontFamily": "OpenSans-Regular",
+                      "fontSize": 15,
+                    },
+                  ]
+                }
+              >
+                 This should not show up in comments. Eligendi rerum excepturi et laudantium fuga similique fugit corporis voluptatem. Esse nobis et sint magnam aut. Dolores maiores incidunt occaecati iusto laborum. Quia deleniti dolorem quibusdam id veniam perspiciatis et nisi. Corporis laboriosam esse. Soluta accusamus officiis ut excepturi blanditiis libero ut.
+              </Text>
+            </Text>
           </View>
           <ExponentLinearGradient
             colors={

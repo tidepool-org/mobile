@@ -4,6 +4,7 @@ import {
   NOTES_FETCH_DID_FAIL,
   NOTES_FETCH_ADD_NOTE,
   NOTES_FETCH_UPDATE_NOTE,
+  NOTES_FETCH_DELETE_NOTE,
 } from "../actions/notesFetch";
 import { AUTH_SIGN_IN_RESET } from "../actions/auth";
 
@@ -93,6 +94,36 @@ function notesFetch(state = initialState, action) {
       } else {
         // console.log(
         //   `Unexpected update of note with profile userId: ${
+        //     action.payload.profile.userId
+        //   } in notes list for profile userId: ${state.userId}`
+        // );
+      }
+      break;
+    }
+    case NOTES_FETCH_DELETE_NOTE: {
+      if (action.payload.profile.userId === state.userId) {
+        const noteIndex = state.notes.findIndex(
+          note => note.id === action.payload.note.id
+        );
+        if (noteIndex !== -1) {
+          const sortedNotes = [
+            ...state.notes.slice(0, noteIndex),
+            ...state.notes.slice(noteIndex + 1),
+          ];
+          nextState = {
+            userId: action.payload.profile.userId,
+            notes: sortedNotes,
+            errorMessage: "",
+            fetching: false,
+          };
+        } else {
+          // console.log(
+          //   `Could not find the deleted note in current notes, this is unexpected`
+          // );
+        }
+      } else {
+        // console.log(
+        //   `Unexpected delete of note with profile userId: ${
         //     action.payload.profile.userId
         //   } in notes list for profile userId: ${state.userId}`
         // );

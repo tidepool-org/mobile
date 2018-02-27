@@ -209,6 +209,18 @@ class TidepoolApi {
     return { errorMessage };
   }
 
+  async deleteNoteAsync({ note }) {
+    const { errorMessage } = await this.deleteNote({
+      note,
+    })
+      .then(() => ({}))
+      .catch(error => ({
+        errorMessage: error.message,
+      }));
+
+    return { errorMessage };
+  }
+
   async addCommentAsync({
     currentUser,
     currentProfile,
@@ -460,6 +472,23 @@ class TidepoolApi {
 
     return new Promise((resolve, reject) => {
       axios({ method, url, baseURL, headers, data })
+        .then(() => {
+          resolve({});
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+  }
+
+  deleteNote({ note }) {
+    const method = "delete";
+    const url = `/message/remove/${note.id}`;
+    const baseURL = this.baseUrl;
+    const headers = { "x-tidepool-session-token": this.sessionToken };
+
+    return new Promise((resolve, reject) => {
+      axios({ method, url, baseURL, headers })
         .then(() => {
           resolve({});
         })
