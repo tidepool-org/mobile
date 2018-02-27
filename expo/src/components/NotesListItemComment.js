@@ -14,7 +14,7 @@ class NotesListItemComment extends PureComponent {
     this.props.onPressEditComment({ comment });
   };
 
-  renderEdit() {
+  renderEditButton() {
     const { theme, currentUserId, comment, allowEditing } = this.props;
 
     if (allowEditing && comment.userId === currentUserId) {
@@ -70,7 +70,7 @@ class NotesListItemComment extends PureComponent {
           >
             {formatDateForNoteList(comment.timestamp)}
           </glamorous.Text>
-          {this.renderEdit()}
+          {this.renderEditButton()}
         </glamorous.View>
         <glamorous.Text
           allowFontScaling={false}

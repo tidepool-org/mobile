@@ -6,6 +6,7 @@ export const NOTES_FETCH_DID_SUCCEED = "NOTES_FETCH_DID_SUCCEED";
 export const NOTES_FETCH_DID_FAIL = "NOTES_FETCH_DID_FAIL";
 export const NOTES_FETCH_ADD_NOTE = "NOTES_FETCH_ADD_NOTE";
 export const NOTES_FETCH_UPDATE_NOTE = "NOTES_FETCH_UPDATE_NOTE";
+export const NOTES_FETCH_DELETE_NOTE = "NOTES_FETCH_DELETE_NOTE";
 
 // TODO: fetch - cancel outstanding request if we get another request to start fetching while one is in progress.
 // TODO: fetch - cancel outstanding request if we sign out while fetch is in progress
@@ -45,6 +46,11 @@ export const notesFetchAddNote = ({ note, profile }) => ({
 
 export const notesFetchUpdateNote = ({ note, profile }) => ({
   type: NOTES_FETCH_UPDATE_NOTE,
+  payload: { note, profile },
+});
+
+export const notesFetchDeleteNote = ({ note, profile }) => ({
+  type: NOTES_FETCH_DELETE_NOTE,
   payload: { note, profile },
 });
 

@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import HomeScreen from "../screens/HomeScreen";
 import { notesFetchAsync } from "../actions/notesFetch";
 import { commentsFetchAsync } from "../actions/commentsFetch";
+import { noteDeleteAsync } from "../actions/noteDelete";
 import {
   navigateEditNote,
   navigateAddComment,
@@ -27,6 +28,7 @@ const mapDispatchToProps = dispatch =>
       navigateEditNote,
       navigateAddComment,
       navigateEditComment,
+      noteDeleteAsync,
     },
     dispatch
   );

@@ -4,6 +4,7 @@ import glamorous from "glamorous-native";
 import { storiesOf } from "@storybook/react-native";
 import faker from "faker";
 import startOfToday from "date-fns/start_of_today";
+import startOfYesterday from "date-fns/start_of_yesterday";
 import setHours from "date-fns/set_hours";
 import setMinutes from "date-fns/set_minutes";
 import addMinutes from "date-fns/add_minutes";
@@ -22,10 +23,28 @@ const currentProfile = {
   userId: "1",
   fullName: "Jill Jellyfish",
 };
-const timestampEarlierToday = setMinutes(setHours(startOfToday(), 9), 41);
+const timestamp = new Date("01/01/2018 9:41 AM");
+const timestampEarlyToday = setMinutes(setHours(startOfToday(), 9), 41);
+const timestampEarlyYesterday = setMinutes(setHours(startOfYesterday(), 9), 41);
 const note = {
   id: "1",
-  timestamp: timestampEarlierToday,
+  timestamp,
+  messageText: `#hashtag1 This should not show up in comments. ${faker.fake(
+    "{{lorem.paragraph}}"
+  )}`,
+  userId: "1",
+};
+const noteToday = {
+  id: "1",
+  timestamp: timestampEarlyToday,
+  messageText: `#hashtag1 This should not show up in comments. ${faker.fake(
+    "{{lorem.paragraph}}"
+  )}`,
+  userId: "1",
+};
+const noteYesterday = {
+  id: "1",
+  timestamp: timestampEarlyYesterday,
   messageText: `#hashtag1 This should not show up in comments. ${faker.fake(
     "{{lorem.paragraph}}"
   )}`,
@@ -38,25 +57,25 @@ const commentsFetchData = {
       messageText: `This is comment 1 #hashtag1. This is a long comment. ${faker.fake(
         "{{lorem.paragraph}}"
       )}`,
-      timestamp: addMinutes(timestampEarlierToday, 60),
+      timestamp: addMinutes(timestampEarlyToday, 60),
       userFullName: "Some other person",
     },
     {
       id: "4",
       messageText: "This is comment 2 #hashtag2",
-      timestamp: addMinutes(timestampEarlierToday, 80),
+      timestamp: addMinutes(timestampEarlyToday, 80),
       userFullName: "Some other person",
     },
     {
       id: "3",
       messageText: "This is comment 3 #hashtag3",
-      timestamp: addMinutes(timestampEarlierToday, 100),
+      timestamp: addMinutes(timestampEarlyToday, 100),
       userFullName: "Some other person",
     },
     {
       id: "2",
       messageText: "This is comment 4 #hashtag4",
-      timestamp: addMinutes(timestampEarlierToday, 120),
+      timestamp: addMinutes(timestampEarlyToday, 120),
       userFullName: "Some other person",
     },
     { ...note, userFullName: "Jill Jellyfish" },
@@ -66,15 +85,16 @@ const commentsFetchData = {
 };
 const commentsFetchAsync = () => {};
 const navigateEditNote = () => {};
+const onDeleteNotePressed = () => {};
 const navigateAddComment = () => {};
 const navigateEditComment = () => {};
 const props = {
   currentUser,
   currentProfile,
-  note,
   commentsFetchAsync,
   commentsFetchData,
   navigateEditNote,
+  onDeleteNotePressed,
   navigateAddComment,
   navigateEditComment,
 };
@@ -82,7 +102,7 @@ const props = {
 storiesOf("NotesListItem", module).add("default", () => (
   <StoryContainerComponent>
     <glamorous.ScrollView>
-      <NotesListItem {...props} />
+      <NotesListItem {...props} note={note} />
     </glamorous.ScrollView>
   </StoryContainerComponent>
 ));
@@ -90,7 +110,23 @@ storiesOf("NotesListItem", module).add("default", () => (
 storiesOf("NotesListItem", module).add("initially expanded", () => (
   <StoryContainerComponent>
     <glamorous.ScrollView>
-      <NotesListItem {...props} initiallyExpanded />
+      <NotesListItem {...props} note={note} initiallyExpanded />
+    </glamorous.ScrollView>
+  </StoryContainerComponent>
+));
+
+storiesOf("NotesListItem", module).add("today", () => (
+  <StoryContainerComponent>
+    <glamorous.ScrollView>
+      <NotesListItem {...props} note={noteToday} />
+    </glamorous.ScrollView>
+  </StoryContainerComponent>
+));
+
+storiesOf("NotesListItem", module).add("yesterday", () => (
+  <StoryContainerComponent>
+    <glamorous.ScrollView>
+      <NotesListItem {...props} note={noteYesterday} />
     </glamorous.ScrollView>
   </StoryContainerComponent>
 ));

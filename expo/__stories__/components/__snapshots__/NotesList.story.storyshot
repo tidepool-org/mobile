@@ -26,13 +26,13 @@ exports[`Storyshots NotesList default 1`] = `
           Object {
             "id": "0",
             "messageText": "Quis molestiae tempora eligendi omnis quisquam quisquam quos. Dolor voluptatibus velit nobis culpa deleniti. Reprehenderit in nisi et. Quia odio et inventore eligendi in deserunt id. Sit odio quia vitae provident quo provident molestiae. #exercise #meal",
-            "timestamp": 2018-02-25T15:41:00.000Z,
+            "timestamp": 2018-01-17T15:41:00.000Z,
             "userId": "1",
           },
           Object {
             "id": "1",
             "messageText": "Pariatur quos est quod laborum. Quisquam esse quia expedita commodi. Tempora ut exercitationem doloribus harum. Sunt omnis et accusantium et quia quos sequi molestiae. Enim necessitatibus molestiae. #exercise #meal",
-            "timestamp": 2018-02-24T15:41:00.000Z,
+            "timestamp": 2018-01-16T15:41:00.000Z,
             "userId": "1",
           },
           Object {
@@ -735,7 +735,7 @@ exports[`Storyshots NotesList default 1`] = `
                     ]
                   }
                 >
-                  Today at 9:41 am
+                  Jan 17 at 9:41 am
                 </Text>
               </View>
               <Text
@@ -912,7 +912,7 @@ exports[`Storyshots NotesList default 1`] = `
                     ]
                   }
                 >
-                  Yesterday at 9:41 am
+                  Jan 16 at 9:41 am
                 </Text>
               </View>
               <Text

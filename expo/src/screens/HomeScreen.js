@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { StatusBar } from "react-native";
+import { Alert, StatusBar } from "react-native";
 import glamorous, { ThemeProvider } from "glamorous-native";
 
 import PrimaryTheme from "../themes/PrimaryTheme";
@@ -39,6 +39,26 @@ class HomeScreen extends PureComponent {
     });
   }
 
+  onDeleteNotePressed = ({ note }) => {
+    const { noteDeleteAsync, currentUser, currentProfile } = this.props;
+
+    Alert.alert(
+      "Delete Note?",
+      "Once you delete this note, it cannot be recovered.",
+      [
+        {
+          text: "Cancel",
+          style: "cancel",
+        },
+        {
+          text: "Delete",
+          onPress: () => noteDeleteAsync({ currentUser, currentProfile, note }),
+          style: "destructive",
+        },
+      ]
+    );
+  };
+
   render() {
     const {
       currentUser,
@@ -68,6 +88,7 @@ class HomeScreen extends PureComponent {
             commentsFetchAsync={commentsFetchAsync}
             commentsFetchDataByMessageId={commentsFetchDataByMessageId}
             navigateEditNote={navigateEditNote}
+            onDeleteNotePressed={this.onDeleteNotePressed}
             navigateAddComment={navigateAddComment}
             navigateEditComment={navigateEditComment}
           />
@@ -102,6 +123,7 @@ HomeScreen.propTypes = {
   navigateEditNote: PropTypes.func.isRequired,
   navigateAddComment: PropTypes.func.isRequired,
   navigateEditComment: PropTypes.func.isRequired,
+  noteDeleteAsync: PropTypes.func.isRequired,
 };
 
 HomeScreen.defaultProps = {
