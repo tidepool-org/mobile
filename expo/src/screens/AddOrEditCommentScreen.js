@@ -67,10 +67,11 @@ class AddOrEditCommentScreen extends PureComponent {
       keyboardHeight: null,
     };
 
+    this.noteViewHeight = null;
     this.editableCommentY = null;
-    this.editableCommentHeight = null;
     this.scrollViewContentHeight = null;
     this.containerViewHeight = null;
+
     this.onScrollViewContentSizeChange = this.onScrollViewContentSizeChange.bind(
       this
     ); // FIXME: This bind shouldn't be necessary, since we're already using a class field
@@ -110,6 +111,12 @@ class AddOrEditCommentScreen extends PureComponent {
     this.scrollToEditableComment();
   };
 
+  onNoteViewLayout = event => {
+    const { layout } = event.nativeEvent;
+    this.noteViewHeight = layout.height;
+    this.scrollToEditableComment();
+  };
+
   onEditableCommentLayout = event => {
     const { layout } = event.nativeEvent;
     this.editableCommentY = layout.y;
@@ -128,18 +135,20 @@ class AddOrEditCommentScreen extends PureComponent {
     this.scrollToEditableComment();
   };
 
+  // FIXME: On Android, a really long comment (longer than the fixed height of the TextInput?) will result in the scroll position changing as the TextInput content height changes, or when TextInput is focused. This is weird. We don't have autoGrow enabled (which is being removed anyway in 0.53.0), and the height of the TextInput doesn't change. This results in a poor initial scroll position for the scroll view. The same bug happens dynamically when typing in the TextInput or focusing it or navigating around it. This eventually causes the TextInput to not be visible even while it's focused and user is typing. This is a poor experience.
   scrollToEditableComment() {
     const isScrollable =
+      this.noteViewHeight &&
       this.editableCommentHeight &&
-      this.scrollViewContentHeight &&
       this.containerViewHeight &&
+      this.scrollViewContentHeight &&
       this.scrollViewContentHeight > this.containerViewHeight;
     if (isScrollable) {
       const scrollMax = this.scrollViewContentHeight - this.containerViewHeight;
       let scrollY =
-        this.editableCommentY +
-        this.editableCommentHeight -
-        this.containerViewHeight / 4;
+        this.noteViewHeight +
+        this.editableCommentY -
+        (this.containerViewHeight / 2 - this.editableCommentHeight / 2);
       if (scrollY < 0) {
         scrollY = 0;
       } else if (scrollY > scrollMax) {
@@ -263,7 +272,9 @@ class AddOrEditCommentScreen extends PureComponent {
               keyboardShouldPersistTaps="always"
               onContentSizeChange={this.onScrollViewContentSizeChange}
             >
-              {this.renderNote()}
+              <glamorous.View onLayout={this.onNoteViewLayout}>
+                {this.renderNote()}
+              </glamorous.View>
               {this.renderComments()}
             </glamorous.ScrollView>
           </glamorous.View>
