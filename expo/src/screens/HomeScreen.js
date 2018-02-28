@@ -40,7 +40,7 @@ class HomeScreen extends PureComponent {
   }
 
   onDeleteNotePressed = ({ note }) => {
-    const { noteDeleteAsync, currentUser, currentProfile } = this.props;
+    const { noteDeleteAsync, currentProfile } = this.props;
 
     Alert.alert(
       "Delete Note?",
@@ -52,7 +52,27 @@ class HomeScreen extends PureComponent {
         },
         {
           text: "Delete",
-          onPress: () => noteDeleteAsync({ currentUser, currentProfile, note }),
+          onPress: () => noteDeleteAsync({ currentProfile, note }),
+          style: "destructive",
+        },
+      ]
+    );
+  };
+
+  onDeleteCommentPressed = ({ note, comment }) => {
+    const { commentDeleteAsync, currentProfile } = this.props;
+
+    Alert.alert(
+      "Delete Comment?",
+      "Once you delete this comment, it cannot be recovered.",
+      [
+        {
+          text: "Cancel",
+          style: "cancel",
+        },
+        {
+          text: "Delete",
+          onPress: () => commentDeleteAsync({ note, currentProfile, comment }),
           style: "destructive",
         },
       ]
@@ -91,6 +111,7 @@ class HomeScreen extends PureComponent {
             onDeleteNotePressed={this.onDeleteNotePressed}
             navigateAddComment={navigateAddComment}
             navigateEditComment={navigateEditComment}
+            onDeleteCommentPressed={this.onDeleteCommentPressed}
           />
         </glamorous.View>
       </ThemeProvider>
@@ -124,6 +145,7 @@ HomeScreen.propTypes = {
   navigateAddComment: PropTypes.func.isRequired,
   navigateEditComment: PropTypes.func.isRequired,
   noteDeleteAsync: PropTypes.func.isRequired,
+  commentDeleteAsync: PropTypes.func.isRequired,
 };
 
 HomeScreen.defaultProps = {

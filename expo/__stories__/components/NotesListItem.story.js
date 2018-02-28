@@ -88,6 +88,7 @@ const navigateEditNote = () => {};
 const onDeleteNotePressed = () => {};
 const navigateAddComment = () => {};
 const navigateEditComment = () => {};
+const onDeleteCommentPressed = () => {};
 const props = {
   currentUser,
   currentProfile,
@@ -97,6 +98,7 @@ const props = {
   onDeleteNotePressed,
   navigateAddComment,
   navigateEditComment,
+  onDeleteCommentPressed,
 };
 
 storiesOf("NotesListItem", module).add("default", () => (

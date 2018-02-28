@@ -5,9 +5,9 @@ export const NOTE_DELETE_DID_START = "NOTE_DELETE_DID_START";
 export const NOTE_DELETE_DID_SUCCEED = "NOTE_DELETE_DID_SUCCEED";
 export const NOTE_DELETE_DID_FAIL = "NOTE_DELETE_DID_FAIL";
 
-export const noteDeleteDidStart = ({ currentProfile, note }) => ({
+export const noteDeleteDidStart = ({ note }) => ({
   type: NOTE_DELETE_DID_START,
-  payload: { currentProfile, note },
+  payload: { note },
 });
 
 export const noteDeleteDidSucceed = ({ note }) => ({
@@ -21,16 +21,10 @@ export const noteDeleteDidFail = ({ errorMessage }) => ({
   payload: { errorMessage },
 });
 
-export const noteDeleteAsync = ({
-  currentUser,
-  currentProfile,
-  note,
-}) => async dispatch => {
-  dispatch(noteDeleteDidStart({ currentUser, currentProfile, note }));
+export const noteDeleteAsync = ({ note, currentProfile }) => async dispatch => {
+  dispatch(noteDeleteDidStart({ note }));
 
   const { errorMessage } = await api().deleteNoteAsync({
-    currentUser,
-    currentProfile,
     note,
   });
 

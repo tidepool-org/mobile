@@ -13,22 +13,31 @@ faker.seed(123);
 
 const currentUserId = "1";
 const timestampEarlierToday = setMinutes(setHours(startOfToday(), 9), 41);
-const comment = {
+const note = {
   id: "1",
+  timestamp: timestampEarlierToday,
+  messageText: `#note This is a note. ${faker.fake("{{lorem.paragraph}}")}`,
+  userId: "1",
+};
+const comment = {
+  id: "2",
   timestamp: timestampEarlierToday,
   messageText: faker.fake("#hashtag1 {{lorem.paragraph}} #hashtag2"),
   userId: "1",
   userFullName: "Jell Jellyfish",
 };
 const onPressEditComment = () => {};
+const onPressDeleteComment = () => {};
 
 storiesOf("NotesListItemComment", module).add("default", () => (
   <StoryContainerComponent>
     <NotesListItemComment
       style={{ width: 300 }}
       currentUserId={currentUserId}
+      note={note}
       comment={comment}
       onPressEditComment={onPressEditComment}
+      onPressDeleteComment={onPressDeleteComment}
     />
   </StoryContainerComponent>
 ));
@@ -46,8 +55,10 @@ storiesOf("NotesListItemComment", module).add("long user full name", () => (
     <NotesListItemComment
       style={{ width: 300 }}
       currentUserId={currentUserId}
+      note={note}
       comment={commentWithLongUserFullName}
       onPressEditComment={onPressEditComment}
+      onPressDeleteComment={onPressDeleteComment}
     />
   </StoryContainerComponent>
 ));

@@ -50,11 +50,12 @@ function notesFetch(state = initialState, action) {
       break;
     }
     case NOTES_FETCH_ADD_NOTE: {
-      if (action.payload.profile.userId === state.userId) {
-        const sortedNotes = [action.payload.note, ...state.notes];
+      const { profile, note } = action.payload;
+      if (profile.userId === state.userId) {
+        const sortedNotes = [note, ...state.notes];
         sortedNotes.sort((note1, note2) => note2.timestamp - note1.timestamp);
         nextState = {
-          userId: action.payload.profile.userId,
+          userId: profile.userId,
           notes: sortedNotes,
           errorMessage: "",
           fetching: false,
@@ -62,26 +63,27 @@ function notesFetch(state = initialState, action) {
       } else {
         // console.log(
         //   `Unexpected insert of note with profile userId: ${
-        //     action.payload.profile.userId
+        //     profile.userId
         //   } in notes list for profile userId: ${state.userId}`
         // );
       }
       break;
     }
     case NOTES_FETCH_UPDATE_NOTE: {
-      if (action.payload.profile.userId === state.userId) {
+      const { profile, note } = action.payload;
+      if (profile.userId === state.userId) {
         const noteIndex = state.notes.findIndex(
-          note => note.id === action.payload.note.id
+          subjectNote => subjectNote.id === note.id
         );
         if (noteIndex !== -1) {
           const sortedNotes = [
             ...state.notes.slice(0, noteIndex),
-            action.payload.note,
+            note,
             ...state.notes.slice(noteIndex + 1),
           ];
           sortedNotes.sort((note1, note2) => note2.timestamp - note1.timestamp);
           nextState = {
-            userId: action.payload.profile.userId,
+            userId: profile.userId,
             notes: sortedNotes,
             errorMessage: "",
             fetching: false,
@@ -94,16 +96,17 @@ function notesFetch(state = initialState, action) {
       } else {
         // console.log(
         //   `Unexpected update of note with profile userId: ${
-        //     action.payload.profile.userId
+        //     profile.userId
         //   } in notes list for profile userId: ${state.userId}`
         // );
       }
       break;
     }
     case NOTES_FETCH_DELETE_NOTE: {
-      if (action.payload.profile.userId === state.userId) {
+      const { profile, note } = action.payload;
+      if (profile.userId === state.userId) {
         const noteIndex = state.notes.findIndex(
-          note => note.id === action.payload.note.id
+          subjectNote => subjectNote.id === note.id
         );
         if (noteIndex !== -1) {
           const sortedNotes = [
@@ -111,7 +114,7 @@ function notesFetch(state = initialState, action) {
             ...state.notes.slice(noteIndex + 1),
           ];
           nextState = {
-            userId: action.payload.profile.userId,
+            userId: profile.userId,
             notes: sortedNotes,
             errorMessage: "",
             fetching: false,
@@ -124,7 +127,7 @@ function notesFetch(state = initialState, action) {
       } else {
         // console.log(
         //   `Unexpected delete of note with profile userId: ${
-        //     action.payload.profile.userId
+        //     profile.userId
         //   } in notes list for profile userId: ${state.userId}`
         // );
       }

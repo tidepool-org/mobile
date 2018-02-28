@@ -66,6 +66,7 @@ class NotesList extends PureComponent {
       onDeleteNotePressed={this.props.onDeleteNotePressed}
       navigateAddComment={this.props.navigateAddComment}
       navigateEditComment={this.props.navigateEditComment}
+      onDeleteCommentPressed={this.props.onDeleteCommentPressed}
     />
   );
 
@@ -118,6 +119,7 @@ NotesList.propTypes = {
   onDeleteNotePressed: PropTypes.func.isRequired,
   navigateAddComment: PropTypes.func.isRequired,
   navigateEditComment: PropTypes.func.isRequired,
+  onDeleteCommentPressed: PropTypes.func.isRequired,
 };
 
 NotesList.defaultProps = {

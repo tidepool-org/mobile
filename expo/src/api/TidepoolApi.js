@@ -210,8 +210,9 @@ class TidepoolApi {
   }
 
   async deleteNoteAsync({ note }) {
-    const { errorMessage } = await this.deleteNote({
-      note,
+    const { id } = note;
+    const { errorMessage } = await this.deleteCommentOrNote({
+      id,
     })
       .then(() => ({}))
       .catch(error => ({
@@ -248,6 +249,19 @@ class TidepoolApi {
   async updateCommentAsync({ comment }) {
     const { errorMessage } = await this.updateComment({
       comment,
+    })
+      .then(() => ({}))
+      .catch(error => ({
+        errorMessage: error.message,
+      }));
+
+    return { errorMessage };
+  }
+
+  async deleteCommentAsync({ comment }) {
+    const { id } = comment;
+    const { errorMessage } = await this.deleteCommentOrNote({
+      id,
     })
       .then(() => ({}))
       .catch(error => ({
@@ -481,23 +495,6 @@ class TidepoolApi {
     });
   }
 
-  deleteNote({ note }) {
-    const method = "delete";
-    const url = `/message/remove/${note.id}`;
-    const baseURL = this.baseUrl;
-    const headers = { "x-tidepool-session-token": this.sessionToken };
-
-    return new Promise((resolve, reject) => {
-      axios({ method, url, baseURL, headers })
-        .then(() => {
-          resolve({});
-        })
-        .catch(error => {
-          reject(error);
-        });
-    });
-  }
-
   addComment({ currentUser, currentProfile, note, messageText, timestamp }) {
     const method = "post";
     const groupId = currentProfile.userId;
@@ -549,6 +546,23 @@ class TidepoolApi {
 
     return new Promise((resolve, reject) => {
       axios({ method, url, baseURL, headers, data })
+        .then(() => {
+          resolve({});
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+  }
+
+  deleteCommentOrNote({ id }) {
+    const method = "delete";
+    const url = `/message/remove/${id}`;
+    const baseURL = this.baseUrl;
+    const headers = { "x-tidepool-session-token": this.sessionToken };
+
+    return new Promise((resolve, reject) => {
+      axios({ method, url, baseURL, headers })
         .then(() => {
           resolve({});
         })
