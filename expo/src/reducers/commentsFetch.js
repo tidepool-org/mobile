@@ -4,6 +4,7 @@ import {
   COMMENTS_FETCH_DID_FAIL,
   COMMENTS_FETCH_ADD_COMMENT,
   COMMENTS_FETCH_UPDATE_COMMENT,
+  COMMENTS_FETCH_DELETE_COMMENT,
 } from "../actions/commentsFetch";
 import { AUTH_SIGN_IN_RESET } from "../actions/auth";
 import { NOTES_FETCH_DID_START } from "../actions/notesFetch";
@@ -57,12 +58,9 @@ function commentsFetch(state = initialState, action) {
       break;
     }
     case COMMENTS_FETCH_ADD_COMMENT: {
-      const { note } = action.payload;
+      const { note, comment } = action.payload;
       // Add the comment
-      const sortedComments = [
-        ...state[note.id].comments,
-        action.payload.comment,
-      ];
+      const sortedComments = [...state[note.id].comments, comment];
       // Sort comments chronologically by timestamp
       sortedComments.sort(
         (comment1, comment2) => comment1.timestamp - comment2.timestamp
@@ -86,7 +84,7 @@ function commentsFetch(state = initialState, action) {
         const previousComments = state[note.id].comments;
         const comments = [
           ...previousComments.slice(0, commentIndex),
-          action.payload.comment,
+          comment,
           ...previousComments.slice(commentIndex + 1),
         ];
         nextState = {
@@ -98,6 +96,32 @@ function commentsFetch(state = initialState, action) {
       } else {
         // console.log(
         //   `commentsFetch COMMENTS_FETCH_UPDATE_COMMENT reducer: Comment wasn't found, this is unexpected`
+        // );
+      }
+      break;
+    }
+    case COMMENTS_FETCH_DELETE_COMMENT: {
+      const { note, comment } = action.payload;
+      // Find the comment
+      const commentIndex = state[note.id].comments.findIndex(
+        subjectComment => comment.id === subjectComment.id
+      );
+      if (commentIndex !== -1) {
+        // Delete the comment
+        const previousComments = state[note.id].comments;
+        const comments = [
+          ...previousComments.slice(0, commentIndex),
+          ...previousComments.slice(commentIndex + 1),
+        ];
+        nextState = {
+          ...state,
+          [note.id]: {
+            comments,
+          },
+        };
+      } else {
+        // console.log(
+        //   `commentsFetch COMMENTS_FETCH_DELETE_COMMENT reducer: Comment wasn't found, this is unexpected`
         // );
       }
       break;

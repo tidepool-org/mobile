@@ -137,6 +137,58 @@ exports[`Storyshots NotesListItemComment default 1`] = `
               ]
             }
           >
+            Delete
+          </Text>
+        </View>
+        <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
+          accessible={true}
+          collapsable={undefined}
+          hasTVPreferredFocus={undefined}
+          hitSlop={
+            Object {
+              "bottom": 10,
+              "left": 10,
+              "right": 10,
+              "top": 10,
+            }
+          }
+          isTVSelectable={true}
+          nativeID={undefined}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "marginRight": 10,
+              "marginTop": 7,
+              "opacity": 1,
+            }
+          }
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={false}
+            ellipsizeMode="tail"
+            numberOfLines={1}
+            style={
+              Array [
+                Object {
+                  "color": "#627cff",
+                  "fontFamily": "OpenSans-Regular",
+                  "fontSize": 12.5,
+                },
+              ]
+            }
+          >
             Edit
           </Text>
         </View>
@@ -192,7 +244,7 @@ exports[`Storyshots NotesListItemComment default 1`] = `
             ]
           }
         >
-           Quis molestiae tempora eligendi omnis quisquam quisquam quos. Dolor voluptatibus velit nobis culpa deleniti. Reprehenderit in nisi et. Quia odio et inventore eligendi in deserunt id. Sit odio quia vitae provident quo provident molestiae. 
+           Pariatur quos est quod laborum. Quisquam esse quia expedita commodi. Tempora ut exercitationem doloribus harum. Sunt omnis et accusantium et quia quos sequi molestiae. Enim necessitatibus molestiae. 
         </Text>
         <Text
           accessible={true}
@@ -353,6 +405,58 @@ exports[`Storyshots NotesListItemComment long user full name 1`] = `
               ]
             }
           >
+            Delete
+          </Text>
+        </View>
+        <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
+          accessible={true}
+          collapsable={undefined}
+          hasTVPreferredFocus={undefined}
+          hitSlop={
+            Object {
+              "bottom": 10,
+              "left": 10,
+              "right": 10,
+              "top": 10,
+            }
+          }
+          isTVSelectable={true}
+          nativeID={undefined}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "marginRight": 10,
+              "marginTop": 7,
+              "opacity": 1,
+            }
+          }
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={false}
+            ellipsizeMode="tail"
+            numberOfLines={1}
+            style={
+              Array [
+                Object {
+                  "color": "#627cff",
+                  "fontFamily": "OpenSans-Regular",
+                  "fontSize": 12.5,
+                },
+              ]
+            }
+          >
             Edit
           </Text>
         </View>
@@ -408,7 +512,7 @@ exports[`Storyshots NotesListItemComment long user full name 1`] = `
             ]
           }
         >
-           Pariatur quos est quod laborum. Quisquam esse quia expedita commodi. Tempora ut exercitationem doloribus harum. Sunt omnis et accusantium et quia quos sequi molestiae. Enim necessitatibus molestiae. 
+           Eligendi rerum excepturi et laudantium fuga similique fugit corporis voluptatem. Esse nobis et sint magnam aut. Dolores maiores incidunt occaecati iusto laborum. Quia deleniti dolorem quibusdam id veniam perspiciatis et nisi. Corporis laboriosam esse. Soluta accusamus officiis ut excepturi blanditiis libero ut. 
         </Text>
         <Text
           accessible={true}

@@ -15,6 +15,7 @@ const navigateEditNote = () => {};
 const onDeleteNotePressed = () => {};
 const navigateAddComment = () => {};
 const navigateEditComment = () => {};
+const onDeleteCommentPressed = () => {};
 const notes = [];
 for (let i = 0; i < 100; i += 1) {
   notes.push({
@@ -40,6 +41,7 @@ const props = {
   onDeleteNotePressed,
   navigateAddComment,
   navigateEditComment,
+  onDeleteCommentPressed,
 };
 
 storiesOf("NotesList", module).add("default", () => (

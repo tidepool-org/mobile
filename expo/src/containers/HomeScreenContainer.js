@@ -5,6 +5,7 @@ import HomeScreen from "../screens/HomeScreen";
 import { notesFetchAsync } from "../actions/notesFetch";
 import { commentsFetchAsync } from "../actions/commentsFetch";
 import { noteDeleteAsync } from "../actions/noteDelete";
+import { commentDeleteAsync } from "../actions/commentDelete";
 import {
   navigateEditNote,
   navigateAddComment,
@@ -29,6 +30,7 @@ const mapDispatchToProps = dispatch =>
       navigateAddComment,
       navigateEditComment,
       noteDeleteAsync,
+      commentDeleteAsync,
     },
     dispatch
   );

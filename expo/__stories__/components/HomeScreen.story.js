@@ -24,6 +24,7 @@ const navigateEditNote = () => {};
 const navigateAddComment = () => {};
 const navigateEditComment = () => {};
 const noteDeleteAsync = () => {};
+const commentDeleteAsync = () => {};
 const notes = [];
 for (let i = 0; i < 100; i += 1) {
   notes.push({
@@ -44,6 +45,7 @@ const props = {
   navigateAddComment,
   navigateEditComment,
   noteDeleteAsync,
+  commentDeleteAsync,
 };
 
 storiesOf("HomeScreen", module).add("default", () => (

@@ -5,6 +5,7 @@ export const COMMENTS_FETCH_DID_SUCCEED = "COMMENTS_FETCH_DID_SUCCEED";
 export const COMMENTS_FETCH_DID_FAIL = "COMMENTS_FETCH_DID_FAIL";
 export const COMMENTS_FETCH_ADD_COMMENT = "COMMENTS_FETCH_ADD_COMMENT";
 export const COMMENTS_FETCH_UPDATE_COMMENT = "COMMENTS_FETCH_UPDATE_COMMENT";
+export const COMMENTS_FETCH_DELETE_COMMENT = "COMMENTS_FETCH_DELETE_COMMENT";
 
 // TODO: fetch - cancel outstanding request if we get another request to start fetching while one is in progress.
 // TODO: fetch - cancel outstanding request if we sign out while fetch is in progress
@@ -45,5 +46,10 @@ export const commentsFetchAddComment = ({ note, comment, profile }) => ({
 
 export const commentsFetchUpdateComment = ({ note, comment, profile }) => ({
   type: COMMENTS_FETCH_UPDATE_COMMENT,
+  payload: { note, comment, profile },
+});
+
+export const commentsFetchDeleteComment = ({ note, comment, profile }) => ({
+  type: COMMENTS_FETCH_DELETE_COMMENT,
   payload: { note, comment, profile },
 });
