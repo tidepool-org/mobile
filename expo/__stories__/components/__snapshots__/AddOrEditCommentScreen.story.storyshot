@@ -36,28 +36,54 @@ exports[`Storyshots AddOrEditCommentScreen add comment 1`] = `
       >
         <View>
           <View
-            style={
-              Array [
-                Object {
-                  "backgroundColor": "#ffffff",
-                },
-              ]
-            }
+            onLayout={[Function]}
+            style={null}
           >
             <View
-              style={null}
+              style={
+                Array [
+                  Object {
+                    "backgroundColor": "#ffffff",
+                  },
+                ]
+              }
             >
               <View
-                style={
-                  Array [
-                    Object {
-                      "flexDirection": "row",
-                      "justifyContent": "flex-start",
-                      "zIndex": 1,
-                    },
-                  ]
-                }
+                style={null}
               >
+                <View
+                  style={
+                    Array [
+                      Object {
+                        "flexDirection": "row",
+                        "justifyContent": "flex-start",
+                        "zIndex": 1,
+                      },
+                    ]
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#4d4e4c",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                        Object {
+                          "marginLeft": 12,
+                          "marginRight": 12,
+                          "marginTop": 7,
+                        },
+                      ]
+                    }
+                  >
+                    Yesterday at 9:41 am
+                  </Text>
+                </View>
                 <Text
                   accessible={true}
                   allowFontScaling={false}
@@ -65,11 +91,13 @@ exports[`Storyshots AddOrEditCommentScreen add comment 1`] = `
                   style={
                     Array [
                       Object {
-                        "color": "#4d4e4c",
+                        "color": "#3c3c3c",
                         "fontFamily": "OpenSans-Regular",
-                        "fontSize": 12.5,
+                        "fontSize": 15,
                       },
                       Object {
+                        "flexDirection": "row",
+                        "marginBottom": 7,
                         "marginLeft": 12,
                         "marginRight": 12,
                         "marginTop": 7,
@@ -77,63 +105,40 @@ exports[`Storyshots AddOrEditCommentScreen add comment 1`] = `
                     ]
                   }
                 >
-                  Yesterday at 9:41 am
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#3c3c3c",
+                          "fontFamily": "OpenSans-Bold",
+                          "fontSize": 15,
+                        },
+                      ]
+                    }
+                  >
+                    #note
+                  </Text>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#3c3c3c",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 15,
+                        },
+                      ]
+                    }
+                  >
+                     This is a note. Quis molestiae tempora eligendi omnis quisquam quisquam quos. Dolor voluptatibus velit nobis culpa deleniti. Reprehenderit in nisi et. Quia odio et inventore eligendi in deserunt id. Sit odio quia vitae provident quo provident molestiae.
+                  </Text>
                 </Text>
               </View>
-              <Text
-                accessible={true}
-                allowFontScaling={false}
-                ellipsizeMode="tail"
-                style={
-                  Array [
-                    Object {
-                      "color": "#3c3c3c",
-                      "fontFamily": "OpenSans-Regular",
-                      "fontSize": 15,
-                    },
-                    Object {
-                      "flexDirection": "row",
-                      "marginBottom": 7,
-                      "marginLeft": 12,
-                      "marginRight": 12,
-                      "marginTop": 7,
-                    },
-                  ]
-                }
-              >
-                <Text
-                  accessible={true}
-                  allowFontScaling={false}
-                  ellipsizeMode="tail"
-                  style={
-                    Array [
-                      Object {
-                        "color": "#3c3c3c",
-                        "fontFamily": "OpenSans-Bold",
-                        "fontSize": 15,
-                      },
-                    ]
-                  }
-                >
-                  #note
-                </Text>
-                <Text
-                  accessible={true}
-                  allowFontScaling={false}
-                  ellipsizeMode="tail"
-                  style={
-                    Array [
-                      Object {
-                        "color": "#3c3c3c",
-                        "fontFamily": "OpenSans-Regular",
-                        "fontSize": 15,
-                      },
-                    ]
-                  }
-                >
-                   This is a note. Quis molestiae tempora eligendi omnis quisquam quisquam quos. Dolor voluptatibus velit nobis culpa deleniti. Reprehenderit in nisi et. Quia odio et inventore eligendi in deserunt id. Sit odio quia vitae provident quo provident molestiae.
-                </Text>
-              </Text>
             </View>
           </View>
           <View
@@ -1076,28 +1081,54 @@ exports[`Storyshots AddOrEditCommentScreen edit comment in middle 1`] = `
       >
         <View>
           <View
-            style={
-              Array [
-                Object {
-                  "backgroundColor": "#ffffff",
-                },
-              ]
-            }
+            onLayout={[Function]}
+            style={null}
           >
             <View
-              style={null}
+              style={
+                Array [
+                  Object {
+                    "backgroundColor": "#ffffff",
+                  },
+                ]
+              }
             >
               <View
-                style={
-                  Array [
-                    Object {
-                      "flexDirection": "row",
-                      "justifyContent": "flex-start",
-                      "zIndex": 1,
-                    },
-                  ]
-                }
+                style={null}
               >
+                <View
+                  style={
+                    Array [
+                      Object {
+                        "flexDirection": "row",
+                        "justifyContent": "flex-start",
+                        "zIndex": 1,
+                      },
+                    ]
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#4d4e4c",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                        Object {
+                          "marginLeft": 12,
+                          "marginRight": 12,
+                          "marginTop": 7,
+                        },
+                      ]
+                    }
+                  >
+                    Yesterday at 9:41 am
+                  </Text>
+                </View>
                 <Text
                   accessible={true}
                   allowFontScaling={false}
@@ -1105,11 +1136,13 @@ exports[`Storyshots AddOrEditCommentScreen edit comment in middle 1`] = `
                   style={
                     Array [
                       Object {
-                        "color": "#4d4e4c",
+                        "color": "#3c3c3c",
                         "fontFamily": "OpenSans-Regular",
-                        "fontSize": 12.5,
+                        "fontSize": 15,
                       },
                       Object {
+                        "flexDirection": "row",
+                        "marginBottom": 7,
                         "marginLeft": 12,
                         "marginRight": 12,
                         "marginTop": 7,
@@ -1117,63 +1150,40 @@ exports[`Storyshots AddOrEditCommentScreen edit comment in middle 1`] = `
                     ]
                   }
                 >
-                  Yesterday at 9:41 am
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#3c3c3c",
+                          "fontFamily": "OpenSans-Bold",
+                          "fontSize": 15,
+                        },
+                      ]
+                    }
+                  >
+                    #note
+                  </Text>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#3c3c3c",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 15,
+                        },
+                      ]
+                    }
+                  >
+                     This is a note. Quis molestiae tempora eligendi omnis quisquam quisquam quos. Dolor voluptatibus velit nobis culpa deleniti. Reprehenderit in nisi et. Quia odio et inventore eligendi in deserunt id. Sit odio quia vitae provident quo provident molestiae.
+                  </Text>
                 </Text>
               </View>
-              <Text
-                accessible={true}
-                allowFontScaling={false}
-                ellipsizeMode="tail"
-                style={
-                  Array [
-                    Object {
-                      "color": "#3c3c3c",
-                      "fontFamily": "OpenSans-Regular",
-                      "fontSize": 15,
-                    },
-                    Object {
-                      "flexDirection": "row",
-                      "marginBottom": 7,
-                      "marginLeft": 12,
-                      "marginRight": 12,
-                      "marginTop": 7,
-                    },
-                  ]
-                }
-              >
-                <Text
-                  accessible={true}
-                  allowFontScaling={false}
-                  ellipsizeMode="tail"
-                  style={
-                    Array [
-                      Object {
-                        "color": "#3c3c3c",
-                        "fontFamily": "OpenSans-Bold",
-                        "fontSize": 15,
-                      },
-                    ]
-                  }
-                >
-                  #note
-                </Text>
-                <Text
-                  accessible={true}
-                  allowFontScaling={false}
-                  ellipsizeMode="tail"
-                  style={
-                    Array [
-                      Object {
-                        "color": "#3c3c3c",
-                        "fontFamily": "OpenSans-Regular",
-                        "fontSize": 15,
-                      },
-                    ]
-                  }
-                >
-                   This is a note. Quis molestiae tempora eligendi omnis quisquam quisquam quos. Dolor voluptatibus velit nobis culpa deleniti. Reprehenderit in nisi et. Quia odio et inventore eligendi in deserunt id. Sit odio quia vitae provident quo provident molestiae.
-                </Text>
-              </Text>
             </View>
           </View>
           <View
@@ -2025,28 +2035,54 @@ exports[`Storyshots AddOrEditCommentScreen edit first comment 1`] = `
       >
         <View>
           <View
-            style={
-              Array [
-                Object {
-                  "backgroundColor": "#ffffff",
-                },
-              ]
-            }
+            onLayout={[Function]}
+            style={null}
           >
             <View
-              style={null}
+              style={
+                Array [
+                  Object {
+                    "backgroundColor": "#ffffff",
+                  },
+                ]
+              }
             >
               <View
-                style={
-                  Array [
-                    Object {
-                      "flexDirection": "row",
-                      "justifyContent": "flex-start",
-                      "zIndex": 1,
-                    },
-                  ]
-                }
+                style={null}
               >
+                <View
+                  style={
+                    Array [
+                      Object {
+                        "flexDirection": "row",
+                        "justifyContent": "flex-start",
+                        "zIndex": 1,
+                      },
+                    ]
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#4d4e4c",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                        Object {
+                          "marginLeft": 12,
+                          "marginRight": 12,
+                          "marginTop": 7,
+                        },
+                      ]
+                    }
+                  >
+                    Yesterday at 9:41 am
+                  </Text>
+                </View>
                 <Text
                   accessible={true}
                   allowFontScaling={false}
@@ -2054,11 +2090,13 @@ exports[`Storyshots AddOrEditCommentScreen edit first comment 1`] = `
                   style={
                     Array [
                       Object {
-                        "color": "#4d4e4c",
+                        "color": "#3c3c3c",
                         "fontFamily": "OpenSans-Regular",
-                        "fontSize": 12.5,
+                        "fontSize": 15,
                       },
                       Object {
+                        "flexDirection": "row",
+                        "marginBottom": 7,
                         "marginLeft": 12,
                         "marginRight": 12,
                         "marginTop": 7,
@@ -2066,63 +2104,40 @@ exports[`Storyshots AddOrEditCommentScreen edit first comment 1`] = `
                     ]
                   }
                 >
-                  Yesterday at 9:41 am
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#3c3c3c",
+                          "fontFamily": "OpenSans-Bold",
+                          "fontSize": 15,
+                        },
+                      ]
+                    }
+                  >
+                    #note
+                  </Text>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#3c3c3c",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 15,
+                        },
+                      ]
+                    }
+                  >
+                     This is a note. Quis molestiae tempora eligendi omnis quisquam quisquam quos. Dolor voluptatibus velit nobis culpa deleniti. Reprehenderit in nisi et. Quia odio et inventore eligendi in deserunt id. Sit odio quia vitae provident quo provident molestiae.
+                  </Text>
                 </Text>
               </View>
-              <Text
-                accessible={true}
-                allowFontScaling={false}
-                ellipsizeMode="tail"
-                style={
-                  Array [
-                    Object {
-                      "color": "#3c3c3c",
-                      "fontFamily": "OpenSans-Regular",
-                      "fontSize": 15,
-                    },
-                    Object {
-                      "flexDirection": "row",
-                      "marginBottom": 7,
-                      "marginLeft": 12,
-                      "marginRight": 12,
-                      "marginTop": 7,
-                    },
-                  ]
-                }
-              >
-                <Text
-                  accessible={true}
-                  allowFontScaling={false}
-                  ellipsizeMode="tail"
-                  style={
-                    Array [
-                      Object {
-                        "color": "#3c3c3c",
-                        "fontFamily": "OpenSans-Bold",
-                        "fontSize": 15,
-                      },
-                    ]
-                  }
-                >
-                  #note
-                </Text>
-                <Text
-                  accessible={true}
-                  allowFontScaling={false}
-                  ellipsizeMode="tail"
-                  style={
-                    Array [
-                      Object {
-                        "color": "#3c3c3c",
-                        "fontFamily": "OpenSans-Regular",
-                        "fontSize": 15,
-                      },
-                    ]
-                  }
-                >
-                   This is a note. Quis molestiae tempora eligendi omnis quisquam quisquam quos. Dolor voluptatibus velit nobis culpa deleniti. Reprehenderit in nisi et. Quia odio et inventore eligendi in deserunt id. Sit odio quia vitae provident quo provident molestiae.
-                </Text>
-              </Text>
             </View>
           </View>
           <View
@@ -2974,28 +2989,54 @@ exports[`Storyshots AddOrEditCommentScreen edit last comment 1`] = `
       >
         <View>
           <View
-            style={
-              Array [
-                Object {
-                  "backgroundColor": "#ffffff",
-                },
-              ]
-            }
+            onLayout={[Function]}
+            style={null}
           >
             <View
-              style={null}
+              style={
+                Array [
+                  Object {
+                    "backgroundColor": "#ffffff",
+                  },
+                ]
+              }
             >
               <View
-                style={
-                  Array [
-                    Object {
-                      "flexDirection": "row",
-                      "justifyContent": "flex-start",
-                      "zIndex": 1,
-                    },
-                  ]
-                }
+                style={null}
               >
+                <View
+                  style={
+                    Array [
+                      Object {
+                        "flexDirection": "row",
+                        "justifyContent": "flex-start",
+                        "zIndex": 1,
+                      },
+                    ]
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#4d4e4c",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                        Object {
+                          "marginLeft": 12,
+                          "marginRight": 12,
+                          "marginTop": 7,
+                        },
+                      ]
+                    }
+                  >
+                    Yesterday at 9:41 am
+                  </Text>
+                </View>
                 <Text
                   accessible={true}
                   allowFontScaling={false}
@@ -3003,11 +3044,13 @@ exports[`Storyshots AddOrEditCommentScreen edit last comment 1`] = `
                   style={
                     Array [
                       Object {
-                        "color": "#4d4e4c",
+                        "color": "#3c3c3c",
                         "fontFamily": "OpenSans-Regular",
-                        "fontSize": 12.5,
+                        "fontSize": 15,
                       },
                       Object {
+                        "flexDirection": "row",
+                        "marginBottom": 7,
                         "marginLeft": 12,
                         "marginRight": 12,
                         "marginTop": 7,
@@ -3015,63 +3058,40 @@ exports[`Storyshots AddOrEditCommentScreen edit last comment 1`] = `
                     ]
                   }
                 >
-                  Yesterday at 9:41 am
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#3c3c3c",
+                          "fontFamily": "OpenSans-Bold",
+                          "fontSize": 15,
+                        },
+                      ]
+                    }
+                  >
+                    #note
+                  </Text>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#3c3c3c",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 15,
+                        },
+                      ]
+                    }
+                  >
+                     This is a note. Quis molestiae tempora eligendi omnis quisquam quisquam quos. Dolor voluptatibus velit nobis culpa deleniti. Reprehenderit in nisi et. Quia odio et inventore eligendi in deserunt id. Sit odio quia vitae provident quo provident molestiae.
+                  </Text>
                 </Text>
               </View>
-              <Text
-                accessible={true}
-                allowFontScaling={false}
-                ellipsizeMode="tail"
-                style={
-                  Array [
-                    Object {
-                      "color": "#3c3c3c",
-                      "fontFamily": "OpenSans-Regular",
-                      "fontSize": 15,
-                    },
-                    Object {
-                      "flexDirection": "row",
-                      "marginBottom": 7,
-                      "marginLeft": 12,
-                      "marginRight": 12,
-                      "marginTop": 7,
-                    },
-                  ]
-                }
-              >
-                <Text
-                  accessible={true}
-                  allowFontScaling={false}
-                  ellipsizeMode="tail"
-                  style={
-                    Array [
-                      Object {
-                        "color": "#3c3c3c",
-                        "fontFamily": "OpenSans-Bold",
-                        "fontSize": 15,
-                      },
-                    ]
-                  }
-                >
-                  #note
-                </Text>
-                <Text
-                  accessible={true}
-                  allowFontScaling={false}
-                  ellipsizeMode="tail"
-                  style={
-                    Array [
-                      Object {
-                        "color": "#3c3c3c",
-                        "fontFamily": "OpenSans-Regular",
-                        "fontSize": 15,
-                      },
-                    ]
-                  }
-                >
-                   This is a note. Quis molestiae tempora eligendi omnis quisquam quisquam quos. Dolor voluptatibus velit nobis culpa deleniti. Reprehenderit in nisi et. Quia odio et inventore eligendi in deserunt id. Sit odio quia vitae provident quo provident molestiae.
-                </Text>
-              </Text>
             </View>
           </View>
           <View

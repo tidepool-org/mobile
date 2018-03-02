@@ -11,6 +11,8 @@ function loadStories() {
   require('../__stories__/components/Button.story');
   require('../__stories__/components/DebugSettings.story');
   require('../__stories__/components/Drawer.story');
+  require('../__stories__/components/HashtagButton.story');
+  require('../__stories__/components/HashtagPicker.story');
   require('../__stories__/components/HashtagText.story');
   require('../__stories__/components/HomeScreen.story');
   require('../__stories__/components/MadePossible.story');
@@ -32,6 +34,8 @@ const stories = [
   '../__stories__/components/Button.story',
   '../__stories__/components/DebugSettings.story',
   '../__stories__/components/Drawer.story',
+  '../__stories__/components/HashtagButton.story',
+  '../__stories__/components/HashtagPicker.story',
   '../__stories__/components/HashtagText.story',
   '../__stories__/components/HomeScreen.story',
   '../__stories__/components/MadePossible.story',

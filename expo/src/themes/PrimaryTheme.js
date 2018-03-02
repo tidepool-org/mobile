@@ -140,6 +140,12 @@ const PrimaryTheme = {
     color: Colors.blackish,
     ...FontStyles.smallBoldFont,
   },
+  hashtagButtonTextStyle: {
+    color: Colors.blackish,
+    textAlign: "center",
+    padding: 4,
+    ...FontStyles.mediumRegularFont,
+  },
 };
 
 export default PrimaryTheme;
