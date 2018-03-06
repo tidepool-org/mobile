@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`has same snapshot default hashtags for new collection 1`] = `
+Array [
+  Array [
+    "#exercise",
+    1,
+  ],
+  Array [
+    "#meal",
+    1,
+  ],
+  Array [
+    "#sitechange",
+    1,
+  ],
+  Array [
+    "#sensorchange",
+    1,
+  ],
+  Array [
+    "#juicebox",
+    1,
+  ],
+  Array [
+    "#devicesetting",
+    1,
+  ],
+]
+`;
+
+exports[`has same snapshot default hashtags for new collection 2`] = `
+Map {
+  "#exercise" => 1,
+  "#meal" => 1,
+  "#sitechange" => 1,
+  "#sensorchange" => 1,
+  "#juicebox" => 1,
+  "#devicesetting" => 1,
+}
+`;
