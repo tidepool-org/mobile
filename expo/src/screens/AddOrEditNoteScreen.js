@@ -33,6 +33,7 @@ import HashtagText from "../components/HashtagText";
 import { formatDateAndTimeForAddOrEditNote } from "../utils/formatDate";
 import { ProfilePropType } from "../prop-types/profile";
 import { UserPropType } from "../prop-types/user";
+import HashtagPicker from "../components/HashtagPicker";
 
 // TODO: refactor - Refactor this screen. It's too complex and responsible for too much, it seems
 // TODO: refactor - Factor out some of the modal screen support
@@ -71,6 +72,7 @@ class AddOrEditNoteScreen extends PureComponent {
       isKeyboardVisible: false,
       containerViewY: null,
       keyboardY: null,
+      selection: { start: messageText.length, end: messageText.length },
     };
   }
 
@@ -107,6 +109,46 @@ class AddOrEditNoteScreen extends PureComponent {
       Keyboard.dismiss();
     }
   }
+
+  onSelectionChange = event => {
+    const { selection } = event.nativeEvent;
+    this.setState({ selection });
+  };
+
+  onPressHashtag = hashtag => {
+    const { selection } = this.state;
+    const messageTextBeforeAddingHashtag = this.state.messageText;
+
+    const firstPartBeforeHashtag = messageTextBeforeAddingHashtag.substr(
+      0,
+      selection.start
+    );
+    let leftSpaceBeforeHashtag = "";
+    if (firstPartBeforeHashtag.length > 0) {
+      if (
+        firstPartBeforeHashtag.charAt(firstPartBeforeHashtag.length - 1).trim()
+          .length > 0
+      ) {
+        leftSpaceBeforeHashtag = " ";
+      }
+    }
+
+    const secondPartAfterHashtag = messageTextBeforeAddingHashtag.substring(
+      selection.end
+    );
+    let rightSpaceAfterHashtag = "";
+    if (secondPartAfterHashtag.length > 0) {
+      if (secondPartAfterHashtag.charAt(0).trim().length > 0) {
+        rightSpaceAfterHashtag = " ";
+      }
+    }
+    const messageText = `${firstPartBeforeHashtag}${leftSpaceBeforeHashtag}${hashtag}${rightSpaceAfterHashtag}${secondPartAfterHashtag}`;
+    this.setState(prevState => ({
+      messageText,
+      isDirty: this.getDirtyState({ ...prevState, messageText }),
+    }));
+    this.textInput.focus();
+  };
 
   onBackPress = () => {
     if (this.state.isDirty) {
@@ -196,6 +238,8 @@ class AddOrEditNoteScreen extends PureComponent {
       if (this.dummyTextInputIOS) {
         this.dummyTextInputIOS.focus();
       }
+    } else {
+      this.textInput.focus();
     }
 
     this.setState({
@@ -240,6 +284,7 @@ class AddOrEditNoteScreen extends PureComponent {
         currentUser,
         currentProfile,
         note: editedNote,
+        originalNote: note,
       });
     } else {
       this.props.noteAddAsync({
@@ -405,7 +450,6 @@ class AddOrEditNoteScreen extends PureComponent {
     return (
       <glamorous.TouchableOpacity
         activeOpacity={1}
-        paddingBottom={8}
         onPress={this.startEditingTimestamp}
       >
         <glamorous.View
@@ -417,10 +461,6 @@ class AddOrEditNoteScreen extends PureComponent {
           {this.renderDateAndroid()}
           {this.renderDateEditAndroid()}
         </glamorous.View>
-        <glamorous.View
-          height={StyleSheet.hairlineWidth}
-          backgroundColor={Colors.darkestGreyColor}
-        />
       </glamorous.TouchableOpacity>
     );
   }
@@ -483,7 +523,6 @@ class AddOrEditNoteScreen extends PureComponent {
     return (
       <glamorous.TouchableOpacity
         activeOpacity={1}
-        paddingBottom={8}
         onPress={this.toggleIsEditingTimestampIOS}
       >
         <glamorous.View
@@ -496,10 +535,6 @@ class AddOrEditNoteScreen extends PureComponent {
           {this.renderDateEditOrDoneIOS()}
         </glamorous.View>
         {this.renderDatePickerIOS()}
-        <glamorous.View
-          height={StyleSheet.hairlineWidth}
-          backgroundColor={Colors.darkestGreyColor}
-        />
       </glamorous.TouchableOpacity>
     );
   }
@@ -525,6 +560,23 @@ class AddOrEditNoteScreen extends PureComponent {
     );
   }
 
+  renderSeparator = () => (
+    <glamorous.View
+      height={StyleSheet.hairlineWidth}
+      backgroundColor={Colors.darkestGreyColor}
+    />
+  );
+
+  renderHashtagPicker() {
+    const { hashtags } = this.props;
+
+    return (
+      <glamorous.View height={64}>
+        <HashtagPicker hashtags={hashtags} onPress={this.onPressHashtag} />
+      </glamorous.View>
+    );
+  }
+
   renderNote() {
     // FIXME: Need to revisit this. If flex is not null here all the time for Android then we have weird layout.
     let flex = 1;
@@ -533,6 +585,7 @@ class AddOrEditNoteScreen extends PureComponent {
     } else if (Platform.OS === "android") {
       flex = null;
     }
+    flex = null; // TODO:  - revisit
 
     return (
       <glamorous.TextInput
@@ -561,6 +614,7 @@ class AddOrEditNoteScreen extends PureComponent {
         onFocus={() => {
           this.stopEditingTimestamp();
         }}
+        onSelectionChange={this.onSelectionChange}
       >
         <HashtagText
           boldStyle={this.theme.notesListItemHashtagStyle}
@@ -630,6 +684,9 @@ class AddOrEditNoteScreen extends PureComponent {
           {this.renderHeader()}
           {Platform.OS === "ios" ? this.renderDateSectionIOS() : null}
           {Platform.OS === "android" ? this.renderDateSectionAndroid() : null}
+          {this.renderSeparator()}
+          {this.renderHashtagPicker()}
+          {this.renderSeparator()}
           <glamorous.View
             flex={this.state.isKeyboardVisible ? null : 1}
             onLayout={this.onContainerViewLayout}
@@ -656,6 +713,7 @@ AddOrEditNoteScreen.propTypes = {
   navigateGoBack: PropTypes.func.isRequired,
   noteUpdateAsync: PropTypes.func.isRequired,
   noteAddAsync: PropTypes.func.isRequired,
+  hashtags: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
 };
 
 AddOrEditNoteScreen.defaultProps = {

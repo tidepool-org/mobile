@@ -22,10 +22,10 @@ class HashtagPicker extends PureComponent {
     return (
       <glamorous.ScrollView
         horizontal
+        keyboardShouldPersistTaps="always"
         flex={1}
         contentContainerStyle={{ alignItems: "center" }}
         flexDirection="row"
-        maxHeight={54}
         backgroundColor={theme.colors.lightBackground}
       >
         {this.renderHashTagButtons()}

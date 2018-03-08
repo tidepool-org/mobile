@@ -10,6 +10,7 @@ class HashtagCollection {
     "#devicesetting",
   ];
 
+  hashtagsSortedByCount = [];
   hashtagsWithCountSortedByCount = [];
   hashtagsWithCountMap = new Map();
 
@@ -23,13 +24,10 @@ class HashtagCollection {
     this.updateSortedHashtags();
   }
 
-  reloadHashtagsForObjectsWithText({
-    arrayOfObjectsWithText,
-    textPropertyName,
-  }) {
+  reloadHashtagsForObjectsWithText({ objectsWithText, textPropertyName }) {
     this.reset();
-    if (arrayOfObjectsWithText && arrayOfObjectsWithText.length > 0) {
-      arrayOfObjectsWithText.forEach(objectWithText => {
+    if (objectsWithText && objectsWithText.length > 0) {
+      objectsWithText.forEach(objectWithText => {
         this.addHashtagsForTextToMap(objectWithText[textPropertyName]);
       });
     }
@@ -38,15 +36,17 @@ class HashtagCollection {
   }
 
   updateHashtagsForText({
-    oldObjectWithText,
-    newObjectWithText,
+    objectWithTextToRemove,
+    objectWithTextToAdd,
     textPropertyName,
   }) {
-    if (newObjectWithText) {
-      this.addHashtagsForTextToMap(newObjectWithText[textPropertyName]);
+    if (objectWithTextToAdd) {
+      this.addHashtagsForTextToMap(objectWithTextToAdd[textPropertyName]);
     }
-    if (oldObjectWithText) {
-      this.removeHashtagsForTextFromMap(oldObjectWithText[textPropertyName]);
+    if (objectWithTextToRemove) {
+      this.removeHashtagsForTextFromMap(
+        objectWithTextToRemove[textPropertyName]
+      );
     }
     this.updateSortedHashtags();
   }
@@ -54,6 +54,7 @@ class HashtagCollection {
   // Private
 
   reset() {
+    this.hashtagsSortedByCount = [];
     this.hashtagsWithCountSortedByCount = [];
     this.hashtagsWithCountMap = new Map();
   }
@@ -71,6 +72,9 @@ class HashtagCollection {
         }
         return 0;
       }
+    );
+    this.hashtagsSortedByCount = this.hashtagsWithCountSortedByCount.map(
+      hashtagWithCount => hashtagWithCount[0]
     );
   }
 

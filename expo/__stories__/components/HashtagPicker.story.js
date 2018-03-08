@@ -1,6 +1,7 @@
 /* eslint import/no-extraneous-dependencies: 0 */
 import React from "react";
 import { storiesOf } from "@storybook/react-native";
+import glamorous from "glamorous-native";
 
 import StoryContainerComponent from "../../__stories__/utils/StoryContainerComponent";
 import HashtagPicker from "../../src/components/HashtagPicker";
@@ -46,30 +47,40 @@ const lotsOfHashtags = [
 
 storiesOf("HashtagPicker", module).add("default", () => (
   <StoryContainerComponent>
-    <HashtagPicker hashtags={defaultHashtags} onPress={onPress} />
+    <glamorous.View height={64}>
+      <HashtagPicker hashtags={defaultHashtags} onPress={onPress} />
+    </glamorous.View>
   </StoryContainerComponent>
 ));
 
 storiesOf("HashtagPicker", module).add("one hashtag", () => (
   <StoryContainerComponent>
-    <HashtagPicker hashtags={oneHashtag} onPress={onPress} />
+    <glamorous.View height={64}>
+      <HashtagPicker hashtags={oneHashtag} onPress={onPress} />
+    </glamorous.View>
   </StoryContainerComponent>
 ));
 
 storiesOf("HashtagPicker", module).add("two hashtags", () => (
   <StoryContainerComponent>
-    <HashtagPicker hashtags={twoHashTags} onPress={onPress} />
+    <glamorous.View height={64}>
+      <HashtagPicker hashtags={twoHashTags} onPress={onPress} />
+    </glamorous.View>
   </StoryContainerComponent>
 ));
 
 storiesOf("HashtagPicker", module).add("short and long hashtags", () => (
   <StoryContainerComponent>
-    <HashtagPicker hashtags={shortAndLongHashtags} onPress={onPress} />
+    <glamorous.View height={64}>
+      <HashtagPicker hashtags={shortAndLongHashtags} onPress={onPress} />
+    </glamorous.View>
   </StoryContainerComponent>
 ));
 
 storiesOf("HashtagPicker", module).add("lots of hashtags", () => (
   <StoryContainerComponent>
-    <HashtagPicker hashtags={lotsOfHashtags} onPress={onPress} />
+    <glamorous.View height={64}>
+      <HashtagPicker hashtags={lotsOfHashtags} onPress={onPress} />
+    </glamorous.View>
   </StoryContainerComponent>
 ));

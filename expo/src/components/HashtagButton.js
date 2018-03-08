@@ -6,12 +6,18 @@ import { ThemePropType } from "../prop-types/theme";
 import Colors from "../constants/Colors";
 
 class HashtagButton extends PureComponent {
+  onPressHashtagButton = () => {
+    const { onPress, hashtag } = this.props;
+    onPress(hashtag);
+  };
+
   render() {
-    const { onPress, hashtag, theme } = this.props;
+    const { hashtag, theme } = this.props;
+
     return (
       <glamorous.TouchableHighlight
         underlayColor="#bce3e8"
-        onPress={onPress}
+        onPress={this.onPressHashtagButton}
         accessibilityComponentType="button"
         height={36}
         paddingLeft={8}
