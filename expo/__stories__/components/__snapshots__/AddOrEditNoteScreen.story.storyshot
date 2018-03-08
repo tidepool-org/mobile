@@ -235,7 +235,6 @@ exports[`Storyshots AddOrEditNoteScreen Add 1`] = `
       style={
         Object {
           "opacity": 1,
-          "paddingBottom": 8,
         }
       }
       testID={undefined}
@@ -384,17 +383,430 @@ exports[`Storyshots AddOrEditNoteScreen Add 1`] = `
           </Text>
         </View>
       </View>
-      <View
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "backgroundColor": "#989898",
+            "height": 0.5,
+          },
+        ]
+      }
+    />
+    <View
+      style={
+        Array [
+          Object {
+            "height": 64,
+          },
+        ]
+      }
+    >
+      <RCTScrollView
+        contentContainerStyle={
+          Object {
+            "alignItems": "center",
+          }
+        }
+        horizontal={true}
+        keyboardShouldPersistTaps="always"
         style={
           Array [
             Object {
-              "backgroundColor": "#989898",
-              "height": 0.5,
+              "backgroundColor": "#f7f7f8",
+              "flex": 1,
+              "flexDirection": "row",
             },
           ]
         }
-      />
+      >
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "padding": 6,
+                },
+              ]
+            }
+          >
+            <View
+              accessibilityComponentType="button"
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
+              accessible={true}
+              hasTVPreferredFocus={undefined}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              nativeID={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Array [
+                  Object {
+                    "backgroundColor": "#ffffff",
+                    "borderColor": "#a7a7a7",
+                    "borderRadius": 18,
+                    "borderWidth": 1,
+                    "height": 36,
+                    "overflow": "hidden",
+                    "paddingLeft": 8,
+                    "paddingRight": 8,
+                  },
+                ]
+              }
+              testID={undefined}
+              tvParallaxProperties={undefined}
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#3c3c3c",
+                      "fontFamily": "OpenSans-Regular",
+                      "fontSize": 17,
+                      "padding": 4,
+                      "textAlign": "center",
+                    },
+                  ]
+                }
+              >
+                #exercise
+              </Text>
+            </View>
+          </View>
+          <View
+            style={
+              Array [
+                Object {
+                  "padding": 6,
+                },
+              ]
+            }
+          >
+            <View
+              accessibilityComponentType="button"
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
+              accessible={true}
+              hasTVPreferredFocus={undefined}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              nativeID={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Array [
+                  Object {
+                    "backgroundColor": "#ffffff",
+                    "borderColor": "#a7a7a7",
+                    "borderRadius": 18,
+                    "borderWidth": 1,
+                    "height": 36,
+                    "overflow": "hidden",
+                    "paddingLeft": 8,
+                    "paddingRight": 8,
+                  },
+                ]
+              }
+              testID={undefined}
+              tvParallaxProperties={undefined}
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#3c3c3c",
+                      "fontFamily": "OpenSans-Regular",
+                      "fontSize": 17,
+                      "padding": 4,
+                      "textAlign": "center",
+                    },
+                  ]
+                }
+              >
+                #meal
+              </Text>
+            </View>
+          </View>
+          <View
+            style={
+              Array [
+                Object {
+                  "padding": 6,
+                },
+              ]
+            }
+          >
+            <View
+              accessibilityComponentType="button"
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
+              accessible={true}
+              hasTVPreferredFocus={undefined}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              nativeID={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Array [
+                  Object {
+                    "backgroundColor": "#ffffff",
+                    "borderColor": "#a7a7a7",
+                    "borderRadius": 18,
+                    "borderWidth": 1,
+                    "height": 36,
+                    "overflow": "hidden",
+                    "paddingLeft": 8,
+                    "paddingRight": 8,
+                  },
+                ]
+              }
+              testID={undefined}
+              tvParallaxProperties={undefined}
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#3c3c3c",
+                      "fontFamily": "OpenSans-Regular",
+                      "fontSize": 17,
+                      "padding": 4,
+                      "textAlign": "center",
+                    },
+                  ]
+                }
+              >
+                #sitechange
+              </Text>
+            </View>
+          </View>
+          <View
+            style={
+              Array [
+                Object {
+                  "padding": 6,
+                },
+              ]
+            }
+          >
+            <View
+              accessibilityComponentType="button"
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
+              accessible={true}
+              hasTVPreferredFocus={undefined}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              nativeID={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Array [
+                  Object {
+                    "backgroundColor": "#ffffff",
+                    "borderColor": "#a7a7a7",
+                    "borderRadius": 18,
+                    "borderWidth": 1,
+                    "height": 36,
+                    "overflow": "hidden",
+                    "paddingLeft": 8,
+                    "paddingRight": 8,
+                  },
+                ]
+              }
+              testID={undefined}
+              tvParallaxProperties={undefined}
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#3c3c3c",
+                      "fontFamily": "OpenSans-Regular",
+                      "fontSize": 17,
+                      "padding": 4,
+                      "textAlign": "center",
+                    },
+                  ]
+                }
+              >
+                #sensorchange
+              </Text>
+            </View>
+          </View>
+          <View
+            style={
+              Array [
+                Object {
+                  "padding": 6,
+                },
+              ]
+            }
+          >
+            <View
+              accessibilityComponentType="button"
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
+              accessible={true}
+              hasTVPreferredFocus={undefined}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              nativeID={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Array [
+                  Object {
+                    "backgroundColor": "#ffffff",
+                    "borderColor": "#a7a7a7",
+                    "borderRadius": 18,
+                    "borderWidth": 1,
+                    "height": 36,
+                    "overflow": "hidden",
+                    "paddingLeft": 8,
+                    "paddingRight": 8,
+                  },
+                ]
+              }
+              testID={undefined}
+              tvParallaxProperties={undefined}
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#3c3c3c",
+                      "fontFamily": "OpenSans-Regular",
+                      "fontSize": 17,
+                      "padding": 4,
+                      "textAlign": "center",
+                    },
+                  ]
+                }
+              >
+                #juicebox
+              </Text>
+            </View>
+          </View>
+          <View
+            style={
+              Array [
+                Object {
+                  "padding": 6,
+                },
+              ]
+            }
+          >
+            <View
+              accessibilityComponentType="button"
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
+              accessible={true}
+              hasTVPreferredFocus={undefined}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              nativeID={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Array [
+                  Object {
+                    "backgroundColor": "#ffffff",
+                    "borderColor": "#a7a7a7",
+                    "borderRadius": 18,
+                    "borderWidth": 1,
+                    "height": 36,
+                    "overflow": "hidden",
+                    "paddingLeft": 8,
+                    "paddingRight": 8,
+                  },
+                ]
+              }
+              testID={undefined}
+              tvParallaxProperties={undefined}
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#3c3c3c",
+                      "fontFamily": "OpenSans-Regular",
+                      "fontSize": 17,
+                      "padding": 4,
+                      "textAlign": "center",
+                    },
+                  ]
+                }
+              >
+                #devicesetting
+              </Text>
+            </View>
+          </View>
+        </View>
+      </RCTScrollView>
     </View>
+    <View
+      style={
+        Array [
+          Object {
+            "backgroundColor": "#989898",
+            "height": 0.5,
+          },
+        ]
+      }
+    />
     <View
       onLayout={[Function]}
       style={
@@ -417,6 +829,7 @@ exports[`Storyshots AddOrEditNoteScreen Add 1`] = `
         onChangeText={[Function]}
         onContentSizeChange={undefined}
         onFocus={[Function]}
+        onSelectionChange={[Function]}
         placeholder="What’s going on?"
         returnKeyType="default"
         selectionColor="#657ef6"
@@ -428,7 +841,7 @@ exports[`Storyshots AddOrEditNoteScreen Add 1`] = `
               "fontSize": 15,
             },
             Object {
-              "flex": 1,
+              "flex": null,
               "paddingBottom": 7,
               "paddingLeft": 16,
               "paddingRight": 16,
@@ -693,7 +1106,6 @@ exports[`Storyshots AddOrEditNoteScreen Edit 1`] = `
       style={
         Object {
           "opacity": 1,
-          "paddingBottom": 8,
         }
       }
       testID={undefined}
@@ -842,17 +1254,430 @@ exports[`Storyshots AddOrEditNoteScreen Edit 1`] = `
           </Text>
         </View>
       </View>
-      <View
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "backgroundColor": "#989898",
+            "height": 0.5,
+          },
+        ]
+      }
+    />
+    <View
+      style={
+        Array [
+          Object {
+            "height": 64,
+          },
+        ]
+      }
+    >
+      <RCTScrollView
+        contentContainerStyle={
+          Object {
+            "alignItems": "center",
+          }
+        }
+        horizontal={true}
+        keyboardShouldPersistTaps="always"
         style={
           Array [
             Object {
-              "backgroundColor": "#989898",
-              "height": 0.5,
+              "backgroundColor": "#f7f7f8",
+              "flex": 1,
+              "flexDirection": "row",
             },
           ]
         }
-      />
+      >
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "padding": 6,
+                },
+              ]
+            }
+          >
+            <View
+              accessibilityComponentType="button"
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
+              accessible={true}
+              hasTVPreferredFocus={undefined}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              nativeID={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Array [
+                  Object {
+                    "backgroundColor": "#ffffff",
+                    "borderColor": "#a7a7a7",
+                    "borderRadius": 18,
+                    "borderWidth": 1,
+                    "height": 36,
+                    "overflow": "hidden",
+                    "paddingLeft": 8,
+                    "paddingRight": 8,
+                  },
+                ]
+              }
+              testID={undefined}
+              tvParallaxProperties={undefined}
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#3c3c3c",
+                      "fontFamily": "OpenSans-Regular",
+                      "fontSize": 17,
+                      "padding": 4,
+                      "textAlign": "center",
+                    },
+                  ]
+                }
+              >
+                #exercise
+              </Text>
+            </View>
+          </View>
+          <View
+            style={
+              Array [
+                Object {
+                  "padding": 6,
+                },
+              ]
+            }
+          >
+            <View
+              accessibilityComponentType="button"
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
+              accessible={true}
+              hasTVPreferredFocus={undefined}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              nativeID={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Array [
+                  Object {
+                    "backgroundColor": "#ffffff",
+                    "borderColor": "#a7a7a7",
+                    "borderRadius": 18,
+                    "borderWidth": 1,
+                    "height": 36,
+                    "overflow": "hidden",
+                    "paddingLeft": 8,
+                    "paddingRight": 8,
+                  },
+                ]
+              }
+              testID={undefined}
+              tvParallaxProperties={undefined}
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#3c3c3c",
+                      "fontFamily": "OpenSans-Regular",
+                      "fontSize": 17,
+                      "padding": 4,
+                      "textAlign": "center",
+                    },
+                  ]
+                }
+              >
+                #meal
+              </Text>
+            </View>
+          </View>
+          <View
+            style={
+              Array [
+                Object {
+                  "padding": 6,
+                },
+              ]
+            }
+          >
+            <View
+              accessibilityComponentType="button"
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
+              accessible={true}
+              hasTVPreferredFocus={undefined}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              nativeID={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Array [
+                  Object {
+                    "backgroundColor": "#ffffff",
+                    "borderColor": "#a7a7a7",
+                    "borderRadius": 18,
+                    "borderWidth": 1,
+                    "height": 36,
+                    "overflow": "hidden",
+                    "paddingLeft": 8,
+                    "paddingRight": 8,
+                  },
+                ]
+              }
+              testID={undefined}
+              tvParallaxProperties={undefined}
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#3c3c3c",
+                      "fontFamily": "OpenSans-Regular",
+                      "fontSize": 17,
+                      "padding": 4,
+                      "textAlign": "center",
+                    },
+                  ]
+                }
+              >
+                #sitechange
+              </Text>
+            </View>
+          </View>
+          <View
+            style={
+              Array [
+                Object {
+                  "padding": 6,
+                },
+              ]
+            }
+          >
+            <View
+              accessibilityComponentType="button"
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
+              accessible={true}
+              hasTVPreferredFocus={undefined}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              nativeID={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Array [
+                  Object {
+                    "backgroundColor": "#ffffff",
+                    "borderColor": "#a7a7a7",
+                    "borderRadius": 18,
+                    "borderWidth": 1,
+                    "height": 36,
+                    "overflow": "hidden",
+                    "paddingLeft": 8,
+                    "paddingRight": 8,
+                  },
+                ]
+              }
+              testID={undefined}
+              tvParallaxProperties={undefined}
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#3c3c3c",
+                      "fontFamily": "OpenSans-Regular",
+                      "fontSize": 17,
+                      "padding": 4,
+                      "textAlign": "center",
+                    },
+                  ]
+                }
+              >
+                #sensorchange
+              </Text>
+            </View>
+          </View>
+          <View
+            style={
+              Array [
+                Object {
+                  "padding": 6,
+                },
+              ]
+            }
+          >
+            <View
+              accessibilityComponentType="button"
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
+              accessible={true}
+              hasTVPreferredFocus={undefined}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              nativeID={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Array [
+                  Object {
+                    "backgroundColor": "#ffffff",
+                    "borderColor": "#a7a7a7",
+                    "borderRadius": 18,
+                    "borderWidth": 1,
+                    "height": 36,
+                    "overflow": "hidden",
+                    "paddingLeft": 8,
+                    "paddingRight": 8,
+                  },
+                ]
+              }
+              testID={undefined}
+              tvParallaxProperties={undefined}
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#3c3c3c",
+                      "fontFamily": "OpenSans-Regular",
+                      "fontSize": 17,
+                      "padding": 4,
+                      "textAlign": "center",
+                    },
+                  ]
+                }
+              >
+                #juicebox
+              </Text>
+            </View>
+          </View>
+          <View
+            style={
+              Array [
+                Object {
+                  "padding": 6,
+                },
+              ]
+            }
+          >
+            <View
+              accessibilityComponentType="button"
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
+              accessible={true}
+              hasTVPreferredFocus={undefined}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              nativeID={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Array [
+                  Object {
+                    "backgroundColor": "#ffffff",
+                    "borderColor": "#a7a7a7",
+                    "borderRadius": 18,
+                    "borderWidth": 1,
+                    "height": 36,
+                    "overflow": "hidden",
+                    "paddingLeft": 8,
+                    "paddingRight": 8,
+                  },
+                ]
+              }
+              testID={undefined}
+              tvParallaxProperties={undefined}
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#3c3c3c",
+                      "fontFamily": "OpenSans-Regular",
+                      "fontSize": 17,
+                      "padding": 4,
+                      "textAlign": "center",
+                    },
+                  ]
+                }
+              >
+                #devicesetting
+              </Text>
+            </View>
+          </View>
+        </View>
+      </RCTScrollView>
     </View>
+    <View
+      style={
+        Array [
+          Object {
+            "backgroundColor": "#989898",
+            "height": 0.5,
+          },
+        ]
+      }
+    />
     <View
       onLayout={[Function]}
       style={
@@ -875,6 +1700,7 @@ exports[`Storyshots AddOrEditNoteScreen Edit 1`] = `
         onChangeText={[Function]}
         onContentSizeChange={undefined}
         onFocus={[Function]}
+        onSelectionChange={[Function]}
         placeholder="What’s going on?"
         returnKeyType="default"
         selectionColor="#657ef6"
@@ -886,7 +1712,7 @@ exports[`Storyshots AddOrEditNoteScreen Edit 1`] = `
               "fontSize": 15,
             },
             Object {
-              "flex": 1,
+              "flex": null,
               "paddingBottom": 7,
               "paddingLeft": 16,
               "paddingRight": 16,

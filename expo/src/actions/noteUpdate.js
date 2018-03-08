@@ -22,7 +22,7 @@ export const noteUpdateDidFail = ({ note, errorMessage }) => ({
   payload: { note, errorMessage },
 });
 
-export const noteUpdateAsync = ({ note, currentProfile }) => async dispatch => {
+export const noteUpdateAsync = ({ note, originalNote, currentProfile }) => async dispatch => {
   dispatch(noteUpdateDidStart({ note }));
 
   const { errorMessage } = await api().updateNoteAsync({ note });
@@ -31,6 +31,6 @@ export const noteUpdateAsync = ({ note, currentProfile }) => async dispatch => {
     dispatch(noteUpdateDidFail({ note, errorMessage }));
   } else {
     dispatch(noteUpdateDidSucceed({ note }));
-    dispatch(notesFetchUpdateNote({ note, profile: currentProfile }));
+    dispatch(notesFetchUpdateNote({ note, originalNote, profile: currentProfile }));
   }
 };

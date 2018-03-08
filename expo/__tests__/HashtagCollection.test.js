@@ -32,7 +32,7 @@ it("has same snapshot default hashtags for new collection", () => {
 it("sorts hashtags by count", () => {
   const hashtagCollection = new HashtagCollection();
   hashtagCollection.updateHashtagsForText({
-    newObjectWithText: { text: "#hash2 #hash2 #hash1 #hash1 #hash1 #hash3" },
+    objectWithTextToAdd: { text: "#hash2 #hash2 #hash1 #hash1 #hash1 #hash3" },
     textPropertyName: "text",
   });
 
@@ -44,19 +44,40 @@ it("sorts hashtags by count", () => {
 it("deletes hashtags", () => {
   const hashtagCollection = new HashtagCollection();
   hashtagCollection.updateHashtagsForText({
-    newObjectWithText: { text: "#hash2 #hash2 #hash1 #hash1 #hash1 #hash3" },
+    objectWithTextToAdd: { text: "#hash2 #hash2 #hash1 #hash1 #hash1 #hash3" },
     textPropertyName: "text",
   });
   hashtagCollection.updateHashtagsForText({
-    oldObjectWithText: { text: "#hash2 #hash2 #hash1 #hash1 #hash1 #hash3" },
+    objectWithTextToRemove: {
+      text: "#hash2 #hash2 #hash1 #hash1 #hash1 #hash3",
+    },
     textPropertyName: "text",
   });
   hashtagCollection.updateHashtagsForText({
-    newObjectWithText: { text: "#hash2 #hash2 #hash1 #hash1 #hash1 #hash3" },
+    objectWithTextToAdd: { text: "#hash2 #hash2 #hash1 #hash1 #hash1 #hash3" },
     textPropertyName: "text",
   });
 
   const { hashtagsWithCountSortedByCount } = hashtagCollection;
   expect(hashtagsWithCountSortedByCount[0][0]).toEqual("#hash1");
   expect(hashtagsWithCountSortedByCount[0][1]).toEqual(3);
+});
+
+it("updates hashtags", () => {
+  const hashtagCollection = new HashtagCollection();
+  const originalObject = { text: "#hash2 #hash2 #hash1 #hash1 #hash1 #hash3" };
+  hashtagCollection.updateHashtagsForText({
+    objectWithTextToAdd: originalObject,
+    textPropertyName: "text",
+  });
+  const newObject = { text: "#hash2 #hash1 #hash1 #hash3" };
+  hashtagCollection.updateHashtagsForText({
+    objectWithTextToRemove: originalObject,
+    objectWithTextToAdd: newObject,
+    textPropertyName: "text",
+  });
+
+  const { hashtagsWithCountSortedByCount } = hashtagCollection;
+  expect(hashtagsWithCountSortedByCount[0][0]).toEqual("#hash1");
+  expect(hashtagsWithCountSortedByCount[0][1]).toEqual(2);
 });

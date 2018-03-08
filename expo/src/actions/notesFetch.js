@@ -44,9 +44,9 @@ export const notesFetchAddNote = ({ note, profile }) => ({
   payload: { note, profile },
 });
 
-export const notesFetchUpdateNote = ({ note, profile }) => ({
+export const notesFetchUpdateNote = ({ note, originalNote, profile }) => ({
   type: NOTES_FETCH_UPDATE_NOTE,
-  payload: { note, profile },
+  payload: { note, originalNote, profile },
 });
 
 export const notesFetchDeleteNote = ({ note, profile }) => ({

@@ -27,13 +27,13 @@ exports[`Storyshots HashtagPicker default 1`] = `
         }
       }
       horizontal={true}
+      keyboardShouldPersistTaps="always"
       style={
         Array [
           Object {
             "backgroundColor": "#f7f7f8",
             "flex": 1,
             "flexDirection": "row",
-            "maxHeight": 54,
           },
         ]
       }
@@ -437,1267 +437,1277 @@ exports[`Storyshots HashtagPicker lots of hashtags 1`] = `
       }
     }
   >
-    <RCTScrollView
-      contentContainerStyle={
-        Object {
-          "alignItems": "center",
-        }
-      }
-      horizontal={true}
+    <View
       style={
         Array [
           Object {
-            "backgroundColor": "#f7f7f8",
-            "flex": 1,
-            "flexDirection": "row",
-            "maxHeight": 54,
+            "height": 64,
           },
         ]
       }
     >
-      <View>
-        <View
-          style={
-            Array [
-              Object {
-                "padding": 6,
-              },
-            ]
+      <RCTScrollView
+        contentContainerStyle={
+          Object {
+            "alignItems": "center",
           }
-        >
+        }
+        horizontal={true}
+        keyboardShouldPersistTaps="always"
+        style={
+          Array [
+            Object {
+              "backgroundColor": "#f7f7f8",
+              "flex": 1,
+              "flexDirection": "row",
+            },
+          ]
+        }
+      >
+        <View>
           <View
-            accessibilityComponentType="button"
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
-            accessible={true}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
-            isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
             style={
               Array [
                 Object {
-                  "backgroundColor": "#ffffff",
-                  "borderColor": "#a7a7a7",
-                  "borderRadius": 18,
-                  "borderWidth": 1,
-                  "height": 36,
-                  "overflow": "hidden",
-                  "paddingLeft": 8,
-                  "paddingRight": 8,
+                  "padding": 6,
                 },
               ]
             }
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
-            <Text
+            <View
+              accessibilityComponentType="button"
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
               accessible={true}
-              allowFontScaling={false}
-              ellipsizeMode="tail"
+              hasTVPreferredFocus={undefined}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              nativeID={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
               style={
                 Array [
                   Object {
-                    "color": "#3c3c3c",
-                    "fontFamily": "OpenSans-Regular",
-                    "fontSize": 17,
-                    "padding": 4,
-                    "textAlign": "center",
+                    "backgroundColor": "#ffffff",
+                    "borderColor": "#a7a7a7",
+                    "borderRadius": 18,
+                    "borderWidth": 1,
+                    "height": 36,
+                    "overflow": "hidden",
+                    "paddingLeft": 8,
+                    "paddingRight": 8,
                   },
                 ]
               }
+              testID={undefined}
+              tvParallaxProperties={undefined}
             >
-              #hashtag1
-            </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#3c3c3c",
+                      "fontFamily": "OpenSans-Regular",
+                      "fontSize": 17,
+                      "padding": 4,
+                      "textAlign": "center",
+                    },
+                  ]
+                }
+              >
+                #hashtag1
+              </Text>
+            </View>
           </View>
-        </View>
-        <View
-          style={
-            Array [
-              Object {
-                "padding": 6,
-              },
-            ]
-          }
-        >
           <View
-            accessibilityComponentType="button"
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
-            accessible={true}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
-            isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
             style={
               Array [
                 Object {
-                  "backgroundColor": "#ffffff",
-                  "borderColor": "#a7a7a7",
-                  "borderRadius": 18,
-                  "borderWidth": 1,
-                  "height": 36,
-                  "overflow": "hidden",
-                  "paddingLeft": 8,
-                  "paddingRight": 8,
+                  "padding": 6,
                 },
               ]
             }
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
-            <Text
+            <View
+              accessibilityComponentType="button"
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
               accessible={true}
-              allowFontScaling={false}
-              ellipsizeMode="tail"
+              hasTVPreferredFocus={undefined}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              nativeID={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
               style={
                 Array [
                   Object {
-                    "color": "#3c3c3c",
-                    "fontFamily": "OpenSans-Regular",
-                    "fontSize": 17,
-                    "padding": 4,
-                    "textAlign": "center",
+                    "backgroundColor": "#ffffff",
+                    "borderColor": "#a7a7a7",
+                    "borderRadius": 18,
+                    "borderWidth": 1,
+                    "height": 36,
+                    "overflow": "hidden",
+                    "paddingLeft": 8,
+                    "paddingRight": 8,
                   },
                 ]
               }
+              testID={undefined}
+              tvParallaxProperties={undefined}
             >
-              #hashtag2
-            </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#3c3c3c",
+                      "fontFamily": "OpenSans-Regular",
+                      "fontSize": 17,
+                      "padding": 4,
+                      "textAlign": "center",
+                    },
+                  ]
+                }
+              >
+                #hashtag2
+              </Text>
+            </View>
           </View>
-        </View>
-        <View
-          style={
-            Array [
-              Object {
-                "padding": 6,
-              },
-            ]
-          }
-        >
           <View
-            accessibilityComponentType="button"
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
-            accessible={true}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
-            isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
             style={
               Array [
                 Object {
-                  "backgroundColor": "#ffffff",
-                  "borderColor": "#a7a7a7",
-                  "borderRadius": 18,
-                  "borderWidth": 1,
-                  "height": 36,
-                  "overflow": "hidden",
-                  "paddingLeft": 8,
-                  "paddingRight": 8,
+                  "padding": 6,
                 },
               ]
             }
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
-            <Text
+            <View
+              accessibilityComponentType="button"
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
               accessible={true}
-              allowFontScaling={false}
-              ellipsizeMode="tail"
+              hasTVPreferredFocus={undefined}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              nativeID={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
               style={
                 Array [
                   Object {
-                    "color": "#3c3c3c",
-                    "fontFamily": "OpenSans-Regular",
-                    "fontSize": 17,
-                    "padding": 4,
-                    "textAlign": "center",
+                    "backgroundColor": "#ffffff",
+                    "borderColor": "#a7a7a7",
+                    "borderRadius": 18,
+                    "borderWidth": 1,
+                    "height": 36,
+                    "overflow": "hidden",
+                    "paddingLeft": 8,
+                    "paddingRight": 8,
                   },
                 ]
               }
+              testID={undefined}
+              tvParallaxProperties={undefined}
             >
-              #hashtag3
-            </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#3c3c3c",
+                      "fontFamily": "OpenSans-Regular",
+                      "fontSize": 17,
+                      "padding": 4,
+                      "textAlign": "center",
+                    },
+                  ]
+                }
+              >
+                #hashtag3
+              </Text>
+            </View>
           </View>
-        </View>
-        <View
-          style={
-            Array [
-              Object {
-                "padding": 6,
-              },
-            ]
-          }
-        >
           <View
-            accessibilityComponentType="button"
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
-            accessible={true}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
-            isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
             style={
               Array [
                 Object {
-                  "backgroundColor": "#ffffff",
-                  "borderColor": "#a7a7a7",
-                  "borderRadius": 18,
-                  "borderWidth": 1,
-                  "height": 36,
-                  "overflow": "hidden",
-                  "paddingLeft": 8,
-                  "paddingRight": 8,
+                  "padding": 6,
                 },
               ]
             }
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
-            <Text
+            <View
+              accessibilityComponentType="button"
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
               accessible={true}
-              allowFontScaling={false}
-              ellipsizeMode="tail"
+              hasTVPreferredFocus={undefined}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              nativeID={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
               style={
                 Array [
                   Object {
-                    "color": "#3c3c3c",
-                    "fontFamily": "OpenSans-Regular",
-                    "fontSize": 17,
-                    "padding": 4,
-                    "textAlign": "center",
+                    "backgroundColor": "#ffffff",
+                    "borderColor": "#a7a7a7",
+                    "borderRadius": 18,
+                    "borderWidth": 1,
+                    "height": 36,
+                    "overflow": "hidden",
+                    "paddingLeft": 8,
+                    "paddingRight": 8,
                   },
                 ]
               }
+              testID={undefined}
+              tvParallaxProperties={undefined}
             >
-              #hashtag4
-            </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#3c3c3c",
+                      "fontFamily": "OpenSans-Regular",
+                      "fontSize": 17,
+                      "padding": 4,
+                      "textAlign": "center",
+                    },
+                  ]
+                }
+              >
+                #hashtag4
+              </Text>
+            </View>
           </View>
-        </View>
-        <View
-          style={
-            Array [
-              Object {
-                "padding": 6,
-              },
-            ]
-          }
-        >
           <View
-            accessibilityComponentType="button"
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
-            accessible={true}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
-            isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
             style={
               Array [
                 Object {
-                  "backgroundColor": "#ffffff",
-                  "borderColor": "#a7a7a7",
-                  "borderRadius": 18,
-                  "borderWidth": 1,
-                  "height": 36,
-                  "overflow": "hidden",
-                  "paddingLeft": 8,
-                  "paddingRight": 8,
+                  "padding": 6,
                 },
               ]
             }
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
-            <Text
+            <View
+              accessibilityComponentType="button"
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
               accessible={true}
-              allowFontScaling={false}
-              ellipsizeMode="tail"
+              hasTVPreferredFocus={undefined}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              nativeID={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
               style={
                 Array [
                   Object {
-                    "color": "#3c3c3c",
-                    "fontFamily": "OpenSans-Regular",
-                    "fontSize": 17,
-                    "padding": 4,
-                    "textAlign": "center",
+                    "backgroundColor": "#ffffff",
+                    "borderColor": "#a7a7a7",
+                    "borderRadius": 18,
+                    "borderWidth": 1,
+                    "height": 36,
+                    "overflow": "hidden",
+                    "paddingLeft": 8,
+                    "paddingRight": 8,
                   },
                 ]
               }
+              testID={undefined}
+              tvParallaxProperties={undefined}
             >
-              #hashtag5
-            </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#3c3c3c",
+                      "fontFamily": "OpenSans-Regular",
+                      "fontSize": 17,
+                      "padding": 4,
+                      "textAlign": "center",
+                    },
+                  ]
+                }
+              >
+                #hashtag5
+              </Text>
+            </View>
           </View>
-        </View>
-        <View
-          style={
-            Array [
-              Object {
-                "padding": 6,
-              },
-            ]
-          }
-        >
           <View
-            accessibilityComponentType="button"
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
-            accessible={true}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
-            isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
             style={
               Array [
                 Object {
-                  "backgroundColor": "#ffffff",
-                  "borderColor": "#a7a7a7",
-                  "borderRadius": 18,
-                  "borderWidth": 1,
-                  "height": 36,
-                  "overflow": "hidden",
-                  "paddingLeft": 8,
-                  "paddingRight": 8,
+                  "padding": 6,
                 },
               ]
             }
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
-            <Text
+            <View
+              accessibilityComponentType="button"
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
               accessible={true}
-              allowFontScaling={false}
-              ellipsizeMode="tail"
+              hasTVPreferredFocus={undefined}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              nativeID={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
               style={
                 Array [
                   Object {
-                    "color": "#3c3c3c",
-                    "fontFamily": "OpenSans-Regular",
-                    "fontSize": 17,
-                    "padding": 4,
-                    "textAlign": "center",
+                    "backgroundColor": "#ffffff",
+                    "borderColor": "#a7a7a7",
+                    "borderRadius": 18,
+                    "borderWidth": 1,
+                    "height": 36,
+                    "overflow": "hidden",
+                    "paddingLeft": 8,
+                    "paddingRight": 8,
                   },
                 ]
               }
+              testID={undefined}
+              tvParallaxProperties={undefined}
             >
-              #hashtag6
-            </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#3c3c3c",
+                      "fontFamily": "OpenSans-Regular",
+                      "fontSize": 17,
+                      "padding": 4,
+                      "textAlign": "center",
+                    },
+                  ]
+                }
+              >
+                #hashtag6
+              </Text>
+            </View>
           </View>
-        </View>
-        <View
-          style={
-            Array [
-              Object {
-                "padding": 6,
-              },
-            ]
-          }
-        >
           <View
-            accessibilityComponentType="button"
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
-            accessible={true}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
-            isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
             style={
               Array [
                 Object {
-                  "backgroundColor": "#ffffff",
-                  "borderColor": "#a7a7a7",
-                  "borderRadius": 18,
-                  "borderWidth": 1,
-                  "height": 36,
-                  "overflow": "hidden",
-                  "paddingLeft": 8,
-                  "paddingRight": 8,
+                  "padding": 6,
                 },
               ]
             }
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
-            <Text
+            <View
+              accessibilityComponentType="button"
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
               accessible={true}
-              allowFontScaling={false}
-              ellipsizeMode="tail"
+              hasTVPreferredFocus={undefined}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              nativeID={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
               style={
                 Array [
                   Object {
-                    "color": "#3c3c3c",
-                    "fontFamily": "OpenSans-Regular",
-                    "fontSize": 17,
-                    "padding": 4,
-                    "textAlign": "center",
+                    "backgroundColor": "#ffffff",
+                    "borderColor": "#a7a7a7",
+                    "borderRadius": 18,
+                    "borderWidth": 1,
+                    "height": 36,
+                    "overflow": "hidden",
+                    "paddingLeft": 8,
+                    "paddingRight": 8,
                   },
                 ]
               }
+              testID={undefined}
+              tvParallaxProperties={undefined}
             >
-              #hashtag7
-            </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#3c3c3c",
+                      "fontFamily": "OpenSans-Regular",
+                      "fontSize": 17,
+                      "padding": 4,
+                      "textAlign": "center",
+                    },
+                  ]
+                }
+              >
+                #hashtag7
+              </Text>
+            </View>
           </View>
-        </View>
-        <View
-          style={
-            Array [
-              Object {
-                "padding": 6,
-              },
-            ]
-          }
-        >
           <View
-            accessibilityComponentType="button"
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
-            accessible={true}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
-            isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
             style={
               Array [
                 Object {
-                  "backgroundColor": "#ffffff",
-                  "borderColor": "#a7a7a7",
-                  "borderRadius": 18,
-                  "borderWidth": 1,
-                  "height": 36,
-                  "overflow": "hidden",
-                  "paddingLeft": 8,
-                  "paddingRight": 8,
+                  "padding": 6,
                 },
               ]
             }
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
-            <Text
+            <View
+              accessibilityComponentType="button"
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
               accessible={true}
-              allowFontScaling={false}
-              ellipsizeMode="tail"
+              hasTVPreferredFocus={undefined}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              nativeID={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
               style={
                 Array [
                   Object {
-                    "color": "#3c3c3c",
-                    "fontFamily": "OpenSans-Regular",
-                    "fontSize": 17,
-                    "padding": 4,
-                    "textAlign": "center",
+                    "backgroundColor": "#ffffff",
+                    "borderColor": "#a7a7a7",
+                    "borderRadius": 18,
+                    "borderWidth": 1,
+                    "height": 36,
+                    "overflow": "hidden",
+                    "paddingLeft": 8,
+                    "paddingRight": 8,
                   },
                 ]
               }
+              testID={undefined}
+              tvParallaxProperties={undefined}
             >
-              #hashtag8
-            </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#3c3c3c",
+                      "fontFamily": "OpenSans-Regular",
+                      "fontSize": 17,
+                      "padding": 4,
+                      "textAlign": "center",
+                    },
+                  ]
+                }
+              >
+                #hashtag8
+              </Text>
+            </View>
           </View>
-        </View>
-        <View
-          style={
-            Array [
-              Object {
-                "padding": 6,
-              },
-            ]
-          }
-        >
           <View
-            accessibilityComponentType="button"
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
-            accessible={true}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
-            isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
             style={
               Array [
                 Object {
-                  "backgroundColor": "#ffffff",
-                  "borderColor": "#a7a7a7",
-                  "borderRadius": 18,
-                  "borderWidth": 1,
-                  "height": 36,
-                  "overflow": "hidden",
-                  "paddingLeft": 8,
-                  "paddingRight": 8,
+                  "padding": 6,
                 },
               ]
             }
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
-            <Text
+            <View
+              accessibilityComponentType="button"
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
               accessible={true}
-              allowFontScaling={false}
-              ellipsizeMode="tail"
+              hasTVPreferredFocus={undefined}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              nativeID={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
               style={
                 Array [
                   Object {
-                    "color": "#3c3c3c",
-                    "fontFamily": "OpenSans-Regular",
-                    "fontSize": 17,
-                    "padding": 4,
-                    "textAlign": "center",
+                    "backgroundColor": "#ffffff",
+                    "borderColor": "#a7a7a7",
+                    "borderRadius": 18,
+                    "borderWidth": 1,
+                    "height": 36,
+                    "overflow": "hidden",
+                    "paddingLeft": 8,
+                    "paddingRight": 8,
                   },
                 ]
               }
+              testID={undefined}
+              tvParallaxProperties={undefined}
             >
-              #hashtag9
-            </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#3c3c3c",
+                      "fontFamily": "OpenSans-Regular",
+                      "fontSize": 17,
+                      "padding": 4,
+                      "textAlign": "center",
+                    },
+                  ]
+                }
+              >
+                #hashtag9
+              </Text>
+            </View>
           </View>
-        </View>
-        <View
-          style={
-            Array [
-              Object {
-                "padding": 6,
-              },
-            ]
-          }
-        >
           <View
-            accessibilityComponentType="button"
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
-            accessible={true}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
-            isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
             style={
               Array [
                 Object {
-                  "backgroundColor": "#ffffff",
-                  "borderColor": "#a7a7a7",
-                  "borderRadius": 18,
-                  "borderWidth": 1,
-                  "height": 36,
-                  "overflow": "hidden",
-                  "paddingLeft": 8,
-                  "paddingRight": 8,
+                  "padding": 6,
                 },
               ]
             }
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
-            <Text
+            <View
+              accessibilityComponentType="button"
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
               accessible={true}
-              allowFontScaling={false}
-              ellipsizeMode="tail"
+              hasTVPreferredFocus={undefined}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              nativeID={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
               style={
                 Array [
                   Object {
-                    "color": "#3c3c3c",
-                    "fontFamily": "OpenSans-Regular",
-                    "fontSize": 17,
-                    "padding": 4,
-                    "textAlign": "center",
+                    "backgroundColor": "#ffffff",
+                    "borderColor": "#a7a7a7",
+                    "borderRadius": 18,
+                    "borderWidth": 1,
+                    "height": 36,
+                    "overflow": "hidden",
+                    "paddingLeft": 8,
+                    "paddingRight": 8,
                   },
                 ]
               }
+              testID={undefined}
+              tvParallaxProperties={undefined}
             >
-              #hashtag10
-            </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#3c3c3c",
+                      "fontFamily": "OpenSans-Regular",
+                      "fontSize": 17,
+                      "padding": 4,
+                      "textAlign": "center",
+                    },
+                  ]
+                }
+              >
+                #hashtag10
+              </Text>
+            </View>
           </View>
-        </View>
-        <View
-          style={
-            Array [
-              Object {
-                "padding": 6,
-              },
-            ]
-          }
-        >
           <View
-            accessibilityComponentType="button"
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
-            accessible={true}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
-            isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
             style={
               Array [
                 Object {
-                  "backgroundColor": "#ffffff",
-                  "borderColor": "#a7a7a7",
-                  "borderRadius": 18,
-                  "borderWidth": 1,
-                  "height": 36,
-                  "overflow": "hidden",
-                  "paddingLeft": 8,
-                  "paddingRight": 8,
+                  "padding": 6,
                 },
               ]
             }
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
-            <Text
+            <View
+              accessibilityComponentType="button"
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
               accessible={true}
-              allowFontScaling={false}
-              ellipsizeMode="tail"
+              hasTVPreferredFocus={undefined}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              nativeID={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
               style={
                 Array [
                   Object {
-                    "color": "#3c3c3c",
-                    "fontFamily": "OpenSans-Regular",
-                    "fontSize": 17,
-                    "padding": 4,
-                    "textAlign": "center",
+                    "backgroundColor": "#ffffff",
+                    "borderColor": "#a7a7a7",
+                    "borderRadius": 18,
+                    "borderWidth": 1,
+                    "height": 36,
+                    "overflow": "hidden",
+                    "paddingLeft": 8,
+                    "paddingRight": 8,
                   },
                 ]
               }
+              testID={undefined}
+              tvParallaxProperties={undefined}
             >
-              #hashtag11
-            </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#3c3c3c",
+                      "fontFamily": "OpenSans-Regular",
+                      "fontSize": 17,
+                      "padding": 4,
+                      "textAlign": "center",
+                    },
+                  ]
+                }
+              >
+                #hashtag11
+              </Text>
+            </View>
           </View>
-        </View>
-        <View
-          style={
-            Array [
-              Object {
-                "padding": 6,
-              },
-            ]
-          }
-        >
           <View
-            accessibilityComponentType="button"
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
-            accessible={true}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
-            isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
             style={
               Array [
                 Object {
-                  "backgroundColor": "#ffffff",
-                  "borderColor": "#a7a7a7",
-                  "borderRadius": 18,
-                  "borderWidth": 1,
-                  "height": 36,
-                  "overflow": "hidden",
-                  "paddingLeft": 8,
-                  "paddingRight": 8,
+                  "padding": 6,
                 },
               ]
             }
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
-            <Text
+            <View
+              accessibilityComponentType="button"
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
               accessible={true}
-              allowFontScaling={false}
-              ellipsizeMode="tail"
+              hasTVPreferredFocus={undefined}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              nativeID={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
               style={
                 Array [
                   Object {
-                    "color": "#3c3c3c",
-                    "fontFamily": "OpenSans-Regular",
-                    "fontSize": 17,
-                    "padding": 4,
-                    "textAlign": "center",
+                    "backgroundColor": "#ffffff",
+                    "borderColor": "#a7a7a7",
+                    "borderRadius": 18,
+                    "borderWidth": 1,
+                    "height": 36,
+                    "overflow": "hidden",
+                    "paddingLeft": 8,
+                    "paddingRight": 8,
                   },
                 ]
               }
+              testID={undefined}
+              tvParallaxProperties={undefined}
             >
-              #hashtag12
-            </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#3c3c3c",
+                      "fontFamily": "OpenSans-Regular",
+                      "fontSize": 17,
+                      "padding": 4,
+                      "textAlign": "center",
+                    },
+                  ]
+                }
+              >
+                #hashtag12
+              </Text>
+            </View>
           </View>
-        </View>
-        <View
-          style={
-            Array [
-              Object {
-                "padding": 6,
-              },
-            ]
-          }
-        >
           <View
-            accessibilityComponentType="button"
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
-            accessible={true}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
-            isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
             style={
               Array [
                 Object {
-                  "backgroundColor": "#ffffff",
-                  "borderColor": "#a7a7a7",
-                  "borderRadius": 18,
-                  "borderWidth": 1,
-                  "height": 36,
-                  "overflow": "hidden",
-                  "paddingLeft": 8,
-                  "paddingRight": 8,
+                  "padding": 6,
                 },
               ]
             }
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
-            <Text
+            <View
+              accessibilityComponentType="button"
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
               accessible={true}
-              allowFontScaling={false}
-              ellipsizeMode="tail"
+              hasTVPreferredFocus={undefined}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              nativeID={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
               style={
                 Array [
                   Object {
-                    "color": "#3c3c3c",
-                    "fontFamily": "OpenSans-Regular",
-                    "fontSize": 17,
-                    "padding": 4,
-                    "textAlign": "center",
+                    "backgroundColor": "#ffffff",
+                    "borderColor": "#a7a7a7",
+                    "borderRadius": 18,
+                    "borderWidth": 1,
+                    "height": 36,
+                    "overflow": "hidden",
+                    "paddingLeft": 8,
+                    "paddingRight": 8,
                   },
                 ]
               }
+              testID={undefined}
+              tvParallaxProperties={undefined}
             >
-              #hashtag13
-            </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#3c3c3c",
+                      "fontFamily": "OpenSans-Regular",
+                      "fontSize": 17,
+                      "padding": 4,
+                      "textAlign": "center",
+                    },
+                  ]
+                }
+              >
+                #hashtag13
+              </Text>
+            </View>
           </View>
-        </View>
-        <View
-          style={
-            Array [
-              Object {
-                "padding": 6,
-              },
-            ]
-          }
-        >
           <View
-            accessibilityComponentType="button"
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
-            accessible={true}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
-            isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
             style={
               Array [
                 Object {
-                  "backgroundColor": "#ffffff",
-                  "borderColor": "#a7a7a7",
-                  "borderRadius": 18,
-                  "borderWidth": 1,
-                  "height": 36,
-                  "overflow": "hidden",
-                  "paddingLeft": 8,
-                  "paddingRight": 8,
+                  "padding": 6,
                 },
               ]
             }
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
-            <Text
+            <View
+              accessibilityComponentType="button"
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
               accessible={true}
-              allowFontScaling={false}
-              ellipsizeMode="tail"
+              hasTVPreferredFocus={undefined}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              nativeID={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
               style={
                 Array [
                   Object {
-                    "color": "#3c3c3c",
-                    "fontFamily": "OpenSans-Regular",
-                    "fontSize": 17,
-                    "padding": 4,
-                    "textAlign": "center",
+                    "backgroundColor": "#ffffff",
+                    "borderColor": "#a7a7a7",
+                    "borderRadius": 18,
+                    "borderWidth": 1,
+                    "height": 36,
+                    "overflow": "hidden",
+                    "paddingLeft": 8,
+                    "paddingRight": 8,
                   },
                 ]
               }
+              testID={undefined}
+              tvParallaxProperties={undefined}
             >
-              #hashtag14
-            </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#3c3c3c",
+                      "fontFamily": "OpenSans-Regular",
+                      "fontSize": 17,
+                      "padding": 4,
+                      "textAlign": "center",
+                    },
+                  ]
+                }
+              >
+                #hashtag14
+              </Text>
+            </View>
           </View>
-        </View>
-        <View
-          style={
-            Array [
-              Object {
-                "padding": 6,
-              },
-            ]
-          }
-        >
           <View
-            accessibilityComponentType="button"
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
-            accessible={true}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
-            isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
             style={
               Array [
                 Object {
-                  "backgroundColor": "#ffffff",
-                  "borderColor": "#a7a7a7",
-                  "borderRadius": 18,
-                  "borderWidth": 1,
-                  "height": 36,
-                  "overflow": "hidden",
-                  "paddingLeft": 8,
-                  "paddingRight": 8,
+                  "padding": 6,
                 },
               ]
             }
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
-            <Text
+            <View
+              accessibilityComponentType="button"
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
               accessible={true}
-              allowFontScaling={false}
-              ellipsizeMode="tail"
+              hasTVPreferredFocus={undefined}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              nativeID={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
               style={
                 Array [
                   Object {
-                    "color": "#3c3c3c",
-                    "fontFamily": "OpenSans-Regular",
-                    "fontSize": 17,
-                    "padding": 4,
-                    "textAlign": "center",
+                    "backgroundColor": "#ffffff",
+                    "borderColor": "#a7a7a7",
+                    "borderRadius": 18,
+                    "borderWidth": 1,
+                    "height": 36,
+                    "overflow": "hidden",
+                    "paddingLeft": 8,
+                    "paddingRight": 8,
                   },
                 ]
               }
+              testID={undefined}
+              tvParallaxProperties={undefined}
             >
-              #hashtag15
-            </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#3c3c3c",
+                      "fontFamily": "OpenSans-Regular",
+                      "fontSize": 17,
+                      "padding": 4,
+                      "textAlign": "center",
+                    },
+                  ]
+                }
+              >
+                #hashtag15
+              </Text>
+            </View>
           </View>
-        </View>
-        <View
-          style={
-            Array [
-              Object {
-                "padding": 6,
-              },
-            ]
-          }
-        >
           <View
-            accessibilityComponentType="button"
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
-            accessible={true}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
-            isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
             style={
               Array [
                 Object {
-                  "backgroundColor": "#ffffff",
-                  "borderColor": "#a7a7a7",
-                  "borderRadius": 18,
-                  "borderWidth": 1,
-                  "height": 36,
-                  "overflow": "hidden",
-                  "paddingLeft": 8,
-                  "paddingRight": 8,
+                  "padding": 6,
                 },
               ]
             }
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
-            <Text
+            <View
+              accessibilityComponentType="button"
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
               accessible={true}
-              allowFontScaling={false}
-              ellipsizeMode="tail"
+              hasTVPreferredFocus={undefined}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              nativeID={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
               style={
                 Array [
                   Object {
-                    "color": "#3c3c3c",
-                    "fontFamily": "OpenSans-Regular",
-                    "fontSize": 17,
-                    "padding": 4,
-                    "textAlign": "center",
+                    "backgroundColor": "#ffffff",
+                    "borderColor": "#a7a7a7",
+                    "borderRadius": 18,
+                    "borderWidth": 1,
+                    "height": 36,
+                    "overflow": "hidden",
+                    "paddingLeft": 8,
+                    "paddingRight": 8,
                   },
                 ]
               }
+              testID={undefined}
+              tvParallaxProperties={undefined}
             >
-              #hashtag16
-            </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#3c3c3c",
+                      "fontFamily": "OpenSans-Regular",
+                      "fontSize": 17,
+                      "padding": 4,
+                      "textAlign": "center",
+                    },
+                  ]
+                }
+              >
+                #hashtag16
+              </Text>
+            </View>
           </View>
-        </View>
-        <View
-          style={
-            Array [
-              Object {
-                "padding": 6,
-              },
-            ]
-          }
-        >
           <View
-            accessibilityComponentType="button"
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
-            accessible={true}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
-            isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
             style={
               Array [
                 Object {
-                  "backgroundColor": "#ffffff",
-                  "borderColor": "#a7a7a7",
-                  "borderRadius": 18,
-                  "borderWidth": 1,
-                  "height": 36,
-                  "overflow": "hidden",
-                  "paddingLeft": 8,
-                  "paddingRight": 8,
+                  "padding": 6,
                 },
               ]
             }
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
-            <Text
+            <View
+              accessibilityComponentType="button"
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
               accessible={true}
-              allowFontScaling={false}
-              ellipsizeMode="tail"
+              hasTVPreferredFocus={undefined}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              nativeID={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
               style={
                 Array [
                   Object {
-                    "color": "#3c3c3c",
-                    "fontFamily": "OpenSans-Regular",
-                    "fontSize": 17,
-                    "padding": 4,
-                    "textAlign": "center",
+                    "backgroundColor": "#ffffff",
+                    "borderColor": "#a7a7a7",
+                    "borderRadius": 18,
+                    "borderWidth": 1,
+                    "height": 36,
+                    "overflow": "hidden",
+                    "paddingLeft": 8,
+                    "paddingRight": 8,
                   },
                 ]
               }
+              testID={undefined}
+              tvParallaxProperties={undefined}
             >
-              #hashtag17
-            </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#3c3c3c",
+                      "fontFamily": "OpenSans-Regular",
+                      "fontSize": 17,
+                      "padding": 4,
+                      "textAlign": "center",
+                    },
+                  ]
+                }
+              >
+                #hashtag17
+              </Text>
+            </View>
           </View>
-        </View>
-        <View
-          style={
-            Array [
-              Object {
-                "padding": 6,
-              },
-            ]
-          }
-        >
           <View
-            accessibilityComponentType="button"
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
-            accessible={true}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
-            isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
             style={
               Array [
                 Object {
-                  "backgroundColor": "#ffffff",
-                  "borderColor": "#a7a7a7",
-                  "borderRadius": 18,
-                  "borderWidth": 1,
-                  "height": 36,
-                  "overflow": "hidden",
-                  "paddingLeft": 8,
-                  "paddingRight": 8,
+                  "padding": 6,
                 },
               ]
             }
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
-            <Text
+            <View
+              accessibilityComponentType="button"
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
               accessible={true}
-              allowFontScaling={false}
-              ellipsizeMode="tail"
+              hasTVPreferredFocus={undefined}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              nativeID={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
               style={
                 Array [
                   Object {
-                    "color": "#3c3c3c",
-                    "fontFamily": "OpenSans-Regular",
-                    "fontSize": 17,
-                    "padding": 4,
-                    "textAlign": "center",
+                    "backgroundColor": "#ffffff",
+                    "borderColor": "#a7a7a7",
+                    "borderRadius": 18,
+                    "borderWidth": 1,
+                    "height": 36,
+                    "overflow": "hidden",
+                    "paddingLeft": 8,
+                    "paddingRight": 8,
                   },
                 ]
               }
+              testID={undefined}
+              tvParallaxProperties={undefined}
             >
-              #hashtag18
-            </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#3c3c3c",
+                      "fontFamily": "OpenSans-Regular",
+                      "fontSize": 17,
+                      "padding": 4,
+                      "textAlign": "center",
+                    },
+                  ]
+                }
+              >
+                #hashtag18
+              </Text>
+            </View>
           </View>
-        </View>
-        <View
-          style={
-            Array [
-              Object {
-                "padding": 6,
-              },
-            ]
-          }
-        >
           <View
-            accessibilityComponentType="button"
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
-            accessible={true}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
-            isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
             style={
               Array [
                 Object {
-                  "backgroundColor": "#ffffff",
-                  "borderColor": "#a7a7a7",
-                  "borderRadius": 18,
-                  "borderWidth": 1,
-                  "height": 36,
-                  "overflow": "hidden",
-                  "paddingLeft": 8,
-                  "paddingRight": 8,
+                  "padding": 6,
                 },
               ]
             }
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
-            <Text
+            <View
+              accessibilityComponentType="button"
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
               accessible={true}
-              allowFontScaling={false}
-              ellipsizeMode="tail"
+              hasTVPreferredFocus={undefined}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              nativeID={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
               style={
                 Array [
                   Object {
-                    "color": "#3c3c3c",
-                    "fontFamily": "OpenSans-Regular",
-                    "fontSize": 17,
-                    "padding": 4,
-                    "textAlign": "center",
+                    "backgroundColor": "#ffffff",
+                    "borderColor": "#a7a7a7",
+                    "borderRadius": 18,
+                    "borderWidth": 1,
+                    "height": 36,
+                    "overflow": "hidden",
+                    "paddingLeft": 8,
+                    "paddingRight": 8,
                   },
                 ]
               }
+              testID={undefined}
+              tvParallaxProperties={undefined}
             >
-              #hashtag19
-            </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#3c3c3c",
+                      "fontFamily": "OpenSans-Regular",
+                      "fontSize": 17,
+                      "padding": 4,
+                      "textAlign": "center",
+                    },
+                  ]
+                }
+              >
+                #hashtag19
+              </Text>
+            </View>
           </View>
-        </View>
-        <View
-          style={
-            Array [
-              Object {
-                "padding": 6,
-              },
-            ]
-          }
-        >
           <View
-            accessibilityComponentType="button"
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
-            accessible={true}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
-            isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
             style={
               Array [
                 Object {
-                  "backgroundColor": "#ffffff",
-                  "borderColor": "#a7a7a7",
-                  "borderRadius": 18,
-                  "borderWidth": 1,
-                  "height": 36,
-                  "overflow": "hidden",
-                  "paddingLeft": 8,
-                  "paddingRight": 8,
+                  "padding": 6,
                 },
               ]
             }
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
-            <Text
+            <View
+              accessibilityComponentType="button"
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
               accessible={true}
-              allowFontScaling={false}
-              ellipsizeMode="tail"
+              hasTVPreferredFocus={undefined}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              nativeID={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
               style={
                 Array [
                   Object {
-                    "color": "#3c3c3c",
-                    "fontFamily": "OpenSans-Regular",
-                    "fontSize": 17,
-                    "padding": 4,
-                    "textAlign": "center",
+                    "backgroundColor": "#ffffff",
+                    "borderColor": "#a7a7a7",
+                    "borderRadius": 18,
+                    "borderWidth": 1,
+                    "height": 36,
+                    "overflow": "hidden",
+                    "paddingLeft": 8,
+                    "paddingRight": 8,
                   },
                 ]
               }
+              testID={undefined}
+              tvParallaxProperties={undefined}
             >
-              #hashtag20
-            </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#3c3c3c",
+                      "fontFamily": "OpenSans-Regular",
+                      "fontSize": 17,
+                      "padding": 4,
+                      "textAlign": "center",
+                    },
+                  ]
+                }
+              >
+                #hashtag20
+              </Text>
+            </View>
           </View>
         </View>
-      </View>
-    </RCTScrollView>
+      </RCTScrollView>
+    </View>
   </View>
 </RCTSafeAreaView>
 `;
@@ -1729,13 +1739,13 @@ exports[`Storyshots HashtagPicker one hashtag 1`] = `
         }
       }
       horizontal={true}
+      keyboardShouldPersistTaps="always"
       style={
         Array [
           Object {
             "backgroundColor": "#f7f7f8",
             "flex": 1,
             "flexDirection": "row",
-            "maxHeight": 54,
           },
         ]
       }
@@ -1836,13 +1846,13 @@ exports[`Storyshots HashtagPicker short and long hashtags 1`] = `
         }
       }
       horizontal={true}
+      keyboardShouldPersistTaps="always"
       style={
         Array [
           Object {
             "backgroundColor": "#f7f7f8",
             "flex": 1,
             "flexDirection": "row",
-            "maxHeight": 54,
           },
         ]
       }
@@ -2005,13 +2015,13 @@ exports[`Storyshots HashtagPicker two hashtags 1`] = `
         }
       }
       horizontal={true}
+      keyboardShouldPersistTaps="always"
       style={
         Array [
           Object {
             "backgroundColor": "#f7f7f8",
             "flex": 1,
             "flexDirection": "row",
-            "maxHeight": 54,
           },
         ]
       }

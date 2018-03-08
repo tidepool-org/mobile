@@ -7,10 +7,14 @@ import {
   NOTES_FETCH_DELETE_NOTE,
 } from "../actions/notesFetch";
 import { AUTH_SIGN_IN_RESET } from "../actions/auth";
+import HashtagCollection from "../utils/HashtagCollection";
+
+const hashtagCollection = new HashtagCollection();
 
 const initialState = {
   userId: "",
   notes: [],
+  hashtags: hashtagCollection.hashtagsSortedByCount,
   errorMessage: "",
   fetching: false,
 };
@@ -20,21 +24,33 @@ function notesFetch(state = initialState, action) {
 
   switch (action.type) {
     case AUTH_SIGN_IN_RESET:
-      nextState = { ...initialState };
+      hashtagCollection.resetToDefaultHashtags();
+      nextState = {
+        ...initialState,
+        hashtags: hashtagCollection.hashtagsSortedByCount,
+      };
       break;
     case NOTES_FETCH_DID_START: {
+      hashtagCollection.resetToDefaultHashtags();
       nextState = {
         userId: action.payload.profile.userId,
         notes: [],
+        hashtags: hashtagCollection.hashtagsSortedByCount,
         errorMessage: "",
         fetching: true,
       };
       break;
     }
     case NOTES_FETCH_DID_SUCCEED: {
+      const { notes, profile } = action.payload;
+      hashtagCollection.reloadHashtagsForObjectsWithText({
+        objectsWithText: notes,
+        textPropertyName: "messageText",
+      });
       nextState = {
-        userId: action.payload.profile.userId,
-        notes: action.payload.notes,
+        userId: profile.userId,
+        notes,
+        hashtags: hashtagCollection.hashtagsSortedByCount,
         errorMessage: "",
         fetching: false,
       };
@@ -44,6 +60,7 @@ function notesFetch(state = initialState, action) {
       nextState = {
         userId: action.payload.profile.userId,
         notes: [],
+        hashtags: hashtagCollection.hashtagsSortedByCount,
         errorMessage: action.payload.errorMessage,
         fetching: false,
       };
@@ -54,9 +71,14 @@ function notesFetch(state = initialState, action) {
       if (profile.userId === state.userId) {
         const sortedNotes = [note, ...state.notes];
         sortedNotes.sort((note1, note2) => note2.timestamp - note1.timestamp);
+        hashtagCollection.updateHashtagsForText({
+          objectWithTextToAdd: note,
+          textPropertyName: "messageText",
+        });
         nextState = {
           userId: profile.userId,
           notes: sortedNotes,
+          hashtags: hashtagCollection.hashtagsSortedByCount,
           errorMessage: "",
           fetching: false,
         };
@@ -70,7 +92,7 @@ function notesFetch(state = initialState, action) {
       break;
     }
     case NOTES_FETCH_UPDATE_NOTE: {
-      const { profile, note } = action.payload;
+      const { profile, note, originalNote } = action.payload;
       if (profile.userId === state.userId) {
         const noteIndex = state.notes.findIndex(
           subjectNote => subjectNote.id === note.id
@@ -82,9 +104,15 @@ function notesFetch(state = initialState, action) {
             ...state.notes.slice(noteIndex + 1),
           ];
           sortedNotes.sort((note1, note2) => note2.timestamp - note1.timestamp);
+          hashtagCollection.updateHashtagsForText({
+            objectWithTextToRemove: originalNote,
+            objectWithTextToAdd: note,
+            textPropertyName: "messageText",
+          });
           nextState = {
             userId: profile.userId,
             notes: sortedNotes,
+            hashtags: hashtagCollection.hashtagsSortedByCount,
             errorMessage: "",
             fetching: false,
           };
@@ -113,9 +141,14 @@ function notesFetch(state = initialState, action) {
             ...state.notes.slice(0, noteIndex),
             ...state.notes.slice(noteIndex + 1),
           ];
+          hashtagCollection.updateHashtagsForText({
+            objectWithTextToRemove: note,
+            textPropertyName: "messageText",
+          });
           nextState = {
             userId: profile.userId,
             notes: sortedNotes,
+            hashtags: hashtagCollection.hashtagsSortedByCount,
             errorMessage: "",
             fetching: false,
           };

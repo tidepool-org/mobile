@@ -5,6 +5,7 @@ import faker from "faker";
 
 import StoryContainerScreen from "../../__stories__/utils/StoryContainerScreen";
 import AddOrEditNoteScreen from "../../src/screens/AddOrEditNoteScreen";
+import HashtagCollection from "../../src/utils/HashtagCollection";
 
 faker.seed(123);
 
@@ -21,6 +22,8 @@ const note = {
     "{{lorem.paragraph}}"
   )}`,
 };
+const hashtagCollection = new HashtagCollection();
+const hashtags = hashtagCollection.hashtagsSortedByCount;
 const navigateGoBack = () => {};
 const noteUpdateAsync = () => {};
 const noteAddAsync = () => {};
@@ -34,6 +37,7 @@ storiesOf("AddOrEditNoteScreen", module).add("Add", () => (
       currentUser={currentProfile}
       currentProfile={currentProfile}
       timestampAddNote={timestampAddNote}
+      hashtags={hashtags}
     />
   </StoryContainerScreen>
 ));
@@ -47,6 +51,7 @@ storiesOf("AddOrEditNoteScreen", module).add("Edit", () => (
       currentUser={currentProfile}
       currentProfile={currentProfile}
       note={note}
+      hashtags={hashtags}
     />
   </StoryContainerScreen>
 ));
