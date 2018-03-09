@@ -577,22 +577,13 @@ class AddOrEditNoteScreen extends PureComponent {
     );
   }
 
+  // FIXME: Looks like ejected app still has about a 20 pixel clipping issue with keyboard on Android, possibly related to status bar height? Or something else? Non-ejected Expo app for Android doesn’t have this issue, neither does iOS. Still need to track this issue. It's probably not a super common case. Need a reasonably long note to notice this. And can still work around it.
   renderNote() {
-    // FIXME: Need to revisit this. If flex is not null here all the time for Android then we have weird layout.
-    let flex = 1;
-    if (Platform.OS === "ios" && this.state.isKeyboardVisible) {
-      flex = null;
-    } else if (Platform.OS === "android") {
-      flex = null;
-    }
-    flex = null; // TODO:  - revisit
-
     return (
       <glamorous.TextInput
         innerRef={textInput => {
           this.textInput = textInput;
         }}
-        flex={flex}
         style={this.theme.notesListItemTextStyle}
         paddingTop={7}
         paddingLeft={16}
@@ -600,7 +591,6 @@ class AddOrEditNoteScreen extends PureComponent {
         paddingBottom={7}
         allowFontScaling={false}
         multiline
-        autoGrow={false}
         selectionColor="#657ef6"
         underlineColorAndroid="transparent"
         autoCapitalize="sentences"
