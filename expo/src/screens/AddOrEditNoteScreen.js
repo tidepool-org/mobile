@@ -141,6 +141,8 @@ class AddOrEditNoteScreen extends PureComponent {
       if (secondPartAfterHashtag.charAt(0).trim().length > 0) {
         rightSpaceAfterHashtag = " ";
       }
+    } else {
+      rightSpaceAfterHashtag = " ";      
     }
     const messageText = `${firstPartBeforeHashtag}${leftSpaceBeforeHashtag}${hashtag}${rightSpaceAfterHashtag}${secondPartAfterHashtag}`;
     this.setState(prevState => ({
