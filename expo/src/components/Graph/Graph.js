@@ -7,6 +7,7 @@ import GraphFixedLayoutInfo from "./GraphFixedLayoutInfo";
 import GraphScalableLayoutInfo from "./GraphScalableLayoutInfo";
 import GraphYAxisLabels from "./GraphYAxisLabels";
 import GraphYAxisBGBoundaryLines from "./GraphYAxisBGBoundaryLines";
+import GraphNoData from "./GraphNoData";
 import GraphScrollable from "./GraphScrollable";
 
 class Graph extends Component {
@@ -52,6 +53,31 @@ class Graph extends Component {
           />
         </glamorous.View>
       );
+    }
+
+    return null;
+  }
+
+  renderNoData() {
+    if (this.state.graphFixedLayoutInfo.width) {
+      const { loading, navigateHowToUpload } = this.props;
+
+      if (!loading) {
+        return (
+          <glamorous.View
+            position="absolute"
+            pointerEvents="box-none"
+            top={this.state.graphFixedLayoutInfo.headerHeight}
+            height={this.state.graphFixedLayoutInfo.graphLayerHeight}
+            width={this.state.graphFixedLayoutInfo.width}
+          >
+            <GraphNoData
+              graphFixedLayoutInfo={this.state.graphFixedLayoutInfo}
+              navigateHowToUpload={navigateHowToUpload}
+            />
+          </glamorous.View>
+        );
+      }
     }
 
     return null;
@@ -144,6 +170,7 @@ class Graph extends Component {
         {this.renderFixedYAxisLabels()}
         {this.renderFixedYAxisBGBoundaryLines()}
         {this.renderGraphScrollable()}
+        {this.renderNoData()}
         {this.renderLoading()}
       </glamorous.View>
     );
@@ -155,6 +182,7 @@ Graph.propTypes = {
   yAxisLabelValues: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
   yAxisBGBoundaryValues: PropTypes.arrayOf(PropTypes.number.isRequired)
     .isRequired,
+  navigateHowToUpload: PropTypes.func.isRequired,
 };
 
 export default Graph;
