@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
-import { SafeAreaView, View } from "react-native";
+import { SafeAreaView, Platform, StatusBar, View } from "react-native";
 
 import Fonts from "../../src/constants/Fonts";
 import withThemeProvider from "../../src/enhancers/withThemeProvider";
@@ -18,9 +18,11 @@ class StoryContainerComponent extends PureComponent {
   render() {
     const { children, behaviors } = this.props;
 
+    const paddingTop = Platform.OS === "android" ? StatusBar.currentHeight : 0;
+
     const enhanced = withThemeProvider(
       withExpoFontPreload(() => children, Fonts),
-      PrimaryTheme,
+      PrimaryTheme
     );
 
     const shouldCenter = behaviors.includes("center");
@@ -43,7 +45,7 @@ class StoryContainerComponent extends PureComponent {
 
     return (
       <Provider store={store}>
-        <SafeAreaView style={safeAreaViewStyle}>
+        <SafeAreaView style={safeAreaViewStyle} paddingTop={paddingTop}>
           <View style={containerStyle}>{enhanced()}</View>
         </SafeAreaView>
       </Provider>

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
-import { SafeAreaView } from "react-native";
+import { SafeAreaView, Platform, StatusBar, View } from "react-native";
 
 import Fonts from "../../src/constants/Fonts";
 import withThemeProvider from "../../src/enhancers/withThemeProvider";
@@ -18,13 +18,17 @@ class StoryContainerScreen extends PureComponent {
   render() {
     const { children } = this.props;
 
+    const paddingTop = Platform.OS === "android" ? StatusBar.currentHeight : 0;
+
     const enhanced = withThemeProvider(
       withExpoFontPreload(() => children, Fonts),
       PrimaryTheme
     );
     return (
       <Provider store={store}>
-        <SafeAreaView style={{ flex: 1 }}>{enhanced()}</SafeAreaView>
+        <SafeAreaView style={{ flex: 1, paddingTop }}>
+          {enhanced()}
+        </SafeAreaView>
       </Provider>
     );
   }
