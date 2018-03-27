@@ -22,6 +22,7 @@ import {
   NAVIGATE_SIGN_IN,
   NAVIGATE_SIGN_UP,
   NAVIGATE_FORGOT_PASSWORD,
+  NAVIGATE_HOW_TO_UPLOAD,
   NAVIGATE_SWITCH_PROFILE,
   NAVIGATE_ADD_NOTE,
   NAVIGATE_EDIT_NOTE,
@@ -176,6 +177,9 @@ function navigation(state = initialState, action) {
       break;
     case NAVIGATE_SIGN_UP:
       Linking.openURL(Urls.signUp);
+      break;
+    case NAVIGATE_HOW_TO_UPLOAD:
+      Linking.openURL(Urls.howToUpload);
       break;
     case NAVIGATE_DRAWER_OPEN:
       nextState = AppNavigator.router.getStateForAction(

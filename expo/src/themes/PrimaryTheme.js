@@ -150,6 +150,14 @@ const PrimaryTheme = {
     color: "#58595b",
     ...FontStyles.smallRegularFont,
   },
+  graphNoDataLabelStyle: {
+    color: Colors.mediumLightGrey,
+    ...FontStyles.smallRegularFont,
+  },
+  graphHowToUploadLabelStyle: {
+    color: Colors.brightBlue,
+    ...FontStyles.smallRegularFont,
+  },
   graphDashedLineStrokeColor: "#e2e4e7",
 };
 

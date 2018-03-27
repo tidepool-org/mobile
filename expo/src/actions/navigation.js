@@ -3,6 +3,7 @@ export const NAVIGATE_HOME = "NAVIGATE_HOME";
 export const NAVIGATE_SIGN_IN = "NAVIGATE_SIGN_IN";
 export const NAVIGATE_SIGN_UP = "NAVIGATE_SIGN_UP";
 export const NAVIGATE_FORGOT_PASSWORD = "NAVIGATE_FORGOT_PASSWORD";
+export const NAVIGATE_HOW_TO_UPLOAD = "NAVIGATE_HOW_TO_UPLOAD";
 export const NAVIGATE_SWITCH_PROFILE = "NAVIGATE_SWITCH_PROFILE";
 export const NAVIGATE_ADD_NOTE = "NAVIGATE_ADD_NOTE";
 export const NAVIGATE_EDIT_NOTE = "NAVIGATE_EDIT_NOTE";
@@ -33,6 +34,10 @@ export function navigateSignUp() {
 
 export function navigateForgotPassword() {
   return { type: NAVIGATE_FORGOT_PASSWORD };
+}
+
+export function navigateHowToUpload() {
+  return { type: NAVIGATE_HOW_TO_UPLOAD };
 }
 
 export function navigateSwitchProfile() {
