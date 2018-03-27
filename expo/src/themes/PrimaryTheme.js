@@ -146,6 +146,11 @@ const PrimaryTheme = {
     padding: 4,
     ...FontStyles.mediumRegularFont,
   },
+  graphYAxisLabelStyle: {
+    color: "#58595b",
+    ...FontStyles.smallRegularFont,
+  },
+  graphDashedLineStrokeColor: "#e2e4e7",
 };
 
 export default PrimaryTheme;
