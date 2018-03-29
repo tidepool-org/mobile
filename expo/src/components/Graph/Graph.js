@@ -14,9 +14,11 @@ class Graph extends Component {
   constructor(props) {
     super(props);
 
+    const { scale } = props;
     const graphFixedLayoutInfo = new GraphFixedLayoutInfo({});
     const graphScalableLayoutInfo = new GraphScalableLayoutInfo({
       graphFixedLayoutInfo,
+      scale,
     });
     this.state = {
       graphFixedLayoutInfo,
@@ -25,6 +27,7 @@ class Graph extends Component {
   }
 
   onContainerViewLayout = event => {
+    const { scale } = this.props;
     const { layout } = event.nativeEvent;
     const graphFixedLayoutInfo = new GraphFixedLayoutInfo({
       width: layout.width,
@@ -32,6 +35,7 @@ class Graph extends Component {
     });
     const graphScalableLayoutInfo = new GraphScalableLayoutInfo({
       graphFixedLayoutInfo,
+      scale,
     });
     this.setState({ graphFixedLayoutInfo, graphScalableLayoutInfo });
   };
@@ -45,6 +49,7 @@ class Graph extends Component {
           style={{ ...StyleSheet.absoluteFillObject }}
           justifyContent="center"
           alignItems="center"
+          pointerEvents="none"
         >
           <glamorous.Image
             width={248}
@@ -182,7 +187,12 @@ Graph.propTypes = {
   yAxisLabelValues: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
   yAxisBGBoundaryValues: PropTypes.arrayOf(PropTypes.number.isRequired)
     .isRequired,
+  scale: PropTypes.number,
   navigateHowToUpload: PropTypes.func.isRequired,
+};
+
+Graph.defaultProps = {
+  scale: 2.5,
 };
 
 export default Graph;

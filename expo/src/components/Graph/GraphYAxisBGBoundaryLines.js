@@ -25,12 +25,11 @@ class GraphYAxisBGBoundaryLines extends Component {
       <Svg.Path
         key={value}
         d={d}
-        stroke={theme.graphDashedLineStrokeColor}
+        stroke={theme.graphLineStrokeColor}
         strokeDasharray="2, 5"
         strokeLinecap="square"
         strokeLineJoin="round"
         strokeWidth="1.5"
-        fillRule="evenodd"
       />
     );
   }

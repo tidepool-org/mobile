@@ -23,24 +23,55 @@ const props = {
   navigateHowToUpload,
 };
 
-storiesOf("Graph", module).add("loading", () => (
+storiesOf("Graph", module).add("loading, default scale", () => (
   <StoryContainerComponent behaviors={[]}>
     <Graph {...props} loading />
   </StoryContainerComponent>
 ));
 
-storiesOf("Graph", module).add("no data, three y-axis labels", () => (
-  <StoryContainerComponent behaviors={[]}>
-    <Graph {...props} />
-  </StoryContainerComponent>
-));
+storiesOf("Graph", module).add(
+  "no data, three y-axis labels, default scale",
+  () => (
+    <StoryContainerComponent behaviors={[]}>
+      <Graph {...props} />
+    </StoryContainerComponent>
+  )
+);
 
-storiesOf("Graph", module).add("no data, four y-axis labels", () => (
+storiesOf("Graph", module).add(
+  "no data, four y-axis labels, default scale",
+  () => (
+    <StoryContainerComponent behaviors={[]}>
+      <Graph
+        {...props}
+        yAxisLabelValues={makeYAxisLabelValues({ low: 90, high: 150 })}
+        yAxisBGBoundaryValues={makeYAxisBGBoundaryValues({
+          low: 90,
+          high: 150,
+        })}
+      />
+    </StoryContainerComponent>
+  )
+);
+
+storiesOf("Graph", module).add("no data, four y-axis labels, 1.0 scale", () => (
   <StoryContainerComponent behaviors={[]}>
     <Graph
       {...props}
       yAxisLabelValues={makeYAxisLabelValues({ low: 90, high: 150 })}
       yAxisBGBoundaryValues={makeYAxisBGBoundaryValues({ low: 90, high: 150 })}
+      scale={1.0}
+    />
+  </StoryContainerComponent>
+));
+
+storiesOf("Graph", module).add("no data, four y-axis labels, max scale", () => (
+  <StoryContainerComponent behaviors={[]}>
+    <Graph
+      {...props}
+      yAxisLabelValues={makeYAxisLabelValues({ low: 90, high: 150 })}
+      yAxisBGBoundaryValues={makeYAxisBGBoundaryValues({ low: 90, high: 150 })}
+      scale={100.0}
     />
   </StoryContainerComponent>
 ));
