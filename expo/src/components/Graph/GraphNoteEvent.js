@@ -32,7 +32,6 @@ class GraphNoteEvent extends Component {
             strokeLinecap="square"
             strokeLineJoin="round"
             strokeWidth="1.5"
-            fillRule="evenodd"
           />
           <Svg.Polygon
             points={trianglePoints}

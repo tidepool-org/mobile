@@ -1,27 +1,140 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Svg } from "expo";
-import glamorous from "glamorous-native";
+import glamorous, { withTheme } from "glamorous-native";
+import format from "date-fns/format";
+import addSeconds from "date-fns/add_seconds";
 
-// TODO: graph - x axis .. need to calc width .. and handle +/- 6 hours for zoomed out and +/- 1 hour(?) for zoom in
-// TODO: graph - tick marks and how often they should go (e.g. every 15 minutes, every hour, every two hours, etc). Add an x-axis component to draw these
+import { ThemePropType } from "../../prop-types/theme";
 
 class GraphXAxisHeader extends Component {
+  calculateTimeMarkers() {
+    const result = {
+      markerXCoordinates: [],
+      markerLengths: [],
+      markerLabels: [],
+    };
+
+    const {
+      graphScalableLayoutInfo: {
+        startTime,
+        secondsPerTick,
+        pixelsPerSecond,
+        pixelsPerTick,
+        scaledContentWidth,
+      },
+    } = this.props;
+    const startTimeSeconds = startTime.getTime() / 1000;
+    const nextTickBoundarySeconds =
+      Math.floor(startTimeSeconds / secondsPerTick) * secondsPerTick;
+    const timeOffset = nextTickBoundarySeconds - startTimeSeconds;
+
+    let xOffset = Math.floor(timeOffset * pixelsPerSecond);
+    let currentDate = new Date(nextTickBoundarySeconds * 1000);
+    do {
+      let formattedDate = format(currentDate, "h:mm a");
+      formattedDate = formattedDate.replace("am", "a");
+      formattedDate = formattedDate.replace("pm", "p");
+      formattedDate = formattedDate.replace(":00", "");
+      // const isMidnight = formattedDate === "12 a"; // TODO: graph - use same midnight marker line and label treatment as Tidepool Mobile 2.x
+
+      const markerLength = 8.0; // isMidnight ? layout.headerHeight : 8.0
+      result.markerXCoordinates.push(xOffset);
+      result.markerLengths.push(markerLength);
+      result.markerLabels.push(formattedDate);
+
+      currentDate = addSeconds(currentDate, secondsPerTick);
+      xOffset += pixelsPerTick;
+    } while (xOffset < scaledContentWidth);
+
+    return result;
+  }
+
+  renderTimeMarkerTicks({ markerXCoordinates, markerLengths }) {
+    const {
+      theme,
+      graphScalableLayoutInfo: { graphFixedLayoutInfo: { headerHeight } },
+    } = this.props;
+
+    const paths = [];
+    for (let i = 0; i < markerXCoordinates.length; i += 1) {
+      const verticalLinePathDescription = `M${
+        markerXCoordinates[i]
+      } ${headerHeight - markerLengths[i]} L${
+        markerXCoordinates[i]
+      } ${headerHeight}`;
+      paths.push(
+        <Svg.Path
+          key={i}
+          d={verticalLinePathDescription}
+          stroke={theme.graphLineStrokeColor}
+          strokeWidth="1.5"
+        />
+      );
+    }
+    return paths;
+  }
+
+  renderTimeMarkerLabel({ width, left, top, markerLabel }) {
+    const { theme } = this.props;
+
+    return (
+      <glamorous.Text
+        key={left}
+        allowFontScaling={false}
+        position="absolute"
+        pointerEvents="none"
+        left={left}
+        top={top}
+        style={theme.graphYAxisLabelStyle}
+        width={width}
+        textAlign="center"
+      >
+        {markerLabel}
+      </glamorous.Text>
+    );
+  }
+
+  renderTimeMarkerLabels({ markerLabels, markerXCoordinates }) {
+    const result = [];
+    for (let i = 0; i < markerXCoordinates.length; i += 1) {
+      const markerLabel = markerLabels[i];
+      const width = 50;
+      const left = markerXCoordinates[i] - width / 2;
+      const top = 0;
+      result.push(
+        this.renderTimeMarkerLabel({ width, left, top, markerLabel })
+      );
+    }
+    return result;
+  }
+
   render() {
     const {
       graphFixedLayoutInfo: { headerHeight },
       scaledContentWidth,
-      eventTime,
-      startTime,
-      pixelsPerSecond,
     } = this.props.graphScalableLayoutInfo;
 
-    return null;
+    const {
+      markerXCoordinates,
+      markerLengths,
+      markerLabels,
+    } = this.calculateTimeMarkers();
+
+    return (
+      <glamorous.View>
+        <Svg height={headerHeight} width={scaledContentWidth}>
+          {this.renderTimeMarkerTicks({ markerXCoordinates, markerLengths })}
+        </Svg>
+        {this.renderTimeMarkerLabels({ markerXCoordinates, markerLabels })}
+      </glamorous.View>
+    );
   }
 }
 
 GraphXAxisHeader.propTypes = {
+  theme: ThemePropType.isRequired,
   graphScalableLayoutInfo: PropTypes.object.isRequired,
 };
 
-export default GraphXAxisHeader;
+export default withTheme(GraphXAxisHeader);

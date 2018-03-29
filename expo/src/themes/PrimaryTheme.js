@@ -158,7 +158,7 @@ const PrimaryTheme = {
     color: Colors.brightBlue,
     ...FontStyles.smallRegularFont,
   },
-  graphDashedLineStrokeColor: "#e2e4e7",
+  graphLineStrokeColor: "#e2e4e7",
 };
 
 export default PrimaryTheme;
