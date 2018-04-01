@@ -9,6 +9,9 @@ import GraphYAxisLabels from "./GraphYAxisLabels";
 import GraphYAxisBGBoundaryLines from "./GraphYAxisBGBoundaryLines";
 import GraphNoData from "./GraphNoData";
 import GraphScrollable from "./GraphScrollable";
+import GraphZoom from "./GraphZoom";
+
+// TODO: graph - need to preserve the middle time position in the middle of the viewport when re-rendering when changing scale
 
 class Graph extends Component {
   constructor(props) {
@@ -23,11 +26,12 @@ class Graph extends Component {
     this.state = {
       graphFixedLayoutInfo,
       graphScalableLayoutInfo,
+      scale,
     };
   }
 
   onContainerViewLayout = event => {
-    const { scale } = this.props;
+    const { scale } = this.state;
     const { layout } = event.nativeEvent;
     const graphFixedLayoutInfo = new GraphFixedLayoutInfo({
       width: layout.width,
@@ -38,6 +42,27 @@ class Graph extends Component {
       scale,
     });
     this.setState({ graphFixedLayoutInfo, graphScalableLayoutInfo });
+  };
+
+  onZoomMove = scale => {
+    const graphScalableLayoutInfo = new GraphScalableLayoutInfo({
+      graphFixedLayoutInfo: this.state.graphFixedLayoutInfo,
+      scale: this.state.scale * scale,
+    });
+    this.setState({
+      graphScalableLayoutInfo,
+    });
+  };
+
+  onZoomEnd = scale => {
+    const graphScalableLayoutInfo = new GraphScalableLayoutInfo({
+      graphFixedLayoutInfo: this.state.graphFixedLayoutInfo,
+      scale: this.state.scale * scale,
+    });
+    this.setState({
+      graphScalableLayoutInfo,
+      scale: graphScalableLayoutInfo.scale, // Use the constrained scale from the new GraphScalableLayoutInfo
+    });
   };
 
   renderLoading() {
@@ -64,89 +89,97 @@ class Graph extends Component {
   }
 
   renderNoData() {
-    if (this.state.graphFixedLayoutInfo.width) {
-      const { loading, navigateHowToUpload } = this.props;
+    const { loading, navigateHowToUpload } = this.props;
 
-      if (!loading) {
-        return (
-          <glamorous.View
-            position="absolute"
-            pointerEvents="box-none"
-            top={this.state.graphFixedLayoutInfo.headerHeight}
-            height={this.state.graphFixedLayoutInfo.graphLayerHeight}
-            width={this.state.graphFixedLayoutInfo.width}
-          >
-            <GraphNoData
-              graphFixedLayoutInfo={this.state.graphFixedLayoutInfo}
-              navigateHowToUpload={navigateHowToUpload}
-            />
-          </glamorous.View>
-        );
-      }
+    if (!loading) {
+      return (
+        <glamorous.View
+          position="absolute"
+          pointerEvents="box-none"
+          top={this.state.graphFixedLayoutInfo.headerHeight}
+          height={this.state.graphFixedLayoutInfo.graphLayerHeight}
+          width={this.state.graphFixedLayoutInfo.width}
+        >
+          <GraphNoData
+            graphFixedLayoutInfo={this.state.graphFixedLayoutInfo}
+            navigateHowToUpload={navigateHowToUpload}
+          />
+        </glamorous.View>
+      );
     }
 
     return null;
   }
 
   renderFixedYAxisLabels() {
-    if (this.state.graphFixedLayoutInfo.width) {
-      const { yAxisLabelValues } = this.props;
-      const { graphFixedLayoutInfo } = this.state;
+    const { yAxisLabelValues } = this.props;
+    const { graphFixedLayoutInfo } = this.state;
 
-      return (
-        <glamorous.View
-          position="absolute"
-          pointerEvents="none"
-          top={this.state.graphFixedLayoutInfo.headerHeight}
-          width={25}
-          height={this.state.graphFixedLayoutInfo.graphLayerHeight}
-          backgroundColor="transparent"
-        >
-          <GraphYAxisLabels
-            yAxisLabelValues={yAxisLabelValues}
-            graphFixedLayoutInfo={graphFixedLayoutInfo}
-          />
-        </glamorous.View>
-      );
-    }
-
-    return null;
+    return (
+      <glamorous.View
+        position="absolute"
+        pointerEvents="none"
+        top={this.state.graphFixedLayoutInfo.headerHeight}
+        width={25}
+        height={this.state.graphFixedLayoutInfo.graphLayerHeight}
+        backgroundColor="transparent"
+      >
+        <GraphYAxisLabels
+          yAxisLabelValues={yAxisLabelValues}
+          graphFixedLayoutInfo={graphFixedLayoutInfo}
+        />
+      </glamorous.View>
+    );
   }
 
   renderFixedYAxisBGBoundaryLines() {
-    if (this.state.graphFixedLayoutInfo.width) {
-      const { yAxisBGBoundaryValues } = this.props;
-      const { graphFixedLayoutInfo } = this.state;
+    const { yAxisBGBoundaryValues } = this.props;
+    const { graphFixedLayoutInfo } = this.state;
 
-      return (
-        <glamorous.View
-          position="absolute"
-          pointerEvents="none"
-          top={this.state.graphFixedLayoutInfo.headerHeight}
-          height={this.state.graphFixedLayoutInfo.graphLayerHeight}
-        >
-          <GraphYAxisBGBoundaryLines
-            yAxisBGBoundaryValues={yAxisBGBoundaryValues}
-            graphFixedLayoutInfo={graphFixedLayoutInfo}
-          />
-        </glamorous.View>
-      );
-    }
-
-    return null;
+    return (
+      <glamorous.View
+        position="absolute"
+        pointerEvents="none"
+        top={this.state.graphFixedLayoutInfo.headerHeight}
+        height={this.state.graphFixedLayoutInfo.graphLayerHeight}
+      >
+        <GraphYAxisBGBoundaryLines
+          yAxisBGBoundaryValues={yAxisBGBoundaryValues}
+          graphFixedLayoutInfo={graphFixedLayoutInfo}
+        />
+      </glamorous.View>
+    );
   }
 
   renderFixedBackground() {
-    if (this.state.graphFixedLayoutInfo.width) {
+    return (
+      <glamorous.View
+        position="absolute"
+        pointerEvents="none"
+        top={this.state.graphFixedLayoutInfo.headerHeight}
+        width={this.state.graphFixedLayoutInfo.width}
+        height={this.state.graphFixedLayoutInfo.graphLayerHeight}
+        backgroundColor="#f6f6f6"
+      />
+    );
+  }
+
+  renderGraphZoom() {
+    const { graphScalableLayoutInfo, graphFixedLayoutInfo } = this.state;
+    if (graphScalableLayoutInfo.scaledContentWidth) {
       return (
-        <glamorous.View
-          position="absolute"
-          pointerEvents="none"
-          top={this.state.graphFixedLayoutInfo.headerHeight}
-          width={this.state.graphFixedLayoutInfo.width}
-          height={this.state.graphFixedLayoutInfo.graphLayerHeight}
-          backgroundColor="#f6f6f6"
-        />
+        <GraphZoom
+          graphFixedLayoutInfo={graphFixedLayoutInfo}
+          onZoomMove={this.onZoomMove}
+          onZoomEnd={this.onZoomEnd}
+        >
+          {this.renderFixedBackground()}
+          {this.renderFixedYAxisLabels()}
+          {this.renderFixedYAxisBGBoundaryLines()}
+          {this.renderGraphScrollable()}
+          {this.renderNoData()}
+          {this.renderLoading()}
+        </GraphZoom>
       );
     }
 
@@ -154,29 +187,20 @@ class Graph extends Component {
   }
 
   renderGraphScrollable() {
-    if (this.state.graphScalableLayoutInfo.scaledContentWidth) {
-      const { loading } = this.props;
-      const { graphScalableLayoutInfo } = this.state;
-      return (
-        <GraphScrollable
-          loading={loading}
-          graphScalableLayoutInfo={graphScalableLayoutInfo}
-        />
-      );
-    }
-
-    return null;
+    const { loading } = this.props;
+    const { graphScalableLayoutInfo } = this.state;
+    return (
+      <GraphScrollable
+        loading={loading}
+        graphScalableLayoutInfo={graphScalableLayoutInfo}
+      />
+    );
   }
 
   render() {
     return (
       <glamorous.View height={180} onLayout={this.onContainerViewLayout}>
-        {this.renderFixedBackground()}
-        {this.renderFixedYAxisLabels()}
-        {this.renderFixedYAxisBGBoundaryLines()}
-        {this.renderGraphScrollable()}
-        {this.renderNoData()}
-        {this.renderLoading()}
+        {this.renderGraphZoom()}
       </glamorous.View>
     );
   }
