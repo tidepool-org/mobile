@@ -2,6 +2,7 @@
 
 exports[`Storyshots NotesListItemComment default 1`] = `
 <RCTSafeAreaView
+  paddingTop={0}
   style={
     Object {
       "alignItems": "center",
@@ -270,6 +271,7 @@ exports[`Storyshots NotesListItemComment default 1`] = `
 
 exports[`Storyshots NotesListItemComment long user full name 1`] = `
 <RCTSafeAreaView
+  paddingTop={0}
   style={
     Object {
       "alignItems": "center",

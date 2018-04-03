@@ -2,6 +2,7 @@
 
 exports[`Storyshots VersionAndApiEnvironment Production 1`] = `
 <RCTSafeAreaView
+  paddingTop={0}
   style={
     Object {
       "alignItems": "center",
@@ -56,6 +57,7 @@ exports[`Storyshots VersionAndApiEnvironment Production 1`] = `
 
 exports[`Storyshots VersionAndApiEnvironment Staging 1`] = `
 <RCTSafeAreaView
+  paddingTop={0}
   style={
     Object {
       "alignItems": "center",

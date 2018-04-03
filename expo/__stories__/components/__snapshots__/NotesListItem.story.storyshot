@@ -2,6 +2,7 @@
 
 exports[`Storyshots NotesListItem default 1`] = `
 <RCTSafeAreaView
+  paddingTop={0}
   style={
     Object {
       "alignItems": "center",
@@ -172,6 +173,7 @@ exports[`Storyshots NotesListItem default 1`] = `
 
 exports[`Storyshots NotesListItem initially expanded 1`] = `
 <RCTSafeAreaView
+  paddingTop={0}
   style={
     Object {
       "alignItems": "center",
@@ -1004,6 +1006,7 @@ exports[`Storyshots NotesListItem initially expanded 1`] = `
 
 exports[`Storyshots NotesListItem today 1`] = `
 <RCTSafeAreaView
+  paddingTop={0}
   style={
     Object {
       "alignItems": "center",
@@ -1174,6 +1177,7 @@ exports[`Storyshots NotesListItem today 1`] = `
 
 exports[`Storyshots NotesListItem yesterday 1`] = `
 <RCTSafeAreaView
+  paddingTop={0}
   style={
     Object {
       "alignItems": "center",

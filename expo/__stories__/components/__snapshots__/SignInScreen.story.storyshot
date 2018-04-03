@@ -5,6 +5,7 @@ exports[`Storyshots SignInScreen Sign in error 1`] = `
   style={
     Object {
       "flex": 1,
+      "paddingTop": 0,
     }
   }
 >
@@ -485,6 +486,7 @@ exports[`Storyshots SignInScreen Signing in 1`] = `
   style={
     Object {
       "flex": 1,
+      "paddingTop": 0,
     }
   }
 >
@@ -978,6 +980,7 @@ exports[`Storyshots SignInScreen default 1`] = `
   style={
     Object {
       "flex": 1,
+      "paddingTop": 0,
     }
   }
 >
