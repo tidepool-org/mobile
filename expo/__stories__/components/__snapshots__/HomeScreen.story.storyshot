@@ -5,6 +5,7 @@ exports[`Storyshots HomeScreen default 1`] = `
   style={
     Object {
       "flex": 1,
+      "paddingTop": 0,
     }
   }
 >

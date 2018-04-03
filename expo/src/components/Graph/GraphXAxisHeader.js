@@ -17,17 +17,16 @@ class GraphXAxisHeader extends Component {
 
     const {
       graphScalableLayoutInfo: {
-        startTime,
+        graphStartTimeSeconds,
         secondsPerTick,
         pixelsPerSecond,
         pixelsPerTick,
         scaledContentWidth,
       },
     } = this.props;
-    const startTimeSeconds = startTime.getTime() / 1000;
     const nextTickBoundarySeconds =
-      Math.floor(startTimeSeconds / secondsPerTick) * secondsPerTick;
-    const timeOffset = nextTickBoundarySeconds - startTimeSeconds;
+      Math.floor(graphStartTimeSeconds / secondsPerTick) * secondsPerTick;
+    const timeOffset = nextTickBoundarySeconds - graphStartTimeSeconds;
 
     let xOffset = Math.floor(timeOffset * pixelsPerSecond);
     let currentDate = new Date(nextTickBoundarySeconds * 1000);

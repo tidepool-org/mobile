@@ -11,8 +11,6 @@ import GraphNoData from "./GraphNoData";
 import GraphScrollable from "./GraphScrollable";
 import GraphZoom from "./GraphZoom";
 
-// TODO: graph - need to preserve the middle time position in the middle of the viewport when re-rendering when changing scale
-
 class Graph extends Component {
   constructor(props) {
     super(props);
@@ -51,6 +49,7 @@ class Graph extends Component {
     });
     this.setState({
       graphScalableLayoutInfo,
+      isZooming: true,
     });
   };
 
@@ -62,6 +61,7 @@ class Graph extends Component {
     this.setState({
       graphScalableLayoutInfo,
       scale: graphScalableLayoutInfo.scale, // Use the constrained scale from the new GraphScalableLayoutInfo
+      isZooming: false,
     });
   };
 
@@ -188,11 +188,12 @@ class Graph extends Component {
 
   renderGraphScrollable() {
     const { loading } = this.props;
-    const { graphScalableLayoutInfo } = this.state;
+    const { graphScalableLayoutInfo, isZooming } = this.state;
     return (
       <GraphScrollable
         loading={loading}
         graphScalableLayoutInfo={graphScalableLayoutInfo}
+        isZooming={isZooming}
       />
     );
   }

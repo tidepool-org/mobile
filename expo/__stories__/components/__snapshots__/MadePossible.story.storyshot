@@ -2,6 +2,7 @@
 
 exports[`Storyshots MadePossibleBy default 1`] = `
 <RCTSafeAreaView
+  paddingTop={0}
   style={
     Object {
       "alignItems": "center",

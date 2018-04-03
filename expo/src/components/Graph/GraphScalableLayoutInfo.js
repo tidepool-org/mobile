@@ -1,10 +1,7 @@
-import addSeconds from "date-fns/add_seconds";
 import subSeconds from "date-fns/sub_seconds";
 
-// TODO: graph - ideally use same zoom level when editing the note?? .. persist it in the state tree
 // TODO: graph - only load/render data that is visible based on scroll position? Consider tiling views like Tidepool Mobile 2.x did?
 // TODO: graph - offscreen labels render fine, and are revealed when user tries to scroll beyond bounds, but, the tick marks are clipped / not rendered
-// TODO: graph - add pinch to zoom .. constrain scale!
 
 class GraphScalableLayoutInfo {
   constructor({
@@ -41,12 +38,14 @@ class GraphScalableLayoutInfo {
       constrainedScale * graphFixedLayoutInfo.width
     );
     this.eventTime = eventTime;
-    this.startTime = subSeconds(eventTime, timeIntervalSeconds / 2);
-    this.endTime = addSeconds(eventTime, timeIntervalSeconds / 2);
+    this.eventTimeSeconds = this.eventTime.getTime() / 1000;
+    this.graphStartTime = subSeconds(eventTime, timeIntervalSeconds / 2);
+    this.graphStartTimeSeconds = this.graphStartTime.getTime() / 1000;
     this.timeIntervalSeconds = timeIntervalSeconds;
     this.graphFixedLayoutInfo = graphFixedLayoutInfo;
     this.secondsPerPixel = this.timeIntervalSeconds / this.scaledContentWidth;
     this.secondsInGraph = this.secondsPerPixel * this.scaledContentWidth;
+    this.secondsInView = this.secondsPerPixel * graphFixedLayoutInfo.width;
     this.pixelsPerSecond = this.scaledContentWidth / this.timeIntervalSeconds;
     const {
       secondsPerTick,
@@ -73,7 +72,7 @@ class GraphScalableLayoutInfo {
       4 * 60 * 60,
       8 * 60 * 60,
     ];
-    const maxPixelsPerTick = 90;
+    const maxPixelsPerTick = 100;
     for (let i = 0; i < secondsPerTickArray.length; i += 1) {
       const secondsPerTick = secondsPerTickArray[i];
       const ticksInGraph = this.secondsInGraph / secondsPerTick;

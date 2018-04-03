@@ -5,6 +5,7 @@ exports[`Storyshots AddOrEditCommentScreen add comment 1`] = `
   style={
     Object {
       "flex": 1,
+      "paddingTop": 0,
     }
   }
 >
@@ -1050,6 +1051,7 @@ exports[`Storyshots AddOrEditCommentScreen edit comment in middle 1`] = `
   style={
     Object {
       "flex": 1,
+      "paddingTop": 0,
     }
   }
 >
@@ -2004,6 +2006,7 @@ exports[`Storyshots AddOrEditCommentScreen edit first comment 1`] = `
   style={
     Object {
       "flex": 1,
+      "paddingTop": 0,
     }
   }
 >
@@ -2958,6 +2961,7 @@ exports[`Storyshots AddOrEditCommentScreen edit last comment 1`] = `
   style={
     Object {
       "flex": 1,
+      "paddingTop": 0,
     }
   }
 >

@@ -2,6 +2,7 @@
 
 exports[`Storyshots SignInForm Sign in error 1`] = `
 <RCTSafeAreaView
+  paddingTop={0}
   style={
     Object {
       "alignItems": "center",
@@ -270,6 +271,7 @@ exports[`Storyshots SignInForm Sign in error 1`] = `
 
 exports[`Storyshots SignInForm Signing in 1`] = `
 <RCTSafeAreaView
+  paddingTop={0}
   style={
     Object {
       "alignItems": "center",
@@ -551,6 +553,7 @@ exports[`Storyshots SignInForm Signing in 1`] = `
 
 exports[`Storyshots SignInForm default 1`] = `
 <RCTSafeAreaView
+  paddingTop={0}
   style={
     Object {
       "alignItems": "center",

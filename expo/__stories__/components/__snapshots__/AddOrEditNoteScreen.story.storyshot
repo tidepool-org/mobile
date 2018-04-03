@@ -5,6 +5,7 @@ exports[`Storyshots AddOrEditNoteScreen Add 1`] = `
   style={
     Object {
       "flex": 1,
+      "paddingTop": 0,
     }
   }
 >
@@ -840,7 +841,6 @@ exports[`Storyshots AddOrEditNoteScreen Add 1`] = `
               "fontSize": 15,
             },
             Object {
-              "flex": null,
               "paddingBottom": 7,
               "paddingLeft": 16,
               "paddingRight": 16,
@@ -875,6 +875,7 @@ exports[`Storyshots AddOrEditNoteScreen Edit 1`] = `
   style={
     Object {
       "flex": 1,
+      "paddingTop": 0,
     }
   }
 >
@@ -1710,7 +1711,6 @@ exports[`Storyshots AddOrEditNoteScreen Edit 1`] = `
               "fontSize": 15,
             },
             Object {
-              "flex": null,
               "paddingBottom": 7,
               "paddingLeft": 16,
               "paddingRight": 16,

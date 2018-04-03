@@ -7,14 +7,13 @@ class GraphNoteEvent extends Component {
     const {
       graphFixedLayoutInfo: { height },
       scaledContentWidth,
-      eventTime,
-      startTime,
+      eventTimeSeconds,
+      graphStartTimeSeconds,
       pixelsPerSecond,
     } = this.props.graphScalableLayoutInfo;
 
     if (scaledContentWidth && height) {
-      const timeIntervalSeconds =
-        eventTime.getTime() / 1000 - startTime.getTime() / 1000;
+      const timeIntervalSeconds = eventTimeSeconds - graphStartTimeSeconds;
       const x = Math.round(pixelsPerSecond * timeIntervalSeconds);
       const verticalLinePathDescription = `M${x} ${0} L${x} ${height}`;
       const triangleWidth = 15.5;
