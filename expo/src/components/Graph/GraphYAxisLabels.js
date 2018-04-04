@@ -1,10 +1,10 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import glamorous, { withTheme } from "glamorous-native";
 
 import { ThemePropType } from "../../prop-types/theme";
 
-class GraphYAxisLabels extends Component {
+class GraphYAxisLabels extends PureComponent {
   renderLabel(value) {
     const {
       theme,
@@ -36,6 +36,8 @@ class GraphYAxisLabels extends Component {
   }
 
   render() {
+    // console.log("GraphYAxisLabels: render");
+
     const { yAxisLabelValues } = this.props;
 
     return (

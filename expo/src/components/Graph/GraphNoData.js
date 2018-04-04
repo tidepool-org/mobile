@@ -1,15 +1,17 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import glamorous, { withTheme } from "glamorous-native";
 
 import { ThemePropType } from "../../prop-types/theme";
 
-class GraphNoData extends Component {
+class GraphNoData extends PureComponent {
   onPressHowToUpload = () => {
     this.props.navigateHowToUpload();
   };
 
   render() {
+    // console.log("GraphNoData: render");
+
     const { theme, graphFixedLayoutInfo } = this.props;
 
     return (

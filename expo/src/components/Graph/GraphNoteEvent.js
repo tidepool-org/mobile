@@ -1,9 +1,11 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Svg } from "expo";
 
-class GraphNoteEvent extends Component {
+class GraphNoteEvent extends PureComponent {
   render() {
+    // console.log("GraphNoteEvent: render");
+
     const {
       graphFixedLayoutInfo: { height },
       scaledContentWidth,
