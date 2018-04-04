@@ -10,6 +10,8 @@ class GraphScalableLayoutInfo {
     scale = 2.5,
     graphFixedLayoutInfo,
   }) {
+    // console.log('GraphScalableLayoutInfo: ctor')
+
     // Constrain scale
     const minScale = 1.0;
     const maxScale = 12;

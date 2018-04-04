@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import glamorous from "glamorous-native";
 
@@ -6,7 +6,7 @@ import PinchZoomResponder from "react-native-pinch-zoom-responder";
 
 // FIXME: For iOS, it seems that touching "How to upload" and then adding another touch (for pinch), messes up the scale calculation (internally in PinchZoomResponder). Android doesn't have this issue. It's an edge case, but, would be good to debug / fix that at some point.
 
-class GraphZoom extends Component {
+class GraphZoom extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -45,6 +45,8 @@ class GraphZoom extends Component {
   }
 
   render() {
+    // console.log("GraphZoom: render");
+
     const { graphFixedLayoutInfo } = this.props;
 
     return (

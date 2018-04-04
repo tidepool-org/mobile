@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { Platform } from "react-native";
 import PropTypes from "prop-types";
 import glamorous from "glamorous-native";
@@ -6,7 +6,7 @@ import glamorous from "glamorous-native";
 import GraphNoteEvent from "./GraphNoteEvent";
 import GraphXAxisHeader from "./GraphXAxisHeader";
 
-class GraphScrollable extends Component {
+class GraphScrollable extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -161,6 +161,8 @@ class GraphScrollable extends Component {
   }
 
   render() {
+    // console.log("GraphScrollable: render");
+
     const x = this.calculateScrollXForRelativeCenterTimeSeconds(
       this.relativeCenterTimeSeconds
     );

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { StyleSheet } from "react-native";
 import PropTypes from "prop-types";
 import glamorous from "glamorous-native";
@@ -11,7 +11,7 @@ import GraphNoData from "./GraphNoData";
 import GraphScrollable from "./GraphScrollable";
 import GraphZoom from "./GraphZoom";
 
-class Graph extends Component {
+class Graph extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -43,6 +43,8 @@ class Graph extends Component {
   };
 
   onZoomMove = scale => {
+    // console.log("onZoomMove");
+
     const graphScalableLayoutInfo = new GraphScalableLayoutInfo({
       graphFixedLayoutInfo: this.state.graphFixedLayoutInfo,
       scale: this.state.scale * scale,
@@ -54,6 +56,8 @@ class Graph extends Component {
   };
 
   onZoomEnd = scale => {
+    // console.log("onZoomEnd");
+
     const graphScalableLayoutInfo = new GraphScalableLayoutInfo({
       graphFixedLayoutInfo: this.state.graphFixedLayoutInfo,
       scale: this.state.scale * scale,
@@ -199,6 +203,8 @@ class Graph extends Component {
   }
 
   render() {
+    // console.log("Graph: render");
+
     return (
       <glamorous.View height={180} onLayout={this.onContainerViewLayout}>
         {this.renderGraphZoom()}

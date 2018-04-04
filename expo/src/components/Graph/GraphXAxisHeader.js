@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Svg } from "expo";
 import glamorous, { withTheme } from "glamorous-native";
@@ -7,7 +7,7 @@ import addSeconds from "date-fns/add_seconds";
 
 import { ThemePropType } from "../../prop-types/theme";
 
-class GraphXAxisHeader extends Component {
+class GraphXAxisHeader extends PureComponent {
   calculateTimeMarkers() {
     const result = {
       markerXCoordinates: [],
@@ -109,6 +109,8 @@ class GraphXAxisHeader extends Component {
   }
 
   render() {
+    // console.log("GraphXAxisHeader: render");
+
     const {
       graphFixedLayoutInfo: { headerHeight },
       scaledContentWidth,

@@ -1,11 +1,11 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { Svg } from "expo";
 import PropTypes from "prop-types";
 import { withTheme } from "glamorous-native";
 
 import { ThemePropType } from "../../prop-types/theme";
 
-class GraphYAxisBGBoundaryLines extends Component {
+class GraphYAxisBGBoundaryLines extends PureComponent {
   renderBGBoundaryLine(value) {
     const {
       theme,
@@ -35,6 +35,8 @@ class GraphYAxisBGBoundaryLines extends Component {
   }
 
   render() {
+    // console.log("GraphYAxisBGBoundaryLines: render");
+
     const {
       yAxisBGBoundaryValues,
       graphFixedLayoutInfo: { width, graphLayerHeight },
