@@ -1,13 +1,15 @@
 import subSeconds from "date-fns/sub_seconds";
 
-// TODO: graph - only load/render data that is visible based on scroll position? Consider tiling views like Tidepool Mobile 2.x did?
-// TODO: graph - offscreen labels render fine, and are revealed when user tries to scroll beyond bounds, but, the tick marks are clipped / not rendered
+// TODO: graph - perf - Only load/render data that is visible based on scroll position? Consider tiling views like Tidepool Mobile 2.x did?
+// TODO: graph - perf - Consider skipping rendering of CBG data points that intersect at certain scales?
+// TODO: graph - Offscreen labels render fine, and are revealed when user tries to scroll beyond bounds, but, the tick marks are clipped / not rendered
 
 class GraphScalableLayoutInfo {
   constructor({
-    eventTime = new Date(),
-    timeIntervalSeconds = 12 * 60 * 60, // 12 hours
-    scale = 2.5,
+    eventTime = GraphScalableLayoutInfo.defaultProps.eventTime,
+    timeIntervalSeconds = GraphScalableLayoutInfo.defaultProps
+      .timeIntervalSeconds,
+    scale = GraphScalableLayoutInfo.defaultProps.scale,
     graphFixedLayoutInfo,
   }) {
     // console.log('GraphScalableLayoutInfo: ctor')
@@ -90,5 +92,11 @@ class GraphScalableLayoutInfo {
     return result;
   }
 }
+
+GraphScalableLayoutInfo.defaultProps = {
+  eventTime: new Date(),
+  timeIntervalSeconds: 12 * 60 * 60, // 12 hours
+  scale: 2.5,
+};
 
 export default GraphScalableLayoutInfo;

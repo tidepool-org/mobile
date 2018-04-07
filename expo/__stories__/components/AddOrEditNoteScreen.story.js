@@ -5,7 +5,7 @@ import faker from "faker";
 
 import StoryContainerScreen from "../../__stories__/utils/StoryContainerScreen";
 import AddOrEditNoteScreen from "../../src/screens/AddOrEditNoteScreen";
-import HashtagCollection from "../../src/utils/HashtagCollection";
+import HashtagCollection from "../../src/models/HashtagCollection";
 
 faker.seed(123);
 

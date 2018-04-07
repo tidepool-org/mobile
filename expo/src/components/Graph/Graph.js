@@ -1,8 +1,9 @@
 import React, { PureComponent } from "react";
 import { StyleSheet } from "react-native";
 import PropTypes from "prop-types";
-import glamorous from "glamorous-native";
+import glamorous, { withTheme } from "glamorous-native";
 
+import { ThemePropType } from "../../prop-types/theme";
 import GraphFixedLayoutInfo from "./GraphFixedLayoutInfo";
 import GraphScalableLayoutInfo from "./GraphScalableLayoutInfo";
 import GraphYAxisLabels from "./GraphYAxisLabels";
@@ -15,11 +16,12 @@ class Graph extends PureComponent {
   constructor(props) {
     super(props);
 
-    const { scale } = props;
+    const { scale, eventTime } = props;
     const graphFixedLayoutInfo = new GraphFixedLayoutInfo({});
     const graphScalableLayoutInfo = new GraphScalableLayoutInfo({
       graphFixedLayoutInfo,
       scale,
+      eventTime,
     });
     this.state = {
       graphFixedLayoutInfo,
@@ -29,6 +31,7 @@ class Graph extends PureComponent {
   }
 
   onContainerViewLayout = event => {
+    const { eventTime } = this.props;
     const { scale } = this.state;
     const { layout } = event.nativeEvent;
     const graphFixedLayoutInfo = new GraphFixedLayoutInfo({
@@ -38,6 +41,7 @@ class Graph extends PureComponent {
     const graphScalableLayoutInfo = new GraphScalableLayoutInfo({
       graphFixedLayoutInfo,
       scale,
+      eventTime,
     });
     this.setState({ graphFixedLayoutInfo, graphScalableLayoutInfo });
   };
@@ -45,9 +49,11 @@ class Graph extends PureComponent {
   onZoomMove = scale => {
     // console.log("onZoomMove");
 
+    const { eventTime } = this.props;
     const graphScalableLayoutInfo = new GraphScalableLayoutInfo({
       graphFixedLayoutInfo: this.state.graphFixedLayoutInfo,
       scale: this.state.scale * scale,
+      eventTime,
     });
     this.setState({
       graphScalableLayoutInfo,
@@ -58,9 +64,11 @@ class Graph extends PureComponent {
   onZoomEnd = scale => {
     // console.log("onZoomEnd");
 
+    const { eventTime } = this.props;
     const graphScalableLayoutInfo = new GraphScalableLayoutInfo({
       graphFixedLayoutInfo: this.state.graphFixedLayoutInfo,
       scale: this.state.scale * scale,
+      eventTime,
     });
     this.setState({
       graphScalableLayoutInfo,
@@ -93,9 +101,9 @@ class Graph extends PureComponent {
   }
 
   renderNoData() {
-    const { loading, navigateHowToUpload } = this.props;
+    const { loading, navigateHowToUpload, cbgData, smbgData } = this.props;
 
-    if (!loading) {
+    if (!loading && cbgData.length === 0 && smbgData.length === 0) {
       return (
         <glamorous.View
           position="absolute"
@@ -156,6 +164,8 @@ class Graph extends PureComponent {
   }
 
   renderFixedBackground() {
+    const { theme } = this.props;
+
     return (
       <glamorous.View
         position="absolute"
@@ -163,7 +173,7 @@ class Graph extends PureComponent {
         top={this.state.graphFixedLayoutInfo.headerHeight}
         width={this.state.graphFixedLayoutInfo.width}
         height={this.state.graphFixedLayoutInfo.graphLayerHeight}
-        backgroundColor="#f6f6f6"
+        backgroundColor={theme.graphBackgroundColor}
       />
     );
   }
@@ -178,9 +188,9 @@ class Graph extends PureComponent {
           onZoomEnd={this.onZoomEnd}
         >
           {this.renderFixedBackground()}
-          {this.renderFixedYAxisLabels()}
           {this.renderFixedYAxisBGBoundaryLines()}
           {this.renderGraphScrollable()}
+          {this.renderFixedYAxisLabels()}
           {this.renderNoData()}
           {this.renderLoading()}
         </GraphZoom>
@@ -191,13 +201,15 @@ class Graph extends PureComponent {
   }
 
   renderGraphScrollable() {
-    const { loading } = this.props;
+    const { loading, cbgData, smbgData } = this.props;
     const { graphScalableLayoutInfo, isZooming } = this.state;
     return (
       <GraphScrollable
         loading={loading}
-        graphScalableLayoutInfo={graphScalableLayoutInfo}
         isZooming={isZooming}
+        graphScalableLayoutInfo={graphScalableLayoutInfo}
+        cbgData={cbgData}
+        smbgData={smbgData}
       />
     );
   }
@@ -214,16 +226,23 @@ class Graph extends PureComponent {
 }
 
 Graph.propTypes = {
+  theme: ThemePropType.isRequired,
   loading: PropTypes.bool.isRequired,
   yAxisLabelValues: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
   yAxisBGBoundaryValues: PropTypes.arrayOf(PropTypes.number.isRequired)
     .isRequired,
+  cbgData: PropTypes.arrayOf(PropTypes.object.isRequired),
+  smbgData: PropTypes.arrayOf(PropTypes.object.isRequired),
   scale: PropTypes.number,
+  eventTime: PropTypes.instanceOf(Date),
   navigateHowToUpload: PropTypes.func.isRequired,
 };
 
 Graph.defaultProps = {
   scale: 2.5,
+  eventTime: new Date(),
+  cbgData: [],
+  smbgData: [],
 };
 
-export default Graph;
+export default withTheme(Graph);

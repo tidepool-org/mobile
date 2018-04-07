@@ -158,7 +158,14 @@ const PrimaryTheme = {
     color: Colors.brightBlue,
     ...FontStyles.smallRegularFont,
   },
+  graphBackgroundColor: "#f6f6f6",
   graphLineStrokeColor: "#e2e4e7",
+  graphBgLowColor: Colors.peach,
+  graphBgNormalColor: Colors.green,
+  graphBgHighColor: Colors.purple,
+  graphSmbgLabelStyle: {
+    ...FontStyles.smallRegularFont,
+  },
 };
 
 export default PrimaryTheme;

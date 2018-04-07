@@ -7,7 +7,7 @@ import {
   NOTES_FETCH_DELETE_NOTE,
 } from "../actions/notesFetch";
 import { AUTH_SIGN_IN_RESET } from "../actions/auth";
-import HashtagCollection from "../utils/HashtagCollection";
+import HashtagCollection from "../models/HashtagCollection";
 
 const hashtagCollection = new HashtagCollection();
 

@@ -2,22 +2,28 @@ const LOW_BG_LABEL_VALUE = 40;
 const HIGH_BG_LABEL_VALUE = 300;
 const DEFAULT_LOW_BG_BOUNDARY_VALUE = 70;
 const DEFAULT_HIGH_BG_BOUNDARY_VALUE = 180;
+const MAX_BG_VALUE = 340;
 
 function makeYAxisLabelValues({
-  low = DEFAULT_LOW_BG_BOUNDARY_VALUE,
-  high = DEFAULT_HIGH_BG_BOUNDARY_VALUE,
+  lowBGBoundary = DEFAULT_LOW_BG_BOUNDARY_VALUE,
+  highBGBoundary = DEFAULT_HIGH_BG_BOUNDARY_VALUE,
 }) {
-  if (low - LOW_BG_LABEL_VALUE >= LOW_BG_LABEL_VALUE) {
-    return [LOW_BG_LABEL_VALUE, low, high, HIGH_BG_LABEL_VALUE];
+  if (lowBGBoundary - LOW_BG_LABEL_VALUE >= LOW_BG_LABEL_VALUE) {
+    return [
+      LOW_BG_LABEL_VALUE,
+      lowBGBoundary,
+      highBGBoundary,
+      HIGH_BG_LABEL_VALUE,
+    ];
   }
-  return [low, high, HIGH_BG_LABEL_VALUE];
+  return [lowBGBoundary, highBGBoundary, HIGH_BG_LABEL_VALUE];
 }
 
 function makeYAxisBGBoundaryValues({
-  low = DEFAULT_LOW_BG_BOUNDARY_VALUE,
-  high = DEFAULT_HIGH_BG_BOUNDARY_VALUE,
+  lowBGBoundary = DEFAULT_LOW_BG_BOUNDARY_VALUE,
+  highBGBoundary = DEFAULT_HIGH_BG_BOUNDARY_VALUE,
 }) {
-  return [low, high];
+  return [lowBGBoundary, highBGBoundary];
 }
 
-export { makeYAxisLabelValues, makeYAxisBGBoundaryValues };
+export { makeYAxisLabelValues, makeYAxisBGBoundaryValues, MAX_BG_VALUE };

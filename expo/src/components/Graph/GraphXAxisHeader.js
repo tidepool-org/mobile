@@ -55,7 +55,7 @@ class GraphXAxisHeader extends PureComponent {
       graphScalableLayoutInfo: { graphFixedLayoutInfo: { headerHeight } },
     } = this.props;
 
-    const paths = [];
+    const paths = new Array(markerXCoordinates.length);
     for (let i = 0; i < markerXCoordinates.length; i += 1) {
       const verticalLinePathDescription = `M${
         markerXCoordinates[i]
@@ -95,7 +95,7 @@ class GraphXAxisHeader extends PureComponent {
   }
 
   renderTimeMarkerLabels({ markerLabels, markerXCoordinates }) {
-    const result = [];
+    const result = new Array(markerXCoordinates.length);
     for (let i = 0; i < markerXCoordinates.length; i += 1) {
       const markerLabel = markerLabels[i];
       const width = 50;
