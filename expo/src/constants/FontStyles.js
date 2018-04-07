@@ -1,6 +1,13 @@
 import makeFontStyle from "../utils/makeFontStyle";
 
 const FontStyles = {
+  verySmallLightFont: {
+    ...makeFontStyle({
+      fontFamilyBaseName: "OpenSans",
+      fontWeightName: "Light",
+      fontSize: 10,
+    }),
+  },
   verySmallRegularFont: {
     ...makeFontStyle({
       fontFamilyBaseName: "OpenSans",
@@ -19,6 +26,13 @@ const FontStyles = {
     ...makeFontStyle({
       fontFamilyBaseName: "OpenSans",
       fontWeightName: "Semibold",
+      fontSize: 12.5,
+    }),
+  },
+  smallLightFont: {
+    ...makeFontStyle({
+      fontFamilyBaseName: "OpenSans",
+      fontWeightName: "Light",
       fontSize: 12.5,
     }),
   },

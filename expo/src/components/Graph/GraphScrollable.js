@@ -5,6 +5,8 @@ import glamorous from "glamorous-native";
 
 import GraphNoteEvent from "./GraphNoteEvent";
 import GraphXAxisHeader from "./GraphXAxisHeader";
+import GraphCbg from "./GraphCbg";
+import GraphSmbg from "./GraphSmbg";
 
 class GraphScrollable extends PureComponent {
   constructor(props) {
@@ -137,7 +139,7 @@ class GraphScrollable extends PureComponent {
   }
 
   renderGraph() {
-    const { loading } = this.props;
+    const { loading, graphScalableLayoutInfo, cbgData, smbgData } = this.props;
 
     if (!loading) {
       return (
@@ -145,15 +147,18 @@ class GraphScrollable extends PureComponent {
           position="absolute"
           pointerEvents="none"
           backgroundColor="transparent"
-          top={
-            this.props.graphScalableLayoutInfo.graphFixedLayoutInfo.headerHeight
-          }
-          height={
-            this.props.graphScalableLayoutInfo.graphFixedLayoutInfo
-              .graphLayerHeight
-          }
-          width={this.props.graphScalableLayoutInfo.scaledContentWidth}
-        />
+          height={graphScalableLayoutInfo.graphFixedLayoutInfo.height}
+          width={graphScalableLayoutInfo.scaledContentWidth}
+        >
+          <GraphCbg
+            graphScalableLayoutInfo={graphScalableLayoutInfo}
+            cbgData={cbgData}
+          />
+          <GraphSmbg
+            graphScalableLayoutInfo={graphScalableLayoutInfo}
+            smbgData={smbgData}
+          />
+        </glamorous.View>
       );
     }
 
@@ -163,10 +168,20 @@ class GraphScrollable extends PureComponent {
   render() {
     // console.log("GraphScrollable: render");
 
+    const { isZooming } = this.props;
     const x = this.calculateScrollXForRelativeCenterTimeSeconds(
       this.relativeCenterTimeSeconds
     );
     const contentOffset = { x, y: 0 };
+
+    // FIXME: For now, on most Android devices, the Graph doesn't render interactively enough
+    // during zoom to support live scale change. We should revisit this as we test on more devices
+    // (both iOS and Android) and after we do a rendering performance optimization pass. (See
+    // related "graph - perf" TODOs.)
+    let shouldRenderGraph = true;
+    if (Platform.OS === "android") {
+      shouldRenderGraph = !isZooming;
+    }
 
     return (
       <glamorous.ScrollView
@@ -182,7 +197,7 @@ class GraphScrollable extends PureComponent {
         {this.renderPlaceholder()}
         {this.renderHeader()}
         {this.renderNoteEvent()}
-        {this.renderGraph()}
+        {shouldRenderGraph && this.renderGraph()}
       </glamorous.ScrollView>
     );
   }
@@ -190,8 +205,10 @@ class GraphScrollable extends PureComponent {
 
 GraphScrollable.propTypes = {
   loading: PropTypes.bool.isRequired,
-  graphScalableLayoutInfo: PropTypes.object.isRequired,
   isZooming: PropTypes.bool,
+  graphScalableLayoutInfo: PropTypes.object.isRequired,
+  cbgData: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+  smbgData: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
 };
 
 GraphScrollable.defaultProps = {

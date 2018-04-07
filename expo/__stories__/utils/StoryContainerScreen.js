@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
-import { SafeAreaView, Platform, StatusBar, View } from "react-native";
+import { SafeAreaView, Platform, StatusBar } from "react-native";
 
 import Fonts from "../../src/constants/Fonts";
 import withThemeProvider from "../../src/enhancers/withThemeProvider";

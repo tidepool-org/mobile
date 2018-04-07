@@ -2,7 +2,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-console */
 
-import HashtagCollection from "../src/utils/HashtagCollection";
+import HashtagCollection from "../src/models/HashtagCollection";
 
 it("has default hashtags for new collection", () => {
   const hashtagCollection = new HashtagCollection();
