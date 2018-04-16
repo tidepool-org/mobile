@@ -39,22 +39,22 @@ graphData2.process({
   highBGBoundary,
 });
 
-const loading = false;
+const isLoading = false;
 const yAxisLabelValues = makeYAxisLabelValues({});
 const yAxisBGBoundaryValues = makeYAxisBGBoundaryValues({});
 const navigateHowToUpload = () => {
   Linking.openURL(Urls.howToUpload);
 };
 const props = {
-  loading,
+  isLoading,
   yAxisLabelValues,
   yAxisBGBoundaryValues,
   navigateHowToUpload,
 };
 
-storiesOf("Graph", module).add("loading, default scale", () => (
+storiesOf("Graph", module).add("isLoading, default scale", () => (
   <StoryContainerComponent behaviors={[]}>
-    <Graph {...props} loading />
+    <Graph {...props} isLoading />
   </StoryContainerComponent>
 ));
 

@@ -1,12 +1,14 @@
 import React, { PureComponent } from "react";
 import { Platform } from "react-native";
 import PropTypes from "prop-types";
-import glamorous from "glamorous-native";
+import { Svg } from "expo";
+import glamorous, { withTheme } from "glamorous-native";
 
-import GraphNoteEvent from "./GraphNoteEvent";
-import GraphXAxisHeader from "./GraphXAxisHeader";
-import GraphCbg from "./GraphCbg";
-import GraphSmbg from "./GraphSmbg";
+import { ThemePropType } from "../../prop-types/theme";
+import { GraphNoteEvent } from "./GraphNoteEvent";
+import { GraphXAxisHeader } from "./GraphXAxisHeader";
+import { GraphCbg } from "./GraphCbg";
+import { GraphSmbg } from "./GraphSmbg";
 
 class GraphScrollable extends PureComponent {
   constructor(props) {
@@ -96,79 +98,30 @@ class GraphScrollable extends PureComponent {
     return x;
   }
 
-  renderPlaceholder() {
-    // This dummy view is needed to ensure the content size of the view, given absolute positioning of other elements
-    return (
-      <glamorous.View
-        height={this.props.graphScalableLayoutInfo.graphFixedLayoutInfo.height}
-        width={this.props.graphScalableLayoutInfo.scaledContentWidth}
-      />
-    );
-  }
-
-  renderHeader() {
-    return (
-      <glamorous.View
-        position="absolute"
-        pointerEvents="none"
-        height={
-          this.props.graphScalableLayoutInfo.graphFixedLayoutInfo.headerHeight
-        }
-        width={this.props.graphScalableLayoutInfo.scaledContentWidth}
-      >
-        <GraphXAxisHeader
-          graphScalableLayoutInfo={this.props.graphScalableLayoutInfo}
-        />
-      </glamorous.View>
-    );
-  }
-
-  renderNoteEvent() {
-    return (
-      <glamorous.View
-        position="absolute"
-        pointerEvents="none"
-        height={this.props.graphScalableLayoutInfo.graphFixedLayoutInfo.height}
-        width={this.props.graphScalableLayoutInfo.scaledContentWidth}
-      >
-        <GraphNoteEvent
-          graphScalableLayoutInfo={this.props.graphScalableLayoutInfo}
-        />
-      </glamorous.View>
-    );
-  }
-
-  renderGraph() {
-    const { loading, graphScalableLayoutInfo, cbgData, smbgData } = this.props;
-
-    if (!loading) {
-      return (
-        <glamorous.View
-          position="absolute"
-          pointerEvents="none"
-          backgroundColor="transparent"
-          height={graphScalableLayoutInfo.graphFixedLayoutInfo.height}
-          width={graphScalableLayoutInfo.scaledContentWidth}
-        >
-          <GraphCbg
-            graphScalableLayoutInfo={graphScalableLayoutInfo}
-            cbgData={cbgData}
-          />
-          <GraphSmbg
-            graphScalableLayoutInfo={graphScalableLayoutInfo}
-            smbgData={smbgData}
-          />
-        </glamorous.View>
-      );
-    }
-
-    return null;
-  }
-
   render() {
     // console.log("GraphScrollable: render");
 
-    const { isZooming } = this.props;
+    const {
+      theme,
+      isZooming,
+      isLoading,
+      graphScalableLayoutInfo,
+      graphScalableLayoutInfo: {
+        eventTimeSeconds,
+        graphStartTimeSeconds,
+        pixelsPerSecond,
+      },
+      graphScalableLayoutInfo: {
+        graphFixedLayoutInfo: {
+          height,
+          yAxisHeightInPixels,
+          yAxisPixelsPerValue,
+          headerHeight,
+        },
+      },
+      cbgData,
+      smbgData,
+    } = this.props;
     const x = this.calculateScrollXForRelativeCenterTimeSeconds(
       this.relativeCenterTimeSeconds
     );
@@ -178,10 +131,49 @@ class GraphScrollable extends PureComponent {
     // during zoom to support live scale change. We should revisit this as we test on more devices
     // (both iOS and Android) and after we do a rendering performance optimization pass. (See
     // related "graph - perf" TODOs.)
-    let shouldRenderGraph = true;
+    let shouldRenderGraphData = !isLoading;
     if (Platform.OS === "android") {
-      shouldRenderGraph = !isZooming;
+      shouldRenderGraphData = !isLoading && !isZooming;
     }
+
+    const {
+      ticks: xAxisTicksSvgElements,
+      labels: xAxisLabelsViews,
+    } = GraphXAxisHeader.renderTicksAndLabels({
+      theme,
+      graphScalableLayoutInfo,
+    });
+
+    const noteSvgElements = GraphNoteEvent.renderNoteEventSvgElements({
+      eventTimeSeconds,
+      graphStartTimeSeconds,
+      pixelsPerSecond,
+      height,
+    });
+
+    const cbgSvgElements = shouldRenderGraphData
+      ? GraphCbg.renderSamplesSvgElements({
+          theme,
+          cbgData,
+          yAxisHeightInPixels,
+          yAxisPixelsPerValue,
+          headerHeight,
+          graphStartTimeSeconds,
+          pixelsPerSecond,
+        })
+      : null;
+
+    const smbgSvgElements = shouldRenderGraphData
+      ? GraphSmbg.renderSamplesSvgElements({
+          theme,
+          smbgData,
+          yAxisHeightInPixels,
+          yAxisPixelsPerValue,
+          headerHeight,
+          graphStartTimeSeconds,
+          pixelsPerSecond,
+        })
+      : null;
 
     return (
       <glamorous.ScrollView
@@ -194,17 +186,39 @@ class GraphScrollable extends PureComponent {
         onScroll={this.onScroll}
         scrollEventThrottle={16}
       >
-        {this.renderPlaceholder()}
-        {this.renderHeader()}
-        {this.renderNoteEvent()}
-        {shouldRenderGraph && this.renderGraph()}
+        <glamorous.View
+          height={
+            this.props.graphScalableLayoutInfo.graphFixedLayoutInfo.headerHeight
+          }
+          width={this.props.graphScalableLayoutInfo.scaledContentWidth}
+          backgroundColor="white"
+        >
+          {xAxisLabelsViews}
+        </glamorous.View>
+        <glamorous.View
+          position="absolute"
+          pointerEvents="none"
+          height={height}
+          width={this.props.graphScalableLayoutInfo.scaledContentWidth}
+        >
+          <Svg
+            height={height}
+            width={this.props.graphScalableLayoutInfo.scaledContentWidth}
+          >
+            {xAxisTicksSvgElements}
+            {noteSvgElements}
+            {cbgSvgElements}
+            {smbgSvgElements}
+          </Svg>
+        </glamorous.View>
       </glamorous.ScrollView>
     );
   }
 }
 
 GraphScrollable.propTypes = {
-  loading: PropTypes.bool.isRequired,
+  theme: ThemePropType.isRequired,
+  isLoading: PropTypes.bool.isRequired,
   isZooming: PropTypes.bool,
   graphScalableLayoutInfo: PropTypes.object.isRequired,
   cbgData: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
@@ -215,4 +229,4 @@ GraphScrollable.defaultProps = {
   isZooming: false,
 };
 
-export default GraphScrollable;
+export default withTheme(GraphScrollable);

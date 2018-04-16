@@ -7,8 +7,8 @@ import addSeconds from "date-fns/add_seconds";
 
 import { ThemePropType } from "../../prop-types/theme";
 
-class GraphXAxisHeader extends PureComponent {
-  calculateTimeMarkers() {
+export class GraphXAxisHeader extends PureComponent {
+  static calculateTimeMarkers({ graphScalableLayoutInfo }) {
     const result = {
       markerXCoordinates: [],
       markerLengths: [],
@@ -16,14 +16,12 @@ class GraphXAxisHeader extends PureComponent {
     };
 
     const {
-      graphScalableLayoutInfo: {
-        graphStartTimeSeconds,
-        secondsPerTick,
-        pixelsPerSecond,
-        pixelsPerTick,
-        scaledContentWidth,
-      },
-    } = this.props;
+      graphStartTimeSeconds,
+      secondsPerTick,
+      pixelsPerSecond,
+      pixelsPerTick,
+      scaledContentWidth,
+    } = graphScalableLayoutInfo;
     const nextTickBoundarySeconds =
       Math.floor(graphStartTimeSeconds / secondsPerTick) * secondsPerTick;
     const timeOffset = nextTickBoundarySeconds - graphStartTimeSeconds;
@@ -49,12 +47,12 @@ class GraphXAxisHeader extends PureComponent {
     return result;
   }
 
-  renderTimeMarkerTicks({ markerXCoordinates, markerLengths }) {
-    const {
-      theme,
-      graphScalableLayoutInfo: { graphFixedLayoutInfo: { headerHeight } },
-    } = this.props;
-
+  static renderTicksSvgElements({
+    theme,
+    markerXCoordinates,
+    markerLengths,
+    headerHeight,
+  }) {
     const paths = new Array(markerXCoordinates.length);
     for (let i = 0; i < markerXCoordinates.length; i += 1) {
       const verticalLinePathDescription = `M${
@@ -74,9 +72,7 @@ class GraphXAxisHeader extends PureComponent {
     return paths;
   }
 
-  renderTimeMarkerLabel({ width, left, top, markerLabel }) {
-    const { theme } = this.props;
-
+  static renderLabel({ theme, width, left, top, markerLabel }) {
     return (
       <glamorous.Text
         key={left}
@@ -94,7 +90,7 @@ class GraphXAxisHeader extends PureComponent {
     );
   }
 
-  renderTimeMarkerLabels({ markerLabels, markerXCoordinates }) {
+  static renderLabelsViews({ theme, markerLabels, markerXCoordinates }) {
     const result = new Array(markerXCoordinates.length);
     for (let i = 0; i < markerXCoordinates.length; i += 1) {
       const markerLabel = markerLabels[i];
@@ -102,32 +98,71 @@ class GraphXAxisHeader extends PureComponent {
       const left = markerXCoordinates[i] - width / 2;
       const top = 0;
       result.push(
-        this.renderTimeMarkerLabel({ width, left, top, markerLabel })
+        GraphXAxisHeader.renderLabel({
+          theme,
+          width,
+          left,
+          top,
+          markerLabel,
+        })
       );
     }
     return result;
+  }
+
+  static renderTicksAndLabels({
+    theme,
+    graphScalableLayoutInfo,
+    graphScalableLayoutInfo: { graphFixedLayoutInfo: { headerHeight } },
+  }) {
+    const {
+      markerXCoordinates,
+      markerLengths,
+      markerLabels,
+    } = GraphXAxisHeader.calculateTimeMarkers({ graphScalableLayoutInfo });
+
+    const ticks = GraphXAxisHeader.renderTicksSvgElements({
+      theme,
+      markerXCoordinates,
+      markerLengths,
+      headerHeight,
+    });
+
+    const labels = GraphXAxisHeader.renderLabelsViews({
+      theme,
+      markerXCoordinates,
+      markerLabels,
+    });
+
+    return {
+      ticks,
+      labels,
+    };
   }
 
   render() {
     // console.log("GraphXAxisHeader: render");
 
     const {
-      graphFixedLayoutInfo: { headerHeight },
-      scaledContentWidth,
-    } = this.props.graphScalableLayoutInfo;
+      theme,
+      graphScalableLayoutInfo,
+      graphScalableLayoutInfo: {
+        graphFixedLayoutInfo: { headerHeight },
+        scaledContentWidth,
+      },
+    } = this.props;
 
-    const {
-      markerXCoordinates,
-      markerLengths,
-      markerLabels,
-    } = this.calculateTimeMarkers();
+    const { ticks, labels } = GraphXAxisHeader.renderTicksAndLabels({
+      theme,
+      graphScalableLayoutInfo,
+    });
 
     return (
-      <glamorous.View>
+      <glamorous.View backgroundColor="white">
         <Svg height={headerHeight} width={scaledContentWidth}>
-          {this.renderTimeMarkerTicks({ markerXCoordinates, markerLengths })}
+          {ticks}
         </Svg>
-        {this.renderTimeMarkerLabels({ markerXCoordinates, markerLabels })}
+        {labels}
       </glamorous.View>
     );
   }

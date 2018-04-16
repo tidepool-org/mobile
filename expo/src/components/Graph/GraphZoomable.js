@@ -1,12 +1,13 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import glamorous from "glamorous-native";
-
+import glamorous, { withTheme } from "glamorous-native";
 import PinchZoomResponder from "react-native-pinch-zoom-responder";
+
+import { ThemePropType } from "../../prop-types/theme";
 
 // FIXME: For iOS, it seems that touching "How to upload" and then adding another touch (for pinch), messes up the scale calculation (internally in PinchZoomResponder). Android doesn't have this issue. It's an edge case, but, would be good to debug / fix that at some point.
 
-class GraphZoom extends PureComponent {
+class GraphZoomable extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -45,13 +46,13 @@ class GraphZoom extends PureComponent {
   }
 
   render() {
-    // console.log("GraphZoom: render");
+    // console.log("GraphZoomable: render");
 
     const { graphFixedLayoutInfo } = this.props;
 
     return (
       <glamorous.View
-        backgroundColor="transparent"
+        backgroundColor="white"
         height={graphFixedLayoutInfo.height}
         width={graphFixedLayoutInfo.width}
         {...this.pinchZoomResponder.handlers}
@@ -62,7 +63,8 @@ class GraphZoom extends PureComponent {
   }
 }
 
-GraphZoom.propTypes = {
+GraphZoomable.propTypes = {
+  theme: ThemePropType.isRequired,
   isEnabled: PropTypes.bool,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.element),
@@ -73,8 +75,8 @@ GraphZoom.propTypes = {
   onZoomEnd: PropTypes.func.isRequired,
 };
 
-GraphZoom.defaultProps = {
+GraphZoomable.defaultProps = {
   isEnabled: true,
 };
 
-export default GraphZoom;
+export default withTheme(GraphZoomable);

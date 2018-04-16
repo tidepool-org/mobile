@@ -4,7 +4,42 @@ import glamorous, { withTheme } from "glamorous-native";
 
 import { ThemePropType } from "../../prop-types/theme";
 
-class GraphNoData extends PureComponent {
+export class GraphNoData extends PureComponent {
+  static renderGraphNoDataViews({
+    theme,
+    graphFixedLayoutInfo,
+    navigateHowToUpload,
+  }) {
+    return [
+      <glamorous.Text
+        key={1}
+        allowFontScaling={false}
+        position="absolute"
+        pointerEvents="none"
+        style={theme.graphNoDataLabelStyle}
+        top={graphFixedLayoutInfo.graphLayerHeight - 50}
+        left={graphFixedLayoutInfo.width - 120}
+      >
+        No data
+      </glamorous.Text>,
+      <glamorous.TouchableOpacity
+        key={2}
+        position="absolute"
+        top={graphFixedLayoutInfo.graphLayerHeight - 30}
+        left={graphFixedLayoutInfo.width - 120}
+        hitSlop={{ left: 10, right: 10, top: 10, bottom: 10 }}
+        onPress={navigateHowToUpload}
+      >
+        <glamorous.Text
+          allowFontScaling={false}
+          style={theme.graphHowToUploadLabelStyle}
+        >
+          How to upload
+        </glamorous.Text>
+      </glamorous.TouchableOpacity>,
+    ];
+  }
+
   onPressHowToUpload = () => {
     this.props.navigateHowToUpload();
   };
@@ -16,30 +51,11 @@ class GraphNoData extends PureComponent {
 
     return (
       <glamorous.View>
-        <glamorous.Text
-          allowFontScaling={false}
-          position="absolute"
-          pointerEvents="none"
-          style={theme.graphNoDataLabelStyle}
-          top={graphFixedLayoutInfo.graphLayerHeight - 50}
-          left={graphFixedLayoutInfo.width - 120}
-        >
-          No data
-        </glamorous.Text>
-        <glamorous.TouchableOpacity
-          position="absolute"
-          top={graphFixedLayoutInfo.graphLayerHeight - 30}
-          left={graphFixedLayoutInfo.width - 120}
-          hitSlop={{ left: 10, right: 10, top: 10, bottom: 10 }}
-          onPress={this.onPressHowToUpload}
-        >
-          <glamorous.Text
-            allowFontScaling={false}
-            style={theme.graphHowToUploadLabelStyle}
-          >
-            How to upload
-          </glamorous.Text>
-        </glamorous.TouchableOpacity>
+        {GraphNoData.renderGraphNoDataViews({
+          theme,
+          graphFixedLayoutInfo,
+          navigateHowToUpload: this.onPressHowToUpload,
+        })}
       </glamorous.View>
     );
   }
