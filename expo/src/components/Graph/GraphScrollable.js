@@ -122,20 +122,11 @@ class GraphScrollable extends PureComponent {
       cbgData,
       smbgData,
     } = this.props;
+    const shouldRenderGraphData = !isLoading && !isZooming;
     const x = this.calculateScrollXForRelativeCenterTimeSeconds(
       this.relativeCenterTimeSeconds
     );
     const contentOffset = { x, y: 0 };
-
-    // FIXME: For now, on most Android devices, the Graph doesn't render interactively enough
-    // during zoom to support live scale change. We should revisit this as we test on more devices
-    // (both iOS and Android) and after we do a rendering performance optimization pass. (See
-    // related "graph - perf" TODOs.)
-    let shouldRenderGraphData = !isLoading;
-    if (Platform.OS === "android") {
-      shouldRenderGraphData = !isLoading && !isZooming;
-    }
-
     const {
       ticks: xAxisTicksSvgElements,
       labels: xAxisLabelsViews,
@@ -185,6 +176,7 @@ class GraphScrollable extends PureComponent {
         contentOffset={contentOffset}
         onScroll={this.onScroll}
         scrollEventThrottle={16}
+        scrollEnabled={!isLoading}
       >
         <glamorous.View
           height={
