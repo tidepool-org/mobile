@@ -52,7 +52,7 @@ exports[`Storyshots Graph data 2, four y-axis labels, default scale 1`] = `
 </RCTSafeAreaView>
 `;
 
-exports[`Storyshots Graph loading, default scale 1`] = `
+exports[`Storyshots Graph isLoading, default scale 1`] = `
 <RCTSafeAreaView
   paddingTop={0}
   style={

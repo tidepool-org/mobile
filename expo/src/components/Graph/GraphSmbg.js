@@ -1,26 +1,21 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Svg } from "expo";
-import glamorous, { withTheme } from "glamorous-native";
+import { withTheme } from "glamorous-native";
 
 import { ThemePropType } from "../../prop-types/theme";
 import { MAX_BG_VALUE } from "./helpers";
 
-class GraphSmbg extends PureComponent {
-  renderSamples() {
-    const { theme, smbgData } = this.props;
-    const {
-      graphScalableLayoutInfo: {
-        graphFixedLayoutInfo: {
-          yAxisHeightInPixels,
-          yAxisPixelsPerValue,
-          headerHeight,
-        },
-        graphStartTimeSeconds,
-        pixelsPerSecond,
-      },
-    } = this.props;
-
+export class GraphSmbg extends PureComponent {
+  static renderSamplesSvgElements({
+    theme,
+    smbgData,
+    yAxisHeightInPixels,
+    yAxisPixelsPerValue,
+    headerHeight,
+    graphStartTimeSeconds,
+    pixelsPerSecond,
+  }) {
     const result = new Array(smbgData.length);
     for (let i = 0; i < smbgData.length; i += 1) {
       const { time, value, isLow, isHigh } = smbgData[i];
@@ -102,20 +97,33 @@ class GraphSmbg extends PureComponent {
     // console.log(`GraphSmbg: render`);
 
     const {
-      graphFixedLayoutInfo: { graphLayerHeight },
-      scaledContentWidth,
-    } = this.props.graphScalableLayoutInfo;
+      theme,
+      smbgData,
+      graphScalableLayoutInfo: {
+        graphFixedLayoutInfo: {
+          yAxisHeightInPixels,
+          yAxisPixelsPerValue,
+          headerHeight,
+          graphLayerHeight,
+        },
+        graphStartTimeSeconds,
+        pixelsPerSecond,
+        scaledContentWidth,
+      },
+    } = this.props;
 
     return (
-      <glamorous.View
-        position="absolute"
-        pointerEvents="none"
-        backgroundColor="transparent"
-      >
-        <Svg height={graphLayerHeight} width={scaledContentWidth}>
-          {this.renderSamples()}
-        </Svg>
-      </glamorous.View>
+      <Svg height={graphLayerHeight} width={scaledContentWidth}>
+        {GraphSmbg.renderSamplesSvgElements({
+          theme,
+          smbgData,
+          yAxisHeightInPixels,
+          yAxisPixelsPerValue,
+          headerHeight,
+          graphStartTimeSeconds,
+          pixelsPerSecond,
+        })}
+      </Svg>
     );
   }
 }
