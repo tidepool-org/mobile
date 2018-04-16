@@ -149,6 +149,7 @@ class Graph extends PureComponent {
           graphFixedLayoutInfo={graphFixedLayoutInfo}
           onZoomMove={this.onZoomMove}
           onZoomEnd={this.onZoomEnd}
+          isEnabled={!isLoading}
         >
           {this.renderFixedBackground()}
           {this.renderGraphScrollable()}

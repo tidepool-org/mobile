@@ -16,15 +16,49 @@ export class GraphCbg extends PureComponent {
     graphStartTimeSeconds,
     pixelsPerSecond,
   }) {
-    const result = new Array(cbgData.length);
-    const radius = 3.5;
+    const result = [];
+
+    result.push(
+      <Svg.Symbol
+        key={result.length + 1}
+        id="normal"
+        viewBox="0 0 7 7"
+        width="7"
+        height="7"
+      >
+        <Svg.Circle r="3.5" fill={theme.graphBgNormalColor} stroke="none" />
+      </Svg.Symbol>
+    );
+    result.push(
+      <Svg.Symbol
+        key={result.length + 1}
+        id="low"
+        viewBox="0 0 7 7"
+        width="7"
+        height="7"
+      >
+        <Svg.Circle r="3.5" fill={theme.graphBgLowColor} stroke="none" />
+      </Svg.Symbol>
+    );
+    result.push(
+      <Svg.Symbol
+        key={result.length + 1}
+        id="high"
+        viewBox="0 0 7 7"
+        width="7"
+        height="7"
+      >
+        <Svg.Circle r="3.5" fill={theme.graphBgHighColor} stroke="none" />
+      </Svg.Symbol>
+    );
+
     for (let i = 0; i < cbgData.length; i += 1) {
       const { time, value, isLow, isHigh } = cbgData[i];
-      let color = theme.graphBgNormalColor;
+      let symbol = "#normal";
       if (isLow) {
-        color = theme.graphBgLowColor;
+        symbol = "#low";
       } else if (isHigh) {
-        color = theme.graphBgHighColor;
+        symbol = "#high";
       }
       const constrainedValue = Math.min(value, MAX_BG_VALUE);
       const deltaTime = time - graphStartTimeSeconds;
@@ -36,13 +70,13 @@ export class GraphCbg extends PureComponent {
         );
 
       result.push(
-        <Svg.Circle
-          key={i}
-          cx={x}
-          cy={y}
-          r={radius}
-          fill={color}
-          stroke="none"
+        <Svg.Use
+          key={result.length + 1}
+          href={symbol}
+          x={x}
+          y={y}
+          width="7"
+          height="7"
         />
       );
     }
