@@ -45,11 +45,15 @@ const yAxisBGBoundaryValues = makeYAxisBGBoundaryValues({});
 const navigateHowToUpload = () => {
   Linking.openURL(Urls.howToUpload);
 };
+const onZoomStart = () => {};
+const onZoomEnd = () => {};
 const props = {
   isLoading,
   yAxisLabelValues,
   yAxisBGBoundaryValues,
   navigateHowToUpload,
+  onZoomStart,
+  onZoomEnd,
 };
 
 storiesOf("Graph", module).add("isLoading, default scale", () => (

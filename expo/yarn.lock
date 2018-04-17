@@ -9072,10 +9072,6 @@ react-native-iphone-x-helper@^1.0.2:
     babel-plugin-module-resolver "^2.3.0"
     babel-preset-react-native "1.9.0"
 
-react-native-pinch-zoom-responder@^0.1.2:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/react-native-pinch-zoom-responder/-/react-native-pinch-zoom-responder-0.1.2.tgz#18ed3b6c60d7baaca1bbfced8cd841ff46b9a97e"
-
 react-native-safe-area-view@^0.7.0:
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/react-native-safe-area-view/-/react-native-safe-area-view-0.7.0.tgz#38f5ab9368d6ef9e5d18ab64212938af3ec39421"

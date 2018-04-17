@@ -5,10 +5,10 @@ import { Svg } from "expo";
 import glamorous, { withTheme } from "glamorous-native";
 
 import { ThemePropType } from "../../prop-types/theme";
-import { GraphNoteEvent } from "./GraphNoteEvent";
-import { GraphXAxisHeader } from "./GraphXAxisHeader";
-import { GraphCbg } from "./GraphCbg";
-import { GraphSmbg } from "./GraphSmbg";
+import { GraphNoteEventClass } from "./GraphNoteEvent";
+import { GraphXAxisHeaderClass } from "./GraphXAxisHeader";
+import { GraphCbgClass } from "./GraphCbg";
+import { GraphSmbgClass } from "./GraphSmbg";
 
 class GraphScrollable extends PureComponent {
   constructor(props) {
@@ -130,12 +130,12 @@ class GraphScrollable extends PureComponent {
     const {
       ticks: xAxisTicksSvgElements,
       labels: xAxisLabelsViews,
-    } = GraphXAxisHeader.renderTicksAndLabels({
+    } = GraphXAxisHeaderClass.renderTicksAndLabels({
       theme,
       graphScalableLayoutInfo,
     });
 
-    const noteSvgElements = GraphNoteEvent.renderNoteEventSvgElements({
+    const noteSvgElements = GraphNoteEventClass.renderNoteEventSvgElements({
       eventTimeSeconds,
       graphStartTimeSeconds,
       pixelsPerSecond,
@@ -143,7 +143,7 @@ class GraphScrollable extends PureComponent {
     });
 
     const cbgSvgElements = shouldRenderGraphData
-      ? GraphCbg.renderSamplesSvgElements({
+      ? GraphCbgClass.renderSamplesSvgElements({
           theme,
           cbgData,
           yAxisHeightInPixels,
@@ -155,7 +155,7 @@ class GraphScrollable extends PureComponent {
       : null;
 
     const smbgSvgElements = shouldRenderGraphData
-      ? GraphSmbg.renderSamplesSvgElements({
+      ? GraphSmbgClass.renderSamplesSvgElements({
           theme,
           smbgData,
           yAxisHeightInPixels,

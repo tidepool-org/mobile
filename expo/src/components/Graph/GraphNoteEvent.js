@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Svg } from "expo";
 
-export class GraphNoteEvent extends PureComponent {
+class GraphNoteEvent extends PureComponent {
   static renderNoteEventSvgElements({
     eventTimeSeconds,
     graphStartTimeSeconds,
@@ -68,3 +68,6 @@ export class GraphNoteEvent extends PureComponent {
 GraphNoteEvent.propTypes = {
   graphScalableLayoutInfo: PropTypes.object.isRequired,
 };
+
+export { GraphNoteEvent as GraphNoteEventClass };
+export default GraphNoteEvent;

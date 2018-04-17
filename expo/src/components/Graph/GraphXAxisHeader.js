@@ -7,7 +7,7 @@ import addSeconds from "date-fns/add_seconds";
 
 import { ThemePropType } from "../../prop-types/theme";
 
-export class GraphXAxisHeader extends PureComponent {
+class GraphXAxisHeader extends PureComponent {
   static calculateTimeMarkers({ graphScalableLayoutInfo }) {
     const result = {
       markerXCoordinates: [],
@@ -173,4 +173,5 @@ GraphXAxisHeader.propTypes = {
   graphScalableLayoutInfo: PropTypes.object.isRequired,
 };
 
+export { GraphXAxisHeader as GraphXAxisHeaderClass };
 export default withTheme(GraphXAxisHeader);

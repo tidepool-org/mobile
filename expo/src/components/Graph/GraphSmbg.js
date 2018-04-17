@@ -6,7 +6,7 @@ import { withTheme } from "glamorous-native";
 import { ThemePropType } from "../../prop-types/theme";
 import { MAX_BG_VALUE } from "./helpers";
 
-export class GraphSmbg extends PureComponent {
+class GraphSmbg extends PureComponent {
   static renderSamplesSvgElements({
     theme,
     smbgData,
@@ -134,4 +134,5 @@ GraphSmbg.propTypes = {
   smbgData: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
 };
 
+export { GraphSmbg as GraphSmbgClass };
 export default withTheme(GraphSmbg);

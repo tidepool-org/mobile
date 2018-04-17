@@ -4,7 +4,7 @@ import glamorous, { withTheme } from "glamorous-native";
 
 import { ThemePropType } from "../../prop-types/theme";
 
-export class GraphNoData extends PureComponent {
+class GraphNoData extends PureComponent {
   static renderGraphNoDataViews({
     theme,
     graphFixedLayoutInfo,
@@ -67,4 +67,5 @@ GraphNoData.propTypes = {
   navigateHowToUpload: PropTypes.func.isRequired,
 };
 
+export { GraphNoData as GraphNoDataClass };
 export default withTheme(GraphNoData);
