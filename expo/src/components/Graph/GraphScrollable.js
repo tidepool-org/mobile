@@ -176,7 +176,7 @@ class GraphScrollable extends PureComponent {
         contentOffset={contentOffset}
         onScroll={this.onScroll}
         scrollEventThrottle={16}
-        scrollEnabled={!isLoading}
+        scrollEnabled={!isLoading && !isZooming}
       >
         <glamorous.View
           height={

@@ -13,13 +13,20 @@ class GraphZoomable extends PureComponent {
     this.isZooming = false;
     this.trackedTouches = [];
     this.pinchZoomResponder = PanResponder.create({
-      onStartShouldSetPanResponder: ({ nativeEvent: { touches } }) => {
-        const filteredTouches = this.filterTouches(touches);
+      onStartShouldSetPanResponder: ({ nativeEvent: { target, touches } }) => {
+        this.target = target;
+        const filteredTouches = this.filterTouchesOnTarget(touches);
         const shouldStartZooming =
           props.isZoomingEnabled && filteredTouches.length === 2;
         // console.log(
-        //   `onStartShouldSetPanResponder, should recognize gesture: ${shouldStartZooming}`
+        //   `onStartShouldSetPanResponder, should recognize gesture: ${shouldStartZooming}, target: ${target}`
         // );
+        this.containerView.measure((x, y, width, height, pageX, pageY) => {
+          this.containerViewPageX = pageX;
+          this.containerViewPageY = pageY;
+          this.containerViewWidth = width;
+          this.containerViewHeight = height;
+        });
         return shouldStartZooming;
       },
       // onPanResponderReject: () => console.log("onPanResponderReject"),
@@ -31,16 +38,16 @@ class GraphZoomable extends PureComponent {
         ) {
           if (this.isZooming) {
             this.commitZoom();
-            this.trackTouches(this.filterTouches(touches));
+            this.trackTouches(this.filterTouchesInView(touches));
           } else {
-            this.startZooming(this.filterTouches(touches));
+            this.startZooming(this.filterTouchesInView(touches));
           }
         }
       },
       onPanResponderMove: ({ nativeEvent: { touches } }) => {
         // console.log("onPanResponderMove");
         if (touches.length <= 2) {
-          this.updateScaleAndTrackTouches(this.filterTouches(touches));
+          this.updateScaleAndTrackTouches(this.filterTouchesInView(touches));
           props.onZoomMove(this.scale);
         }
       },
@@ -55,15 +62,6 @@ class GraphZoomable extends PureComponent {
       onPanResponderTerminationRequest: () => false,
     });
   }
-
-  onContainerViewLayout = () => {
-    this.containerView.measure((x, y, width, height, pageX, pageY) => {
-      this.containerViewPageX = pageX;
-      this.containerViewPageY = pageY;
-      this.containerViewWidth = width;
-      this.containerViewHeight = height;
-    });
-  };
 
   pageCoordinatesIntersectContainerView({ pageX, pageY }) {
     return (
@@ -99,8 +97,13 @@ class GraphZoomable extends PureComponent {
     this.scale = 1;
   }
 
-  filterTouches(touches) {
-    // Only include up to two touches that are contained in the graph
+  filterTouchesOnTarget(touches) {
+    // Only include up to two touches that have the same target as the view
+    return touches.filter(touch => touch.target === this.target).slice(0, 2);
+  }
+
+  filterTouchesInView(touches) {
+    // Only include up to two touches that are contained in the view (can be different target)
     return touches
       .filter(touch => {
         const { pageX, pageY } = touch;
@@ -173,7 +176,6 @@ class GraphZoomable extends PureComponent {
         innerRef={containerView => {
           this.containerView = containerView;
         }}
-        onLayout={this.onContainerViewLayout}
         backgroundColor="white"
         height={graphFixedLayoutInfo.height}
         width={graphFixedLayoutInfo.width}
