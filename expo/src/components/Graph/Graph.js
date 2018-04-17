@@ -60,13 +60,13 @@ class Graph extends PureComponent {
     this.state = {
       graphFixedLayoutInfo,
       graphScalableLayoutInfo,
-      scale,
     };
+    this.scale = scale;
   }
 
   onContainerViewLayout = event => {
+    const { scale } = this;
     const { eventTime } = this.props;
-    const { scale } = this.state;
     const { layout } = event.nativeEvent;
     const graphFixedLayoutInfo = new GraphFixedLayoutInfo({
       width: layout.width,
@@ -80,35 +80,36 @@ class Graph extends PureComponent {
     this.setState({ graphFixedLayoutInfo, graphScalableLayoutInfo });
   };
 
-  onZoomMove = scale => {
-    // console.log("onZoomMove");
-
-    const { eventTime } = this.props;
-    const graphScalableLayoutInfo = new GraphScalableLayoutInfo({
-      graphFixedLayoutInfo: this.state.graphFixedLayoutInfo,
-      scale: this.state.scale * scale,
-      eventTime,
-    });
+  onZoomStart = () => {
+    // console.log("onZoomStart");
     this.setState({
-      graphScalableLayoutInfo,
       isZooming: true,
     });
+    this.props.onZoomStart();
   };
 
-  onZoomEnd = scale => {
-    // console.log("onZoomEnd");
-
+  onZoomMove = scale => {
+    // console.log("onZoomMove");
     const { eventTime } = this.props;
     const graphScalableLayoutInfo = new GraphScalableLayoutInfo({
       graphFixedLayoutInfo: this.state.graphFixedLayoutInfo,
-      scale: this.state.scale * scale,
+      scale: this.scale * scale,
       eventTime,
     });
+    this.setState({ graphScalableLayoutInfo });
+  };
+
+  onZoomCommit = () => {
+    // console.log("onZoomCommit");
+    this.scale = this.state.graphScalableLayoutInfo.scale; // Use last graphScalableLayoutInfo, not passed in scale. (graphScalableLayoutInfo scale is constrained)
+  };
+
+  onZoomEnd = () => {
+    // console.log("onZoomEnd");
     this.setState({
-      graphScalableLayoutInfo,
-      scale: graphScalableLayoutInfo.scale, // Use the constrained scale from the new GraphScalableLayoutInfo
       isZooming: false,
     });
+    this.props.onZoomEnd();
   };
 
   renderFixedBackground() {
@@ -147,9 +148,11 @@ class Graph extends PureComponent {
       return (
         <GraphZoomable
           graphFixedLayoutInfo={graphFixedLayoutInfo}
+          onZoomStart={this.onZoomStart}
           onZoomMove={this.onZoomMove}
+          onZoomCommit={this.onZoomCommit}
           onZoomEnd={this.onZoomEnd}
-          isEnabled={!isLoading}
+          isZoomingEnabled={!isLoading}
         >
           {this.renderFixedBackground()}
           {this.renderGraphScrollable()}
@@ -200,6 +203,8 @@ Graph.propTypes = {
   scale: PropTypes.number,
   eventTime: PropTypes.instanceOf(Date),
   navigateHowToUpload: PropTypes.func.isRequired,
+  onZoomStart: PropTypes.func.isRequired,
+  onZoomEnd: PropTypes.func.isRequired,
 };
 
 Graph.defaultProps = {
