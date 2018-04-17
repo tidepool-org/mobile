@@ -21,34 +21,34 @@ class GraphZoomable extends PureComponent {
         // console.log(
         //   `onStartShouldSetPanResponder, should recognize gesture: ${shouldStartZooming}, target: ${target}`
         // );
-        this.containerView.measure((x, y, width, height, pageX, pageY) => {
-          this.containerViewPageX = pageX;
-          this.containerViewPageY = pageY;
-          this.containerViewWidth = width;
-          this.containerViewHeight = height;
-        });
         return shouldStartZooming;
       },
       // onPanResponderReject: () => console.log("onPanResponderReject"),
-      onPanResponderStart: ({ nativeEvent: { pageX, pageY, touches } }) => {
-        // console.log(`onPanResponderStart, pageX: ${pageX}, pageY: ${pageY}`);
-        if (
-          touches.length <= 2 &&
-          this.pageCoordinatesIntersectContainerView({ pageX, pageY })
-        ) {
+      onPanResponderStart: ({ nativeEvent: { touches } }) => {
+        // console.log(`onPanResponderStart`);
+        if (touches.length <= 2) {
           if (this.isZooming) {
             this.commitZoom();
-            this.trackTouches(this.filterTouchesInView(touches));
+            this.trackTouches(this.filterTouchesOnTarget(touches));
           } else {
-            this.startZooming(this.filterTouchesInView(touches));
+            this.startZooming(this.filterTouchesOnTarget(touches));
           }
         }
       },
       onPanResponderMove: ({ nativeEvent: { touches } }) => {
-        // console.log("onPanResponderMove");
         if (touches.length <= 2) {
-          this.updateScaleAndTrackTouches(this.filterTouchesInView(touches));
+          const touchesOnTarget = this.filterTouchesOnTarget(touches);
+          this.updateScaleAndTrackTouches(touchesOnTarget);
           props.onZoomMove(this.scale);
+          // console.log(
+          //   `onPanResponderMove, touches: ${
+          //     touches.length
+          //   }, touches on target: ${touchesOnTarget.length}, tracked touches ${
+          //     this.trackedTouches.length
+          //   }, new scale: ${this.scale}`
+          // );
+        } else {
+          // console.log(`onPanResponderMove, touchCount ${touches.length}`);
         }
       },
       onPanResponderRelease: () => {
@@ -61,15 +61,6 @@ class GraphZoomable extends PureComponent {
       },
       onPanResponderTerminationRequest: () => false,
     });
-  }
-
-  pageCoordinatesIntersectContainerView({ pageX, pageY }) {
-    return (
-      pageX >= this.containerViewPageX &&
-      pageX <= this.containerViewPageX + this.containerViewWidth &&
-      pageY >= this.containerViewPageY &&
-      pageY <= this.containerViewPageY + this.containerViewHeight
-    );
   }
 
   startZooming(touches) {
@@ -102,22 +93,13 @@ class GraphZoomable extends PureComponent {
     return touches.filter(touch => touch.target === this.target).slice(0, 2);
   }
 
-  filterTouchesInView(touches) {
-    // Only include up to two touches that are contained in the view (can be different target)
-    return touches
-      .filter(touch => {
-        const { pageX, pageY } = touch;
-        return this.pageCoordinatesIntersectContainerView({ pageX, pageY });
-      })
-      .slice(0, 2);
-  }
-
   trackTouches(touches) {
     this.trackedTouches = touches;
   }
 
   updateScaleAndTrackTouches(touches) {
     const touchCount = touches.length;
+    const trackedTouchCount = this.trackedTouches.length;
     if (touchCount <= 1) {
       // If there is only one touch, and there were previously two tracked touches, then commit the zoom
       if (touchCount === 1 && this.trackedTouches.length === 2) {
@@ -125,43 +107,43 @@ class GraphZoomable extends PureComponent {
       }
       // Reset tracked touches
       this.trackTouches(touches);
-    } else {
-      const trackedTouchCount = this.trackedTouches.length;
-      if (trackedTouchCount === 1) {
-        // If there was one tracked touch before and now there are more, then reset tracked touches
-        this.trackTouches(touches);
-      } else if (trackedTouchCount === 2) {
-        // If there were two tracked touches before and there are two or more now, and the same two
-        // tracked touches exist as before, then update the scale for those two tracked touches,
-        // ignoring any new touches.
-        const trackedTouch1 = this.trackedTouches[0];
-        const trackedTouch2 = this.trackedTouches[1];
-        let trackedTouch1StillExists = false;
-        let trackedTouch2StillExists = false;
-        let touch1;
-        let touch2;
-        touches.forEach(touch => {
-          if (touch.identifier === trackedTouch1.identifier) {
-            trackedTouch1StillExists = true;
-            touch1 = touch;
-          } else if (touch.identifier === trackedTouch2.identifier) {
-            trackedTouch2StillExists = true;
-            touch2 = touch;
-          }
-        });
-        if (trackedTouch1StillExists && trackedTouch2StillExists) {
-          // Update scale
-          const currentTouchDistance = Math.abs(touch1.pageX - touch2.pageX);
-          const trackedTouchDistance = Math.abs(
-            trackedTouch1.pageX - trackedTouch2.pageX
-          );
-          this.scale = currentTouchDistance / trackedTouchDistance;
-        } else {
-          // If there were two touches before, and there are two or more now, but the two tracked
-          // touches don't still exist, then don't update scale and reset the tracked touches to an
-          // empty set. We'll start tracking again once we have one or two touches.
-          this.trackedTouches = [];
+    } else if (trackedTouchCount === 0) {
+      // Just track the new touches if we weren't tracking any before
+      this.trackTouches(touches);
+    } else if (trackedTouchCount === 1) {
+      // If there was one tracked touch before and now there are more, then reset tracked touches
+      this.trackTouches(touches);
+    } else if (trackedTouchCount === 2) {
+      // If there were two tracked touches before and there are two or more now, and the same two
+      // tracked touches exist as before, then update the scale for those two tracked touches,
+      // ignoring any new touches.
+      const trackedTouch1 = this.trackedTouches[0];
+      const trackedTouch2 = this.trackedTouches[1];
+      let trackedTouch1StillExists = false;
+      let trackedTouch2StillExists = false;
+      let touch1;
+      let touch2;
+      touches.forEach(touch => {
+        if (touch.identifier === trackedTouch1.identifier) {
+          trackedTouch1StillExists = true;
+          touch1 = touch;
+        } else if (touch.identifier === trackedTouch2.identifier) {
+          trackedTouch2StillExists = true;
+          touch2 = touch;
         }
+      });
+      if (trackedTouch1StillExists && trackedTouch2StillExists) {
+        // Update scale
+        const currentTouchDistance = Math.abs(touch1.pageX - touch2.pageX);
+        const trackedTouchDistance = Math.abs(
+          trackedTouch1.pageX - trackedTouch2.pageX
+        );
+        this.scale = currentTouchDistance / trackedTouchDistance;
+      } else {
+        // If there were two touches before, and there are two or more now, but the two tracked
+        // touches don't still exist, then don't update scale and reset the tracked touches to an
+        // empty set. We'll start tracking again once we have one or two touches.
+        this.trackedTouches = [];
       }
     }
   }
