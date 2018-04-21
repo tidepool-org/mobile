@@ -8,7 +8,7 @@ import AddOrEditNoteScreen from "../screens/AddOrEditNoteScreen";
 
 const mapStateToProps = (state, ownProps) => ({
   currentUser: state.auth,
-  currentProfile: state.profile.currentProfile,
+  currentProfile: state.currentProfile,
   note: ownProps.navigation.state.params.note,
   hashtags: state.notesFetch.hashtags,
   timestampAddNote: new Date(),

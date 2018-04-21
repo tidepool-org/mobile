@@ -6,6 +6,10 @@ import faker from "faker";
 import StoryContainerScreen from "../../__stories__/utils/StoryContainerScreen";
 import AddOrEditNoteScreen from "../../src/screens/AddOrEditNoteScreen";
 import HashtagCollection from "../../src/models/HashtagCollection";
+import {
+  DEFAULT_LOW_BG_BOUNDARY_VALUE,
+  DEFAULT_HIGH_BG_BOUNDARY_VALUE,
+} from "../../src/components/Graph/helpers";
 
 faker.seed(123);
 
@@ -13,6 +17,8 @@ const currentProfile = {
   userId: "1",
   username: "email@gmail.com",
   fullName: "Jill Jellyfish",
+  lowBGBoundary: DEFAULT_LOW_BG_BOUNDARY_VALUE,
+  highBGBoundary: DEFAULT_HIGH_BG_BOUNDARY_VALUE,
 };
 const timestampAddNote = new Date("01/01/2018 9:41 AM");
 const note = {

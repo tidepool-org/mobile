@@ -3,6 +3,7 @@ package io.tidepool.urchinRN;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.horcrux.svg.SvgPackage;
 import com.apsl.versionnumber.RNVersionNumberPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.facebook.react.ReactNativeHost;
@@ -24,7 +25,8 @@ public class MainApplication extends Application implements ReactApplication {
 
     @Override
     protected List<ReactPackage> getPackages() {
-      return Arrays.<ReactPackage>asList(new MainReactPackage(), new RNVersionNumberPackage(),
+      return Arrays.<ReactPackage>asList(new MainReactPackage(),
+            new SvgPackage(), new RNVersionNumberPackage(),
           new LinearGradientPackage(), new LaunchScreenReactPackage());
     }
 

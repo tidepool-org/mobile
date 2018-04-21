@@ -6,6 +6,10 @@ import faker from "faker";
 
 import StoryContainerScreen from "../../__stories__/utils/StoryContainerScreen";
 import HomeScreen from "../../src/screens/HomeScreen";
+import {
+  DEFAULT_LOW_BG_BOUNDARY_VALUE,
+  DEFAULT_HIGH_BG_BOUNDARY_VALUE,
+} from "../../src/components/Graph/helpers";
 
 faker.seed(123);
 
@@ -17,9 +21,12 @@ const currentUser = {
 const currentProfile = {
   userId: "1",
   fullName: "Jill Jellyfish",
+  lowBGBoundary: DEFAULT_LOW_BG_BOUNDARY_VALUE,
+  highBGBoundary: DEFAULT_HIGH_BG_BOUNDARY_VALUE,
 };
 const notesFetchAsync = () => {};
 const commentsFetchAsync = () => {};
+const graphDataFetchAsync = () => {};
 const navigateEditNote = () => {};
 const navigateAddComment = () => {};
 const navigateEditComment = () => {};
@@ -41,6 +48,7 @@ const props = {
   notesFetchAsync,
   currentProfile,
   commentsFetchAsync,
+  graphDataFetchAsync,
   navigateEditNote,
   navigateAddComment,
   navigateEditComment,

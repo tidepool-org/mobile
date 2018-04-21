@@ -1,8 +1,8 @@
 import React, { PureComponent } from "react";
-import { Svg } from "expo";
 import PropTypes from "prop-types";
 import { withTheme } from "glamorous-native";
 
+import { Svg, Path } from "../../svg-exports";
 import { ThemePropType } from "../../prop-types/theme";
 
 class GraphYAxisBGBoundaryLines extends PureComponent {
@@ -22,7 +22,7 @@ class GraphYAxisBGBoundaryLines extends PureComponent {
     const d = `M${x1} ${y} L${x2} ${y}`;
 
     return (
-      <Svg.Path
+      <Path
         key={value}
         d={d}
         stroke={theme.graphLineStrokeColor}

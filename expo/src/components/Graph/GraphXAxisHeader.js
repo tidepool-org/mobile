@@ -1,10 +1,10 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { Svg } from "expo";
 import glamorous, { withTheme } from "glamorous-native";
 import format from "date-fns/format";
 import addSeconds from "date-fns/add_seconds";
 
+import { Svg, Path } from "../../svg-exports";
 import { ThemePropType } from "../../prop-types/theme";
 
 class GraphXAxisHeader extends PureComponent {
@@ -61,7 +61,7 @@ class GraphXAxisHeader extends PureComponent {
         markerXCoordinates[i]
       } ${headerHeight}`;
       paths.push(
-        <Svg.Path
+        <Path
           key={i}
           d={verticalLinePathDescription}
           stroke={theme.graphLineStrokeColor}

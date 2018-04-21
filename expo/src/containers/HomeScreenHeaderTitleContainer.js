@@ -7,7 +7,7 @@ import HomeScreenHeaderTitle from "../components/HomeScreenHeaderTitle";
 import { ProfilePropType } from "../prop-types/profile";
 
 const mapStateToProps = state => ({
-  currentProfile: state.profile.currentProfile,
+  currentProfile: state.currentProfile,
 });
 
 const HomeScreenHeaderTitleWithTheme = ({ currentProfile }) => (

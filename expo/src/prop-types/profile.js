@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 export const ProfilePropType = PropTypes.shape({
   userId: PropTypes.string.isRequired,
   fullName: PropTypes.string.isRequired,
+  lowBGBoundary: PropTypes.number.isRequired,
+  highBGBoundary: PropTypes.number.isRequired,
 });
 
 export const ProfileListItemPropType = PropTypes.shape({

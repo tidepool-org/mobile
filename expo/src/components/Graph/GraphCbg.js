@@ -1,10 +1,10 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { Svg } from "expo";
 import { withTheme } from "glamorous-native";
 
 import { ThemePropType } from "../../prop-types/theme";
 import { MAX_BG_VALUE } from "./helpers";
+import { Svg, Circle, Symbol, Use } from "../../svg-exports";
 
 class GraphCbg extends PureComponent {
   static renderSamplesSvgElements({
@@ -19,37 +19,37 @@ class GraphCbg extends PureComponent {
     const result = [];
 
     result.push(
-      <Svg.Symbol
+      <Symbol
         key={result.length + 1}
         id="normal"
         viewBox="0 0 7 7"
         width="7"
         height="7"
       >
-        <Svg.Circle r="3.5" fill={theme.graphBgNormalColor} stroke="none" />
-      </Svg.Symbol>
+        <Circle r="3.5" fill={theme.graphBgNormalColor} stroke="none" />
+      </Symbol>
     );
     result.push(
-      <Svg.Symbol
+      <Symbol
         key={result.length + 1}
         id="low"
         viewBox="0 0 7 7"
         width="7"
         height="7"
       >
-        <Svg.Circle r="3.5" fill={theme.graphBgLowColor} stroke="none" />
-      </Svg.Symbol>
+        <Circle r="3.5" fill={theme.graphBgLowColor} stroke="none" />
+      </Symbol>
     );
     result.push(
-      <Svg.Symbol
+      <Symbol
         key={result.length + 1}
         id="high"
         viewBox="0 0 7 7"
         width="7"
         height="7"
       >
-        <Svg.Circle r="3.5" fill={theme.graphBgHighColor} stroke="none" />
-      </Svg.Symbol>
+        <Circle r="3.5" fill={theme.graphBgHighColor} stroke="none" />
+      </Symbol>
     );
 
     for (let i = 0; i < cbgData.length; i += 1) {
@@ -70,7 +70,7 @@ class GraphCbg extends PureComponent {
         );
 
       result.push(
-        <Svg.Use
+        <Use
           key={result.length + 1}
           href={symbol}
           x={x}

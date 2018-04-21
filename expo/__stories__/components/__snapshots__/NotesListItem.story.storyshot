@@ -424,6 +424,16 @@ exports[`Storyshots NotesListItem initially expanded 1`] = `
             </Text>
           </View>
           <View
+            onLayout={[Function]}
+            style={
+              Array [
+                Object {
+                  "height": 180,
+                },
+              ]
+            }
+          />
+          <View
             style={
               Array [
                 Object {

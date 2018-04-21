@@ -45,6 +45,16 @@ class NotesList extends PureComponent {
     }
   }
 
+  onGraphZoomStart = () => {
+    // console.log("onGraphZoomStart");
+    this.setState({ isZoomingGraph: true });
+  };
+
+  onGraphZoomEnd = () => {
+    // console.log("onGraphZoomEnd");
+    this.setState({ isZoomingGraph: false });
+  };
+
   onRefresh = () => {
     const { notesFetchAsync, currentProfile } = this.props;
 
@@ -62,16 +72,21 @@ class NotesList extends PureComponent {
       currentProfile={this.props.currentProfile}
       commentsFetchData={this.props.commentsFetchDataByMessageId[item.id]}
       commentsFetchAsync={this.props.commentsFetchAsync}
+      graphDataFetchData={this.props.graphDataFetchDataByMessageId[item.id]}
+      graphDataFetchAsync={this.props.graphDataFetchAsync}
       navigateEditNote={this.props.navigateEditNote}
       onDeleteNotePressed={this.props.onDeleteNotePressed}
       navigateAddComment={this.props.navigateAddComment}
       navigateEditComment={this.props.navigateEditComment}
       onDeleteCommentPressed={this.props.onDeleteCommentPressed}
+      onGraphZoomStart={this.onGraphZoomStart}
+      onGraphZoomEnd={this.onGraphZoomEnd}
     />
   );
 
   render() {
     const { notes } = this.props;
+    const { isZoomingGraph } = this.state;
 
     return (
       <glamorous.FlatList
@@ -88,6 +103,7 @@ class NotesList extends PureComponent {
             onRefresh={this.onRefresh}
           />
         }
+        scrollEnabled={!isZoomingGraph}
       />
     );
   }
@@ -115,6 +131,15 @@ NotesList.propTypes = {
       fetched: PropTypes.bool,
     })
   ),
+  graphDataFetchAsync: PropTypes.func.isRequired,
+  graphDataFetchDataByMessageId: PropTypes.objectOf(
+    PropTypes.shape({
+      graphData: PropTypes.object,
+      errorMessage: PropTypes.string,
+      fetching: PropTypes.bool,
+      fetched: PropTypes.bool,
+    })
+  ),
   navigateEditNote: PropTypes.func.isRequired,
   onDeleteNotePressed: PropTypes.func.isRequired,
   navigateAddComment: PropTypes.func.isRequired,
@@ -126,6 +151,7 @@ NotesList.defaultProps = {
   errorMessage: "",
   fetching: false,
   commentsFetchDataByMessageId: {},
+  graphDataFetchDataByMessageId: {},
 };
 
 export default withTheme(NotesList);

@@ -1,6 +1,8 @@
 import axios from "axios";
 import uuidv4 from "uuid/v4";
 
+import GraphData from "../../src/models/GraphData";
+
 // TODO: api - default timeout for requests
 
 // TODO: api - update User-Agent in the header for all requests to indicate the app name and version, build info,
@@ -61,6 +63,20 @@ class TidepoolApi {
       }));
 
     return { userId, fullName, errorMessage };
+  }
+
+  async fetchProfileSettingsAsync({ userId }) {
+    const { settings, errorMessage } = await this.fetchProfileSettings({
+      userId,
+    })
+      .then(response => ({
+        settings: response.settings,
+      }))
+      .catch(error => ({
+        errorMessage: error.message,
+      }));
+      
+    return { settings, errorMessage };
   }
 
   async fetchNotesAsync({ userId }) {
@@ -271,6 +287,34 @@ class TidepoolApi {
     return { errorMessage };
   }
 
+  async fetchGraphDataAsync({
+    userId,
+    noteDate,
+    startDate,
+    endDate,
+    objectTypes,
+    lowBGBoundary,
+    highBGBoundary,
+  }) {
+    const { graphData, errorMessage } = await this.fetchGraphData({
+      userId,
+      noteDate,
+      startDate,
+      endDate,
+      objectTypes,
+      lowBGBoundary,
+      highBGBoundary,
+    })
+      .then(response => ({
+        graphData: response.graphData,
+      }))
+      .catch(error => ({
+        errorMessage: error.message,
+      }));
+
+    return { graphData, errorMessage };
+  }
+
   //
   // Lower-level promise-based methods
   //
@@ -367,6 +411,35 @@ class TidepoolApi {
           const profile = response.data;
           const { fullName } = profile;
           resolve({ userId, fullName });
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+  }
+
+  fetchProfileSettings({ userId }) {
+    const method = "get";
+    const url = `/metadata/${userId}/settings`;
+    const baseURL = this.baseUrl;
+    const headers = { "x-tidepool-session-token": this.sessionToken };
+
+    return new Promise((resolve, reject) => {
+      axios({ method, url, baseURL, headers })
+        .then(({ data: { bgTarget } }) => {
+          if (bgTarget && bgTarget.low && bgTarget.high) {
+            const settings = {
+              lowBGBoundary: bgTarget.low,
+              highBGBoundary: bgTarget.high,
+            };
+            resolve({ settings });
+          } else {
+            reject(
+              new Error(
+                "No bgTarget was found in settings response data for user."
+              )
+            );
+          }
         })
         .catch(error => {
           reject(error);
@@ -571,6 +644,104 @@ class TidepoolApi {
         });
     });
   }
+
+  fetchGraphData({
+    userId,
+    noteDate,
+    startDate,
+    endDate,
+    objectTypes,
+    lowBGBoundary,
+    highBGBoundary,
+  }) {
+    const method = "get";
+    const url = `/data/${userId}`;
+    const params = {
+      endDate: endDate.toISOString(),
+      startDate: startDate.toISOString(),
+      type: objectTypes,
+    };
+    const baseURL = this.baseUrl;
+    const headers = { "x-tidepool-session-token": this.sessionToken };
+
+    return new Promise((resolve, reject) => {
+      axios({ method, url, params, baseURL, headers })
+        .then(response => {
+          const noteTimeSeconds = noteDate.getTime() / 1000;
+          const graphData = new GraphData();
+          graphData.addResponseData(response.data);
+          graphData.process({
+            eventTimeSeconds: noteTimeSeconds,
+            timeIntervalSeconds: 60 * 60 * 12, // TODO: my - 0 - calculate this from start/End
+            lowBGBoundary,
+            highBGBoundary,
+          });
+          resolve({ graphData });
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+  }
+  /*
+    func getReadOnlyUserData(_ startDate: Date? = nil, endDate: Date? = nil, objectTypes: String = "smbg,bolus,cbg,wizard,basal", completion: @escaping (Result<JSON>) -> (Void)) {
+        // Set our endpoint for the user data
+        // TODO: centralize define of read-only events!
+        // request format is like: https://api.tidepool.org/data/f934a287c4?endDate=2015-11-17T08%3A00%3A00%2E000Z&startDate=2015-11-16T12%3A00%3A00%2E000Z&type=smbg%2Cbolus%2Ccbg%2Cwizard%2Cbasal
+        let userId = TidepoolMobileDataController.sharedInstance.currentViewedUser!.userid
+        let endpoint = "data/" + userId
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        DDLogInfo("getReadOnlyUserData request start")
+        // TODO: If there is no data returned, I get a failure case with status code 200, and error FAILURE: Error Domain=NSCocoaErrorDomain Code=3840 "Invalid value around character 0." UserInfo={NSDebugDescription=Invalid value around character 0.} ] Maybe an Alamofire issue?
+        var parameters: Dictionary = ["type": objectTypes]
+        if let startDate = startDate {
+            // NOTE: start date is excluded (i.e., dates > start date)
+            parameters.updateValue(TidepoolMobileUtils.dateToJSON(startDate), forKey: "startDate")
+        }
+        if let endDate = endDate {
+            // NOTE: end date is included (i.e., dates <= end date)
+            parameters.updateValue(TidepoolMobileUtils.dateToJSON(endDate), forKey: "endDate")
+        }
+        sendRequest(.get, endpoint: endpoint, parameters: parameters as [String : AnyObject]?).responseJSON { response in
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            DDLogInfo("getReadOnlyUserData request complete")
+            if (response.result.isSuccess) {
+                let json = JSON(response.result.value!)
+                var validResult = true
+                if let status = json["status"].number {
+                    let statusCode = Int(status)
+                    DDLogInfo("getReadOnlyUserData includes status field: \(statusCode)")
+                    // TODO: determine if any status is indicative of failure here! Note that if call was successful, there will be no status field in the json result. The only verified error response is 403 which happens when we pass an invalid token.
+                    if statusCode == 401 || statusCode == 403 {
+                        validResult = false
+                        self.lastNetworkError = statusCode
+                        completion(Result.failure(NSError(domain: self.kTidepoolMobileErrorDomain,
+                            code: statusCode,
+                            userInfo: nil)))
+                    }
+                }
+                if validResult {
+                    completion(Result.success(json))
+                }
+            } else {
+                // Failure: typically, no data were found:
+                // Error Domain=NSCocoaErrorDomain Code=3840 "Invalid value around character 0." UserInfo={NSDebugDescription=Invalid value around character 0.}
+                if let theResponse = response.response {
+                    let statusCode = theResponse.statusCode
+                    if statusCode != 200 {
+                        DDLogError("Failure status code: \(statusCode) for getReadOnlyUserData")
+                        APIConnector.connector().trackMetric("Tidepool Data Fetch Failure - Code " + String(statusCode))
+                    }
+                    // Otherwise, just indicates no data were found...
+                } else {
+                    DDLogError("Invalid response for getReadOnlyUserData metric")
+                }
+                completion(Result.failure(response.result.error!))
+            }
+        }
+    }
+  
+  */
 }
 
 export default TidepoolApi;
