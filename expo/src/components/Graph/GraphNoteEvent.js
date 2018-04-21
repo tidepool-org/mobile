@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { Svg } from "expo";
+
+import { Svg, Path, Polygon } from "../../svg-exports";
 
 class GraphNoteEvent extends PureComponent {
   static renderNoteEventSvgElements({
@@ -20,7 +21,7 @@ class GraphNoteEvent extends PureComponent {
       triangleWidth / 2}, 0 ${x}, ${triangleHeight}`;
 
     const svgElements = [
-      <Svg.Path
+      <Path
         key={1}
         d={verticalLinePathDescription}
         stroke="black"
@@ -28,7 +29,7 @@ class GraphNoteEvent extends PureComponent {
         strokeLineJoin="round"
         strokeWidth="1.5"
       />,
-      <Svg.Polygon
+      <Polygon
         key={2}
         points={trianglePoints}
         fill="black"

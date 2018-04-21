@@ -8,6 +8,8 @@ import Graph from "../../src/components/Graph/Graph";
 import {
   makeYAxisLabelValues,
   makeYAxisBGBoundaryValues,
+  DEFAULT_LOW_BG_BOUNDARY_VALUE,
+  DEFAULT_HIGH_BG_BOUNDARY_VALUE,
 } from "../../src/components/Graph/helpers";
 import Urls from "../../src/constants/Urls";
 import GraphData from "../../src/models/GraphData";
@@ -40,8 +42,14 @@ graphData2.process({
 });
 
 const isLoading = false;
-const yAxisLabelValues = makeYAxisLabelValues({});
-const yAxisBGBoundaryValues = makeYAxisBGBoundaryValues({});
+const yAxisLabelValues = makeYAxisLabelValues({
+  lowBGBoundary: DEFAULT_LOW_BG_BOUNDARY_VALUE,
+  highBGBoundary: DEFAULT_HIGH_BG_BOUNDARY_VALUE,
+});
+const yAxisBGBoundaryValues = makeYAxisBGBoundaryValues({
+  lowBGBoundary: DEFAULT_LOW_BG_BOUNDARY_VALUE,
+  highBGBoundary: DEFAULT_HIGH_BG_BOUNDARY_VALUE,
+});
 const navigateHowToUpload = () => {
   Linking.openURL(Urls.howToUpload);
 };

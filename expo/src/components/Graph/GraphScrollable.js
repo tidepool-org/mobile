@@ -1,9 +1,9 @@
 import React, { PureComponent } from "react";
 import { Platform } from "react-native";
 import PropTypes from "prop-types";
-import { Svg } from "expo";
 import glamorous, { withTheme } from "glamorous-native";
 
+import { Svg } from "../../svg-exports";
 import { ThemePropType } from "../../prop-types/theme";
 import { GraphNoteEventClass } from "./GraphNoteEvent";
 import { GraphXAxisHeaderClass } from "./GraphXAxisHeader";

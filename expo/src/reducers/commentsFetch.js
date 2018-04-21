@@ -16,7 +16,7 @@ function commentsFetch(state = initialState, action) {
 
   switch (action.type) {
     case AUTH_SIGN_IN_RESET:
-    case NOTES_FETCH_DID_START: // Also reset to initial state if a refresh of notes list starts
+    case NOTES_FETCH_DID_START:
       nextState = initialState;
       break;
     case COMMENTS_FETCH_DID_START: {

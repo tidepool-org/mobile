@@ -1,8 +1,22 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { Alert, Animated, ViewPropTypes, LayoutAnimation } from "react-native";
+import {
+  Alert,
+  Animated,
+  LayoutAnimation,
+  Linking,
+  ViewPropTypes,
+} from "react-native";
 import glamorous, { withTheme } from "glamorous-native";
+import addHours from "date-fns/add_hours";
+import subHours from "date-fns/sub_hours";
 
+import Urls from "../constants/Urls";
+import {
+  makeYAxisLabelValues,
+  makeYAxisBGBoundaryValues,
+} from "./Graph/helpers";
+import Graph from "./Graph/Graph";
 import HashtagText from "./HashtagText";
 import LinearGradient from "./LinearGradient";
 import AddCommentButton from "./AddCommentButton";
@@ -57,12 +71,23 @@ class NotesListItem extends PureComponent {
     if (this.props.commentsFetchData.errorMessage) {
       NotesListItem.showErrorMessageAlert();
     }
+
+    if (this.props.graphDataFetchData.errorMessage) {
+      NotesListItem.showErrorMessageAlert();
+    }
   }
 
   componentWillReceiveProps(nextProps) {
-    if (
+    const shouldShowCommentsFetchErrorMessage =
       nextProps.commentsFetchData.errorMessage &&
-      !this.props.commentsFetchData.errorMessage
+      !this.props.commentsFetchData.errorMessage;
+    const shouldShowGraphDataFetchErrorMessage =
+      nextProps.graphDataFetchData.errorMessage &&
+      !this.props.graphDataFetchData.errorMessage;
+
+    if (
+      shouldShowCommentsFetchErrorMessage ||
+      shouldShowGraphDataFetchErrorMessage
     ) {
       NotesListItem.showErrorMessageAlert();
     }
@@ -81,10 +106,32 @@ class NotesListItem extends PureComponent {
 
   onPressNote = () => {
     if (this.props.allowExpansionToggle) {
+      const {
+        note,
+        currentProfile: { userId, lowBGBoundary, highBGBoundary },
+      } = this.props;
       const wasExpanded = this.state.expanded;
       this.setState({ expanded: !wasExpanded });
-      if (!wasExpanded && !this.props.commentsFetchData.fetching) {
-        this.props.commentsFetchAsync({ messageId: this.props.note.id });
+      if (!wasExpanded) {
+        if (!this.props.commentsFetchData.fetching) {
+          this.props.commentsFetchAsync({ messageId: note.id });
+        }
+        if (!this.props.graphDataFetchData.fetching) {
+          const { timestamp } = note;
+          const startDate = subHours(timestamp, 12);
+          const endDate = addHours(timestamp, 12);
+          const objectTypes = "smbg,bolus,cbg,wizard,basal";
+          this.props.graphDataFetchAsync({
+            messageId: note.id,
+            userId,
+            noteDate: timestamp,
+            startDate,
+            endDate,
+            objectTypes,
+            lowBGBoundary,
+            highBGBoundary,
+          });
+        }
       }
       LayoutAnimation.configureNext({
         ...LayoutAnimation.Presets.easeInEaseOut,
@@ -262,6 +309,49 @@ class NotesListItem extends PureComponent {
     );
   }
 
+  renderGraph() {
+    if (this.state.expanded) {
+      const {
+        graphDataFetchData: {
+          fetching,
+          graphData: { cbgData, smbgData },
+        },
+        currentProfile: { lowBGBoundary, highBGBoundary },
+        note: { timestamp: eventTime },
+      } = this.props;
+
+      const isLoading = fetching;
+      const yAxisLabelValues = makeYAxisLabelValues({
+        lowBGBoundary,
+        highBGBoundary,
+      });
+      const yAxisBGBoundaryValues = makeYAxisBGBoundaryValues({
+        lowBGBoundary,
+        highBGBoundary,
+      });
+      const navigateHowToUpload = () => {
+        Linking.openURL(Urls.howToUpload);
+      };
+
+      const { onGraphZoomStart, onGraphZoomEnd } = this.props;
+      return (
+        <Graph
+          isLoading={isLoading}
+          yAxisLabelValues={yAxisLabelValues}
+          yAxisBGBoundaryValues={yAxisBGBoundaryValues}
+          cbgData={cbgData}
+          smbgData={smbgData}
+          eventTime={eventTime}
+          navigateHowToUpload={navigateHowToUpload}
+          onZoomStart={onGraphZoomStart}
+          onZoomEnd={onGraphZoomEnd}
+        />
+      );
+    }
+
+    return null;
+  }
+
   renderComments() {
     const { currentUser, allowEditing, note } = this.props;
 
@@ -318,6 +408,7 @@ class NotesListItem extends PureComponent {
           {this.renderDateSection()}
           {this.renderNote()}
         </glamorous.TouchableOpacity>
+        {this.renderGraph()}
         {this.renderComments()}
         {this.renderAddCommentButton()}
         {NotesListItem.renderSeparator()}
@@ -346,11 +437,20 @@ NotesListItem.propTypes = {
     fetching: PropTypes.bool,
     fetched: PropTypes.bool,
   }),
+  graphDataFetchAsync: PropTypes.func.isRequired,
+  graphDataFetchData: PropTypes.shape({
+    graphData: PropTypes.object,
+    errorMessage: PropTypes.string,
+    fetching: PropTypes.bool,
+    fetched: PropTypes.bool,
+  }),
   navigateEditNote: PropTypes.func.isRequired,
   onDeleteNotePressed: PropTypes.func.isRequired,
   navigateAddComment: PropTypes.func.isRequired,
   navigateEditComment: PropTypes.func.isRequired,
   onDeleteCommentPressed: PropTypes.func.isRequired,
+  onGraphZoomStart: PropTypes.func.isRequired,
+  onGraphZoomEnd: PropTypes.func.isRequired,
 };
 
 NotesListItem.defaultProps = {
@@ -360,6 +460,12 @@ NotesListItem.defaultProps = {
   allowExpansionToggle: true,
   commentsFetchData: {
     comments: [],
+    errorMessage: "",
+    fetching: false,
+    fetched: false,
+  },
+  graphDataFetchData: {
+    graphData: {},
     errorMessage: "",
     fetching: false,
     fetched: false,

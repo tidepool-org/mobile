@@ -13,7 +13,7 @@ const mapStateToProps = state => {
     profileListData = state.profilesFetch.profiles.map(profile => ({
       ...profile,
       currentUserId: state.auth.userId,
-      selectedProfileUserId: state.profile.currentProfile.userId,
+      selectedProfileUserId: state.currentProfile.userId,
     }));
   }
 
@@ -21,7 +21,7 @@ const mapStateToProps = state => {
     profileListData,
     errorMessage: state.profilesFetch.errorMessage,
     fetching: state.profilesFetch.fetching,
-    selectedProfileUserId: state.profile.currentProfile.userId,
+    selectedProfileUserId: state.currentProfile.userId,
     currentUser: state.auth,
   };
 };

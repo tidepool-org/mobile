@@ -8,7 +8,7 @@ import AddOrEditCommentScreen from "../screens/AddOrEditCommentScreen";
 
 const mapStateToProps = (state, ownProps) => ({
   currentUser: state.auth,
-  currentProfile: state.profile.currentProfile,
+  currentProfile: state.currentProfile,
   note: ownProps.navigation.state.params.note,
   comment: ownProps.navigation.state.params.comment,
   timestampAddComment: new Date(),

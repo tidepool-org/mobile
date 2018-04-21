@@ -651,6 +651,7 @@ exports[`Storyshots HomeScreen default 1`] = `
         />
       }
       renderItem={[Function]}
+      scrollEnabled={true}
       scrollEventThrottle={50}
       stickyHeaderIndices={Array []}
       style={

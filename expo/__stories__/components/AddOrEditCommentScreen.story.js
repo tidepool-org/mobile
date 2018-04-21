@@ -10,6 +10,10 @@ import addMinutes from "date-fns/add_minutes";
 
 import StoryContainerScreen from "../../__stories__/utils/StoryContainerScreen";
 import AddOrEditCommentScreen from "../../src/screens/AddOrEditCommentScreen";
+import {
+  DEFAULT_LOW_BG_BOUNDARY_VALUE,
+  DEFAULT_HIGH_BG_BOUNDARY_VALUE,
+} from "../../src/components/Graph/helpers";
 
 faker.seed(123);
 
@@ -17,6 +21,8 @@ const currentProfile = {
   userId: "1",
   username: "email@gmail.com",
   fullName: "Jill Jellyfish",
+  lowBGBoundary: DEFAULT_LOW_BG_BOUNDARY_VALUE,
+  highBGBoundary: DEFAULT_HIGH_BG_BOUNDARY_VALUE,
 };
 const timestampEarlierToday = setMinutes(setHours(startOfToday(), 9), 41);
 const timestampEarlierYesterday = setMinutes(

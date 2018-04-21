@@ -1,5 +1,5 @@
 import { AsyncStorage } from "react-native";
-import { profileRestoreAndSetAsync } from "../actions/profile";
+import { currentProfileRestoreAsync } from "../actions/currentProfile";
 import { navigateHome, navigateSignIn } from "../actions/navigation";
 import api from "../api";
 
@@ -79,7 +79,7 @@ export const authSignInAsync = ({ username, password }) => async dispatch => {
       try {
         AsyncStorage.setItem(AUTH_USER_KEY, JSON.stringify(authUser));
         dispatch(authSignInDidSucceed({ authUser }));
-        await dispatch(profileRestoreAndSetAsync({ authUser }));
+        await dispatch(currentProfileRestoreAsync({ authUser }));
         dispatch(navigateHome());
       } catch (error) {
         dispatch(authSignInDidFail(error.errorMessage));
@@ -145,7 +145,7 @@ export const authRefreshTokenOrSignInAsync = () => async dispatch => {
       authUser.sessionToken = sessionToken;
       authUser.userId = userId;
       dispatch(authRefreshTokenDidSucceed({ authUser }));
-      await dispatch(profileRestoreAndSetAsync({ authUser }));
+      await dispatch(currentProfileRestoreAsync({ authUser }));
       dispatch(navigateHome());
     }
   }

@@ -1,8 +1,8 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { Svg } from "expo";
 import { withTheme } from "glamorous-native";
 
+import { Svg, Circle, Text } from "../../svg-exports";
 import { ThemePropType } from "../../prop-types/theme";
 import { MAX_BG_VALUE } from "./helpers";
 
@@ -66,7 +66,7 @@ class GraphSmbg extends PureComponent {
       }
       if (!nextSampleLabelMightIntersect) {
         result.push(
-          <Svg.Text
+          <Text
             key={i + 0.1}
             {...theme.graphSmbgLabelStyle}
             fill={color}
@@ -76,11 +76,11 @@ class GraphSmbg extends PureComponent {
             textAnchor="middle"
           >
             {value}
-          </Svg.Text>
+          </Text>
         );
       }
       result.push(
-        <Svg.Circle
+        <Circle
           key={i + 0.2}
           cx={x}
           cy={y}

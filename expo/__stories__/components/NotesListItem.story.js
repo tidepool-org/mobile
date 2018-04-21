@@ -11,6 +11,10 @@ import addMinutes from "date-fns/add_minutes";
 
 import StoryContainerComponent from "../../__stories__/utils/StoryContainerComponent";
 import NotesListItem from "../../src/components/NotesListItem";
+import {
+  DEFAULT_LOW_BG_BOUNDARY_VALUE,
+  DEFAULT_HIGH_BG_BOUNDARY_VALUE,
+} from "../../src/components/Graph/helpers";
 
 faker.seed(123);
 
@@ -22,6 +26,8 @@ const currentUser = {
 const currentProfile = {
   userId: "1",
   fullName: "Jill Jellyfish",
+  lowBGBoundary: DEFAULT_LOW_BG_BOUNDARY_VALUE,
+  highBGBoundary: DEFAULT_HIGH_BG_BOUNDARY_VALUE,
 };
 const timestamp = new Date("01/01/2018 9:41 AM");
 const timestampEarlyToday = setMinutes(setHours(startOfToday(), 9), 41);
@@ -50,6 +56,12 @@ const noteYesterday = {
   )}`,
   userId: "1",
 };
+const graphDataFetchData = {
+  graphData: {},
+  fetching: false,
+  fetched: true,
+};
+const graphDataFetchAsync = () => {};
 const commentsFetchData = {
   comments: [
     {
@@ -89,16 +101,22 @@ const onDeleteNotePressed = () => {};
 const navigateAddComment = () => {};
 const navigateEditComment = () => {};
 const onDeleteCommentPressed = () => {};
+const onGraphZoomStart = () => {};
+const onGraphZoomEnd = () => {};
 const props = {
   currentUser,
   currentProfile,
   commentsFetchAsync,
   commentsFetchData,
+  graphDataFetchAsync,
+  graphDataFetchData,
   navigateEditNote,
   onDeleteNotePressed,
   navigateAddComment,
   navigateEditComment,
   onDeleteCommentPressed,
+  onGraphZoomStart,
+  onGraphZoomEnd,
 };
 
 storiesOf("NotesListItem", module).add("default", () => (

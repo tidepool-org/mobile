@@ -5,9 +5,10 @@ import appVersion from "./appVersion";
 import auth from "./auth";
 import apiEnvironment from "./apiEnvironment";
 import commentsFetch from "./commentsFetch";
+import graphDataFetch from "./graphDataFetch";
 import navigation from "./navigation";
 import notesFetch from "./notesFetch";
-import profile from "./profile";
+import currentProfile from "./currentProfile";
 import profilesFetch from "./profilesFetch";
 
 const reducers = combineReducers({
@@ -16,9 +17,10 @@ const reducers = combineReducers({
   auth,
   apiEnvironment,
   commentsFetch,
+  graphDataFetch,
   navigation,
   notesFetch,
-  profile,
+  currentProfile,
   profilesFetch,
 });
 

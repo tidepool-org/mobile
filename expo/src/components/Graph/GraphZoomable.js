@@ -17,9 +17,11 @@ class GraphZoomable extends PureComponent {
         this.target = target;
         const filteredTouches = this.filterTouchesOnTarget(touches);
         const shouldStartZooming =
-          props.isZoomingEnabled && filteredTouches.length === 2;
+          this.props.isZoomingEnabled && filteredTouches.length === 2;
         // console.log(
-        //   `onStartShouldSetPanResponder, should recognize gesture: ${shouldStartZooming}, target: ${target}`
+        //   `onStartShouldSetPanResponder, should recognize gesture: ${shouldStartZooming}, target: ${target}, isZoomingEnabled: ${
+        //     this.props.isZoomingEnabled
+        //   }`
         // );
         return shouldStartZooming;
       },
@@ -39,7 +41,7 @@ class GraphZoomable extends PureComponent {
         if (touches.length <= 2) {
           const touchesOnTarget = this.filterTouchesOnTarget(touches);
           this.updateScaleAndTrackTouches(touchesOnTarget);
-          props.onZoomMove(this.scale);
+          this.props.onZoomMove(this.scale);
           // console.log(
           //   `onPanResponderMove, touches: ${
           //     touches.length
@@ -149,7 +151,9 @@ class GraphZoomable extends PureComponent {
   }
 
   render() {
-    // console.log("GraphZoomable: render");
+    // console.log(
+    //   `GraphZoomable: render, isZoomingEnabled: ${this.props.isZoomingEnabled}`
+    // );
 
     const { graphFixedLayoutInfo } = this.props;
 

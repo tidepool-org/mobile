@@ -82,8 +82,10 @@ class HomeScreen extends PureComponent {
   render() {
     const {
       currentUser,
-      commentsFetchDataByMessageId,
       commentsFetchAsync,
+      commentsFetchDataByMessageId,
+      graphDataFetchAsync,
+      graphDataFetchDataByMessageId,
       currentProfile,
       errorMessage,
       fetching,
@@ -107,6 +109,8 @@ class HomeScreen extends PureComponent {
             notesFetchAsync={notesFetchAsync}
             commentsFetchAsync={commentsFetchAsync}
             commentsFetchDataByMessageId={commentsFetchDataByMessageId}
+            graphDataFetchAsync={graphDataFetchAsync}
+            graphDataFetchDataByMessageId={graphDataFetchDataByMessageId}
             navigateEditNote={navigateEditNote}
             onDeleteNotePressed={this.onDeleteNotePressed}
             navigateAddComment={navigateAddComment}
@@ -141,6 +145,15 @@ HomeScreen.propTypes = {
       fetched: PropTypes.bool,
     })
   ),
+  graphDataFetchAsync: PropTypes.func.isRequired,
+  graphDataFetchDataByMessageId: PropTypes.objectOf(
+    PropTypes.shape({
+      graphData: PropTypes.object,
+      errorMessage: PropTypes.string,
+      fetching: PropTypes.bool,
+      fetched: PropTypes.bool,
+    })
+  ),
   navigateEditNote: PropTypes.func.isRequired,
   navigateAddComment: PropTypes.func.isRequired,
   navigateEditComment: PropTypes.func.isRequired,
@@ -152,6 +165,7 @@ HomeScreen.defaultProps = {
   errorMessage: "",
   fetching: false,
   commentsFetchDataByMessageId: {},
+  graphDataFetchDataByMessageId: {},
 };
 
 export default HomeScreen;
