@@ -668,11 +668,13 @@ class TidepoolApi {
       axios({ method, url, params, baseURL, headers })
         .then(response => {
           const noteTimeSeconds = noteDate.getTime() / 1000;
+          const startDateSeconds = startDate.getTime() / 1000;
+          const endDateSeconds = endDate.getTime() / 1000;
           const graphData = new GraphData();
           graphData.addResponseData(response.data);
           graphData.process({
             eventTimeSeconds: noteTimeSeconds,
-            timeIntervalSeconds: 60 * 60 * 12, // TODO: my - 0 - calculate this from start/End
+            timeIntervalSeconds: endDateSeconds - startDateSeconds,
             lowBGBoundary,
             highBGBoundary,
           });
