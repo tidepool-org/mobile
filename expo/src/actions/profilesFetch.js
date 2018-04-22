@@ -1,28 +1,28 @@
 import api from "../api";
 
-export const PROFILES_FETCH_DID_START = "PROFILES_FETCH_DID_START";
-export const PROFILES_FETCH_DID_SUCCEED = "PROFILES_FETCH_DID_SUCCEED";
-export const PROFILES_FETCH_DID_FAIL = "PROFILES_FETCH_DID_FAIL";
+const PROFILES_FETCH_DID_START = "PROFILES_FETCH_DID_START";
+const PROFILES_FETCH_DID_SUCCEED = "PROFILES_FETCH_DID_SUCCEED";
+const PROFILES_FETCH_DID_FAIL = "PROFILES_FETCH_DID_FAIL";
 
 // TODO: fetch - cancel outstanding request if we get another request to start fetching while one is in progress.
 // TODO: fetch - cancel outstanding request if we sign out while fetch is in progress
 
-export const profilesFetchDidStart = ({ userId }) => ({
+const profilesFetchDidStart = ({ userId }) => ({
   type: PROFILES_FETCH_DID_START,
   payload: { userId },
 });
 
-export const profilesFetchDidSucceed = ({ userId, profiles }) => ({
+const profilesFetchDidSucceed = ({ userId, profiles }) => ({
   type: PROFILES_FETCH_DID_SUCCEED,
   payload: { userId, profiles },
 });
 
-export const profilesFetchDidFail = ({ userId, errorMessage }) => ({
+const profilesFetchDidFail = ({ userId, errorMessage }) => ({
   type: PROFILES_FETCH_DID_FAIL,
   payload: { userId, errorMessage },
 });
 
-export const profilesFetchAsync = ({ userId, fullName }) => async dispatch => {
+const profilesFetchAsync = ({ userId, fullName }) => async dispatch => {
   dispatch(profilesFetchDidStart(PROFILES_FETCH_DID_START));
 
   const { profiles, errorMessage } = await api().fetchViewableUserProfilesAsync(
@@ -34,4 +34,14 @@ export const profilesFetchAsync = ({ userId, fullName }) => async dispatch => {
   } else {
     dispatch(profilesFetchDidSucceed({ userId, profiles }));
   }
+};
+
+export {
+  profilesFetchDidStart,
+  profilesFetchDidSucceed,
+  profilesFetchDidFail,
+  profilesFetchAsync,
+  PROFILES_FETCH_DID_START,
+  PROFILES_FETCH_DID_SUCCEED,
+  PROFILES_FETCH_DID_FAIL,
 };

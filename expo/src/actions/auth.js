@@ -3,24 +3,24 @@ import { currentProfileRestoreAsync } from "../actions/currentProfile";
 import { navigateHome, navigateSignIn } from "../actions/navigation";
 import api from "../api";
 
-export const AUTH_SIGN_IN_RESET = "AUTH_SIGN_IN_RESET";
-export const AUTH_SIGN_IN_DID_START = "AUTH_SIGN_IN_DID_START";
-export const AUTH_SIGN_IN_DID_SUCCEED = "AUTH_SIGN_IN_DID_SUCCEED";
-export const AUTH_SIGN_IN_DID_FAIL = "AUTH_SIGN_IN_DID_FAIL";
-export const AUTH_REFRESH_SESSION_TOKEN_DID_START =
+const AUTH_SIGN_IN_RESET = "AUTH_SIGN_IN_RESET";
+const AUTH_SIGN_IN_DID_START = "AUTH_SIGN_IN_DID_START";
+const AUTH_SIGN_IN_DID_SUCCEED = "AUTH_SIGN_IN_DID_SUCCEED";
+const AUTH_SIGN_IN_DID_FAIL = "AUTH_SIGN_IN_DID_FAIL";
+const AUTH_REFRESH_SESSION_TOKEN_DID_START =
   "AUTH_REFRESH_SESSION_TOKEN_DID_START";
-export const AUTH_REFRESH_SESSION_TOKEN_DID_SUCCEED =
+const AUTH_REFRESH_SESSION_TOKEN_DID_SUCCEED =
   "AUTH_REFRESH_SESSION_TOKEN_DID_SUCCEED";
-export const AUTH_REFRESH_SESSION_TOKEN_DID_FAIL =
+const AUTH_REFRESH_SESSION_TOKEN_DID_FAIL =
   "AUTH_REFRESH_SESSION_TOKEN_DID_FAIL";
 
 const AUTH_USER_KEY = "AUTH_USER_KEY";
 
-export const authSignInReset = () => ({
+const authSignInReset = () => ({
   type: AUTH_SIGN_IN_RESET,
 });
 
-export const authSignOutAsync = () => async dispatch => {
+const authSignOutAsync = () => async dispatch => {
   try {
     AsyncStorage.removeItem(AUTH_USER_KEY);
   } catch (error) {
@@ -33,23 +33,23 @@ export const authSignOutAsync = () => async dispatch => {
   dispatch(navigateSignIn());
 };
 
-export const authSignInDidStart = () => ({
+const authSignInDidStart = () => ({
   type: AUTH_SIGN_IN_DID_START,
 });
 
-export const authSignInDidSucceed = ({
+const authSignInDidSucceed = ({
   authUser: { sessionToken, userId, username, fullName },
 }) => ({
   type: AUTH_SIGN_IN_DID_SUCCEED,
   payload: { sessionToken, userId, username, fullName },
 });
 
-export const authSignInDidFail = errorMessage => ({
+const authSignInDidFail = errorMessage => ({
   type: AUTH_SIGN_IN_DID_FAIL,
   payload: errorMessage,
 });
 
-export const authSignInAsync = ({ username, password }) => async dispatch => {
+const authSignInAsync = ({ username, password }) => async dispatch => {
   dispatch(authSignInDidStart());
 
   const {
@@ -88,23 +88,23 @@ export const authSignInAsync = ({ username, password }) => async dispatch => {
   }
 };
 
-export const authRefreshTokenDidStart = () => ({
+const authRefreshTokenDidStart = () => ({
   type: AUTH_REFRESH_SESSION_TOKEN_DID_START,
 });
 
-export const authRefreshTokenDidSucceed = ({
+const authRefreshTokenDidSucceed = ({
   authUser: { sessionToken, userId, username, fullName },
 }) => ({
   type: AUTH_REFRESH_SESSION_TOKEN_DID_SUCCEED,
   payload: { sessionToken, userId, username, fullName },
 });
 
-export const authRefreshTokenDidFail = errorMessage => ({
+const authRefreshTokenDidFail = errorMessage => ({
   type: AUTH_REFRESH_SESSION_TOKEN_DID_FAIL,
   payload: errorMessage,
 });
 
-export const authRefreshTokenOrSignInAsync = () => async dispatch => {
+const authRefreshTokenOrSignInAsync = () => async dispatch => {
   dispatch(authRefreshTokenDidStart());
 
   let authUser = {};
@@ -149,4 +149,24 @@ export const authRefreshTokenOrSignInAsync = () => async dispatch => {
       dispatch(navigateHome());
     }
   }
+};
+
+export {
+  authSignInReset,
+  authSignOutAsync,
+  authSignInDidStart,
+  authSignInDidSucceed,
+  authSignInDidFail,
+  authSignInAsync,
+  authRefreshTokenDidStart,
+  authRefreshTokenDidSucceed,
+  authRefreshTokenDidFail,
+  authRefreshTokenOrSignInAsync,
+  AUTH_SIGN_IN_RESET,
+  AUTH_SIGN_IN_DID_START,
+  AUTH_SIGN_IN_DID_SUCCEED,
+  AUTH_SIGN_IN_DID_FAIL,
+  AUTH_REFRESH_SESSION_TOKEN_DID_START,
+  AUTH_REFRESH_SESSION_TOKEN_DID_SUCCEED,
+  AUTH_REFRESH_SESSION_TOKEN_DID_FAIL,
 };
