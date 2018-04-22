@@ -5,14 +5,14 @@ import { apiEnvironmentLoadAndSetAsync } from "../actions/apiEnvironment";
 import { navigateLaunch } from "../actions/navigation";
 import runTimeEnvironment from "../utils/runtimeEnvironment";
 
-export const APP_INIT_DID_FINISH = "APP_INIT_DID_FINISH";
+const APP_INIT_DID_FINISH = "APP_INIT_DID_FINISH";
 
-export const appInitDidFinish = () => ({
+const appInitDidFinish = () => ({
   type: APP_INIT_DID_FINISH,
   payload: true,
 });
 
-export const appInitAsync = () => async dispatch => {
+const appInitAsync = () => async dispatch => {
   if (!runTimeEnvironment.useExpo) {
     NativeModules.LaunchScreen.showActivityIndicator();
   }
@@ -27,3 +27,5 @@ export const appInitAsync = () => async dispatch => {
     NativeModules.LaunchScreen.hide();
   }
 };
+
+export { appInitAsync, appInitDidFinish, APP_INIT_DID_FINISH };

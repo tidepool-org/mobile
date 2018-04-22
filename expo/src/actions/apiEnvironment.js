@@ -2,11 +2,11 @@ import { AsyncStorage } from "react-native";
 import { authSignOutAsync } from "../actions/auth";
 import { switchApiEnvironment, API_ENVIRONMENT_PRODUCTION } from "../api";
 
-export const API_ENVIRONMENT_SET = "API_ENVIRONMENT_SET";
+const API_ENVIRONMENT_SET = "API_ENVIRONMENT_SET";
 
 const API_ENVIRONMENT_KEY = "API_ENVIRONMENT_KEY";
 
-export const apiEnvironmentSet = apiEnvironment => {
+const apiEnvironmentSet = apiEnvironment => {
   switchApiEnvironment(apiEnvironment);
 
   return {
@@ -15,7 +15,7 @@ export const apiEnvironmentSet = apiEnvironment => {
   };
 };
 
-export const apiEnvironmentLoadAndSetAsync = () => async dispatch => {
+const apiEnvironmentLoadAndSetAsync = () => async dispatch => {
   let apiEnvironment = API_ENVIRONMENT_PRODUCTION;
   try {
     apiEnvironment = await AsyncStorage.getItem(API_ENVIRONMENT_KEY);
@@ -38,7 +38,7 @@ export const apiEnvironmentLoadAndSetAsync = () => async dispatch => {
   dispatch(apiEnvironmentSet(apiEnvironment));
 };
 
-export const apiEnvironmentSetAndSaveAsync = apiEnvironment => async dispatch => {
+const apiEnvironmentSetAndSaveAsync = apiEnvironment => async dispatch => {
   dispatch(authSignOutAsync());
 
   try {
@@ -53,4 +53,11 @@ export const apiEnvironmentSetAndSaveAsync = apiEnvironment => async dispatch =>
   }
 
   dispatch(apiEnvironmentSet(apiEnvironment));
+};
+
+export {
+  apiEnvironmentSet,
+  apiEnvironmentLoadAndSetAsync,
+  apiEnvironmentSetAndSaveAsync,
+  API_ENVIRONMENT_SET,
 };

@@ -3,7 +3,7 @@ import isYesterday from "date-fns/is_yesterday";
 import isToday from "date-fns/is_today";
 import isThisYear from "date-fns/is_this_year";
 
-export const formatDateForNoteList = date => {
+const formatDateForNoteList = date => {
   let dayString;
   if (isToday(date)) {
     dayString = "Today";
@@ -20,9 +20,11 @@ export const formatDateForNoteList = date => {
   return `${dayString} at ${timeString}`;
 };
 
-export const formatDateAndTimeForAddOrEditNote = date => {
+const formatDateAndTimeForAddOrEditNote = date => {
   const formattedDate = format(date, "dddd M/D/YY");
   const formattedTime = format(date, "h:mm a");
 
   return { formattedDate, formattedTime };
 };
+
+export { formatDateForNoteList, formatDateAndTimeForAddOrEditNote };

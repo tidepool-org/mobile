@@ -2,27 +2,27 @@ import api from "../api";
 
 import { commentsFetchUpdateComment } from "../actions/commentsFetch";
 
-export const COMMENT_UPDATE_DID_START = "COMMENT_UPDATE_DID_START";
-export const COMMENT_UPDATE_DID_SUCCEED = "COMMENT_UPDATE_DID_SUCCEED";
-export const COMMENT_UPDATE_DID_FAIL = "COMMENT_UPDATE_DID_FAIL";
+const COMMENT_UPDATE_DID_START = "COMMENT_UPDATE_DID_START";
+const COMMENT_UPDATE_DID_SUCCEED = "COMMENT_UPDATE_DID_SUCCEED";
+const COMMENT_UPDATE_DID_FAIL = "COMMENT_UPDATE_DID_FAIL";
 
-export const commentUpdateDidStart = ({ comment }) => ({
+const commentUpdateDidStart = ({ comment }) => ({
   type: COMMENT_UPDATE_DID_START,
   payload: { comment },
 });
 
 // TODO: animation - need to do some sort of distinct update animation
-export const commentUpdateDidSucceed = ({ comment }) => ({
+const commentUpdateDidSucceed = ({ comment }) => ({
   type: COMMENT_UPDATE_DID_SUCCEED,
   payload: { comment },
 });
 
-export const commentUpdateDidFail = ({ comment, errorMessage }) => ({
+const commentUpdateDidFail = ({ comment, errorMessage }) => ({
   type: COMMENT_UPDATE_DID_FAIL,
   payload: { comment, errorMessage },
 });
 
-export const commentUpdateAsync = ({
+const commentUpdateAsync = ({
   note,
   comment,
   currentProfile,
@@ -39,4 +39,14 @@ export const commentUpdateAsync = ({
       commentsFetchUpdateComment({ note, comment, profile: currentProfile })
     );
   }
+};
+
+export {
+  commentUpdateDidStart,
+  commentUpdateDidSucceed,
+  commentUpdateDidFail,
+  commentUpdateAsync,
+  COMMENT_UPDATE_DID_START,
+  COMMENT_UPDATE_DID_SUCCEED,
+  COMMENT_UPDATE_DID_FAIL,
 };

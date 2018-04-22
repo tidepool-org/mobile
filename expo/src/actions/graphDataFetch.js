@@ -1,28 +1,28 @@
 import api from "../api";
 
-export const GRAPH_DATA_FETCH_DID_START = "GRAPH_DATA_FETCH_DID_START";
-export const GRAPH_DATA_FETCH_DID_SUCCEED = "GRAPH_DATA_FETCH_DID_SUCCEED";
-export const GRAPH_DATA_FETCH_DID_FAIL = "GRAPH_DATA_FETCH_DID_FAIL";
+const GRAPH_DATA_FETCH_DID_START = "GRAPH_DATA_FETCH_DID_START";
+const GRAPH_DATA_FETCH_DID_SUCCEED = "GRAPH_DATA_FETCH_DID_SUCCEED";
+const GRAPH_DATA_FETCH_DID_FAIL = "GRAPH_DATA_FETCH_DID_FAIL";
 
 // TODO: fetch - cancel outstanding request if we get another request to start fetching while one is in progress.
 // TODO: fetch - cancel outstanding request if we sign out while fetch is in progress
 
-export const graphDataFetchDidStart = ({ messageId }) => ({
+const graphDataFetchDidStart = ({ messageId }) => ({
   type: GRAPH_DATA_FETCH_DID_START,
   payload: { messageId },
 });
 
-export const graphDataFetchDidSucceed = ({ messageId, graphData }) => ({
+const graphDataFetchDidSucceed = ({ messageId, graphData }) => ({
   type: GRAPH_DATA_FETCH_DID_SUCCEED,
   payload: { messageId, graphData },
 });
 
-export const graphDataFetchDidFail = ({ messageId, errorMessage }) => ({
+const graphDataFetchDidFail = ({ messageId, errorMessage }) => ({
   type: GRAPH_DATA_FETCH_DID_FAIL,
   payload: { messageId, errorMessage },
 });
 
-export const graphDataFetchAsync = ({
+const graphDataFetchAsync = ({
   messageId,
   userId,
   noteDate,
@@ -49,4 +49,14 @@ export const graphDataFetchAsync = ({
   } else {
     dispatch(graphDataFetchDidSucceed({ messageId, graphData }));
   }
+};
+
+export {
+  graphDataFetchDidStart,
+  graphDataFetchDidSucceed,
+  graphDataFetchDidFail,
+  graphDataFetchAsync,
+  GRAPH_DATA_FETCH_DID_START,
+  GRAPH_DATA_FETCH_DID_SUCCEED,
+  GRAPH_DATA_FETCH_DID_FAIL,
 };

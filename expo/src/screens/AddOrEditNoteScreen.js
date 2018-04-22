@@ -48,8 +48,8 @@ import HashtagPicker from "../components/HashtagPicker";
 // FIXME: Currently we're handling keyboard hide/show events to ajust size of the TextInput. Ideally should be able to simplify with KeyboardAvoidingView, but, see: https://github.com/facebook/react-native/issues/16826
 // FIXME: We're importing Header directly and rendering in this modal, rather than getting that for free as part of navigator. This is needed due to bugs in React Navigation related to double headers with nested navigators. We have to set headerMode to 'none' for the modal stack navigator (like the one presenting this screen), which prevents the double header on the parent navigator, but, also removes it from the nested one.
 
-export const ADD_OR_EDIT_SCREEN_ADD_NOTE_TITLE = "Add Note";
-export const ADD_OR_EDIT_SCREEN_EDIT_NOTE_TITLE = "Edit Note";
+const ADD_OR_EDIT_SCREEN_ADD_NOTE_TITLE = "Add Note";
+const ADD_OR_EDIT_SCREEN_EDIT_NOTE_TITLE = "Edit Note";
 
 class AddOrEditNoteScreen extends PureComponent {
   static navigationOptions = () => ({
@@ -713,4 +713,8 @@ AddOrEditNoteScreen.defaultProps = {
   timestampAddNote: null,
 };
 
+export {
+  ADD_OR_EDIT_SCREEN_ADD_NOTE_TITLE,
+  ADD_OR_EDIT_SCREEN_EDIT_NOTE_TITLE,
+};
 export default AddOrEditNoteScreen;
