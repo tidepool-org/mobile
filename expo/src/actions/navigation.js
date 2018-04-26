@@ -52,14 +52,14 @@ function navigateEditNote({ note }) {
   return { type: NAVIGATE_EDIT_NOTE, payload: { note } };
 }
 
-function navigateAddComment({ note, commentsFetchData }) {
-  return { type: NAVIGATE_ADD_COMMENT, payload: { note, commentsFetchData } };
+function navigateAddComment({ note }) {
+  return { type: NAVIGATE_ADD_COMMENT, payload: { note } };
 }
 
-function navigateEditComment({ note, commentsFetchData, comment }) {
+function navigateEditComment({ note, comment }) {
   return {
     type: NAVIGATE_EDIT_COMMENT,
-    payload: { note, commentsFetchData, comment },
+    payload: { note, comment },
   };
 }
 

@@ -1,14 +1,32 @@
 import React, { PureComponent } from "react";
+import { Alert, Linking } from "react-native";
 import PropTypes from "prop-types";
 import glamorous, { withTheme } from "glamorous-native";
+import addHours from "date-fns/add_hours";
+import subHours from "date-fns/sub_hours";
 
+import Urls from "../constants/Urls";
 import Colors from "../../src/constants/Colors";
 import HashtagText from "./HashtagText";
+import {
+  makeYAxisLabelValues,
+  makeYAxisBGBoundaryValues,
+} from "./Graph/helpers";
+import Graph from "./Graph/Graph";
 import { formatDateForNoteList } from "../utils/formatDate";
 import { ThemePropType } from "../prop-types/theme";
 import { ProfilePropType } from "../prop-types/profile";
 
 class AddOrEditCommentScreenNote extends PureComponent {
+  static showErrorMessageAlert() {
+    // TODO: strings - Use some i18n module for these and other UI strings
+    Alert.alert(
+      "Unknown Error Occurred",
+      "An unknown error occurred. We are working hard to resolve this issue.",
+      [{ text: "OK" }]
+    );
+  }
+
   shouldRenderUserLabelSection() {
     const { note } = this.props;
     return note.userId !== note.groupId && note.userFullName;
@@ -23,7 +41,6 @@ class AddOrEditCommentScreenNote extends PureComponent {
       <glamorous.View
         flexDirection="row"
         justifyContent="space-between"
-        zIndex={1}
       >
         <glamorous.Text
           allowFontScaling={false}
@@ -40,6 +57,41 @@ class AddOrEditCommentScreenNote extends PureComponent {
     );
   }
 
+  renderGraph() {
+    const {
+      graphDataFetchData: { fetching, graphData: { cbgData, smbgData } },
+      currentProfile: { lowBGBoundary, highBGBoundary },
+      note: { timestamp: eventTime },
+    } = this.props;
+
+    const isLoading = fetching;
+    const yAxisLabelValues = makeYAxisLabelValues({
+      lowBGBoundary,
+      highBGBoundary,
+    });
+    const yAxisBGBoundaryValues = makeYAxisBGBoundaryValues({
+      lowBGBoundary,
+      highBGBoundary,
+    });
+    const navigateHowToUpload = () => {
+      Linking.openURL(Urls.howToUpload);
+    };
+
+    return (
+      <Graph
+        isLoading={isLoading}
+        yAxisLabelValues={yAxisLabelValues}
+        yAxisBGBoundaryValues={yAxisBGBoundaryValues}
+        cbgData={cbgData}
+        smbgData={smbgData}
+        eventTime={eventTime}
+        navigateHowToUpload={navigateHowToUpload}
+        onZoomStart={() => {}}
+        onZoomEnd={() => {}}
+      />
+    );
+  }
+
   renderDateSection() {
     const { theme, note } = this.props;
 
@@ -47,7 +99,6 @@ class AddOrEditCommentScreenNote extends PureComponent {
       <glamorous.View
         flexDirection="row"
         justifyContent="flex-start"
-        zIndex={1}
       >
         <glamorous.Text
           allowFontScaling={false}
@@ -91,6 +142,7 @@ class AddOrEditCommentScreenNote extends PureComponent {
           {this.shouldRenderUserLabelSection() && this.renderUserLabelSection()}
           {this.renderDateSection()}
           {this.renderNote()}
+          {this.renderGraph()}
         </glamorous.View>
       </glamorous.View>
     );
@@ -105,6 +157,21 @@ AddOrEditCommentScreenNote.propTypes = {
     timestamp: PropTypes.instanceOf(Date),
     messageText: PropTypes.string.isRequired,
   }).isRequired,
+  graphDataFetchData: PropTypes.shape({
+    graphData: PropTypes.object,
+    errorMessage: PropTypes.string,
+    fetching: PropTypes.bool,
+    fetched: PropTypes.bool,
+  }),
+};
+
+AddOrEditCommentScreenNote.defaultProps = {
+  graphDataFetchData: {
+    graphData: {},
+    errorMessage: "",
+    fetching: false,
+    fetched: false,
+  },
 };
 
 export default withTheme(AddOrEditCommentScreenNote);

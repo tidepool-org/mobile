@@ -39,7 +39,6 @@ exports[`Storyshots NotesListItemComment default 1`] = `
             Object {
               "flexDirection": "row",
               "justifyContent": "flex-start",
-              "zIndex": 1,
             },
           ]
         }
@@ -308,7 +307,6 @@ exports[`Storyshots NotesListItemComment long user full name 1`] = `
             Object {
               "flexDirection": "row",
               "justifyContent": "flex-start",
-              "zIndex": 1,
             },
           ]
         }

@@ -58,7 +58,6 @@ exports[`Storyshots AddOrEditCommentScreen add comment 1`] = `
                       Object {
                         "flexDirection": "row",
                         "justifyContent": "flex-start",
-                        "zIndex": 1,
                       },
                     ]
                   }
@@ -139,6 +138,16 @@ exports[`Storyshots AddOrEditCommentScreen add comment 1`] = `
                      This is a note. Quis molestiae tempora eligendi omnis quisquam quisquam quos. Dolor voluptatibus velit nobis culpa deleniti. Reprehenderit in nisi et. Quia odio et inventore eligendi in deserunt id. Sit odio quia vitae provident quo provident molestiae.
                   </Text>
                 </Text>
+                <View
+                  onLayout={[Function]}
+                  style={
+                    Array [
+                      Object {
+                        "height": 180,
+                      },
+                    ]
+                  }
+                />
               </View>
             </View>
           </View>
@@ -169,7 +178,6 @@ exports[`Storyshots AddOrEditCommentScreen add comment 1`] = `
                       Object {
                         "flexDirection": "row",
                         "justifyContent": "flex-start",
-                        "zIndex": 1,
                       },
                     ]
                   }
@@ -309,7 +317,6 @@ exports[`Storyshots AddOrEditCommentScreen add comment 1`] = `
                       Object {
                         "flexDirection": "row",
                         "justifyContent": "flex-start",
-                        "zIndex": 1,
                       },
                     ]
                   }
@@ -449,7 +456,6 @@ exports[`Storyshots AddOrEditCommentScreen add comment 1`] = `
                       Object {
                         "flexDirection": "row",
                         "justifyContent": "flex-start",
-                        "zIndex": 1,
                       },
                     ]
                   }
@@ -589,7 +595,6 @@ exports[`Storyshots AddOrEditCommentScreen add comment 1`] = `
                       Object {
                         "flexDirection": "row",
                         "justifyContent": "flex-start",
-                        "zIndex": 1,
                       },
                     ]
                   }
@@ -729,7 +734,6 @@ exports[`Storyshots AddOrEditCommentScreen add comment 1`] = `
                       Object {
                         "flexDirection": "row",
                         "justifyContent": "flex-start",
-                        "zIndex": 1,
                       },
                     ]
                   }
@@ -1104,7 +1108,6 @@ exports[`Storyshots AddOrEditCommentScreen edit comment in middle 1`] = `
                       Object {
                         "flexDirection": "row",
                         "justifyContent": "flex-start",
-                        "zIndex": 1,
                       },
                     ]
                   }
@@ -1185,6 +1188,16 @@ exports[`Storyshots AddOrEditCommentScreen edit comment in middle 1`] = `
                      This is a note. Quis molestiae tempora eligendi omnis quisquam quisquam quos. Dolor voluptatibus velit nobis culpa deleniti. Reprehenderit in nisi et. Quia odio et inventore eligendi in deserunt id. Sit odio quia vitae provident quo provident molestiae.
                   </Text>
                 </Text>
+                <View
+                  onLayout={[Function]}
+                  style={
+                    Array [
+                      Object {
+                        "height": 180,
+                      },
+                    ]
+                  }
+                />
               </View>
             </View>
           </View>
@@ -1215,7 +1228,6 @@ exports[`Storyshots AddOrEditCommentScreen edit comment in middle 1`] = `
                       Object {
                         "flexDirection": "row",
                         "justifyContent": "flex-start",
-                        "zIndex": 1,
                       },
                     ]
                   }
@@ -1355,7 +1367,6 @@ exports[`Storyshots AddOrEditCommentScreen edit comment in middle 1`] = `
                       Object {
                         "flexDirection": "row",
                         "justifyContent": "flex-start",
-                        "zIndex": 1,
                       },
                     ]
                   }
@@ -1731,7 +1742,6 @@ exports[`Storyshots AddOrEditCommentScreen edit comment in middle 1`] = `
                       Object {
                         "flexDirection": "row",
                         "justifyContent": "flex-start",
-                        "zIndex": 1,
                       },
                     ]
                   }
@@ -1871,7 +1881,6 @@ exports[`Storyshots AddOrEditCommentScreen edit comment in middle 1`] = `
                       Object {
                         "flexDirection": "row",
                         "justifyContent": "flex-start",
-                        "zIndex": 1,
                       },
                     ]
                   }
@@ -2059,7 +2068,6 @@ exports[`Storyshots AddOrEditCommentScreen edit first comment 1`] = `
                       Object {
                         "flexDirection": "row",
                         "justifyContent": "flex-start",
-                        "zIndex": 1,
                       },
                     ]
                   }
@@ -2140,6 +2148,16 @@ exports[`Storyshots AddOrEditCommentScreen edit first comment 1`] = `
                      This is a note. Quis molestiae tempora eligendi omnis quisquam quisquam quos. Dolor voluptatibus velit nobis culpa deleniti. Reprehenderit in nisi et. Quia odio et inventore eligendi in deserunt id. Sit odio quia vitae provident quo provident molestiae.
                   </Text>
                 </Text>
+                <View
+                  onLayout={[Function]}
+                  style={
+                    Array [
+                      Object {
+                        "height": 180,
+                      },
+                    ]
+                  }
+                />
               </View>
             </View>
           </View>
@@ -2406,7 +2424,6 @@ exports[`Storyshots AddOrEditCommentScreen edit first comment 1`] = `
                       Object {
                         "flexDirection": "row",
                         "justifyContent": "flex-start",
-                        "zIndex": 1,
                       },
                     ]
                   }
@@ -2546,7 +2563,6 @@ exports[`Storyshots AddOrEditCommentScreen edit first comment 1`] = `
                       Object {
                         "flexDirection": "row",
                         "justifyContent": "flex-start",
-                        "zIndex": 1,
                       },
                     ]
                   }
@@ -2686,7 +2702,6 @@ exports[`Storyshots AddOrEditCommentScreen edit first comment 1`] = `
                       Object {
                         "flexDirection": "row",
                         "justifyContent": "flex-start",
-                        "zIndex": 1,
                       },
                     ]
                   }
@@ -2826,7 +2841,6 @@ exports[`Storyshots AddOrEditCommentScreen edit first comment 1`] = `
                       Object {
                         "flexDirection": "row",
                         "justifyContent": "flex-start",
-                        "zIndex": 1,
                       },
                     ]
                   }
@@ -3014,7 +3028,6 @@ exports[`Storyshots AddOrEditCommentScreen edit last comment 1`] = `
                       Object {
                         "flexDirection": "row",
                         "justifyContent": "flex-start",
-                        "zIndex": 1,
                       },
                     ]
                   }
@@ -3095,6 +3108,16 @@ exports[`Storyshots AddOrEditCommentScreen edit last comment 1`] = `
                      This is a note. Quis molestiae tempora eligendi omnis quisquam quisquam quos. Dolor voluptatibus velit nobis culpa deleniti. Reprehenderit in nisi et. Quia odio et inventore eligendi in deserunt id. Sit odio quia vitae provident quo provident molestiae.
                   </Text>
                 </Text>
+                <View
+                  onLayout={[Function]}
+                  style={
+                    Array [
+                      Object {
+                        "height": 180,
+                      },
+                    ]
+                  }
+                />
               </View>
             </View>
           </View>
@@ -3125,7 +3148,6 @@ exports[`Storyshots AddOrEditCommentScreen edit last comment 1`] = `
                       Object {
                         "flexDirection": "row",
                         "justifyContent": "flex-start",
-                        "zIndex": 1,
                       },
                     ]
                   }
@@ -3265,7 +3287,6 @@ exports[`Storyshots AddOrEditCommentScreen edit last comment 1`] = `
                       Object {
                         "flexDirection": "row",
                         "justifyContent": "flex-start",
-                        "zIndex": 1,
                       },
                     ]
                   }
@@ -3405,7 +3426,6 @@ exports[`Storyshots AddOrEditCommentScreen edit last comment 1`] = `
                       Object {
                         "flexDirection": "row",
                         "justifyContent": "flex-start",
-                        "zIndex": 1,
                       },
                     ]
                   }
@@ -3545,7 +3565,6 @@ exports[`Storyshots AddOrEditCommentScreen edit last comment 1`] = `
                       Object {
                         "flexDirection": "row",
                         "justifyContent": "flex-start",
-                        "zIndex": 1,
                       },
                     ]
                   }

@@ -3,17 +3,26 @@ import { connect } from "react-redux";
 import { navigateGoBack } from "../actions/navigation";
 import { commentAddAsync } from "../actions/commentAdd";
 import { commentUpdateAsync } from "../actions/commentUpdate";
+import { commentsFetchAsync } from "../actions/commentsFetch";
+import { graphDataFetchAsync } from "../actions/graphDataFetch";
 
 import AddOrEditCommentScreen from "../screens/AddOrEditCommentScreen";
 
-const mapStateToProps = (state, ownProps) => ({
-  currentUser: state.auth,
-  currentProfile: state.currentProfile,
-  note: ownProps.navigation.state.params.note,
-  comment: ownProps.navigation.state.params.comment,
-  timestampAddComment: new Date(),
-  commentsFetchData: ownProps.navigation.state.params.commentsFetchData,
-});
+const mapStateToProps = (state, ownProps) => {
+  const { note } = ownProps.navigation.state.params;
+  const commentsFetchData = state.commentsFetch[note.id];
+  const graphDataFetchData = state.graphDataFetch[note.id];
+
+  return {
+    currentUser: state.auth,
+    currentProfile: state.currentProfile,
+    note,
+    comment: ownProps.navigation.state.params.comment,
+    timestampAddComment: new Date(),
+    commentsFetchData,
+    graphDataFetchData,
+  };
+};
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
@@ -21,6 +30,8 @@ const mapDispatchToProps = dispatch =>
       navigateGoBack,
       commentAddAsync,
       commentUpdateAsync,
+      commentsFetchAsync,
+      graphDataFetchAsync,
     },
     dispatch
   );
