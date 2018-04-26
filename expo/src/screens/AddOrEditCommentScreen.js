@@ -2,6 +2,8 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Alert, Keyboard, StatusBar } from "react-native";
 import glamorous, { ThemeProvider } from "glamorous-native";
+import addHours from "date-fns/add_hours";
+import subHours from "date-fns/sub_hours";
 
 import PrimaryTheme from "../themes/PrimaryTheme";
 import Colors from "../constants/Colors";
@@ -78,7 +80,37 @@ class AddOrEditCommentScreen extends PureComponent {
   }
 
   componentDidMount() {
-    if (this.props.commentsFetchData.errorMessage) {
+    const {
+      note,
+      currentProfile: { userId, lowBGBoundary, highBGBoundary },
+      commentsFetchData,
+      commentsFetchAsync,
+      graphDataFetchData,
+      graphDataFetchAsync,
+    } = this.props;
+
+    if (!commentsFetchData.fetched && !commentsFetchData.fetching) {
+      commentsFetchAsync({ messageId: note.id });
+    }
+
+    if (!graphDataFetchData.fetched && !graphDataFetchData.fetching) {
+      const { timestamp } = note;
+      const startDate = subHours(timestamp, 12);
+      const endDate = addHours(timestamp, 12);
+      const objectTypes = "smbg,bolus,cbg,wizard,basal";
+      graphDataFetchAsync({
+        messageId: note.id,
+        userId,
+        noteDate: timestamp,
+        startDate,
+        endDate,
+        objectTypes,
+        lowBGBoundary,
+        highBGBoundary,
+      });
+    }
+
+    if (commentsFetchData.errorMessage || graphDataFetchData.errorMessage) {
       AddOrEditCommentScreen.showErrorMessageAlert();
     }
 
@@ -93,10 +125,13 @@ class AddOrEditCommentScreen extends PureComponent {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (
+    const shouldShowCommentsFetchError =
       nextProps.commentsFetchData.errorMessage &&
-      !this.props.commentsFetchData.errorMessage
-    ) {
+      !this.props.commentsFetchData.errorMessage;
+    const shouldShowGraphDataFetchError =
+      nextProps.graphDataFetchData.errorMessage &&
+      !this.props.graphDataFetchData.errorMessage;
+    if (shouldShowCommentsFetchError || shouldShowGraphDataFetchError) {
       AddOrEditCommentScreen.showErrorMessageAlert();
     }
   }
@@ -214,6 +249,7 @@ class AddOrEditCommentScreen extends PureComponent {
       currentUser,
       currentProfile,
       commentsFetchData,
+      graphDataFetchData,
     } = this.props;
 
     return (
@@ -223,6 +259,7 @@ class AddOrEditCommentScreen extends PureComponent {
         currentUser={currentUser}
         currentProfile={currentProfile}
         commentsFetchData={commentsFetchData}
+        graphDataFetchData={graphDataFetchData}
       />
     );
   }
@@ -289,27 +326,41 @@ AddOrEditCommentScreen.propTypes = {
   currentProfile: ProfilePropType.isRequired,
   note: NotePropType.isRequired,
   comment: CommentPropType,
+  timestampAddComment: PropTypes.instanceOf(Date),
   navigateGoBack: PropTypes.func.isRequired,
   commentAddAsync: PropTypes.func.isRequired,
   commentUpdateAsync: PropTypes.func.isRequired,
+  commentsFetchAsync: PropTypes.func.isRequired,
   commentsFetchData: PropTypes.shape({
     comments: PropTypes.arrayOf(CommentPropType),
     errorMessage: PropTypes.string,
     fetching: PropTypes.bool,
     fetched: PropTypes.bool,
   }),
-  timestampAddComment: PropTypes.instanceOf(Date),
+  graphDataFetchAsync: PropTypes.func.isRequired,
+  graphDataFetchData: PropTypes.shape({
+    graphData: PropTypes.object,
+    errorMessage: PropTypes.string,
+    fetching: PropTypes.bool,
+    fetched: PropTypes.bool,
+  }),
 };
 
 AddOrEditCommentScreen.defaultProps = {
+  comment: null,
+  timestampAddComment: null,
   commentsFetchData: {
     comments: [],
     errorMessage: "",
     fetching: false,
     fetched: false,
   },
-  comment: null,
-  timestampAddComment: null,
+  graphDataFetchData: {
+    graphData: {},
+    errorMessage: "",
+    fetching: false,
+    fetched: false,
+  },
 };
 
 export default AddOrEditCommentScreen;

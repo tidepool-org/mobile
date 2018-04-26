@@ -83,33 +83,32 @@ const commentsFetchData = {
 const navigateGoBack = () => {};
 const commentAddAsync = () => {};
 const commentUpdateAsync = () => {};
+const commentsFetchAsync = () => {};
+const graphDataFetchAsync = () => {};
+const props = {
+  currentUser: currentProfile,
+  currentProfile,
+  note,
+  timestampAddComment,
+  navigateGoBack,
+  commentsFetchData,
+  commentAddAsync,
+  commentUpdateAsync,
+  commentsFetchAsync,
+  graphDataFetchAsync,
+};
 
 storiesOf("AddOrEditCommentScreen", module).add("add comment", () => (
   <StoryContainerScreen>
-    <AddOrEditCommentScreen
-      currentUser={currentProfile}
-      currentProfile={currentProfile}
-      commentsFetchData={commentsFetchData}
-      note={note}
-      timestampAddComment={timestampAddComment}
-      navigateGoBack={navigateGoBack}
-      commentAddAsync={commentAddAsync}
-      commentUpdateAsync={commentUpdateAsync}
-    />
+    <AddOrEditCommentScreen {...props} />
   </StoryContainerScreen>
 ));
 
 storiesOf("AddOrEditCommentScreen", module).add("edit first comment", () => (
   <StoryContainerScreen>
     <AddOrEditCommentScreen
-      currentUser={currentProfile}
-      currentProfile={currentProfile}
-      commentsFetchData={commentsFetchData}
-      note={note}
+      {...props}
       comment={commentsFetchData.comments[0]}
-      navigateGoBack={navigateGoBack}
-      commentAddAsync={commentAddAsync}
-      commentUpdateAsync={commentUpdateAsync}
     />
   </StoryContainerScreen>
 ));
@@ -119,14 +118,8 @@ storiesOf("AddOrEditCommentScreen", module).add(
   () => (
     <StoryContainerScreen>
       <AddOrEditCommentScreen
-        currentUser={currentProfile}
-        currentProfile={currentProfile}
-        commentsFetchData={commentsFetchData}
-        note={note}
+        {...props}
         comment={commentsFetchData.comments[2]}
-        navigateGoBack={navigateGoBack}
-        commentAddAsync={commentAddAsync}
-        commentUpdateAsync={commentUpdateAsync}
       />
     </StoryContainerScreen>
   )
@@ -135,16 +128,10 @@ storiesOf("AddOrEditCommentScreen", module).add(
 storiesOf("AddOrEditCommentScreen", module).add("edit last comment", () => (
   <StoryContainerScreen>
     <AddOrEditCommentScreen
-      currentUser={currentProfile}
-      currentProfile={currentProfile}
-      commentsFetchData={commentsFetchData}
-      note={note}
+      {...props}
       comment={
         commentsFetchData.comments[commentsFetchData.comments.length - 1]
       }
-      navigateGoBack={navigateGoBack}
-      commentAddAsync={commentAddAsync}
-      commentUpdateAsync={commentUpdateAsync}
     />
   </StoryContainerScreen>
 ));

@@ -159,8 +159,9 @@ function navigation(state = initialState, action) {
           routeName: EDIT_COMMENT_ROUTE_NAME,
           params: {
             note: action.payload.note,
-            commentsFetchData: action.payload.commentsFetchData,
             comment: action.payload.comment,
+            commentsFetchData: action.payload.commentsFetchData,
+            graphFetchData: action.payload.graphFetchData,
           },
         }),
         state

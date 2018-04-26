@@ -448,7 +448,6 @@ exports[`Storyshots NotesListItem initially expanded 1`] = `
                   Object {
                     "flexDirection": "row",
                     "justifyContent": "flex-start",
-                    "zIndex": 1,
                   },
                 ]
               }
@@ -584,7 +583,6 @@ exports[`Storyshots NotesListItem initially expanded 1`] = `
                   Object {
                     "flexDirection": "row",
                     "justifyContent": "flex-start",
-                    "zIndex": 1,
                   },
                 ]
               }
@@ -704,7 +702,6 @@ exports[`Storyshots NotesListItem initially expanded 1`] = `
                   Object {
                     "flexDirection": "row",
                     "justifyContent": "flex-start",
-                    "zIndex": 1,
                   },
                 ]
               }
@@ -824,7 +821,6 @@ exports[`Storyshots NotesListItem initially expanded 1`] = `
                   Object {
                     "flexDirection": "row",
                     "justifyContent": "flex-start",
-                    "zIndex": 1,
                   },
                 ]
               }

@@ -79,7 +79,6 @@ class NotesListItemComment extends PureComponent {
         <glamorous.View
           flexDirection="row"
           justifyContent="flex-start"
-          zIndex={1}
         >
           <glamorous.Text
             style={theme.notesListItemUserFullNameStyle}
