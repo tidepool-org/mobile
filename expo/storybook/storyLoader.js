@@ -21,6 +21,7 @@ function loadStories() {
   require('../__stories__/components/NotesListItem.story');
   require('../__stories__/components/NotesListItemComment.story');
   require('../__stories__/components/ProfileList.story');
+  require('../__stories__/components/SearchBar.story');
   require('../__stories__/components/SignInForm.story');
   require('../__stories__/components/SignInScreen.story');
   require('../__stories__/components/SwitchProfileScreen.story');
@@ -45,6 +46,7 @@ const stories = [
   '../__stories__/components/NotesListItem.story',
   '../__stories__/components/NotesListItemComment.story',
   '../__stories__/components/ProfileList.story',
+  '../__stories__/components/SearchBar.story',
   '../__stories__/components/SignInForm.story',
   '../__stories__/components/SignInScreen.story',
   '../__stories__/components/SwitchProfileScreen.story',
