@@ -31,6 +31,19 @@ class SearchBar extends PureComponent {
     this.props.onChangeText(searchText);
   };
 
+  renderSearchIcon() {
+    const { theme } = this.props;
+    return (
+      <glamorous.Image
+        source={require("../../assets/images/search-icon.png")}
+        marginLeft={7}
+        width={22}
+        height={22}
+        style={{ tintColor: theme.searchBarPlaceholderTextColor }}
+      />
+    );
+  }
+
   renderTextInput() {
     const { theme, placeholderText } = this.props;
     const { searchText } = this.state;
@@ -39,8 +52,8 @@ class SearchBar extends PureComponent {
         style={theme.searchBarTextStylenotesListItemTextStyle}
         flex={1}
         paddingTop={7}
-        paddingLeft={6}
-        paddingRight={6}
+        paddingLeft={7}
+        paddingRight={7}
         paddingBottom={7}
         allowFontScaling={false}
         selectionColor="#657ef6"
@@ -60,6 +73,7 @@ class SearchBar extends PureComponent {
   }
 
   renderClearButton() {
+    const { theme } = this.props;
     if (Platform.OS === "android") {
       return (
         <glamorous.TouchableOpacity onPress={this.onPressClear}>
@@ -67,6 +81,7 @@ class SearchBar extends PureComponent {
             source={require("../../assets/images/modal-close-button.png")}
             width={22}
             height={22}
+            style={{ tintColor: theme.searchBarPlaceholderTextColor }}
           />
         </glamorous.TouchableOpacity>
       );
@@ -81,13 +96,10 @@ class SearchBar extends PureComponent {
         flexDirection="row"
         justifyContent="space-between"
         alignItems="center"
+        marginTop={7}
+        marginBottom={7}
       >
-        <glamorous.Image
-          source={require("../../assets/images/search-icon.png")}
-          marginLeft={6}
-          width={22}
-          height={22}
-        />
+        {this.renderSearchIcon()}
         {this.renderTextInput()}
         {this.renderClearButton()}
       </glamorous.View>
