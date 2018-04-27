@@ -50,6 +50,13 @@ const FontStyles = {
       fontSize: 12.5,
     }),
   },
+  mediumSmallLightFont: {
+    ...makeFontStyle({
+      fontFamilyBaseName: "OpenSans",
+      fontWeightName: "Light",
+      fontSize: 15,
+    }),
+  },
   mediumSmallRegularFont: {
     ...makeFontStyle({
       fontFamilyBaseName: "OpenSans",

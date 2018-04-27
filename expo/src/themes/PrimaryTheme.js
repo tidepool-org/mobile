@@ -27,7 +27,7 @@ const PrimaryTheme = {
   },
   searchBarTextStyle: {
     color: Colors.blackish,
-    ...FontStyles.mediumSmallRegularFont,
+    ...FontStyles.mediumSmallLightFont,
   },
   searchBarPlaceholderTextColor: Colors.warmGrey,
   versionStringStyle: {

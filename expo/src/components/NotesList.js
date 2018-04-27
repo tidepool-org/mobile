@@ -5,6 +5,7 @@ import glamorous, { withTheme } from "glamorous-native";
 
 import Colors from "../constants/Colors";
 import NotesListItem from "./NotesListItem";
+import SearchBar from "./SearchBar";
 import { ProfilePropType } from "../prop-types/profile";
 import { CommentPropType } from "../prop-types/comment";
 import { UserPropType } from "../prop-types/user";
@@ -44,6 +45,10 @@ class NotesList extends PureComponent {
       this.setState({ refreshing: false });
     }
   }
+
+  onChangeSearchText = searchText => {
+    console.log({ searchText });
+  };
 
   onGraphZoomStart = () => {
     // console.log("onGraphZoomStart");
@@ -89,22 +94,25 @@ class NotesList extends PureComponent {
     const { isZoomingGraph } = this.state;
 
     return (
-      <glamorous.FlatList
-        style={{
-          backgroundColor: Colors.veryLightGrey, // TODO: use theme rather than color directly
-        }}
-        data={notes}
-        extraData={this.state}
-        keyExtractor={this.keyExtractor}
-        renderItem={this.renderNote}
-        refreshControl={
-          <RefreshControl
-            refreshing={this.state.refreshing}
-            onRefresh={this.onRefresh}
-          />
-        }
-        scrollEnabled={!isZoomingGraph}
-      />
+      <glamorous.View>
+        <SearchBar onChangeText={this.onChangeSearchText} />
+        <glamorous.FlatList
+          style={{
+            backgroundColor: Colors.veryLightGrey, // TODO: use theme rather than color directly
+          }}
+          data={notes}
+          extraData={this.state}
+          keyExtractor={this.keyExtractor}
+          renderItem={this.renderNote}
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.refreshing}
+              onRefresh={this.onRefresh}
+            />
+          }
+          scrollEnabled={!isZoomingGraph}
+        />
+      </glamorous.View>
     );
   }
 }

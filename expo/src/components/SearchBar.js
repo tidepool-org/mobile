@@ -1,11 +1,20 @@
 import React, { PureComponent } from "react";
-import { Platform } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 import PropTypes from "prop-types";
 import glamorous, { withTheme } from "glamorous-native";
 
 import { ThemePropType } from "../prop-types/theme";
 
 class SearchBar extends PureComponent {
+  static renderSeparator() {
+    return (
+      <glamorous.View
+        height={StyleSheet.hairlineWidth}
+        backgroundColor="#ced0ce"
+      />
+    );
+  }
+
   constructor(props) {
     super(props);
 
@@ -47,6 +56,7 @@ class SearchBar extends PureComponent {
   renderTextInput() {
     const { theme, placeholderText } = this.props;
     const { searchText } = this.state;
+
     return (
       <glamorous.TextInput
         style={theme.searchBarTextStylenotesListItemTextStyle}
@@ -81,6 +91,8 @@ class SearchBar extends PureComponent {
             source={require("../../assets/images/modal-close-button.png")}
             width={22}
             height={22}
+            hitSlop={{ left: 10, right: 10, top: 10, bottom: 10 }}
+            marginRight={7}
             style={{ tintColor: theme.searchBarPlaceholderTextColor }}
           />
         </glamorous.TouchableOpacity>
@@ -92,16 +104,21 @@ class SearchBar extends PureComponent {
 
   render() {
     return (
-      <glamorous.View
-        flexDirection="row"
-        justifyContent="space-between"
-        alignItems="center"
-        marginTop={7}
-        marginBottom={7}
-      >
-        {this.renderSearchIcon()}
-        {this.renderTextInput()}
-        {this.renderClearButton()}
+      <glamorous.View>
+        <glamorous.View
+          flexDirection="row"
+          justifyContent="space-between"
+          alignItems="center"
+          marginTop={7}
+          marginBottom={7}
+          marginLeft={10}
+          marginRight={Platform.OS === "ios" ? 13 : 10}
+        >
+          {this.renderSearchIcon()}
+          {this.renderTextInput()}
+          {this.renderClearButton()}
+        </glamorous.View>
+        {SearchBar.renderSeparator()}
       </glamorous.View>
     );
   }
