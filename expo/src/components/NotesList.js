@@ -46,8 +46,9 @@ class NotesList extends PureComponent {
     }
   }
 
-  onChangeSearchText = searchText => {
-    console.log({ searchText });
+  onChangeSearchText = text => {
+    const searchText = text.trim();
+    this.props.notesFetchSetSearchFilter({ searchText });
   };
 
   onGraphZoomStart = () => {
@@ -130,6 +131,7 @@ NotesList.propTypes = {
   errorMessage: PropTypes.string,
   fetching: PropTypes.bool,
   notesFetchAsync: PropTypes.func.isRequired,
+  notesFetchSetSearchFilter: PropTypes.func.isRequired,
   commentsFetchAsync: PropTypes.func.isRequired,
   commentsFetchDataByMessageId: PropTypes.objectOf(
     PropTypes.shape({

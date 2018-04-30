@@ -91,6 +91,7 @@ class HomeScreen extends PureComponent {
       fetching,
       notes,
       notesFetchAsync,
+      notesFetchSetSearchFilter,
       navigateEditNote,
       navigateAddComment,
       navigateEditComment,
@@ -107,6 +108,7 @@ class HomeScreen extends PureComponent {
             errorMessage={errorMessage}
             currentProfile={currentProfile}
             notesFetchAsync={notesFetchAsync}
+            notesFetchSetSearchFilter={notesFetchSetSearchFilter}
             commentsFetchAsync={commentsFetchAsync}
             commentsFetchDataByMessageId={commentsFetchDataByMessageId}
             graphDataFetchAsync={graphDataFetchAsync}
@@ -136,6 +138,7 @@ HomeScreen.propTypes = {
   fetching: PropTypes.bool,
   currentProfile: ProfilePropType.isRequired,
   notesFetchAsync: PropTypes.func.isRequired,
+  notesFetchSetSearchFilter: PropTypes.func.isRequired,
   commentsFetchAsync: PropTypes.func.isRequired,
   commentsFetchDataByMessageId: PropTypes.objectOf(
     PropTypes.shape({

@@ -2,7 +2,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
 import HomeScreen from "../screens/HomeScreen";
-import { notesFetchAsync } from "../actions/notesFetch";
+import { notesFetchAsync, notesFetchSetSearchFilter } from "../actions/notesFetch";
 import { commentsFetchAsync } from "../actions/commentsFetch";
 import { noteDeleteAsync } from "../actions/noteDelete";
 import { commentDeleteAsync } from "../actions/commentDelete";
@@ -27,6 +27,7 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       notesFetchAsync,
+      notesFetchSetSearchFilter,
       noteDeleteAsync,
       commentsFetchAsync,
       commentDeleteAsync,

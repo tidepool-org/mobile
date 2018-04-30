@@ -25,6 +25,7 @@ const currentProfile = {
   highBGBoundary: DEFAULT_HIGH_BG_BOUNDARY_VALUE,
 };
 const notesFetchAsync = () => {};
+const notesFetchSetSearchFilter = () => {};
 const commentsFetchAsync = () => {};
 const graphDataFetchAsync = () => {};
 const navigateEditNote = () => {};
@@ -46,6 +47,7 @@ const props = {
   currentUser,
   notes,
   notesFetchAsync,
+  notesFetchSetSearchFilter,
   currentProfile,
   commentsFetchAsync,
   graphDataFetchAsync,
