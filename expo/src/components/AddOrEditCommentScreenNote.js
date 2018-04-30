@@ -2,8 +2,6 @@ import React, { PureComponent } from "react";
 import { Alert, Linking } from "react-native";
 import PropTypes from "prop-types";
 import glamorous, { withTheme } from "glamorous-native";
-import addHours from "date-fns/add_hours";
-import subHours from "date-fns/sub_hours";
 
 import Urls from "../constants/Urls";
 import Colors from "../../src/constants/Colors";
@@ -38,10 +36,7 @@ class AddOrEditCommentScreenNote extends PureComponent {
     const userLabelText = `${note.userFullName} to ${currentProfile.fullName}`;
 
     return (
-      <glamorous.View
-        flexDirection="row"
-        justifyContent="space-between"
-      >
+      <glamorous.View flexDirection="row" justifyContent="space-between">
         <glamorous.Text
           allowFontScaling={false}
           numberOfLines={1}
@@ -96,10 +91,7 @@ class AddOrEditCommentScreenNote extends PureComponent {
     const { theme, note } = this.props;
 
     return (
-      <glamorous.View
-        flexDirection="row"
-        justifyContent="flex-start"
-      >
+      <glamorous.View flexDirection="row" justifyContent="flex-start">
         <glamorous.Text
           allowFontScaling={false}
           style={theme.notesListItemMetadataStyle}

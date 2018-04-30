@@ -14,6 +14,7 @@ import {
 faker.seed(123);
 
 const notesFetchAsync = () => {};
+const notesFetchSetSearchFilter = () => {};
 const commentsFetchAsync = () => {};
 const graphDataFetchAsync = () => {};
 const navigateEditNote = () => {};
@@ -43,6 +44,7 @@ const props = {
   currentProfile: currentUser,
   notes,
   notesFetchAsync,
+  notesFetchSetSearchFilter,
   commentsFetchAsync,
   graphDataFetchAsync,
   navigateEditNote,
