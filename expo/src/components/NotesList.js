@@ -95,7 +95,7 @@ class NotesList extends PureComponent {
     const { isZoomingGraph } = this.state;
 
     return (
-      <glamorous.View>
+      <glamorous.View flex={1}>
         <SearchBar onChangeText={this.onChangeSearchText} />
         <glamorous.FlatList
           style={{
