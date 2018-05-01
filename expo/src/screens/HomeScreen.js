@@ -90,6 +90,7 @@ class HomeScreen extends PureComponent {
       errorMessage,
       fetching,
       notes,
+      searchText,
       notesFetchAsync,
       notesFetchSetSearchFilter,
       navigateEditNote,
@@ -104,6 +105,7 @@ class HomeScreen extends PureComponent {
           <NotesList
             currentUser={currentUser}
             notes={notes}
+            searchText={searchText}
             fetching={fetching}
             errorMessage={errorMessage}
             currentProfile={currentProfile}
@@ -134,6 +136,7 @@ HomeScreen.propTypes = {
       messageText: PropTypes.string.isRequired,
     })
   ).isRequired,
+  searchText: PropTypes.string,
   errorMessage: PropTypes.string,
   fetching: PropTypes.bool,
   currentProfile: ProfilePropType.isRequired,
@@ -166,6 +169,7 @@ HomeScreen.propTypes = {
 
 HomeScreen.defaultProps = {
   errorMessage: "",
+  searchText: "",
   fetching: false,
   commentsFetchDataByMessageId: {},
   graphDataFetchDataByMessageId: {},
