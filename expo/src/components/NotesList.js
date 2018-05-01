@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { Alert, RefreshControl } from "react-native";
+import { Alert, Keyboard, RefreshControl } from "react-native";
 import glamorous, { withTheme } from "glamorous-native";
 
 import Colors from "../constants/Colors";
@@ -45,6 +45,10 @@ class NotesList extends PureComponent {
       this.setState({ refreshing: false });
     }
   }
+
+  onScrollBeginDrag = () => {
+    Keyboard.dismiss();
+  };
 
   onChangeSearchText = text => {
     const searchText = text.trim();
@@ -112,6 +116,7 @@ class NotesList extends PureComponent {
             />
           }
           scrollEnabled={!isZoomingGraph}
+          onScrollBeginDrag={this.onScrollBeginDrag}
         />
       </glamorous.View>
     );
