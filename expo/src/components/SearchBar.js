@@ -89,12 +89,14 @@ class SearchBar extends PureComponent {
     const { theme } = this.props;
     if (Platform.OS === "android") {
       return (
-        <glamorous.TouchableOpacity onPress={this.onPressClear}>
+        <glamorous.TouchableOpacity
+          hitSlop={{ left: 20, right: 20, top: 20, bottom: 20 }}
+          onPress={this.onPressClear}
+        >
           <glamorous.Image
             source={require("../../assets/images/modal-close-button.png")}
             width={22}
             height={22}
-            hitSlop={{ left: 10, right: 10, top: 10, bottom: 10 }}
             marginRight={7}
             style={{ tintColor: theme.searchBarPlaceholderTextColor }}
           />
