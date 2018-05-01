@@ -19,78 +19,89 @@ exports[`Storyshots HomeScreen default 1`] = `
     }
   >
     <View
-      style={null}
+      style={
+        Array [
+          Object {
+            "flex": 1,
+          },
+        ]
+      }
     >
       <View
+        onLayout={[Function]}
         style={null}
       >
         <View
-          style={
-            Array [
-              Object {
-                "alignItems": "center",
-                "flexDirection": "row",
-                "justifyContent": "space-between",
-                "marginBottom": 7,
-                "marginLeft": 10,
-                "marginRight": 13,
-                "marginTop": 7,
-              },
-            ]
-          }
+          style={null}
         >
-          <Image
-            source={1}
+          <View
             style={
               Array [
                 Object {
-                  "tintColor": "#9b9b9b",
-                },
-                Object {
-                  "height": 22,
-                  "marginLeft": 7,
-                  "width": 22,
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "justifyContent": "space-between",
+                  "marginBottom": 7,
+                  "marginLeft": 10,
+                  "marginRight": 13,
+                  "marginTop": 7,
                 },
               ]
             }
-          />
-          <TextInput
-            allowFontScaling={false}
-            autoCapitalize="none"
-            autoCorrect={true}
-            clearButtonMode="while-editing"
-            keyboardAppearance="dark"
-            keyboardType="default"
-            onChangeText={[Function]}
-            placeholder="Search"
-            placeholderTextColor="#9b9b9b"
-            returnKeyType="default"
-            selectionColor="#657ef6"
+          >
+            <Image
+              source={1}
+              style={
+                Array [
+                  Object {
+                    "tintColor": "#9b9b9b",
+                  },
+                  Object {
+                    "height": 22,
+                    "marginLeft": 7,
+                    "width": 22,
+                  },
+                ]
+              }
+            />
+            <TextInput
+              allowFontScaling={false}
+              autoCapitalize="none"
+              autoCorrect={true}
+              clearButtonMode="while-editing"
+              keyboardAppearance="dark"
+              keyboardType="default"
+              onChangeText={[Function]}
+              placeholder="Search"
+              placeholderTextColor="#9b9b9b"
+              returnKeyType="default"
+              selectionColor="#657ef6"
+              style={
+                Array [
+                  Object {
+                    "flex": 1,
+                    "paddingBottom": 7,
+                    "paddingLeft": 7,
+                    "paddingRight": 7,
+                    "paddingTop": 7,
+                  },
+                ]
+              }
+              underlineColorAndroid="transparent"
+              value=""
+            />
+          </View>
+          <View
             style={
               Array [
                 Object {
-                  "flex": 1,
-                  "paddingBottom": 7,
-                  "paddingLeft": 7,
-                  "paddingRight": 7,
-                  "paddingTop": 7,
+                  "backgroundColor": "#ced0ce",
+                  "height": 0.5,
                 },
               ]
             }
-            underlineColorAndroid="transparent"
-            value=""
           />
         </View>
-        <View
-          style={
-            Array [
-              Object {
-                "backgroundColor": "#ced0ce",
-                "height": 0.5,
-              },
-            ]
-          }
-        />
       </View>
       <RCTScrollView
         data={
@@ -701,6 +712,7 @@ exports[`Storyshots HomeScreen default 1`] = `
         extraData={
           Object {
             "refreshing": false,
+            "shouldShowSearchBar": true,
           }
         }
         getItem={[Function]}
@@ -726,7 +738,7 @@ exports[`Storyshots HomeScreen default 1`] = `
         }
         renderItem={[Function]}
         scrollEnabled={true}
-        scrollEventThrottle={50}
+        scrollEventThrottle={16}
         stickyHeaderIndices={Array []}
         style={
           Array [

@@ -2,7 +2,10 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
 import HomeScreen from "../screens/HomeScreen";
-import { notesFetchAsync, notesFetchSetSearchFilter } from "../actions/notesFetch";
+import {
+  notesFetchAsync,
+  notesFetchSetSearchFilter,
+} from "../actions/notesFetch";
 import { commentsFetchAsync } from "../actions/commentsFetch";
 import { noteDeleteAsync } from "../actions/noteDelete";
 import { commentDeleteAsync } from "../actions/commentDelete";
@@ -16,6 +19,7 @@ import {
 const mapStateToProps = state => ({
   currentUser: state.auth,
   notes: state.notesFetch.notes,
+  searchText: state.notesFetch.searchText,
   commentsFetchDataByMessageId: state.commentsFetch,
   graphDataFetchDataByMessageId: state.graphDataFetch,
   errorMessage: state.notesFetch.errorMessage,

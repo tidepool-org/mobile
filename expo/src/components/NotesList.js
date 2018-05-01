@@ -66,17 +66,42 @@ class NotesList extends PureComponent {
     this.isScrollInitiatedByUser = true;
   };
 
-  onScrollEndDrag = () => {
+  onScrollEndDrag = ({ nativeEvent }) => {
+    // FIXME: There's an odd issue on (some?) Android devices where the animation doesn't complete
+    // and the SearchBar is only half-shown. Removing the animation fixes it. (useNativeDriver
+    // makes no difference.) Additionally, though, while the user is still scrolling, if the search
+    // bar hides or shows, it messes up the scroll interaction. iOS doesn't suffer from this. So,
+    // for now, don't hide/show search bar for android during scrolling, just show it all the time
+    if (Platform.OS === "ios") {
+      const { targetContentOffset } = nativeEvent;
+      if (
+        targetContentOffset &&
+        targetContentOffset.y < this.searchBarHeight / 2
+      ) {
+        LayoutAnimation.configureNext({
+          ...LayoutAnimation.Presets.easeInEaseOut,
+          duration: 250,
+          useNativeDriver: true,
+        });
+        this.setState({ shouldShowSearchBar: true });
+      }
+    }
+
     this.isScrollInitiatedByUser = false;
   };
 
   onScroll = ({ nativeEvent }) => {
+    const { notes } = this.props;
     // FIXME: There's an odd issue on (some?) Android devices where the animation doesn't complete
     // and the SearchBar is only half-shown. Removing the animation fixes it. (useNativeDriver
     // makes no difference.) Additionally, though, while the user is still scrolling, if the search
-    // bar hides or shows, it messes up the scroll interaction. iOS doesn't suffere from this. So,
+    // bar hides or shows, it messes up the scroll interaction. iOS doesn't suffer from this. So,
     // for now, don't hide/show search bar for android during scrolling, just show it all the time
-    if (this.isScrollInitiatedByUser && Platform.OS === "ios") {
+    if (
+      this.isScrollInitiatedByUser &&
+      Platform.OS === "ios" &&
+      notes.length > 0
+    ) {
       const contentOffsetY = nativeEvent.contentOffset.y;
       const deltaY = contentOffsetY - this.lastContentOffsetY;
       const isScrollingDown = deltaY > 0;
@@ -153,14 +178,17 @@ class NotesList extends PureComponent {
   );
 
   render() {
-    const { notes } = this.props;
+    const { notes, searchText } = this.props;
     const { isZoomingGraph } = this.state;
 
     return (
       <glamorous.View flex={1}>
         <glamorous.View onLayout={this.onSearchBarLayout}>
           {this.state.shouldShowSearchBar && (
-            <SearchBar onChangeText={this.onChangeSearchText} />
+            <SearchBar
+              searchText={searchText}
+              onChangeText={this.onChangeSearchText}
+            />
           )}
         </glamorous.View>
         <glamorous.FlatList
@@ -198,6 +226,7 @@ NotesList.propTypes = {
       messageText: PropTypes.string.isRequired,
     })
   ).isRequired,
+  searchText: PropTypes.string,
   errorMessage: PropTypes.string,
   fetching: PropTypes.bool,
   notesFetchAsync: PropTypes.func.isRequired,
@@ -229,6 +258,7 @@ NotesList.propTypes = {
 
 NotesList.defaultProps = {
   errorMessage: "",
+  searchText: "",
   fetching: false,
   commentsFetchDataByMessageId: {},
   graphDataFetchDataByMessageId: {},
