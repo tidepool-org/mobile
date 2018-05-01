@@ -1,6 +1,12 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { Alert, Keyboard, RefreshControl } from "react-native";
+import {
+  Alert,
+  Keyboard,
+  LayoutAnimation,
+  Platform,
+  RefreshControl,
+} from "react-native";
 import glamorous, { withTheme } from "glamorous-native";
 
 import Colors from "../constants/Colors";
@@ -27,6 +33,7 @@ class NotesList extends PureComponent {
 
     this.state = {
       refreshing: false,
+      shouldShowSearchBar: true,
     };
   }
 
@@ -46,8 +53,59 @@ class NotesList extends PureComponent {
     }
   }
 
-  onScrollBeginDrag = () => {
+  onSearchBarLayout = ({ nativeEvent }) => {
+    if (!this.searchBarHeight) {
+      this.searchBarHeight = nativeEvent.layout.height;
+    }
+  };
+
+  onScrollBeginDrag = ({ nativeEvent }) => {
     Keyboard.dismiss();
+    const contentOffsetY = nativeEvent.contentOffset.y;
+    this.lastContentOffsetY = contentOffsetY;
+    this.isScrollInitiatedByUser = true;
+  };
+
+  onScrollEndDrag = () => {
+    this.isScrollInitiatedByUser = false;
+  };
+
+  onScroll = ({ nativeEvent }) => {
+    // FIXME: There's an odd issue on (some?) Android devices where the animation doesn't complete
+    // and the SearchBar is only half-shown. Removing the animation fixes it. (useNativeDriver
+    // makes no difference.) Additionally, though, while the user is still scrolling, if the search
+    // bar hides or shows, it messes up the scroll interaction. iOS doesn't suffere from this. So,
+    // for now, don't hide/show search bar for android during scrolling, just show it all the time
+    if (this.isScrollInitiatedByUser && Platform.OS === "ios") {
+      const contentOffsetY = nativeEvent.contentOffset.y;
+      const deltaY = contentOffsetY - this.lastContentOffsetY;
+      const isScrollingDown = deltaY > 0;
+      this.lastContentOffsetY = contentOffsetY;
+      if (contentOffsetY > this.searchBarHeight) {
+        if (isScrollingDown && deltaY > 5.0) {
+          LayoutAnimation.configureNext({
+            ...LayoutAnimation.Presets.easeInEaseOut,
+            duration: 250,
+            useNativeDriver: true,
+          });
+          this.setState({ shouldShowSearchBar: false });
+        } else if (!isScrollingDown && deltaY < -5.0) {
+          LayoutAnimation.configureNext({
+            ...LayoutAnimation.Presets.easeInEaseOut,
+            duration: 250,
+            useNativeDriver: true,
+          });
+          this.setState({ shouldShowSearchBar: true });
+        }
+      } else if (contentOffsetY < this.searchBarHeight / 2) {
+        LayoutAnimation.configureNext({
+          ...LayoutAnimation.Presets.easeInEaseOut,
+          duration: 250,
+          useNativeDriver: true,
+        });
+        this.setState({ shouldShowSearchBar: true });
+      }
+    }
   };
 
   onChangeSearchText = text => {
@@ -100,7 +158,11 @@ class NotesList extends PureComponent {
 
     return (
       <glamorous.View flex={1}>
-        <SearchBar onChangeText={this.onChangeSearchText} />
+        <glamorous.View onLayout={this.onSearchBarLayout}>
+          {this.state.shouldShowSearchBar && (
+            <SearchBar onChangeText={this.onChangeSearchText} />
+          )}
+        </glamorous.View>
         <glamorous.FlatList
           style={{
             backgroundColor: Colors.veryLightGrey, // TODO: use theme rather than color directly
@@ -116,7 +178,10 @@ class NotesList extends PureComponent {
             />
           }
           scrollEnabled={!isZoomingGraph}
+          scrollEventThrottle={Platform.OS === "ios" ? 16 : undefined}
+          onScroll={Platform.OS === "ios" ? this.onScroll : undefined}
           onScrollBeginDrag={this.onScrollBeginDrag}
+          onScrollEndDrag={this.onScrollEndDrag}
         />
       </glamorous.View>
     );
