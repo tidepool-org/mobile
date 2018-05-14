@@ -1,10 +1,9 @@
-import React, { PureComponent } from "react";
-import PropTypes from "prop-types";
+import React from "react";
 
-import { Svg, Path, Polygon } from "../../svg-exports";
+import { Path, Polygon } from "../../../svg-exports";
 
-class GraphNoteEvent extends PureComponent {
-  static renderNoteEventSvgElements({
+class GraphNoteEventSvg {
+  static render({
     eventTimeSeconds,
     graphStartTimeSeconds,
     pixelsPerSecond,
@@ -39,36 +38,6 @@ class GraphNoteEvent extends PureComponent {
     ];
     return svgElements;
   }
-
-  render() {
-    // console.log("GraphNoteEvent: render");
-
-    const {
-      graphFixedLayoutInfo: { height },
-      scaledContentWidth,
-      eventTimeSeconds,
-      graphStartTimeSeconds,
-      pixelsPerSecond,
-    } = this.props.graphScalableLayoutInfo;
-
-    const svgElements = GraphNoteEvent.renderNoteEventSvgElements({
-      eventTimeSeconds,
-      graphStartTimeSeconds,
-      pixelsPerSecond,
-      height,
-    });
-
-    return (
-      <Svg height={height} width={scaledContentWidth}>
-        {svgElements}
-      </Svg>
-    );
-  }
 }
 
-GraphNoteEvent.propTypes = {
-  graphScalableLayoutInfo: PropTypes.object.isRequired,
-};
-
-export { GraphNoteEvent as GraphNoteEventClass };
-export default GraphNoteEvent;
+export default GraphNoteEventSvg;

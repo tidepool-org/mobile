@@ -1,13 +1,9 @@
-import React, { PureComponent } from "react";
-import PropTypes from "prop-types";
-import { withTheme } from "glamorous-native";
+import React from "react";
+import { Circle, Text } from "../../../svg-exports";
+import { MAX_BG_VALUE } from "../helpers";
 
-import { Svg, Circle, Text } from "../../svg-exports";
-import { ThemePropType } from "../../prop-types/theme";
-import { MAX_BG_VALUE } from "./helpers";
-
-class GraphSmbg extends PureComponent {
-  static renderSamplesSvgElements({
+class GraphSmbgSvg {
+  static render({
     theme,
     smbgData,
     yAxisHeightInPixels,
@@ -92,47 +88,5 @@ class GraphSmbg extends PureComponent {
     }
     return result;
   }
-
-  render() {
-    // console.log(`GraphSmbg: render`);
-
-    const {
-      theme,
-      smbgData,
-      graphScalableLayoutInfo: {
-        graphFixedLayoutInfo: {
-          yAxisHeightInPixels,
-          yAxisPixelsPerValue,
-          headerHeight,
-          graphLayerHeight,
-        },
-        graphStartTimeSeconds,
-        pixelsPerSecond,
-        scaledContentWidth,
-      },
-    } = this.props;
-
-    return (
-      <Svg height={graphLayerHeight} width={scaledContentWidth}>
-        {GraphSmbg.renderSamplesSvgElements({
-          theme,
-          smbgData,
-          yAxisHeightInPixels,
-          yAxisPixelsPerValue,
-          headerHeight,
-          graphStartTimeSeconds,
-          pixelsPerSecond,
-        })}
-      </Svg>
-    );
-  }
 }
-
-GraphSmbg.propTypes = {
-  theme: ThemePropType.isRequired,
-  graphScalableLayoutInfo: PropTypes.object.isRequired,
-  smbgData: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
-};
-
-export { GraphSmbg as GraphSmbgClass };
-export default withTheme(GraphSmbg);
+export default GraphSmbgSvg;

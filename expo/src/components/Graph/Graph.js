@@ -7,7 +7,7 @@ import { ThemePropType } from "../../prop-types/theme";
 import GraphFixedLayoutInfo from "./GraphFixedLayoutInfo";
 import GraphScalableLayoutInfo from "./GraphScalableLayoutInfo";
 import GraphYAxisLabels from "./GraphYAxisLabels";
-import GraphYAxisBGBoundaryLines from "./GraphYAxisBGBoundaryLines";
+import GraphYAxisBGBoundaryLinesSvg from "./svg/GraphYAxisBGBoundaryLinesSvg";
 import GraphNoData from "./GraphNoData";
 import GraphScrollable from "./GraphScrollable";
 import GraphZoomable from "./GraphZoomable";
@@ -101,7 +101,7 @@ class Graph extends PureComponent {
 
   onZoomCommit = () => {
     // console.log("onZoomCommit");
-    this.scale = this.state.graphScalableLayoutInfo.scale; // Use last graphScalableLayoutInfo, not passed in scale. (graphScalableLayoutInfo scale is constrained)
+    this.scale = this.state.graphScalableLayoutInfo.scale; // Use last graphScalableLayoutInfo, not the scale passed to onZoomCommi (graphScalableLayoutInfo scale is constrained)
   };
 
   onZoomEnd = () => {
@@ -113,6 +113,8 @@ class Graph extends PureComponent {
   };
 
   renderFixedBackground() {
+    // console.log(`renderFixedBackground`);
+
     const { theme, yAxisLabelValues, yAxisBGBoundaryValues } = this.props;
     const { graphFixedLayoutInfo } = this.state;
 
@@ -129,7 +131,7 @@ class Graph extends PureComponent {
           yAxisLabelValues={yAxisLabelValues}
           graphFixedLayoutInfo={graphFixedLayoutInfo}
         />
-        <GraphYAxisBGBoundaryLines
+        <GraphYAxisBGBoundaryLinesSvg
           yAxisBGBoundaryValues={yAxisBGBoundaryValues}
           graphFixedLayoutInfo={graphFixedLayoutInfo}
         />
@@ -168,8 +170,9 @@ class Graph extends PureComponent {
   }
 
   renderGraphScrollable() {
-    const { isLoading, cbgData, smbgData } = this.props;
+    const { isLoading, cbgData, smbgData, graphRenderer } = this.props;
     const { graphScalableLayoutInfo, isZooming } = this.state;
+
     return (
       <GraphScrollable
         isLoading={isLoading}
@@ -177,6 +180,7 @@ class Graph extends PureComponent {
         graphScalableLayoutInfo={graphScalableLayoutInfo}
         cbgData={cbgData}
         smbgData={smbgData}
+        graphRenderer={graphRenderer}
       />
     );
   }
@@ -205,6 +209,7 @@ Graph.propTypes = {
   navigateHowToUpload: PropTypes.func.isRequired,
   onZoomStart: PropTypes.func.isRequired,
   onZoomEnd: PropTypes.func.isRequired,
+  graphRenderer: PropTypes.string.isRequired,
 };
 
 Graph.defaultProps = {

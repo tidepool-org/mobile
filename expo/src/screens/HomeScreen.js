@@ -86,6 +86,7 @@ class HomeScreen extends PureComponent {
       commentsFetchDataByMessageId,
       graphDataFetchAsync,
       graphDataFetchDataByMessageId,
+      graphRenderer,
       currentProfile,
       errorMessage,
       fetching,
@@ -120,6 +121,7 @@ class HomeScreen extends PureComponent {
             navigateAddComment={navigateAddComment}
             navigateEditComment={navigateEditComment}
             onDeleteCommentPressed={this.onDeleteCommentPressed}
+            graphRenderer={graphRenderer}
           />
         </glamorous.View>
       </ThemeProvider>
@@ -160,6 +162,7 @@ HomeScreen.propTypes = {
       fetched: PropTypes.bool,
     })
   ),
+  graphRenderer: PropTypes.string.isRequired,
   navigateEditNote: PropTypes.func.isRequired,
   navigateAddComment: PropTypes.func.isRequired,
   navigateEditComment: PropTypes.func.isRequired,

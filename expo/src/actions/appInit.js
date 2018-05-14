@@ -2,6 +2,7 @@ import { NativeModules } from "react-native";
 import { appVersionLoad } from "../actions/appVersion";
 import { authRefreshTokenOrSignInAsync } from "../actions/auth";
 import { apiEnvironmentLoadAndSetAsync } from "../actions/apiEnvironment";
+import { graphRendererLoadAndSetAsync } from "../actions/graphRenderer";
 import { navigateLaunch } from "../actions/navigation";
 import runTimeEnvironment from "../utils/runtimeEnvironment";
 
@@ -19,6 +20,7 @@ const appInitAsync = () => async dispatch => {
 
   dispatch(navigateLaunch());
   dispatch(appVersionLoad());
+  await dispatch(graphRendererLoadAndSetAsync());
   await dispatch(apiEnvironmentLoadAndSetAsync());
   await dispatch(authRefreshTokenOrSignInAsync());
   dispatch(appInitDidFinish());

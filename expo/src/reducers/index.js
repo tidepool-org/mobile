@@ -4,6 +4,7 @@ import appInitDidFinish from "./appInitDidFinish";
 import appVersion from "./appVersion";
 import auth from "./auth";
 import apiEnvironment from "./apiEnvironment";
+import graphRenderer from "./graphRenderer";
 import commentsFetch from "./commentsFetch";
 import graphDataFetch from "./graphDataFetch";
 import navigation from "./navigation";
@@ -16,6 +17,7 @@ const reducers = combineReducers({
   appVersion,
   auth,
   apiEnvironment,
+  graphRenderer,
   commentsFetch,
   graphDataFetch,
   navigation,

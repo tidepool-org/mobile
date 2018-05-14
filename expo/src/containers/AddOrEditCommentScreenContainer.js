@@ -21,6 +21,7 @@ const mapStateToProps = (state, ownProps) => {
     timestampAddComment: new Date(),
     commentsFetchData,
     graphDataFetchData,
+    graphRenderer: state.graphRenderer,
   };
 };
 

@@ -54,9 +54,13 @@ class AddOrEditCommentScreenNote extends PureComponent {
 
   renderGraph() {
     const {
-      graphDataFetchData: { fetching, graphData: { cbgData, smbgData } },
+      graphDataFetchData: {
+        fetching,
+        graphData: { cbgData, smbgData },
+      },
       currentProfile: { lowBGBoundary, highBGBoundary },
       note: { timestamp: eventTime },
+      graphRenderer,
     } = this.props;
 
     const isLoading = fetching;
@@ -83,6 +87,7 @@ class AddOrEditCommentScreenNote extends PureComponent {
         navigateHowToUpload={navigateHowToUpload}
         onZoomStart={() => {}}
         onZoomEnd={() => {}}
+        graphRenderer={graphRenderer}
       />
     );
   }
@@ -155,6 +160,7 @@ AddOrEditCommentScreenNote.propTypes = {
     fetching: PropTypes.bool,
     fetched: PropTypes.bool,
   }),
+  graphRenderer: PropTypes.string.isRequired,
 };
 
 AddOrEditCommentScreenNote.defaultProps = {

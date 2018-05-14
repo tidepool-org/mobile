@@ -15,6 +15,7 @@ import {
   DEFAULT_LOW_BG_BOUNDARY_VALUE,
   DEFAULT_HIGH_BG_BOUNDARY_VALUE,
 } from "../../src/components/Graph/helpers";
+import { GRAPH_RENDERER_THREE_JS } from "../../src/actions/graphRenderer";
 
 faker.seed(123);
 
@@ -103,6 +104,7 @@ const navigateEditComment = () => {};
 const onDeleteCommentPressed = () => {};
 const onGraphZoomStart = () => {};
 const onGraphZoomEnd = () => {};
+const graphRenderer = GRAPH_RENDERER_THREE_JS;
 const props = {
   currentUser,
   currentProfile,
@@ -117,6 +119,7 @@ const props = {
   onDeleteCommentPressed,
   onGraphZoomStart,
   onGraphZoomEnd,
+  graphRenderer,
 };
 
 storiesOf("NotesListItem", module).add("default", () => (

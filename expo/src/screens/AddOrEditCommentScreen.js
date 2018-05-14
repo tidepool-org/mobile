@@ -250,6 +250,7 @@ class AddOrEditCommentScreen extends PureComponent {
       currentProfile,
       commentsFetchData,
       graphDataFetchData,
+      graphRenderer,
     } = this.props;
 
     return (
@@ -260,6 +261,7 @@ class AddOrEditCommentScreen extends PureComponent {
         currentProfile={currentProfile}
         commentsFetchData={commentsFetchData}
         graphDataFetchData={graphDataFetchData}
+        graphRenderer={graphRenderer}
       />
     );
   }
@@ -344,6 +346,7 @@ AddOrEditCommentScreen.propTypes = {
     fetching: PropTypes.bool,
     fetched: PropTypes.bool,
   }),
+  graphRenderer: PropTypes.string.isRequired,
 };
 
 AddOrEditCommentScreen.defaultProps = {

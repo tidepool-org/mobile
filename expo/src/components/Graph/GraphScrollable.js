@@ -3,25 +3,43 @@ import { Platform } from "react-native";
 import PropTypes from "prop-types";
 import glamorous, { withTheme } from "glamorous-native";
 
-import { Svg } from "../../svg-exports";
 import { ThemePropType } from "../../prop-types/theme";
-import { GraphNoteEventClass } from "./GraphNoteEvent";
-import { GraphXAxisHeaderClass } from "./GraphXAxisHeader";
-import { GraphCbgClass } from "./GraphCbg";
-import { GraphSmbgClass } from "./GraphSmbg";
+import GraphScrollableGl from "./gl/GraphScrollableGl";
+import GraphScrollableSvg from "./svg/GraphScrollableSvg";
+import {
+  calculateRelativeCenterTimeSeconds,
+  calculateScrollXAndRelativeCenterTimeSeconds,
+} from "./helpers";
+import {
+  GRAPH_RENDERER_SVG,
+  GRAPH_RENDERER_THREE_JS,
+} from "../../actions/graphRenderer";
 
 class GraphScrollable extends PureComponent {
   constructor(props) {
     super(props);
 
-    // Set initial relativeCenterTimeSeconds for contentOffset to be the event time. Do this before initial render so we can use it to calculate contentOffset for initial scroll position
+    // Set initial relativeCenterTimeSeconds for contentOffset to be the event time. Do this before
+    // initial render so we can use it to calculate contentOffset for initial scroll position.
+    // Don't use state for this since we don't want a re-render when this changes.
     const {
       graphScalableLayoutInfo: { eventTimeSeconds, graphStartTimeSeconds },
-    } = props;
-    this.relativeCenterTimeSeconds = eventTimeSeconds - graphStartTimeSeconds;
+    } = this.props;
+    const relativeCenterTimeSeconds = eventTimeSeconds - graphStartTimeSeconds;
+    this.relativeCenterTimeSeconds = relativeCenterTimeSeconds;
   }
 
   componentDidMount() {
+    const { isZooming, graphScalableLayoutInfo } = this.props;
+    const result = calculateScrollXAndRelativeCenterTimeSeconds({
+      graphScalableLayoutInfo,
+      relativeCenterTimeSeconds: this.relativeCenterTimeSeconds,
+      isZooming,
+    });
+    if (this.graphScrollableRef && this.graphScrollableRef.onContentOffsetX) {
+      this.graphScrollableRef.onContentOffsetX(result.x);
+    }
+
     // Android doesn't support contentOffset, so, scroll to the initial center time here. The timeout is also needed for Android, else the initial scroll doesn't take effect
     if (Platform.OS === "android") {
       setTimeout(() => {
@@ -33,7 +51,8 @@ class GraphScrollable extends PureComponent {
   componentDidUpdate(prevProps) {
     // Android doesn't support contentOffset, so, we also need to scroll to the last stored center time after the component renders
     if (Platform.OS === "android") {
-      const { scaledContentWidth } = this.props.graphScalableLayoutInfo;
+      const { graphScalableLayoutInfo } = this.props;
+      const { scaledContentWidth } = graphScalableLayoutInfo;
       const {
         scaledContentWidth: prevScaledContentWidth,
       } = prevProps.graphScalableLayoutInfo;
@@ -45,165 +64,147 @@ class GraphScrollable extends PureComponent {
     }
   }
 
-  onScroll = ({ nativeEvent }) => {
-    const { isZooming } = this.props;
-    // Since we can also get scroll events during zoom, only store an updated center time if the user is not zooming
+  onScroll = event => {
+    const { nativeEvent } = event;
+    const { isZooming, graphScalableLayoutInfo } = this.props;
     if (!isZooming) {
-      const { contentOffset: { x } } = nativeEvent;
-      this.relativeCenterTimeSeconds = this.calculateRelativeCenterTimeSecondsForScrollX(
-        x
-      );
+      const {
+        contentOffset: { x },
+      } = nativeEvent;
+      const relativeCenterTimeSeconds = calculateRelativeCenterTimeSeconds({
+        graphScalableLayoutInfo,
+        x,
+      });
+      this.relativeCenterTimeSeconds = relativeCenterTimeSeconds;
+      if (this.graphScrollableRef && this.graphScrollableRef.onContentOffsetX) {
+        this.graphScrollableRef.onContentOffsetX(x);
+      }
     }
   };
 
+  getPropsForGraphScrollable() {
+    const {
+      theme,
+      isLoading,
+      isZooming,
+      graphScalableLayoutInfo,
+      cbgData,
+      smbgData,
+    } = this.props;
+
+    const props = {
+      ref: graphScrollableRef => {
+        this.graphScrollableRef = graphScrollableRef;
+      },
+      theme,
+      isLoading,
+      isZooming,
+      graphScalableLayoutInfo,
+      cbgData,
+      smbgData,
+    };
+
+    return props;
+  }
+
   scrollToRelativeCenterTimeSeconds() {
-    const x = this.calculateScrollXForRelativeCenterTimeSeconds(
-      this.relativeCenterTimeSeconds
-    );
+    const { graphScalableLayoutInfo, isZooming } = this.props;
+    const { relativeCenterTimeSeconds } = this;
+    const result = calculateScrollXAndRelativeCenterTimeSeconds({
+      graphScalableLayoutInfo,
+      relativeCenterTimeSeconds,
+      isZooming,
+    });
+    this.relativeCenterTimeSeconds = result.relativeCenterTimeSeconds;
+    if (this.graphScrollableRef && this.graphScrollableRef.onContentOffsetX) {
+      this.graphScrollableRef.onContentOffsetX(result.x);
+    }
     this.scrollView.scrollTo({
-      x,
+      x: result.x,
       y: 0,
       animated: false,
     });
   }
 
-  calculateRelativeCenterTimeSecondsForScrollX(x) {
-    const { graphScalableLayoutInfo } = this.props;
-    const { secondsPerPixel, secondsInView } = graphScalableLayoutInfo;
-    const scrollSeconds = x * secondsPerPixel;
-    const relativeCenterTimeSeconds = scrollSeconds + secondsInView / 2;
-    return relativeCenterTimeSeconds;
+  renderGraphScrollableSvg() {
+    return <GraphScrollableSvg {...this.getPropsForGraphScrollable()} />;
   }
 
-  // relativeCenterTimeSeconds is relative to graphStartTimeSeconds (so, 0 is start of graph)
-  calculateScrollXForRelativeCenterTimeSeconds(relativeCenterTimeSeconds) {
+  renderGraphScrollableGlPlaceholder() {
     const {
-      scaledContentWidth,
-      pixelsPerSecond,
-      secondsInView,
-      graphFixedLayoutInfo,
-    } = this.props.graphScalableLayoutInfo;
-    const viewStartTimeSeconds = Math.max(
-      0,
-      relativeCenterTimeSeconds - secondsInView / 2
-    );
-    const secondsToScroll = viewStartTimeSeconds;
-    const scrollableContentWidth =
-      scaledContentWidth - graphFixedLayoutInfo.width;
-    const x = Math.min(
-      scrollableContentWidth,
-      Math.round(pixelsPerSecond * secondsToScroll)
-    );
+      graphScalableLayoutInfo: {
+        scaledContentWidth,
+        graphFixedLayoutInfo: { headerHeight },
+      },
+    } = this.props;
 
-    return x;
+    return <glamorous.View height={headerHeight} width={scaledContentWidth} />;
+  }
+
+  renderGraphScrollableGl() {
+    const {
+      graphScalableLayoutInfo,
+      graphScalableLayoutInfo: { graphFixedLayoutInfo },
+    } = this.props;
+
+    return (
+      <glamorous.View
+        position="absolute"
+        pointerEvents="none"
+        width={graphScalableLayoutInfo.scaledContentWidth}
+        height={graphFixedLayoutInfo.height}
+      >
+        <GraphScrollableGl {...this.getPropsForGraphScrollable()} />
+      </glamorous.View>
+    );
   }
 
   render() {
-    // console.log("GraphScrollable: render");
-
     const {
-      theme,
+      graphRenderer,
       isZooming,
       isLoading,
       graphScalableLayoutInfo,
       graphScalableLayoutInfo: {
-        eventTimeSeconds,
-        graphStartTimeSeconds,
-        pixelsPerSecond,
+        graphFixedLayoutInfo: { width, height },
       },
-      graphScalableLayoutInfo: {
-        graphFixedLayoutInfo: {
-          height,
-          yAxisHeightInPixels,
-          yAxisPixelsPerValue,
-          headerHeight,
-        },
-      },
-      cbgData,
-      smbgData,
     } = this.props;
-    const shouldRenderGraphData = !isLoading && !isZooming;
-    const x = this.calculateScrollXForRelativeCenterTimeSeconds(
-      this.relativeCenterTimeSeconds
-    );
-    const contentOffset = { x, y: 0 };
-    const {
-      ticks: xAxisTicksSvgElements,
-      labels: xAxisLabelsViews,
-    } = GraphXAxisHeaderClass.renderTicksAndLabels({
-      theme,
+
+    const { relativeCenterTimeSeconds } = this;
+    const result = calculateScrollXAndRelativeCenterTimeSeconds({
       graphScalableLayoutInfo,
+      relativeCenterTimeSeconds,
+      isZooming,
     });
+    this.relativeCenterTimeSeconds = result.relativeCenterTimeSeconds;
+    if (this.graphScrollableRef && this.graphScrollableRef.onContentOffsetX) {
+      this.graphScrollableRef.onContentOffsetX(result.x);
+    }
+    const contentOffset = { x: result.x, y: 0 };
 
-    const noteSvgElements = GraphNoteEventClass.renderNoteEventSvgElements({
-      eventTimeSeconds,
-      graphStartTimeSeconds,
-      pixelsPerSecond,
-      height,
-    });
-
-    const cbgSvgElements = shouldRenderGraphData
-      ? GraphCbgClass.renderSamplesSvgElements({
-          theme,
-          cbgData,
-          yAxisHeightInPixels,
-          yAxisPixelsPerValue,
-          headerHeight,
-          graphStartTimeSeconds,
-          pixelsPerSecond,
-        })
-      : null;
-
-    const smbgSvgElements = shouldRenderGraphData
-      ? GraphSmbgClass.renderSamplesSvgElements({
-          theme,
-          smbgData,
-          yAxisHeightInPixels,
-          yAxisPixelsPerValue,
-          headerHeight,
-          graphStartTimeSeconds,
-          pixelsPerSecond,
-        })
-      : null;
+    // console.log(`GraphScrollable: render: contentOffsetX: ${contentOffset.x}`);
 
     return (
-      <glamorous.ScrollView
-        innerRef={scrollView => {
-          this.scrollView = scrollView;
-        }}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentOffset={contentOffset}
-        onScroll={this.onScroll}
-        scrollEventThrottle={16}
-        scrollEnabled={!isLoading && !isZooming}
-      >
-        <glamorous.View
-          height={
-            this.props.graphScalableLayoutInfo.graphFixedLayoutInfo.headerHeight
-          }
-          width={this.props.graphScalableLayoutInfo.scaledContentWidth}
-          backgroundColor="white"
+      <glamorous.View position="absolute" width={width} height={height}>
+        <glamorous.ScrollView
+          innerRef={scrollView => {
+            this.scrollView = scrollView;
+          }}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentOffset={contentOffset}
+          onScroll={this.onScroll}
+          scrollEventThrottle={16}
+          scrollEnabled={!isLoading && !isZooming}
         >
-          {xAxisLabelsViews}
-        </glamorous.View>
-        <glamorous.View
-          position="absolute"
-          pointerEvents="none"
-          height={height}
-          width={this.props.graphScalableLayoutInfo.scaledContentWidth}
-        >
-          <Svg
-            height={height}
-            width={this.props.graphScalableLayoutInfo.scaledContentWidth}
-          >
-            {xAxisTicksSvgElements}
-            {noteSvgElements}
-            {cbgSvgElements}
-            {smbgSvgElements}
-          </Svg>
-        </glamorous.View>
-      </glamorous.ScrollView>
+          {graphRenderer === GRAPH_RENDERER_SVG
+            ? this.renderGraphScrollableSvg()
+            : this.renderGraphScrollableGlPlaceholder()}
+        </glamorous.ScrollView>
+        {graphRenderer === GRAPH_RENDERER_THREE_JS
+          ? this.renderGraphScrollableGl()
+          : null}
+      </glamorous.View>
     );
   }
 }
@@ -212,6 +213,7 @@ GraphScrollable.propTypes = {
   theme: ThemePropType.isRequired,
   isLoading: PropTypes.bool.isRequired,
   isZooming: PropTypes.bool,
+  graphRenderer: PropTypes.string.isRequired,
   graphScalableLayoutInfo: PropTypes.object.isRequired,
   cbgData: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
   smbgData: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,

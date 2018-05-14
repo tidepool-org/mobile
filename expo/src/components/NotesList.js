@@ -174,6 +174,7 @@ class NotesList extends PureComponent {
       onDeleteCommentPressed={this.props.onDeleteCommentPressed}
       onGraphZoomStart={this.onGraphZoomStart}
       onGraphZoomEnd={this.onGraphZoomEnd}
+      graphRenderer={this.props.graphRenderer}
     />
   );
 
@@ -249,6 +250,7 @@ NotesList.propTypes = {
       fetched: PropTypes.bool,
     })
   ),
+  graphRenderer: PropTypes.string.isRequired,
   navigateEditNote: PropTypes.func.isRequired,
   onDeleteNotePressed: PropTypes.func.isRequired,
   navigateAddComment: PropTypes.func.isRequired,

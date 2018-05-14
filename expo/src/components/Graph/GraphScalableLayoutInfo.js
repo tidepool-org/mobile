@@ -14,6 +14,13 @@ class GraphScalableLayoutInfo {
   }) {
     // console.log('GraphScalableLayoutInfo: ctor')
 
+    this.eventTime = eventTime;
+    this.eventTimeSeconds = this.eventTime.getTime() / 1000;
+    this.graphStartTime = subSeconds(eventTime, timeIntervalSeconds / 2);
+    this.graphStartTimeSeconds = this.graphStartTime.getTime() / 1000;
+    this.timeIntervalSeconds = timeIntervalSeconds;
+    this.graphFixedLayoutInfo = graphFixedLayoutInfo;
+
     // Constrain scale
     const minScale = 1.0;
     const maxScale = 12;
@@ -41,12 +48,7 @@ class GraphScalableLayoutInfo {
     this.scaledContentWidth = Math.round(
       constrainedScale * graphFixedLayoutInfo.width
     );
-    this.eventTime = eventTime;
-    this.eventTimeSeconds = this.eventTime.getTime() / 1000;
-    this.graphStartTime = subSeconds(eventTime, timeIntervalSeconds / 2);
-    this.graphStartTimeSeconds = this.graphStartTime.getTime() / 1000;
-    this.timeIntervalSeconds = timeIntervalSeconds;
-    this.graphFixedLayoutInfo = graphFixedLayoutInfo;
+
     this.secondsPerPixel = this.timeIntervalSeconds / this.scaledContentWidth;
     this.secondsInGraph = this.secondsPerPixel * this.scaledContentWidth;
     this.secondsInView = this.secondsPerPixel * graphFixedLayoutInfo.width;

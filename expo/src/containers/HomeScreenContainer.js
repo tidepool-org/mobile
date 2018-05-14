@@ -25,6 +25,7 @@ const mapStateToProps = state => ({
   errorMessage: state.notesFetch.errorMessage,
   fetching: state.notesFetch.fetching,
   currentProfile: state.currentProfile,
+  graphRenderer: state.graphRenderer,
 });
 
 const mapDispatchToProps = dispatch =>

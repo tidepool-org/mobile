@@ -14,9 +14,11 @@ import {
   DEFAULT_LOW_BG_BOUNDARY_VALUE,
   DEFAULT_HIGH_BG_BOUNDARY_VALUE,
 } from "../../src/components/Graph/helpers";
+import { GRAPH_RENDERER_THREE_JS } from "../../src/actions/graphRenderer";
 
 faker.seed(123);
 
+const graphRenderer = GRAPH_RENDERER_THREE_JS;
 const currentProfile = {
   userId: "1",
   username: "email@gmail.com",
@@ -96,6 +98,7 @@ const props = {
   commentUpdateAsync,
   commentsFetchAsync,
   graphDataFetchAsync,
+  graphRenderer,
 };
 
 storiesOf("AddOrEditCommentScreen", module).add("add comment", () => (

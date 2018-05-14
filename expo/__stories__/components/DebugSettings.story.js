@@ -5,11 +5,14 @@ import { storiesOf } from "@storybook/react-native";
 import StoryContainerScreen from "../../__stories__/utils/StoryContainerScreen";
 import DebugSettingsScreen from "../../src/screens/DebugSettingsScreen";
 import { API_ENVIRONMENT_STAGING } from "../../src/api";
+import { GRAPH_RENDERER_THREE_JS } from "../../src/actions/graphRenderer";
 
 const props = {
   navigateGoBack: () => {},
   apiEnvironmentSetAndSaveAsync: () => {},
+  graphRendererSetAndSaveAsync: () => {},
   selectedApiEnvironment: API_ENVIRONMENT_STAGING,
+  selectedGraphRenderer: GRAPH_RENDERER_THREE_JS,
 };
 
 storiesOf("DebugSettingsScreen", module).add("default", () => (

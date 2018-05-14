@@ -315,7 +315,10 @@ class NotesListItem extends PureComponent {
   renderGraph() {
     if (this.state.expanded) {
       const {
-        graphDataFetchData: { fetching, graphData: { cbgData, smbgData } },
+        graphDataFetchData: {
+          fetching,
+          graphData: { cbgData, smbgData },
+        },
         currentProfile: { lowBGBoundary, highBGBoundary },
         note: { timestamp: eventTime },
       } = this.props;
@@ -333,7 +336,7 @@ class NotesListItem extends PureComponent {
         Linking.openURL(Urls.howToUpload);
       };
 
-      const { onGraphZoomStart, onGraphZoomEnd } = this.props;
+      const { onGraphZoomStart, onGraphZoomEnd, graphRenderer } = this.props;
       return (
         <Graph
           isLoading={isLoading}
@@ -345,6 +348,7 @@ class NotesListItem extends PureComponent {
           navigateHowToUpload={navigateHowToUpload}
           onZoomStart={onGraphZoomStart}
           onZoomEnd={onGraphZoomEnd}
+          graphRenderer={graphRenderer}
         />
       );
     }
@@ -356,7 +360,10 @@ class NotesListItem extends PureComponent {
     const { currentUser, allowEditing, note } = this.props;
 
     if (this.state.expanded) {
-      const { theme, commentsFetchData: { comments } } = this.props;
+      const {
+        theme,
+        commentsFetchData: { comments },
+      } = this.props;
       return comments.map(comment => {
         // Skip rendering the comment that has same id as the note
         if (comment.id !== this.props.note.id) {
@@ -451,6 +458,7 @@ NotesListItem.propTypes = {
   onDeleteCommentPressed: PropTypes.func.isRequired,
   onGraphZoomStart: PropTypes.func.isRequired,
   onGraphZoomEnd: PropTypes.func.isRequired,
+  graphRenderer: PropTypes.string.isRequired,
 };
 
 NotesListItem.defaultProps = {
