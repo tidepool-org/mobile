@@ -506,7 +506,14 @@ exports[`Storyshots Drawer default 1`] = `
           accessible={true}
           collapsable={undefined}
           hasTVPreferredFocus={undefined}
-          hitSlop={undefined}
+          hitSlop={
+            Object {
+              "bottom": 10,
+              "left": 10,
+              "right": 10,
+              "top": 10,
+            }
+          }
           isTVSelectable={true}
           nativeID={undefined}
           onLayout={undefined}
@@ -1067,7 +1074,14 @@ exports[`Storyshots Drawer long user full name 1`] = `
           accessible={true}
           collapsable={undefined}
           hasTVPreferredFocus={undefined}
-          hitSlop={undefined}
+          hitSlop={
+            Object {
+              "bottom": 10,
+              "left": 10,
+              "right": 10,
+              "top": 10,
+            }
+          }
           isTVSelectable={true}
           nativeID={undefined}
           onLayout={undefined}

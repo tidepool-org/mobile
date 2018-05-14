@@ -6,6 +6,7 @@ import glamorous, { ThemeProvider } from "glamorous-native";
 import PrimaryTheme from "../themes/PrimaryTheme";
 import Colors from "../constants/Colors";
 import DebugSettingsApiEnvironmentList from "../components/DebugSettingsApiEnvironmentList";
+import DebugSettingsGraphRendererList from "../components/DebugSettingsGraphRendererList";
 
 class DebugSettingsScreen extends PureComponent {
   constructor(props) {
@@ -20,6 +21,13 @@ class DebugSettingsScreen extends PureComponent {
     } else {
       this.props.navigateGoBack();
     }
+  };
+
+  onGraphRendererSelected = selectedGraphRenderer => {
+    if (selectedGraphRenderer !== this.props.selectedGraphRenderer) {
+      this.props.graphRendererSetAndSaveAsync(selectedGraphRenderer);
+    }
+    this.props.navigateGoBack();
   };
 
   renderSeparator = () => (
@@ -40,7 +48,11 @@ class DebugSettingsScreen extends PureComponent {
   );
 
   render() {
-    const { navigateGoBack, selectedApiEnvironment } = this.props;
+    const {
+      navigateGoBack,
+      selectedApiEnvironment,
+      selectedGraphRenderer,
+    } = this.props;
 
     return (
       <ThemeProvider theme={this.theme}>
@@ -75,10 +87,21 @@ class DebugSettingsScreen extends PureComponent {
               </glamorous.Text>
               <glamorous.View width={32} height={32} />
             </glamorous.View>
-            <DebugSettingsApiEnvironmentList
-              onApiEnvironmentSelected={this.onApiEnvironmentSelected}
-              selectedApiEnvironment={selectedApiEnvironment}
-            />
+            <glamorous.ScrollView>
+              <DebugSettingsApiEnvironmentList
+                onApiEnvironmentSelected={this.onApiEnvironmentSelected}
+                selectedApiEnvironment={selectedApiEnvironment}
+              />
+              <glamorous.View
+                flexDirection="row"
+                justifyContent="space-between"
+                padding={8}
+              />
+              <DebugSettingsGraphRendererList
+                onGraphRendererSelected={this.onGraphRendererSelected}
+                selectedGraphRenderer={selectedGraphRenderer}
+              />
+            </glamorous.ScrollView>
           </SafeAreaView>
         </Modal>
       </ThemeProvider>
@@ -89,11 +112,14 @@ class DebugSettingsScreen extends PureComponent {
 DebugSettingsScreen.propTypes = {
   navigateGoBack: PropTypes.func.isRequired,
   apiEnvironmentSetAndSaveAsync: PropTypes.func.isRequired,
+  graphRendererSetAndSaveAsync: PropTypes.func.isRequired,
   selectedApiEnvironment: PropTypes.string,
+  selectedGraphRenderer: PropTypes.string,
 };
 
 DebugSettingsScreen.defaultProps = {
   selectedApiEnvironment: "",
+  selectedGraphRenderer: "",
 };
 
 export default DebugSettingsScreen;

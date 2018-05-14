@@ -79,8 +79,8 @@ class GraphZoomable extends PureComponent {
     if (this.isZooming) {
       // console.log("stopZooming");
       this.commitZoom();
-      this.isZooming = false;
       this.props.onZoomEnd(this.scale);
+      this.isZooming = false;
     }
   }
 

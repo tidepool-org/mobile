@@ -1,13 +1,9 @@
-import React, { PureComponent } from "react";
-import PropTypes from "prop-types";
-import { withTheme } from "glamorous-native";
+import React from "react";
+import { MAX_BG_VALUE } from "../helpers";
+import { Circle, Symbol, Use } from "../../../svg-exports";
 
-import { ThemePropType } from "../../prop-types/theme";
-import { MAX_BG_VALUE } from "./helpers";
-import { Svg, Circle, Symbol, Use } from "../../svg-exports";
-
-class GraphCbg extends PureComponent {
-  static renderSamplesSvgElements({
+class GraphCbgSvg {
+  static render({
     theme,
     cbgData,
     yAxisHeightInPixels,
@@ -16,6 +12,7 @@ class GraphCbg extends PureComponent {
     graphStartTimeSeconds,
     pixelsPerSecond,
   }) {
+    // console.log(`render`);
     const result = [];
 
     result.push(
@@ -83,47 +80,6 @@ class GraphCbg extends PureComponent {
 
     return result;
   }
-
-  render() {
-    // console.log(`GraphCbg: render`);
-
-    const {
-      theme,
-      cbgData,
-      graphScalableLayoutInfo: {
-        graphFixedLayoutInfo: {
-          yAxisHeightInPixels,
-          yAxisPixelsPerValue,
-          headerHeight,
-          graphLayerHeight,
-        },
-        graphStartTimeSeconds,
-        pixelsPerSecond,
-        scaledContentWidth,
-      },
-    } = this.props;
-
-    return (
-      <Svg height={graphLayerHeight} width={scaledContentWidth}>
-        {GraphCbg.renderSamplesSvgElements({
-          theme,
-          cbgData,
-          yAxisHeightInPixels,
-          yAxisPixelsPerValue,
-          headerHeight,
-          graphStartTimeSeconds,
-          pixelsPerSecond,
-        })}
-      </Svg>
-    );
-  }
 }
 
-GraphCbg.propTypes = {
-  theme: ThemePropType.isRequired,
-  graphScalableLayoutInfo: PropTypes.object.isRequired,
-  cbgData: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
-};
-
-export { GraphCbg as GraphCbgClass };
-export default withTheme(GraphCbg);
+export default GraphCbgSvg;

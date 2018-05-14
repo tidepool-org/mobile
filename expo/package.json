@@ -44,9 +44,9 @@
     "flow": "flow",
     "format": "prettier-eslint \"src/**/*.js\"",
     "pre":
-      "cp crna-entry.js index.js && mkdir -p src/svg-exports && cp expo-specific-src/svg-exports/index.js src/svg-exports/index.js && cp expo-specific-src/utils/runtimeEnvironment.js src/utils/runtimeEnvironment.js && cp expo-specific-src/components/LinearGradient.js src/components/LinearGradient.js && cp expo-specific-src/actions/appVersion.js src/actions/appVersion.js && cp expo-specific-src/reducers/appVersion.js src/reducers/appVersion.js",
+      "cp crna-entry.js index.js && mkdir -p src/svg-exports && cp expo-specific-src/svg-exports/index.js src/svg-exports/index.js && cp expo-specific-src/utils/runtimeEnvironment.js src/utils/runtimeEnvironment.js && cp expo-specific-src/components/LinearGradient.js src/components/LinearGradient.js && cp expo-specific-src/actions/appVersion.js src/actions/appVersion.js && cp expo-specific-src/reducers/appVersion.js src/reducers/appVersion.js && cp expo-specific-src/components/Graph/gl/GraphGlView.js src/components/Graph/gl/GraphGlView.js",
     "prestorybook":
-      "cp storybook-entry.js index.js && mkdir -p src/svg-exports && cp expo-specific-src/svg-exports/index.js src/svg-exports/index.js && cp expo-specific-src/utils/runtimeEnvironment.js src/utils/runtimeEnvironment.js && cp expo-specific-src/components/LinearGradient.js src/components/LinearGradient.js && cp expo-specific-src/actions/appVersion.js src/actions/appVersion.js && cp expo-specific-src/reducers/appVersion.js src/reducers/appVersion.js && rnstl",
+      "cp storybook-entry.js index.js && mkdir -p src/svg-exports && cp expo-specific-src/svg-exports/index.js src/svg-exports/index.js && cp expo-specific-src/utils/runtimeEnvironment.js src/utils/runtimeEnvironment.js && cp expo-specific-src/components/LinearGradient.js src/components/LinearGradient.js && cp expo-specific-src/actions/appVersion.js src/actions/appVersion.js && cp expo-specific-src/reducers/appVersion.js src/reducers/appVersion.js && cp expo-specific-src/components/Graph/gl/GraphGlView.js src/components/Graph/gl/GraphGlView.js && rnstl",
     "storybook": "storybook start -p 7007",
     "react-devtools": "react-devtools",
     "postinstall": "rndebugger-open"
@@ -73,6 +73,7 @@
     "axios": "0.18.0",
     "date-fns": "1.29.0",
     "expo": "27.0.1",
+    "expo-three": "^2.2.2-alpha.1",
     "glamorous-native": "1.4.0",
     "prop-types": "15.6.1",
     "react": "16.3.2",
@@ -82,6 +83,8 @@
     "react-redux": "5.0.7",
     "redux": "4.0.0",
     "redux-thunk": "2.2.0",
+    "three": "^0.92.0",
+    "three-bmfont-text": "^2.3.0",
     "twitter-text": "2.0.4",
     "uuid": "3.2.1"
   }

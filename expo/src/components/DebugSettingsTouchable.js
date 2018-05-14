@@ -36,7 +36,11 @@ class DebugSettingsTouchable extends PureComponent {
 
     return (
       <glamorous.View style={style}>
-        <glamorous.TouchableOpacity activeOpacity={1} onPress={this.onPress}>
+        <glamorous.TouchableOpacity
+          activeOpacity={1}
+          onPress={this.onPress}
+          hitSlop={{ left: 10, right: 10, top: 10, bottom: 10 }}
+        >
           {this.props.children}
         </glamorous.TouchableOpacity>
       </glamorous.View>

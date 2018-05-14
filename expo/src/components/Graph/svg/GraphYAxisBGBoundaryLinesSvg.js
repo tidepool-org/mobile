@@ -2,10 +2,10 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { withTheme } from "glamorous-native";
 
-import { Svg, Path } from "../../svg-exports";
-import { ThemePropType } from "../../prop-types/theme";
+import { Svg, Path } from "../../../svg-exports";
+import { ThemePropType } from "../../../prop-types/theme";
 
-class GraphYAxisBGBoundaryLines extends PureComponent {
+class GraphYAxisBGBoundaryLinesSvg extends PureComponent {
   renderBGBoundaryLine(value) {
     const {
       theme,
@@ -35,7 +35,7 @@ class GraphYAxisBGBoundaryLines extends PureComponent {
   }
 
   render() {
-    // console.log("GraphYAxisBGBoundaryLines: render");
+    // console.log("GraphYAxisBGBoundaryLinesSvg: render");
 
     const {
       yAxisBGBoundaryValues,
@@ -50,11 +50,11 @@ class GraphYAxisBGBoundaryLines extends PureComponent {
   }
 }
 
-GraphYAxisBGBoundaryLines.propTypes = {
+GraphYAxisBGBoundaryLinesSvg.propTypes = {
   theme: ThemePropType.isRequired,
   yAxisBGBoundaryValues: PropTypes.arrayOf(PropTypes.number.isRequired)
     .isRequired,
   graphFixedLayoutInfo: PropTypes.object.isRequired,
 };
 
-export default withTheme(GraphYAxisBGBoundaryLines);
+export default withTheme(GraphYAxisBGBoundaryLinesSvg);

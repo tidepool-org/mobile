@@ -10,6 +10,7 @@ import {
   DEFAULT_LOW_BG_BOUNDARY_VALUE,
   DEFAULT_HIGH_BG_BOUNDARY_VALUE,
 } from "../../src/components/Graph/helpers";
+import { GRAPH_RENDERER_THREE_JS } from "../../src/actions/graphRenderer";
 
 faker.seed(123);
 
@@ -38,6 +39,7 @@ const currentUser = {
   lowBGBoundary: DEFAULT_LOW_BG_BOUNDARY_VALUE,
   highBGBoundary: DEFAULT_HIGH_BG_BOUNDARY_VALUE,
 };
+const graphRenderer = GRAPH_RENDERER_THREE_JS;
 
 const props = {
   currentUser,
@@ -52,6 +54,7 @@ const props = {
   navigateAddComment,
   navigateEditComment,
   onDeleteCommentPressed,
+  graphRenderer,
 };
 
 storiesOf("NotesList", module).add("default", () => (
