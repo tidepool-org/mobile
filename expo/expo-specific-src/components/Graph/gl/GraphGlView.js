@@ -3,7 +3,8 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Expo from "expo";
-import { THREE } from "expo-three";
+
+import { THREE } from "./helpers";
 
 class GraphGlView extends PureComponent {
   componentDidMount() {
