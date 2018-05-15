@@ -1,4 +1,4 @@
-import { StackNavigator } from "react-navigation";
+import { createStackNavigator } from "react-navigation";
 
 import HomeScreenContainer from "../containers/HomeScreenContainer";
 import SwitchProfileScreenContainer from "../containers/SwitchProfileScreenContainer";
@@ -10,7 +10,7 @@ import {
   EDIT_COMMENT_ROUTE_NAME,
 } from "./routeNames";
 
-const MainStackNavigator = StackNavigator(
+const MainStackNavigator = createStackNavigator(
   {
     [HOME_ROUTE_NAME]: {
       screen: HomeScreenContainer,

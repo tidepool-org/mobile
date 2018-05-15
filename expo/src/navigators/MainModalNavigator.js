@@ -1,4 +1,4 @@
-import { StackNavigator } from "react-navigation";
+import { createStackNavigator } from "react-navigation";
 
 import MainStackNavigator from "./MainStackNavigator";
 import AddOrEditNoteScreenContainer from "../containers/AddOrEditNoteScreenContainer";
@@ -10,7 +10,7 @@ const transitionConfig = () => ({
   },
 });
 
-const MainModalNavigator = StackNavigator(
+const MainModalNavigator = createStackNavigator(
   {
     MainStackNavigator: { screen: MainStackNavigator },
     [ADD_NOTE_ROUTE_NAME]: {

@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { BackHandler, UIManager } from "react-native";
-import { addNavigationHelpers, NavigationActions } from "react-navigation";
+import { NavigationActions } from "react-navigation";
 import { connect } from "react-redux";
 
 import { AppNavigator } from "../navigators/AppNavigator";
@@ -37,11 +37,11 @@ class AppWithNavigationState extends PureComponent {
 
     return (
       <AppNavigator
-        navigation={addNavigationHelpers({
+        navigation={{
           dispatch,
           state: navigation,
           addListener,
-        })}
+        }}
       />
     );
   }
