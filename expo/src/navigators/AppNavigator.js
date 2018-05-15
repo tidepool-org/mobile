@@ -1,6 +1,6 @@
 import React from "react";
 import { Animated, Easing } from "react-native";
-import { StackNavigator } from "react-navigation";
+import { createStackNavigator } from "react-navigation";
 
 import LaunchScreen from "../screens/LaunchScreen";
 import SignInScreenContainer from "../containers/SignInScreenContainer";
@@ -21,7 +21,7 @@ const noTransitionConfig = () => ({
   },
 });
 
-const AppNavigator = StackNavigator(
+const AppNavigator = createStackNavigator(
   {
     [LAUNCH_ROUTE_NAME]: {
       screen: LaunchScreen,

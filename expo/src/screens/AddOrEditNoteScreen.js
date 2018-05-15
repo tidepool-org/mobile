@@ -622,20 +622,36 @@ class AddOrEditNoteScreen extends PureComponent {
       ? ADD_OR_EDIT_SCREEN_EDIT_NOTE_TITLE
       : ADD_OR_EDIT_SCREEN_ADD_NOTE_TITLE;
 
+    const scene = {
+      index: 0,
+      key: "modal",
+      isActive: true,
+      descriptor: {
+        options: {
+          headerStyle: { backgroundColor: Colors.darkPurple },
+          headerTitle: (
+            <ThemeProvider theme={this.theme}>
+              <ModalScreenHeaderTitle title={title} />
+            </ThemeProvider>
+          ),
+          headerLeft: <ModalScreenHeaderLeft action={this.onCloseAction} />,
+          headerRight: (
+            <ThemeProvider theme={this.theme}>
+              <ModalScreenHeaderRight
+                actionTitle="Save"
+                action={this.saveAndGoBack}
+                disabled={!this.state.isDirty}
+              />
+            </ThemeProvider>
+          ),
+        },
+      },
+    };
+
     return (
       <Header
-        scenes={[
-          {
-            index: 0,
-            key: "modal",
-            isActive: true,
-          },
-        ]}
-        scene={{
-          index: 0,
-          key: "modal",
-          isActive: true,
-        }}
+        scenes={[scene]}
+        scene={scene}
         navigation={{ state: { index: 0 } }}
         getScreenDetails={() => ({
           options: {

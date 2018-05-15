@@ -1,4 +1,8 @@
-import { NavigationActions } from "react-navigation";
+import {
+  NavigationActions,
+  StackActions,
+  DrawerActions,
+} from "react-navigation";
 import { Linking } from "react-native";
 
 import Urls from "../constants/Urls";
@@ -83,7 +87,7 @@ function navigation(state = initialState, action) {
   switch (action.type) {
     case NAVIGATE_LAUNCH:
       nextState = AppNavigator.router.getStateForAction(
-        NavigationActions.reset({
+        StackActions.reset({
           index: 0,
           key: null,
           actions: [
@@ -95,7 +99,7 @@ function navigation(state = initialState, action) {
       break;
     case NAVIGATE_HOME:
       nextState = AppNavigator.router.getStateForAction(
-        NavigationActions.reset({
+        StackActions.reset({
           index: 0,
           key: null,
           actions: [
@@ -107,7 +111,7 @@ function navigation(state = initialState, action) {
       break;
     case NAVIGATE_SIGN_IN:
       nextState = AppNavigator.router.getStateForAction(
-        NavigationActions.reset({
+        StackActions.reset({
           index: 0,
           key: null,
           actions: [
@@ -184,13 +188,13 @@ function navigation(state = initialState, action) {
       break;
     case NAVIGATE_DRAWER_OPEN:
       nextState = AppNavigator.router.getStateForAction(
-        NavigationActions.navigate({ routeName: "DrawerOpen" }),
+        DrawerActions.openDrawer(),
         state
       );
       break;
     case NAVIGATE_DRAWER_CLOSE:
       nextState = AppNavigator.router.getStateForAction(
-        NavigationActions.navigate({ routeName: "DrawerClose" }),
+        DrawerActions.closeDrawer(),
         state
       );
       break;
