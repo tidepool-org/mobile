@@ -1,6 +1,7 @@
-import ExpoTHREE, { THREE } from "expo-three";
 import createGeometry from "three-bmfont-text";
 import { PixelRatio } from "react-native";
+
+import { THREE, createTextureAsync } from "./helpers";
 
 // Create .fnt from .ttf
 // http://www.angelcode.com/products/bmfont/
@@ -37,9 +38,11 @@ class GraphTextMeshFactory {
   async loadAssets() {
     if (!this.assetsAreLoaded) {
       this.bmFont = require("./fonts/OpenSans-Regular-56px.json");
-      this.bmFontSpriteSheetTexture = await ExpoTHREE.createTextureAsync({
+      console.log("before create texture");
+      this.bmFontSpriteSheetTexture = await createTextureAsync({
         asset: require("./fonts/OpenSans-Regular-56px.png"),
       });
+      console.log("after create texture");
     }
     this.assetsAreLoaded = true;
   }

@@ -1,5 +1,4 @@
-import { THREE } from "expo-three";
-
+import { THREE } from "./helpers";
 import GraphRenderLayerGl from "./GraphRenderLayerGl";
 
 class GraphNoteEventGl extends GraphRenderLayerGl {

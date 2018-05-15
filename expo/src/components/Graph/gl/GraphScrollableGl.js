@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import { PixelRatio } from "react-native";
 import PropTypes from "prop-types";
-import ExpoTHREE, { THREE } from "expo-three";
+import { THREE, createRenderer } from "./helpers";
 
 import { ThemePropType } from "../../../prop-types/theme";
 import GraphGlView from "./GraphGlView";
@@ -13,8 +13,6 @@ import GraphTextMeshFactory from "./GraphTextMeshFactory";
 
 class GraphScrollableGl extends PureComponent {
   componentDidMount() {
-    THREE.suppressExpoWarnings(true);
-
     const {
       theme,
       graphScalableLayoutInfo: { graphStartTimeSeconds, graphFixedLayoutInfo },
@@ -75,9 +73,9 @@ class GraphScrollableGl extends PureComponent {
     this.gl = gl;
 
     // Create renderer
-    this.renderer = ExpoTHREE.createRenderer({ gl });
-    this.renderer.sortObjects = false;
-    this.renderer.setSize(gl.drawingBufferWidth, gl.drawingBufferHeight);
+    this.renderer = createRenderer({ gl }); // TODO: my - 0 - compare with RN GL
+    this.renderer.sortObjects = false; // TODO: my - 0 - compare with RN GL
+    this.renderer.setSize(gl.drawingBufferWidth, gl.drawingBufferHeight); // TODO: my - 0 - compare with RN GL
 
     // Create camera
     const { drawingBufferWidth, drawingBufferHeight } = gl;
@@ -108,7 +106,9 @@ class GraphScrollableGl extends PureComponent {
     // );
 
     // Load text assets (bmfont sprite sheet)
+    console.log("before loadAssets");
     await GraphTextMeshFactory.loadAssets();
+    console.log("after loadAssets");
 
     this.renderScene();
   };
@@ -124,7 +124,7 @@ class GraphScrollableGl extends PureComponent {
           contentOffsetX: this.contentOffsetX,
         });
       });
-      this.renderer.render(this.scene, this.camera);
+      this.renderer.render(this.scene, this.camera); // TODO: my - 0 - compare with RN GL
       this.gl.endFrameEXP();
     } else {
       // console.log("GraphScrollableGl: renderScene: No scene, skipped render");
