@@ -105,11 +105,6 @@ class GraphScrollableGl extends PureComponent {
     //     pixelRatio}`
     // );
 
-    // Load text assets (bmfont sprite sheet)
-    console.log("before loadAssets");
-    await GraphTextMeshFactory.loadAssets();
-    console.log("after loadAssets");
-
     this.renderScene();
   };
 

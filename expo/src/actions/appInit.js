@@ -5,6 +5,7 @@ import { apiEnvironmentLoadAndSetAsync } from "../actions/apiEnvironment";
 import { graphRendererLoadAndSetAsync } from "../actions/graphRenderer";
 import { navigateLaunch } from "../actions/navigation";
 import runTimeEnvironment from "../utils/runtimeEnvironment";
+import GraphTextMeshFactory from "../components/Graph/gl/GraphTextMeshFactory";
 
 const APP_INIT_DID_FINISH = "APP_INIT_DID_FINISH";
 
@@ -23,6 +24,7 @@ const appInitAsync = () => async dispatch => {
   await dispatch(graphRendererLoadAndSetAsync());
   await dispatch(apiEnvironmentLoadAndSetAsync());
   await dispatch(authRefreshTokenOrSignInAsync());
+  await GraphTextMeshFactory.loadAssets();
   dispatch(appInitDidFinish());
 
   if (!runTimeEnvironment.useExpo) {

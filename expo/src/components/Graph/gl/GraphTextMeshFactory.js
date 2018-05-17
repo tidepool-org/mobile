@@ -38,11 +38,9 @@ class GraphTextMeshFactory {
   async loadAssets() {
     if (!this.assetsAreLoaded) {
       this.bmFont = require("./fonts/OpenSans-Regular-56px.json");
-      console.log("before create texture");
       this.bmFontSpriteSheetTexture = await createTextureAsync({
         asset: require("./fonts/OpenSans-Regular-56px.png"),
       });
-      console.log("after create texture");
     }
     this.assetsAreLoaded = true;
   }
