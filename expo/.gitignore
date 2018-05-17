@@ -265,6 +265,4 @@ ios/Exponent/Supporting/Generated/EXKeys.h
 ios/RCTTest.podspec
 
 # Open source
-ios/Podfile.lock
-ios/Pods
 .expo
