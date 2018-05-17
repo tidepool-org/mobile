@@ -27,26 +27,18 @@
     "react-devtools": "3.2.1",
     "react-dom": "16.3.2",
     "react-native-debugger-open": "^0.3.17",
-    "react-native-scripts": "1.14.0",
     "react-native-storybook-loader": "1.8.0",
     "react-test-renderer": "16.3.2"
   },
   "scripts": {
-    "start": "yarn run pre && react-native-scripts start",
     "start-storybook": "yarn run prestorybook && react-native-scripts start",
-    "eject": "react-native-scripts eject",
-    "android": "yarn run pre && react-native-scripts android",
-    "android-storybook":
-      "yarn run prestorybook && react-native-scripts android",
-    "ios": "yarn run pre && react-native-scripts ios",
+    "android-storybook": "yarn run prestorybook && react-native-scripts android",
     "ios-storybook": "yarn run prestorybook && react-native-scripts ios",
     "test": "node node_modules/jest/bin/jest.js --watch",
     "flow": "flow",
     "format": "prettier-eslint \"src/**/*.js\"",
-    "pre":
-      "cp crna-entry.js index.js && mkdir -p src/svg-exports && cp expo-specific-src/svg-exports/index.js src/svg-exports/index.js && cp expo-specific-src/utils/runtimeEnvironment.js src/utils/runtimeEnvironment.js && cp expo-specific-src/components/LinearGradient.js src/components/LinearGradient.js && cp expo-specific-src/actions/appVersion.js src/actions/appVersion.js && cp expo-specific-src/reducers/appVersion.js src/reducers/appVersion.js && cp expo-specific-src/components/Graph/gl/GraphGlView.js src/components/Graph/gl/GraphGlView.js && mkdir -p src/components/Graph/gl/helpers && cp expo-specific-src/components/Graph/gl/helpers/index.js src/components/Graph/gl/helpers/index.js",
-    "prestorybook":
-      "cp storybook-entry.js index.js && mkdir -p src/svg-exports && cp expo-specific-src/svg-exports/index.js src/svg-exports/index.js && cp expo-specific-src/utils/runtimeEnvironment.js src/utils/runtimeEnvironment.js && cp expo-specific-src/components/LinearGradient.js src/components/LinearGradient.js && cp expo-specific-src/actions/appVersion.js src/actions/appVersion.js && cp expo-specific-src/reducers/appVersion.js src/reducers/appVersion.js && cp expo-specific-src/components/Graph/gl/GraphGlView.js src/components/Graph/gl/GraphGlView.js && mkdir -p src/components/Graph/gl/helpers && cp expo-specific-src/components/Graph/gl/helpers/index.js src/components/Graph/gl/helpers/index.js && rnstl",
+    "pre": "cp crna-entry.js index.js && mkdir -p src/svg-exports && cp expo-specific-src/svg-exports/index.js src/svg-exports/index.js && cp expo-specific-src/utils/runtimeEnvironment.js src/utils/runtimeEnvironment.js && cp expo-specific-src/components/LinearGradient.js src/components/LinearGradient.js && cp expo-specific-src/actions/appVersion.js src/actions/appVersion.js && cp expo-specific-src/reducers/appVersion.js src/reducers/appVersion.js && cp expo-specific-src/components/Graph/gl/GraphGlView.js src/components/Graph/gl/GraphGlView.js && mkdir -p src/components/Graph/gl/helpers && cp expo-specific-src/components/Graph/gl/helpers/index.js src/components/Graph/gl/helpers/index.js",
+    "prestorybook": "cp storybook-entry.js index.js && mkdir -p src/svg-exports && cp expo-specific-src/svg-exports/index.js src/svg-exports/index.js && cp expo-specific-src/utils/runtimeEnvironment.js src/utils/runtimeEnvironment.js && cp expo-specific-src/components/LinearGradient.js src/components/LinearGradient.js && cp expo-specific-src/actions/appVersion.js src/actions/appVersion.js && cp expo-specific-src/reducers/appVersion.js src/reducers/appVersion.js && cp expo-specific-src/components/Graph/gl/GraphGlView.js src/components/Graph/gl/GraphGlView.js && mkdir -p src/components/Graph/gl/helpers && cp expo-specific-src/components/Graph/gl/helpers/index.js src/components/Graph/gl/helpers/index.js && rnstl",
     "storybook": "storybook start -p 7007",
     "react-devtools": "react-devtools",
     "postinstall": "rndebugger-open"
@@ -64,7 +56,9 @@
   },
   "config": {
     "react-native-storybook-loader": {
-      "searchDir": ["./__stories__"],
+      "searchDir": [
+        "./__stories__"
+      ],
       "pattern": "**/*.story.js",
       "outputFile": "./storybook/storyLoader.js"
     }
@@ -77,8 +71,7 @@
     "glamorous-native": "1.4.0",
     "prop-types": "15.6.1",
     "react": "16.3.1",
-    "react-native":
-      "https://github.com/expo/react-native/archive/sdk-27.0.0.tar.gz",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-27.0.0.tar.gz",
     "react-navigation": "2.0.1",
     "react-navigation-redux-helpers": "1.0.6",
     "react-redux": "5.0.7",
@@ -88,5 +81,6 @@
     "three-bmfont-text": "^2.3.0",
     "twitter-text": "2.0.4",
     "uuid": "3.2.1"
-  }
+  },
+  "main": "node_modules/expo/AppEntry.js"
 }

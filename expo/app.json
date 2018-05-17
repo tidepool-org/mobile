@@ -1,6 +1,4 @@
 {
-  "name": "Tidepool",
-  "displayName": "Tidepool",
   "expo": {
     "name": "Tidepool",
     "slug": "Tidepool",
@@ -11,7 +9,9 @@
     "ios": {
       "bundleIdentifier": "org.tidepool.blipnotesRN",
       "icon": "./assets/images/Icon-App-512x512@2x.png",
-      "usesNonExemptEncryption": false
+      "usesNonExemptEncryption": false,
+      "publishBundlePath": "ios/tidepool/Supporting/shell-app.bundle",
+      "publishManifestPath": "ios/tidepool/Supporting/shell-app-manifest.json"
     },
     "android": {
       "package": "io.tidepool.urchinRN",
@@ -20,6 +20,12 @@
     },
     "updates": {
       "enabled": false
+    },
+    "isDetached": true,
+    "detach": {
+      "scheme": "exp97874575306645aa9ca45e4ad7992729",
+      "iosExpoViewUrl": "https://s3.amazonaws.com/exp-exponent-view-code/ios-v2.5.9-sdk27.0.0-da522861-77ed-40ba-b468-7bd999f7e4ee.tar.gz",
+      "androidExpoViewUrl": "https://s3.amazonaws.com/exp-exponent-view-code/android-v2.5.3-sdk27.0.0-408c8d77-8d1f-4784-b7b4-93826250663a.tar.gz"
     }
   }
 }
