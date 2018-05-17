@@ -1,8 +1,9 @@
+.expo/
 EXBuildConstants*
 keys.json
+*.bundle # Expo publish artifact, don't commit
 
 node_modules/
-.expo/
 npm-debug.*
 yarn-debug.log*
 yarn-error.log*
@@ -133,13 +134,13 @@ captures/
 
 # IntelliJ
 *.iml
-.idea/workspace.xml
-.idea/tasks.xml
-.idea/gradle.xml
-.idea/assetWizardSettings.xml
-.idea/dictionaries
-.idea/libraries
-.idea/caches
+/android/.idea/workspace.xml
+/android/.idea/tasks.xml
+/android/.idea/gradle.xml
+/android/.idea/assetWizardSettings.xml
+/android/.idea/dictionaries
+/android/.idea/libraries
+/android/.idea/caches
 
 # Keystore files
 # Uncomment the following line if you do not want to check your keystore files in.
@@ -186,12 +187,12 @@ DerivedData
 *.xcscmblueprint
 
 # Android Studio
-**/.idea/libraries
-**/.idea/workspace.xml
-**/.idea/gradle.xml
-**/.idea/misc.xml
-**/.idea/modules.xml
-**/.idea/vcs.xml
+/android/.idea/libraries
+/android/.idea/workspace.xml
+/android/.idea/gradle.xml
+/android/.idea/misc.xml
+/android/.idea/modules.xml
+/android/.idea/vcs.xml
 *.iml
 .gradle
 /android/app/build
@@ -260,7 +261,6 @@ android/logcat.txt
 android-shell-app
 
 # Template files
-android/app/src/main/AndroidManifest.xml
 android/app/google-services.json
 android/app/src/main/java/host/exp/exponent/generated/ExponentKeys.java
 android/app/fabric.properties
