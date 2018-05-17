@@ -21,36 +21,22 @@ exports[`Storyshots AddOrEditNoteScreen Add 1`] = `
   >
     <View
       collapsable={undefined}
-      onLayout={[Function]}
-      pointerEvents="box-none"
-      style={
-        Object {
-          "backgroundColor": "#281946",
-          "borderBottomColor": "#A7A7AA",
-          "borderBottomWidth": 0.5,
-          "height": 64,
-          "paddingBottom": 0,
-          "paddingLeft": 0,
-          "paddingRight": 0,
-          "paddingTop": 20,
-        }
-      }
+      style={Object {}}
     >
       <View
+        collapsable={undefined}
+        onLayout={[Function]}
+        pointerEvents="box-none"
         style={
           Object {
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-          }
-        }
-      />
-      <View
-        style={
-          Object {
-            "flex": 1,
+            "backgroundColor": "#281946",
+            "borderBottomColor": "#A7A7AA",
+            "borderBottomWidth": 0.5,
+            "height": 64,
+            "paddingBottom": 0,
+            "paddingLeft": 0,
+            "paddingRight": 0,
+            "paddingTop": 20,
           }
         }
       >
@@ -58,110 +44,26 @@ exports[`Storyshots AddOrEditNoteScreen Add 1`] = `
           style={
             Object {
               "bottom": 0,
-              "flexDirection": "row",
               "left": 0,
               "position": "absolute",
               "right": 0,
               "top": 0,
             }
           }
+        />
+        <View
+          style={
+            Object {
+              "flex": 1,
+            }
+          }
         >
           <View
-            collapsable={undefined}
-            pointerEvents="box-none"
             style={
               Object {
-                "alignItems": "center",
-                "backgroundColor": "transparent",
-                "bottom": 0,
-                "flexDirection": "row",
-                "justifyContent": "center",
-                "left": 70,
-                "opacity": 1,
-                "position": "absolute",
-                "right": 70,
-                "top": 0,
-              }
-            }
-          >
-            <Text
-              accessible={true}
-              allowFontScaling={false}
-              ellipsizeMode="tail"
-              numberOfLines={1}
-              style={
-                Array [
-                  Object {
-                    "alignSelf": "center",
-                    "color": "white",
-                    "fontFamily": "OpenSans-Regular",
-                    "fontSize": 17.5,
-                  },
-                ]
-              }
-            >
-              Add Note
-            </Text>
-          </View>
-          <View
-            collapsable={undefined}
-            pointerEvents="box-none"
-            style={
-              Object {
-                "alignItems": "center",
-                "backgroundColor": "transparent",
                 "bottom": 0,
                 "flexDirection": "row",
                 "left": 0,
-                "opacity": 1,
-                "position": "absolute",
-                "top": 0,
-              }
-            }
-          >
-            <View
-              accessibilityComponentType={undefined}
-              accessibilityLabel={undefined}
-              accessibilityTraits={undefined}
-              accessible={true}
-              collapsable={undefined}
-              hasTVPreferredFocus={undefined}
-              hitSlop={undefined}
-              isTVSelectable={true}
-              nativeID={undefined}
-              onLayout={undefined}
-              onResponderGrant={[Function]}
-              onResponderMove={[Function]}
-              onResponderRelease={[Function]}
-              onResponderTerminate={[Function]}
-              onResponderTerminationRequest={[Function]}
-              onStartShouldSetResponder={[Function]}
-              style={
-                Object {
-                  "marginLeft": 6,
-                  "opacity": 1,
-                  "padding": 10,
-                }
-              }
-              testID={undefined}
-              tvParallaxProperties={undefined}
-            >
-              <Image
-                source={1}
-                style={null}
-              />
-            </View>
-          </View>
-          <View
-            collapsable={undefined}
-            pointerEvents="box-none"
-            style={
-              Object {
-                "alignItems": "center",
-                "backgroundColor": "transparent",
-                "bottom": 0,
-                "flexDirection": "row",
-                "opacity": 1,
                 "position": "absolute",
                 "right": 0,
                 "top": 0,
@@ -169,48 +71,151 @@ exports[`Storyshots AddOrEditNoteScreen Add 1`] = `
             }
           >
             <View
-              accessibilityComponentType={undefined}
-              accessibilityLabel={undefined}
-              accessibilityTraits={undefined}
-              accessible={true}
               collapsable={undefined}
-              hasTVPreferredFocus={undefined}
-              hitSlop={undefined}
-              isTVSelectable={true}
-              nativeID={undefined}
-              onLayout={undefined}
-              onResponderGrant={[Function]}
-              onResponderMove={[Function]}
-              onResponderRelease={[Function]}
-              onResponderTerminate={[Function]}
-              onResponderTerminationRequest={[Function]}
-              onStartShouldSetResponder={[Function]}
+              pointerEvents="box-none"
               style={
                 Object {
-                  "marginRight": 6,
-                  "opacity": 0.2,
-                  "padding": 10,
+                  "alignItems": "center",
+                  "backgroundColor": "transparent",
+                  "bottom": 0,
+                  "flexDirection": "row",
+                  "justifyContent": "center",
+                  "left": 70,
+                  "opacity": 1,
+                  "position": "absolute",
+                  "right": 70,
+                  "top": 0,
                 }
               }
-              testID={undefined}
-              tvParallaxProperties={undefined}
             >
               <Text
                 accessible={true}
-                allowFontScaling={true}
+                allowFontScaling={false}
                 ellipsizeMode="tail"
+                numberOfLines={1}
                 style={
                   Array [
                     Object {
+                      "alignSelf": "center",
                       "color": "white",
                       "fontFamily": "OpenSans-Regular",
-                      "fontSize": 17,
+                      "fontSize": 17.5,
                     },
                   ]
                 }
               >
-                Save
+                Add Note
               </Text>
+            </View>
+            <View
+              collapsable={undefined}
+              pointerEvents="box-none"
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "transparent",
+                  "bottom": 0,
+                  "flexDirection": "row",
+                  "left": 0,
+                  "opacity": 1,
+                  "position": "absolute",
+                  "top": 0,
+                }
+              }
+            >
+              <View
+                accessibilityComponentType={undefined}
+                accessibilityLabel={undefined}
+                accessibilityTraits={undefined}
+                accessible={true}
+                collapsable={undefined}
+                hasTVPreferredFocus={undefined}
+                hitSlop={undefined}
+                isTVSelectable={true}
+                nativeID={undefined}
+                onLayout={undefined}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  Object {
+                    "marginLeft": 6,
+                    "opacity": 1,
+                    "padding": 10,
+                  }
+                }
+                testID={undefined}
+                tvParallaxProperties={undefined}
+              >
+                <Image
+                  source={1}
+                  style={null}
+                />
+              </View>
+            </View>
+            <View
+              collapsable={undefined}
+              pointerEvents="box-none"
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "transparent",
+                  "bottom": 0,
+                  "flexDirection": "row",
+                  "opacity": 1,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                }
+              }
+            >
+              <View
+                accessibilityComponentType={undefined}
+                accessibilityLabel={undefined}
+                accessibilityTraits={undefined}
+                accessible={true}
+                collapsable={undefined}
+                hasTVPreferredFocus={undefined}
+                hitSlop={undefined}
+                isTVSelectable={true}
+                nativeID={undefined}
+                onLayout={undefined}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  Object {
+                    "marginRight": 6,
+                    "opacity": 0.2,
+                    "padding": 10,
+                  }
+                }
+                testID={undefined}
+                tvParallaxProperties={undefined}
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "white",
+                        "fontFamily": "OpenSans-Regular",
+                        "fontSize": 17,
+                      },
+                    ]
+                  }
+                >
+                  Save
+                </Text>
+              </View>
             </View>
           </View>
         </View>
@@ -891,36 +896,22 @@ exports[`Storyshots AddOrEditNoteScreen Edit 1`] = `
   >
     <View
       collapsable={undefined}
-      onLayout={[Function]}
-      pointerEvents="box-none"
-      style={
-        Object {
-          "backgroundColor": "#281946",
-          "borderBottomColor": "#A7A7AA",
-          "borderBottomWidth": 0.5,
-          "height": 64,
-          "paddingBottom": 0,
-          "paddingLeft": 0,
-          "paddingRight": 0,
-          "paddingTop": 20,
-        }
-      }
+      style={Object {}}
     >
       <View
+        collapsable={undefined}
+        onLayout={[Function]}
+        pointerEvents="box-none"
         style={
           Object {
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-          }
-        }
-      />
-      <View
-        style={
-          Object {
-            "flex": 1,
+            "backgroundColor": "#281946",
+            "borderBottomColor": "#A7A7AA",
+            "borderBottomWidth": 0.5,
+            "height": 64,
+            "paddingBottom": 0,
+            "paddingLeft": 0,
+            "paddingRight": 0,
+            "paddingTop": 20,
           }
         }
       >
@@ -928,110 +919,26 @@ exports[`Storyshots AddOrEditNoteScreen Edit 1`] = `
           style={
             Object {
               "bottom": 0,
-              "flexDirection": "row",
               "left": 0,
               "position": "absolute",
               "right": 0,
               "top": 0,
             }
           }
+        />
+        <View
+          style={
+            Object {
+              "flex": 1,
+            }
+          }
         >
           <View
-            collapsable={undefined}
-            pointerEvents="box-none"
             style={
               Object {
-                "alignItems": "center",
-                "backgroundColor": "transparent",
-                "bottom": 0,
-                "flexDirection": "row",
-                "justifyContent": "center",
-                "left": 70,
-                "opacity": 1,
-                "position": "absolute",
-                "right": 70,
-                "top": 0,
-              }
-            }
-          >
-            <Text
-              accessible={true}
-              allowFontScaling={false}
-              ellipsizeMode="tail"
-              numberOfLines={1}
-              style={
-                Array [
-                  Object {
-                    "alignSelf": "center",
-                    "color": "white",
-                    "fontFamily": "OpenSans-Regular",
-                    "fontSize": 17.5,
-                  },
-                ]
-              }
-            >
-              Edit Note
-            </Text>
-          </View>
-          <View
-            collapsable={undefined}
-            pointerEvents="box-none"
-            style={
-              Object {
-                "alignItems": "center",
-                "backgroundColor": "transparent",
                 "bottom": 0,
                 "flexDirection": "row",
                 "left": 0,
-                "opacity": 1,
-                "position": "absolute",
-                "top": 0,
-              }
-            }
-          >
-            <View
-              accessibilityComponentType={undefined}
-              accessibilityLabel={undefined}
-              accessibilityTraits={undefined}
-              accessible={true}
-              collapsable={undefined}
-              hasTVPreferredFocus={undefined}
-              hitSlop={undefined}
-              isTVSelectable={true}
-              nativeID={undefined}
-              onLayout={undefined}
-              onResponderGrant={[Function]}
-              onResponderMove={[Function]}
-              onResponderRelease={[Function]}
-              onResponderTerminate={[Function]}
-              onResponderTerminationRequest={[Function]}
-              onStartShouldSetResponder={[Function]}
-              style={
-                Object {
-                  "marginLeft": 6,
-                  "opacity": 1,
-                  "padding": 10,
-                }
-              }
-              testID={undefined}
-              tvParallaxProperties={undefined}
-            >
-              <Image
-                source={1}
-                style={null}
-              />
-            </View>
-          </View>
-          <View
-            collapsable={undefined}
-            pointerEvents="box-none"
-            style={
-              Object {
-                "alignItems": "center",
-                "backgroundColor": "transparent",
-                "bottom": 0,
-                "flexDirection": "row",
-                "opacity": 1,
                 "position": "absolute",
                 "right": 0,
                 "top": 0,
@@ -1039,48 +946,151 @@ exports[`Storyshots AddOrEditNoteScreen Edit 1`] = `
             }
           >
             <View
-              accessibilityComponentType={undefined}
-              accessibilityLabel={undefined}
-              accessibilityTraits={undefined}
-              accessible={true}
               collapsable={undefined}
-              hasTVPreferredFocus={undefined}
-              hitSlop={undefined}
-              isTVSelectable={true}
-              nativeID={undefined}
-              onLayout={undefined}
-              onResponderGrant={[Function]}
-              onResponderMove={[Function]}
-              onResponderRelease={[Function]}
-              onResponderTerminate={[Function]}
-              onResponderTerminationRequest={[Function]}
-              onStartShouldSetResponder={[Function]}
+              pointerEvents="box-none"
               style={
                 Object {
-                  "marginRight": 6,
-                  "opacity": 0.2,
-                  "padding": 10,
+                  "alignItems": "center",
+                  "backgroundColor": "transparent",
+                  "bottom": 0,
+                  "flexDirection": "row",
+                  "justifyContent": "center",
+                  "left": 70,
+                  "opacity": 1,
+                  "position": "absolute",
+                  "right": 70,
+                  "top": 0,
                 }
               }
-              testID={undefined}
-              tvParallaxProperties={undefined}
             >
               <Text
                 accessible={true}
-                allowFontScaling={true}
+                allowFontScaling={false}
                 ellipsizeMode="tail"
+                numberOfLines={1}
                 style={
                   Array [
                     Object {
+                      "alignSelf": "center",
                       "color": "white",
                       "fontFamily": "OpenSans-Regular",
-                      "fontSize": 17,
+                      "fontSize": 17.5,
                     },
                   ]
                 }
               >
-                Save
+                Edit Note
               </Text>
+            </View>
+            <View
+              collapsable={undefined}
+              pointerEvents="box-none"
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "transparent",
+                  "bottom": 0,
+                  "flexDirection": "row",
+                  "left": 0,
+                  "opacity": 1,
+                  "position": "absolute",
+                  "top": 0,
+                }
+              }
+            >
+              <View
+                accessibilityComponentType={undefined}
+                accessibilityLabel={undefined}
+                accessibilityTraits={undefined}
+                accessible={true}
+                collapsable={undefined}
+                hasTVPreferredFocus={undefined}
+                hitSlop={undefined}
+                isTVSelectable={true}
+                nativeID={undefined}
+                onLayout={undefined}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  Object {
+                    "marginLeft": 6,
+                    "opacity": 1,
+                    "padding": 10,
+                  }
+                }
+                testID={undefined}
+                tvParallaxProperties={undefined}
+              >
+                <Image
+                  source={1}
+                  style={null}
+                />
+              </View>
+            </View>
+            <View
+              collapsable={undefined}
+              pointerEvents="box-none"
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "transparent",
+                  "bottom": 0,
+                  "flexDirection": "row",
+                  "opacity": 1,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                }
+              }
+            >
+              <View
+                accessibilityComponentType={undefined}
+                accessibilityLabel={undefined}
+                accessibilityTraits={undefined}
+                accessible={true}
+                collapsable={undefined}
+                hasTVPreferredFocus={undefined}
+                hitSlop={undefined}
+                isTVSelectable={true}
+                nativeID={undefined}
+                onLayout={undefined}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  Object {
+                    "marginRight": 6,
+                    "opacity": 0.2,
+                    "padding": 10,
+                  }
+                }
+                testID={undefined}
+                tvParallaxProperties={undefined}
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "white",
+                        "fontFamily": "OpenSans-Regular",
+                        "fontSize": 17,
+                      },
+                    ]
+                  }
+                >
+                  Save
+                </Text>
+              </View>
             </View>
           </View>
         </View>
