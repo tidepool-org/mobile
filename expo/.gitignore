@@ -1,7 +1,7 @@
 .expo/
 EXBuildConstants*
 keys.json
-*.bundle # Expo publish artifact, don't commit
+*.bundle 
 
 node_modules/
 npm-debug.*
