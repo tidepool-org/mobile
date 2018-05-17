@@ -1,9 +1,25 @@
 {
-  "expo": {
-    "sdkVersion": "27.0.0",
-    "name": "Tidepool",
-    "slug": "Tidepool"
-  },
   "name": "Tidepool",
-  "displayName": "Tidepool"
+  "displayName": "Tidepool",
+  "expo": {
+    "name": "Tidepool",
+    "slug": "Tidepool",
+    "version": "3.0",
+    "sdkVersion": "27.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/Icon-App-512x512@2x.png",
+    "ios": {
+      "bundleIdentifier": "org.tidepool.blipnotesRN",
+      "icon": "./assets/images/Icon-App-512x512@2x.png",
+      "usesNonExemptEncryption": false
+    },
+    "android": {
+      "package": "io.tidepool.urchinRN",
+      "icon": "./assets/images/Icon-App-512x512@2x.png",
+      "permissions": []
+    },
+    "updates": {
+      "enabled": false
+    }
+  }
 }
