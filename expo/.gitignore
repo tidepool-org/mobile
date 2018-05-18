@@ -1,7 +1,6 @@
 .expo/
 EXBuildConstants*
 keys.json
-*.bundle 
 
 node_modules/
 npm-debug.*
