@@ -17,17 +17,17 @@
 		B5CFBF4F1EDE419400B4BE24 /* EXBuildConstants.plist in Resources */ = {isa = PBXBuildFile; fileRef = B5CFBF4E1EDE419400B4BE24 /* EXBuildConstants.plist */; };
 		B5DB04801F3A684600E91581 /* shell-app-manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = B5DB047E1F3A684600E91581 /* shell-app-manifest.json */; };
 		B5DB04811F3A684600E91581 /* shell-app.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B5DB047F1F3A684600E91581 /* shell-app.bundle */; };
-		EBB8117C1BFA0514F79CAF74 /* libPods-tidepool.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C4A88D15726AD99E8A257BC7 /* libPods-tidepool.a */; };
+		EBB8117C1BFA0514F79CAF74 /* libPods-Tidepool.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C4A88D15726AD99E8A257BC7 /* libPods-Tidepool.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2C1548D9E4CB1AEFA5CCAE6D /* Pods-tidepool.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tidepool.debug.xcconfig"; path = "Pods/Target Support Files/Pods-tidepool/Pods-tidepool.debug.xcconfig"; sourceTree = "<group>"; };
+		2C1548D9E4CB1AEFA5CCAE6D /* Pods-Tidepool.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tidepool.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tidepool/Pods-Tidepool.debug.xcconfig"; sourceTree = "<group>"; };
 		4DF7011120AF15C700B2FDC6 /* LaunchScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchScreen.m; sourceTree = "<group>"; };
 		4DF7011220AF15C700B2FDC6 /* LaunchScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchScreen.h; sourceTree = "<group>"; };
 		4DF7011520AF15DC00B2FDC6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		A47FE4D7F70906B7DC8CE39B /* Pods-tidepool.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tidepool.release.xcconfig"; path = "Pods/Target Support Files/Pods-tidepool/Pods-tidepool.release.xcconfig"; sourceTree = "<group>"; };
+		A47FE4D7F70906B7DC8CE39B /* Pods-Tidepool.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tidepool.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tidepool/Pods-Tidepool.release.xcconfig"; sourceTree = "<group>"; };
 		B501732A1DC01252003445D9 /* EXShell.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = EXShell.plist; sourceTree = "<group>"; };
-		B56386411DB9693800A0598C /* tidepool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tidepool.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B56386411DB9693800A0598C /* Tidepool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tidepool.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B56386471DB9693800A0598C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B56386481DB9693800A0598C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		B56386501DB9693800A0598C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -37,7 +37,7 @@
 		B5CFBF4E1EDE419400B4BE24 /* EXBuildConstants.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = EXBuildConstants.plist; sourceTree = "<group>"; };
 		B5DB047E1F3A684600E91581 /* shell-app-manifest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "shell-app-manifest.json"; sourceTree = "<group>"; };
 		B5DB047F1F3A684600E91581 /* shell-app.bundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "shell-app.bundle"; sourceTree = "<group>"; };
-		C4A88D15726AD99E8A257BC7 /* libPods-tidepool.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-tidepool.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C4A88D15726AD99E8A257BC7 /* libPods-Tidepool.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Tidepool.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,7 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EBB8117C1BFA0514F79CAF74 /* libPods-tidepool.a in Frameworks */,
+				EBB8117C1BFA0514F79CAF74 /* libPods-Tidepool.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -55,7 +55,7 @@
 		1A42804E64B7E9E0AB8B6799 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				C4A88D15726AD99E8A257BC7 /* libPods-tidepool.a */,
+				C4A88D15726AD99E8A257BC7 /* libPods-Tidepool.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -63,8 +63,8 @@
 		5B29BC350A332C58878A9F13 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				2C1548D9E4CB1AEFA5CCAE6D /* Pods-tidepool.debug.xcconfig */,
-				A47FE4D7F70906B7DC8CE39B /* Pods-tidepool.release.xcconfig */,
+				2C1548D9E4CB1AEFA5CCAE6D /* Pods-Tidepool.debug.xcconfig */,
+				A47FE4D7F70906B7DC8CE39B /* Pods-Tidepool.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -72,7 +72,7 @@
 		B56386381DB9693800A0598C = {
 			isa = PBXGroup;
 			children = (
-				B56386431DB9693800A0598C /* tidepool */,
+				B56386431DB9693800A0598C /* Tidepool */,
 				B56386421DB9693800A0598C /* Products */,
 				5B29BC350A332C58878A9F13 /* Pods */,
 				1A42804E64B7E9E0AB8B6799 /* Frameworks */,
@@ -82,12 +82,12 @@
 		B56386421DB9693800A0598C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B56386411DB9693800A0598C /* tidepool.app */,
+				B56386411DB9693800A0598C /* Tidepool.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		B56386431DB9693800A0598C /* tidepool */ = {
+		B56386431DB9693800A0598C /* Tidepool */ = {
 			isa = PBXGroup;
 			children = (
 				B56386471DB9693800A0598C /* AppDelegate.h */,
@@ -95,7 +95,7 @@
 				B56386501DB9693800A0598C /* Assets.xcassets */,
 				B563865B1DB96A5E00A0598C /* Supporting */,
 			);
-			path = tidepool;
+			path = Tidepool;
 			sourceTree = "<group>";
 		};
 		B563865B1DB96A5E00A0598C /* Supporting */ = {
@@ -118,9 +118,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B56386401DB9693800A0598C /* tidepool */ = {
+		B56386401DB9693800A0598C /* Tidepool */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B56386581DB9693800A0598C /* Build configuration list for PBXNativeTarget "tidepool" */;
+			buildConfigurationList = B56386581DB9693800A0598C /* Build configuration list for PBXNativeTarget "Tidepool" */;
 			buildPhases = (
 				23539343DCC44EF8449429EE /* [CP] Check Pods Manifest.lock */,
 				B5722AD01DFB7E3F0084848F /* Prepare Expo */,
@@ -135,9 +135,9 @@
 			);
 			dependencies = (
 			);
-			name = tidepool;
-			productName = tidepool;
-			productReference = B56386411DB9693800A0598C /* tidepool.app */;
+			name = Tidepool;
+			productName = Tidepool;
+			productReference = B56386411DB9693800A0598C /* Tidepool.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -156,7 +156,7 @@
 					};
 				};
 			};
-			buildConfigurationList = B563863C1DB9693800A0598C /* Build configuration list for PBXProject "tidepool" */;
+			buildConfigurationList = B563863C1DB9693800A0598C /* Build configuration list for PBXProject "Tidepool" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -169,7 +169,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B56386401DB9693800A0598C /* tidepool */,
+				B56386401DB9693800A0598C /* Tidepool */,
 			);
 		};
 /* End PBXProject section */
@@ -217,7 +217,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-tidepool-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Tidepool-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -236,7 +236,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-tidepool/Pods-tidepool-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Tidepool/Pods-Tidepool-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		AA38385B7D8D0854176B72FC /* [CP] Copy Pods Resources */ = {
@@ -245,7 +245,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-tidepool/Pods-tidepool-resources.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-Tidepool/Pods-Tidepool-resources.sh",
 				"${PODS_ROOT}/Amplitude-iOS/Amplitude/api.amplitude.com.der",
 				"${PODS_ROOT}/Amplitude-iOS/Amplitude/ComodoCaLimitedRsaCertificationAuthority.der",
 				"${PODS_ROOT}/Amplitude-iOS/Amplitude/ComodoRsaCA.der",
@@ -278,7 +278,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-tidepool/Pods-tidepool-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Tidepool/Pods-Tidepool-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B5722AD01DFB7E3F0084848F /* Prepare Expo */ = {
@@ -426,11 +426,11 @@
 		};
 		B56386591DB9693800A0598C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2C1548D9E4CB1AEFA5CCAE6D /* Pods-tidepool.debug.xcconfig */;
+			baseConfigurationReference = 2C1548D9E4CB1AEFA5CCAE6D /* Pods-Tidepool.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 75U4X84TEG;
-				INFOPLIST_FILE = "$(SRCROOT)/tidepool/Supporting/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Tidepool/Supporting/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.tidepool.blipnotesRN;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -440,11 +440,11 @@
 		};
 		B563865A1DB9693800A0598C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A47FE4D7F70906B7DC8CE39B /* Pods-tidepool.release.xcconfig */;
+			baseConfigurationReference = A47FE4D7F70906B7DC8CE39B /* Pods-Tidepool.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 75U4X84TEG;
-				INFOPLIST_FILE = "$(SRCROOT)/tidepool/Supporting/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Tidepool/Supporting/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.tidepool.blipnotesRN;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -455,7 +455,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B563863C1DB9693800A0598C /* Build configuration list for PBXProject "tidepool" */ = {
+		B563863C1DB9693800A0598C /* Build configuration list for PBXProject "Tidepool" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B56386561DB9693800A0598C /* Debug */,
@@ -464,7 +464,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B56386581DB9693800A0598C /* Build configuration list for PBXNativeTarget "tidepool" */ = {
+		B56386581DB9693800A0598C /* Build configuration list for PBXNativeTarget "Tidepool" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B56386591DB9693800A0598C /* Debug */,
