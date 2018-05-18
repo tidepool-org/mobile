@@ -55,7 +55,7 @@ android {
     }
     prod {
       // The actual minSdkVersion for the application.
-      minSdkVersion 19
+      minSdkVersion 21
     }
   }
   buildTypes {
