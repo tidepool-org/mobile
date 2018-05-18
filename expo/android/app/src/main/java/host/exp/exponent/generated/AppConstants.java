@@ -17,7 +17,7 @@ public class AppConstants {
   public static final String SHELL_APP_SCHEME = "exp97874575306645aa9ca45e4ad7992729";
   public static final String RELEASE_CHANNEL = "default";
   public static boolean SHOW_LOADING_VIEW_IN_SHELL_APP = false;
-  public static boolean ARE_REMOTE_UPDATES_ENABLED = false;
+  public static boolean ARE_REMOTE_UPDATES_ENABLED = true;
   public static final List<Constants.EmbeddedResponse> EMBEDDED_RESPONSES;
   public static boolean FCM_ENABLED = false;
 
