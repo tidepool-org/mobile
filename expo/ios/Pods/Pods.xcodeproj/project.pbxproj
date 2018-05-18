@@ -1763,7 +1763,7 @@
 		BF8969CB1ED2B53CAFFC42DF8C93017F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DD98143E07396F4EEDDBFDA58C91642 /* Foundation.framework */; };
 		BF89A6D7AAEF1B537051CCB7D94BAD32 /* FBSDKAccessTokenCacheV4.h in Headers */ = {isa = PBXBuildFile; fileRef = E41C8D97927D036DBCD0B1C6AB5A5485 /* FBSDKAccessTokenCacheV4.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		BF8A9F8CC0C5494796C03B9BA493441C /* GPUImageBrightnessFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CACE53EC086BCA31626387469CF2E2A /* GPUImageBrightnessFilter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		BF8DAF7CF7C6D5C2438B8309C2449B39 /* Pods-tidepool-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 855F28BFF402E2784DE89383CDE69F4D /* Pods-tidepool-dummy.m */; };
+		BF8DAF7CF7C6D5C2438B8309C2449B39 /* Pods-Tidepool-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 855F28BFF402E2784DE89383CDE69F4D /* Pods-Tidepool-dummy.m */; };
 		BFAB3DE9BBDF36A32944215F56E053B4 /* RCTBridgeDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 17992C173500FF8B51CDB429CEEBD909 /* RCTBridgeDelegate.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		BFC80A1A8E936F894832D29D691EC352 /* RCTReloadCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = BD9BA9ABED0CF262BE781D1D33292BF9 /* RCTReloadCommand.m */; settings = {COMPILER_FLAGS = "-DFOLLY_NO_CONFIG -DFOLLY_MOBILE=1 -DFOLLY_USE_LIBCPP=1"; }; };
 		BFD13957757E4F2F787A781F97A17140 /* RCTSegmentedControlManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BBBB0416ECC67C42B324A4CC2BBAD88A /* RCTSegmentedControlManager.m */; settings = {COMPILER_FLAGS = "-DFOLLY_NO_CONFIG -DFOLLY_MOBILE=1 -DFOLLY_USE_LIBCPP=1"; }; };
@@ -3147,7 +3147,7 @@
 		30CB9A1E2F7D81263BAABFA23A415853 /* LOTTransformInterpolator.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LOTTransformInterpolator.m; path = "lottie-ios/Classes/RenderSystem/InterpolatorNodes/LOTTransformInterpolator.m"; sourceTree = "<group>"; };
 		30CDD54F0F734E18E7B99C022EB3C12C /* NSDataBigString.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = NSDataBigString.h; sourceTree = "<group>"; };
 		30D921691AB03B4507F3986CF8E4DAE9 /* RecoverableError.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RecoverableError.h; path = ReactCommon/cxxreact/RecoverableError.h; sourceTree = "<group>"; };
-		30E38BE715B7521124E0FFC71AAC31AF /* Pods-tidepool.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-tidepool.debug.xcconfig"; sourceTree = "<group>"; };
+		30E38BE715B7521124E0FFC71AAC31AF /* Pods-Tidepool.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Tidepool.debug.xcconfig"; sourceTree = "<group>"; };
 		310481A4B23420BE5AA67D863BEC28E5 /* GPUImageVignetteFilter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GPUImageVignetteFilter.m; path = framework/Source/GPUImageVignetteFilter.m; sourceTree = "<group>"; };
 		310A61A7D055D59BD4BED481E81A8CDA /* FabricUIManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FabricUIManager.h; path = ReactCommon/fabric/FabricUIManager.h; sourceTree = "<group>"; };
 		3112770A8CA07AB3EB22E88D560D36BB /* BranchLogoutRequest.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = BranchLogoutRequest.m; path = "Branch-SDK/Branch-SDK/Requests/BranchLogoutRequest.m"; sourceTree = "<group>"; };
@@ -3191,7 +3191,7 @@
 		35645349C0B4B9F7652A345801882365 /* BFWebViewAppLinkResolver.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = BFWebViewAppLinkResolver.m; path = Bolts/iOS/BFWebViewAppLinkResolver.m; sourceTree = "<group>"; };
 		359152334943B8607C8818E7060B9CC6 /* libFBSDKShareKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libFBSDKShareKit.a; path = libFBSDKShareKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		359C7F1FC3D81A41DB52F191A2FA041B /* RCTModalHostViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = RCTModalHostViewController.m; sourceTree = "<group>"; };
-		35D8CD33E090A770FE9979302EBAE760 /* libPods-tidepool.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-tidepool.a"; path = "libPods-tidepool.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		35D8CD33E090A770FE9979302EBAE760 /* libPods-Tidepool.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-Tidepool.a"; path = "libPods-Tidepool.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		35DB58227658C6DE5EA0A24C6D009F3B /* GPUImageJFAVoronoiFilter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GPUImageJFAVoronoiFilter.m; path = framework/Source/GPUImageJFAVoronoiFilter.m; sourceTree = "<group>"; };
 		36125FB171F9883A38EDB9B796EA6146 /* EXAppFetcherWithTimeout.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = EXAppFetcherWithTimeout.m; path = ios/Exponent/Kernel/AppLoader/AppFetcher/EXAppFetcherWithTimeout.m; sourceTree = "<group>"; };
 		3613239349327F8A6DC8A80DFFFB33B4 /* ARTSolidColor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = ARTSolidColor.h; sourceTree = "<group>"; };
@@ -3939,7 +3939,7 @@
 		8520E769045AF268036C1D3DB936E6FE /* AIRMapMarkerManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AIRMapMarkerManager.h; path = ios/Exponent/Versioned/Core/Api/Components/Maps/AIRMapMarkerManager.h; sourceTree = "<group>"; };
 		852346FC8400511FE28203098DEA034D /* RNSVGLineManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RNSVGLineManager.h; path = ios/Exponent/Versioned/Core/Api/Components/Svg/ViewManagers/RNSVGLineManager.h; sourceTree = "<group>"; };
 		852F5B9F86FFFEB50E91AED9B8EB3501 /* AppAuth-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "AppAuth-prefix.pch"; sourceTree = "<group>"; };
-		855F28BFF402E2784DE89383CDE69F4D /* Pods-tidepool-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-tidepool-dummy.m"; sourceTree = "<group>"; };
+		855F28BFF402E2784DE89383CDE69F4D /* Pods-Tidepool-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Tidepool-dummy.m"; sourceTree = "<group>"; };
 		858EF2A03EDACDAAFB07F36747939939 /* RNSVGClipPath.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = RNSVGClipPath.m; path = ios/Exponent/Versioned/Core/Api/Components/Svg/Elements/RNSVGClipPath.m; sourceTree = "<group>"; };
 		85A20A64D1DB0951FBE2AC4F68BBBB5B /* RNSVGUnits.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RNSVGUnits.h; path = ios/Exponent/Versioned/Core/Api/Components/Svg/Utils/RNSVGUnits.h; sourceTree = "<group>"; };
 		85B1CB598073C9B2845B5F239EBFB631 /* EXCameraPermissionRequester.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = EXCameraPermissionRequester.h; path = ios/Exponent/Versioned/Core/Api/Permissions/EXCameraPermissionRequester.h; sourceTree = "<group>"; };
@@ -4085,7 +4085,7 @@
 		9378A050182A80608DB1F60AC1401AC7 /* RCTAnimationUtils.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RCTAnimationUtils.h; path = Libraries/NativeAnimation/RCTAnimationUtils.h; sourceTree = "<group>"; };
 		93889F0F82A78EF3EDBCD357CE910396 /* RNGestureHandler.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = RNGestureHandler.m; path = ios/Exponent/Versioned/Core/Api/Components/GestureHandler/RNGestureHandler.m; sourceTree = "<group>"; };
 		938E42CDB5021C572B03371896343AC5 /* GPUImageFilterPipeline.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GPUImageFilterPipeline.h; path = framework/Source/GPUImageFilterPipeline.h; sourceTree = "<group>"; };
-		939125E7D58F9B3E661179BFE5BC5029 /* Pods-tidepool-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-tidepool-resources.sh"; sourceTree = "<group>"; };
+		939125E7D58F9B3E661179BFE5BC5029 /* Pods-Tidepool-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Tidepool-resources.sh"; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		93AFB3EA6A59D861B5B2F8DDFF6EA366 /* NSData+EXRemoteNotifications.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSData+EXRemoteNotifications.m"; path = "ios/Exponent/Kernel/Services/Notifications/NSData+EXRemoteNotifications.m"; sourceTree = "<group>"; };
 		93B3CBDC091FB177989F929A2D205250 /* GPUImageColorMatrixFilter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GPUImageColorMatrixFilter.m; path = framework/Source/GPUImageColorMatrixFilter.m; sourceTree = "<group>"; };
@@ -4148,7 +4148,7 @@
 		995994C316223A2ECB67A24C2EB66532 /* RCTReconnectingWebSocket.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = RCTReconnectingWebSocket.m; path = Libraries/WebSocket/RCTReconnectingWebSocket.m; sourceTree = "<group>"; };
 		995C6AF00D729D8877A7E5A0C05A0003 /* GPUImageCGAColorspaceFilter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GPUImageCGAColorspaceFilter.h; path = framework/Source/GPUImageCGAColorspaceFilter.h; sourceTree = "<group>"; };
 		995DA386CB9DC3F0AE495863133BEC05 /* GPUImageOverlayBlendFilter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GPUImageOverlayBlendFilter.h; path = framework/Source/GPUImageOverlayBlendFilter.h; sourceTree = "<group>"; };
-		9979AB4E6C4DE82FED83F5100D32E29D /* Pods-tidepool-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-tidepool-acknowledgements.markdown"; sourceTree = "<group>"; };
+		9979AB4E6C4DE82FED83F5100D32E29D /* Pods-Tidepool-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Tidepool-acknowledgements.markdown"; sourceTree = "<group>"; };
 		9989FF703A19C65782567AD45C02586F /* CocoaLumberjack.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CocoaLumberjack.h; path = Classes/CocoaLumberjack.h; sourceTree = "<group>"; };
 		99C7BB06942D2905B6F02D9CB8392A6F /* RCTSliderManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RCTSliderManager.h; sourceTree = "<group>"; };
 		99DE1A75198CDA1F30A34274E9648D02 /* GPUImageColorPackingFilter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GPUImageColorPackingFilter.h; path = framework/Source/GPUImageColorPackingFilter.h; sourceTree = "<group>"; };
@@ -4212,7 +4212,7 @@
 		9E4431511654214F9B1743C1E57522A3 /* GPUImageMovie.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GPUImageMovie.h; path = framework/Source/GPUImageMovie.h; sourceTree = "<group>"; };
 		9E4AC794D3EC88682307A455266A08D7 /* RCTPerformanceLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RCTPerformanceLogger.h; sourceTree = "<group>"; };
 		9E7301F4D58694ABA958B4ADF4521ABC /* FBSDKErrorRecoveryConfiguration.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBSDKErrorRecoveryConfiguration.h; path = FBSDKCoreKit/FBSDKCoreKit/Internal/ServerConfiguration/FBSDKErrorRecoveryConfiguration.h; sourceTree = "<group>"; };
-		9ECE5BBB71B91ED8895C50800743D317 /* Pods-tidepool.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-tidepool.release.xcconfig"; sourceTree = "<group>"; };
+		9ECE5BBB71B91ED8895C50800743D317 /* Pods-Tidepool.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Tidepool.release.xcconfig"; sourceTree = "<group>"; };
 		9EE876AD7A44060D170AEB86219FA82A /* Unicode.cpp */ = {isa = PBXFileReference; includeInIndex = 1; name = Unicode.cpp; path = ReactCommon/jschelpers/Unicode.cpp; sourceTree = "<group>"; };
 		9F01F2405AB4B7F36345BD761E6F3AC1 /* MethodCall.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MethodCall.h; path = ReactCommon/cxxreact/MethodCall.h; sourceTree = "<group>"; };
 		9F096DDBBF1C57DC5B3237D57900AFAF /* FBSDKShareUtility.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBSDKShareUtility.h; path = FBSDKShareKit/FBSDKShareKit/Internal/FBSDKShareUtility.h; sourceTree = "<group>"; };
@@ -4358,7 +4358,7 @@
 		ACC769A000064D803D5023640AE3483A /* ARTGroupManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = ARTGroupManager.m; sourceTree = "<group>"; };
 		ACCCB07D9CDFCDCB1A96A90C57D2445F /* RCTWebView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = RCTWebView.m; sourceTree = "<group>"; };
 		ACDCF5DAA8C4653B1C3DEAB41C62AADF /* BNCServerInterface.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BNCServerInterface.h; path = "Branch-SDK/Branch-SDK/BNCServerInterface.h"; sourceTree = "<group>"; };
-		ACDF80897909FEAFC9DB9813EFCFB389 /* Pods-tidepool-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-tidepool-acknowledgements.plist"; sourceTree = "<group>"; };
+		ACDF80897909FEAFC9DB9813EFCFB389 /* Pods-Tidepool-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Tidepool-acknowledgements.plist"; sourceTree = "<group>"; };
 		ACE7F19E3E05B9F33BC220860EC21575 /* LOTAsset.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LOTAsset.m; path = "lottie-ios/Classes/Models/LOTAsset.m"; sourceTree = "<group>"; };
 		ACFC2B33838E03B0E28566DFA72C0B4A /* FBSDKSettings+Internal.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "FBSDKSettings+Internal.h"; path = "FBSDKCoreKit/FBSDKCoreKit/Internal/FBSDKSettings+Internal.h"; sourceTree = "<group>"; };
 		AD0F848CCB3797B7C7C26186F0D9570B /* ARTRadialGradient.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = ARTRadialGradient.h; sourceTree = "<group>"; };
@@ -5029,7 +5029,7 @@
 		F2B1EAC4C1BE36B48676D37931DFB85A /* EXMagnetometerUncalibrated.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = EXMagnetometerUncalibrated.m; path = ios/Exponent/Versioned/Core/Api/Sensors/EXMagnetometerUncalibrated.m; sourceTree = "<group>"; };
 		F2C8FE8819DAFF2EB07C013008931655 /* RCTSwitch.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = RCTSwitch.m; sourceTree = "<group>"; };
 		F2D063D0FDD30A37A16414AE6079BF69 /* RNBranch.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RNBranch.h; path = ios/Exponent/Versioned/Core/Api/Standalone/Branch/RNBranch.h; sourceTree = "<group>"; };
-		F2D165FB337B80B062DE49F6C285348C /* Pods-tidepool-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-tidepool-frameworks.sh"; sourceTree = "<group>"; };
+		F2D165FB337B80B062DE49F6C285348C /* Pods-Tidepool-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Tidepool-frameworks.sh"; sourceTree = "<group>"; };
 		F2E0BC7727AD35074EE9A1536FDE20A0 /* BranchUniversalObject+RNBranch.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "BranchUniversalObject+RNBranch.h"; path = "ios/Exponent/Versioned/Core/Api/Standalone/Branch/BranchUniversalObject+RNBranch.h"; sourceTree = "<group>"; };
 		F2E859229B7C52BDAF13670957D50E25 /* FBMediaView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBMediaView.h; path = FBAudienceNetwork.framework/Headers/FBMediaView.h; sourceTree = "<group>"; };
 		F2EA0D30F5F7A73407AEA93590B3D000 /* RCTBundleURLProvider.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = RCTBundleURLProvider.m; sourceTree = "<group>"; };
@@ -5438,19 +5438,19 @@
 			path = "../Target Support Files/GPUImage";
 			sourceTree = "<group>";
 		};
-		1000EE921F175624D0FD09355A7D3084 /* Pods-tidepool */ = {
+		1000EE921F175624D0FD09355A7D3084 /* Pods-Tidepool */ = {
 			isa = PBXGroup;
 			children = (
-				9979AB4E6C4DE82FED83F5100D32E29D /* Pods-tidepool-acknowledgements.markdown */,
-				ACDF80897909FEAFC9DB9813EFCFB389 /* Pods-tidepool-acknowledgements.plist */,
-				855F28BFF402E2784DE89383CDE69F4D /* Pods-tidepool-dummy.m */,
-				F2D165FB337B80B062DE49F6C285348C /* Pods-tidepool-frameworks.sh */,
-				939125E7D58F9B3E661179BFE5BC5029 /* Pods-tidepool-resources.sh */,
-				30E38BE715B7521124E0FFC71AAC31AF /* Pods-tidepool.debug.xcconfig */,
-				9ECE5BBB71B91ED8895C50800743D317 /* Pods-tidepool.release.xcconfig */,
+				9979AB4E6C4DE82FED83F5100D32E29D /* Pods-Tidepool-acknowledgements.markdown */,
+				ACDF80897909FEAFC9DB9813EFCFB389 /* Pods-Tidepool-acknowledgements.plist */,
+				855F28BFF402E2784DE89383CDE69F4D /* Pods-Tidepool-dummy.m */,
+				F2D165FB337B80B062DE49F6C285348C /* Pods-Tidepool-frameworks.sh */,
+				939125E7D58F9B3E661179BFE5BC5029 /* Pods-Tidepool-resources.sh */,
+				30E38BE715B7521124E0FFC71AAC31AF /* Pods-Tidepool.debug.xcconfig */,
+				9ECE5BBB71B91ED8895C50800743D317 /* Pods-Tidepool.release.xcconfig */,
 			);
-			name = "Pods-tidepool";
-			path = "Target Support Files/Pods-tidepool";
+			name = "Pods-Tidepool";
+			path = "Target Support Files/Pods-Tidepool";
 			sourceTree = "<group>";
 		};
 		12BCA6313ED98AD09CFC9F281825DC2A /* GoogleUtilities */ = {
@@ -7968,7 +7968,7 @@
 				5E249EF9EAEE74E32E46EB5342837875 /* libGPUImage.a */,
 				F367F843F1F07147402886E7F1CF4A2D /* libJKBigInteger2.a */,
 				7FEF03FFC53F6EE717D70FBE86202ABC /* liblottie-ios.a */,
-				35D8CD33E090A770FE9979302EBAE760 /* libPods-tidepool.a */,
+				35D8CD33E090A770FE9979302EBAE760 /* libPods-Tidepool.a */,
 				7141D4BC9BE1308309C707BFD131D793 /* libReact.a */,
 				626D5C080F4546CB5F63E957688507C9 /* libyoga.a */,
 			);
@@ -8971,7 +8971,7 @@
 		F63323C99FDC7031136FEC51DE8702AF /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				1000EE921F175624D0FD09355A7D3084 /* Pods-tidepool */,
+				1000EE921F175624D0FD09355A7D3084 /* Pods-Tidepool */,
 			);
 			name = "Targets Support Files";
 			sourceTree = "<group>";
@@ -10627,9 +10627,9 @@
 			productReference = E4C58050C5CADE83541A3955768F85E8 /* libAppAuth.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		92A827B706421D74AFACDBEEC3A1C652 /* Pods-tidepool */ = {
+		92A827B706421D74AFACDBEEC3A1C652 /* Pods-Tidepool */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 41EA77F9228C8CCBB5A1C847C5BEDF16 /* Build configuration list for PBXNativeTarget "Pods-tidepool" */;
+			buildConfigurationList = 41EA77F9228C8CCBB5A1C847C5BEDF16 /* Build configuration list for PBXNativeTarget "Pods-Tidepool" */;
 			buildPhases = (
 				518DD194CF4057BF4B69D7FFA39DE974 /* Sources */,
 				45380A0344668703394F83FF0BE8F37A /* Frameworks */,
@@ -10657,9 +10657,9 @@
 				925162794224020706E0B48BD3AF23E2 /* PBXTargetDependency */,
 				C3F23ABEC684A5FDB45E6E28C64A9C7A /* PBXTargetDependency */,
 			);
-			name = "Pods-tidepool";
-			productName = "Pods-tidepool";
-			productReference = 35D8CD33E090A770FE9979302EBAE760 /* libPods-tidepool.a */;
+			name = "Pods-Tidepool";
+			productName = "Pods-Tidepool";
+			productReference = 35D8CD33E090A770FE9979302EBAE760 /* libPods-Tidepool.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		9E10AEC2C9CBBD0E56AD44F74E0AEC73 /* Folly */ = {
@@ -10843,7 +10843,7 @@
 				295A12CCBCA9B23FD71E276D141A0A5E /* GPUImage */,
 				B18A06887E23BAF0D310D18878E37A41 /* JKBigInteger2 */,
 				FFB0C7E1AFBAAB48D754B3D84509BC92 /* lottie-ios */,
-				92A827B706421D74AFACDBEEC3A1C652 /* Pods-tidepool */,
+				92A827B706421D74AFACDBEEC3A1C652 /* Pods-Tidepool */,
 				F04EC08750FCDD9E8C3A21430DC15BAB /* React */,
 				51D680420321F01ACF00E316AD8C601B /* yoga */,
 			);
@@ -11479,7 +11479,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BF8DAF7CF7C6D5C2438B8309C2449B39 /* Pods-tidepool-dummy.m in Sources */,
+				BF8DAF7CF7C6D5C2438B8309C2449B39 /* Pods-Tidepool-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -12472,7 +12472,7 @@
 		};
 		162108F473ACEB64F4D57AC3CB6ECA1F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9ECE5BBB71B91ED8895C50800743D317 /* Pods-tidepool.release.xcconfig */;
+			baseConfigurationReference = 9ECE5BBB71B91ED8895C50800743D317 /* Pods-Tidepool.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -12656,7 +12656,7 @@
 		};
 		2DC4C35B2978F8BC8E20F189BC5DE703 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 30E38BE715B7521124E0FFC71AAC31AF /* Pods-tidepool.debug.xcconfig */;
+			baseConfigurationReference = 30E38BE715B7521124E0FFC71AAC31AF /* Pods-Tidepool.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -13437,7 +13437,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		41EA77F9228C8CCBB5A1C847C5BEDF16 /* Build configuration list for PBXNativeTarget "Pods-tidepool" */ = {
+		41EA77F9228C8CCBB5A1C847C5BEDF16 /* Build configuration list for PBXNativeTarget "Pods-Tidepool" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2DC4C35B2978F8BC8E20F189BC5DE703 /* Debug */,
