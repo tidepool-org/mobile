@@ -38,9 +38,9 @@ class GraphTextMeshFactory {
 
   async loadAssets() {
     if (!this.assetsAreLoaded) {
-      this.bmFont = require("./fonts/OpenSans-Regular-56px.json");
+      this.bmFont = require("../../../../assets/fonts/OpenSans-Regular-56px.json");
       this.bmFontSpriteSheetTexture = await createTextureAsync({
-        asset: require("./fonts/OpenSans-Regular-56px.png"),
+        asset: require("../../../../assets/fonts/OpenSans-Regular-56px.png"),
       });
     }
     this.assetsAreLoaded = true;
@@ -51,7 +51,7 @@ class GraphTextMeshFactory {
     if (!geometry) {
       geometry = createGeometry({
         text,
-        font: require("./fonts/OpenSans-Regular-56px.json"),
+        font: this.bmFont,
         width: width * this.pixelRatioBase / this.textHeightScale,
         align: "center",
       });
