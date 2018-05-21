@@ -93,5 +93,7 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>EXAnalyticsDisabled</key>
+	<true/>
 </dict>
 </plist>
