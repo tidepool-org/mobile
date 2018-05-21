@@ -33,6 +33,7 @@ exports[`Storyshots AddOrEditCommentScreen add comment 1`] = `
       <RCTScrollView
         keyboardShouldPersistTaps="always"
         onContentSizeChange={[Function]}
+        scrollEnabled={true}
         style={null}
       >
         <View>
@@ -1083,6 +1084,7 @@ exports[`Storyshots AddOrEditCommentScreen edit comment in middle 1`] = `
       <RCTScrollView
         keyboardShouldPersistTaps="always"
         onContentSizeChange={[Function]}
+        scrollEnabled={true}
         style={null}
       >
         <View>
@@ -2043,6 +2045,7 @@ exports[`Storyshots AddOrEditCommentScreen edit first comment 1`] = `
       <RCTScrollView
         keyboardShouldPersistTaps="always"
         onContentSizeChange={[Function]}
+        scrollEnabled={true}
         style={null}
       >
         <View>
@@ -3003,6 +3006,7 @@ exports[`Storyshots AddOrEditCommentScreen edit last comment 1`] = `
       <RCTScrollView
         keyboardShouldPersistTaps="always"
         onContentSizeChange={[Function]}
+        scrollEnabled={true}
         style={null}
       >
         <View>
