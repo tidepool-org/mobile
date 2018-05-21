@@ -141,6 +141,14 @@ class AddOrEditCommentScreen extends PureComponent {
     this.keyboardDidHideListener.remove();
   }
 
+  onGraphZoomStart = () => {
+    this.setState({ isZoomingGraph: true });
+  };
+
+  onGraphZoomEnd = () => {
+    this.setState({ isZoomingGraph: false });
+  };
+
   onScrollViewContentSizeChange = (contentWidth, contentHeight) => {
     this.scrollViewContentHeight = contentHeight;
     this.scrollToEditableComment();
@@ -262,6 +270,8 @@ class AddOrEditCommentScreen extends PureComponent {
         commentsFetchData={commentsFetchData}
         graphDataFetchData={graphDataFetchData}
         graphRenderer={graphRenderer}
+        onGraphZoomStart={this.onGraphZoomStart}
+        onGraphZoomEnd={this.onGraphZoomEnd}
       />
     );
   }
@@ -290,6 +300,7 @@ class AddOrEditCommentScreen extends PureComponent {
   }
 
   render() {
+    const { isZoomingGraph } = this.state;
     const containerViewHeight = this.state.isKeyboardVisible
       ? this.state.containerViewHeightWithoutKeyboard -
         this.state.keyboardHeight
@@ -310,6 +321,7 @@ class AddOrEditCommentScreen extends PureComponent {
               }}
               keyboardShouldPersistTaps="always"
               onContentSizeChange={this.onScrollViewContentSizeChange}
+              scrollEnabled={!isZoomingGraph}
             >
               <glamorous.View onLayout={this.onNoteViewLayout}>
                 {this.renderNote()}
