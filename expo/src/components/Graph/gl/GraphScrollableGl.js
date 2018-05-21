@@ -9,7 +9,6 @@ import GraphXAxisGl from "./GraphXAxisGl";
 import GraphNoteEventGl from "./GraphNoteEventGl";
 import GraphCbgGl from "./GraphCbgGl";
 import GraphSmbgGl from "./GraphSmbgGl";
-import GraphTextMeshFactory from "./GraphTextMeshFactory";
 
 class GraphScrollableGl extends PureComponent {
   componentDidMount() {
