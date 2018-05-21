@@ -61,6 +61,8 @@ class AddOrEditCommentScreenNote extends PureComponent {
       currentProfile: { lowBGBoundary, highBGBoundary },
       note: { timestamp: eventTime },
       graphRenderer,
+      onGraphZoomStart,
+      onGraphZoomEnd,
     } = this.props;
 
     const isLoading = fetching;
@@ -85,9 +87,9 @@ class AddOrEditCommentScreenNote extends PureComponent {
         smbgData={smbgData}
         eventTime={eventTime}
         navigateHowToUpload={navigateHowToUpload}
-        onZoomStart={() => {}}
-        onZoomEnd={() => {}}
         graphRenderer={graphRenderer}
+        onZoomStart={onGraphZoomStart}
+        onZoomEnd={onGraphZoomEnd}
       />
     );
   }
@@ -161,6 +163,8 @@ AddOrEditCommentScreenNote.propTypes = {
     fetched: PropTypes.bool,
   }),
   graphRenderer: PropTypes.string.isRequired,
+  onGraphZoomStart: PropTypes.func,
+  onGraphZoomEnd: PropTypes.func,
 };
 
 AddOrEditCommentScreenNote.defaultProps = {
@@ -170,6 +174,8 @@ AddOrEditCommentScreenNote.defaultProps = {
     fetching: false,
     fetched: false,
   },
+  onGraphZoomStart: null,
+  onGraphZoomEnd: null,
 };
 
 export default withTheme(AddOrEditCommentScreenNote);

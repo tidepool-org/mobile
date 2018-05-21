@@ -85,7 +85,10 @@ class Graph extends PureComponent {
     this.setState({
       isZooming: true,
     });
-    this.props.onZoomStart();
+
+    if (this.props.onZoomStart) {
+      this.props.onZoomStart();
+    }
   };
 
   onZoomMove = scale => {
@@ -109,7 +112,10 @@ class Graph extends PureComponent {
     this.setState({
       isZooming: false,
     });
-    this.props.onZoomEnd();
+
+    if (this.props.onZoomEnd) {
+      this.props.onZoomEnd();
+    }
   };
 
   renderFixedBackground() {
@@ -207,9 +213,9 @@ Graph.propTypes = {
   scale: PropTypes.number,
   eventTime: PropTypes.instanceOf(Date),
   navigateHowToUpload: PropTypes.func.isRequired,
-  onZoomStart: PropTypes.func.isRequired,
-  onZoomEnd: PropTypes.func.isRequired,
   graphRenderer: PropTypes.string.isRequired,
+  onZoomStart: PropTypes.func,
+  onZoomEnd: PropTypes.func,
 };
 
 Graph.defaultProps = {
@@ -217,6 +223,8 @@ Graph.defaultProps = {
   eventTime: new Date(),
   cbgData: [],
   smbgData: [],
+  onZoomStart: null,
+  onZoomEnd: null,
 };
 
 export default withTheme(Graph);
