@@ -1,7 +1,8 @@
-import createGeometry from "three-bmfont-text";
-import { PixelRatio } from "react-native";
-
-import { THREE, createTextureAsync } from "./helpers";
+// Use require instead of import (for three-bmfont-text) and set global THREE due to: https://github.com/Jam3/three-bmfont-text/issues/13
+const THREE = require("three");
+const { PixelRatio } = require("react-native");
+const { createTextureAsync } = require("./helpers");
+const createGeometry = require("three-bmfont-text");
 
 // Create .fnt from .ttf
 // http://www.angelcode.com/products/bmfont/
