@@ -72,9 +72,9 @@ class GraphScrollableGl extends PureComponent {
     this.gl = gl;
 
     // Create renderer
-    this.renderer = createRenderer({ gl }); // TODO: my - 0 - compare with RN GL
-    this.renderer.sortObjects = false; // TODO: my - 0 - compare with RN GL
-    this.renderer.setSize(gl.drawingBufferWidth, gl.drawingBufferHeight); // TODO: my - 0 - compare with RN GL
+    this.renderer = createRenderer({ gl });
+    this.renderer.sortObjects = false;
+    this.renderer.setSize(gl.drawingBufferWidth, gl.drawingBufferHeight);
 
     // Create camera
     const { drawingBufferWidth, drawingBufferHeight } = gl;
@@ -118,7 +118,7 @@ class GraphScrollableGl extends PureComponent {
           contentOffsetX: this.contentOffsetX,
         });
       });
-      this.renderer.render(this.scene, this.camera); // TODO: my - 0 - compare with RN GL
+      this.renderer.render(this.scene, this.camera);
       this.gl.endFrameEXP();
     } else {
       // console.log("GraphScrollableGl: renderScene: No scene, skipped render");

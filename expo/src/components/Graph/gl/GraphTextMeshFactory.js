@@ -1,8 +1,11 @@
 // Use require instead of import (for three-bmfont-text) and set global THREE due to: https://github.com/Jam3/three-bmfont-text/issues/13
 const THREE = require("three");
+const Expo = require("expo");
 const { PixelRatio } = require("react-native");
-const { createTextureAsync } = require("./helpers");
+const ExpoTHREE = require("expo-three");
 const createGeometry = require("three-bmfont-text");
+
+const { createTextureAsync } = ExpoTHREE;
 
 // Create .fnt from .ttf
 // http://www.angelcode.com/products/bmfont/
@@ -38,9 +41,9 @@ class GraphTextMeshFactory {
 
   async loadAssets() {
     if (!this.assetsAreLoaded) {
-      this.bmFont = require("../../../../assets/fonts/OpenSans-Regular-56px.json");
+      this.bmFont = require("../../../../assets/bmfonts/OpenSans-Regular-56px.json");
       this.bmFontSpriteSheetTexture = await createTextureAsync({
-        asset: require("../../../../assets/fonts/OpenSans-Regular-56px.png"),
+        asset: require("../../../../assets/bmfonts/OpenSans-Regular-56px.png"),
       });
     }
     this.assetsAreLoaded = true;
