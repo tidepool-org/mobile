@@ -4,7 +4,6 @@ import { authRefreshTokenOrSignInAsync } from "../actions/auth";
 import { apiEnvironmentLoadAndSetAsync } from "../actions/apiEnvironment";
 import { graphRendererLoadAndSetAsync } from "../actions/graphRenderer";
 import { navigateLaunch } from "../actions/navigation";
-import runTimeEnvironment from "../utils/runtimeEnvironment";
 import GraphTextMeshFactory from "../components/Graph/gl/GraphTextMeshFactory";
 
 const APP_INIT_DID_FINISH = "APP_INIT_DID_FINISH";
@@ -15,9 +14,10 @@ const appInitDidFinish = () => ({
 });
 
 const appInitAsync = () => async dispatch => {
-  if (!runTimeEnvironment.useExpo) {
-    NativeModules.LaunchScreen.showActivityIndicator();
-  }
+  // TODO: launch screen - activity indicator - revisit this now that we're using ExpoKit
+  // if (!runTimeEnvironment.useExpo) {
+  //   NativeModules.LaunchScreen.showActivityIndicator();
+  // }
 
   dispatch(navigateLaunch());
   dispatch(appVersionLoad());
@@ -27,9 +27,10 @@ const appInitAsync = () => async dispatch => {
   await GraphTextMeshFactory.loadAssets();
   dispatch(appInitDidFinish());
 
-  if (!runTimeEnvironment.useExpo) {
-    NativeModules.LaunchScreen.hide();
-  }
+  // TODO: launch screen - activity indicator - revisit this now that we're using ExpoKit
+  // if (!runTimeEnvironment.useExpo) {
+  //   NativeModules.LaunchScreen.hide();
+  // }
 };
 
 export { appInitAsync, appInitDidFinish, APP_INIT_DID_FINISH };

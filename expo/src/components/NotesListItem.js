@@ -7,6 +7,7 @@ import {
   Linking,
   ViewPropTypes,
 } from "react-native";
+import { LinearGradient } from "expo";
 import glamorous, { withTheme } from "glamorous-native";
 import addHours from "date-fns/add_hours";
 import subHours from "date-fns/sub_hours";
@@ -18,7 +19,6 @@ import {
 } from "./Graph/helpers";
 import Graph from "./Graph/Graph";
 import HashtagText from "./HashtagText";
-import LinearGradient from "./LinearGradient";
 import AddCommentButton from "./AddCommentButton";
 import NotesListItemComment from "./NotesListItemComment";
 import { formatDateForNoteList } from "../utils/formatDate";

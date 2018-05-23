@@ -1,4 +1,5 @@
-import { THREE } from "./helpers";
+import { THREE } from "expo-three";
+
 import GraphRenderLayerGl from "./GraphRenderLayerGl";
 import GraphTextMeshFactory from "./GraphTextMeshFactory";
 import { MAX_BG_VALUE, convertHexColorStringToInt } from "../helpers";

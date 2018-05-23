@@ -35,9 +35,8 @@
     "flow": "flow",
     "format": "prettier-eslint \"src/**/*.js\"",
     "pre":
-      "cp $TIDEPOOL_GOOGLE_SERVICES_FILE android/app && cp crna-entry.js index.js && mkdir -p src/svg-exports && cp expo-specific-src/svg-exports/index.js src/svg-exports/index.js && cp expo-specific-src/utils/runtimeEnvironment.js src/utils/runtimeEnvironment.js && cp expo-specific-src/components/LinearGradient.js src/components/LinearGradient.js && cp expo-specific-src/components/Graph/gl/GraphGlView.js src/components/Graph/gl/GraphGlView.js && mkdir -p src/components/Graph/gl/helpers && cp expo-specific-src/components/Graph/gl/helpers/index.js src/components/Graph/gl/helpers/index.js",
-    "prestorybook":
-      "cp storybook-entry.js index.js && mkdir -p src/svg-exports && cp expo-specific-src/svg-exports/index.js src/svg-exports/index.js && cp expo-specific-src/utils/runtimeEnvironment.js src/utils/runtimeEnvironment.js && cp expo-specific-src/components/LinearGradient.js src/components/LinearGradient.js && cp expo-specific-src/components/Graph/gl/GraphGlView.js src/components/Graph/gl/GraphGlView.js && mkdir -p src/components/Graph/gl/helpers && cp expo-specific-src/components/Graph/gl/helpers/index.js src/components/Graph/gl/helpers/index.js && rnstl",
+      "cp $TIDEPOOL_GOOGLE_SERVICES_FILE android/app && cp crna-entry.js index.js",
+    "prestorybook": "cp storybook-entry.js index.js && rnstl",
     "storybook": "storybook start -p 7007",
     "react-devtools": "react-devtools",
     "postinstall": "rndebugger-open"

@@ -1,6 +1,9 @@
 import React from "react";
+import { Svg } from "expo";
+
 import { MAX_BG_VALUE } from "../helpers";
-import { Circle, Symbol, Use } from "../../../svg-exports";
+
+const { Circle, Symbol, Use } = Svg;
 
 class GraphCbgSvg {
   static render({

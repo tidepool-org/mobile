@@ -1,6 +1,7 @@
 import React from "react";
+import { Svg } from "expo";
 
-import { Path, Polygon } from "../../../svg-exports";
+const { Path, Polygon } = Svg;
 
 class GraphNoteEventSvg {
   static render({

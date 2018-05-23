@@ -1,6 +1,5 @@
 // Use require instead of import (for three-bmfont-text) and set global THREE due to: https://github.com/Jam3/three-bmfont-text/issues/13
 const THREE = require("three");
-const Expo = require("expo");
 const { PixelRatio } = require("react-native");
 const ExpoTHREE = require("expo-three");
 const createGeometry = require("three-bmfont-text");

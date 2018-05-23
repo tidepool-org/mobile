@@ -1,10 +1,7 @@
-// NOTE: This file is copied via build script to src/components/Graph/gl/GraphGlView.js
-
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Expo from "expo";
-
-import { THREE } from "./helpers";
+import { THREE } from "expo-three";
 
 class GraphGlView extends PureComponent {
   componentDidMount() {

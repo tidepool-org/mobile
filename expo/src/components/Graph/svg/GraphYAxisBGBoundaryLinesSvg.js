@@ -1,9 +1,11 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { withTheme } from "glamorous-native";
+import { Svg } from "expo";
 
-import { Svg, Path } from "../../../svg-exports";
 import { ThemePropType } from "../../../prop-types/theme";
+
+const { Path } = Svg;
 
 class GraphYAxisBGBoundaryLinesSvg extends PureComponent {
   renderBGBoundaryLine(value) {

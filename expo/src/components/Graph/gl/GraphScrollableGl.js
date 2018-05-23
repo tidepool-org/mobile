@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import { PixelRatio } from "react-native";
 import PropTypes from "prop-types";
-import { THREE, createRenderer } from "./helpers";
+import ExpoTHREE, { THREE } from "expo-three";
 
 import { ThemePropType } from "../../../prop-types/theme";
 import GraphGlView from "./GraphGlView";
@@ -9,6 +9,8 @@ import GraphXAxisGl from "./GraphXAxisGl";
 import GraphNoteEventGl from "./GraphNoteEventGl";
 import GraphCbgGl from "./GraphCbgGl";
 import GraphSmbgGl from "./GraphSmbgGl";
+
+const { createRenderer } = ExpoTHREE;
 
 class GraphScrollableGl extends PureComponent {
   componentDidMount() {
