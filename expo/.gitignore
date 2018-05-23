@@ -11,14 +11,6 @@ yarn-error.log*
 # Either crna-entry.js or storybook-entry.js is copied via script to index.js, rather than using "main" in package.json
 /index.js
 
-# Switch between build time copied versions via package.json scripts, don't commit the copied files in /src
-/src/actions/appVersion.js
-/src/components/LinearGradient.js
-/src/reducers/appVersion.js
-/src/utils/runtimeEnvironment.js
-src/components/Graph/gl/GraphGlView.js
-src/components/Graph/gl/helpers/index.js
-
 #
 # From https://github.com/github/gitignore/blob/master/Swift.gitignore
 #

@@ -1,8 +1,10 @@
 import React from "react";
 import glamorous from "glamorous-native";
+import { Svg } from "expo";
 
-import { Path } from "../../../svg-exports";
 import { calculateTimeMarkers } from "../helpers";
+
+const { Path } = Svg;
 
 class GraphXAxisHeaderSvg {
   static renderTicksSvgElements({
