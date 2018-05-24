@@ -6,13 +6,22 @@ const createGeometry = require("three-bmfont-text");
 
 const { createTextureAsync } = ExpoTHREE;
 
-// Create .fnt from .ttf
+// Creating bmfont json and sprite sheet
+// Create .fnt and .png from .ttf
 // http://www.angelcode.com/products/bmfont/
-// or https://github.com/libgdx/libgdx/wiki/Hiero
+// or https://github.com/libgdx/libgdx/wiki/Hiero (used this)
 //
 // Convert from .fnt to .json
 // https://www.npmjs.com/package/convert-bmfont
 // TODO: Look at using MSDF for better rendering
+
+// FIXME: Due to some odd issue with asset bundling on Android, it seems that if we have the
+// sprite sheet texture bundled (as opposed to served from CDN, when publishing via Expo) it fails
+// to load, or isn't seen as a valid texture. Other image assets (not used as textures) don't seem
+// to have this problem. This is only an issue for Android, not iOS. For now we exclude the bmfont
+// assets from bundling (see assetBundlePatterns in app.json) and just serve from CDN. We should
+// revisit this, though, and try to root cause / fix, or confirm whether a future ExpoKit release
+// (or other dependencies like expo-three, etc), have fixed.
 
 class GraphTextMeshFactory {
   constructor() {
