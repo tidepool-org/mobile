@@ -1,3 +1,5 @@
+// This file is copied via pre script to index.js
+
 import Expo from "expo";
 
 import Fonts from "./src/constants/Fonts";
