@@ -34,8 +34,7 @@
     "test": "node node_modules/jest/bin/jest.js --watch",
     "flow": "flow",
     "format": "prettier-eslint \"src/**/*.js\"",
-    "pre":
-      "cp $TIDEPOOL_GOOGLE_SERVICES_FILE android/app && cp crna-entry.js index.js",
+    "pre": "cp crna-entry.js index.js",
     "prestorybook": "cp storybook-entry.js index.js && rnstl",
     "storybook": "storybook start -p 7007",
     "react-devtools": "react-devtools",

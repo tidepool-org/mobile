@@ -140,9 +140,6 @@ captures/
 # External native build folder generated in Android Studio 2.2 and later
 .externalNativeBuild
 
-# Google Services (e.g. APIs or Firebase)
-google-services.json
-
 # Freeline
 freeline.py
 freeline/
@@ -252,7 +249,6 @@ android/logcat.txt
 android-shell-app
 
 # Template files
-android/app/google-services.json
 android/app/src/main/java/host/exp/exponent/generated/ExponentKeys.java
 android/app/fabric.properties
 ios/Exponent/Supporting/Generated/EXKeys.h
