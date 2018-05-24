@@ -1,5 +1,6 @@
 .expo/
-EXBuildConstants*
+EXBuildConstants.json
+EXBuildConstants.plist*
 keys.json
 
 node_modules/
@@ -7,6 +8,8 @@ npm-debug.*
 yarn-debug.log*
 yarn-error.log*
 .vscode/.react/debuggerWorker.js
+android/.settings/
+android/app/.settings/
 
 # Either crna-entry.js or storybook-entry.js is copied via script to index.js, rather than using "main" in package.json
 /index.js
@@ -85,7 +88,7 @@ fastlane/screenshots/**/*.png
 fastlane/test_output
 
 #
-# https://github.com/github/gitignore/blob/master/Android.gitignore
+# https://github.com/github/gitignore/blob/masterandroid.gitignore
 #
 
 
@@ -125,13 +128,13 @@ captures/
 
 # IntelliJ
 *.iml
-/android/.idea/workspace.xml
-/android/.idea/tasks.xml
-/android/.idea/gradle.xml
-/android/.idea/assetWizardSettings.xml
-/android/.idea/dictionaries
-/android/.idea/libraries
-/android/.idea/caches
+android/.idea/workspace.xml
+android/.idea/tasks.xml
+android/.idea/gradle.xml
+android/.idea/assetWizardSettings.xml
+android/.idea/dictionaries
+android/.idea/libraries
+android/.idea/caches
 
 # Keystore files
 # Uncomment the following line if you do not want to check your keystore files in.
@@ -175,24 +178,24 @@ DerivedData
 *.xcscmblueprint
 
 # Android Studio
-/android/.idea/libraries
-/android/.idea/workspace.xml
-/android/.idea/gradle.xml
-/android/.idea/misc.xml
-/android/.idea/modules.xml
-/android/.idea/vcs.xml
+android/.idea/libraries
+android/.idea/workspace.xml
+android/.idea/gradle.xml
+android/.idea/misc.xml
+android/.idea/modules.xml
+android/.idea/vcs.xml
 *.iml
 .gradle
-/android/app/build
-/android/build
-/android/captures
-/android/local.properties
-/android/tools/build
-/android/ReactAndroid/build
-/android/app/libs/ReactAndroid-temp
-/android/versioned-react-native/build
-/android/versioned-react-native/local.properties
-/android/versioned-react-native/ReactAndroid
+android/app/build
+android/build
+android/captures
+android/local.properties
+android/tools/build
+android/ReactAndroid/build
+android/app/libs/ReactAndroid-temp
+android/versioned-react-native/build
+android/versioned-react-native/local.properties
+android/versioned-react-native/ReactAndroid
 ReactAndroid-temp.aar
 *.apk
 
@@ -208,8 +211,9 @@ npm-debug.log
 
 # Dynamic Macros
 /ios/Exponent/Supporting/Generated/EXDynamicMacros.h
-/android/app/src/main/java/host/exp/exponent/generated/ExponentBuildConstants.java
-/android/app/src/androidTest/java/host/exp/exponent/generated/TestBuildConstants.java
+android/app/src/main/java/host/exp/exponent/generated/AppConstants.java
+android/app/src/main/java/host/exp/exponent/generated/ExponentBuildConstants.java
+android/app/srcandroidTest/java/host/exp/exponent/generated/TestBuildConstants.java
 .kernel-ngrok-url
 
 # Python
