@@ -1,45 +1,56 @@
-This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app). The most recent version the guide is available [here](https://github.com/react-community/create-react-native-app/blob/master/react-native-scripts/template/README.md).
+Tidepool is a mobile app (iOS and Android) for type 1 diabetes (T1D) built on top of the [Tidepool](http://tidepool.org/) platform. It allows patients and their "care team" (family, doctors) to visualize their diabetes device data (from insulin pumps, BGMs, and/or CGMs) and message each other.
+
+This README is focused on just the details of getting the Tidepool mobile app building and running locally.
+
+---
 
 ## Table of Contents
 
-* [Available Scripts](#available-scripts)
-  * [yarn run pre](#yarn-run-pre)
+* [Overview](#overview)
+* [Getting Started](#getting-started)
+* [Publishing and Building Standalone Apps](#publishing-and-building-standalone-apps-)
+* [npm scripts](#npm-scripts)
   * [yarn run storybook](#yarn-run-storybook)
-  * [yarn start](#yarn-start)
-  * [yarn test](#yarn-test)
-  * [yarn run ios](#yarn-run-ios)
-  * [yarn run android](#yarn-run-android)
+  * [yarn run prestorybook](#yarn-run-prestorybook)
+  * [yarn run pre](#yarn-run-pre)
+  * [yarn run test](#yarn-run-test)
 
-## Scripts
+## Overview
+
+This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app) (CRNA). The most recent version the guide is available [here](https://github.com/react-community/create-react-native-app/blob/master/react-native-scripts/template/README.md).
+
+The project currently supports building and running the iOS and Android apps within the [Expo app](https://expo.io) or as a standalone installable iOS app (.ipa) or Android app (.apk). The Expo app is built via [XDE](https://expo.io/tools#xde). The standalone apps are built via Xcode (iOS) and Android Studio (Android).
+
+The project uses [Storybook for React Native](https://github.com/storybooks/storybook/tree/master/app/react-native) for productive isolated dev/test of UI components used by the app.
+
+## Getting Started
+
+After cloning, execute `yarn install` to install npm dependencies followed by `yarn run pre` to copy the main entry point (crna-entry.js) to index.js.
+
+You should now be able to open the project in XDE and serve it locally in dev mode to the Expo app. Suggest using LAN mode as the host in XDE, which will play nicely when switching between Storybook and non-Storybook.
+
+To run Storybook, use `yarn run storybook`. This will copy the Storybook entry point (storybook-entry.js) to index.js and will execute rnstl, which will update the Storybook loader for the stories in **stories** (using react-native-storybook-loader), and will will then start the Storybook server. You can then open the Storybook browser (http://localhost:7007) to navigate stories, which will load the story in each connected Expo app.
+
+To switch back-and-forth between Storybook and non-storybook, just execute `yarn run prestorybook` (to switch to Storybook) or `yarn run pre` (to switch to non-Storybook). This just switches the entry point for the app and should auto-reload (via Live Reload) in each connected Expo app.
+
+## Publishing and Building Standalone Apps
+
+TODO
+
+## npm scripts
 
 ### `yarn run pre`
 
-This must be used once before trying to run the packager, or when switching from storybook. This copies the Expo variant of some files like App.js and environment.js into place. When running storybook, the storybook variants of these files will be copied into place. The ejected version of the app also has a `pre` script which serves a similar purpose.
+This must be used once after a fresh clone of the repository or when switching from Storybook to non-Storybook. This script copies the main entry point (crna-entry.js) to index.js.
 
 ### `yarn run storybook`
 
-Start the storybook server with the storybook npm script. Now, you can open http://localhost:7007 to view your storybook menus in the browser.
+Starts the storybook server
 
-### `yarn start`
+### `yarn run prestorybook`
 
-Runs your app in development mode.
+Copies the Storybook entry point (storybook-entry.js) to index.js and updates the Storybook loader.
 
-Open it in the [Expo app](https://expo.io) on your phone to view it. It will reload if you save edits to your files, and you will see build errors and logs in the terminal.
+### `yarn run test`
 
-Sometimes you may need to reset or clear the React Native packager's cache. To do so, you can pass the `--reset-cache` flag to the start script:
-
-```
-yarn start -- --reset-cache
-```
-
-### `yarn test`
-
-Runs the [jest](https://github.com/facebook/jest) test runner on your tests.
-
-### `yarn run ios`
-
-Like `yarn start`, but also attempts to open your app in the iOS Simulator if you're on a Mac and have it installed.
-
-### `yarn run android`
-
-Like `yarn start`, but also attempts to open your app on a connected Android device or emulator. Requires an installation of Android build tools (see [React Native docs](https://facebook.github.io/react-native/docs/getting-started.html) for detailed setup). 
+Runs the [jest](https://github.com/facebook/jest) test runner. This includes some unit tests as well as jest snapshot tests of components.
