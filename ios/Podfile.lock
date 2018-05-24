@@ -23,7 +23,7 @@ PODS:
   - Crashlytics (3.10.1):
     - Fabric (~> 1.7.5)
   - DoubleConversion (1.1.5)
-  - ExpoKit/Core (2.5.9):
+  - ExpoKit/Core (2.5.10):
     - Amplitude-iOS (~> 3.8)
     - Analytics (~> 3.5)
     - AppAuth (~> 0.4)
@@ -43,9 +43,9 @@ PODS:
     - JKBigInteger2 (= 0.0.5)
     - lottie-ios (~> 2.1.3)
     - React
-  - ExpoKit/CPP (2.5.9):
+  - ExpoKit/CPP (2.5.10):
     - ExpoKit/Core
-  - ExpoKit/GL (2.5.9):
+  - ExpoKit/GL (2.5.10):
     - ExpoKit/CPP
   - Fabric (1.7.5)
   - FBAudienceNetwork (4.28.0)
@@ -157,9 +157,9 @@ PODS:
 
 DEPENDENCIES:
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
-  - ExpoKit/Core (from `http://github.com/expo/expo.git`, tag `ios/2.5.9`)
-  - ExpoKit/CPP (from `http://github.com/expo/expo.git`, tag `ios/2.5.9`)
-  - ExpoKit/GL (from `http://github.com/expo/expo.git`, tag `ios/2.5.9`)
+  - ExpoKit/Core (from `http://github.com/expo/expo.git`, tag `ios/2.5.10`)
+  - ExpoKit/CPP (from `http://github.com/expo/expo.git`, tag `ios/2.5.10`)
+  - ExpoKit/GL (from `http://github.com/expo/expo.git`, tag `ios/2.5.10`)
   - Folly (from `../node_modules/react-native/third-party-podspecs/Folly.podspec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - React/ART (from `../node_modules/react-native`)
@@ -183,7 +183,7 @@ EXTERNAL SOURCES:
     :podspec: ../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec
   ExpoKit:
     :git: http://github.com/expo/expo.git
-    :tag: ios/2.5.9
+    :tag: ios/2.5.10
   Folly:
     :podspec: ../node_modules/react-native/third-party-podspecs/Folly.podspec
   glog:
@@ -198,7 +198,7 @@ EXTERNAL SOURCES:
 CHECKOUT OPTIONS:
   ExpoKit:
     :git: http://github.com/expo/expo.git
-    :tag: ios/2.5.9
+    :tag: ios/2.5.10
 
 SPEC CHECKSUMS:
   Amplitude-iOS: 4a3c8807b2ea5369dc11e87e23825bff01e5a922
@@ -210,7 +210,7 @@ SPEC CHECKSUMS:
   CocoaLumberjack: 2800c03334042fe80589423c8d80e582dcaec482
   Crashlytics: aee1a064cbbf99b32efa3f056a5f458d846bc8ff
   DoubleConversion: e22e0762848812a87afd67ffda3998d9ef29170c
-  ExpoKit: c6b8b89c013a8b1a371ca752ff9ffda6a9c53faa
+  ExpoKit: ba3ef8465f7e54487ba06e8176ed6bd4fb195aee
   Fabric: ae7146a5f505ea370a1e44820b4b1dc8890e2890
   FBAudienceNetwork: 25decde0ee5bfee9573d1d729ace66a66827de41
   FBSDKCoreKit: e08ccfcefa7bc1347a07c276dac9bf6c7fe57024
@@ -234,6 +234,6 @@ SPEC CHECKSUMS:
   RNDeviceInfo: 568c5641057313b4912d08a7742ff0b2f753ed5c
   yoga: a23273df0088bf7f2bb7e5d7b00044ea57a2a54a
 
-PODFILE CHECKSUM: 4dd27cebbed70cdfcd37666aa382cfbf88e0c044
+PODFILE CHECKSUM: 37b5cce524375cfb85c45d26a9321f4a7ef04e39
 
 COCOAPODS: 1.4.0
