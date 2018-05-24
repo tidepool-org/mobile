@@ -1,4 +1,5 @@
 import React, { PureComponent } from "react";
+import { Platform, StatusBar } from "react-native";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
@@ -17,12 +18,16 @@ import { notesSwitchProfileAndFetchAsync } from "../actions/notesFetch";
 class DrawerContainer extends PureComponent {
   render() {
     const { currentUser, version, apiEnvironment } = this.props;
+    let marginTop = 0;
+    if (Platform.OS === "android") {
+      marginTop += StatusBar.currentHeight;
+    }
 
     return (
       <Drawer
         style={{
           flex: 1,
-          marginTop: 0,
+          marginTop,
         }}
         notesSwitchProfileAndFetchAsync={
           this.props.notesSwitchProfileAndFetchAsync
