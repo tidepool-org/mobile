@@ -522,11 +522,21 @@
     lodash "^4.17.4"
     react-native-vector-icons "4.5.0"
 
-"@storybook/addon-actions@3.4.4":
-  version "3.4.4"
-  resolved "https://registry.yarnpkg.com/@storybook/addon-actions/-/addon-actions-3.4.4.tgz#03cc675977b6c6ce44a4dd7e2d36a910848af85f"
+"@expo/websql@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@expo/websql/-/websql-1.0.1.tgz#fff0cf9c1baa1f70f9e1d658b7c39a420d9b10a9"
   dependencies:
-    "@storybook/components" "3.4.4"
+    argsarray "^0.0.1"
+    immediate "^3.2.2"
+    noop-fn "^1.0.0"
+    pouchdb-collections "^1.0.1"
+    tiny-queue "^0.2.1"
+
+"@storybook/addon-actions@3.4.5":
+  version "3.4.5"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-actions/-/addon-actions-3.4.5.tgz#ba0d0c0c74357c0852e0b890b404214975df40a8"
+  dependencies:
+    "@storybook/components" "3.4.5"
     babel-runtime "^6.26.0"
     deep-equal "^1.0.1"
     glamor "^2.20.40"
@@ -537,21 +547,21 @@
     react-inspector "^2.2.2"
     uuid "^3.2.1"
 
-"@storybook/addon-links@3.4.4":
-  version "3.4.4"
-  resolved "https://registry.yarnpkg.com/@storybook/addon-links/-/addon-links-3.4.4.tgz#ff2a7c810c97fe465b25e417752eeebb5322ed9c"
+"@storybook/addon-links@3.4.5":
+  version "3.4.5"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-links/-/addon-links-3.4.5.tgz#c885dae976f5084faa0ae026755f2d6068da034f"
   dependencies:
-    "@storybook/components" "3.4.4"
+    "@storybook/components" "3.4.5"
     babel-runtime "^6.26.0"
     global "^4.3.2"
     prop-types "^15.6.1"
 
-"@storybook/addon-storyshots@3.4.4":
-  version "3.4.4"
-  resolved "https://registry.yarnpkg.com/@storybook/addon-storyshots/-/addon-storyshots-3.4.4.tgz#cff74f2d35a424e3a22684fc05b1bcbb3d377b6c"
+"@storybook/addon-storyshots@3.4.5":
+  version "3.4.5"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-storyshots/-/addon-storyshots-3.4.5.tgz#e67b57657f76a024a40b21862281952410118283"
   dependencies:
-    "@storybook/channels" "3.4.4"
-    "@storybook/node-logger" "3.4.4"
+    "@storybook/channels" "3.4.5"
+    "@storybook/node-logger" "3.4.5"
     babel-runtime "^6.26.0"
     glob "^7.1.2"
     global "^4.3.2"
@@ -560,50 +570,50 @@
     puppeteer "^1.2.0"
     read-pkg-up "^3.0.0"
 
-"@storybook/addons@3.4.4":
-  version "3.4.4"
-  resolved "https://registry.yarnpkg.com/@storybook/addons/-/addons-3.4.4.tgz#5f3203791df83499247a8bc4034788943500ff16"
+"@storybook/addons@3.4.5":
+  version "3.4.5"
+  resolved "https://registry.yarnpkg.com/@storybook/addons/-/addons-3.4.5.tgz#8dd6eb93ae26b4498a9b1e2b890316944efa41da"
 
-"@storybook/channel-postmessage@3.4.4":
-  version "3.4.4"
-  resolved "https://registry.yarnpkg.com/@storybook/channel-postmessage/-/channel-postmessage-3.4.4.tgz#96ead79c7752c747c355f297f4f344a44763600b"
+"@storybook/channel-postmessage@3.4.5":
+  version "3.4.5"
+  resolved "https://registry.yarnpkg.com/@storybook/channel-postmessage/-/channel-postmessage-3.4.5.tgz#8c7de674847dec2a154947e0b99e54a2618c79cb"
   dependencies:
-    "@storybook/channels" "3.4.4"
+    "@storybook/channels" "3.4.5"
     global "^4.3.2"
     json-stringify-safe "^5.0.1"
 
-"@storybook/channel-websocket@3.4.4":
-  version "3.4.4"
-  resolved "https://registry.yarnpkg.com/@storybook/channel-websocket/-/channel-websocket-3.4.4.tgz#0f4ea89f34760b5491c341eecd48f28e9a6a6ee0"
+"@storybook/channel-websocket@3.4.5":
+  version "3.4.5"
+  resolved "https://registry.yarnpkg.com/@storybook/channel-websocket/-/channel-websocket-3.4.5.tgz#193779bb04b5887adbdf4b7496b96497b9eb1205"
   dependencies:
-    "@storybook/channels" "3.4.4"
+    "@storybook/channels" "3.4.5"
     global "^4.3.2"
 
-"@storybook/channels@3.4.4":
-  version "3.4.4"
-  resolved "https://registry.yarnpkg.com/@storybook/channels/-/channels-3.4.4.tgz#a0492404d21231dcbe12716707472dd4549fb37a"
+"@storybook/channels@3.4.5":
+  version "3.4.5"
+  resolved "https://registry.yarnpkg.com/@storybook/channels/-/channels-3.4.5.tgz#cb8e3798cdcbed0b7037e634fb029cdd758c73a8"
 
-"@storybook/client-logger@3.4.4":
-  version "3.4.4"
-  resolved "https://registry.yarnpkg.com/@storybook/client-logger/-/client-logger-3.4.4.tgz#e76a457e7a19ba7a66fae9cce91bf52e6ece3f6e"
+"@storybook/client-logger@3.4.5":
+  version "3.4.5"
+  resolved "https://registry.yarnpkg.com/@storybook/client-logger/-/client-logger-3.4.5.tgz#aca45699b14d6663c694ab3253d46bc257f8783e"
 
-"@storybook/components@3.4.4":
-  version "3.4.4"
-  resolved "https://registry.yarnpkg.com/@storybook/components/-/components-3.4.4.tgz#272bcbdb2ac28583de049f75352f9eec76835641"
+"@storybook/components@3.4.5":
+  version "3.4.5"
+  resolved "https://registry.yarnpkg.com/@storybook/components/-/components-3.4.5.tgz#02653ba562e3678eab3adbc31b012eae4fbe61dc"
   dependencies:
     glamor "^2.20.40"
     glamorous "^4.12.1"
     prop-types "^15.6.1"
 
-"@storybook/core@3.4.4":
-  version "3.4.4"
-  resolved "https://registry.yarnpkg.com/@storybook/core/-/core-3.4.4.tgz#4335974772bcdf858b5ccbc7f89d9cd6090e7889"
+"@storybook/core@3.4.5":
+  version "3.4.5"
+  resolved "https://registry.yarnpkg.com/@storybook/core/-/core-3.4.5.tgz#a34a498eace85d29a12559a895c420f5ae54b0b7"
   dependencies:
-    "@storybook/addons" "3.4.4"
-    "@storybook/channel-postmessage" "3.4.4"
-    "@storybook/client-logger" "3.4.4"
-    "@storybook/node-logger" "3.4.4"
-    "@storybook/ui" "3.4.4"
+    "@storybook/addons" "3.4.5"
+    "@storybook/channel-postmessage" "3.4.5"
+    "@storybook/client-logger" "3.4.5"
+    "@storybook/node-logger" "3.4.5"
+    "@storybook/ui" "3.4.5"
     autoprefixer "^7.2.6"
     babel-runtime "^6.26.0"
     chalk "^2.3.2"
@@ -635,9 +645,9 @@
     "@storybook/react-simple-di" "^1.2.1"
     babel-runtime "6.x.x"
 
-"@storybook/node-logger@3.4.4":
-  version "3.4.4"
-  resolved "https://registry.yarnpkg.com/@storybook/node-logger/-/node-logger-3.4.4.tgz#f4378e63d3fb6addc76f9a8baaf5be4dae7811f4"
+"@storybook/node-logger@3.4.5":
+  version "3.4.5"
+  resolved "https://registry.yarnpkg.com/@storybook/node-logger/-/node-logger-3.4.5.tgz#d08c082b0d4a573736f25c2e0eea261b30183962"
   dependencies:
     npmlog "^4.1.2"
 
@@ -658,16 +668,16 @@
     lodash.pick "^4.4.0"
     shallowequal "^0.2.2"
 
-"@storybook/react-native@3.4.4":
-  version "3.4.4"
-  resolved "https://registry.yarnpkg.com/@storybook/react-native/-/react-native-3.4.4.tgz#b97e5d9358f26703eefc66b7f47e7054bf1bb7e4"
+"@storybook/react-native@3.4.5":
+  version "3.4.5"
+  resolved "https://registry.yarnpkg.com/@storybook/react-native/-/react-native-3.4.5.tgz#cdd859ae26dbb87f648060d1ad21902f5e9232bd"
   dependencies:
-    "@storybook/addon-actions" "3.4.4"
-    "@storybook/addon-links" "3.4.4"
-    "@storybook/addons" "3.4.4"
-    "@storybook/channel-websocket" "3.4.4"
-    "@storybook/core" "3.4.4"
-    "@storybook/ui" "3.4.4"
+    "@storybook/addon-actions" "3.4.5"
+    "@storybook/addon-links" "3.4.5"
+    "@storybook/addons" "3.4.5"
+    "@storybook/channel-websocket" "3.4.5"
+    "@storybook/core" "3.4.5"
+    "@storybook/ui" "3.4.5"
     babel-loader "^7.1.4"
     babel-plugin-macros "^2.2.0"
     babel-plugin-syntax-async-functions "^6.13.0"
@@ -718,11 +728,11 @@
   dependencies:
     babel-runtime "^6.5.0"
 
-"@storybook/ui@3.4.4":
-  version "3.4.4"
-  resolved "https://registry.yarnpkg.com/@storybook/ui/-/ui-3.4.4.tgz#2bb8ba4cdb7711695e018c2cc2db0a7e1c48a09a"
+"@storybook/ui@3.4.5":
+  version "3.4.5"
+  resolved "https://registry.yarnpkg.com/@storybook/ui/-/ui-3.4.5.tgz#b11e97590b5e09b2d1452c0a4b84567780ec3390"
   dependencies:
-    "@storybook/components" "3.4.4"
+    "@storybook/components" "3.4.5"
     "@storybook/mantra-core" "^1.7.2"
     "@storybook/podda" "^1.2.3"
     "@storybook/react-komposer" "^2.0.3"
@@ -743,6 +753,10 @@
     react-modal "^3.3.2"
     react-split-pane "^0.1.77"
     react-treebeard "^2.1.0"
+
+"@types/node@^8.0.24":
+  version "8.10.17"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.10.17.tgz#d48cf10f0dc6dcf59f827f5a3fc7a4a6004318d3"
 
 abab@^1.0.4:
   version "1.0.4"
@@ -2106,6 +2120,13 @@ babel-register@^6.24.1, babel-register@^6.26.0:
     mkdirp "^0.5.1"
     source-map-support "^0.4.15"
 
+babel-runtime@6.11.6:
+  version "6.11.6"
+  resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.11.6.tgz#6db707fef2d49c49bfa3cb64efdb436b518b8222"
+  dependencies:
+    core-js "^2.4.0"
+    regenerator-runtime "^0.9.5"
+
 babel-runtime@6.x.x, babel-runtime@^6.0.0, babel-runtime@^6.11.6, babel-runtime@^6.18.0, babel-runtime@^6.2.0, babel-runtime@^6.22.0, babel-runtime@^6.23.0, babel-runtime@^6.26.0, babel-runtime@^6.5.0:
   version "6.26.0"
   resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.26.0.tgz#965c7058668e82b55d7bfe04ff2337bc8b5647fe"
@@ -2524,6 +2545,10 @@ camelcase@^2.0.0:
 camelcase@^4.0.0, camelcase@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-4.1.0.tgz#d545635be1e33c542649c69173e5de6acfae34dd"
+
+can-use-dom@0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/can-use-dom/-/can-use-dom-0.1.0.tgz#22cc4a34a0abc43950f42c6411024a3f6366b45a"
 
 caniuse-api@^1.5.2:
   version "1.6.1"
@@ -2989,6 +3014,14 @@ create-hmac@^1.1.0, create-hmac@^1.1.2, create-hmac@^1.1.4:
     ripemd160 "^2.0.0"
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
+
+create-react-class@15.5.3:
+  version "15.5.3"
+  resolved "https://registry.yarnpkg.com/create-react-class/-/create-react-class-15.5.3.tgz#fb0f7cae79339e9a179e194ef466efa3923820fe"
+  dependencies:
+    fbjs "^0.8.9"
+    loose-envify "^1.3.1"
+    object-assign "^4.1.1"
 
 create-react-class@^15.6.2:
   version "15.6.2"
@@ -3502,10 +3535,11 @@ electron-to-chromium@^1.3.30:
   dependencies:
     electron-releases "^2.1.0"
 
-electron@~1.4.15:
-  version "1.4.16"
-  resolved "https://registry.yarnpkg.com/electron/-/electron-1.4.16.tgz#435a7c037c6a858de37569bb4b012c3f286bf1f3"
+electron@^1.8.7:
+  version "1.8.7"
+  resolved "https://registry.yarnpkg.com/electron/-/electron-1.8.7.tgz#373c1dc4589d7ab4acd49aff8db4a1c0a6c3bcc1"
   dependencies:
+    "@types/node" "^8.0.24"
     electron-download "^3.0.1"
     extract-zip "^1.0.3"
 
@@ -3780,9 +3814,9 @@ eslint-module-utils@^2.2.0:
     debug "^2.6.8"
     pkg-dir "^1.0.0"
 
-eslint-plugin-import@2.11.0:
-  version "2.11.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-import/-/eslint-plugin-import-2.11.0.tgz#15aeea37a67499d848e8e981806d4627b5503816"
+eslint-plugin-import@2.12.0:
+  version "2.12.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-import/-/eslint-plugin-import-2.12.0.tgz#dad31781292d6664b25317fd049d2e2b2f02205d"
   dependencies:
     contains-path "^0.1.0"
     debug "^2.6.8"
@@ -4137,11 +4171,12 @@ expo-three@^2.2.2-alpha.1:
     text-encoding "^0.6.4"
     xmldom-qsa "^1.0.3"
 
-expo@27.0.1:
-  version "27.0.1"
-  resolved "https://registry.yarnpkg.com/expo/-/expo-27.0.1.tgz#556a37121282f4509b0821d8d4e7c8a8da0c11d8"
+expo@27.0.2:
+  version "27.0.2"
+  resolved "https://registry.yarnpkg.com/expo/-/expo-27.0.2.tgz#1ae86d71f8e66fdc6783f7393354671e8197b7ef"
   dependencies:
     "@expo/vector-icons" "^6.3.1"
+    "@expo/websql" "^1.0.1"
     babel-preset-expo "^4.0.0"
     fbemitter "^2.1.1"
     invariant "^2.2.2"
@@ -4157,8 +4192,9 @@ expo@27.0.1:
     react-native-gesture-handler "1.0.0-alpha.41"
     react-native-maps "0.21.0"
     react-native-svg "6.2.2"
+    react-native-svg-web "^1.0.1"
+    react-native-web-maps "^0.1.0"
     uuid-js "^0.7.5"
-    websql "https://github.com/expo/node-websql/archive/18.0.0.tar.gz"
 
 express@^4.16.3:
   version "4.16.3"
@@ -4758,6 +4794,10 @@ glogg@^1.0.0:
   dependencies:
     sparkles "^1.0.0"
 
+google-maps-infobox@1.1.13:
+  version "1.1.13"
+  resolved "https://registry.yarnpkg.com/google-maps-infobox/-/google-maps-infobox-1.1.13.tgz#eb3a453220db4cab4e1f404e37da71e2155e24d7"
+
 got@^6.7.1:
   version "6.7.1"
   resolved "https://registry.yarnpkg.com/got/-/got-6.7.1.tgz#240cd05785a9a18e561dc1b44b41c763ef1e8db0"
@@ -5237,6 +5277,12 @@ inquirer@3.3.0, inquirer@^3.0.6:
 interpret@^1.0.0:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/interpret/-/interpret-1.0.4.tgz#820cdd588b868ffb191a809506d6c9c8f212b1b0"
+
+invariant@2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/invariant/-/invariant-2.2.1.tgz#b097010547668c7e337028ebe816ebe36c8a8d54"
+  dependencies:
+    loose-envify "^1.0.0"
 
 invariant@^2.0.0, invariant@^2.2.0, invariant@^2.2.2:
   version "2.2.2"
@@ -6368,6 +6414,10 @@ lodash.zipobject@^4.1.3:
   version "4.1.3"
   resolved "https://registry.yarnpkg.com/lodash.zipobject/-/lodash.zipobject-4.1.3.tgz#b399f5aba8ff62a746f6979bf20b214f964dbef8"
 
+lodash@4.16.2:
+  version "4.16.2"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.16.2.tgz#3e626db827048a699281a8a125226326cfc0e652"
+
 lodash@^3.10.1, lodash@^3.5.0:
   version "3.10.1"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-3.10.1.tgz#5bf45e8e49ba4189e17d482789dfd15bd140b7b6"
@@ -6490,6 +6540,10 @@ markdown-loader@^2.0.2:
 marked@^0.3.9:
   version "0.3.19"
   resolved "https://registry.yarnpkg.com/marked/-/marked-0.3.19.tgz#5d47f709c4c9fc3c216b6d46127280f40b39d790"
+
+marker-clusterer-plus@2.1.4:
+  version "2.1.4"
+  resolved "https://registry.yarnpkg.com/marker-clusterer-plus/-/marker-clusterer-plus-2.1.4.tgz#f8eff74d599dab3b7d0e3fed5264ea0e704f5d67"
 
 math-expression-evaluator@^1.2.14:
   version "1.2.17"
@@ -7936,6 +7990,12 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
+prop-types@15.5.8:
+  version "15.5.8"
+  resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.5.8.tgz#6b7b2e141083be38c8595aa51fc55775c7199394"
+  dependencies:
+    fbjs "^0.8.9"
+
 prop-types@15.6.1, prop-types@^15.6.1:
   version "15.6.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.1.tgz#36644453564255ddda391191fb3a125cbdf654ca"
@@ -8174,23 +8234,27 @@ react-devtools-core@3.1.0:
     shell-quote "^1.6.1"
     ws "^2.0.3"
 
-react-devtools-core@^3.2.1:
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/react-devtools-core/-/react-devtools-core-3.2.1.tgz#9d170b2b49e66b7426f659895684c72a431145da"
+react-devtools-core@^3.2.3:
+  version "3.2.3"
+  resolved "https://registry.yarnpkg.com/react-devtools-core/-/react-devtools-core-3.2.3.tgz#a37e199d94865e2cbb616b97be8f5820674e6abd"
   dependencies:
     shell-quote "^1.6.1"
-    ws "^2.0.3"
+    ws "^3.3.1"
 
-react-devtools@3.2.1:
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/react-devtools/-/react-devtools-3.2.1.tgz#cacde35d3a18f2527b5e9f97839a948574d66569"
+react-devtools@3.2.3:
+  version "3.2.3"
+  resolved "https://registry.yarnpkg.com/react-devtools/-/react-devtools-3.2.3.tgz#4793d1df10c145b36cf6675496733612b85bdda1"
   dependencies:
     cross-spawn "^5.0.1"
-    electron "~1.4.15"
+    electron "^1.8.7"
     ip "^1.1.4"
     minimist "^1.2.0"
-    react-devtools-core "^3.2.1"
+    react-devtools-core "^3.2.3"
     update-notifier "^2.1.0"
+
+react-display-name@0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/react-display-name/-/react-display-name-0.2.0.tgz#0e1f7086e45a32d07764df35ed32ff16f1259790"
 
 react-dom@16.3.2:
   version "16.3.2"
@@ -8213,6 +8277,23 @@ react-fuzzy@^0.5.2:
     classnames "^2.2.5"
     fuse.js "^3.0.1"
     prop-types "^15.5.9"
+
+react-google-maps@^7.3.0:
+  version "7.3.0"
+  resolved "https://registry.yarnpkg.com/react-google-maps/-/react-google-maps-7.3.0.tgz#b697da0438a3aa2b7f565a2d4c4876d0ed95012c"
+  dependencies:
+    babel-runtime "6.11.6"
+    can-use-dom "0.1.0"
+    create-react-class "15.5.3"
+    google-maps-infobox "1.1.13"
+    invariant "2.2.1"
+    lodash "4.16.2"
+    marker-clusterer-plus "2.1.4"
+    prop-types "15.5.8"
+    react-display-name "0.2.0"
+    react-prop-types-element-of-type "2.2.0"
+    scriptjs "2.5.8"
+    warning "3.0.0"
 
 react-html-attributes@^1.3.0:
   version "1.4.1"
@@ -8341,6 +8422,12 @@ react-native-storybook-loader@1.8.0:
     glob "^7.1.1"
     yargs "^8.0.2"
 
+react-native-svg-web@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/react-native-svg-web/-/react-native-svg-web-1.0.1.tgz#16e1784077b6e5b6c7ebd9c3829e6684211cba99"
+  dependencies:
+    prop-types "^15.5.10"
+
 react-native-svg@6.2.2:
   version "6.2.2"
   resolved "https://registry.yarnpkg.com/react-native-svg/-/react-native-svg-6.2.2.tgz#5803cddce374a542b4468c38a2474fca32080685"
@@ -8369,9 +8456,15 @@ react-native-vector-icons@4.5.0:
     prop-types "^15.5.10"
     yargs "^8.0.2"
 
-"react-native@https://github.com/expo/react-native/archive/sdk-27.0.0.tar.gz":
+react-native-web-maps@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/react-native-web-maps/-/react-native-web-maps-0.1.0.tgz#a5ead1e001376df2a3e3afbe49f057c4356f4315"
+  dependencies:
+    react-google-maps "^7.3.0"
+
+"react-native@https://github.com/expo/react-native/archive/sdk-27.0.2.tar.gz":
   version "0.55.2"
-  resolved "https://github.com/expo/react-native/archive/sdk-27.0.0.tar.gz#13850be33f38b0ddc7257a4a30109a41c6305a76"
+  resolved "https://github.com/expo/react-native/archive/sdk-27.0.2.tar.gz#4bc4f7d3e8b1b3afd017196e3ae54107c8a82f4a"
   dependencies:
     absolute-path "^0.0.0"
     art "^0.10.0"
@@ -8439,9 +8532,9 @@ react-navigation-deprecated-tab-navigator@1.2.0:
   dependencies:
     react-native-tab-view "^0.0.74"
 
-react-navigation-redux-helpers@1.0.6:
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/react-navigation-redux-helpers/-/react-navigation-redux-helpers-1.0.6.tgz#427bd5a0d2bc3c4f5b6fd5c57fa4961b1ea45e1d"
+react-navigation-redux-helpers@1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/react-navigation-redux-helpers/-/react-navigation-redux-helpers-1.1.1.tgz#6832c831e3fa47fb030012fac8ebdf37e45bda9f"
   dependencies:
     invariant "^2.2.2"
 
@@ -8469,6 +8562,10 @@ react-navigation@2.0.1:
     react-native-safe-area-view "^0.7.0"
     react-navigation-deprecated-tab-navigator "1.2.0"
     react-navigation-tabs "0.2.0"
+
+react-prop-types-element-of-type@2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/react-prop-types-element-of-type/-/react-prop-types-element-of-type-2.2.0.tgz#bcc332d3903c2259cf68c28a81c4a663faba59ac"
 
 react-proxy@^1.1.7:
   version "1.1.8"
@@ -8702,6 +8799,10 @@ regenerate@^1.2.1:
 regenerator-runtime@^0.11.0:
   version "0.11.0"
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.11.0.tgz#7e54fe5b5ccd5d6624ea6255c3473be090b802e1"
+
+regenerator-runtime@^0.9.5:
+  version "0.9.6"
+  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.9.6.tgz#d33eb95d0d2001a4be39659707c51b0cb71ce029"
 
 regenerator-transform@^0.10.0:
   version "0.10.1"
@@ -9048,6 +9149,10 @@ schema-utils@^0.4.0, schema-utils@^0.4.5:
   dependencies:
     ajv "^6.1.0"
     ajv-keywords "^3.1.0"
+
+scriptjs@2.5.8:
+  version "2.5.8"
+  resolved "https://registry.yarnpkg.com/scriptjs/-/scriptjs-2.5.8.tgz#d0c43955c2e6bad33b6e4edf7b53b8965aa7ca5f"
 
 semver-diff@^2.0.0:
   version "2.1.0"
@@ -10059,7 +10164,7 @@ walker@~1.0.5:
   dependencies:
     makeerror "1.0.x"
 
-warning@^3.0.0:
+warning@3.0.0, warning@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/warning/-/warning-3.0.0.tgz#32e5377cb572de4ab04753bdf8821c01ed605b7c"
   dependencies:
@@ -10154,16 +10259,6 @@ websocket-driver@>=0.5.1:
 websocket-extensions@>=0.1.1:
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/websocket-extensions/-/websocket-extensions-0.1.3.tgz#5d2ff22977003ec687a4b87073dfbbac146ccf29"
-
-"websql@https://github.com/expo/node-websql/archive/18.0.0.tar.gz":
-  version "0.4.4"
-  resolved "https://github.com/expo/node-websql/archive/18.0.0.tar.gz#39b12a08b0180495de1412d8a64a529e21ad554e"
-  dependencies:
-    argsarray "^0.0.1"
-    immediate "^3.2.2"
-    noop-fn "^1.0.0"
-    pouchdb-collections "^1.0.1"
-    tiny-queue "^0.2.1"
 
 whatwg-encoding@^1.0.1:
   version "1.0.1"
@@ -10299,7 +10394,7 @@ ws@^2.0.3:
     safe-buffer "~5.0.1"
     ultron "~1.1.0"
 
-ws@^3.0.0:
+ws@^3.0.0, ws@^3.3.1:
   version "3.3.3"
   resolved "https://registry.yarnpkg.com/ws/-/ws-3.3.3.tgz#f1cf84fe2d5e901ebce94efaece785f187a228f2"
   dependencies:
