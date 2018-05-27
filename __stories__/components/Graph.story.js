@@ -6,14 +6,12 @@ import { storiesOf } from "@storybook/react-native";
 import StoryContainerComponent from "../../__stories__/utils/StoryContainerComponent";
 import Graph from "../../src/components/Graph/Graph";
 import {
-  GRAPH_RENDERER_SVG,
-  GRAPH_RENDERER_THREE_JS,
-} from "../../src/actions/graphRenderer";
-import {
   makeYAxisLabelValues,
   makeYAxisBGBoundaryValues,
   DEFAULT_LOW_BG_BOUNDARY_VALUE,
   DEFAULT_HIGH_BG_BOUNDARY_VALUE,
+  GRAPH_RENDERER_SVG,
+  GRAPH_RENDERER_THREE_JS,
 } from "../../src/components/Graph/helpers";
 import Urls from "../../src/constants/Urls";
 import GraphData from "../../src/models/GraphData";
@@ -160,19 +158,11 @@ storiesOf("Graph", module).add(
 );
 
 storiesOf("Graph", module).add(
-  "data 1, four y-axis labels, default scale, ThreeJS",
+  "data 1, three y-axis labels, default scale, ThreeJS",
   () => (
     <StoryContainerComponent behaviors={[]}>
       <Graph
         {...props}
-        yAxisLabelValues={makeYAxisLabelValues({
-          lowBGBoundary,
-          highBGBoundary,
-        })}
-        yAxisBGBoundaryValues={makeYAxisBGBoundaryValues({
-          lowBGBoundary,
-          highBGBoundary,
-        })}
         eventTime={eventTime1}
         cbgData={graphData1.cbgData}
         smbgData={graphData1.smbgData}

@@ -17,13 +17,14 @@ class GraphRenderLayerGl {
     this.pixelRatio = PixelRatio.get();
   }
 
-  updateObjectPosition(objectParam, { x, y, z }) {
+  updateObjectPosition(object, { x, y, z }) {
     // Adjust object position with pixelRatio, right hand coordinate system (-y), and increasing
     // z (for proper paint order of meshes)
-    const object = objectParam;
+    /* eslint-disable no-param-reassign */
     object.position.x = x * this.pixelRatio;
     object.position.y = -y * this.pixelRatio;
     object.position.z = z;
+    /* eslint-enable no-param-reassign */
   }
 }
 

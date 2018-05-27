@@ -1,4 +1,4 @@
-import { NativeModules } from "react-native";
+// import { NativeModules } from "react-native";
 import { appVersionLoad } from "../actions/appVersion";
 import { authRefreshTokenOrSignInAsync } from "../actions/auth";
 import { apiEnvironmentLoadAndSetAsync } from "../actions/apiEnvironment";

@@ -78,7 +78,7 @@ exports[`Storyshots Graph data 1, four y-axis labels, default scale 1`] = `
 </RCTSafeAreaView>
 `;
 
-exports[`Storyshots Graph data 1, four y-axis labels, default scale, ThreeJS 1`] = `
+exports[`Storyshots Graph data 1, three y-axis labels, default scale, ThreeJS 1`] = `
 <RCTSafeAreaView
   paddingTop={0}
   style={

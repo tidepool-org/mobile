@@ -1,11 +1,13 @@
 import { AsyncStorage } from "react-native";
 
+import {
+  GRAPH_RENDERER_SVG,
+  GRAPH_RENDERER_THREE_JS,
+} from "../components/Graph/helpers";
+
 const GRAPH_RENDERER_SET = "GRAPH_RENDERER_SET";
 
 const GRAPH_RENDERER_KEY = "GRAPH_RENDERER_KEY";
-
-const GRAPH_RENDERER_SVG = "SVG";
-const GRAPH_RENDERER_THREE_JS = "Three.js (OpenGL)";
 
 const graphRenderers = [GRAPH_RENDERER_SVG, GRAPH_RENDERER_THREE_JS];
 

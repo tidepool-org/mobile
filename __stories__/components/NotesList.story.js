@@ -9,8 +9,8 @@ import NotesList from "../../src/components/NotesList";
 import {
   DEFAULT_LOW_BG_BOUNDARY_VALUE,
   DEFAULT_HIGH_BG_BOUNDARY_VALUE,
+  GRAPH_RENDERER_THREE_JS,
 } from "../../src/components/Graph/helpers";
-import { GRAPH_RENDERER_THREE_JS } from "../../src/actions/graphRenderer";
 
 faker.seed(123);
 

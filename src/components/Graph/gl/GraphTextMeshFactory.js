@@ -33,8 +33,8 @@ class GraphTextMeshFactory {
     this.textHeightScale = 0.75; // Adjust scale to get desired pixel height
   }
 
-  makeTextMesh({ text, width, color }) {
-    const geometry = this.getGeometry({ text, width });
+  makeTextMesh({ text, width, color, align = "center" }) {
+    const geometry = this.getGeometry({ text, width, align });
     const material = this.getMaterial({ color });
     const mesh = new THREE.Mesh(geometry, material);
     mesh.applyMatrix(
@@ -57,16 +57,17 @@ class GraphTextMeshFactory {
     this.assetsAreLoaded = true;
   }
 
-  getGeometry({ text, width }) {
-    let geometry = this.geometryPool.get(text);
+  getGeometry({ text, width, align }) {
+    const key = `${text}-${width}-${align}`;
+    let geometry = this.geometryPool.get(key);
     if (!geometry) {
       geometry = createGeometry({
         text,
         font: this.bmFont,
         width: width * this.pixelRatioBase / this.textHeightScale,
-        align: "center",
+        align,
       });
-      this.geometryPool.set(text, geometry);
+      this.geometryPool.set(key, geometry);
     }
     return geometry;
   }
