@@ -9,11 +9,9 @@ import GraphScrollableSvg from "./svg/GraphScrollableSvg";
 import {
   calculateRelativeCenterTimeSeconds,
   calculateScrollXAndRelativeCenterTimeSeconds,
-} from "./helpers";
-import {
   GRAPH_RENDERER_SVG,
   GRAPH_RENDERER_THREE_JS,
-} from "../../actions/graphRenderer";
+} from "./helpers";
 
 class GraphScrollable extends PureComponent {
   constructor(props) {
@@ -90,6 +88,8 @@ class GraphScrollable extends PureComponent {
       graphScalableLayoutInfo,
       cbgData,
       smbgData,
+      yAxisBGBoundaryValues,
+      yAxisLabelValues,
     } = this.props;
 
     const props = {
@@ -102,6 +102,8 @@ class GraphScrollable extends PureComponent {
       graphScalableLayoutInfo,
       cbgData,
       smbgData,
+      yAxisBGBoundaryValues,
+      yAxisLabelValues,
     };
 
     return props;
@@ -217,6 +219,9 @@ GraphScrollable.propTypes = {
   graphScalableLayoutInfo: PropTypes.object.isRequired,
   cbgData: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
   smbgData: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+  yAxisBGBoundaryValues: PropTypes.arrayOf(PropTypes.number.isRequired)
+    .isRequired,
+  yAxisLabelValues: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
 };
 
 GraphScrollable.defaultProps = {

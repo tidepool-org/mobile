@@ -6,9 +6,11 @@ import { calculateTimeMarkers, convertHexColorStringToInt } from "../helpers";
 
 class GraphXAxisGl extends GraphRenderLayerGl {
   constructor(props) {
+    // console.log(`GraphXAxisGl ctor`);
+
     super(props);
 
-    // console.log(`GraphXAxisGl ctor`);
+    const { width, headerHeight } = props.graphFixedLayoutInfo;
 
     // FIXME: Ideally the tickHeight should come from markerLengths (important if we add longer
     // tick for midnight, per TODO in calculateTimeMarkers). However, if we do that, we should
@@ -27,21 +29,32 @@ class GraphXAxisGl extends GraphRenderLayerGl {
     this.tickLineMeshes = [];
     this.tickLabelTextMeshes = new Map();
     this.tickLabelTextWidth = 60;
+
+    const backgroundMaterial = new THREE.MeshBasicMaterial({
+      color: 0xffffff, // convertHexColorStringToInt(this.theme.graphXAxisBackgroundColor),
+    });
+    const rectangleShape = new THREE.Shape();
+    rectangleShape.moveTo(0, 0);
+    rectangleShape.lineTo(width * this.pixelRatio, 0);
+    rectangleShape.lineTo(
+      width * this.pixelRatio,
+      -headerHeight * this.pixelRatio
+    );
+    rectangleShape.lineTo(0, -headerHeight * this.pixelRatio);
+    rectangleShape.moveTo(0, 0);
+    const rectangleGeometry = new THREE.ShapeGeometry(rectangleShape);
+    this.backgroundMesh = new THREE.Mesh(rectangleGeometry, backgroundMaterial);
   }
 
-  render({ scene, graphScalableLayoutInfo, contentOffsetX }) {
-    // console.log(`GraphXAxisGl render`);
-
-    const { markerXCoordinates, markerLabels } = calculateTimeMarkers({
-      graphScalableLayoutInfo,
-    });
-    this.renderTickLines({ scene, contentOffsetX, markerXCoordinates });
-    this.renderTickLabels({
-      scene,
-      contentOffsetX,
-      markerXCoordinates,
-      markerLabels,
-    });
+  renderBackground({ scene }) {
+    if (!this.hasRenderedAtLeastOnce) {
+      scene.add(this.backgroundMesh);
+      this.updateObjectPosition(this.backgroundMesh, {
+        x: 0,
+        y: 0,
+        z: this.zStart,
+      });
+    }
   }
 
   renderTickLines({ scene, contentOffsetX, markerXCoordinates }) {
@@ -107,6 +120,24 @@ class GraphXAxisGl extends GraphRenderLayerGl {
       });
       mesh.visible = true;
     }
+  }
+
+  render({ scene, graphScalableLayoutInfo, contentOffsetX }) {
+    // console.log(`GraphXAxisGl render`);
+
+    const { markerXCoordinates, markerLabels } = calculateTimeMarkers({
+      graphScalableLayoutInfo,
+    });
+    this.renderBackground({ scene });
+    this.renderTickLines({ scene, contentOffsetX, markerXCoordinates });
+    this.renderTickLabels({
+      scene,
+      contentOffsetX,
+      markerXCoordinates,
+      markerLabels,
+    });
+
+    this.hasRenderedAtLeastOnce = true;
   }
 }
 

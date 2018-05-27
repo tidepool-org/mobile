@@ -164,6 +164,7 @@ const PrimaryTheme = {
     ...FontStyles.smallRegularFont,
   },
   graphBackgroundColor: "#f6f6f6",
+  graphXAxisBackgroundColor: "#ffffff",
   graphLineStrokeColor: "#e2e4e7",
   graphBgLowColor: Colors.peach,
   graphBgNormalColor: Colors.green,

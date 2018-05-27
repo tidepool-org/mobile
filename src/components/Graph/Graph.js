@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import glamorous, { withTheme } from "glamorous-native";
 
 import { ThemePropType } from "../../prop-types/theme";
+import { GRAPH_RENDERER_SVG } from "./helpers";
 import GraphFixedLayoutInfo from "./GraphFixedLayoutInfo";
 import GraphScalableLayoutInfo from "./GraphScalableLayoutInfo";
 import GraphYAxisLabels from "./GraphYAxisLabels";
@@ -118,8 +119,8 @@ class Graph extends PureComponent {
     }
   };
 
-  renderFixedBackground() {
-    // console.log(`renderFixedBackground`);
+  renderFixedBackgroundSvg() {
+    // console.log(`renderFixedBackgroundSvg`);
 
     const { theme, yAxisLabelValues, yAxisBGBoundaryValues } = this.props;
     const { graphFixedLayoutInfo } = this.state;
@@ -146,7 +147,13 @@ class Graph extends PureComponent {
   }
 
   renderGraphZoomable() {
-    const { isLoading, cbgData, smbgData, navigateHowToUpload } = this.props;
+    const {
+      isLoading,
+      cbgData,
+      smbgData,
+      navigateHowToUpload,
+      graphRenderer,
+    } = this.props;
     const { graphScalableLayoutInfo, graphFixedLayoutInfo } = this.state;
     const shouldRenderLoadingIndicator = isLoading;
     const shouldRenderNoData =
@@ -162,7 +169,9 @@ class Graph extends PureComponent {
           onZoomEnd={this.onZoomEnd}
           isZoomingEnabled={!isLoading}
         >
-          {this.renderFixedBackground()}
+          {graphRenderer === GRAPH_RENDERER_SVG
+            ? this.renderFixedBackgroundSvg()
+            : null}
           {this.renderGraphScrollable()}
           {shouldRenderNoData
             ? Graph.renderNoData({ navigateHowToUpload, graphFixedLayoutInfo })
@@ -176,7 +185,14 @@ class Graph extends PureComponent {
   }
 
   renderGraphScrollable() {
-    const { isLoading, cbgData, smbgData, graphRenderer } = this.props;
+    const {
+      isLoading,
+      graphRenderer,
+      cbgData,
+      smbgData,
+      yAxisBGBoundaryValues,
+      yAxisLabelValues,
+    } = this.props;
     const { graphScalableLayoutInfo, isZooming } = this.state;
 
     return (
@@ -184,9 +200,11 @@ class Graph extends PureComponent {
         isLoading={isLoading}
         isZooming={isZooming}
         graphScalableLayoutInfo={graphScalableLayoutInfo}
+        graphRenderer={graphRenderer}
         cbgData={cbgData}
         smbgData={smbgData}
-        graphRenderer={graphRenderer}
+        yAxisBGBoundaryValues={yAxisBGBoundaryValues}
+        yAxisLabelValues={yAxisLabelValues}
       />
     );
   }

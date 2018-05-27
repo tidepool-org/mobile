@@ -5,10 +5,12 @@ import ExpoTHREE, { THREE } from "expo-three";
 
 import { ThemePropType } from "../../../prop-types/theme";
 import GraphGlView from "./GraphGlView";
+import GraphYAxisGl from "./GraphYAxisGl";
 import GraphXAxisGl from "./GraphXAxisGl";
 import GraphNoteEventGl from "./GraphNoteEventGl";
 import GraphCbgGl from "./GraphCbgGl";
 import GraphSmbgGl from "./GraphSmbgGl";
+import { convertHexColorStringToInt } from "../helpers";
 
 const { createRenderer } = ExpoTHREE;
 
@@ -24,27 +26,33 @@ class GraphScrollableGl extends PureComponent {
       graphFixedLayoutInfo,
       graphStartTimeSeconds,
     };
-    const graphXAxisGl = new GraphXAxisGl({
+    const graphYAxisGl = new GraphYAxisGl({
       ...graphLayerCommonProps,
       zStart: 100,
       zEnd: 199,
     });
-    const graphNoteEventGl = new GraphNoteEventGl({
+    const graphXAxisGl = new GraphXAxisGl({
       ...graphLayerCommonProps,
       zStart: 200,
       zEnd: 299,
     });
-    const graphCbgGl = new GraphCbgGl({
+    const graphNoteEventGl = new GraphNoteEventGl({
       ...graphLayerCommonProps,
       zStart: 300,
       zEnd: 399,
     });
-    const graphSmbgGl = new GraphSmbgGl({
+    const graphCbgGl = new GraphCbgGl({
       ...graphLayerCommonProps,
       zStart: 400,
-      zEnd: 499,
+      zEnd: 599,
+    });
+    const graphSmbgGl = new GraphSmbgGl({
+      ...graphLayerCommonProps,
+      zStart: 500,
+      zEnd: 599,
     });
     this.graphRenderLayers = [
+      graphYAxisGl,
       graphXAxisGl,
       graphNoteEventGl,
       graphCbgGl,
@@ -65,6 +73,7 @@ class GraphScrollableGl extends PureComponent {
 
   onContextCreate = async gl => {
     const {
+      theme,
       graphScalableLayoutInfo: {
         graphFixedLayoutInfo: { height },
       },
@@ -77,6 +86,10 @@ class GraphScrollableGl extends PureComponent {
     this.renderer = createRenderer({ gl });
     this.renderer.sortObjects = false;
     this.renderer.setSize(gl.drawingBufferWidth, gl.drawingBufferHeight);
+    this.renderer.setClearColor(
+      convertHexColorStringToInt(theme.graphBackgroundColor),
+      1
+    );
 
     // Create camera
     const { drawingBufferWidth, drawingBufferHeight } = gl;

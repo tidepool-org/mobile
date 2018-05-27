@@ -7,6 +7,9 @@ const DEFAULT_LOW_BG_BOUNDARY_VALUE = 70;
 const DEFAULT_HIGH_BG_BOUNDARY_VALUE = 180;
 const MAX_BG_VALUE = 340;
 
+const GRAPH_RENDERER_SVG = "SVG";
+const GRAPH_RENDERER_THREE_JS = "Three.js (OpenGL)";
+
 function makeYAxisLabelValues({ lowBGBoundary, highBGBoundary }) {
   if (lowBGBoundary - LOW_BG_LABEL_VALUE >= LOW_BG_LABEL_VALUE) {
     return [
@@ -119,4 +122,6 @@ export {
   DEFAULT_LOW_BG_BOUNDARY_VALUE,
   DEFAULT_HIGH_BG_BOUNDARY_VALUE,
   MAX_BG_VALUE,
+  GRAPH_RENDERER_SVG,
+  GRAPH_RENDERER_THREE_JS,
 };
