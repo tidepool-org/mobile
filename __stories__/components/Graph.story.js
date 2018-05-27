@@ -2,6 +2,7 @@
 import React from "react";
 import { Linking } from "react-native";
 import { storiesOf } from "@storybook/react-native";
+import { withKnobs, selectV2 } from "@storybook/addon-knobs";
 
 import StoryContainerComponent from "../../__stories__/utils/StoryContainerComponent";
 import Graph from "../../src/components/Graph/Graph";
@@ -57,6 +58,13 @@ const navigateHowToUpload = () => {
 };
 const onZoomStart = () => {};
 const onZoomEnd = () => {};
+
+const stories = storiesOf("Graph", module);
+stories.addDecorator(withKnobs);
+const rendererLabel = "Renderer";
+const rendererOptions = [GRAPH_RENDERER_THREE_JS, GRAPH_RENDERER_SVG];
+const defaultRenderer = GRAPH_RENDERER_THREE_JS;
+
 const props = {
   isLoading,
   yAxisLabelValues,
@@ -64,44 +72,31 @@ const props = {
   navigateHowToUpload,
   onZoomStart,
   onZoomEnd,
-  graphRenderer: GRAPH_RENDERER_SVG,
 };
 
-storiesOf("Graph", module).add("isLoading, default scale", () => (
+const selectGraphRenderer = () => {
+  const graphRenderer = selectV2(
+    rendererLabel,
+    rendererOptions,
+    defaultRenderer
+  );
+
+  return graphRenderer;
+};
+
+stories.add("isLoading, default scale", () => (
   <StoryContainerComponent behaviors={[]}>
-    <Graph {...props} isLoading />
+    <Graph {...props} isLoading graphRenderer={selectGraphRenderer()} />
   </StoryContainerComponent>
 ));
 
-storiesOf("Graph", module).add(
-  "no data, three y-axis labels, default scale",
-  () => (
-    <StoryContainerComponent behaviors={[]}>
-      <Graph {...props} />
-    </StoryContainerComponent>
-  )
-);
+stories.add("no data, three y-axis labels, default scale", () => (
+  <StoryContainerComponent behaviors={[]}>
+    <Graph {...props} graphRenderer={selectGraphRenderer()} />
+  </StoryContainerComponent>
+));
 
-storiesOf("Graph", module).add(
-  "no data, four y-axis labels, default scale",
-  () => (
-    <StoryContainerComponent behaviors={[]}>
-      <Graph
-        {...props}
-        yAxisLabelValues={makeYAxisLabelValues({
-          lowBGBoundary,
-          highBGBoundary,
-        })}
-        yAxisBGBoundaryValues={makeYAxisBGBoundaryValues({
-          lowBGBoundary,
-          highBGBoundary,
-        })}
-      />
-    </StoryContainerComponent>
-  )
-);
-
-storiesOf("Graph", module).add("no data, four y-axis labels, 1.0 scale", () => (
+stories.add("no data, four y-axis labels, default scale", () => (
   <StoryContainerComponent behaviors={[]}>
     <Graph
       {...props}
@@ -113,12 +108,60 @@ storiesOf("Graph", module).add("no data, four y-axis labels, 1.0 scale", () => (
         lowBGBoundary,
         highBGBoundary,
       })}
+      graphRenderer={selectGraphRenderer()}
+    />
+  </StoryContainerComponent>
+));
+
+stories.add("no data, four y-axis labels, 1.0 scale", () => (
+  <StoryContainerComponent behaviors={[]}>
+    <Graph
+      {...props}
+      yAxisLabelValues={makeYAxisLabelValues({
+          lowBGBoundary,
+          highBGBoundary,
+        })}
+      yAxisBGBoundaryValues={makeYAxisBGBoundaryValues({
+          lowBGBoundary,
+          highBGBoundary,
+        })}
       scale={1.0}
+      graphRenderer={selectGraphRenderer()}
+    />
+  </StoryContainerComponent>
+  ));
+
+stories.add("no data, four y-axis labels, max scale", () => (
+  <StoryContainerComponent behaviors={[]}>
+    <Graph
+      {...props}
+      yAxisLabelValues={makeYAxisLabelValues({
+          lowBGBoundary,
+          highBGBoundary,
+        })}
+      yAxisBGBoundaryValues={makeYAxisBGBoundaryValues({
+          lowBGBoundary,
+          highBGBoundary,
+        })}
+      scale={100.0}
+      graphRenderer={selectGraphRenderer()}
+    />
+  </StoryContainerComponent>
+  ));
+
+stories.add("data 1, three y-axis labels, default scale", () => (
+  <StoryContainerComponent behaviors={[]}>
+    <Graph
+      {...props}
+      eventTime={eventTime1}
+      cbgData={graphData1.cbgData}
+      smbgData={graphData1.smbgData}
+      graphRenderer={selectGraphRenderer()}
     />
   </StoryContainerComponent>
 ));
 
-storiesOf("Graph", module).add("no data, four y-axis labels, max scale", () => (
+stories.add("data 1, four y-axis labels, default scale", () => (
   <StoryContainerComponent behaviors={[]}>
     <Graph
       {...props}
@@ -130,49 +173,15 @@ storiesOf("Graph", module).add("no data, four y-axis labels, max scale", () => (
         lowBGBoundary,
         highBGBoundary,
       })}
-      scale={100.0}
+      eventTime={eventTime1}
+      cbgData={graphData1.cbgData}
+      smbgData={graphData1.smbgData}
+      graphRenderer={selectGraphRenderer()}
     />
   </StoryContainerComponent>
 ));
 
-storiesOf("Graph", module).add(
-  "data 1, four y-axis labels, default scale",
-  () => (
-    <StoryContainerComponent behaviors={[]}>
-      <Graph
-        {...props}
-        yAxisLabelValues={makeYAxisLabelValues({
-          lowBGBoundary,
-          highBGBoundary,
-        })}
-        yAxisBGBoundaryValues={makeYAxisBGBoundaryValues({
-          lowBGBoundary,
-          highBGBoundary,
-        })}
-        eventTime={eventTime1}
-        cbgData={graphData1.cbgData}
-        smbgData={graphData1.smbgData}
-      />
-    </StoryContainerComponent>
-  )
-);
-
-storiesOf("Graph", module).add(
-  "data 1, three y-axis labels, default scale, ThreeJS",
-  () => (
-    <StoryContainerComponent behaviors={[]}>
-      <Graph
-        {...props}
-        eventTime={eventTime1}
-        cbgData={graphData1.cbgData}
-        smbgData={graphData1.smbgData}
-        graphRenderer={GRAPH_RENDERER_THREE_JS}
-      />
-    </StoryContainerComponent>
-  )
-);
-
-storiesOf("Graph", module).add("data 1, four y-axis labels, 1.0 scale", () => (
+stories.add("data 1, four y-axis labels, 1.0 scale", () => (
   <StoryContainerComponent behaviors={[]}>
     <Graph
       {...props}
@@ -188,54 +197,50 @@ storiesOf("Graph", module).add("data 1, four y-axis labels, 1.0 scale", () => (
       cbgData={graphData1.cbgData}
       smbgData={graphData1.smbgData}
       scale={1.0}
+      graphRenderer={selectGraphRenderer()}
     />
   </StoryContainerComponent>
 ));
 
-storiesOf("Graph", module).add(
-  "data 1, four y-axis labels, 1.0 scale, ThreeJS",
-  () => (
-    <StoryContainerComponent behaviors={[]}>
-      <Graph
-        {...props}
-        yAxisLabelValues={makeYAxisLabelValues({
-          lowBGBoundary,
-          highBGBoundary,
-        })}
-        yAxisBGBoundaryValues={makeYAxisBGBoundaryValues({
-          lowBGBoundary,
-          highBGBoundary,
-        })}
-        eventTime={eventTime1}
-        cbgData={graphData1.cbgData}
-        smbgData={graphData1.smbgData}
-        scale={1.0}
-        graphRenderer={GRAPH_RENDERER_THREE_JS}
-      />
-    </StoryContainerComponent>
-  )
-);
+stories.add("data 1, four y-axis labels, max scale", () => (
+  <StoryContainerComponent behaviors={[]}>
+    <Graph
+      {...props}
+      yAxisLabelValues={makeYAxisLabelValues({
+        lowBGBoundary,
+        highBGBoundary,
+      })}
+      yAxisBGBoundaryValues={makeYAxisBGBoundaryValues({
+        lowBGBoundary,
+        highBGBoundary,
+      })}
+      eventTime={eventTime1}
+      cbgData={graphData1.cbgData}
+      smbgData={graphData1.smbgData}
+      scale={100.0}
+      graphRenderer={selectGraphRenderer()}
+    />
+  </StoryContainerComponent>
+));
 
-storiesOf("Graph", module).add(
-  "data 2, four y-axis labels, default scale",
-  () => (
-    <StoryContainerComponent behaviors={[]}>
-      <Graph
-        {...props}
-        yAxisLabelValues={makeYAxisLabelValues({
-          lowBGBoundary,
-          highBGBoundary,
-        })}
-        yAxisBGBoundaryValues={makeYAxisBGBoundaryValues({
-          lowBGBoundary,
-          highBGBoundary,
-        })}
-        eventTime={eventTime2}
-        cbgData={graphData2.cbgData}
-        smbgData={graphData2.smbgData}
-      />
-    </StoryContainerComponent>
-  )
-);
+stories.add("data 2, four y-axis labels, default scale", () => (
+  <StoryContainerComponent behaviors={[]}>
+    <Graph
+      {...props}
+      yAxisLabelValues={makeYAxisLabelValues({
+        lowBGBoundary,
+        highBGBoundary,
+      })}
+      yAxisBGBoundaryValues={makeYAxisBGBoundaryValues({
+        lowBGBoundary,
+        highBGBoundary,
+      })}
+      eventTime={eventTime2}
+      cbgData={graphData2.cbgData}
+      smbgData={graphData2.smbgData}
+      graphRenderer={selectGraphRenderer()}
+    />
+  </StoryContainerComponent>
+));
 
 export { makeYAxisLabelValues };
