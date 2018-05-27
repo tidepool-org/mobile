@@ -4,6 +4,7 @@
   "private": true,
   "devDependencies": {
     "@storybook/addon-actions": "3.4.6",
+    "@storybook/addon-knobs": "^3.4.6",
     "@storybook/addon-links": "3.4.6",
     "@storybook/addon-storyshots": "3.4.6",
     "@storybook/addons": "3.4.6",

@@ -26,32 +26,6 @@ exports[`Storyshots Graph data 1, four y-axis labels, 1.0 scale 1`] = `
 </RCTSafeAreaView>
 `;
 
-exports[`Storyshots Graph data 1, four y-axis labels, 1.0 scale, ThreeJS 1`] = `
-<RCTSafeAreaView
-  paddingTop={0}
-  style={
-    Object {
-      "flex": 1,
-    }
-  }
->
-  <View
-    style={Object {}}
-  >
-    <View
-      onLayout={[Function]}
-      style={
-        Array [
-          Object {
-            "height": 180,
-          },
-        ]
-      }
-    />
-  </View>
-</RCTSafeAreaView>
-`;
-
 exports[`Storyshots Graph data 1, four y-axis labels, default scale 1`] = `
 <RCTSafeAreaView
   paddingTop={0}
@@ -78,7 +52,33 @@ exports[`Storyshots Graph data 1, four y-axis labels, default scale 1`] = `
 </RCTSafeAreaView>
 `;
 
-exports[`Storyshots Graph data 1, three y-axis labels, default scale, ThreeJS 1`] = `
+exports[`Storyshots Graph data 1, four y-axis labels, max scale 1`] = `
+<RCTSafeAreaView
+  paddingTop={0}
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={Object {}}
+  >
+    <View
+      onLayout={[Function]}
+      style={
+        Array [
+          Object {
+            "height": 180,
+          },
+        ]
+      }
+    />
+  </View>
+</RCTSafeAreaView>
+`;
+
+exports[`Storyshots Graph data 1, three y-axis labels, default scale 1`] = `
 <RCTSafeAreaView
   paddingTop={0}
   style={
