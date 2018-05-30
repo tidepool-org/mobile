@@ -118,36 +118,36 @@ stories.add("no data, four y-axis labels, 1.0 scale", () => (
     <Graph
       {...props}
       yAxisLabelValues={makeYAxisLabelValues({
-          lowBGBoundary,
-          highBGBoundary,
-        })}
+        lowBGBoundary,
+        highBGBoundary,
+      })}
       yAxisBGBoundaryValues={makeYAxisBGBoundaryValues({
-          lowBGBoundary,
-          highBGBoundary,
-        })}
+        lowBGBoundary,
+        highBGBoundary,
+      })}
       scale={1.0}
       graphRenderer={selectGraphRenderer()}
     />
   </StoryContainerComponent>
-  ));
+));
 
 stories.add("no data, four y-axis labels, max scale", () => (
   <StoryContainerComponent behaviors={[]}>
     <Graph
       {...props}
       yAxisLabelValues={makeYAxisLabelValues({
-          lowBGBoundary,
-          highBGBoundary,
-        })}
+        lowBGBoundary,
+        highBGBoundary,
+      })}
       yAxisBGBoundaryValues={makeYAxisBGBoundaryValues({
-          lowBGBoundary,
-          highBGBoundary,
-        })}
+        lowBGBoundary,
+        highBGBoundary,
+      })}
       scale={100.0}
       graphRenderer={selectGraphRenderer()}
     />
   </StoryContainerComponent>
-  ));
+));
 
 stories.add("data 1, three y-axis labels, default scale", () => (
   <StoryContainerComponent behaviors={[]}>
@@ -156,6 +156,8 @@ stories.add("data 1, three y-axis labels, default scale", () => (
       eventTime={eventTime1}
       cbgData={graphData1.cbgData}
       smbgData={graphData1.smbgData}
+      basalData={graphData1.basalData}
+      maxBasalValue={graphData1.maxBasalValue}
       graphRenderer={selectGraphRenderer()}
     />
   </StoryContainerComponent>
@@ -176,6 +178,8 @@ stories.add("data 1, four y-axis labels, default scale", () => (
       eventTime={eventTime1}
       cbgData={graphData1.cbgData}
       smbgData={graphData1.smbgData}
+      basalData={graphData1.basalData}
+      maxBasalValue={graphData1.maxBasalValue}
       graphRenderer={selectGraphRenderer()}
     />
   </StoryContainerComponent>
@@ -196,6 +200,8 @@ stories.add("data 1, four y-axis labels, 1.0 scale", () => (
       eventTime={eventTime1}
       cbgData={graphData1.cbgData}
       smbgData={graphData1.smbgData}
+      basalData={graphData1.basalData}
+      maxBasalValue={graphData1.maxBasalValue}
       scale={1.0}
       graphRenderer={selectGraphRenderer()}
     />
@@ -217,6 +223,8 @@ stories.add("data 1, four y-axis labels, max scale", () => (
       eventTime={eventTime1}
       cbgData={graphData1.cbgData}
       smbgData={graphData1.smbgData}
+      basalData={graphData1.basalData}
+      maxBasalValue={graphData1.maxBasalValue}
       scale={100.0}
       graphRenderer={selectGraphRenderer()}
     />
@@ -238,6 +246,8 @@ stories.add("data 2, four y-axis labels, default scale", () => (
       eventTime={eventTime2}
       cbgData={graphData2.cbgData}
       smbgData={graphData2.smbgData}
+      basalData={graphData2.basalData}
+      maxBasalValue={graphData2.maxBasalValue}
       graphRenderer={selectGraphRenderer()}
     />
   </StoryContainerComponent>

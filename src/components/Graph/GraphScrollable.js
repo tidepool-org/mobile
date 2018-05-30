@@ -86,10 +86,12 @@ class GraphScrollable extends PureComponent {
       isLoading,
       isZooming,
       graphScalableLayoutInfo,
-      cbgData,
-      smbgData,
       yAxisBGBoundaryValues,
       yAxisLabelValues,
+      cbgData,
+      smbgData,
+      basalData,
+      maxBasalValue,
     } = this.props;
 
     const props = {
@@ -100,10 +102,12 @@ class GraphScrollable extends PureComponent {
       isLoading,
       isZooming,
       graphScalableLayoutInfo,
-      cbgData,
-      smbgData,
       yAxisBGBoundaryValues,
       yAxisLabelValues,
+      cbgData,
+      smbgData,
+      basalData,
+      maxBasalValue,
     };
 
     return props;
@@ -217,11 +221,13 @@ GraphScrollable.propTypes = {
   isZooming: PropTypes.bool,
   graphRenderer: PropTypes.string.isRequired,
   graphScalableLayoutInfo: PropTypes.object.isRequired,
-  cbgData: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
-  smbgData: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
   yAxisBGBoundaryValues: PropTypes.arrayOf(PropTypes.number.isRequired)
     .isRequired,
   yAxisLabelValues: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+  cbgData: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+  smbgData: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+  basalData: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+  maxBasalValue: PropTypes.number.isRequired,
 };
 
 GraphScrollable.defaultProps = {

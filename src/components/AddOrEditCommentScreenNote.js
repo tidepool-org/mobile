@@ -56,7 +56,7 @@ class AddOrEditCommentScreenNote extends PureComponent {
     const {
       graphDataFetchData: {
         fetching,
-        graphData: { cbgData, smbgData },
+        graphData: { cbgData, smbgData, basalData, maxBasalValue },
       },
       currentProfile: { lowBGBoundary, highBGBoundary },
       note: { timestamp: eventTime },
@@ -85,6 +85,8 @@ class AddOrEditCommentScreenNote extends PureComponent {
         yAxisBGBoundaryValues={yAxisBGBoundaryValues}
         cbgData={cbgData}
         smbgData={smbgData}
+        basalData={basalData}
+        maxBasalValue={maxBasalValue}
         eventTime={eventTime}
         navigateHowToUpload={navigateHowToUpload}
         graphRenderer={graphRenderer}

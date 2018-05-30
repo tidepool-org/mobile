@@ -11,11 +11,11 @@ class GraphYAxisBGBoundaryLinesSvg extends PureComponent {
   renderBGBoundaryLine(value) {
     const {
       theme,
-      graphFixedLayoutInfo: { yAxisHeightInPixels, yAxisPixelsPerValue, width },
+      graphFixedLayoutInfo: { yAxisGlucoseHeight, yAxisGlucosePixelsPerValue, width },
     } = this.props;
 
     const yOffset = Math.round(
-      yAxisHeightInPixels - value * yAxisPixelsPerValue
+      yAxisGlucoseHeight - value * yAxisGlucosePixelsPerValue
     );
 
     const x1 = 30;

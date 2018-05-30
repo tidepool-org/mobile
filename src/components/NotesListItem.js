@@ -317,7 +317,7 @@ class NotesListItem extends PureComponent {
       const {
         graphDataFetchData: {
           fetching,
-          graphData: { cbgData, smbgData },
+          graphData: { cbgData, smbgData, basalData, maxBasalValue },
         },
         currentProfile: { lowBGBoundary, highBGBoundary },
         note: { timestamp: eventTime },
@@ -344,6 +344,8 @@ class NotesListItem extends PureComponent {
           yAxisBGBoundaryValues={yAxisBGBoundaryValues}
           cbgData={cbgData}
           smbgData={smbgData}
+          basalData={basalData}
+          maxBasalValue={maxBasalValue}
           eventTime={eventTime}
           navigateHowToUpload={navigateHowToUpload}
           onZoomStart={onGraphZoomStart}

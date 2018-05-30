@@ -60,27 +60,26 @@ class GraphSmbgGl extends GraphRenderLayerGl {
       const { time, value, isLow, isHigh } = smbgData[i];
 
       // Add circle
-      let color = this.theme.graphBgNormalColor;
-      let material = this.normalMaterial;
-      if (isLow) {
-        material = this.lowMaterial;
-        color = this.theme.graphBgLowColor;
-      } else if (isHigh) {
-        material = this.highMaterial;
-        color = this.theme.graphBgHighColor;
-      }
       const constrainedValue = Math.min(value, MAX_BG_VALUE);
       const deltaTime = time - this.graphStartTimeSeconds;
       const x = deltaTime * pixelsPerSecond - contentOffsetX;
       const y =
-        this.graphFixedLayoutInfo.headerHeight +
-        (this.graphFixedLayoutInfo.yAxisHeightInPixels -
-          constrainedValue * this.graphFixedLayoutInfo.yAxisPixelsPerValue);
+        this.graphFixedLayoutInfo.yAxisBottomOfGlucose -
+        constrainedValue * this.graphFixedLayoutInfo.yAxisGlucosePixelsPerValue;
 
       let mesh;
+      let color = this.theme.graphBgNormalColor;
       if (updateExistingMeshes) {
         mesh = scene.children[this.meshIndexStart + i * 3];
       } else {
+        let material = this.normalMaterial;
+        if (isLow) {
+          material = this.lowMaterial;
+          color = this.theme.graphBgLowColor;
+        } else if (isHigh) {
+          material = this.highMaterial;
+          color = this.theme.graphBgHighColor;
+        }
         mesh = new THREE.Mesh(this.circleGeometry, material);
         scene.add(mesh);
       }
