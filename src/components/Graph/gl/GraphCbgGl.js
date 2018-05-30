@@ -38,24 +38,23 @@ class GraphCbgGl extends GraphRenderLayerGl {
     }
     for (let i = 0; i < cbgData.length; i += 1) {
       const { time, value, isLow, isHigh } = cbgData[i];
-      let material = this.normalMaterial;
-      if (isLow) {
-        material = this.lowMaterial;
-      } else if (isHigh) {
-        material = this.highMaterial;
-      }
       const constrainedValue = Math.min(value, MAX_BG_VALUE);
       const deltaTime = time - this.graphStartTimeSeconds;
       const x = deltaTime * pixelsPerSecond - contentOffsetX;
       const y =
-        this.graphFixedLayoutInfo.headerHeight +
-        (this.graphFixedLayoutInfo.yAxisHeightInPixels -
-          constrainedValue * this.graphFixedLayoutInfo.yAxisPixelsPerValue);
+        this.graphFixedLayoutInfo.yAxisBottomOfGlucose -
+        constrainedValue * this.graphFixedLayoutInfo.yAxisGlucosePixelsPerValue;
 
       let mesh;
       if (updateExistingMeshes) {
         mesh = scene.children[this.meshIndexStart + i];
       } else {
+        let material = this.normalMaterial;
+        if (isLow) {
+          material = this.lowMaterial;
+        } else if (isHigh) {
+          material = this.highMaterial;
+        }
         mesh = new THREE.Mesh(this.circleGeometry, material);
         scene.add(mesh);
       }

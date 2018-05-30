@@ -33,9 +33,8 @@ class GraphYAxisGl extends GraphRenderLayerGl {
 
   addLabelForValue({ scene, graphFixedLayoutInfo, value }) {
     const {
-      yAxisHeightInPixels,
-      yAxisPixelsPerValue,
-      headerHeight,
+      yAxisBottomOfGlucose,
+      yAxisGlucosePixelsPerValue,
     } = graphFixedLayoutInfo;
 
     // FIXME: We should really measure the text here for the width and height
@@ -48,9 +47,7 @@ class GraphYAxisGl extends GraphRenderLayerGl {
       color: this.theme.graphYAxisLabelStyle.color,
       align: "right",
     });
-    const y =
-      Math.round(yAxisHeightInPixels - value * yAxisPixelsPerValue) +
-      headerHeight;
+    const y = Math.round(yAxisBottomOfGlucose - value * yAxisGlucosePixelsPerValue);
     this.updateObjectPosition(textMesh, {
       x: 0,
       y: y + height / 2,
@@ -62,14 +59,11 @@ class GraphYAxisGl extends GraphRenderLayerGl {
 
   addLineForValue({ scene, graphFixedLayoutInfo, value }) {
     const {
-      yAxisHeightInPixels,
-      yAxisPixelsPerValue,
-      headerHeight,
+      yAxisGlucosePixelsPerValue,
+      yAxisBottomOfGlucose,
     } = graphFixedLayoutInfo;
 
-    const y =
-      Math.round(yAxisHeightInPixels - value * yAxisPixelsPerValue) +
-      headerHeight;
+    const y = Math.round(yAxisBottomOfGlucose - value * yAxisGlucosePixelsPerValue);
     const line = new THREE.Line(this.lineGeometry, this.lineDashedMaterial);
     line.computeLineDistances();
     this.updateObjectPosition(line, { x: 0, y, z: this.zStart });

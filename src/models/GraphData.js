@@ -1,3 +1,8 @@
+// TODO: Currently GraphData is responsible for too much. It processes response data and holds the
+// processed / partitioned data. The discrete graph data types (cbg, smbg, basal, etc) are kind of
+// buried as anonymous objects instead of classes. Should refactor to have those be discrete
+// classes (probably with common base) and have the processor be a separate class as well.
+
 export default class GraphData {
   responseData = [];
 
@@ -22,13 +27,24 @@ export default class GraphData {
     this.lowBGBoundary = lowBGBoundary;
     this.highBGBoundary = highBGBoundary;
 
+    this.cbgData = [];
+    this.smbgData = [];
+    this.basalData = [];
+    this.maxBasalValue = 0;
+
     this.splitAndTransformResponseDataByType();
 
-    // console.log("process cbgData");
-    this.cbgData = this.processBgData(this.cbgData);
+    // console.log("sortAndDeduplicate cbgData");
+    this.cbgData = this.sortAndDeduplicate(this.cbgData);
 
-    // console.log("process smbgData");
-    this.smbgData = this.processBgData(this.smbgData);
+    // console.log("sortAndDeduplicate smbgData");
+    this.smbgData = this.sortAndDeduplicate(this.smbgData);
+
+    // console.log("sortAndDeduplicate basalData");
+    this.basalData = this.sortAndDeduplicate(this.basalData);
+    const minBasalScaleValue = 1.0;
+    this.maxBasalValue = Math.max(this.maxBasalValue, minBasalScaleValue);
+    // console.log(`maxBasalValue: ${this.maxBasalValue}`);
   }
 
   //
@@ -36,9 +52,6 @@ export default class GraphData {
   //
 
   splitAndTransformResponseDataByType() {
-    this.cbgData = [];
-    this.smbgData = [];
-
     this.responseData.forEach(item => {
       switch (item.type) {
         case "cbg":
@@ -46,6 +59,14 @@ export default class GraphData {
           break;
         case "smbg":
           this.smbgData.push(this.transformSmbgResponseDataItem(item));
+          break;
+        case "basal":
+          {
+            const transformedItem = this.transformBasalResponseDataItem(item);
+            if (transformedItem) {
+              this.basalData.push(transformedItem);
+            }
+          }
           break;
         default:
           break;
@@ -86,10 +107,81 @@ export default class GraphData {
     };
   }
 
-  processBgData(data) {
-    let processedData = data;
+  transformBasalResponseDataItem(item) {
+    let shouldAddItem = true;
+    const time = new Date(item.time).getTime() / 1000;
+    const { rate, duration, deliveryType } = item;
+    const suppressedRate = this.getSuppressedBasalRate(item);
+    const transformedItem = {
+      time,
+      value: rate,
+      deliveryType,
+      suppressedRate,
+    };
 
-    // console.log(`data items: ${data.length}`);
+    if (deliveryType === "suspend") {
+      // Sometimes "suspend" events have no rate or duration, use 0 instead
+      if (rate === undefined || duration === undefined) {
+        transformedItem.value = 0;
+      }
+    } else if (!duration) {
+      // Except for "suspend" events, filter out items with no duration
+      shouldAddItem = false;
+    }
+
+    if (shouldAddItem && transformedItem.value === undefined) {
+      // Filter out items with no value (rate)
+      shouldAddItem = false;
+    }
+
+    if (shouldAddItem) {
+      if (transformedItem.value > this.maxBasalValue) {
+        this.maxBasalValue = transformedItem.value;
+      }
+
+      return transformedItem;
+    }
+
+    return null;
+  }
+
+  getSuppressedBasalRate(item) {
+    let suppressedRate;
+
+    if (item.deliveryType === "temp") {
+      const suppressedBasalItem = item.suppressed;
+      if (suppressedBasalItem) {
+        suppressedRate = this.getScheduledSuppressedRate(suppressedBasalItem);
+      }
+      if (suppressedRate === undefined) {
+        // console.log(
+        //   `getSuppressedBasalRate: No suppressed rate in temp basal!, item: ${JSON.stringify(
+        //     item
+        //   )}`
+        // );
+      }
+    }
+
+    return suppressedRate;
+  }
+
+  getScheduledSuppressedRate(item) {
+    // Deal with nested suppressed arrays - need to march up them to find the innermost value. Data
+    // may have a temp rate of 0, and multiple suppressions all at zero. Only innermost will have a
+    // delivery type of 'scheduled'.
+    const suppressedBasalItem = item.suppressed;
+    if (item.deliveryType === "scheduled") {
+      return item.rate;
+    } else if (suppressedBasalItem) {
+      return this.getScheduledSuppressedRate(suppressedBasalItem);
+    }
+    return null;
+  }
+
+  sortAndDeduplicate(data) {
+    // console.log(`sortAndDeduplicate: data items: ${data.length}`);
+
+    let processedData = data;
 
     if (processedData.length > 0) {
       processedData.sort((a, b) => {
@@ -119,8 +211,8 @@ export default class GraphData {
       //     processedData.length
       //   }`
       // );
-      processedData = processedData.filter(sample => {
-        const { time } = sample;
+      processedData = processedData.filter(item => {
+        const { time } = item;
         return (
           Math.abs(this.eventTimeSeconds - time) <= this.timeIntervalSecondsHalf
         );
@@ -128,16 +220,14 @@ export default class GraphData {
       // console.log(
       //   `data items filtered by time interval: ${processedData.length}`
       // );
-      // const firstSampleTime = new Date(data[0].time * 1000);
-      // console.log(`first sample time: ${firstSampleTime}`);
-      // const lastSampleTime = new Date(data[processedData.length - 1].time * 1000);
-      // console.log(`last sample time: ${lastSampleTime}`);
-      // const cbgSampleTimeSpanSeconds =
-      //   lastSampleTime.getTime() / 1000 - firstSampleTime.getTime() / 1000;
+      // const firstItemTime = new Date(data[0].time * 1000);
+      // console.log(`first item time: ${firstItemTime}`);
+      // const lastItemTime = new Date(data[processedData.length - 1].time * 1000);
+      // console.log(`last item time: ${lastItemTime}`);
+      // const dataTimeSpanSeconds =
+      //   lastItemTime.getTime() / 1000 - firstItemTime.getTime() / 1000;
       // console.log(
-      //   `data time span seconds (hours): ${cbgSampleTimeSpanSeconds /
-      //     60 /
-      //     60}`
+      //   `data time span seconds (hours): ${dataTimeSpanSeconds / 60 / 60}`
       // );
     }
 

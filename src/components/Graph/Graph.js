@@ -71,7 +71,6 @@ class Graph extends PureComponent {
     const { layout } = event.nativeEvent;
     const graphFixedLayoutInfo = new GraphFixedLayoutInfo({
       width: layout.width,
-      height: layout.headerHeight,
     });
     const graphScalableLayoutInfo = new GraphScalableLayoutInfo({
       graphFixedLayoutInfo,
@@ -188,10 +187,12 @@ class Graph extends PureComponent {
     const {
       isLoading,
       graphRenderer,
-      cbgData,
-      smbgData,
       yAxisBGBoundaryValues,
       yAxisLabelValues,
+      cbgData,
+      smbgData,
+      basalData,
+      maxBasalValue,
     } = this.props;
     const { graphScalableLayoutInfo, isZooming } = this.state;
 
@@ -201,10 +202,12 @@ class Graph extends PureComponent {
         isZooming={isZooming}
         graphScalableLayoutInfo={graphScalableLayoutInfo}
         graphRenderer={graphRenderer}
-        cbgData={cbgData}
-        smbgData={smbgData}
         yAxisBGBoundaryValues={yAxisBGBoundaryValues}
         yAxisLabelValues={yAxisLabelValues}
+        cbgData={cbgData}
+        smbgData={smbgData}
+        basalData={basalData}
+        maxBasalValue={maxBasalValue}
       />
     );
   }
@@ -228,6 +231,8 @@ Graph.propTypes = {
     .isRequired,
   cbgData: PropTypes.arrayOf(PropTypes.object.isRequired),
   smbgData: PropTypes.arrayOf(PropTypes.object.isRequired),
+  basalData: PropTypes.arrayOf(PropTypes.object.isRequired),
+  maxBasalValue: PropTypes.number,
   scale: PropTypes.number,
   eventTime: PropTypes.instanceOf(Date),
   navigateHowToUpload: PropTypes.func.isRequired,
@@ -241,6 +246,8 @@ Graph.defaultProps = {
   eventTime: new Date(),
   cbgData: [],
   smbgData: [],
+  basalData: [],
+  maxBasalValue: 1.0,
   onZoomStart: null,
   onZoomEnd: null,
 };

@@ -24,9 +24,9 @@ class GraphScrollableSvg extends PureComponent {
       graphScalableLayoutInfo: {
         graphFixedLayoutInfo: {
           height,
-          yAxisHeightInPixels,
-          yAxisPixelsPerValue,
           headerHeight,
+          yAxisGlucosePixelsPerValue,
+          yAxisBottomOfGlucose,
         },
       },
       cbgData,
@@ -55,9 +55,8 @@ class GraphScrollableSvg extends PureComponent {
       ? GraphCbgSvg.render({
           theme,
           cbgData,
-          yAxisHeightInPixels,
-          yAxisPixelsPerValue,
-          headerHeight,
+          yAxisGlucosePixelsPerValue,
+          yAxisBottomOfGlucose,
           graphStartTimeSeconds,
           pixelsPerSecond,
         })
@@ -67,9 +66,8 @@ class GraphScrollableSvg extends PureComponent {
       ? GraphSmbgSvg.render({
           theme,
           smbgData,
-          yAxisHeightInPixels,
-          yAxisPixelsPerValue,
-          headerHeight,
+          yAxisGlucosePixelsPerValue,
+          yAxisBottomOfGlucose,
           graphStartTimeSeconds,
           pixelsPerSecond,
         })

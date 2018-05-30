@@ -9,14 +9,14 @@ class GraphYAxisLabels extends PureComponent {
     const {
       theme,
       graphFixedLayoutInfo: {
-        yAxisLabelTextHalfHeight,
-        yAxisHeightInPixels,
-        yAxisPixelsPerValue,
+        yAxisGlucoseLabelTextHalfHeight,
+        yAxisGlucoseHeight,
+        yAxisGlucosePixelsPerValue,
       },
     } = this.props;
 
     const yOffset = Math.round(
-      yAxisHeightInPixels - value * yAxisPixelsPerValue
+      yAxisGlucoseHeight - value * yAxisGlucosePixelsPerValue
     );
 
     return (
@@ -28,7 +28,7 @@ class GraphYAxisLabels extends PureComponent {
         style={theme.graphYAxisLabelStyle}
         width={25}
         textAlign="right"
-        top={yOffset - yAxisLabelTextHalfHeight}
+        top={yOffset - yAxisGlucoseLabelTextHalfHeight}
       >
         {value}
       </glamorous.Text>

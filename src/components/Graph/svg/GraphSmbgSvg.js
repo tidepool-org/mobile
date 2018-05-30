@@ -9,9 +9,8 @@ class GraphSmbgSvg {
   static render({
     theme,
     smbgData,
-    yAxisHeightInPixels,
-    yAxisPixelsPerValue,
-    headerHeight,
+    yAxisGlucosePixelsPerValue,
+    yAxisBottomOfGlucose,
     graphStartTimeSeconds,
     pixelsPerSecond,
   }) {
@@ -27,11 +26,9 @@ class GraphSmbgSvg {
       const constrainedValue = Math.min(value, MAX_BG_VALUE);
       const deltaTime = time - graphStartTimeSeconds;
       const x = deltaTime * pixelsPerSecond;
-      const y =
-        headerHeight +
-        Math.round(
-          yAxisHeightInPixels - constrainedValue * yAxisPixelsPerValue
-        );
+      const y = Math.round(
+        yAxisBottomOfGlucose - constrainedValue * yAxisGlucosePixelsPerValue
+      );
 
       // Try to avoid intersecting labels
       //
@@ -49,11 +46,9 @@ class GraphSmbgSvg {
         const nextConstrainedValue = Math.min(nextValue, MAX_BG_VALUE);
         const nextDeltaTime = nextTime - graphStartTimeSeconds;
         const nextX = nextDeltaTime * pixelsPerSecond;
-        const nextY =
-          headerHeight +
-          Math.round(
-            yAxisHeightInPixels - nextConstrainedValue * yAxisPixelsPerValue
-          );
+        const nextY = Math.round(
+          yAxisBottomOfGlucose - nextConstrainedValue * yAxisGlucosePixelsPerValue
+        );
         const approximateTextHeight = 9;
         const approximateTextWidth = 21;
         if (

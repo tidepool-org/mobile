@@ -9,9 +9,8 @@ class GraphCbgSvg {
   static render({
     theme,
     cbgData,
-    yAxisHeightInPixels,
-    yAxisPixelsPerValue,
-    headerHeight,
+    yAxisGlucosePixelsPerValue,
+    yAxisBottomOfGlucose,
     graphStartTimeSeconds,
     pixelsPerSecond,
   }) {
@@ -63,11 +62,9 @@ class GraphCbgSvg {
       const constrainedValue = Math.min(value, MAX_BG_VALUE);
       const deltaTime = time - graphStartTimeSeconds;
       const x = deltaTime * pixelsPerSecond;
-      const y =
-        headerHeight +
-        Math.round(
-          yAxisHeightInPixels - constrainedValue * yAxisPixelsPerValue
-        );
+      const y = Math.round(
+        yAxisBottomOfGlucose - constrainedValue * yAxisGlucosePixelsPerValue
+      );
 
       result.push(
         <Use
