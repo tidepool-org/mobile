@@ -47,7 +47,7 @@ class GraphXAxisGl extends GraphRenderLayerGl {
   }
 
   renderBackground({ scene }) {
-    if (!this.hasRenderedAtLeastOnce) {
+    if (this.isInitialRender) {
       scene.add(this.backgroundMesh);
       this.updateObjectPosition(this.backgroundMesh, {
         x: 0,
@@ -122,8 +122,8 @@ class GraphXAxisGl extends GraphRenderLayerGl {
     }
   }
 
-  render({ scene, graphScalableLayoutInfo, contentOffsetX }) {
-    // console.log(`GraphXAxisGl render`);
+  renderSelf({ scene, graphScalableLayoutInfo, contentOffsetX }) {
+    // console.log(`GraphXAxisGl renderSelf`);
 
     const { markerXCoordinates, markerLabels } = calculateTimeMarkers({
       graphScalableLayoutInfo,
@@ -136,8 +136,6 @@ class GraphXAxisGl extends GraphRenderLayerGl {
       markerXCoordinates,
       markerLabels,
     });
-
-    this.hasRenderedAtLeastOnce = true;
   }
 }
 

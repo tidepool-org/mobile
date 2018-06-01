@@ -24,44 +24,46 @@ class GraphCbgGl extends GraphRenderLayerGl {
     });
   }
 
-  render({ scene, cbgData, graphScalableLayoutInfo, contentOffsetX }) {
-    // console.log(`GraphCbgGl render`);
+  /* eslint-disable class-methods-use-this */
+  hasDataToRender({ cbgData }) {
+    return cbgData && cbgData.length > 0;
+  }
+  /* eslint-enable class-methods-use-this */
 
-    if (!cbgData || cbgData.length === 0) {
+  renderSelf({ scene, graphScalableLayoutInfo, contentOffsetX, cbgData }) {
+    // console.log(`GraphCbgGl renderSelf`);
+
+    if (this.isScrollOrZoomRender) {
+      // No need to render for scroll or zoom since we're only using auto-scrollable objects
       return;
     }
 
     const { pixelsPerSecond } = graphScalableLayoutInfo;
-    const updateExistingMeshes = this.hasRenderedAtLeastOnce;
-    if (!updateExistingMeshes) {
-      this.meshIndexStart = scene.children.length;
-    }
     for (let i = 0; i < cbgData.length; i += 1) {
       const { time, value, isLow, isHigh } = cbgData[i];
       const constrainedValue = Math.min(value, MAX_BG_VALUE);
-      const deltaTime = time - this.graphStartTimeSeconds;
-      const x = deltaTime * pixelsPerSecond - contentOffsetX;
+      const timeOffset = time - this.graphStartTimeSeconds;
+      const x = timeOffset;
       const y =
         this.graphFixedLayoutInfo.yAxisBottomOfGlucose -
         constrainedValue * this.graphFixedLayoutInfo.yAxisGlucosePixelsPerValue;
 
-      let mesh;
-      if (updateExistingMeshes) {
-        mesh = scene.children[this.meshIndexStart + i];
-      } else {
-        let material = this.normalMaterial;
-        if (isLow) {
-          material = this.lowMaterial;
-        } else if (isHigh) {
-          material = this.highMaterial;
-        }
-        mesh = new THREE.Mesh(this.circleGeometry, material);
-        scene.add(mesh);
+      let material = this.normalMaterial;
+      if (isLow) {
+        material = this.lowMaterial;
+      } else if (isHigh) {
+        material = this.highMaterial;
       }
-      this.updateObjectPosition(mesh, { x, y, z: this.zStart + i * 0.01 });
+      const object = new THREE.Mesh(this.circleGeometry, material);
+      this.addAutoScrollableObjectToScene(scene, object, {
+        x,
+        y,
+        z: this.zStart + i * 0.01,
+        contentOffsetX,
+        pixelsPerSecond,
+        shouldScrollX: true,
+      });
     }
-
-    this.hasRenderedAtLeastOnce = true;
   }
 }
 

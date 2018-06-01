@@ -47,7 +47,9 @@ class GraphYAxisGl extends GraphRenderLayerGl {
       color: this.theme.graphYAxisLabelStyle.color,
       align: "right",
     });
-    const y = Math.round(yAxisBottomOfGlucose - value * yAxisGlucosePixelsPerValue);
+    const y = Math.round(
+      yAxisBottomOfGlucose - value * yAxisGlucosePixelsPerValue
+    );
     this.updateObjectPosition(textMesh, {
       x: 0,
       y: y + height / 2,
@@ -63,7 +65,9 @@ class GraphYAxisGl extends GraphRenderLayerGl {
       yAxisBottomOfGlucose,
     } = graphFixedLayoutInfo;
 
-    const y = Math.round(yAxisBottomOfGlucose - value * yAxisGlucosePixelsPerValue);
+    const y = Math.round(
+      yAxisBottomOfGlucose - value * yAxisGlucosePixelsPerValue
+    );
     const line = new THREE.Line(this.lineGeometry, this.lineDashedMaterial);
     line.computeLineDistances();
     this.updateObjectPosition(line, { x: 0, y, z: this.zStart });
@@ -71,14 +75,13 @@ class GraphYAxisGl extends GraphRenderLayerGl {
     scene.add(line);
   }
 
-  render({
+  renderSelf({
     scene,
     graphScalableLayoutInfo,
     yAxisBGBoundaryValues,
     yAxisLabelValues,
   }) {
-    // console.log("GraphYAxisGl: render");
-
+    // console.log(`GraphYAxisGl renderSelf`);
     const { graphFixedLayoutInfo } = graphScalableLayoutInfo;
 
     // Hide existing lines
@@ -87,6 +90,7 @@ class GraphYAxisGl extends GraphRenderLayerGl {
       value.visible = false;
     });
     /* eslint-enable no-param-reassign */
+
     // Add new lines and/or show existing lines
     yAxisBGBoundaryValues.forEach(value => {
       if (this.yAxisBGBoundaryValueLines[value]) {

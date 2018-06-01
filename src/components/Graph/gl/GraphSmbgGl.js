@@ -44,87 +44,81 @@ class GraphSmbgGl extends GraphRenderLayerGl {
     });
   }
 
-  render({ scene, smbgData, graphScalableLayoutInfo, contentOffsetX }) {
-    // console.log(`GraphSmbgGl render`);
+  /* eslint-disable class-methods-use-this */
+  hasDataToRender({ smbgData }) {
+    return smbgData && smbgData.length > 0;
+  }
+  /* eslint-enable class-methods-use-this */
 
-    if (!smbgData || smbgData.length === 0) {
+  renderSelf({ scene, graphScalableLayoutInfo, contentOffsetX, smbgData }) {
+    // console.log(`GraphSmbgGl renderSelf`);
+
+    if (this.isScrollOrZoomRender) {
+      // No need to render for scroll or zoom since we're only using auto-scrollable objects
       return;
     }
 
     const { pixelsPerSecond } = graphScalableLayoutInfo;
-    const updateExistingMeshes = this.hasRenderedAtLeastOnce;
-    if (!updateExistingMeshes) {
-      this.meshIndexStart = scene.children.length;
-    }
     for (let i = 0; i < smbgData.length; i += 1) {
       const { time, value, isLow, isHigh } = smbgData[i];
 
       // Add circle
       const constrainedValue = Math.min(value, MAX_BG_VALUE);
-      const deltaTime = time - this.graphStartTimeSeconds;
-      const x = deltaTime * pixelsPerSecond - contentOffsetX;
+      const timeOffset = time - this.graphStartTimeSeconds;
+      const x = timeOffset;
       const y =
         this.graphFixedLayoutInfo.yAxisBottomOfGlucose -
         constrainedValue * this.graphFixedLayoutInfo.yAxisGlucosePixelsPerValue;
 
-      let mesh;
       let color = this.theme.graphBgNormalColor;
-      if (updateExistingMeshes) {
-        mesh = scene.children[this.meshIndexStart + i * 3];
-      } else {
-        let material = this.normalMaterial;
-        if (isLow) {
-          material = this.lowMaterial;
-          color = this.theme.graphBgLowColor;
-        } else if (isHigh) {
-          material = this.highMaterial;
-          color = this.theme.graphBgHighColor;
-        }
-        mesh = new THREE.Mesh(this.circleGeometry, material);
-        scene.add(mesh);
+      let material = this.normalMaterial;
+      if (isLow) {
+        material = this.lowMaterial;
+        color = this.theme.graphBgLowColor;
+      } else if (isHigh) {
+        material = this.highMaterial;
+        color = this.theme.graphBgHighColor;
       }
-      this.updateObjectPosition(mesh, {
+      let object = new THREE.Mesh(this.circleGeometry, material);
+      this.addAutoScrollableObjectToScene(scene, object, {
         x,
         y,
         z: this.zStart + (i * 3 + 0) * 0.01,
+        contentOffsetX,
+        pixelsPerSecond,
+        shouldScrollX: true,
       });
 
       // Add text background
-      if (updateExistingMeshes) {
-        mesh = scene.children[this.meshIndexStart + i * 3 + 1];
-      } else {
-        mesh = new THREE.Mesh(
-          this.textBackgroundGeometry,
-          this.textBackgroundMaterial
-        );
-        scene.add(mesh);
-      }
-      this.updateObjectPosition(mesh, {
+      object = new THREE.Mesh(
+        this.textBackgroundGeometry,
+        this.textBackgroundMaterial
+      );
+      this.addAutoScrollableObjectToScene(scene, object, {
         x,
         y: y + 24,
         z: this.zStart + (i * 3 + 1) * 0.01,
+        contentOffsetX,
+        pixelsPerSecond,
+        shouldScrollX: true,
       });
 
       // Add text
-      if (updateExistingMeshes) {
-        mesh = scene.children[this.meshIndexStart + i * 3 + 2];
-      } else {
-        const text = value.toString();
-        mesh = GraphTextMeshFactory.makeTextMesh({
-          text,
-          width: this.textWidth,
-          color,
-        });
-        scene.add(mesh);
-      }
-      this.updateObjectPosition(mesh, {
+      const text = value.toString();
+      object = GraphTextMeshFactory.makeTextMesh({
+        text,
+        width: this.textWidth,
+        color,
+      });
+      this.addAutoScrollableObjectToScene(scene, object, {
         x: x - this.textWidth / 2,
         y: y + this.textHeight + 10,
         z: this.zStart + (i * 3 + 2) * 0.01,
+        contentOffsetX,
+        pixelsPerSecond,
+        shouldScrollX: true,
       });
     }
-
-    this.hasRenderedAtLeastOnce = true;
   }
 }
 

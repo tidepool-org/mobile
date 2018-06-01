@@ -34,8 +34,13 @@ class GraphNoteEventGl extends GraphRenderLayerGl {
     });
   }
 
-  render({ scene, graphScalableLayoutInfo, contentOffsetX }) {
-    // console.log(`GraphNoteEventGl render`);
+  renderSelf({ scene, graphScalableLayoutInfo, contentOffsetX }) {
+    // console.log(`GraphNoteEventGl renderSelf`);
+
+    if (this.isScrollOrZoomRender) {
+      // No need to render for scroll or zoom since we're only using auto-scrollable objects
+      return;
+    }
 
     const {
       eventTimeSeconds,
@@ -44,29 +49,33 @@ class GraphNoteEventGl extends GraphRenderLayerGl {
     } = graphScalableLayoutInfo;
 
     const timeIntervalSeconds = eventTimeSeconds - graphStartTimeSeconds;
-    const x =
-      Math.round(pixelsPerSecond * timeIntervalSeconds) - contentOffsetX;
+    const x = timeIntervalSeconds;
     const y = 0;
 
     // Add tick line to scene
-    if (!this.tickLineMesh) {
-      this.tickLineMesh = new THREE.Line(
-        this.tickLineGeometry,
-        this.tickLineMaterial
-      );
-      scene.add(this.tickLineMesh);
-    }
-    this.updateObjectPosition(this.tickLineMesh, { x, y, z: this.zStart });
+    let object = new THREE.Line(this.tickLineGeometry, this.tickLineMaterial);
+    this.addAutoScrollableObjectToScene(scene, object, {
+      x,
+      y,
+      z: this.zStart,
+      contentOffsetX,
+      pixelsPerSecond,
+      shouldScrollX: true,
+    });
 
     // Add tick triangle to scene
-    if (!this.tickTriangleMesh) {
-      this.tickTriangleMesh = new THREE.Mesh(
-        this.tickTriangleGeometry,
-        this.tickTriangleMaterial
-      );
-      scene.add(this.tickTriangleMesh);
-    }
-    this.updateObjectPosition(this.tickTriangleMesh, { x, y, z: this.zStart });
+    object = new THREE.Mesh(
+      this.tickTriangleGeometry,
+      this.tickTriangleMaterial
+    );
+    this.addAutoScrollableObjectToScene(scene, object, {
+      x,
+      y,
+      z: this.zStart,
+      contentOffsetX,
+      pixelsPerSecond,
+      shouldScrollX: true,
+    });
   }
 }
 
