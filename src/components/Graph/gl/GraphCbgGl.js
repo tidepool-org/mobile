@@ -38,31 +38,38 @@ class GraphCbgGl extends GraphRenderLayerGl {
       return;
     }
 
-    const { pixelsPerSecond } = graphScalableLayoutInfo;
+    const {
+      pixelsPerSecond,
+      graphStartTimeSeconds,
+      graphEndTimeSeconds,
+    } = graphScalableLayoutInfo;
     for (let i = 0; i < cbgData.length; i += 1) {
       const { time, value, isLow, isHigh } = cbgData[i];
-      const constrainedValue = Math.min(value, MAX_BG_VALUE);
-      const timeOffset = time - this.graphStartTimeSeconds;
-      const x = timeOffset;
-      const y =
-        this.graphFixedLayoutInfo.yAxisBottomOfGlucose -
-        constrainedValue * this.graphFixedLayoutInfo.yAxisGlucosePixelsPerValue;
+      if (time >= graphStartTimeSeconds && time <= graphEndTimeSeconds) {
+        const constrainedValue = Math.min(value, MAX_BG_VALUE);
+        const timeOffset = time - this.graphStartTimeSeconds;
+        const x = timeOffset;
+        const y =
+          this.graphFixedLayoutInfo.yAxisBottomOfGlucose -
+          constrainedValue *
+            this.graphFixedLayoutInfo.yAxisGlucosePixelsPerValue;
 
-      let material = this.normalMaterial;
-      if (isLow) {
-        material = this.lowMaterial;
-      } else if (isHigh) {
-        material = this.highMaterial;
+        let material = this.normalMaterial;
+        if (isLow) {
+          material = this.lowMaterial;
+        } else if (isHigh) {
+          material = this.highMaterial;
+        }
+        const object = new THREE.Mesh(this.circleGeometry, material);
+        this.addAutoScrollableObjectToScene(scene, object, {
+          x,
+          y,
+          z: this.zStart + i * 0.01,
+          contentOffsetX,
+          pixelsPerSecond,
+          shouldScrollX: true,
+        });
       }
-      const object = new THREE.Mesh(this.circleGeometry, material);
-      this.addAutoScrollableObjectToScene(scene, object, {
-        x,
-        y,
-        z: this.zStart + i * 0.01,
-        contentOffsetX,
-        pixelsPerSecond,
-        shouldScrollX: true,
-      });
     }
   }
 }
