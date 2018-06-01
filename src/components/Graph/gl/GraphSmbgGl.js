@@ -68,7 +68,7 @@ class GraphSmbgGl extends GraphRenderLayerGl {
       if (time >= graphStartTimeSeconds && time <= graphEndTimeSeconds) {
         // Add circle
         const constrainedValue = Math.min(value, MAX_BG_VALUE);
-        const timeOffset = time - this.graphStartTimeSeconds;
+        const timeOffset = time - graphStartTimeSeconds;
         const x = timeOffset;
         const y =
           this.graphFixedLayoutInfo.yAxisBottomOfGlucose -

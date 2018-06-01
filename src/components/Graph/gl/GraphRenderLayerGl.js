@@ -10,7 +10,6 @@ class GraphRenderLayerGl {
   }) {
     this.theme = theme;
     this.graphFixedLayoutInfo = graphFixedLayoutInfo;
-    this.graphStartTimeSeconds = graphStartTimeSeconds;
     this.zStart = zStart;
     this.zEnd = zEnd;
     this.scrollableObjectsStartIndex = undefined;

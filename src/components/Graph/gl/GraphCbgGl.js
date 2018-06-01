@@ -47,7 +47,7 @@ class GraphCbgGl extends GraphRenderLayerGl {
       const { time, value, isLow, isHigh } = cbgData[i];
       if (time >= graphStartTimeSeconds && time <= graphEndTimeSeconds) {
         const constrainedValue = Math.min(value, MAX_BG_VALUE);
-        const timeOffset = time - this.graphStartTimeSeconds;
+        const timeOffset = time - graphStartTimeSeconds;
         const x = timeOffset;
         const y =
           this.graphFixedLayoutInfo.yAxisBottomOfGlucose -

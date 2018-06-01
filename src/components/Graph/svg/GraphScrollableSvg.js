@@ -18,6 +18,7 @@ class GraphScrollableSvg extends PureComponent {
       graphScalableLayoutInfo: {
         eventTimeSeconds,
         graphStartTimeSeconds,
+        graphEndTimeSeconds,
         pixelsPerSecond,
         scaledContentWidth,
       },
@@ -46,6 +47,7 @@ class GraphScrollableSvg extends PureComponent {
     const noteSvgElements = GraphNoteEventSvg.render({
       eventTimeSeconds,
       graphStartTimeSeconds,
+      graphEndTimeSeconds,
       pixelsPerSecond,
       height,
     });
@@ -58,6 +60,7 @@ class GraphScrollableSvg extends PureComponent {
           yAxisGlucosePixelsPerValue,
           yAxisBottomOfGlucose,
           graphStartTimeSeconds,
+          graphEndTimeSeconds,
           pixelsPerSecond,
         })
       : null;
@@ -69,6 +72,7 @@ class GraphScrollableSvg extends PureComponent {
           yAxisGlucosePixelsPerValue,
           yAxisBottomOfGlucose,
           graphStartTimeSeconds,
+          graphEndTimeSeconds,
           pixelsPerSecond,
         })
       : null;
