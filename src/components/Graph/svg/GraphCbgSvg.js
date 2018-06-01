@@ -12,6 +12,7 @@ class GraphCbgSvg {
     yAxisGlucosePixelsPerValue,
     yAxisBottomOfGlucose,
     graphStartTimeSeconds,
+    graphEndTimeSeconds,
     pixelsPerSecond,
   }) {
     // console.log(`render`);
@@ -53,29 +54,31 @@ class GraphCbgSvg {
 
     for (let i = 0; i < cbgData.length; i += 1) {
       const { time, value, isLow, isHigh } = cbgData[i];
-      let symbol = "#normal";
-      if (isLow) {
-        symbol = "#low";
-      } else if (isHigh) {
-        symbol = "#high";
-      }
-      const constrainedValue = Math.min(value, MAX_BG_VALUE);
-      const deltaTime = time - graphStartTimeSeconds;
-      const x = deltaTime * pixelsPerSecond;
-      const y = Math.round(
-        yAxisBottomOfGlucose - constrainedValue * yAxisGlucosePixelsPerValue
-      );
+      if (time >= graphStartTimeSeconds && time <= graphEndTimeSeconds) {
+        let symbol = "#normal";
+        if (isLow) {
+          symbol = "#low";
+        } else if (isHigh) {
+          symbol = "#high";
+        }
+        const constrainedValue = Math.min(value, MAX_BG_VALUE);
+        const timeOffset = time - graphStartTimeSeconds;
+        const x = timeOffset * pixelsPerSecond;
+        const y = Math.round(
+          yAxisBottomOfGlucose - constrainedValue * yAxisGlucosePixelsPerValue
+        );
 
-      result.push(
-        <Use
-          key={result.length + 1}
-          href={symbol}
-          x={x}
-          y={y}
-          width="7"
-          height="7"
-        />
-      );
+        result.push(
+          <Use
+            key={result.length + 1}
+            href={symbol}
+            x={x}
+            y={y}
+            width="7"
+            height="7"
+          />
+        );
+      }
     }
 
     return result;
