@@ -18,6 +18,7 @@ class GraphScalableLayoutInfo {
     this.eventTimeSeconds = this.eventTime.getTime() / 1000;
     this.graphStartTime = subSeconds(eventTime, timeIntervalSeconds / 2);
     this.graphStartTimeSeconds = this.graphStartTime.getTime() / 1000;
+    this.graphEndTimeSeconds = this.graphStartTimeSeconds + timeIntervalSeconds;
     this.timeIntervalSeconds = timeIntervalSeconds;
     this.graphFixedLayoutInfo = graphFixedLayoutInfo;
 

@@ -58,66 +58,72 @@ class GraphSmbgGl extends GraphRenderLayerGl {
       return;
     }
 
-    const { pixelsPerSecond } = graphScalableLayoutInfo;
+    const {
+      pixelsPerSecond,
+      graphStartTimeSeconds,
+      graphEndTimeSeconds,
+    } = graphScalableLayoutInfo;
     for (let i = 0; i < smbgData.length; i += 1) {
       const { time, value, isLow, isHigh } = smbgData[i];
+      if (time >= graphStartTimeSeconds && time <= graphEndTimeSeconds) {
+        // Add circle
+        const constrainedValue = Math.min(value, MAX_BG_VALUE);
+        const timeOffset = time - this.graphStartTimeSeconds;
+        const x = timeOffset;
+        const y =
+          this.graphFixedLayoutInfo.yAxisBottomOfGlucose -
+          constrainedValue *
+            this.graphFixedLayoutInfo.yAxisGlucosePixelsPerValue;
 
-      // Add circle
-      const constrainedValue = Math.min(value, MAX_BG_VALUE);
-      const timeOffset = time - this.graphStartTimeSeconds;
-      const x = timeOffset;
-      const y =
-        this.graphFixedLayoutInfo.yAxisBottomOfGlucose -
-        constrainedValue * this.graphFixedLayoutInfo.yAxisGlucosePixelsPerValue;
+        let color = this.theme.graphBgNormalColor;
+        let material = this.normalMaterial;
+        if (isLow) {
+          material = this.lowMaterial;
+          color = this.theme.graphBgLowColor;
+        } else if (isHigh) {
+          material = this.highMaterial;
+          color = this.theme.graphBgHighColor;
+        }
+        let object = new THREE.Mesh(this.circleGeometry, material);
+        this.addAutoScrollableObjectToScene(scene, object, {
+          x,
+          y,
+          z: this.zStart + (i * 3 + 0) * 0.01,
+          contentOffsetX,
+          pixelsPerSecond,
+          shouldScrollX: true,
+        });
 
-      let color = this.theme.graphBgNormalColor;
-      let material = this.normalMaterial;
-      if (isLow) {
-        material = this.lowMaterial;
-        color = this.theme.graphBgLowColor;
-      } else if (isHigh) {
-        material = this.highMaterial;
-        color = this.theme.graphBgHighColor;
+        // Add text background
+        object = new THREE.Mesh(
+          this.textBackgroundGeometry,
+          this.textBackgroundMaterial
+        );
+        this.addAutoScrollableObjectToScene(scene, object, {
+          x,
+          y: y + 24,
+          z: this.zStart + (i * 3 + 1) * 0.01,
+          contentOffsetX,
+          pixelsPerSecond,
+          shouldScrollX: true,
+        });
+
+        // Add text
+        const text = value.toString();
+        object = GraphTextMeshFactory.makeTextMesh({
+          text,
+          width: this.textWidth,
+          color,
+        });
+        this.addAutoScrollableObjectToScene(scene, object, {
+          x: x - this.textWidth / 2,
+          y: y + this.textHeight + 10,
+          z: this.zStart + (i * 3 + 2) * 0.01,
+          contentOffsetX,
+          pixelsPerSecond,
+          shouldScrollX: true,
+        });
       }
-      let object = new THREE.Mesh(this.circleGeometry, material);
-      this.addAutoScrollableObjectToScene(scene, object, {
-        x,
-        y,
-        z: this.zStart + (i * 3 + 0) * 0.01,
-        contentOffsetX,
-        pixelsPerSecond,
-        shouldScrollX: true,
-      });
-
-      // Add text background
-      object = new THREE.Mesh(
-        this.textBackgroundGeometry,
-        this.textBackgroundMaterial
-      );
-      this.addAutoScrollableObjectToScene(scene, object, {
-        x,
-        y: y + 24,
-        z: this.zStart + (i * 3 + 1) * 0.01,
-        contentOffsetX,
-        pixelsPerSecond,
-        shouldScrollX: true,
-      });
-
-      // Add text
-      const text = value.toString();
-      object = GraphTextMeshFactory.makeTextMesh({
-        text,
-        width: this.textWidth,
-        color,
-      });
-      this.addAutoScrollableObjectToScene(scene, object, {
-        x: x - this.textWidth / 2,
-        y: y + this.textHeight + 10,
-        z: this.zStart + (i * 3 + 2) * 0.01,
-        contentOffsetX,
-        pixelsPerSecond,
-        shouldScrollX: true,
-      });
     }
   }
 }
