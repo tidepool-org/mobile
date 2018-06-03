@@ -43,15 +43,6 @@ class NotesListItem extends PureComponent {
     );
   }
 
-  static renderSeparator() {
-    return (
-      <LinearGradient
-        colors={["#e4e4e5", "#ededee", "#f7f7f8"]}
-        style={{ height: 10 }}
-      />
-    );
-  }
-
   constructor(props) {
     super(props);
 
@@ -172,6 +163,15 @@ class NotesListItem extends PureComponent {
   shouldRenderUserLabelSection() {
     const { note } = this.props;
     return note.userId !== note.groupId && note.userFullName;
+  }
+
+  static renderSeparator() {
+    return (
+      <LinearGradient
+        colors={["#e4e4e5", "#ededee", "#f7f7f8"]}
+        style={{ height: 10 }}
+      />
+    );
   }
 
   renderDeleteButton() {

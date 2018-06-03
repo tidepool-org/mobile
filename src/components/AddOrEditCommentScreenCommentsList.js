@@ -10,17 +10,6 @@ import { CommentPropType } from "../prop-types/comment";
 import { UserPropType } from "../prop-types/user";
 
 class AddOrEditCommentScreenCommentsList extends PureComponent {
-  static renderSeparator() {
-    return (
-      <glamorous.View
-        marginTop={7}
-        marginBottom={7}
-        height={StyleSheet.hairlineWidth}
-        backgroundColor="#CED0CE"
-      />
-    );
-  }
-
   onPressSave = ({ messageText, timestampAddComment }) => {
     this.props.onPressSave({ messageText, timestampAddComment });
   };
@@ -32,6 +21,17 @@ class AddOrEditCommentScreenCommentsList extends PureComponent {
   onEditableCommentLayout = event => {
     this.props.onEditableCommentLayout(event);
   };
+
+  static renderSeparator() {
+    return (
+      <glamorous.View
+        marginTop={7}
+        marginBottom={7}
+        height={StyleSheet.hairlineWidth}
+        backgroundColor="#CED0CE"
+      />
+    );
+  }
 
   renderEditableComment({ comment, timestampAddComment }) {
     const { theme, currentUser } = this.props;
@@ -72,7 +72,11 @@ class AddOrEditCommentScreenCommentsList extends PureComponent {
   }
 
   renderComments() {
-    const { commentsFetchData, commentsFetchData: { comments }, timestampAddComment } = this.props;
+    const {
+      commentsFetchData,
+      commentsFetchData: { comments },
+      timestampAddComment,
+    } = this.props;
 
     const renderedComments = comments.map(comment => {
       // Don't render the comment that has same id as the note
@@ -91,7 +95,9 @@ class AddOrEditCommentScreenCommentsList extends PureComponent {
 
     // If no comment was provided to edit, then we're adding a comment, so append an editable comment to end of the rendered comments
     if (!commentsFetchData.errorMessage && !this.props.comment) {
-      renderedComments.push(this.renderEditableComment({ comment: null, timestampAddComment }));
+      renderedComments.push(
+        this.renderEditableComment({ comment: null, timestampAddComment })
+      );
     }
 
     return renderedComments;

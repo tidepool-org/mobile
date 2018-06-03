@@ -5,6 +5,10 @@ import glamorous, { withTheme } from "glamorous-native";
 import { ThemePropType } from "../../prop-types/theme";
 
 class GraphNoData extends PureComponent {
+  onPressHowToUpload = () => {
+    this.props.navigateHowToUpload();
+  };
+
   static renderGraphNoDataViews({
     theme,
     graphFixedLayoutInfo,
@@ -39,10 +43,6 @@ class GraphNoData extends PureComponent {
       </glamorous.TouchableOpacity>,
     ];
   }
-
-  onPressHowToUpload = () => {
-    this.props.navigateHowToUpload();
-  };
 
   render() {
     // console.log("GraphNoData: render");

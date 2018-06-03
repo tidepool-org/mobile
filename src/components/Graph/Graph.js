@@ -14,40 +14,6 @@ import GraphScrollable from "./GraphScrollable";
 import GraphZoomable from "./GraphZoomable";
 
 class Graph extends PureComponent {
-  static renderLoadingIndicator() {
-    return (
-      <glamorous.View
-        style={{ ...StyleSheet.absoluteFillObject }}
-        justifyContent="center"
-        alignItems="center"
-        pointerEvents="none"
-      >
-        <glamorous.Image
-          width={248}
-          height={155}
-          source={require("../../../assets/images/jump-jump-jump-jump.gif")}
-        />
-      </glamorous.View>
-    );
-  }
-
-  static renderNoData({ navigateHowToUpload, graphFixedLayoutInfo }) {
-    return (
-      <glamorous.View
-        position="absolute"
-        pointerEvents="box-none"
-        top={graphFixedLayoutInfo.headerHeight}
-        height={graphFixedLayoutInfo.graphLayerHeight}
-        width={graphFixedLayoutInfo.width}
-      >
-        <GraphNoData
-          graphFixedLayoutInfo={graphFixedLayoutInfo}
-          navigateHowToUpload={navigateHowToUpload}
-        />
-      </glamorous.View>
-    );
-  }
-
   constructor(props) {
     super(props);
 
@@ -117,6 +83,40 @@ class Graph extends PureComponent {
       this.props.onZoomEnd();
     }
   };
+
+  static renderNoData({ navigateHowToUpload, graphFixedLayoutInfo }) {
+    return (
+      <glamorous.View
+        position="absolute"
+        pointerEvents="box-none"
+        top={graphFixedLayoutInfo.headerHeight}
+        height={graphFixedLayoutInfo.graphLayerHeight}
+        width={graphFixedLayoutInfo.width}
+      >
+        <GraphNoData
+          graphFixedLayoutInfo={graphFixedLayoutInfo}
+          navigateHowToUpload={navigateHowToUpload}
+        />
+      </glamorous.View>
+    );
+  }
+
+  static renderLoadingIndicator() {
+    return (
+      <glamorous.View
+        style={{ ...StyleSheet.absoluteFillObject }}
+        justifyContent="center"
+        alignItems="center"
+        pointerEvents="none"
+      >
+        <glamorous.Image
+          width={248}
+          height={155}
+          source={require("../../../assets/images/jump-jump-jump-jump.gif")}
+        />
+      </glamorous.View>
+    );
+  }
 
   renderFixedBackgroundSvg() {
     // console.log(`renderFixedBackgroundSvg`);
