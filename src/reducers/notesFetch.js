@@ -32,7 +32,9 @@ function notesFetch(
       break;
     }
     case NOTES_FETCH_DID_START: {
-      const { profile: { userId } } = action.payload;
+      const {
+        profile: { userId },
+      } = action.payload;
       const { notesFetchData } = state;
       notesFetchData.didStart({ userId });
       nextState = { ...notesFetchData, notesFetchData };
@@ -56,7 +58,7 @@ function notesFetch(
       const { profile, note } = action.payload;
       const { notesFetchData } = state;
       notesFetchData.addNote({ profile, note });
-      nextState = { ...state, notesFetchData };
+      nextState = { ...notesFetchData, notesFetchData };
       break;
     }
     case NOTES_FETCH_UPDATE_NOTE: {
