@@ -146,14 +146,14 @@ export default class GraphData {
   }
 
   getSuppressedBasalRate(item) {
-    let suppressedRate;
+    let suppressedRate = null;
 
     if (item.deliveryType === "temp") {
       const suppressedBasalItem = item.suppressed;
       if (suppressedBasalItem) {
         suppressedRate = this.getScheduledSuppressedRate(suppressedBasalItem);
       }
-      if (suppressedRate === undefined) {
+      if (suppressedRate === null) {
         // console.log(
         //   `getSuppressedBasalRate: No suppressed rate in temp basal!, item: ${JSON.stringify(
         //     item

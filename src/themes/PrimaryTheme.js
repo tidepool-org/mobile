@@ -172,6 +172,8 @@ const PrimaryTheme = {
   graphSmbgLabelStyle: {
     ...FontStyles.smallRegularFont,
   },
+  graphBasalRectColor: "#c5e5f1#",
+  graphBasalLineColor: "#7aceef",
 };
 
 export default PrimaryTheme;

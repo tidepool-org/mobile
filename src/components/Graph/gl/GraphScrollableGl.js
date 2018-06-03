@@ -10,6 +10,7 @@ import GraphXAxisGl from "./GraphXAxisGl";
 import GraphNoteEventGl from "./GraphNoteEventGl";
 import GraphCbgGl from "./GraphCbgGl";
 import GraphSmbgGl from "./GraphSmbgGl";
+import GraphBasalGl from "./GraphBasalGl";
 import { convertHexColorStringToInt } from "../helpers";
 
 const { createRenderer } = ExpoTHREE;
@@ -36,17 +37,22 @@ class GraphScrollableGl extends PureComponent {
       zStart: 200,
       zEnd: 299,
     });
-    const graphNoteEventGl = new GraphNoteEventGl({
+    const graphCbgGl = new GraphCbgGl({
       ...graphLayerCommonProps,
       zStart: 300,
       zEnd: 399,
     });
-    const graphCbgGl = new GraphCbgGl({
+    const graphSmbgGl = new GraphSmbgGl({
       ...graphLayerCommonProps,
       zStart: 400,
-      zEnd: 599,
+      zEnd: 499,
     });
-    const graphSmbgGl = new GraphSmbgGl({
+    const graphBasalGl = new GraphBasalGl({
+      ...graphLayerCommonProps,
+      zStart: 300,
+      zEnd: 399,
+    });
+    const graphNoteEventGl = new GraphNoteEventGl({
       ...graphLayerCommonProps,
       zStart: 500,
       zEnd: 599,
@@ -54,9 +60,10 @@ class GraphScrollableGl extends PureComponent {
     this.graphRenderLayers = [
       graphYAxisGl,
       graphXAxisGl,
-      graphNoteEventGl,
       graphCbgGl,
       graphSmbgGl,
+      graphBasalGl,
+      graphNoteEventGl,
     ];
 
     this.contentOffsetX = 0;

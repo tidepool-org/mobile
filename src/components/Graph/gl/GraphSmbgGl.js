@@ -116,12 +116,13 @@ class GraphSmbgGl extends GraphRenderLayerGl {
           color,
         });
         this.addAutoScrollableObjectToScene(scene, object, {
-          x: x - this.textWidth / 2,
+          x,
           y: y + this.textHeight + 10,
           z: this.zStart + (i * 3 + 2) * 0.01,
           contentOffsetX,
           pixelsPerSecond,
           shouldScrollX: true,
+          xFinalPixelAdjust: -this.textWidth * this.pixelRatio / 2,
         });
       }
     }
