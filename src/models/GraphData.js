@@ -1,3 +1,5 @@
+import parse from "date-fns/parse";
+
 // TODO: Currently GraphData is responsible for too much. It processes response data and holds the
 // processed / partitioned data. The discrete graph data types (cbg, smbg, basal, etc) are kind of
 // buried as anonymous objects instead of classes. Should refactor to have those be discrete
@@ -78,7 +80,7 @@ export default class GraphData {
   }
 
   transformCbgResponseDataItem(item) {
-    const time = new Date(item.time).getTime() / 1000;
+    const time = parse(item.time).getTime() / 1000;
     const glucoseConversionToMgDl = 18.0;
     const value = Math.round(item.value * glucoseConversionToMgDl);
     const isLow = value < this.lowBGBoundary;
@@ -93,7 +95,7 @@ export default class GraphData {
   }
 
   transformSmbgResponseDataItem(item) {
-    const time = new Date(item.time).getTime() / 1000;
+    const time = parse(item.time).getTime() / 1000;
     const glucoseConversionToMgDl = 18.0;
     const value = Math.round(item.value * glucoseConversionToMgDl);
     const isLow = value < this.lowBGBoundary;
@@ -109,7 +111,7 @@ export default class GraphData {
 
   transformBasalResponseDataItem(item) {
     let shouldAddItem = true;
-    const time = new Date(item.time).getTime() / 1000;
+    const time = parse(item.time).getTime() / 1000;
     const { rate, duration, deliveryType } = item;
     const suppressedRate = this.getSuppressedBasalRate(item);
     const transformedItem = {
@@ -220,9 +222,9 @@ export default class GraphData {
       // console.log(
       //   `data items filtered by time interval: ${processedData.length}`
       // );
-      // const firstItemTime = new Date(data[0].time * 1000);
+      // const firstItemTime = parse(data[0].time * 1000);
       // console.log(`first item time: ${firstItemTime}`);
-      // const lastItemTime = new Date(data[processedData.length - 1].time * 1000);
+      // const lastItemTime = parse(data[processedData.length - 1].time * 1000);
       // console.log(`last item time: ${lastItemTime}`);
       // const dataTimeSpanSeconds =
       //   lastItemTime.getTime() / 1000 - firstItemTime.getTime() / 1000;
