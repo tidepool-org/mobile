@@ -17,12 +17,12 @@
     "eslint-plugin-import": "2.12.0",
     "eslint-plugin-jsx-a11y": "6.0.3",
     "eslint-plugin-prettier": "2.6.0",
-    "eslint-plugin-react": "7.8.2",
+    "eslint-plugin-react": "7.9.0",
     "eslint-plugin-react-native": "3.2.1",
     "faker": "4.1.0",
     "flow-bin": "0.73.0",
     "jest-expo": "^27.0.1",
-    "prettier": "1.12.1",
+    "prettier": "1.13.4",
     "prettier-eslint": "8.8.1",
     "prettier-eslint-cli": "4.7.1",
     "react-devtools": "3.2.3",
@@ -54,7 +54,9 @@
   },
   "config": {
     "react-native-storybook-loader": {
-      "searchDir": ["./__stories__"],
+      "searchDir": [
+        "./__stories__"
+      ],
       "pattern": "**/*.story.js",
       "outputFile": "./storybook/storyLoader.js"
     }
@@ -67,15 +69,14 @@
     "glamorous-native": "1.4.0",
     "prop-types": "15.6.1",
     "react": "16.3.1",
-    "react-native":
-      "https://github.com/expo/react-native/archive/sdk-27.0.2.tar.gz",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-27.0.2.tar.gz",
     "react-native-device-info": "^0.21.5",
     "react-navigation": "2.0.4",
-    "react-navigation-redux-helpers": "1.1.1",
+    "react-navigation-redux-helpers": "1.1.2",
     "react-redux": "5.0.7",
     "redux": "4.0.0",
-    "redux-thunk": "2.2.0",
-    "three": "^0.92.0",
+    "redux-thunk": "2.3.0",
+    "three": "0.92.0",
     "three-bmfont-text": "^2.3.0",
     "twitter-text": "2.0.4",
     "uuid": "3.2.1"

@@ -9,15 +9,6 @@ import glamorous, { withTheme } from "glamorous-native";
 import { ThemePropType } from "../prop-types/theme";
 
 class SearchBar extends PureComponent {
-  static renderSeparator() {
-    return (
-      <glamorous.View
-        height={StyleSheet.hairlineWidth}
-        backgroundColor="#ced0ce"
-      />
-    );
-  }
-
   constructor(props) {
     super(props);
 
@@ -42,6 +33,14 @@ class SearchBar extends PureComponent {
     });
     this.props.onChangeText(searchText);
   };
+  static renderSeparator() {
+    return (
+      <glamorous.View
+        height={StyleSheet.hairlineWidth}
+        backgroundColor="#ced0ce"
+      />
+    );
+  }
 
   renderSearchIcon() {
     const { theme } = this.props;

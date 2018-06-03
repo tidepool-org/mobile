@@ -54,15 +54,15 @@ class GraphBasalGl extends GraphRenderLayerGl {
 
   updateSuppressedLineMaterial() {
     this.suppressedLineMaterial.dashSize =
-      4 * this.pixelRatio / this.graphScalableLayoutInfo.pixelsPerSecond;
+      (4 * this.pixelRatio) / this.graphScalableLayoutInfo.pixelsPerSecond;
     this.suppressedLineMaterial.gapSize =
-      2 * this.pixelRatio / this.graphScalableLayoutInfo.pixelsPerSecond;
+      (2 * this.pixelRatio) / this.graphScalableLayoutInfo.pixelsPerSecond;
   }
 
   renderSuppressedLine() {
     if (this.suppressedLinePath) {
       const points = this.suppressedLinePath.getPoints();
-      const geometry = new THREE.BufferGeometry().setFromPoints(points);
+      const geometry = new THREE.Geometry().setFromPoints(points);
       const { contentOffsetX, pixelsPerSecond } = this;
       const line = new THREE.Line(geometry, this.suppressedLineMaterial);
       this.updateSuppressedLineMaterial();
