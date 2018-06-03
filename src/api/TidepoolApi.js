@@ -1,5 +1,6 @@
 import axios from "axios";
 import uuidv4 from "uuid/v4";
+import parse from "date-fns/parse";
 
 import GraphData from "../../src/models/GraphData";
 
@@ -75,7 +76,7 @@ class TidepoolApi {
       .catch(error => ({
         errorMessage: error.message,
       }));
-      
+
     return { settings, errorMessage };
   }
 
@@ -93,7 +94,7 @@ class TidepoolApi {
 
           const mappedNote = {
             id: responseNote.id,
-            timestamp: new Date(new Date(responseNote.timestamp)),
+            timestamp: parse(responseNote.timestamp),
             messageText: responseNote.messagetext,
             parentMessageId: responseNote.parentmessage,
             userId: responseNote.userid,
@@ -123,7 +124,7 @@ class TidepoolApi {
         const sortedComments = response.comments.map(responseComment => {
           const mappedComment = {
             id: responseComment.id,
-            timestamp: new Date(new Date(responseComment.timestamp)),
+            timestamp: parse(responseComment.timestamp),
             messageText: responseComment.messagetext,
             parentMessageId: responseComment.parentmessage,
             userId: responseComment.userid,
@@ -742,7 +743,7 @@ class TidepoolApi {
             }
         }
     }
-  
+
   */
 }
 
