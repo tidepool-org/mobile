@@ -1,47 +1,104 @@
-import { THREE } from "expo-three";
+import ExpoTHREE, { THREE } from "expo-three";
 
 import GraphRenderLayerGl from "./GraphRenderLayerGl";
 import GraphTextMeshFactory from "./GraphTextMeshFactory";
 import { MAX_BG_VALUE, convertHexColorStringToInt } from "../helpers";
 
+const { createTextureAsync } = ExpoTHREE;
+
+// Support rendering using circle geometry or sprites
+const useSprites = false;
+
 class GraphSmbgGl extends GraphRenderLayerGl {
   constructor(props) {
-    super(props);
-
     // console.log(`GraphSmbgGl ctor`);
 
-    this.circleGeometry = new THREE.CircleBufferGeometry(
-      9 * this.pixelRatio,
-      8 * this.pixelRatio
-    );
-    this.lowMaterial = new THREE.MeshBasicMaterial({
-      color: convertHexColorStringToInt(this.theme.graphBgLowColor),
-    });
-    this.normalMaterial = new THREE.MeshBasicMaterial({
-      color: convertHexColorStringToInt(this.theme.graphBgNormalColor),
-    });
-    this.highMaterial = new THREE.MeshBasicMaterial({
-      color: convertHexColorStringToInt(this.theme.graphBgHighColor),
-    });
+    super(props);
+
+    const radius = 9;
+    if (useSprites) {
+      this.lowSpriteMaterial = new THREE.MeshBasicMaterial({
+        map: GraphSmbgGl.lowSpriteTexture,
+        transparent: true,
+      });
+      this.normalSpriteMaterial = new THREE.MeshBasicMaterial({
+        map: GraphSmbgGl.normalSpriteTexture,
+        transparent: true,
+      });
+      this.highSpriteMaterial = new THREE.MeshBasicMaterial({
+        map: GraphSmbgGl.highSpriteTexture,
+        transparent: true,
+      });
+      this.spriteGeometry = new THREE.PlaneGeometry(
+        radius * 2 * this.pixelRatio,
+        radius * 2 * this.pixelRatio,
+        1,
+        1
+      );
+    } else {
+      this.lowMaterial = new THREE.MeshBasicMaterial({
+        color: convertHexColorStringToInt(this.theme.graphBgLowColor),
+      });
+      this.normalMaterial = new THREE.MeshBasicMaterial({
+        color: convertHexColorStringToInt(this.theme.graphBgNormalColor),
+      });
+      this.highMaterial = new THREE.MeshBasicMaterial({
+        color: convertHexColorStringToInt(this.theme.graphBgHighColor),
+      });
+      this.circleOutlineGeometry = new THREE.CircleBufferGeometry(
+        radius * this.pixelRatio,
+        8 * this.pixelRatio
+      );
+      this.circleGeometry = new THREE.CircleBufferGeometry(
+        (radius - 1) * this.pixelRatio,
+        8 * this.pixelRatio
+      );
+    }
 
     this.textHeight = 12;
     this.textWidth = 22;
     const rectangleShape = new THREE.Shape();
-    rectangleShape.moveTo(-this.textWidth / 2 * this.pixelRatio, 0);
-    rectangleShape.lineTo(this.textWidth / 2 * this.pixelRatio, 0);
+    rectangleShape.moveTo((-this.textWidth / 2) * this.pixelRatio, 0);
+    rectangleShape.lineTo((this.textWidth / 2) * this.pixelRatio, 0);
     rectangleShape.lineTo(
-      this.textWidth / 2 * this.pixelRatio,
+      (this.textWidth / 2) * this.pixelRatio,
       this.textHeight * this.pixelRatio
     );
     rectangleShape.lineTo(
-      -this.textWidth / 2 * this.pixelRatio,
+      (-this.textWidth / 2) * this.pixelRatio,
       this.textHeight * this.pixelRatio
     );
-    rectangleShape.moveTo(-this.textWidth / 2 * this.pixelRatio, 0);
+    rectangleShape.moveTo((-this.textWidth / 2) * this.pixelRatio, 0);
     this.textBackgroundGeometry = new THREE.ShapeGeometry(rectangleShape);
-    this.textBackgroundMaterial = new THREE.MeshBasicMaterial({
+    this.backgroundMaterial = new THREE.MeshBasicMaterial({
       color: convertHexColorStringToInt(this.theme.graphBackgroundColor),
     });
+  }
+
+  static async loadAssets() {
+    if (GraphSmbgGl.assetsAreLoaded) {
+      return;
+    }
+
+    if (useSprites) {
+      GraphSmbgGl.lowSpriteTexture = await createTextureAsync({
+        asset: require("../../../../assets/images/smbg-circle-low.png"),
+      });
+      GraphSmbgGl.lowSpriteTexture.magFilter = THREE.NearestFilter;
+      GraphSmbgGl.lowSpriteTexture.minFilter = THREE.NearestFilter;
+      GraphSmbgGl.normalSpriteTexture = await createTextureAsync({
+        asset: require("../../../../assets/images/smbg-circle-normal.png"),
+      });
+      GraphSmbgGl.normalSpriteTexture.magFilter = THREE.NearestFilter;
+      GraphSmbgGl.normalSpriteTexture.minFilter = THREE.NearestFilter;
+      GraphSmbgGl.highSpriteTexture = await createTextureAsync({
+        asset: require("../../../../assets/images/smbg-circle-high.png"),
+      });
+      GraphSmbgGl.highSpriteTexture.magFilter = THREE.NearestFilter;
+      GraphSmbgGl.highSpriteTexture.minFilter = THREE.NearestFilter;
+    }
+
+    GraphSmbgGl.assetsAreLoaded = true;
   }
 
   /* eslint-disable class-methods-use-this */
@@ -49,6 +106,72 @@ class GraphSmbgGl extends GraphRenderLayerGl {
     return smbgData && smbgData.length > 0;
   }
   /* eslint-enable class-methods-use-this */
+
+  renderSelfUsingCircleGeometry({
+    scene,
+    contentOffsetX,
+    pixelsPerSecond,
+    x,
+    y,
+    z,
+    isLow,
+    isHigh,
+  }) {
+    let material = this.normalMaterial;
+    if (isLow) {
+      material = this.lowMaterial;
+    } else if (isHigh) {
+      material = this.highMaterial;
+    }
+    let object = new THREE.Mesh(
+      this.circleOutlineGeometry,
+      this.backgroundMaterial
+    );
+    this.addAutoScrollableObjectToScene(scene, object, {
+      x,
+      y,
+      z,
+      contentOffsetX,
+      pixelsPerSecond,
+      shouldScrollX: true,
+    });
+    object = new THREE.Mesh(this.circleGeometry, material);
+    this.addAutoScrollableObjectToScene(scene, object, {
+      x,
+      y,
+      z,
+      contentOffsetX,
+      pixelsPerSecond,
+      shouldScrollX: true,
+    });
+  }
+
+  renderSelfUsingSprites({
+    scene,
+    contentOffsetX,
+    pixelsPerSecond,
+    x,
+    y,
+    z,
+    isLow,
+    isHigh,
+  }) {
+    let material = this.normalSpriteMaterial;
+    if (isLow) {
+      material = this.lowSpriteMaterial;
+    } else if (isHigh) {
+      material = this.highSpriteMaterial;
+    }
+    const object = new THREE.Mesh(this.spriteGeometry, material);
+    this.addAutoScrollableObjectToScene(scene, object, {
+      x,
+      y,
+      z,
+      contentOffsetX,
+      pixelsPerSecond,
+      shouldScrollX: true,
+    });
+  }
 
   renderSelf({ scene, graphScalableLayoutInfo, contentOffsetX, smbgData }) {
     // console.log(`GraphSmbgGl renderSelf`);
@@ -74,30 +197,41 @@ class GraphSmbgGl extends GraphRenderLayerGl {
           this.graphFixedLayoutInfo.yAxisBottomOfGlucose -
           constrainedValue *
             this.graphFixedLayoutInfo.yAxisGlucosePixelsPerValue;
-
         let color = this.theme.graphBgNormalColor;
-        let material = this.normalMaterial;
         if (isLow) {
-          material = this.lowMaterial;
           color = this.theme.graphBgLowColor;
         } else if (isHigh) {
-          material = this.highMaterial;
           color = this.theme.graphBgHighColor;
         }
-        let object = new THREE.Mesh(this.circleGeometry, material);
-        this.addAutoScrollableObjectToScene(scene, object, {
-          x,
-          y,
-          z: this.zStart + (i * 3 + 0) * 0.01,
-          contentOffsetX,
-          pixelsPerSecond,
-          shouldScrollX: true,
-        });
 
+        const z = this.zStart + (i * 3 + 0) * 0.01;
+        if (useSprites) {
+          this.renderSelfUsingSprites({
+            scene,
+            contentOffsetX,
+            pixelsPerSecond,
+            x,
+            y,
+            z,
+            isLow,
+            isHigh,
+          });
+        } else {
+          this.renderSelfUsingCircleGeometry({
+            scene,
+            contentOffsetX,
+            pixelsPerSecond,
+            x,
+            y,
+            z,
+            isLow,
+            isHigh,
+          });
+        }
         // Add text background
-        object = new THREE.Mesh(
+        let object = new THREE.Mesh(
           this.textBackgroundGeometry,
-          this.textBackgroundMaterial
+          this.backgroundMaterial
         );
         this.addAutoScrollableObjectToScene(scene, object, {
           x,
@@ -122,7 +256,7 @@ class GraphSmbgGl extends GraphRenderLayerGl {
           contentOffsetX,
           pixelsPerSecond,
           shouldScrollX: true,
-          xFinalPixelAdjust: -this.textWidth * this.pixelRatio / 2,
+          xFinalPixelAdjust: (-this.textWidth * this.pixelRatio) / 2,
         });
       }
     }
