@@ -91,13 +91,13 @@ class GraphXAxisGl extends GraphRenderLayerGl {
     // Add new tick labels to the scene if necessary
     markerLabels.forEach(text => {
       if (!this.tickLabelTextMeshes.get(text)) {
-        const mesh = GraphTextMeshFactory.makeTextMesh({
+        const { textMesh } = GraphTextMeshFactory.makeTextMesh({
           text,
           width: this.tickLabelTextWidth,
           color: convertHexColorStringToInt("#58595b"),
         });
-        this.tickLabelTextMeshes.set(text, mesh);
-        scene.add(mesh);
+        this.tickLabelTextMeshes.set(text, textMesh);
+        scene.add(textMesh);
       }
     });
 
