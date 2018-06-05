@@ -1,6 +1,7 @@
 import ExpoTHREE, { THREE } from "expo-three";
 
 import GraphRenderLayerGl from "./GraphRenderLayerGl";
+import GraphShapeGeometryFactory from "./GraphShapeGeometryFactory";
 import GraphTextMeshFactory from "./GraphTextMeshFactory";
 import { MAX_BG_VALUE, convertHexColorStringToInt } from "../helpers";
 
@@ -55,21 +56,6 @@ class GraphSmbgGl extends GraphRenderLayerGl {
       );
     }
 
-    this.textHeight = 12;
-    this.textWidth = 22;
-    const rectangleShape = new THREE.Shape();
-    rectangleShape.moveTo((-this.textWidth / 2) * this.pixelRatio, 0);
-    rectangleShape.lineTo((this.textWidth / 2) * this.pixelRatio, 0);
-    rectangleShape.lineTo(
-      (this.textWidth / 2) * this.pixelRatio,
-      this.textHeight * this.pixelRatio
-    );
-    rectangleShape.lineTo(
-      (-this.textWidth / 2) * this.pixelRatio,
-      this.textHeight * this.pixelRatio
-    );
-    rectangleShape.moveTo((-this.textWidth / 2) * this.pixelRatio, 0);
-    this.textBackgroundGeometry = new THREE.ShapeGeometry(rectangleShape);
     this.backgroundMaterial = new THREE.MeshBasicMaterial({
       color: convertHexColorStringToInt(this.theme.graphBackgroundColor),
     });
@@ -228,14 +214,35 @@ class GraphSmbgGl extends GraphRenderLayerGl {
             isHigh,
           });
         }
+
+        // Make text mesh
+        const text = value.toString();
+        const {
+          textMesh,
+          measuredWidth,
+          measuredHeight,
+          capHeight,
+        } = GraphTextMeshFactory.makeTextMesh({
+          text,
+          color,
+        });
+
         // Add text background
-        let object = new THREE.Mesh(
-          this.textBackgroundGeometry,
+        const textTopToCircleBottom = 12;
+        const textPadding = 4;
+        const textBackgroundGeometry = GraphShapeGeometryFactory.makeRectangleGeometry(
+          {
+            width: measuredWidth + textPadding,
+            height: capHeight + textPadding,
+          }
+        );
+        const object = new THREE.Mesh(
+          textBackgroundGeometry,
           this.backgroundMaterial
         );
         this.addAutoScrollableObjectToScene(scene, object, {
           x,
-          y: y + 24,
+          y: y + capHeight / 2 + textTopToCircleBottom,
           z: this.zStart + (i * 3 + 1) * 0.01,
           contentOffsetX,
           pixelsPerSecond,
@@ -243,20 +250,14 @@ class GraphSmbgGl extends GraphRenderLayerGl {
         });
 
         // Add text
-        const text = value.toString();
-        object = GraphTextMeshFactory.makeTextMesh({
-          text,
-          width: this.textWidth,
-          color,
-        });
-        this.addAutoScrollableObjectToScene(scene, object, {
+        this.addAutoScrollableObjectToScene(scene, textMesh, {
           x,
-          y: y + this.textHeight + 10,
+          y: y + capHeight + textTopToCircleBottom,
           z: this.zStart + (i * 3 + 2) * 0.01,
           contentOffsetX,
           pixelsPerSecond,
           shouldScrollX: true,
-          xFinalPixelAdjust: (-this.textWidth * this.pixelRatio) / 2,
+          xFinalPixelAdjust: (-measuredWidth * this.pixelRatio) / 2,
         });
       }
     }

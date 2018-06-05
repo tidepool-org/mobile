@@ -34,17 +34,26 @@ class GraphTextMeshFactory {
   }
 
   makeTextMesh({ text, width, color, align = "center" }) {
-    const geometry = this.getGeometry({ text, width, align });
+    const {
+      geometry,
+      measuredWidth,
+      measuredHeight,
+      capHeight,
+    } = this.getGeometry({
+      text,
+      width,
+      align,
+    });
     const material = this.getMaterial({ color });
-    const mesh = new THREE.Mesh(geometry, material);
-    mesh.applyMatrix(
+    const textMesh = new THREE.Mesh(geometry, material);
+    textMesh.applyMatrix(
       new THREE.Matrix4().makeScale(
         1 * this.textHeightScale * this.pixelRatioScale,
         -1 * this.textHeightScale * this.pixelRatioScale,
         -1
       )
     );
-    return mesh;
+    return { textMesh, measuredWidth, measuredHeight, capHeight };
   }
 
   async loadAssets() {
@@ -64,12 +73,21 @@ class GraphTextMeshFactory {
       geometry = createGeometry({
         text,
         font: this.bmFont,
-        width: width * this.pixelRatioBase / this.textHeightScale,
+        width: width
+          ? (width * this.pixelRatioBase) / this.textHeightScale
+          : undefined,
         align,
       });
       this.geometryPool.set(key, geometry);
     }
-    return geometry;
+
+    const measuredWidth =
+      (geometry.layout.width / this.pixelRatio) * this.textHeightScale;
+    const measuredHeight =
+      (geometry.layout.height / this.pixelRatio) * this.textHeightScale;
+    const capHeight =
+      (geometry.layout.capHeight / this.pixelRatio) * this.textHeightScale;
+    return { geometry, measuredWidth, measuredHeight, capHeight };
   }
 
   getMaterial({ color }) {
