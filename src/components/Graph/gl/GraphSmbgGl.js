@@ -220,7 +220,6 @@ class GraphSmbgGl extends GraphRenderLayerGl {
         const {
           textMesh,
           measuredWidth,
-          measuredHeight,
           capHeight,
         } = GraphTextMeshFactory.makeTextMesh({
           text,
