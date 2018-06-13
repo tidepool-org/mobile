@@ -6,6 +6,7 @@ import {
   View,
   Text,
   TouchableOpacity,
+  ViewPropTypes,
 } from "react-native";
 
 const styles = StyleSheet.create({
@@ -34,20 +35,28 @@ const styles = StyleSheet.create({
 
 class Button extends PureComponent {
   render() {
-    const { color, onPress, title, disabled } = this.props;
-    const buttonStyles = [styles.button];
-    const textStyles = [styles.text];
+    const {
+      color,
+      onPress,
+      title,
+      disabled,
+      containerStyle,
+      textStyle,
+    } = this.props;
+    const mergedButtonStyles = [styles.button, containerStyle];
+    const mergedTextStyles = [styles.text];
     if (color) {
       if (Platform.OS === "ios") {
-        textStyles.push({ color });
+        mergedTextStyles.push({ color });
       } else {
-        buttonStyles.push({ backgroundColor: color });
+        mergedButtonStyles.push({ backgroundColor: color });
       }
     }
+    mergedTextStyles.push(textStyle);
     const accessibilityTraits = ["button"];
     if (disabled) {
-      buttonStyles.push(styles.buttonDisabled);
-      textStyles.push(styles.textDisabled);
+      mergedButtonStyles.push(styles.buttonDisabled);
+      mergedTextStyles.push(styles.textDisabled);
       accessibilityTraits.push("disabled");
     }
     const formattedTitle =
@@ -62,8 +71,12 @@ class Button extends PureComponent {
         disabled={disabled}
         onPress={onPress}
       >
-        <View style={buttonStyles}>
-          <Text style={textStyles} disabled={disabled} allowFontScaling={false}>
+        <View style={mergedButtonStyles}>
+          <Text
+            style={mergedTextStyles}
+            disabled={disabled}
+            allowFontScaling={false}
+          >
             {formattedTitle}
           </Text>
         </View>
@@ -77,11 +90,15 @@ Button.propTypes = {
   color: PropTypes.string,
   disabled: PropTypes.bool,
   onPress: PropTypes.func.isRequired,
+  containerStyle: ViewPropTypes.style,
+  textStyle: Text.propTypes.style,
 };
 
 Button.defaultProps = {
   color: null,
   disabled: false,
+  containerStyle: null,
+  textStyle: null,
 };
 
 export default Button;

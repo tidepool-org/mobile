@@ -174,6 +174,14 @@ const PrimaryTheme = {
   },
   graphBasalRectColor: "#c5e5f1#",
   graphBasalLineColor: "#7aceef",
+  toolTipContentTextStyle: {
+    color: Colors.blackish,
+    ...FontStyles.mediumSmallSemiboldFont,
+  },
+  toolTipContentButtonTextStyle: {
+    color: Colors.white,
+    ...FontStyles.mediumSmallSemiboldFont,
+  },
 };
 
 export default PrimaryTheme;

@@ -8748,6 +8748,12 @@ react-native-vector-icons@4.5.0:
     prop-types "^15.5.10"
     yargs "^8.0.2"
 
+react-native-walkthrough-tooltip@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/react-native-walkthrough-tooltip/-/react-native-walkthrough-tooltip-0.2.0.tgz#290c14a4faa6e223d99d61b2e4e1bd65ac39daef"
+  dependencies:
+    prop-types "^15.6.1"
+
 react-native-web-maps@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/react-native-web-maps/-/react-native-web-maps-0.1.0.tgz#a5ead1e001376df2a3e3afbe49f057c4356f4315"
