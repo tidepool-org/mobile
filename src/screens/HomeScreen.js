@@ -9,11 +9,11 @@ import HomeScreenHeaderTitleContainer from "../containers/HomeScreenHeaderTitleC
 import HomeScreenHeaderLeftContainer from "../containers/HomeScreenHeaderLeftContainer";
 import HomeScreenHeaderRightContainer from "../containers/HomeScreenHeaderRightContainer";
 import NotesList from "../components/NotesList";
+import Tooltip from "../components/Tooltip";
+import TidepoolUploaderTooltipContent from "../components/Tooltips/TidepoolUploaderTooltipContent";
 import { ProfilePropType } from "../prop-types/profile";
 import { CommentPropType } from "../prop-types/comment";
 import { UserPropType } from "../prop-types/user";
-
-// TODO: notes - we need to handle empty notes list with the "add note" tip
 
 class HomeScreen extends PureComponent {
   static navigationOptions = () => {
@@ -27,11 +27,9 @@ class HomeScreen extends PureComponent {
     };
   };
 
-  constructor(props) {
-    super(props);
-
-    this.theme = PrimaryTheme;
-  }
+  state = {
+    toolTipVisible: false,
+  };
 
   componentDidMount() {
     this.props.notesFetchAsync({
@@ -79,6 +77,17 @@ class HomeScreen extends PureComponent {
     );
   };
 
+  onPressTooltipEmailLink = () => {
+    // TODO: Handle email link
+    this.setState({ toolTipVisible: false });
+  };
+
+  onPressTooltipOk = () => {
+    this.setState({ toolTipVisible: false });
+  };
+
+  theme = PrimaryTheme;
+
   render() {
     const {
       currentUser,
@@ -123,6 +132,39 @@ class HomeScreen extends PureComponent {
             onDeleteCommentPressed={this.onDeleteCommentPressed}
             graphRenderer={graphRenderer}
           />
+          <Tooltip
+            isVisible={this.state.toolTipVisible}
+            placement="top"
+            content={
+              <TidepoolUploaderTooltipContent
+                onPressEmailLink={this.onPressTooltipEmailLink}
+                onPressOk={this.onPressTooltipOk}
+              />
+            }
+            arrowSize={{ width: 0, height: 0 }}
+            adjustPlacementStyle={placementStyle => {
+              const { top, ...rest } = placementStyle;
+              return {
+                ...rest,
+                top: top - 5,
+              };
+            }}
+          >
+            <glamorous.View
+              position="absolute"
+              right={0}
+              left={0}
+              bottom={0}
+              justifyContent="center"
+              flexDirection="row"
+            >
+              <glamorous.View
+                backgroundColor="transparent"
+                width={0}
+                height={0}
+              />
+            </glamorous.View>
+          </Tooltip>
         </glamorous.View>
       </ThemeProvider>
     );
