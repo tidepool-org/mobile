@@ -28,24 +28,16 @@ function auth(state = initialState, action) {
       nextState = { ...state, signingIn: true };
       break;
     case AUTH_SIGN_IN_DID_SUCCEED: {
-      const { sessionToken, userId, username, fullName } = action.payload;
       nextState = {
-        sessionToken,
-        userId,
-        username,
-        fullName,
+        ...action.payload,
         signingIn: false,
         errorMessage: "",
       };
       break;
     }
     case AUTH_REFRESH_SESSION_TOKEN_DID_SUCCEED: {
-      const { sessionToken, userId, username, fullName } = action.payload;
       nextState = {
-        sessionToken,
-        userId,
-        username,
-        fullName,
+        ...action.payload,
         signingIn: false,
         errorMessage: "",
       };

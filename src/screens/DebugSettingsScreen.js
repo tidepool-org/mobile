@@ -1,12 +1,13 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { StatusBar, SafeAreaView, Modal, StyleSheet } from "react-native";
+import { StatusBar, SafeAreaView, Modal } from "react-native";
 import glamorous, { ThemeProvider } from "glamorous-native";
 
 import PrimaryTheme from "../themes/PrimaryTheme";
 import Colors from "../constants/Colors";
 import DebugSettingsApiEnvironmentList from "../components/DebugSettingsApiEnvironmentList";
 import DebugSettingsGraphRendererList from "../components/DebugSettingsGraphRendererList";
+import DebugSettingsOtherList from "../components/DebugSettingsOtherList";
 
 class DebugSettingsScreen extends PureComponent {
   constructor(props) {
@@ -25,17 +26,14 @@ class DebugSettingsScreen extends PureComponent {
 
   onGraphRendererSelected = selectedGraphRenderer => {
     if (selectedGraphRenderer !== this.props.selectedGraphRenderer) {
-      this.props.graphRendererSetAndSaveAsync(selectedGraphRenderer);
+      // Delay this so the Modal closes faster
+      const { graphRendererSetAndSaveAsync } = this.props;
+      setTimeout(() => {
+        graphRendererSetAndSaveAsync(selectedGraphRenderer);
+      }, 250);
     }
     this.props.navigateGoBack();
   };
-
-  renderSeparator = () => (
-    <glamorous.View
-      height={StyleSheet.hairlineWidth}
-      backgroundColor="#CED0CE"
-    />
-  );
 
   renderItem = ({ item }) => (
     <glamorous.Text
@@ -50,6 +48,7 @@ class DebugSettingsScreen extends PureComponent {
   render() {
     const {
       navigateGoBack,
+      firstTimeTipsResetTips,
       selectedApiEnvironment,
       selectedGraphRenderer,
     } = this.props;
@@ -101,6 +100,15 @@ class DebugSettingsScreen extends PureComponent {
                 onGraphRendererSelected={this.onGraphRendererSelected}
                 selectedGraphRenderer={selectedGraphRenderer}
               />
+              <glamorous.View
+                flexDirection="row"
+                justifyContent="space-between"
+                padding={8}
+              />
+              <DebugSettingsOtherList
+                navigateGoBack={navigateGoBack}
+                firstTimeTipsResetTips={firstTimeTipsResetTips}
+              />
             </glamorous.ScrollView>
           </SafeAreaView>
         </Modal>
@@ -112,8 +120,9 @@ class DebugSettingsScreen extends PureComponent {
 DebugSettingsScreen.propTypes = {
   navigateGoBack: PropTypes.func.isRequired,
   apiEnvironmentSetAndSaveAsync: PropTypes.func.isRequired,
-  graphRendererSetAndSaveAsync: PropTypes.func.isRequired,
   selectedApiEnvironment: PropTypes.string,
+  firstTimeTipsResetTips: PropTypes.func.isRequired,
+  graphRendererSetAndSaveAsync: PropTypes.func.isRequired,
   selectedGraphRenderer: PropTypes.string,
 };
 

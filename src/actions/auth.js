@@ -37,11 +37,9 @@ const authSignInDidStart = () => ({
   type: AUTH_SIGN_IN_DID_START,
 });
 
-const authSignInDidSucceed = ({
-  authUser: { sessionToken, userId, username, fullName },
-}) => ({
+const authSignInDidSucceed = ({ authUser }) => ({
   type: AUTH_SIGN_IN_DID_SUCCEED,
-  payload: { sessionToken, userId, username, fullName },
+  payload: authUser,
 });
 
 const authSignInDidFail = errorMessage => ({
@@ -66,8 +64,8 @@ const authSignInAsync = ({ username, password }) => async dispatch => {
     dispatch(authSignInDidFail(signInErrorMessage));
   } else {
     const {
-      fullName,
       errorMessage: fetchProfileErrorMessage,
+      profile,
     } = await api().fetchProfileAsync({
       userId,
     });
@@ -75,7 +73,7 @@ const authSignInAsync = ({ username, password }) => async dispatch => {
     if (fetchProfileErrorMessage) {
       dispatch(authSignInDidFail(fetchProfileErrorMessage));
     } else {
-      const authUser = { sessionToken, userId, username, fullName };
+      const authUser = { sessionToken, userId, username, ...profile };
       try {
         AsyncStorage.setItem(AUTH_USER_KEY, JSON.stringify(authUser));
         dispatch(authSignInDidSucceed({ authUser }));
@@ -92,11 +90,9 @@ const authRefreshTokenDidStart = () => ({
   type: AUTH_REFRESH_SESSION_TOKEN_DID_START,
 });
 
-const authRefreshTokenDidSucceed = ({
-  authUser: { sessionToken, userId, username, fullName },
-}) => ({
+const authRefreshTokenDidSucceed = ({ authUser }) => ({
   type: AUTH_REFRESH_SESSION_TOKEN_DID_SUCCEED,
-  payload: { sessionToken, userId, username, fullName },
+  payload: authUser,
 });
 
 const authRefreshTokenDidFail = errorMessage => ({
@@ -130,7 +126,6 @@ const authRefreshTokenOrSignInAsync = () => async dispatch => {
       userId,
       errorMessage,
     } = await api().refreshTokenAsync(authUser);
-
     if (errorMessage) {
       // console.log(`authRefreshTokenOrSignInAsync: Error: ${errorMessage}`);
       dispatch(authRefreshTokenDidFail(errorMessage));
@@ -144,9 +139,32 @@ const authRefreshTokenOrSignInAsync = () => async dispatch => {
       // console.log(`authRefreshTokenOrSignInAsync: Success!`);
       authUser.sessionToken = sessionToken;
       authUser.userId = userId;
-      dispatch(authRefreshTokenDidSucceed({ authUser }));
-      await dispatch(currentProfileRestoreAsync({ authUser }));
-      dispatch(navigateHome());
+
+      const {
+        errorMessage: fetchProfileErrorMessage,
+        profile,
+      } = await api().fetchProfileAsync({
+        userId,
+      });
+
+      if (fetchProfileErrorMessage) {
+        dispatch(authSignInDidFail(fetchProfileErrorMessage));
+        // console.log(
+        //   `authRefreshTokenOrSignInAsync: Navigate to sign in due to error`
+        // ); // TODO: sign in - what about client side errors? Those should not result in reset / sign in
+        dispatch(authSignInReset());
+        dispatch(navigateSignIn());
+      } else {
+        authUser = { ...authUser, ...profile };
+        try {
+          AsyncStorage.setItem(AUTH_USER_KEY, JSON.stringify(authUser));
+          dispatch(authRefreshTokenDidSucceed({ authUser }));
+          await dispatch(currentProfileRestoreAsync({ authUser }));
+          dispatch(navigateHome());
+        } catch (error) {
+          dispatch(authSignInDidFail(error.errorMessage));
+        }
+      }
     }
   }
 };

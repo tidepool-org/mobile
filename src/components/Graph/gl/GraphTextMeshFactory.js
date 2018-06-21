@@ -56,7 +56,7 @@ class GraphTextMeshFactory {
     return { textMesh, measuredWidth, measuredHeight, capHeight };
   }
 
-  async loadAssets() {
+  async loadAssetsAsync() {
     if (!this.assetsAreLoaded) {
       this.bmFont = require("../../../../assets/bmfonts/OpenSans-Regular-56px.json");
       this.bmFontSpriteSheetTexture = await createTextureAsync({

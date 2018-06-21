@@ -25,10 +25,11 @@ const apiEnvironmentLoadAndSetAsync = () => async dispatch => {
       //   `No apiEnvironment was saved, defaulting to ${API_ENVIRONMENT_PRODUCTION}`
       // );
       apiEnvironment = API_ENVIRONMENT_PRODUCTION;
+    } else {
+      // console.log(
+      //   `apiEnvironmentLoadAndSetAsync succeeded, apiEnvironment: ${apiEnvironment}`
+      // );
     }
-    // console.log(
-    //   `apiEnvironmentLoadAndSetAsync succeeded, apiEnvironment: ${apiEnvironment}`
-    // );
   } catch (error) {
     // console.log(
     //   `Failed to load apiEnvironment, defaulting to ${API_ENVIRONMENT_PRODUCTION}, error: ${error}`

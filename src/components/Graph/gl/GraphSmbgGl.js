@@ -61,7 +61,7 @@ class GraphSmbgGl extends GraphRenderLayerGl {
     });
   }
 
-  static async loadAssets() {
+  static async loadAssetsAsync() {
     if (GraphSmbgGl.assetsAreLoaded) {
       return;
     }

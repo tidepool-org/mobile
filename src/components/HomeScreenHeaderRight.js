@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Image, Platform, TouchableOpacity } from "react-native";
 
+import FirstTimeTips from "../models/FirstTimeTips";
 import Tooltip from "./Tooltip";
 import SimpleTextTooltipContent from "../components/Tooltips/SimpleTextTooltipContent";
 
@@ -10,10 +11,39 @@ class HomeScreenHeaderRight extends PureComponent {
     toolTipVisible: false,
   };
 
+  componentDidUpdate() {
+    const { navigation, notesFetch, currentUser } = this.props;
+    this.showTipIfNeeded({ navigation, notesFetch, currentUser });
+  }
+
+  componentWillUnmount() {
+    if (this.showTipTimeoutId) {
+      clearTimeout(this.showTipTimeoutId);
+    }
+  }
+
   onPress = () => {
-    this.setState({ toolTipVisible: false });
+    this.hideTipIfNeeded();
     this.props.navigateAddNote();
   };
+
+  showTipIfNeeded(params) {
+    if (FirstTimeTips.shouldShowTip(FirstTimeTips.TIP_ADD_NOTE, params)) {
+      const { firstTimeTipsShowTip } = this.props;
+      this.showTipTimeoutId = setTimeout(() => {
+        firstTimeTipsShowTip(FirstTimeTips.TIP_ADD_NOTE, true);
+        this.setState({ toolTipVisible: true });
+      }, 50);
+    }
+  }
+
+  hideTipIfNeeded() {
+    if (FirstTimeTips.currentTip === FirstTimeTips.TIP_ADD_NOTE) {
+      const { firstTimeTipsShowTip } = this.props;
+      firstTimeTipsShowTip(FirstTimeTips.TIP_ADD_NOTE, false);
+      this.setState({ toolTipVisible: false });
+    }
+  }
 
   render() {
     return (
@@ -26,13 +56,9 @@ class HomeScreenHeaderRight extends PureComponent {
         arrowStyle={{
           marginLeft: 5,
         }}
-        adjustPlacementStyle={placementStyle => {
-          const { left, top, ...rest } = placementStyle;
-          return {
-            ...rest,
-            left: left - 4,
-            top: Platform.OS === "ios" ? top : top + 3,
-          };
+        tooltipOriginOffset={{
+          x: -8,
+          y: Platform.OS === "ios" ? 0 : 3,
         }}
       >
         <TouchableOpacity
@@ -50,7 +76,11 @@ class HomeScreenHeaderRight extends PureComponent {
 }
 
 HomeScreenHeaderRight.propTypes = {
+  navigation: PropTypes.object.isRequired,
+  notesFetch: PropTypes.object.isRequired,
+  currentUser: PropTypes.object.isRequired,
   navigateAddNote: PropTypes.func.isRequired,
+  firstTimeTipsShowTip: PropTypes.func.isRequired,
 };
 
 export default HomeScreenHeaderRight;

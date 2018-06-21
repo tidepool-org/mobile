@@ -5,6 +5,7 @@ import DebugSettingsScreen from "../screens/DebugSettingsScreen";
 import { navigateGoBack } from "../actions/navigation";
 import { apiEnvironmentSetAndSaveAsync } from "../actions/apiEnvironment";
 import { graphRendererSetAndSaveAsync } from "../actions/graphRenderer";
+import { firstTimeTipsResetTips } from "../actions/firstTimeTips";
 
 const mapStateToProps = state => ({
   selectedApiEnvironment: state.apiEnvironment,
@@ -16,11 +17,13 @@ const mapDispatchToProps = dispatch =>
     {
       navigateGoBack,
       apiEnvironmentSetAndSaveAsync,
+      firstTimeTipsResetTips,
       graphRendererSetAndSaveAsync,
     },
     dispatch
   );
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  DebugSettingsScreen
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DebugSettingsScreen);

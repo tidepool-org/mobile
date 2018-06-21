@@ -53,17 +53,17 @@ class TidepoolApi {
   }
 
   async fetchProfileAsync({ userId }) {
-    const { fullName, errorMessage } = await this.fetchProfile({
+    const { errorMessage, ...rest } = await this.fetchProfile({
       userId,
     })
       .then(response => ({
-        fullName: response.fullName,
+        profile: response,
       }))
       .catch(error => ({
         errorMessage: error.message,
       }));
 
-    return { userId, fullName, errorMessage };
+    return { userId, ...rest, errorMessage };
   }
 
   async fetchProfileSettingsAsync({ userId }) {
@@ -409,9 +409,7 @@ class TidepoolApi {
     return new Promise((resolve, reject) => {
       axios({ method, url, baseURL, headers })
         .then(response => {
-          const profile = response.data;
-          const { fullName } = profile;
-          resolve({ userId, fullName });
+          resolve({ userId, ...response.data });
         })
         .catch(error => {
           reject(error);
@@ -461,7 +459,16 @@ class TidepoolApi {
           resolve({ notes });
         })
         .catch(error => {
-          reject(error);
+          if (error.response.status === 404) {
+            // console.log(
+            //   `fetchNotes: No notes retrieved, status code: ${
+            //     error.response.status
+            //   }, userid: ${userId}`
+            // );
+            resolve({ notes: [] });
+          } else {
+            reject(error);
+          }
         });
     });
   }

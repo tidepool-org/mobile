@@ -13,12 +13,12 @@ if (process.env.NODE_ENV === "development") {
   Expo.KeepAwake.activate();
 }
 
-const loadAssets = async () => {
-  await GraphTextMeshFactory.loadAssets();
-  await GraphCbgGl.loadAssets();
-  await GraphSmbgGl.loadAssets();
+const loadAssetsAsync = async () => {
+  await GraphTextMeshFactory.loadAssetsAsync();
+  await GraphCbgGl.loadAssetsAsync();
+  await GraphSmbgGl.loadAssetsAsync();
 };
 
-loadAssets();
+loadAssetsAsync();
 
 Expo.registerRootComponent(withExpoFontPreload(App, Fonts));

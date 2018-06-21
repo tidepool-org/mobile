@@ -5,7 +5,7 @@ import WalkthroughTooltip from "react-native-walkthrough-tooltip";
 
 class Tooltip extends PureComponent {
   render() {
-    const { children, adjustPlacementStyle, ...rest } = this.props;
+    const { children, ...rest } = this.props;
 
     const SCREEN_HEIGHT = Dimensions.get("window").height - 48;
     const SCREEN_WIDTH = Dimensions.get("window").width;
@@ -22,19 +22,6 @@ class Tooltip extends PureComponent {
         displayArea={fullDisplayArea}
         onClose={onClose}
         {...rest}
-        ref={tooltip => {
-          if (tooltip && adjustPlacementStyle) {
-            const tooltipMonkeyPatched = tooltip;
-            const { getTooltipPlacementStyles } = tooltipMonkeyPatched;
-            tooltipMonkeyPatched.getTooltipPlacementStyles = () => {
-              const placementStyles = getTooltipPlacementStyles();
-              const adjustedPlacementStyles = adjustPlacementStyle(
-                placementStyles
-              );
-              return adjustedPlacementStyles;
-            };
-          }
-        }}
       >
         {children}
       </WalkthroughTooltip>
@@ -44,11 +31,14 @@ class Tooltip extends PureComponent {
 
 Tooltip.propTypes = {
   children: PropTypes.element.isRequired,
-  adjustPlacementStyle: PropTypes.func,
+  tooltipOriginOffset: PropTypes.shape({
+    x: PropTypes.number.isRequired,
+    y: PropTypes.number.isRequired,
+  }),
 };
 
 Tooltip.defaultProps = {
-  adjustPlacementStyle: null,
+  tooltipOriginOffset: undefined,
 };
 
 export default Tooltip;

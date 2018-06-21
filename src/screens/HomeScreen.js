@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Alert, StatusBar } from "react-native";
 import glamorous, { ThemeProvider } from "glamorous-native";
+import Expo from "expo";
 
 import PrimaryTheme from "../themes/PrimaryTheme";
 import Colors from "../constants/Colors";
@@ -11,30 +12,36 @@ import HomeScreenHeaderRightContainer from "../containers/HomeScreenHeaderRightC
 import NotesList from "../components/NotesList";
 import Tooltip from "../components/Tooltip";
 import TidepoolUploaderTooltipContent from "../components/Tooltips/TidepoolUploaderTooltipContent";
+import FirstTimeTips from "../models/FirstTimeTips";
 import { ProfilePropType } from "../prop-types/profile";
 import { CommentPropType } from "../prop-types/comment";
 import { UserPropType } from "../prop-types/user";
 
 class HomeScreen extends PureComponent {
-  static navigationOptions = () => {
-    const headerStyle = { backgroundColor: Colors.darkPurple };
+  constructor(props) {
+    super(props);
 
-    return {
-      headerStyle,
-      headerTitle: <HomeScreenHeaderTitleContainer />,
-      headerLeft: <HomeScreenHeaderLeftContainer />,
-      headerRight: <HomeScreenHeaderRightContainer />,
+    this.theme = PrimaryTheme;
+    this.state = {
+      toolTipVisible: false,
     };
-  };
-
-  state = {
-    toolTipVisible: false,
-  };
+  }
 
   componentDidMount() {
     this.props.notesFetchAsync({
       profile: this.props.currentProfile,
     });
+  }
+
+  componentDidUpdate() {
+    const { navigation, notesFetch, currentUser } = this.props;
+    this.showTipIfNeeded({ navigation, notesFetch, currentUser });
+  }
+
+  componentWillUnmount() {
+    if (this.showTipTimeoutId) {
+      clearTimeout(this.showTipTimeoutId);
+    }
   }
 
   onDeleteNotePressed = ({ note }) => {
@@ -78,15 +85,55 @@ class HomeScreen extends PureComponent {
   };
 
   onPressTooltipEmailLink = () => {
-    // TODO: Handle email link
-    this.setState({ toolTipVisible: false });
+    this.composeEmailWithDesktopUploaderLink();
+    this.hideTipIfNeeded();
   };
 
   onPressTooltipOk = () => {
-    this.setState({ toolTipVisible: false });
+    this.hideTipIfNeeded();
   };
 
-  theme = PrimaryTheme;
+  async composeEmailWithDesktopUploaderLink() {
+    const currentUserEmail = this.props.currentUser.username;
+
+    try {
+      await Expo.MailComposer.composeAsync({
+        subject: "How to set up the Tidepool Uploader",
+        body:
+          "Please go to the following link on your computer to learn about setting up the Tidepool Uploader: http://support.tidepool.org/article/6-how-to-install-or-update-the-tidepool-uploader-gen",
+        recipients: [currentUserEmail],
+      });
+    } catch (error) {
+      Alert.alert(
+        "Error",
+        "Unable to send email. You may need to configure email settings on your device.",
+        [{ text: "OK" }]
+      );
+    }
+  }
+
+  showTipIfNeeded(params) {
+    if (
+      FirstTimeTips.shouldShowTip(
+        FirstTimeTips.TIP_GET_DESKTOP_UPLOADER,
+        params
+      )
+    ) {
+      const { firstTimeTipsShowTip } = this.props;
+      this.showTipTimeoutId = setTimeout(() => {
+        firstTimeTipsShowTip(FirstTimeTips.TIP_GET_DESKTOP_UPLOADER, true);
+        this.setState({ toolTipVisible: true });
+      }, 50);
+    }
+  }
+
+  hideTipIfNeeded() {
+    if (FirstTimeTips.currentTip === FirstTimeTips.TIP_GET_DESKTOP_UPLOADER) {
+      const { firstTimeTipsShowTip } = this.props;
+      firstTimeTipsShowTip(FirstTimeTips.TIP_GET_DESKTOP_UPLOADER, false);
+      this.setState({ toolTipVisible: false });
+    }
+  }
 
   render() {
     const {
@@ -97,10 +144,7 @@ class HomeScreen extends PureComponent {
       graphDataFetchDataByMessageId,
       graphRenderer,
       currentProfile,
-      errorMessage,
-      fetching,
-      notes,
-      searchText,
+      notesFetch: { errorMessage, fetching, notes, searchText },
       notesFetchAsync,
       notesFetchSetSearchFilter,
       navigateEditNote,
@@ -142,12 +186,9 @@ class HomeScreen extends PureComponent {
               />
             }
             arrowSize={{ width: 0, height: 0 }}
-            adjustPlacementStyle={placementStyle => {
-              const { top, ...rest } = placementStyle;
-              return {
-                ...rest,
-                top: top - 5,
-              };
+            tooltipOriginOffset={{
+              x: 0,
+              y: -24,
             }}
           >
             <glamorous.View
@@ -173,16 +214,7 @@ class HomeScreen extends PureComponent {
 
 HomeScreen.propTypes = {
   currentUser: UserPropType.isRequired,
-  notes: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      timestamp: PropTypes.instanceOf(Date),
-      messageText: PropTypes.string.isRequired,
-    })
-  ).isRequired,
-  searchText: PropTypes.string,
-  errorMessage: PropTypes.string,
-  fetching: PropTypes.bool,
+  notesFetch: PropTypes.object.isRequired,
   currentProfile: ProfilePropType.isRequired,
   notesFetchAsync: PropTypes.func.isRequired,
   notesFetchSetSearchFilter: PropTypes.func.isRequired,
@@ -210,14 +242,24 @@ HomeScreen.propTypes = {
   navigateEditComment: PropTypes.func.isRequired,
   noteDeleteAsync: PropTypes.func.isRequired,
   commentDeleteAsync: PropTypes.func.isRequired,
+  navigation: PropTypes.object.isRequired,
+  firstTimeTipsShowTip: PropTypes.func.isRequired,
 };
 
 HomeScreen.defaultProps = {
-  errorMessage: "",
-  searchText: "",
-  fetching: false,
   commentsFetchDataByMessageId: {},
   graphDataFetchDataByMessageId: {},
+};
+
+HomeScreen.navigationOptions = () => {
+  const headerStyle = { backgroundColor: Colors.darkPurple };
+
+  return {
+    headerStyle,
+    headerTitle: <HomeScreenHeaderTitleContainer />,
+    headerLeft: <HomeScreenHeaderLeftContainer />,
+    headerRight: <HomeScreenHeaderRightContainer />,
+  };
 };
 
 export default HomeScreen;

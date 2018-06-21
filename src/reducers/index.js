@@ -11,6 +11,7 @@ import navigation from "./navigation";
 import notesFetch from "./notesFetch";
 import currentProfile from "./currentProfile";
 import profilesFetch from "./profilesFetch";
+import firstTimeTips from "./firstTimeTips";
 
 const reducers = combineReducers({
   appInitDidFinish,
@@ -24,6 +25,7 @@ const reducers = combineReducers({
   notesFetch,
   currentProfile,
   profilesFetch,
+  firstTimeTips,
 });
 
 export default reducers;

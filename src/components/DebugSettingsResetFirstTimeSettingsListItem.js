@@ -4,17 +4,21 @@ import glamorous, { withTheme } from "glamorous-native";
 
 import { ThemePropType } from "../prop-types/theme";
 
-class DebugSettingsGraphRendererListItem extends PureComponent {
+class DebugSettingsResetFirstTimeSettingsListItem extends PureComponent {
   state = {
     isUnderlayVisible: false,
   };
 
   onPress = () => {
-    this.props.onPress(this.props.graphRenderer);
+    const { firstTimeTipsResetTips, navigateGoBack } = this.props;
+    navigateGoBack();
+    setTimeout(() => {
+      firstTimeTipsResetTips();
+    }, 50);
   };
 
-  renderName() {
-    const { theme, graphRenderer } = this.props;
+  renderButtonText() {
+    const { theme } = this.props;
     const titleColor = this.state.isUnderlayVisible
       ? theme.titleColorActive
       : theme.listItemName.color;
@@ -27,38 +31,9 @@ class DebugSettingsGraphRendererListItem extends PureComponent {
         numberOfLines={1}
         color={titleColor}
       >
-        {graphRenderer}
+        Reset First-time Tips
       </glamorous.Text>
     );
-  }
-
-  renderSelectedCheckMark() {
-    const { theme, selected } = this.props;
-    const borderColor = this.state.isUnderlayVisible
-      ? theme.titleColorActive
-      : theme.underlayColor;
-
-    if (selected) {
-      return (
-        <glamorous.View
-          width={13}
-          height={6}
-          marginLeft={12}
-          alignSelf="center"
-          backgroundColor="transparent"
-          borderBottomWidth={2}
-          borderLeftWidth={2}
-          borderColor={borderColor}
-          transform={[
-            {
-              rotate: "-45deg",
-            },
-          ]}
-        />
-      );
-    }
-
-    return null;
   }
 
   render() {
@@ -81,23 +56,17 @@ class DebugSettingsGraphRendererListItem extends PureComponent {
           flexDirection="row"
           justifyContent="space-between"
         >
-          {this.renderName()}
-          {this.renderSelectedCheckMark()}
+          {this.renderButtonText()}
         </glamorous.View>
       </glamorous.TouchableHighlight>
     );
   }
 }
 
-DebugSettingsGraphRendererListItem.propTypes = {
+DebugSettingsResetFirstTimeSettingsListItem.propTypes = {
   theme: ThemePropType.isRequired,
-  graphRenderer: PropTypes.string.isRequired,
-  selected: PropTypes.bool,
-  onPress: PropTypes.func.isRequired,
+  navigateGoBack: PropTypes.func.isRequired,
+  firstTimeTipsResetTips: PropTypes.func.isRequired,
 };
 
-DebugSettingsGraphRendererListItem.defaultProps = {
-  selected: false,
-};
-
-export default withTheme(DebugSettingsGraphRendererListItem);
+export default withTheme(DebugSettingsResetFirstTimeSettingsListItem);

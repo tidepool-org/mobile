@@ -23,7 +23,7 @@ class AppWithNavigationState extends PureComponent {
 
   onBackPress = () => {
     const { dispatch, navigation } = this.props;
-    const routeName = getRouteName({ navigationState: navigation });
+    const { routeName } = getRouteName({ navigation });
     if (routeName === HOME_ROUTE_NAME || routeName === SIGN_IN_ROUTE_NAME) {
       return false;
     }

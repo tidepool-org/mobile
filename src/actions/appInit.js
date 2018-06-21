@@ -7,6 +7,7 @@ import { navigateLaunch } from "../actions/navigation";
 import GraphTextMeshFactory from "../components/Graph/gl/GraphTextMeshFactory";
 import GraphCbgGl from "../components/Graph/gl/GraphCbgGl";
 import GraphSmbgGl from "../components/Graph/gl/GraphSmbgGl";
+import { firstTimeTipsLoadSettingsAsync } from "../actions/firstTimeTips";
 
 const APP_INIT_DID_FINISH = "APP_INIT_DID_FINISH";
 
@@ -23,12 +24,16 @@ const appInitAsync = () => async dispatch => {
 
   dispatch(navigateLaunch());
   dispatch(appVersionLoad());
+
   await dispatch(graphRendererLoadAndSetAsync());
   await dispatch(apiEnvironmentLoadAndSetAsync());
   await dispatch(authRefreshTokenOrSignInAsync());
-  await GraphTextMeshFactory.loadAssets();
-  await GraphCbgGl.loadAssets();
-  await GraphSmbgGl.loadAssets();
+
+  await GraphTextMeshFactory.loadAssetsAsync();
+  await GraphCbgGl.loadAssetsAsync();
+  await GraphSmbgGl.loadAssetsAsync();
+
+  await dispatch(firstTimeTipsLoadSettingsAsync());
 
   dispatch(appInitDidFinish());
 
