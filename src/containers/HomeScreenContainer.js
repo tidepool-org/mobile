@@ -15,8 +15,11 @@ import {
   navigateAddComment,
   navigateEditComment,
 } from "../actions/navigation";
+import { firstTimeTipsShowTip } from "../actions/firstTimeTips";
 
 const mapStateToProps = state => ({
+  navigation: state.navigation,
+  notesFetch: state.notesFetch,
   currentUser: state.auth,
   notes: state.notesFetch.notes,
   searchText: state.notesFetch.searchText,
@@ -26,6 +29,7 @@ const mapStateToProps = state => ({
   fetching: state.notesFetch.fetching,
   currentProfile: state.currentProfile,
   graphRenderer: state.graphRenderer,
+  firstTimeTips: state.firstTimeTips,
 });
 
 const mapDispatchToProps = dispatch =>
@@ -40,8 +44,12 @@ const mapDispatchToProps = dispatch =>
       navigateEditNote,
       navigateAddComment,
       navigateEditComment,
+      firstTimeTipsShowTip,
     },
     dispatch
   );
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(HomeScreen);

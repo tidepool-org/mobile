@@ -1,8 +1,10 @@
-const getRouteName = ({ navigationState: rootNavigationState }) => {
-  let resultRouteName = rootNavigationState
-    ? rootNavigationState.routeName
-    : "";
-
+const getRouteName = ({ navigation: rootNavigationState }) => {
+  const result = {
+    routeName: rootNavigationState ? rootNavigationState.routeName : "",
+    isTransitioning: rootNavigationState
+      ? rootNavigationState.isTransitioning
+      : false,
+  };
   let navigationState = rootNavigationState;
   let nextNavigationStateIndex = navigationState
     ? navigationState.index
@@ -10,10 +12,13 @@ const getRouteName = ({ navigationState: rootNavigationState }) => {
   while (nextNavigationStateIndex !== undefined) {
     navigationState = navigationState.routes[nextNavigationStateIndex];
     nextNavigationStateIndex = navigationState.index;
-    resultRouteName = navigationState.routeName;
+    result.routeName = navigationState.routeName;
+    if (navigationState.isTransitioning) {
+      result.isTransitioning = true;
+    }
   }
 
-  return resultRouteName;
+  return result;
 };
 
 export default getRouteName;

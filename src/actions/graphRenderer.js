@@ -26,10 +26,11 @@ const graphRendererLoadAndSetAsync = () => async dispatch => {
       //   `No graphRenderer was saved, defaulting to ${GRAPH_RENDERER_THREE_JS}`
       // );
       graphRenderer = GRAPH_RENDERER_THREE_JS;
+    } else {
+      // console.log(
+      //   `graphRendererLoadAndSetAsync succeeded, graphRenderer: ${graphRenderer}`
+      // );
     }
-    // console.log(
-    //   `graphRendererLoadAndSetAsync succeeded, graphRenderer: ${graphRenderer}`
-    // );
   } catch (error) {
     // console.log(
     //   `Failed to load graphRenderer, defaulting to ${GRAPH_RENDERER_THREE_JS}, error: ${error}`

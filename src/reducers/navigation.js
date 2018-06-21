@@ -46,9 +46,10 @@ const shouldIgnoreNextNavigate = ({ nextState, state }) => {
   // Prevent double navigation for some routes (e.g. when tapping UI elements that cause navigation quickly)
   // TODO: Revisit this. It's kind of hacky / fragile
   if (nextState !== state) {
-    const nextRouteName = getRouteName({
-      navigationState: nextState,
+    const { routeName } = getRouteName({
+      navigation: nextState,
     });
+    const nextRouteName = routeName;
 
     const routeNames = [
       SWITCH_PROFILE_ROUTE_NAME,

@@ -51,7 +51,7 @@ class GraphCbgGl extends GraphRenderLayerGl {
     }
   }
 
-  static async loadAssets() {
+  static async loadAssetsAsync() {
     if (GraphCbgGl.assetsAreLoaded) {
       return;
     }

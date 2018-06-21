@@ -11,9 +11,11 @@ import {
   DEFAULT_HIGH_BG_BOUNDARY_VALUE,
   GRAPH_RENDERER_THREE_JS,
 } from "../../src/components/Graph/helpers";
+import NotesFetchData from "../../src/models/NotesFetchData";
 
 faker.seed(123);
 
+const navigation = {};
 const graphRenderer = GRAPH_RENDERER_THREE_JS;
 const currentUser = {
   userId: "1",
@@ -35,6 +37,8 @@ const navigateAddComment = () => {};
 const navigateEditComment = () => {};
 const noteDeleteAsync = () => {};
 const commentDeleteAsync = () => {};
+const firstTimeTipsShowTip = () => {};
+
 const notes = [];
 for (let i = 0; i < 100; i += 1) {
   notes.push({
@@ -44,10 +48,13 @@ for (let i = 0; i < 100; i += 1) {
     userId: "1",
   });
 }
+const notesFetch = new NotesFetchData();
+notesFetch.didStart({ userId: currentProfile.userId });
+notesFetch.didSucceed({ notes, profile: currentProfile });
 
 const props = {
   currentUser,
-  notes,
+  notesFetch,
   notesFetchAsync,
   notesFetchSetSearchFilter,
   currentProfile,
@@ -59,6 +66,8 @@ const props = {
   navigateEditComment,
   noteDeleteAsync,
   commentDeleteAsync,
+  firstTimeTipsShowTip,
+  navigation,
 };
 
 storiesOf("HomeScreen", module).add("default", () => (

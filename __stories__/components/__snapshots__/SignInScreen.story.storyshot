@@ -313,6 +313,7 @@ exports[`Storyshots SignInScreen Sign in error 1`] = `
                       "paddingLeft": 16,
                       "paddingRight": 16,
                     },
+                    null,
                     Object {
                       "backgroundColor": "#9eaaf4",
                       "elevation": 0,
@@ -333,6 +334,7 @@ exports[`Storyshots SignInScreen Sign in error 1`] = `
                         "padding": 8,
                         "textAlign": "center",
                       },
+                      null,
                       Object {
                         "color": "white",
                       },
@@ -801,6 +803,7 @@ exports[`Storyshots SignInScreen Signing in 1`] = `
                       "paddingLeft": 16,
                       "paddingRight": 16,
                     },
+                    null,
                     Object {
                       "backgroundColor": "#9eaaf4",
                       "elevation": 0,
@@ -821,6 +824,7 @@ exports[`Storyshots SignInScreen Signing in 1`] = `
                         "padding": 8,
                         "textAlign": "center",
                       },
+                      null,
                       Object {
                         "color": "white",
                       },
@@ -1302,6 +1306,7 @@ exports[`Storyshots SignInScreen default 1`] = `
                       "paddingLeft": 16,
                       "paddingRight": 16,
                     },
+                    null,
                     Object {
                       "backgroundColor": "#9eaaf4",
                       "elevation": 0,
@@ -1322,6 +1327,7 @@ exports[`Storyshots SignInScreen default 1`] = `
                         "padding": 8,
                         "textAlign": "center",
                       },
+                      null,
                       Object {
                         "color": "white",
                       },

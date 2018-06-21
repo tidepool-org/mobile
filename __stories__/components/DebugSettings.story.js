@@ -10,6 +10,7 @@ import { GRAPH_RENDERER_THREE_JS } from "../../src/components/Graph/helpers";
 const props = {
   navigateGoBack: () => {},
   apiEnvironmentSetAndSaveAsync: () => {},
+  firstTimeTipsResetTips: () => {},
   graphRendererSetAndSaveAsync: () => {},
   selectedApiEnvironment: API_ENVIRONMENT_STAGING,
   selectedGraphRenderer: GRAPH_RENDERER_THREE_JS,
