@@ -20,7 +20,7 @@ class TidepoolUploaderTooltipContent extends PureComponent {
           style={this.theme.toolTipContentTextStyle}
         >
           Woohoo!{"\n\n"}Last step: to get pump data, you need the Tidepool
-          Uploader on your Computer.
+          Uploader on your computer.
         </glamorous.Text>
         <glamorous.View flexDirection="row" justifyContent="space-between">
           <Button
