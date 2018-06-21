@@ -50,10 +50,13 @@ class Drawer extends PureComponent {
               {
                 data: [
                   {
+                    currentUser: this.props.currentUser,
                     key: "health",
                   },
                 ],
-                renderItem: () => <DrawerHealth />,
+                renderItem: ({ item }) => (
+                  <DrawerHealth currentUser={item.currentUser} />
+                ),
               },
               {
                 data: [{ key: "switchProfileButtonDivider" }],

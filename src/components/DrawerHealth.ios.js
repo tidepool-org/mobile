@@ -1,4 +1,5 @@
 import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
 import { ViewPropTypes, Switch } from "react-native";
 import glamorous, { withTheme } from "glamorous-native";
 
@@ -18,7 +19,11 @@ class DrawerHealth extends PureComponent {
   };
 
   render() {
-    const { theme, style } = this.props;
+    const { theme, style, currentUser } = this.props;
+
+    if (!currentUser.patient) {
+      return null;
+    }
 
     return (
       <glamorous.View style={style} height={80}>
@@ -45,6 +50,7 @@ class DrawerHealth extends PureComponent {
 DrawerHealth.propTypes = {
   theme: ThemePropType.isRequired,
   style: ViewPropTypes.style,
+  currentUser: PropTypes.object.isRequired,
 };
 
 DrawerHealth.defaultProps = {
