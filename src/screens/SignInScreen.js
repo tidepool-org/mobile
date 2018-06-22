@@ -112,8 +112,15 @@ class SignInScreen extends PureComponent {
   };
 
   keyboardWillChangeFrame = event => {
-    // Currently using adjustResize for Android, so, Android won't get keyboardWillChangeFrame. We should revisit this.
-    if (Platform.OS === "ios") {
+    // Currently using adjustResize for Android, so, Android won't get keyboardWillChangeFrame. We
+    // should revisit this.
+    const { startCoordinates, endCoordinates } = event;
+    const coordinatesAreDifferent =
+      startCoordinates.screenX !== endCoordinates.screenX ||
+      startCoordinates.screenY !== endCoordinates.screenY ||
+      startCoordinates.height !== endCoordinates.height ||
+      startCoordinates.width !== endCoordinates.width;
+    if (Platform.OS === "ios" && coordinatesAreDifferent) {
       this.scrollToAvoidKeyboard(event);
     }
   };
