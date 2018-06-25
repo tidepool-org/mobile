@@ -107,6 +107,8 @@ class SignInForm extends PureComponent {
           }}
           style={theme.signInEditFieldStyle}
           secureTextEntry
+          autoCapitalize="none"
+          autoCorrect={false}
           returnKeyType="go"
           selectionColor="#657ef6"
           underlineColorAndroid="#657ef6"
