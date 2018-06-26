@@ -93,44 +93,21 @@ class NotesListItem extends PureComponent {
         useNativeDriver: true,
       });
     }
-  }
 
-  onPressNote = () => {
-    if (this.props.allowExpansionToggle) {
-      const {
-        note,
-        currentProfile: { userId, lowBGBoundary, highBGBoundary },
-      } = this.props;
-      const wasExpanded = this.state.expanded;
-      this.setState({ expanded: !wasExpanded });
-      if (!wasExpanded) {
-        if (!this.props.commentsFetchData.fetching) {
-          this.props.commentsFetchAsync({ messageId: note.id });
-        }
-        if (!this.props.graphDataFetchData.fetching) {
-          const { timestamp } = note;
-          const startDate = subHours(timestamp, 12);
-          const endDate = addHours(timestamp, 12);
-          const objectTypes = "smbg,bolus,cbg,wizard,basal";
-          this.props.graphDataFetchAsync({
-            messageId: note.id,
-            userId,
-            noteDate: timestamp,
-            startDate,
-            endDate,
-            objectTypes,
-            lowBGBoundary,
-            highBGBoundary,
-          });
-        }
+    const { note } = this.props;
+    const { note: nextNote } = nextProps;
+    const { graphRenderer } = this.props;
+    const { graphRenderer: nextGraphRenderer } = nextProps;
+    const graphRendererChanged =
+      graphRenderer && nextGraphRenderer && graphRenderer !== nextGraphRenderer;
+    if (nextNote.userUpdatedAt !== note.userUpdatedAt || graphRendererChanged) {
+      if (this.state.expanded) {
+        this.setState({ expanded: false }, () => {
+          this.toggleNote({ animationDuration: 350, fetchComments: false });
+        });
       }
-      LayoutAnimation.configureNext({
-        ...LayoutAnimation.Presets.easeInEaseOut,
-        duration: 175,
-        useNativeDriver: true,
-      });
     }
-  };
+  }
 
   onPressDeleteNote = () => {
     const { note } = this.props;
@@ -158,6 +135,50 @@ class NotesListItem extends PureComponent {
       note,
       comment,
     });
+  };
+
+  toggleNote = (
+    { animationDuration = 175, fetchComments = true } = {
+      animationDuration: 175,
+      fetchComments: true,
+    }
+  ) => {
+    if (this.props.allowExpansionToggle) {
+      const {
+        note,
+        currentProfile: { userId, lowBGBoundary, highBGBoundary },
+      } = this.props;
+      const wasExpanded = this.state.expanded;
+      this.setState({ expanded: !wasExpanded });
+      if (!wasExpanded) {
+        if (fetchComments && !this.props.commentsFetchData.fetching) {
+          this.props.commentsFetchAsync({ messageId: note.id });
+        }
+        if (!this.props.graphDataFetchData.fetching) {
+          const { timestamp } = note;
+          const startDate = subHours(timestamp, 12);
+          const endDate = addHours(timestamp, 12);
+          const objectTypes = "smbg,bolus,cbg,wizard,basal";
+          this.props.graphDataFetchAsync({
+            messageId: note.id,
+            userId,
+            noteDate: timestamp,
+            startDate,
+            endDate,
+            objectTypes,
+            lowBGBoundary,
+            highBGBoundary,
+          });
+        }
+      }
+      if (animationDuration) {
+        LayoutAnimation.configureNext({
+          ...LayoutAnimation.Presets.easeInEaseOut,
+          duration: animationDuration,
+          useNativeDriver: true,
+        });
+      }
+    }
   };
 
   shouldRenderUserLabelSection() {
@@ -407,12 +428,7 @@ class NotesListItem extends PureComponent {
           { backgroundColor: "white", opacity: this.state.fadeAnimation },
         ]}
       >
-        <glamorous.TouchableOpacity
-          activeOpacity={1}
-          onPress={() => {
-            this.onPressNote();
-          }}
-        >
+        <glamorous.TouchableOpacity activeOpacity={1} onPress={this.toggleNote}>
           {this.renderUserLabelSection()}
           {this.renderDateSection()}
           {this.renderNote()}

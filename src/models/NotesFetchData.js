@@ -57,13 +57,15 @@ class NotesFetchData {
   }
 
   addNote({ profile, note }) {
+    const noteToAdd = note;
     if (profile.userId === this.userId) {
+      noteToAdd.userAddedAt = new Date();
       this.hashtagCollection.updateHashtagsForText({
-        objectWithTextToAdd: note,
+        objectWithTextToAdd: noteToAdd,
         textPropertyName: "messageText",
       });
       this.hashtags = this.hashtagCollection.hashtagsSortedByCount;
-      const sortedNotes = [note, ...this.notes];
+      const sortedNotes = [noteToAdd, ...this.notes];
       sortedNotes.sort((note1, note2) => note2.timestamp - note1.timestamp);
       this.unfilteredNotes = sortedNotes;
       this.filterNotes();
@@ -78,19 +80,21 @@ class NotesFetchData {
 
   updateNote({ profile, note, originalNote }) {
     if (profile.userId === this.userId) {
+      const noteToUpdate = note;
+      noteToUpdate.userUpdatedAt = new Date();
       const noteIndex = this.notes.findIndex(
-        subjectNote => subjectNote.id === note.id
+        subjectNote => subjectNote.id === noteToUpdate.id
       );
       if (noteIndex !== -1) {
         this.hashtagCollection.updateHashtagsForText({
           objectWithTextToRemove: originalNote,
-          objectWithTextToAdd: note,
+          objectWithTextToAdd: noteToUpdate,
           textPropertyName: "messageText",
         });
         this.hashtags = this.hashtagCollection.hashtagsSortedByCount;
         const sortedNotes = [
           ...this.notes.slice(0, noteIndex),
-          note,
+          noteToUpdate,
           ...this.notes.slice(noteIndex + 1),
         ];
         sortedNotes.sort((note1, note2) => note2.timestamp - note1.timestamp);
