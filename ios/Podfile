@@ -6,7 +6,7 @@ EXPO_CPP_HEADER_DIR = 'ExpoKit'
 target 'Tidepool' do
   pod 'ExpoKit',
     :git => "http://github.com/expo/expo.git",
-    :tag => "ios/2.5.10",
+    :tag => "ios/2.6.8",
     :subspecs => [
       "Core",
       "CPP",
