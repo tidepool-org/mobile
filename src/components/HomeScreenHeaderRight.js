@@ -4,7 +4,7 @@ import { Image, Platform, TouchableOpacity } from "react-native";
 
 import FirstTimeTips from "../models/FirstTimeTips";
 import Tooltip from "./Tooltip";
-import SimpleTextTooltipContent from "../components/Tooltips/SimpleTextTooltipContent";
+import SimpleTextTooltipContent from "./Tooltips/SimpleTextTooltipContent";
 
 class HomeScreenHeaderRight extends PureComponent {
   state = {
@@ -23,8 +23,9 @@ class HomeScreenHeaderRight extends PureComponent {
   }
 
   onPress = () => {
+    const { navigateAddNote } = this.props;
     this.hideTipIfNeeded();
-    this.props.navigateAddNote();
+    navigateAddNote();
   };
 
   showTipIfNeeded(params) {
@@ -46,9 +47,10 @@ class HomeScreenHeaderRight extends PureComponent {
   }
 
   render() {
+    const { toolTipVisible } = this.state;
     return (
       <Tooltip
-        isVisible={this.state.toolTipVisible}
+        isVisible={toolTipVisible}
         placement="bottom"
         content={
           <SimpleTextTooltipContent text="Now, add an event, a meal, or note." />

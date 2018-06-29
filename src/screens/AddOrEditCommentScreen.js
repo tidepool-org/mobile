@@ -125,12 +125,13 @@ class AddOrEditCommentScreen extends PureComponent {
   }
 
   componentWillReceiveProps(nextProps) {
+    const { commentsFetchData, graphDataFetchData } = this.props;
     const shouldShowCommentsFetchError =
       nextProps.commentsFetchData.errorMessage &&
-      !this.props.commentsFetchData.errorMessage;
+      !commentsFetchData.errorMessage;
     const shouldShowGraphDataFetchError =
       nextProps.graphDataFetchData.errorMessage &&
-      !this.props.graphDataFetchData.errorMessage;
+      !graphDataFetchData.errorMessage;
     if (shouldShowCommentsFetchError || shouldShowGraphDataFetchError) {
       AddOrEditCommentScreen.showErrorMessageAlert();
     }
@@ -169,7 +170,9 @@ class AddOrEditCommentScreen extends PureComponent {
 
   onContainerViewLayout = event => {
     const { height } = event.nativeEvent.layout;
-    if (!this.state.isKeyboardVisible) {
+    const { isKeyboardVisible } = this.state;
+
+    if (!isKeyboardVisible) {
       this.setState({
         containerViewHeightWithoutKeyboard: height,
       });
@@ -178,8 +181,64 @@ class AddOrEditCommentScreen extends PureComponent {
     this.scrollToEditableComment();
   };
 
+  keyboardDidShow = event => {
+    this.setState({
+      isKeyboardVisible: true,
+      keyboardHeight: event.endCoordinates.height,
+    });
+    this.scrollToEditableComment();
+  };
+
+  keyboardDidHide = () => {
+    this.setState({
+      isKeyboardVisible: false,
+    });
+  };
+
+  cancelAndGoBack = () => {
+    this.goBack();
+  };
+
+  addOrSaveAndGoBack = ({ messageText, timestampAddComment }) => {
+    const {
+      currentUser,
+      currentProfile,
+      comment,
+      note,
+      commentUpdateAsync,
+      commentAddAsync,
+    } = this.props;
+
+    if (comment) {
+      commentUpdateAsync({
+        currentUser,
+        currentProfile,
+        note,
+        comment: { ...comment, messageText },
+      });
+    } else {
+      commentAddAsync({
+        currentUser,
+        currentProfile,
+        note,
+        messageText,
+        timestamp: timestampAddComment,
+      });
+    }
+    this.goBack();
+  };
+
+  goBack() {
+    const { navigateGoBack } = this.props;
+
+    navigateGoBack();
+    Keyboard.dismiss();
+  }
+
   // FIXME: On Android, a really long comment (longer than the fixed height of the TextInput?) will result in the scroll position changing as the TextInput content height changes, or when TextInput is focused. This is weird. We don't have autoGrow enabled (which is being removed anyway in 0.53.0), and the height of the TextInput doesn't change. This results in a poor initial scroll position for the scroll view. The same bug happens dynamically when typing in the TextInput or focusing it or navigating around it. This eventually causes the TextInput to not be visible even while it's focused and user is typing. This is a poor experience.
   scrollToEditableComment() {
+    const { isKeyboardVisible } = this.state;
+
     const isScrollable =
       this.noteViewHeight &&
       this.editableCommentHeight &&
@@ -200,55 +259,10 @@ class AddOrEditCommentScreen extends PureComponent {
       this.scrollView.scrollTo({
         x: 0,
         y: scrollY,
-        animated: this.state.isKeyboardVisible,
+        animated: isKeyboardVisible,
       });
     }
   }
-
-  keyboardDidShow = event => {
-    this.setState({
-      isKeyboardVisible: true,
-      keyboardHeight: event.endCoordinates.height,
-    });
-    this.scrollToEditableComment();
-  };
-
-  keyboardDidHide = () => {
-    this.setState({
-      isKeyboardVisible: false,
-    });
-  };
-
-  goBack() {
-    this.props.navigateGoBack();
-    Keyboard.dismiss();
-  }
-
-  cancelAndGoBack = () => {
-    this.goBack();
-  };
-
-  addOrSaveAndGoBack = ({ messageText, timestampAddComment }) => {
-    const { currentUser, currentProfile, comment, note } = this.props;
-
-    if (comment) {
-      this.props.commentUpdateAsync({
-        currentUser,
-        currentProfile,
-        note,
-        comment: { ...comment, messageText },
-      });
-    } else {
-      this.props.commentAddAsync({
-        currentUser,
-        currentProfile,
-        note,
-        messageText,
-        timestamp: timestampAddComment,
-      });
-    }
-    this.goBack();
-  };
 
   renderNote() {
     const {
@@ -300,10 +314,14 @@ class AddOrEditCommentScreen extends PureComponent {
   }
 
   render() {
-    const { isZoomingGraph } = this.state;
-    const containerViewHeight = this.state.isKeyboardVisible
-      ? this.state.containerViewHeightWithoutKeyboard -
-        this.state.keyboardHeight
+    const {
+      isKeyboardVisible,
+      isZoomingGraph,
+      containerViewHeightWithoutKeyboard,
+      keyboardHeight,
+    } = this.state;
+    const containerViewHeight = isKeyboardVisible
+      ? containerViewHeightWithoutKeyboard - keyboardHeight
       : null;
 
     return (
@@ -312,8 +330,8 @@ class AddOrEditCommentScreen extends PureComponent {
           <StatusBar barStyle="light-content" />
           <glamorous.View
             onLayout={this.onContainerViewLayout}
-            height={this.state.isKeyboardVisible ? containerViewHeight : null}
-            flex={this.state.isKeyboardVisible ? null : 1}
+            height={isKeyboardVisible ? containerViewHeight : null}
+            flex={isKeyboardVisible ? null : 1}
           >
             <glamorous.ScrollView
               innerRef={scrollView => {

@@ -2,7 +2,7 @@
 import React from "react";
 import { storiesOf } from "@storybook/react-native";
 
-import StoryContainerComponent from "../../__stories__/utils/StoryContainerComponent";
+import StoryContainerComponent from "../utils/StoryContainerComponent";
 import Drawer from "../../src/components/Drawer";
 import { API_ENVIRONMENT_STAGING } from "../../src/api";
 

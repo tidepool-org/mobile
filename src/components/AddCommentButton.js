@@ -7,7 +7,9 @@ import { ThemePropType } from "../prop-types/theme";
 
 class AddCommentButton extends PureComponent {
   onPress = () => {
-    this.props.onPress();
+    const { onPress } = this.props;
+
+    onPress();
   };
 
   render() {

@@ -14,10 +14,11 @@ class GraphZoomable extends PureComponent {
     this.trackedTouches = [];
     this.pinchZoomResponder = PanResponder.create({
       onStartShouldSetPanResponder: ({ nativeEvent: { target, touches } }) => {
+        const { isZoomingEnabled } = this.props;
         this.target = target;
         const filteredTouches = this.filterTouchesOnTarget(touches);
         const shouldStartZooming =
-          this.props.isZoomingEnabled && filteredTouches.length === 2;
+          isZoomingEnabled && filteredTouches.length === 2;
         // console.log(
         //   `onStartShouldSetPanResponder, should recognize gesture: ${shouldStartZooming}, target: ${target}, isZoomingEnabled: ${
         //     this.props.isZoomingEnabled
@@ -39,9 +40,10 @@ class GraphZoomable extends PureComponent {
       },
       onPanResponderMove: ({ nativeEvent: { touches } }) => {
         if (touches.length <= 2) {
+          const { onZoomMove } = this.props;
           const touchesOnTarget = this.filterTouchesOnTarget(touches);
           this.updateScaleAndTrackTouches(touchesOnTarget);
-          this.props.onZoomMove(this.scale);
+          onZoomMove(this.scale);
           // console.log(
           //   `onPanResponderMove, touches: ${
           //     touches.length
@@ -68,25 +70,28 @@ class GraphZoomable extends PureComponent {
   startZooming(touches) {
     if (!this.isZooming) {
       // console.log("startZooming");
+      const { onZoomStart } = this.props;
       this.scale = 1.0;
       this.isZooming = true;
       this.trackTouches(touches);
-      this.props.onZoomStart(this.scale);
+      onZoomStart(this.scale);
     }
   }
 
   stopZooming() {
     if (this.isZooming) {
       // console.log("stopZooming");
+      const { onZoomEnd } = this.props;
       this.commitZoom();
-      this.props.onZoomEnd(this.scale);
+      onZoomEnd(this.scale);
       this.isZooming = false;
     }
   }
 
   commitZoom() {
+    const { onZoomCommit } = this.props;
     // console.log(`commitZoom: ${this.scale}`);
-    this.props.onZoomCommit(this.scale);
+    onZoomCommit(this.scale);
     this.scale = 1;
   }
 
@@ -155,7 +160,7 @@ class GraphZoomable extends PureComponent {
     //   `GraphZoomable: render, isZoomingEnabled: ${this.props.isZoomingEnabled}`
     // );
 
-    const { graphFixedLayoutInfo } = this.props;
+    const { graphFixedLayoutInfo, children } = this.props;
 
     return (
       <glamorous.View
@@ -167,7 +172,7 @@ class GraphZoomable extends PureComponent {
         width={graphFixedLayoutInfo.width}
         {...this.pinchZoomResponder.panHandlers}
       >
-        {this.props.children}
+        {children}
       </glamorous.View>
     );
   }

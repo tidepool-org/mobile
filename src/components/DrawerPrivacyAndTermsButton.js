@@ -5,7 +5,8 @@ import DrawerButton from "./DrawerButton";
 
 class DrawerPrivacyAndTermsButton extends PureComponent {
   onPress = () => {
-    this.props.navigatePrivacyAndTerms();
+    const { navigatePrivacyAndTerms } = this.props;
+    navigatePrivacyAndTerms();
   };
 
   render() {

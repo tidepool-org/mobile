@@ -11,7 +11,8 @@ const graphRenderers = [{ name: "SVG" }, { name: "Three.js (OpenGL)" }];
 
 class DebugSettingsGraphRendererList extends PureComponent {
   onPress = graphRenderer => {
-    this.props.onGraphRendererSelected(graphRenderer);
+    const { onGraphRendererSelected } = this.props;
+    onGraphRendererSelected(graphRenderer);
   };
 
   renderSeparator = () => (
@@ -21,14 +22,17 @@ class DebugSettingsGraphRendererList extends PureComponent {
     />
   );
 
-  renderItem = ({ item }) => (
-    <DebugSettingsGraphRendererListItem
-      key={item.name}
-      graphRenderer={item.name}
-      onPress={this.onPress}
-      selected={item.name === this.props.selectedGraphRenderer}
-    />
-  );
+  renderItem = ({ item }) => {
+    const { selectedGraphRenderer } = this.props;
+    return (
+      <DebugSettingsGraphRendererListItem
+        key={item.name}
+        graphRenderer={item.name}
+        onPress={this.onPress}
+        selected={item.name === selectedGraphRenderer}
+      />
+    );
+  };
 
   render() {
     const { theme } = this.props;

@@ -22,24 +22,28 @@ class SignInForm extends PureComponent {
   }
 
   onContainerViewLayout = event => {
-    this.props.onKeyboardAvoidingViewHeight(
+    const { onKeyboardAvoidingViewHeight } = this.props;
+    onKeyboardAvoidingViewHeight(
       event.nativeEvent.layout.height -
         SignInForm.ACTIVITY_INDICATOR_VIEW_HEIGHT
     );
   };
 
   onPressSignIn = () => {
-    if (this.state.username.length > 0 && this.state.password.length > 0) {
+    const { authSignInAsync } = this.props;
+    const { username, password } = this.state;
+    if (username.length > 0 && password.length > 0) {
       Keyboard.dismiss();
-      this.props.authSignInAsync({
-        username: this.state.username,
-        password: this.state.password,
+      authSignInAsync({
+        username,
+        password,
       });
     }
   };
 
   onPressForgotPassword = () => {
-    this.props.navigateForgotPassword();
+    const { navigateForgotPassword } = this.props;
+    navigateForgotPassword();
   };
 
   renderErrorMessage() {
@@ -59,7 +63,8 @@ class SignInForm extends PureComponent {
   }
 
   render() {
-    const { theme, signingIn } = this.props;
+    const { theme, signingIn, authSignInReset } = this.props;
+    const { username, password } = this.state;
 
     return (
       <glamorous.View onLayout={this.onContainerViewLayout}>
@@ -72,7 +77,7 @@ class SignInForm extends PureComponent {
         />
         {this.renderErrorMessage()}
         <glamorous.TextInput
-          value={this.state.username}
+          value={username}
           allowFontScaling={false}
           innerRef={textInput => {
             this.emailTextInput = textInput;
@@ -94,13 +99,13 @@ class SignInForm extends PureComponent {
           onSubmitEditing={() => {
             this.passwordTextInput.focus();
           }}
-          onChangeText={username => {
-            this.setState({ username });
-            this.props.authSignInReset();
+          onChangeText={text => {
+            this.setState({ username: text });
+            authSignInReset();
           }}
         />
         <glamorous.TextInput
-          value={this.state.password}
+          value={password}
           allowFontScaling={false}
           innerRef={textInput => {
             this.passwordTextInput = textInput;
@@ -120,9 +125,9 @@ class SignInForm extends PureComponent {
           borderWidth={Platform.OS === "android" ? 0 : 1}
           paddingLeft={Platform.OS === "android" ? 3 : 12}
           marginTop={15}
-          onChangeText={password => {
-            this.setState({ password });
-            this.props.authSignInReset();
+          onChangeText={text => {
+            this.setState({ password: text });
+            authSignInReset();
           }}
           onSubmitEditing={this.onPressSignIn}
         />
@@ -150,9 +155,7 @@ class SignInForm extends PureComponent {
             onPress={this.onPressSignIn}
             title="Log in"
             disabled={
-              signingIn ||
-              this.state.username.length === 0 ||
-              this.state.password.length === 0
+              signingIn || username.length === 0 || password.length === 0
             }
           />
         </glamorous.View>
@@ -168,7 +171,7 @@ class SignInForm extends PureComponent {
             height: SignInForm.ACTIVITY_INDICATOR_VIEW_HEIGHT,
           }}
         >
-          {this.props.signingIn && (
+          {signingIn && (
             <ActivityIndicator
               style={{
                 height: SignInForm.ACTIVITY_INDICATOR_VIEW_HEIGHT,

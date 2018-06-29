@@ -14,14 +14,15 @@ class DebugSettingsTouchable extends PureComponent {
   }
 
   onPress = () => {
+    const { navigateDebugSettings } = this.props;
+    const { lastTouchTime, touchCount: previousTouchCount } = this.state;
     const touchTime = new Date().getTime();
-    const millisecondsSinceLastTouch = touchTime - this.state.lastTouchTime;
-    const previousTouchCount = this.state.touchCount;
+    const millisecondsSinceLastTouch = touchTime - lastTouchTime;
     let touchCount =
       millisecondsSinceLastTouch < 500 ? previousTouchCount + 1 : 1;
 
     if (touchCount === 7) {
-      this.props.navigateDebugSettings();
+      navigateDebugSettings();
       touchCount = 0;
     }
 
@@ -32,7 +33,7 @@ class DebugSettingsTouchable extends PureComponent {
   };
 
   render() {
-    const { style } = this.props;
+    const { style, children } = this.props;
 
     return (
       <glamorous.View style={style}>
@@ -41,7 +42,7 @@ class DebugSettingsTouchable extends PureComponent {
           onPress={this.onPress}
           hitSlop={{ left: 10, right: 10, top: 10, bottom: 10 }}
         >
-          {this.props.children}
+          {children}
         </glamorous.TouchableOpacity>
       </glamorous.View>
     );

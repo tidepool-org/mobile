@@ -12,20 +12,32 @@ import DrawerSupportButton from "./DrawerSupportButton";
 import DrawerPrivacyAndTermsButton from "./DrawerPrivacyAndTermsButton";
 import DrawerSignOutButton from "./DrawerSignOutButton";
 import Divider from "./Divider";
-import DebugSettingsTouchable from "../components/DebugSettingsTouchable";
-import VersionAndApiEnvironment from "../components/VersionAndApiEnvironment";
+import DebugSettingsTouchable from "./DebugSettingsTouchable";
+import VersionAndApiEnvironment from "./VersionAndApiEnvironment";
 import { UserPropType } from "../prop-types/user";
 
 class Drawer extends PureComponent {
   theme = PrimaryTheme;
 
   render() {
-    const { version, apiEnvironment, navigateDebugSettings } = this.props;
+    const {
+      style,
+      version,
+      apiEnvironment,
+      currentUser,
+      navigateDebugSettings,
+      navigateDrawerClose,
+      notesSwitchProfileAndFetchAsync,
+      navigateSwitchProfile,
+      navigateSupport,
+      navigatePrivacyAndTerms,
+      authSignOutAsync,
+    } = this.props;
 
     return (
       <ThemeProvider theme={this.theme}>
         <SafeAreaView
-          style={[this.props.style, { backgroundColor: Colors.veryLightGrey }]}
+          style={[style, { backgroundColor: Colors.veryLightGrey }]}
         >
           <glamorous.SectionList
             scrollEnabled={false}
@@ -33,15 +45,15 @@ class Drawer extends PureComponent {
               {
                 data: [
                   {
-                    currentUser: this.props.currentUser,
+                    currentUser,
                     key: "currentUser",
                   },
                 ],
                 renderItem: ({ item }) => (
                   <DrawerCurrentUser
-                    navigateDrawerClose={this.props.navigateDrawerClose}
+                    navigateDrawerClose={navigateDrawerClose}
                     notesSwitchProfileAndFetchAsync={
-                      this.props.notesSwitchProfileAndFetchAsync
+                      notesSwitchProfileAndFetchAsync
                     }
                     currentUser={item.currentUser}
                   />
@@ -50,7 +62,7 @@ class Drawer extends PureComponent {
               {
                 data: [
                   {
-                    currentUser: this.props.currentUser,
+                    currentUser,
                     key: "health",
                   },
                 ],
@@ -70,8 +82,8 @@ class Drawer extends PureComponent {
                 ],
                 renderItem: () => (
                   <DrawerSwitchProfileButton
-                    navigateSwitchProfile={this.props.navigateSwitchProfile}
-                    navigateDrawerClose={this.props.navigateDrawerClose}
+                    navigateSwitchProfile={navigateSwitchProfile}
+                    navigateDrawerClose={navigateDrawerClose}
                   />
                 ),
               },
@@ -82,9 +94,7 @@ class Drawer extends PureComponent {
               {
                 data: [{ key: "supportButton" }],
                 renderItem: () => (
-                  <DrawerSupportButton
-                    navigateSupport={this.props.navigateSupport}
-                  />
+                  <DrawerSupportButton navigateSupport={navigateSupport} />
                 ),
               },
               {
@@ -99,7 +109,7 @@ class Drawer extends PureComponent {
                 ],
                 renderItem: () => (
                   <DrawerPrivacyAndTermsButton
-                    navigatePrivacyAndTerms={this.props.navigatePrivacyAndTerms}
+                    navigatePrivacyAndTerms={navigatePrivacyAndTerms}
                   />
                 ),
               },
@@ -108,13 +118,11 @@ class Drawer extends PureComponent {
                 renderItem: () => <Divider />,
               },
               {
-                data: [
-                  { currentUser: this.props.currentUser, key: "signOutButton" },
-                ],
+                data: [{ currentUser, key: "signOutButton" }],
                 renderItem: ({ item }) => (
                   <DrawerSignOutButton
                     currentUser={item.currentUser}
-                    authSignOutAsync={this.props.authSignOutAsync}
+                    authSignOutAsync={authSignOutAsync}
                   />
                 ),
               },

@@ -2667,7 +2667,7 @@ exports[`Storyshots HomeScreen default 1`] = `
                   
 
 
-                  Last step: to get pump data, you need the Tidepool Uploader on your Computer.
+                  Last step: to get pump data, you need the Tidepool Uploader on your computer.
                 </Text>
                 <View
                   style={

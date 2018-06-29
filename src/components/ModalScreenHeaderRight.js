@@ -7,7 +7,8 @@ import { ThemePropType } from "../prop-types/theme";
 
 class ModalScreenHeaderRight extends PureComponent {
   onPress = () => {
-    this.props.action();
+    const { action } = this.props;
+    action();
   };
 
   formattedTitle() {

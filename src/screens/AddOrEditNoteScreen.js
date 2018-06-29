@@ -116,8 +116,8 @@ class AddOrEditNoteScreen extends PureComponent {
   };
 
   onPressHashtag = hashtag => {
-    const { selection } = this.state;
-    const messageTextBeforeAddingHashtag = this.state.messageText;
+    const { selection, messageText } = this.state;
+    const messageTextBeforeAddingHashtag = messageText;
 
     const firstPartBeforeHashtag = messageTextBeforeAddingHashtag.substr(
       0,
@@ -144,16 +144,21 @@ class AddOrEditNoteScreen extends PureComponent {
     } else {
       rightSpaceAfterHashtag = " ";
     }
-    const messageText = `${firstPartBeforeHashtag}${leftSpaceBeforeHashtag}${hashtag}${rightSpaceAfterHashtag}${secondPartAfterHashtag}`;
+    const newMessageText = `${firstPartBeforeHashtag}${leftSpaceBeforeHashtag}${hashtag}${rightSpaceAfterHashtag}${secondPartAfterHashtag}`;
     this.setState(prevState => ({
-      messageText,
-      isDirty: this.getDirtyState({ ...prevState, messageText }),
+      messageText: newMessageText,
+      isDirty: this.getDirtyState({
+        ...prevState,
+        messageText: newMessageText,
+      }),
     }));
     this.textInput.focus();
   };
 
   onBackPress = () => {
-    if (this.state.isDirty) {
+    const { isDirty } = this.state;
+
+    if (isDirty) {
       this.onCloseAction();
       return true;
     }
@@ -176,7 +181,9 @@ class AddOrEditNoteScreen extends PureComponent {
   };
 
   onCloseAction = () => {
-    if (this.state.isDirty) {
+    const { isDirty } = this.state;
+
+    if (isDirty) {
       if (this.isAddNoteMode()) {
         this.showDiscardNoteAlert();
       } else {
@@ -189,7 +196,9 @@ class AddOrEditNoteScreen extends PureComponent {
 
   onContainerViewLayout = event => {
     const { y } = event.nativeEvent.layout;
-    if (!this.state.isKeyboardVisible) {
+    const { isKeyboardVisible } = this.state;
+
+    if (!isKeyboardVisible) {
       this.setState({
         containerViewY: y,
       });
@@ -250,7 +259,8 @@ class AddOrEditNoteScreen extends PureComponent {
   };
 
   toggleIsEditingTimestampIOS = () => {
-    this.setIsEditingTimestamp(!this.state.isEditingTimestamp);
+    const { isEditingTimestamp } = this.state;
+    this.setIsEditingTimestamp(!isEditingTimestamp);
   };
 
   startEditingTimestamp = () => {
@@ -266,7 +276,9 @@ class AddOrEditNoteScreen extends PureComponent {
   };
 
   discardAndGoBack = () => {
-    this.props.navigateGoBack();
+    const { navigateGoBack } = this.props;
+
+    navigateGoBack();
     this.textInput.blur();
     if (this.dummyTextInputIOS) {
       this.dummyTextInputIOS.focus();
@@ -274,29 +286,37 @@ class AddOrEditNoteScreen extends PureComponent {
   };
 
   saveAndGoBack = () => {
-    const { currentUser, currentProfile, note } = this.props;
+    const {
+      currentUser,
+      currentProfile,
+      note,
+      noteAddAsync,
+      noteUpdateAsync,
+      navigateGoBack,
+    } = this.props;
+    const { messageText, timestamp } = this.state;
 
     if (this.isEditNoteMode()) {
       const editedNote = {
         ...note,
-        messageText: this.state.messageText.trim(),
-        timestamp: this.state.timestamp,
+        messageText: messageText.trim(),
+        timestamp,
       };
-      this.props.noteUpdateAsync({
+      noteUpdateAsync({
         currentUser,
         currentProfile,
         note: editedNote,
         originalNote: note,
       });
     } else {
-      this.props.noteAddAsync({
+      noteAddAsync({
         currentUser,
         currentProfile,
-        messageText: this.state.messageText.trim(),
-        timestamp: this.state.timestamp,
+        messageText: messageText.trim(),
+        timestamp,
       });
     }
-    this.props.navigateGoBack();
+    navigateGoBack();
     this.textInput.blur();
     if (this.dummyTextInputIOS) {
       this.dummyTextInputIOS.focus();
@@ -336,14 +356,6 @@ class AddOrEditNoteScreen extends PureComponent {
     );
   };
 
-  isAddNoteMode() {
-    return !this.props.note;
-  }
-
-  isEditNoteMode() {
-    return !!this.props.note;
-  }
-
   keyboardDidShow = event => {
     this.setState({
       isKeyboardVisible: true,
@@ -359,17 +371,22 @@ class AddOrEditNoteScreen extends PureComponent {
 
   openAndroidDatePicker = async () => {
     try {
+      const { timestamp } = this.state;
+
       const { action, year, month, day } = await DatePickerAndroid.open({
-        date: this.state.timestamp,
+        date: timestamp,
       });
       if (action !== DatePickerAndroid.dismissedAction) {
-        const timestamp = setDate(
-          setMonth(setYear(this.state.timestamp, year), month),
+        const newTimestamp = setDate(
+          setMonth(setYear(timestamp, year), month),
           day
         );
         this.setState(prevState => ({
-          timestamp,
-          isDirty: this.getDirtyState({ ...prevState, timestamp }),
+          timestamp: newTimestamp,
+          isDirty: this.getDirtyState({
+            ...prevState,
+            timestamp: newTimestamp,
+          }),
         }));
 
         this.openAndroidTimePicker();
@@ -384,20 +401,22 @@ class AddOrEditNoteScreen extends PureComponent {
 
   openAndroidTimePicker = async () => {
     try {
+      const { timestamp } = this.state;
+
       const { action, hour, minute } = await TimePickerAndroid.open({
-        hour: getHours(this.state.timestamp),
-        minute: getMinutes(this.state.timestamp),
+        hour: getHours(timestamp),
+        minute: getMinutes(timestamp),
         is24Hour: false, // TODO: android - Should use something locale specific, respecting system settings?
         mode: "default",
       });
       if (action !== TimePickerAndroid.dismissedAction) {
-        const timestamp = setMinutes(
-          setHours(this.state.timestamp, hour),
-          minute
-        );
+        const newTimestamp = setMinutes(setHours(timestamp, hour), minute);
         this.setState(prevState => ({
-          timestamp,
-          isDirty: this.getDirtyState({ ...prevState, timestamp }),
+          timestamp: newTimestamp,
+          isDirty: this.getDirtyState({
+            ...prevState,
+            timestamp: newTimestamp,
+          }),
         }));
       }
     } catch ({ code, message }) {
@@ -407,9 +426,22 @@ class AddOrEditNoteScreen extends PureComponent {
     this.stopEditingTimestamp();
   };
 
+  isAddNoteMode() {
+    const { note } = this.props;
+
+    return !note;
+  }
+
+  isEditNoteMode() {
+    const { note } = this.props;
+
+    return !!note;
+  }
+
   renderDateAndroid() {
+    const { timestamp } = this.state;
     const { formattedDate, formattedTime } = formatDateAndTimeForAddOrEditNote(
-      this.state.timestamp
+      timestamp
     );
 
     return (
@@ -468,12 +500,11 @@ class AddOrEditNoteScreen extends PureComponent {
   }
 
   renderDatePickerIOS() {
-    if (this.state.isEditingTimestamp) {
+    const { timestamp, isEditingTimestamp } = this.state;
+
+    if (isEditingTimestamp) {
       return (
-        <DatePickerIOS
-          date={this.state.timestamp}
-          onDateChange={this.onDateChangeIOS}
-        />
+        <DatePickerIOS date={timestamp} onDateChange={this.onDateChangeIOS} />
       );
     }
 
@@ -481,8 +512,9 @@ class AddOrEditNoteScreen extends PureComponent {
   }
 
   renderDateIOS() {
+    const { timestamp } = this.state;
     const { formattedDate, formattedTime } = formatDateAndTimeForAddOrEditNote(
-      this.state.timestamp
+      timestamp
     );
 
     return (
@@ -506,6 +538,8 @@ class AddOrEditNoteScreen extends PureComponent {
   }
 
   renderDateEditOrDoneIOS() {
+    const { isEditingTimestamp } = this.state;
+
     return (
       <glamorous.TouchableOpacity
         onPress={this.toggleIsEditingTimestampIOS}
@@ -515,7 +549,7 @@ class AddOrEditNoteScreen extends PureComponent {
           paddingRight={16}
           style={this.theme.editButtonTextStyle}
         >
-          {this.state.isEditingTimestamp ? "Done" : "Edit"}
+          {isEditingTimestamp ? "Done" : "Edit"}
         </glamorous.Text>
       </glamorous.TouchableOpacity>
     );
@@ -581,6 +615,8 @@ class AddOrEditNoteScreen extends PureComponent {
 
   // FIXME: Looks like ejected app still has about a 20 pixel clipping issue with keyboard on Android, possibly related to status bar height? Or something else? Non-ejected Expo app for Android doesn’t have this issue, neither does iOS. Still need to track this issue. It's probably not a super common case. Need a reasonably long note to notice this. And can still work around it.
   renderNote() {
+    const { messageText } = this.state;
+
     return (
       <glamorous.TextInput
         innerRef={textInput => {
@@ -611,13 +647,14 @@ class AddOrEditNoteScreen extends PureComponent {
         <HashtagText
           boldStyle={this.theme.notesListItemHashtagStyle}
           normalStyle={this.theme.notesListItemTextStyle}
-          text={this.state.messageText}
+          text={messageText}
         />
       </glamorous.TextInput>
     );
   }
 
   renderHeader() {
+    const { isDirty } = this.state;
     const title = this.isEditNoteMode()
       ? ADD_OR_EDIT_SCREEN_EDIT_NOTE_TITLE
       : ADD_OR_EDIT_SCREEN_ADD_NOTE_TITLE;
@@ -640,7 +677,7 @@ class AddOrEditNoteScreen extends PureComponent {
               <ModalScreenHeaderRight
                 actionTitle="Save"
                 action={this.saveAndGoBack}
-                disabled={!this.state.isDirty}
+                disabled={!isDirty}
               />
             </ThemeProvider>
           ),
@@ -667,7 +704,7 @@ class AddOrEditNoteScreen extends PureComponent {
                 <ModalScreenHeaderRight
                   actionTitle="Save"
                   action={this.saveAndGoBack}
-                  disabled={!this.state.isDirty}
+                  disabled={!isDirty}
                 />
               </ThemeProvider>
             ),
@@ -678,8 +715,10 @@ class AddOrEditNoteScreen extends PureComponent {
   }
 
   render() {
-    const containerViewHeight = this.state.isKeyboardVisible
-      ? this.state.keyboardY - this.state.containerViewY
+    const { isKeyboardVisible, containerViewY, keyboardY } = this.state;
+
+    const containerViewHeight = isKeyboardVisible
+      ? keyboardY - containerViewY
       : null;
 
     return (
@@ -696,7 +735,7 @@ class AddOrEditNoteScreen extends PureComponent {
           {this.renderHashtagPicker()}
           {this.renderSeparator()}
           <glamorous.View
-            flex={this.state.isKeyboardVisible ? null : 1}
+            flex={isKeyboardVisible ? null : 1}
             onLayout={this.onContainerViewLayout}
             height={containerViewHeight}
           >

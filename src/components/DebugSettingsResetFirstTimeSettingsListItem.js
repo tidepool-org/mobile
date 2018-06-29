@@ -19,7 +19,8 @@ class DebugSettingsResetFirstTimeSettingsListItem extends PureComponent {
 
   renderButtonText() {
     const { theme } = this.props;
-    const titleColor = this.state.isUnderlayVisible
+    const { isUnderlayVisible } = this.state;
+    const titleColor = isUnderlayVisible
       ? theme.titleColorActive
       : theme.listItemName.color;
 

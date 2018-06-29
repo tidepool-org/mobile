@@ -24,23 +24,26 @@ class ProfileList extends PureComponent {
   }
 
   componentDidMount() {
-    if (this.props.errorMessage) {
+    const { errorMessage } = this.props;
+    if (errorMessage) {
       ProfileList.showErrorMessageAlert();
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.errorMessage && !this.props.errorMessage) {
+    const { errorMessage, fetching } = this.props;
+    if (nextProps.errorMessage && !errorMessage) {
       ProfileList.showErrorMessageAlert();
     }
 
-    if (!nextProps.fetching && this.props.fetching) {
+    if (!nextProps.fetching && fetching) {
       this.setState({ refreshing: false });
     }
   }
 
   onPress = profile => {
-    this.props.onPress(profile);
+    const { onPress } = this.props;
+    onPress(profile);
   };
 
   onRefresh = () => {
@@ -67,6 +70,7 @@ class ProfileList extends PureComponent {
 
   render() {
     const { profileListData } = this.props;
+    const { refreshing } = this.state;
 
     return (
       <glamorous.FlatList
@@ -77,10 +81,7 @@ class ProfileList extends PureComponent {
         renderItem={this.renderItem}
         ItemSeparatorComponent={this.renderSeparator}
         refreshControl={
-          <RefreshControl
-            refreshing={this.state.refreshing}
-            onRefresh={this.onRefresh}
-          />
+          <RefreshControl refreshing={refreshing} onRefresh={this.onRefresh} />
         }
       />
     );

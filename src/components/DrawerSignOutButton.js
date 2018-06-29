@@ -5,7 +5,8 @@ import DrawerButton from "./DrawerButton";
 
 class DrawerSignOutButton extends PureComponent {
   onPress = () => {
-    this.props.authSignOutAsync();
+    const { authSignOutAsync } = this.props;
+    authSignOutAsync();
   };
 
   render() {

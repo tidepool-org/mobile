@@ -16,23 +16,31 @@ class DebugSettingsScreen extends PureComponent {
     this.theme = PrimaryTheme;
   }
 
-  onApiEnvironmentSelected = selectedApiEnvironment => {
-    if (selectedApiEnvironment !== this.props.selectedApiEnvironment) {
-      this.props.apiEnvironmentSetAndSaveAsync(selectedApiEnvironment);
+  onApiEnvironmentSelected = newSelectedApiEnvironment => {
+    const {
+      selectedApiEnvironment,
+      apiEnvironmentSetAndSaveAsync,
+      navigateGoBack,
+    } = this.props;
+
+    if (newSelectedApiEnvironment !== selectedApiEnvironment) {
+      apiEnvironmentSetAndSaveAsync(newSelectedApiEnvironment);
     } else {
-      this.props.navigateGoBack();
+      navigateGoBack();
     }
   };
 
-  onGraphRendererSelected = selectedGraphRenderer => {
-    if (selectedGraphRenderer !== this.props.selectedGraphRenderer) {
+  onGraphRendererSelected = newSelectedGraphRenderer => {
+    const { selectedGraphRenderer, navigateGoBack } = this.props;
+
+    if (newSelectedGraphRenderer !== selectedGraphRenderer) {
       // Delay this so the Modal closes faster
       const { graphRendererSetAndSaveAsync } = this.props;
       setTimeout(() => {
-        graphRendererSetAndSaveAsync(selectedGraphRenderer);
+        graphRendererSetAndSaveAsync(newSelectedGraphRenderer);
       }, 250);
     }
-    this.props.navigateGoBack();
+    navigateGoBack();
   };
 
   renderItem = ({ item }) => (

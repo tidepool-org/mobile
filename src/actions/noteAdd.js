@@ -1,6 +1,6 @@
 import api from "../api";
 
-import { notesFetchAddNote } from "../actions/notesFetch";
+import { notesFetchAddNote } from "./notesFetch";
 
 const NOTE_ADD_DID_START = "NOTE_ADD_DID_START";
 const NOTE_ADD_DID_SUCCEED = "NOTE_ADD_DID_SUCCEED";

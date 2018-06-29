@@ -1,13 +1,13 @@
 // import { NativeModules } from "react-native";
-import { appVersionLoad } from "../actions/appVersion";
-import { authRefreshTokenOrSignInAsync } from "../actions/auth";
-import { apiEnvironmentLoadAndSetAsync } from "../actions/apiEnvironment";
-import { graphRendererLoadAndSetAsync } from "../actions/graphRenderer";
-import { navigateLaunch } from "../actions/navigation";
+import { appVersionLoad } from "./appVersion";
+import { authRefreshTokenOrSignInAsync } from "./auth";
+import { apiEnvironmentLoadAndSetAsync } from "./apiEnvironment";
+import { graphRendererLoadAndSetAsync } from "./graphRenderer";
+import { navigateLaunch } from "./navigation";
 import GraphTextMeshFactory from "../components/Graph/gl/GraphTextMeshFactory";
 import GraphCbgGl from "../components/Graph/gl/GraphCbgGl";
 import GraphSmbgGl from "../components/Graph/gl/GraphSmbgGl";
-import { firstTimeTipsLoadSettingsAsync } from "../actions/firstTimeTips";
+import { firstTimeTipsLoadSettingsAsync } from "./firstTimeTips";
 
 const APP_INIT_DID_FINISH = "APP_INIT_DID_FINISH";
 

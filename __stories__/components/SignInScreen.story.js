@@ -2,7 +2,7 @@
 import React from "react";
 import { storiesOf } from "@storybook/react-native";
 
-import StoryContainerScreen from "../../__stories__/utils/StoryContainerScreen";
+import StoryContainerScreen from "../utils/StoryContainerScreen";
 import SignInScreen from "../../src/screens/SignInScreen";
 import { API_ENVIRONMENT_STAGING } from "../../src/api";
 

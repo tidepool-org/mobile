@@ -4,7 +4,8 @@ import glamorous, { withTheme } from "glamorous-native";
 
 class ModalScreenHeaderLeft extends PureComponent {
   onPress = () => {
-    this.props.action();
+    const { action } = this.props;
+    action();
   };
 
   render() {

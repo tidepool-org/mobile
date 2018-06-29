@@ -22,7 +22,8 @@ const apiEnvironments = [
 
 class DebugSettingsApiEnvironmentList extends PureComponent {
   onPress = apiEnvironmentName => {
-    this.props.onApiEnvironmentSelected(apiEnvironmentName);
+    const { onApiEnvironmentSelected } = this.props;
+    onApiEnvironmentSelected(apiEnvironmentName);
   };
 
   renderSeparator = () => (
@@ -32,14 +33,17 @@ class DebugSettingsApiEnvironmentList extends PureComponent {
     />
   );
 
-  renderItem = ({ item }) => (
-    <DebugSettingsApiEnvironmentListItem
-      key={item.name}
-      apiEnvironmentName={item.name}
-      onPress={this.onPress}
-      selected={item.name === this.props.selectedApiEnvironment}
-    />
-  );
+  renderItem = ({ item }) => {
+    const { selectedApiEnvironment } = this.props;
+    return (
+      <DebugSettingsApiEnvironmentListItem
+        key={item.name}
+        apiEnvironmentName={item.name}
+        onPress={this.onPress}
+        selected={item.name === selectedApiEnvironment}
+      />
+    );
+  };
 
   render() {
     const { theme } = this.props;

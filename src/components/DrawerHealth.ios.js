@@ -20,6 +20,7 @@ class DrawerHealth extends PureComponent {
 
   render() {
     const { theme, style, currentUser } = this.props;
+    const { connectToHealth } = this.state;
 
     if (!currentUser.patient) {
       return null;
@@ -39,7 +40,7 @@ class DrawerHealth extends PureComponent {
             style={{ transform: [{ scaleX: 0.75 }, { scaleY: 0.75 }] }}
             onTintColor={Colors.brightBlue}
             onValueChange={this.onConnectToHealthValueChange}
-            value={this.state.connectToHealth}
+            value={connectToHealth}
           />
         </glamorous.View>
       </glamorous.View>

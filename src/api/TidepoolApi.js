@@ -2,7 +2,7 @@ import axios from "axios";
 import uuidv4 from "uuid/v4";
 import parse from "date-fns/parse";
 
-import GraphData from "../../src/models/GraphData";
+import GraphData from "../models/GraphData";
 
 // TODO: api - default timeout for requests
 

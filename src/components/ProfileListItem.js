@@ -16,7 +16,8 @@ class ProfileListItem extends PureComponent {
   }
 
   componentDidMount() {
-    Animated.timing(this.state.fadeAnimation, {
+    const { fadeAnimation } = this.state;
+    Animated.timing(fadeAnimation, {
       toValue: 1,
       duration: 250,
       useNativeDriver: true,
@@ -24,11 +25,14 @@ class ProfileListItem extends PureComponent {
   }
 
   onPress = () => {
-    this.props.onPress(this.props.item);
+    const { item, onPress } = this.props;
+    onPress(item);
   };
 
   renderCurrentUserProfileIcon() {
-    const { item: { currentUserId, userId } } = this.props;
+    const {
+      item: { currentUserId, userId },
+    } = this.props;
 
     if (currentUserId === userId) {
       return (
@@ -45,8 +49,12 @@ class ProfileListItem extends PureComponent {
   }
 
   renderName() {
-    const { theme, item: { currentUserId, userId, fullName } } = this.props;
-    const titleColor = this.state.isUnderlayVisible
+    const {
+      theme,
+      item: { currentUserId, userId, fullName },
+    } = this.props;
+    const { isUnderlayVisible } = this.state;
+    const titleColor = isUnderlayVisible
       ? theme.titleColorActive
       : theme.listItemName.color;
 
@@ -65,8 +73,12 @@ class ProfileListItem extends PureComponent {
   }
 
   renderSelectedCheckMark() {
-    const { theme, item: { selectedProfileUserId, userId } } = this.props;
-    const borderColor = this.state.isUnderlayVisible
+    const {
+      theme,
+      item: { selectedProfileUserId, userId },
+    } = this.props;
+    const { isUnderlayVisible } = this.state;
+    const borderColor = isUnderlayVisible
       ? theme.titleColorActive
       : theme.underlayColor;
 
@@ -95,9 +107,10 @@ class ProfileListItem extends PureComponent {
 
   render() {
     const { style, theme } = this.props;
+    const { fadeAnimation } = this.state;
 
     return (
-      <Animated.View style={[style, { opacity: this.state.fadeAnimation }]}>
+      <Animated.View style={[style, { opacity: fadeAnimation }]}>
         <glamorous.TouchableHighlight
           onPress={this.onPress}
           underlayColor={theme.underlayColor}

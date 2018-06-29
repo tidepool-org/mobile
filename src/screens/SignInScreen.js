@@ -17,6 +17,7 @@ import VersionAndApiEnvironment from "../components/VersionAndApiEnvironment";
 import DebugSettingsTouchable from "../components/DebugSettingsTouchable";
 
 class SignInScreen extends PureComponent {
+  theme = PrimaryTheme;
   state = {};
 
   componentDidMount() {
@@ -41,7 +42,9 @@ class SignInScreen extends PureComponent {
   }
 
   onContainerViewLayout = event => {
-    if (!this.state.isKeyboardVisible) {
+    const { isKeyboardVisible } = this.state;
+
+    if (!isKeyboardVisible) {
       const { layout } = event.nativeEvent;
       const containerViewHeightWithoutKeyboard = layout.height;
       this.setState({ containerViewHeightWithoutKeyboard });
@@ -57,44 +60,6 @@ class SignInScreen extends PureComponent {
   onKeyboardAvoidingViewHeight = height => {
     this.setState({ signInFormKeyboardAvoidingViewHeight: height });
   };
-
-  scrollToAvoidKeyboard(event) {
-    // Configure next LayoutAnimation
-    let animationConfig;
-    if (event && event.easing && event.duration) {
-      animationConfig = {
-        duration: event.duration,
-        update: {
-          type: LayoutAnimation.Types[event.easing],
-        },
-      };
-    } else {
-      animationConfig = { ...LayoutAnimation.Presets.easeInEaseOut };
-    }
-    LayoutAnimation.configureNext({
-      ...animationConfig,
-      duration: 175,
-      useNativeDriver: true,
-    });
-
-    // Calculate scrollY
-    let scrollY = 0;
-    if (event) {
-      const keyboardY = event ? event.endCoordinates.screenY : 0;
-      const paddingY = 10;
-      scrollY =
-        this.state.signInFormY +
-        this.state.signInFormKeyboardAvoidingViewHeight +
-        paddingY -
-        keyboardY;
-      if (scrollY < 0) {
-        scrollY = 0;
-      }
-    }
-
-    // Scroll
-    this.setState({ signInFormContainerTop: -scrollY });
-  }
 
   // FIXME: Not called on Android with adjustNothing windowSoftInputMode. See: https://github.com/facebook/react-native/issues/3468#issuecomment-329603915 and https://github.com/facebook/react-native/issues/2852. Ideally we want adjustNothing and manage the keyboard avoidance ourselves, rather than adjustResize
   keyboardDidShow = event => {
@@ -125,16 +90,56 @@ class SignInScreen extends PureComponent {
     }
   };
 
-  theme = PrimaryTheme;
+  scrollToAvoidKeyboard(event) {
+    const { signInFormY, signInFormKeyboardAvoidingViewHeight } = this.state;
+
+    // Configure next LayoutAnimation
+    let animationConfig;
+    if (event && event.easing && event.duration) {
+      animationConfig = {
+        duration: event.duration,
+        update: {
+          type: LayoutAnimation.Types[event.easing],
+        },
+      };
+    } else {
+      animationConfig = { ...LayoutAnimation.Presets.easeInEaseOut };
+    }
+    LayoutAnimation.configureNext({
+      ...animationConfig,
+      duration: 175,
+      useNativeDriver: true,
+    });
+
+    // Calculate scrollY
+    let scrollY = 0;
+    if (event) {
+      const keyboardY = event ? event.endCoordinates.screenY : 0;
+      const paddingY = 10;
+      scrollY =
+        signInFormY +
+        signInFormKeyboardAvoidingViewHeight +
+        paddingY -
+        keyboardY;
+      if (scrollY < 0) {
+        scrollY = 0;
+      }
+    }
+
+    // Scroll
+    this.setState({ signInFormContainerTop: -scrollY });
+  }
 
   renderHeader() {
+    const { navigateSignUp } = this.props;
+
     return (
       <SignUp
         style={{
           alignSelf: "flex-end",
           marginTop: 30,
         }}
-        navigateSignUp={this.props.navigateSignUp}
+        navigateSignUp={navigateSignUp}
       />
     );
   }
@@ -186,6 +191,11 @@ class SignInScreen extends PureComponent {
   }
 
   render() {
+    const {
+      containerViewHeightWithoutKeyboard,
+      signInFormContainerTop,
+    } = this.state;
+
     return (
       <ThemeProvider theme={this.theme}>
         <glamorous.View
@@ -193,7 +203,7 @@ class SignInScreen extends PureComponent {
           // FIXME: This minHeight is needed to work around Android issue where adjustResize windowSoftInputMode causes the window size to change, thus squishing the view and revealing the footer rather than obscuring it. See: https://github.com/facebook/react-native/issues/3468#issuecomment-329603915 and https://github.com/facebook/react-native/issues/2852. Ideally we want adjustNothing and manage the keyboard avoidance ourselves, rather than adjustResize
           minHeight={
             Platform.OS === "android"
-              ? this.state.containerViewHeightWithoutKeyboard
+              ? containerViewHeightWithoutKeyboard
               : null
           }
           backgroundColor={this.theme.colors.lightBackground}
@@ -209,7 +219,7 @@ class SignInScreen extends PureComponent {
             {this.renderHeader()}
             <glamorous.View
               onLayout={this.onSignInFormLayout}
-              top={this.state.signInFormContainerTop}
+              top={signInFormContainerTop}
             >
               {this.renderSignInForm()}
             </glamorous.View>

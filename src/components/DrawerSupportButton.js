@@ -5,7 +5,8 @@ import DrawerButton from "./DrawerButton";
 
 class DrawerSupportButton extends PureComponent {
   onPress = () => {
-    this.props.navigateSupport();
+    const { navigateSupport } = this.props;
+    navigateSupport();
   };
 
   render() {

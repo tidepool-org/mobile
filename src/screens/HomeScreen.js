@@ -28,8 +28,10 @@ class HomeScreen extends PureComponent {
   }
 
   componentDidMount() {
-    this.props.notesFetchAsync({
-      profile: this.props.currentProfile,
+    const { currentProfile, notesFetchAsync } = this.props;
+
+    notesFetchAsync({
+      profile: currentProfile,
     });
   }
 
@@ -94,7 +96,8 @@ class HomeScreen extends PureComponent {
   };
 
   async composeEmailWithDesktopUploaderLink() {
-    const currentUserEmail = this.props.currentUser.username;
+    const { currentUser } = this.props;
+    const currentUserEmail = currentUser.username;
 
     try {
       await Expo.MailComposer.composeAsync({
@@ -151,6 +154,7 @@ class HomeScreen extends PureComponent {
       navigateAddComment,
       navigateEditComment,
     } = this.props;
+    const { toolTipVisible } = this.state;
 
     return (
       <ThemeProvider theme={this.theme}>
@@ -177,14 +181,14 @@ class HomeScreen extends PureComponent {
             graphRenderer={graphRenderer}
           />
           <Tooltip
-            isVisible={this.state.toolTipVisible}
+            isVisible={toolTipVisible}
             placement="top"
-            content={
+            content={(
               <TidepoolUploaderTooltipContent
                 onPressEmailLink={this.onPressTooltipEmailLink}
                 onPressOk={this.onPressTooltipOk}
               />
-            }
+)}
             arrowSize={{ width: 0, height: 0 }}
             tooltipOriginOffset={{
               x: 0,
