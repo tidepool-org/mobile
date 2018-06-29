@@ -26,6 +26,7 @@
 #import "FBSDKAppEventsStateManager.h"
 #import "FBSDKAppEventsUtility.h"
 #import "FBSDKConstants.h"
+#import "FBSDKDynamicFrameworkLoader.h"
 #import "FBSDKError.h"
 #import "FBSDKGraphRequest+Internal.h"
 #import "FBSDKInternalUtility.h"
@@ -36,6 +37,11 @@
 #import "FBSDKSettings.h"
 #import "FBSDKTimeSpentData.h"
 #import "FBSDKUtility.h"
+
+#if !TARGET_OS_TV
+#import "FBSDKEventBindingManager.h"
+#import "FBSDKHybridAppEventsScriptMessageHandler.h"
+#endif
 
 //
 // Public event names
@@ -122,6 +128,7 @@ NSString *const FBSDKAppEventNameFBSDKLikeButtonImpression        = @"fb_like_bu
 NSString *const FBSDKAppEventNameFBSDKLoginButtonImpression       = @"fb_login_button_impression";
 NSString *const FBSDKAppEventNameFBSDKSendButtonImpression        = @"fb_send_button_impression";
 NSString *const FBSDKAppEventNameFBSDKShareButtonImpression       = @"fb_share_button_impression";
+NSString *const FBSDKAppEventNameFBSDKLiveStreamingButtonImpression = @"fb_live_streaming_button_impression";
 
 NSString *const FBSDKAppEventNameFBSDKSmartLoginService      = @"fb_smart_login_service";
 
@@ -129,6 +136,7 @@ NSString *const FBSDKAppEventNameFBSDKLikeButtonDidTap  = @"fb_like_button_did_t
 NSString *const FBSDKAppEventNameFBSDKLoginButtonDidTap  = @"fb_login_button_did_tap";
 NSString *const FBSDKAppEventNameFBSDKSendButtonDidTap  = @"fb_send_button_did_tap";
 NSString *const FBSDKAppEventNameFBSDKShareButtonDidTap  = @"fb_share_button_did_tap";
+NSString *const FBSDKAppEventNameFBSDKLiveStreamingButtonDidTap  = @"fb_live_streaming_button_did_tap";
 
 NSString *const FBSDKAppEventNameFBSDKLikeControlDidDisable          = @"fb_like_control_did_disable";
 NSString *const FBSDKAppEventNameFBSDKLikeControlDidLike             = @"fb_like_control_did_like";
@@ -149,6 +157,16 @@ NSString *const FBSDKAppEventNameFBSDKEventAppInviteShareDialogShow =   @"fb_app
 
 NSString *const FBSDKAppEventNameFBSessionFASLoginDialogResult = @"fb_mobile_login_fas_dialog_result";
 
+NSString *const FBSDKAppEventNameFBSDKLiveStreamingStart        = @"fb_sdk_live_streaming_start";
+NSString *const FBSDKAppEventNameFBSDKLiveStreamingStop         = @"fb_sdk_live_streaming_stop";
+NSString *const FBSDKAppEventNameFBSDKLiveStreamingPause        = @"fb_sdk_live_streaming_pause";
+NSString *const FBSDKAppEventNameFBSDKLiveStreamingResume       = @"fb_sdk_live_streaming_resume";
+NSString *const FBSDKAppEventNameFBSDKLiveStreamingError        = @"fb_sdk_live_streaming_error";
+NSString *const FBSDKAppEventNameFBSDKLiveStreamingUpdateStatus = @"fb_sdk_live_streaming_update_status";
+NSString *const FBSDKAppEventNameFBSDKLiveStreamingVideoID      = @"fb_sdk_live_streaming_video_id";
+NSString *const FBSDKAppEventNameFBSDKLiveStreamingMic          = @"fb_sdk_live_streaming_mic";
+NSString *const FBSDKAppEventNameFBSDKLiveStreamingCamera       = @"fb_sdk_live_streaming_camera";
+
 // Event Parameters internal to this file
 NSString *const FBSDKAppEventParameterDialogOutcome               = @"fb_dialog_outcome";
 NSString *const FBSDKAppEventParameterDialogErrorMessage          = @"fb_dialog_outcome_error_message";
@@ -161,6 +179,13 @@ NSString *const FBSDKAppEventParameterShareTrayResult             = @"fb_share_t
 NSString *const FBSDKAppEventParameterLogTime = @"_logTime";
 NSString *const FBSDKAppEventParameterEventName = @"_eventName";
 NSString *const FBSDKAppEventParameterImplicitlyLogged = @"_implicitlyLogged";
+
+NSString *const FBSDKAppEventParameterLiveStreamingPrevStatus    = @"live_streaming_prev_status";
+NSString *const FBSDKAppEventParameterLiveStreamingStatus        = @"live_streaming_status";
+NSString *const FBSDKAppEventParameterLiveStreamingError         = @"live_streaming_error";
+NSString *const FBSDKAppEventParameterLiveStreamingVideoID       = @"live_streaming_video_id";
+NSString *const FBSDKAppEventParameterLiveStreamingMicEnabled    = @"live_streaming_mic_enabled";
+NSString *const FBSDKAppEventParameterLiveStreamingCameraEnabled = @"live_streaming_camera_enabled";
 
 // Event parameter values internal to this file
 NSString *const FBSDKAppEventsDialogOutcomeValue_Completed = @"Completed";
@@ -205,6 +230,16 @@ static NSString *const FBSDKAppEventParameterPushAction = @"fb_push_action";
 static NSString *const FBSDKAppEventsPushPayloadKey = @"fb_push_payload";
 static NSString *const FBSDKAppEventsPushPayloadCampaignKey = @"campaign";
 
+//
+// Augmentation of web browser constants
+//
+NSString *const FBSDKAppEventsWKWebViewMessagesPixelIDKey = @"pixelID";
+NSString *const FBSDKAppEventsWKWebViewMessagesHandlerKey = @"fbmqHandler";
+NSString *const FBSDKAppEventsWKWebViewMessagesEventKey = @"event";
+NSString *const FBSDKAppEventsWKWebViewMessagesParamsKey = @"params";
+NSString *const FBSDKAPPEventsWKWebViewMessagesProtocolKey = @"fbmq-0.1";
+
+
 #define NUM_LOG_EVENTS_TO_TRY_TO_FLUSH_AFTER 100
 #define FLUSH_PERIOD_IN_SECONDS 15
 #define APP_SUPPORTS_ATTRIBUTION_ID_RECHECK_PERIOD 60 * 60 * 24
@@ -230,6 +265,9 @@ static NSString *g_overrideAppID = nil;
   BOOL _explicitEventsLoggedYet;
   FBSDKServerConfiguration *_serverConfiguration;
   FBSDKAppEventsState *_appEventsState;
+#if !TARGET_OS_TV
+  FBSDKEventBindingManager *_eventBindingManager;
+#endif
   NSString *_userID;
 }
 
@@ -541,6 +579,35 @@ static NSString *g_overrideAppID = nil;
   [request startWithCompletionHandler:handler];
 }
 
+#if !TARGET_OS_TV
++ (void)augmentHybridWKWebView:(WKWebView *)webView {
+  // Ensure we can instantiate WebKit before trying this
+  Class WKWebViewClass = fbsdkdfl_WKWebViewClass();
+  if (WKWebViewClass != nil && [webView isKindOfClass:WKWebViewClass]) {
+    Class WKUserScriptClass = fbsdkdfl_WKUserScriptClass();
+    if (WKUserScriptClass != nil) {
+      WKUserContentController *controller = webView.configuration.userContentController;
+      FBSDKHybridAppEventsScriptMessageHandler *scriptHandler = [[FBSDKHybridAppEventsScriptMessageHandler alloc] init];
+      [controller addScriptMessageHandler:scriptHandler name:FBSDKAppEventsWKWebViewMessagesHandlerKey];
+
+      NSString *js =  [NSString stringWithFormat:@"window.fbmq_%@={'sendEvent': function(pixel_id,event_name,custom_data){var msg={\"%@\":pixel_id, \"%@\":event_name,\"%@\":custom_data};window.webkit.messageHandlers[\"%@\"].postMessage(msg);}, 'getProtocol':function(){return \"%@\";}}",
+                         [[self singleton] appID],
+                         FBSDKAppEventsWKWebViewMessagesPixelIDKey,
+                         FBSDKAppEventsWKWebViewMessagesEventKey,
+                         FBSDKAppEventsWKWebViewMessagesParamsKey,
+                         FBSDKAppEventsWKWebViewMessagesHandlerKey,
+                         FBSDKAPPEventsWKWebViewMessagesProtocolKey
+                       ];
+
+      [controller addUserScript:[[WKUserScriptClass alloc] initWithSource:js injectionTime:WKUserScriptInjectionTimeAtDocumentStart forMainFrameOnly:NO]];
+    }
+  }
+  else {
+    [FBSDKAppEventsUtility logAndNotify:@"You must call augmentHybridWKWebView with WebKit linked to your project and a WKWebView instance"];
+  }
+}
+#endif
+
 #pragma mark - Internal Methods
 
 + (void)logImplicitEvent:(NSString *)eventName
@@ -593,6 +660,10 @@ static NSString *g_overrideAppID = nil;
 - (void)publishInstall
 {
   NSString *appID = [self appID];
+  if ([appID length] == 0) {
+    [FBSDKLogger singleShotLogEntry:FBSDKLoggingBehaviorDeveloperErrors logEntry:@"Missing [FBSDKAppEvents appID] for [FBSDKAppEvents publishInstall:]"];
+    return;
+  }
   NSString *lastAttributionPingString = [NSString stringWithFormat:@"com.facebook.sdk:lastAttributionPing%@", appID];
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   if ([defaults objectForKey:lastAttributionPingString]) {
@@ -619,6 +690,20 @@ static NSString *g_overrideAppID = nil;
   }];
 }
 
+#if !TARGET_OS_TV
+- (void)enableCodelessEvents {
+  if (_serverConfiguration.isCodelessEventsEnabled) {
+    if (!_eventBindingManager) {
+      _eventBindingManager = [[FBSDKEventBindingManager alloc] init];
+      [_eventBindingManager start];
+    }
+
+    [_eventBindingManager updateBindings:[FBSDKEventBindingManager
+                                          parseArray:_serverConfiguration.eventBindings]];
+  }
+}
+#endif
+
 // app events can use a server configuration up to 24 hours old to minimize network traffic.
 - (void)fetchServerConfiguration:(void (^)(void))callback
 {
@@ -631,12 +716,18 @@ static NSString *g_overrideAppID = nil;
       } else {
         [FBSDKPaymentObserver stopObservingTransactions];
       }
+#if !TARGET_OS_TV
+      [self enableCodelessEvents];
+#endif
       if (callback) {
         callback();
       }
     }];
     return;
   }
+#if !TARGET_OS_TV
+  [self enableCodelessEvents];
+#endif
   if (callback) {
     callback();
   }
@@ -782,9 +873,16 @@ static NSString *g_overrideAppID = nil;
 - (void)flushOnMainQueue:(FBSDKAppEventsState *)appEventsState
                forReason:(FBSDKAppEventsFlushReason)reason
 {
+
   if (appEventsState.events.count == 0) {
     return;
   }
+
+  if ([appEventsState.appID length] == 0) {
+    [FBSDKLogger singleShotLogEntry:FBSDKLoggingBehaviorDeveloperErrors logEntry:@"Missing [FBSDKAppEvents appEventsState.appID] for [FBSDKAppEvents flushOnMainQueue:]"];
+    return;
+  }
+
   [FBSDKAppEventsUtility ensureOnMainThread:NSStringFromSelector(_cmd) className:NSStringFromClass([self class])];
 
   [self fetchServerConfiguration:^(void) {
@@ -864,7 +962,8 @@ static NSString *g_overrideAppID = nil;
 
     // We interpret a 400 coming back from FBRequestConnection as a server error due to improper data being
     // sent down.  Otherwise we assume no connectivity, or another condition where we could treat it as no connectivity.
-    flushResult = errorCode == 400 ? FlushResultServerError : FlushResultNoConnectivity;
+    // Adding 404 as having wrong/missing appID results in 404 and that is not a connectivity issue
+    flushResult = (errorCode == 400 || errorCode == 404) ? FlushResultServerError : FlushResultNoConnectivity;
   }
 
   if (flushResult == FlushResultServerError) {
