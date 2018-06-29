@@ -54,6 +54,11 @@ exports[`Storyshots Drawer default 1`] = `
             Object {
               "data": Array [
                 Object {
+                  "currentUser": Object {
+                    "fullName": "Current User",
+                    "userId": "1",
+                    "username": "email@gmail.com",
+                  },
                   "key": "health",
                 },
               ],
@@ -175,6 +180,11 @@ exports[`Storyshots Drawer default 1`] = `
             Object {
               "data": Array [
                 Object {
+                  "currentUser": Object {
+                    "fullName": "Current User",
+                    "userId": "1",
+                    "username": "email@gmail.com",
+                  },
                   "key": "health",
                 },
               ],
@@ -375,76 +385,7 @@ exports[`Storyshots Drawer default 1`] = `
           <View
             onLayout={[Function]}
             style={null}
-          >
-            <View
-              style={
-                Array [
-                  Object {
-                    "height": 80,
-                  },
-                ]
-              }
-            >
-              <View
-                style={
-                  Array [
-                    Object {
-                      "alignItems": "center",
-                      "flexDirection": "row",
-                      "marginLeft": 16,
-                    },
-                  ]
-                }
-              >
-                <Text
-                  accessible={true}
-                  allowFontScaling={false}
-                  ellipsizeMode="tail"
-                  style={
-                    Array [
-                      Object {
-                        "color": "#281946",
-                        "fontFamily": "OpenSans-Regular",
-                        "fontSize": 15,
-                      },
-                      Object {
-                        "marginRight": 8,
-                      },
-                    ]
-                  }
-                >
-                  Connect to Health
-                </Text>
-                <RCTSwitch
-                  disabled={false}
-                  onChange={[Function]}
-                  onResponderTerminationRequest={[Function]}
-                  onStartShouldSetResponder={[Function]}
-                  onTintColor="#627cff"
-                  onValueChange={[Function]}
-                  style={
-                    Array [
-                      Object {
-                        "height": 31,
-                        "width": 51,
-                      },
-                      Object {
-                        "transform": Array [
-                          Object {
-                            "scaleX": 0.75,
-                          },
-                          Object {
-                            "scaleY": 0.75,
-                          },
-                        ],
-                      },
-                    ]
-                  }
-                  value={false}
-                />
-              </View>
-            </View>
-          </View>
+          />
           <View
             onLayout={[Function]}
             style={null}
@@ -622,6 +563,11 @@ exports[`Storyshots Drawer long user full name 1`] = `
             Object {
               "data": Array [
                 Object {
+                  "currentUser": Object {
+                    "fullName": "This is a really long full name for a user",
+                    "userId": "1",
+                    "username": "email@gmail.com",
+                  },
                   "key": "health",
                 },
               ],
@@ -743,6 +689,11 @@ exports[`Storyshots Drawer long user full name 1`] = `
             Object {
               "data": Array [
                 Object {
+                  "currentUser": Object {
+                    "fullName": "This is a really long full name for a user",
+                    "userId": "1",
+                    "username": "email@gmail.com",
+                  },
                   "key": "health",
                 },
               ],
@@ -943,76 +894,7 @@ exports[`Storyshots Drawer long user full name 1`] = `
           <View
             onLayout={[Function]}
             style={null}
-          >
-            <View
-              style={
-                Array [
-                  Object {
-                    "height": 80,
-                  },
-                ]
-              }
-            >
-              <View
-                style={
-                  Array [
-                    Object {
-                      "alignItems": "center",
-                      "flexDirection": "row",
-                      "marginLeft": 16,
-                    },
-                  ]
-                }
-              >
-                <Text
-                  accessible={true}
-                  allowFontScaling={false}
-                  ellipsizeMode="tail"
-                  style={
-                    Array [
-                      Object {
-                        "color": "#281946",
-                        "fontFamily": "OpenSans-Regular",
-                        "fontSize": 15,
-                      },
-                      Object {
-                        "marginRight": 8,
-                      },
-                    ]
-                  }
-                >
-                  Connect to Health
-                </Text>
-                <RCTSwitch
-                  disabled={false}
-                  onChange={[Function]}
-                  onResponderTerminationRequest={[Function]}
-                  onStartShouldSetResponder={[Function]}
-                  onTintColor="#627cff"
-                  onValueChange={[Function]}
-                  style={
-                    Array [
-                      Object {
-                        "height": 31,
-                        "width": 51,
-                      },
-                      Object {
-                        "transform": Array [
-                          Object {
-                            "scaleX": 0.75,
-                          },
-                          Object {
-                            "scaleY": 0.75,
-                          },
-                        ],
-                      },
-                    ]
-                  }
-                  value={false}
-                />
-              </View>
-            </View>
-          </View>
+          />
           <View
             onLayout={[Function]}
             style={null}

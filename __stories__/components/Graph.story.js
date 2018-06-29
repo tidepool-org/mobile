@@ -4,7 +4,7 @@ import { Linking } from "react-native";
 import { storiesOf } from "@storybook/react-native";
 import { withKnobs, selectV2 } from "@storybook/addon-knobs";
 
-import StoryContainerComponent from "../../__stories__/utils/StoryContainerComponent";
+import StoryContainerComponent from "../utils/StoryContainerComponent";
 import Graph from "../../src/components/Graph/Graph";
 import {
   makeYAxisLabelValues,

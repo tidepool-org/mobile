@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import glamorous, { withTheme } from "glamorous-native";
 
 import Urls from "../constants/Urls";
-import Colors from "../../src/constants/Colors";
+import Colors from "../constants/Colors";
 import HashtagText from "./HashtagText";
 import {
   makeYAxisLabelValues,

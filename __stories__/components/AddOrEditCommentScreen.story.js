@@ -8,7 +8,7 @@ import setHours from "date-fns/set_hours";
 import setMinutes from "date-fns/set_minutes";
 import addMinutes from "date-fns/add_minutes";
 
-import StoryContainerScreen from "../../__stories__/utils/StoryContainerScreen";
+import StoryContainerScreen from "../utils/StoryContainerScreen";
 import AddOrEditCommentScreen from "../../src/screens/AddOrEditCommentScreen";
 import {
   DEFAULT_LOW_BG_BOUNDARY_VALUE,

@@ -53,39 +53,45 @@ class NotesListItem extends PureComponent {
   }
 
   componentDidMount() {
-    Animated.timing(this.state.fadeAnimation, {
+    const { fadeAnimation } = this.state;
+    const {
+      commentsFetchData: { errorMessage: commentsFetchErrorMessage },
+      graphDataFetchData: { errorMessage: graphDataFetchErrorMessage },
+    } = this.props;
+
+    Animated.timing(fadeAnimation, {
       toValue: 1,
       duration: 250,
       useNativeDriver: true,
     }).start();
 
-    if (this.props.commentsFetchData.errorMessage) {
+    if (commentsFetchErrorMessage) {
       NotesListItem.showErrorMessageAlert();
     }
 
-    if (this.props.graphDataFetchData.errorMessage) {
+    if (graphDataFetchErrorMessage) {
       NotesListItem.showErrorMessageAlert();
     }
   }
 
   componentWillReceiveProps(nextProps) {
+    const {
+      commentsFetchData: { comments, errorMessage: commentsFetchErrorMessage },
+      graphDataFetchData: { errorMessage: graphDataFetchErrorMessage },
+    } = this.props;
     const shouldShowCommentsFetchErrorMessage =
-      nextProps.commentsFetchData.errorMessage &&
-      !this.props.commentsFetchData.errorMessage;
+      nextProps.commentsFetchData.errorMessage && !commentsFetchErrorMessage;
     const shouldShowGraphDataFetchErrorMessage =
-      nextProps.graphDataFetchData.errorMessage &&
-      !this.props.graphDataFetchData.errorMessage;
-
+      nextProps.graphDataFetchData.errorMessage && !graphDataFetchErrorMessage;
     if (
       shouldShowCommentsFetchErrorMessage ||
       shouldShowGraphDataFetchErrorMessage
     ) {
       NotesListItem.showErrorMessageAlert();
     }
-
     if (
       nextProps.commentsFetchData.comments.length > 0 &&
-      this.props.commentsFetchData.comments.length === 0
+      comments.length === 0
     ) {
       LayoutAnimation.configureNext({
         ...LayoutAnimation.Presets.easeInEaseOut,
@@ -98,10 +104,11 @@ class NotesListItem extends PureComponent {
     const { note: nextNote } = nextProps;
     const { graphRenderer } = this.props;
     const { graphRenderer: nextGraphRenderer } = nextProps;
+    const { expanded } = this.state;
     const graphRendererChanged =
       graphRenderer && nextGraphRenderer && graphRenderer !== nextGraphRenderer;
     if (nextNote.userUpdatedAt !== note.userUpdatedAt || graphRendererChanged) {
-      if (this.state.expanded) {
+      if (expanded) {
         this.setState({ expanded: false }, () => {
           this.toggleNote({ animationDuration: 350, fetchComments: false });
         });
@@ -110,28 +117,29 @@ class NotesListItem extends PureComponent {
   }
 
   onPressDeleteNote = () => {
-    const { note } = this.props;
-    this.props.onDeleteNotePressed({ note });
+    const { note, onDeleteNotePressed } = this.props;
+    onDeleteNotePressed({ note });
   };
 
   onPressEditNote = () => {
-    const { note } = this.props;
-    this.props.navigateEditNote({ note });
+    const { note, navigateEditNote } = this.props;
+    navigateEditNote({ note });
   };
 
   onPressAddComment = () => {
     // TODO: If comments are still loading and user taps Add Comment, then the existing comments won't be shown on the Add Comment screen, even once commentsFetch has completed. We should probably fix that so that the while commentsFetch is in fetching state, and completes, while Add Comment screen is current, that it loads those comments? Should probably also have a comments loading indicator both in notes list and in Add Comment screen?
-    const { note } = this.props;
-    this.props.navigateAddComment({ note });
+    const { note, navigateAddComment } = this.props;
+    navigateAddComment({ note });
   };
 
   onPressDeleteComment = ({ note, comment }) => {
-    this.props.onDeleteCommentPressed({ note, comment });
+    const { onDeleteCommentPressed } = this.props;
+    onDeleteCommentPressed({ note, comment });
   };
 
   onPressEditComment = ({ comment }) => {
-    const { note } = this.props;
-    this.props.navigateEditComment({
+    const { note, navigateEditComment } = this.props;
+    navigateEditComment({
       note,
       comment,
     });
@@ -143,23 +151,29 @@ class NotesListItem extends PureComponent {
       fetchComments: true,
     }
   ) => {
-    if (this.props.allowExpansionToggle) {
+    const { allowExpansionToggle } = this.props;
+
+    if (allowExpansionToggle) {
       const {
         note,
         currentProfile: { userId, lowBGBoundary, highBGBoundary },
+        commentsFetchData: { fetching: isFetchingComments },
+        graphDataFetchData: { fetching: isFetchingGraphData },
+        commentsFetchAsync,
+        graphDataFetchAsync,
       } = this.props;
-      const wasExpanded = this.state.expanded;
+      const { expanded: wasExpanded } = this.state;
       this.setState({ expanded: !wasExpanded });
       if (!wasExpanded) {
-        if (fetchComments && !this.props.commentsFetchData.fetching) {
-          this.props.commentsFetchAsync({ messageId: note.id });
+        if (fetchComments && !isFetchingComments) {
+          commentsFetchAsync({ messageId: note.id });
         }
-        if (!this.props.graphDataFetchData.fetching) {
+        if (!isFetchingGraphData) {
           const { timestamp } = note;
           const startDate = subHours(timestamp, 12);
           const endDate = addHours(timestamp, 12);
           const objectTypes = "smbg,bolus,cbg,wizard,basal";
-          this.props.graphDataFetchAsync({
+          graphDataFetchAsync({
             messageId: note.id,
             userId,
             noteDate: timestamp,
@@ -196,13 +210,10 @@ class NotesListItem extends PureComponent {
   }
 
   renderDeleteButton() {
-    const { theme, note, currentUser } = this.props;
+    const { theme, note, currentUser, allowEditing } = this.props;
+    const { expanded } = this.state;
 
-    if (
-      this.props.allowEditing &&
-      this.state.expanded &&
-      note.userId === currentUser.userId
-    ) {
+    if (allowEditing && expanded && note.userId === currentUser.userId) {
       return (
         <glamorous.TouchableOpacity
           marginLeft="auto"
@@ -226,13 +237,10 @@ class NotesListItem extends PureComponent {
   }
 
   renderEditButton() {
-    const { theme, note, currentUser } = this.props;
+    const { theme, note, currentUser, allowEditing } = this.props;
+    const { expanded } = this.state;
 
-    if (
-      this.props.allowEditing &&
-      this.state.expanded &&
-      note.userId === currentUser.userId
-    ) {
+    if (allowEditing && expanded && note.userId === currentUser.userId) {
       return (
         <glamorous.TouchableOpacity
           marginRight={10}
@@ -334,7 +342,9 @@ class NotesListItem extends PureComponent {
   }
 
   renderGraph() {
-    if (this.state.expanded) {
+    const { expanded } = this.state;
+
+    if (expanded) {
       const {
         graphDataFetchData: {
           fetching,
@@ -381,15 +391,16 @@ class NotesListItem extends PureComponent {
 
   renderComments() {
     const { currentUser, allowEditing, note } = this.props;
+    const { expanded } = this.state;
 
-    if (this.state.expanded) {
+    if (expanded) {
       const {
         theme,
         commentsFetchData: { comments },
       } = this.props;
       return comments.map(comment => {
         // Skip rendering the comment that has same id as the note
-        if (comment.id !== this.props.note.id) {
+        if (comment.id !== note.id) {
           return (
             <NotesListItemComment
               key={comment.id}
@@ -411,7 +422,10 @@ class NotesListItem extends PureComponent {
   }
 
   renderAddCommentButton() {
-    if (this.props.allowEditing && this.state.expanded) {
+    const { allowEditing } = this.props;
+    const { expanded } = this.state;
+
+    if (allowEditing && expanded) {
       return <AddCommentButton onPress={this.onPressAddComment} />;
     }
 
@@ -420,13 +434,11 @@ class NotesListItem extends PureComponent {
 
   render() {
     const { style } = this.props;
+    const { fadeAnimation } = this.state;
 
     return (
       <Animated.View
-        style={[
-          style,
-          { backgroundColor: "white", opacity: this.state.fadeAnimation },
-        ]}
+        style={[style, { backgroundColor: "white", opacity: fadeAnimation }]}
       >
         <glamorous.TouchableOpacity activeOpacity={1} onPress={this.toggleNote}>
           {this.renderUserLabelSection()}

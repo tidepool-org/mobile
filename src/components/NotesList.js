@@ -38,17 +38,19 @@ class NotesList extends PureComponent {
   }
 
   componentDidMount() {
-    if (this.props.errorMessage) {
+    const { errorMessage } = this.props;
+    if (errorMessage) {
       NotesList.showErrorMessageAlert();
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.errorMessage && !this.props.errorMessage) {
+    const { errorMessage, fetching } = this.props;
+    if (nextProps.errorMessage && !errorMessage) {
       NotesList.showErrorMessageAlert();
     }
 
-    if (!nextProps.fetching && this.props.fetching) {
+    if (!nextProps.fetching && fetching) {
       this.setState({ refreshing: false });
     }
   }
@@ -134,8 +136,9 @@ class NotesList extends PureComponent {
   };
 
   onChangeSearchText = text => {
+    const { notesFetchSetSearchFilter } = this.props;
     const searchText = text.trim();
-    this.props.notesFetchSetSearchFilter({ searchText });
+    notesFetchSetSearchFilter({ searchText });
   };
 
   onGraphZoomStart = () => {
@@ -158,34 +161,50 @@ class NotesList extends PureComponent {
 
   keyExtractor = item => item.id;
 
-  renderNote = ({ item }) => (
-    <NotesListItem
-      note={item}
-      currentUser={this.props.currentUser}
-      currentProfile={this.props.currentProfile}
-      commentsFetchData={this.props.commentsFetchDataByMessageId[item.id]}
-      commentsFetchAsync={this.props.commentsFetchAsync}
-      graphDataFetchData={this.props.graphDataFetchDataByMessageId[item.id]}
-      graphDataFetchAsync={this.props.graphDataFetchAsync}
-      navigateEditNote={this.props.navigateEditNote}
-      onDeleteNotePressed={this.props.onDeleteNotePressed}
-      navigateAddComment={this.props.navigateAddComment}
-      navigateEditComment={this.props.navigateEditComment}
-      onDeleteCommentPressed={this.props.onDeleteCommentPressed}
-      onGraphZoomStart={this.onGraphZoomStart}
-      onGraphZoomEnd={this.onGraphZoomEnd}
-      graphRenderer={this.props.graphRenderer}
-    />
-  );
+  renderNote = ({ item }) => {
+    const {
+      currentUser,
+      currentProfile,
+      commentsFetchDataByMessageId,
+      commentsFetchAsync,
+      graphDataFetchDataByMessageId,
+      graphDataFetchAsync,
+      navigateEditNote,
+      onDeleteNotePressed,
+      navigateAddComment,
+      navigateEditComment,
+      onDeleteCommentPressed,
+      graphRenderer,
+    } = this.props;
+    return (
+      <NotesListItem
+        note={item}
+        currentUser={currentUser}
+        currentProfile={currentProfile}
+        commentsFetchData={commentsFetchDataByMessageId[item.id]}
+        commentsFetchAsync={commentsFetchAsync}
+        graphDataFetchData={graphDataFetchDataByMessageId[item.id]}
+        graphDataFetchAsync={graphDataFetchAsync}
+        navigateEditNote={navigateEditNote}
+        onDeleteNotePressed={onDeleteNotePressed}
+        navigateAddComment={navigateAddComment}
+        navigateEditComment={navigateEditComment}
+        onDeleteCommentPressed={onDeleteCommentPressed}
+        onGraphZoomStart={this.onGraphZoomStart}
+        onGraphZoomEnd={this.onGraphZoomEnd}
+        graphRenderer={graphRenderer}
+      />
+    );
+  };
 
   render() {
     const { notes, searchText } = this.props;
-    const { isZoomingGraph } = this.state;
+    const { isZoomingGraph, shouldShowSearchBar, refreshing } = this.state;
 
     return (
       <glamorous.View flex={1}>
         <glamorous.View onLayout={this.onSearchBarLayout}>
-          {this.state.shouldShowSearchBar && (
+          {shouldShowSearchBar && (
             <SearchBar
               searchText={searchText}
               onChangeText={this.onChangeSearchText}
@@ -200,12 +219,12 @@ class NotesList extends PureComponent {
           extraData={this.state}
           keyExtractor={this.keyExtractor}
           renderItem={this.renderNote}
-          refreshControl={
+          refreshControl={(
             <RefreshControl
-              refreshing={this.state.refreshing}
+              refreshing={refreshing}
               onRefresh={this.onRefresh}
             />
-          }
+)}
           scrollEnabled={!isZoomingGraph}
           scrollEventThrottle={Platform.OS === "ios" ? 16 : undefined}
           onScroll={Platform.OS === "ios" ? this.onScroll : undefined}

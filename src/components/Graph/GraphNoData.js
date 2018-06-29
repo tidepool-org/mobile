@@ -6,7 +6,8 @@ import { ThemePropType } from "../../prop-types/theme";
 
 class GraphNoData extends PureComponent {
   onPressHowToUpload = () => {
-    this.props.navigateHowToUpload();
+    const { navigateHowToUpload } = this.props;
+    navigateHowToUpload();
   };
 
   static renderGraphNoDataViews({

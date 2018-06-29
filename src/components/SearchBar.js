@@ -19,20 +19,22 @@ class SearchBar extends PureComponent {
   }
 
   onChangeText = searchText => {
+    const { onChangeText } = this.props;
     this.setState({
       searchText,
     });
-
-    this.props.onChangeText(searchText);
+    onChangeText(searchText);
   };
 
   onPressClear = () => {
+    const { onChangeText } = this.props;
     const searchText = "";
     this.setState({
       searchText,
     });
-    this.props.onChangeText(searchText);
+    onChangeText(searchText);
   };
+
   static renderSeparator() {
     return (
       <glamorous.View

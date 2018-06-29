@@ -3,7 +3,7 @@ import React from "react";
 import { storiesOf } from "@storybook/react-native";
 import glamorous from "glamorous-native";
 
-import StoryContainerComponent from "../../__stories__/utils/StoryContainerComponent";
+import StoryContainerComponent from "../utils/StoryContainerComponent";
 import SearchBar from "../../src/components/SearchBar";
 
 const onChangeText = () => {};

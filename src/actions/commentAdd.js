@@ -1,6 +1,6 @@
 import api from "../api";
 
-import { commentsFetchAddComment } from "../actions/commentsFetch";
+import { commentsFetchAddComment } from "./commentsFetch";
 
 const COMMENT_ADD_DID_START = "COMMENT_ADD_DID_START";
 const COMMENT_ADD_DID_SUCCEED = "COMMENT_ADD_DID_SUCCEED";

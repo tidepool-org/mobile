@@ -4,7 +4,7 @@ import { storiesOf } from "@storybook/react-native";
 import glamorous from "glamorous-native";
 import faker from "faker";
 
-import StoryContainerComponent from "../../__stories__/utils/StoryContainerComponent";
+import StoryContainerComponent from "../utils/StoryContainerComponent";
 import ProfileList from "../../src/components/ProfileList";
 
 faker.seed(123);

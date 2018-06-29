@@ -92,6 +92,8 @@ exports[`Storyshots SignInForm Sign in error 1`] = `
       />
       <TextInput
         allowFontScaling={false}
+        autoCapitalize="none"
+        autoCorrect={false}
         keyboardAppearance="dark"
         onChangeText={[Function]}
         onSubmitEditing={[Function]}
@@ -363,6 +365,8 @@ exports[`Storyshots SignInForm Signing in 1`] = `
       />
       <TextInput
         allowFontScaling={false}
+        autoCapitalize="none"
+        autoCorrect={false}
         keyboardAppearance="dark"
         onChangeText={[Function]}
         onSubmitEditing={[Function]}
@@ -647,6 +651,8 @@ exports[`Storyshots SignInForm default 1`] = `
       />
       <TextInput
         allowFontScaling={false}
+        autoCapitalize="none"
+        autoCorrect={false}
         keyboardAppearance="dark"
         onChangeText={[Function]}
         onSubmitEditing={[Function]}

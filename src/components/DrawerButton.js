@@ -14,6 +14,7 @@ class DrawerButton extends PureComponent {
 
   renderTitle() {
     const { title, theme, hasDisclosureIndicator } = this.props;
+    const { isUnderlayVisible } = this.state;
     const titleColor = hasDisclosureIndicator
       ? theme.drawerMenuButtonStyle.titleColorBlue
       : theme.drawerMenuButtonStyle.titleColorGrey;
@@ -25,9 +26,7 @@ class DrawerButton extends PureComponent {
         marginLeft={15}
         marginRight={15}
         alignSelf="center"
-        color={
-          this.state.isUnderlayVisible ? theme.titleColorActive : titleColor
-        }
+        color={isUnderlayVisible ? theme.titleColorActive : titleColor}
       >
         {title}
       </glamorous.Text>
@@ -36,6 +35,7 @@ class DrawerButton extends PureComponent {
 
   renderSubtitle() {
     const { subtitle, hasDisclosureIndicator, theme } = this.props;
+    const { isUnderlayVisible } = this.state;
     const titleColor = hasDisclosureIndicator
       ? theme.drawerMenuButtonStyle.titleColorBlue
       : theme.drawerMenuButtonStyle.titleColorGrey;
@@ -49,9 +49,7 @@ class DrawerButton extends PureComponent {
         textAlign="right"
         alignSelf="center"
         marginRight={15}
-        color={
-          this.state.isUnderlayVisible ? theme.titleColorActive : titleColor
-        }
+        color={isUnderlayVisible ? theme.titleColorActive : titleColor}
       >
         {subtitle}
       </glamorous.Text>

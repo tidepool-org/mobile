@@ -10,7 +10,8 @@ class GraphXAxisGl extends GraphRenderLayerGl {
 
     super(props);
 
-    const { width, headerHeight } = props.graphFixedLayoutInfo;
+    const { graphFixedLayoutInfo } = props;
+    const { width, headerHeight } = graphFixedLayoutInfo;
 
     // FIXME: Ideally the tickHeight should come from markerLengths (important if we add longer
     // tick for midnight, per TODO in calculateTimeMarkers). However, if we do that, we should

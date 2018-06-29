@@ -8,15 +8,24 @@ import { UserPropType } from "../prop-types/user";
 
 class DrawerCurrentUser extends PureComponent {
   onPress = () => {
-    this.props.notesSwitchProfileAndFetchAsync({
-      authUser: this.props.currentUser,
-      profile: this.props.currentUser,
+    const {
+      currentUser,
+      notesSwitchProfileAndFetchAsync,
+      navigateDrawerClose,
+    } = this.props;
+    notesSwitchProfileAndFetchAsync({
+      authUser: currentUser,
+      profile: currentUser,
     });
-    this.props.navigateDrawerClose();
+    navigateDrawerClose();
   };
 
   render() {
-    const { theme, style, currentUser: { fullName } } = this.props;
+    const {
+      theme,
+      style,
+      currentUser: { fullName },
+    } = this.props;
 
     return (
       <glamorous.TouchableOpacity onPress={this.onPress}>

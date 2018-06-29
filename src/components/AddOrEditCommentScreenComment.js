@@ -38,13 +38,17 @@ class AddOrEditCommentScreenComment extends PureComponent {
   }
 
   onPressSave = () => {
-    const { timestampAddComment } = this.props;
-    const messageText = this.state.messageText.trim();
-    this.props.onPressSave({ messageText, timestampAddComment });
+    const { timestampAddComment, onPressSave } = this.props;
+    const { messageText } = this.state;
+    onPressSave({
+      messageText: messageText.trim(),
+      timestampAddComment,
+    });
   };
 
   onPressCancel = () => {
-    this.props.onPressCancel();
+    const { onPressCancel } = this.props;
+    onPressCancel();
   };
 
   onChangeText = messageText => {
@@ -88,8 +92,9 @@ class AddOrEditCommentScreenComment extends PureComponent {
 
   renderSaveOrPostButton() {
     const { theme } = this.props;
+    const { isDirty } = this.state;
     const text = this.isAddMode ? "Post" : "Save";
-    const disabled = !this.state.isDirty;
+    const disabled = !isDirty;
 
     return (
       <glamorous.TouchableOpacity
@@ -117,6 +122,7 @@ class AddOrEditCommentScreenComment extends PureComponent {
   // FIXME: Text that doesn't fill the TextInput is centered vertically on Android, but, not iOS. Ideally it seems the text on Android should be aligned as on iOS
   renderEditableComment() {
     const { theme } = this.props;
+    const { messageText } = this.state;
 
     return (
       <glamorous.View flex={1}>
@@ -144,7 +150,7 @@ class AddOrEditCommentScreenComment extends PureComponent {
           <HashtagText
             boldStyle={theme.notesListItemHashtagStyle}
             normalStyle={theme.notesListItemTextStyle}
-            text={this.state.messageText}
+            text={messageText}
           />
         </glamorous.TextInput>
         <glamorous.View flexDirection="row" justifyContent="flex-end">
@@ -160,10 +166,7 @@ class AddOrEditCommentScreenComment extends PureComponent {
 
     return (
       <glamorous.View style={style} backgroundColor="white">
-        <glamorous.View
-          flexDirection="row"
-          justifyContent="flex-start"
-        >
+        <glamorous.View flexDirection="row" justifyContent="flex-start">
           <glamorous.Text
             style={theme.notesListItemUserFullNameStyle}
             flexShrink={1}

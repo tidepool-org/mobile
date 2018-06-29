@@ -10,12 +10,14 @@ class DebugSettingsGraphRendererListItem extends PureComponent {
   };
 
   onPress = () => {
-    this.props.onPress(this.props.graphRenderer);
+    const { graphRenderer, onPress } = this.props;
+    onPress(graphRenderer);
   };
 
   renderName() {
     const { theme, graphRenderer } = this.props;
-    const titleColor = this.state.isUnderlayVisible
+    const { isUnderlayVisible } = this.state;
+    const titleColor = isUnderlayVisible
       ? theme.titleColorActive
       : theme.listItemName.color;
 
@@ -34,7 +36,8 @@ class DebugSettingsGraphRendererListItem extends PureComponent {
 
   renderSelectedCheckMark() {
     const { theme, selected } = this.props;
-    const borderColor = this.state.isUnderlayVisible
+    const { isUnderlayVisible } = this.state;
+    const borderColor = isUnderlayVisible
       ? theme.titleColorActive
       : theme.underlayColor;
 

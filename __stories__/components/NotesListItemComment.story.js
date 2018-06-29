@@ -6,7 +6,7 @@ import startOfToday from "date-fns/start_of_today";
 import setHours from "date-fns/set_hours";
 import setMinutes from "date-fns/set_minutes";
 
-import StoryContainerComponent from "../../__stories__/utils/StoryContainerComponent";
+import StoryContainerComponent from "../utils/StoryContainerComponent";
 import NotesListItemComment from "../../src/components/NotesListItemComment";
 
 faker.seed(123);

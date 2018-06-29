@@ -1,5 +1,5 @@
 import api from "../api";
-import { notesFetchDeleteNote } from "../actions/notesFetch";
+import { notesFetchDeleteNote } from "./notesFetch";
 
 const NOTE_DELETE_DID_START = "NOTE_DELETE_DID_START";
 const NOTE_DELETE_DID_SUCCEED = "NOTE_DELETE_DID_SUCCEED";

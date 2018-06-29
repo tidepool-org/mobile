@@ -3,7 +3,7 @@ import React from "react";
 import { storiesOf } from "@storybook/react-native";
 import faker from "faker";
 
-import StoryContainerScreen from "../../__stories__/utils/StoryContainerScreen";
+import StoryContainerScreen from "../utils/StoryContainerScreen";
 import AddOrEditNoteScreen from "../../src/screens/AddOrEditNoteScreen";
 import HashtagCollection from "../../src/models/HashtagCollection";
 import {

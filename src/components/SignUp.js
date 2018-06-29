@@ -7,7 +7,9 @@ import { ThemePropType } from "../prop-types/theme";
 
 class SignUp extends PureComponent {
   onPressSignUp = () => {
-    this.props.navigateSignUp();
+    const { navigateSignUp } = this.props;
+
+    navigateSignUp();
   };
 
   render() {

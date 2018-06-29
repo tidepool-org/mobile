@@ -14,12 +14,14 @@ class DebugSettingsApiEnvironmentListItem extends PureComponent {
   }
 
   onPress = () => {
-    this.props.onPress(this.props.apiEnvironmentName);
+    const { apiEnvironmentName, onPress } = this.props;
+    onPress(apiEnvironmentName);
   };
 
   renderName() {
     const { theme, apiEnvironmentName } = this.props;
-    const titleColor = this.state.isUnderlayVisible
+    const { isUnderlayVisible } = this.state;
+    const titleColor = isUnderlayVisible
       ? theme.titleColorActive
       : theme.listItemName.color;
 
@@ -38,7 +40,8 @@ class DebugSettingsApiEnvironmentListItem extends PureComponent {
 
   renderSelectedCheckMark() {
     const { theme, selected } = this.props;
-    const borderColor = this.state.isUnderlayVisible
+    const { isUnderlayVisible } = this.state;
+    const borderColor = isUnderlayVisible
       ? theme.titleColorActive
       : theme.underlayColor;
 

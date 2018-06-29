@@ -4,22 +4,25 @@ import { StyleSheet } from "react-native";
 import glamorous, { withTheme } from "glamorous-native";
 
 import AddOrEditCommentScreenComment from "./AddOrEditCommentScreenComment";
-import Colors from "../../src/constants/Colors";
+import Colors from "../constants/Colors";
 import { ThemePropType } from "../prop-types/theme";
 import { CommentPropType } from "../prop-types/comment";
 import { UserPropType } from "../prop-types/user";
 
 class AddOrEditCommentScreenCommentsList extends PureComponent {
   onPressSave = ({ messageText, timestampAddComment }) => {
-    this.props.onPressSave({ messageText, timestampAddComment });
+    const { onPressSave } = this.props;
+    onPressSave({ messageText, timestampAddComment });
   };
 
   onPressCancel = () => {
-    this.props.onPressCancel();
+    const { onPressCancel } = this.props;
+    onPressCancel();
   };
 
   onEditableCommentLayout = event => {
-    this.props.onEditableCommentLayout(event);
+    const { onEditableCommentLayout } = this.props;
+    onEditableCommentLayout(event);
   };
 
   static renderSeparator() {
@@ -76,25 +79,27 @@ class AddOrEditCommentScreenCommentsList extends PureComponent {
       commentsFetchData,
       commentsFetchData: { comments },
       timestampAddComment,
+      note,
+      comment,
     } = this.props;
 
-    const renderedComments = comments.map(comment => {
+    const renderedComments = comments.map(commentToRender => {
       // Don't render the comment that has same id as the note
-      if (comment.id === this.props.note.id) {
+      if (commentToRender.id === note.id) {
         return null;
       }
 
       // If editing a comment, render editable comment
-      if (this.props.comment && this.props.comment.id === comment.id) {
-        return this.renderEditableComment({ comment });
+      if (comment && comment.id === commentToRender.id) {
+        return this.renderEditableComment({ comment: commentToRender });
       }
 
       // Render non-editable comment
-      return this.renderNonEditableComment({ comment });
+      return this.renderNonEditableComment({ comment: commentToRender });
     });
 
     // If no comment was provided to edit, then we're adding a comment, so append an editable comment to end of the rendered comments
-    if (!commentsFetchData.errorMessage && !this.props.comment) {
+    if (!commentsFetchData.errorMessage && !comment) {
       renderedComments.push(
         this.renderEditableComment({ comment: null, timestampAddComment })
       );

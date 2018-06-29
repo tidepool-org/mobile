@@ -4,7 +4,7 @@ import { Image, TouchableOpacity } from "react-native";
 
 import FirstTimeTips from "../models/FirstTimeTips";
 import Tooltip from "./Tooltip";
-import ConnectHealthTooltipContent from "../components/Tooltips/ConnectHealthTooltipContent";
+import ConnectHealthTooltipContent from "./Tooltips/ConnectHealthTooltipContent";
 
 class HomeScreenHeaderLeft extends PureComponent {
   state = {
@@ -23,7 +23,8 @@ class HomeScreenHeaderLeft extends PureComponent {
   }
 
   onPress = () => {
-    this.props.navigateDrawerOpen();
+    const { navigateDrawerOpen } = this.props;
+    navigateDrawerOpen();
     this.hideTipIfNeeded();
   };
 
@@ -48,9 +49,10 @@ class HomeScreenHeaderLeft extends PureComponent {
   }
 
   render() {
+    const { toolTipVisible } = this.state;
     return (
       <Tooltip
-        isVisible={this.state.toolTipVisible}
+        isVisible={toolTipVisible}
         placement="bottom"
         content={<ConnectHealthTooltipContent />}
         arrowStyle={{

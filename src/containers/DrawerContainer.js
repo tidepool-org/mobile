@@ -16,8 +16,20 @@ import { authSignOutAsync } from "../actions/auth";
 import { notesSwitchProfileAndFetchAsync } from "../actions/notesFetch";
 
 class DrawerContainer extends PureComponent {
+  /* eslint-disable no-shadow */
   render() {
-    const { currentUser, version, apiEnvironment } = this.props;
+    const {
+      currentUser,
+      version,
+      apiEnvironment,
+      notesSwitchProfileAndFetchAsync,
+      navigateDrawerClose,
+      navigateSwitchProfile,
+      navigateSupport,
+      navigatePrivacyAndTerms,
+      navigateDebugSettings,
+      authSignOutAsync,
+    } = this.props;
     let marginTop = 0;
     if (Platform.OS === "android") {
       marginTop += StatusBar.currentHeight;
@@ -29,21 +41,20 @@ class DrawerContainer extends PureComponent {
           flex: 1,
           marginTop,
         }}
-        notesSwitchProfileAndFetchAsync={
-          this.props.notesSwitchProfileAndFetchAsync
-        }
-        navigateDrawerClose={this.props.navigateDrawerClose}
-        navigateSwitchProfile={this.props.navigateSwitchProfile}
-        navigateSupport={this.props.navigateSupport}
-        navigatePrivacyAndTerms={this.props.navigatePrivacyAndTerms}
-        navigateDebugSettings={this.props.navigateDebugSettings}
-        authSignOutAsync={this.props.authSignOutAsync}
+        notesSwitchProfileAndFetchAsync={notesSwitchProfileAndFetchAsync}
+        navigateDrawerClose={navigateDrawerClose}
+        navigateSwitchProfile={navigateSwitchProfile}
+        navigateSupport={navigateSupport}
+        navigatePrivacyAndTerms={navigatePrivacyAndTerms}
+        navigateDebugSettings={navigateDebugSettings}
+        authSignOutAsync={authSignOutAsync}
         currentUser={currentUser}
         version={version}
         apiEnvironment={apiEnvironment}
       />
     );
   }
+  /* eslint-enable no-shadow */
 }
 
 DrawerContainer.propTypes = {
@@ -81,4 +92,7 @@ const mapDispatchToProps = dispatch =>
     dispatch
   );
 
-export default connect(mapStateToProps, mapDispatchToProps)(DrawerContainer);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DrawerContainer);

@@ -1,6 +1,6 @@
 import { AsyncStorage } from "react-native";
-import { currentProfileRestoreAsync } from "../actions/currentProfile";
-import { navigateHome, navigateSignIn } from "../actions/navigation";
+import { currentProfileRestoreAsync } from "./currentProfile";
+import { navigateHome, navigateSignIn } from "./navigation";
 import api from "../api";
 
 const AUTH_SIGN_IN_RESET = "AUTH_SIGN_IN_RESET";

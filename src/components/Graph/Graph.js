@@ -48,39 +48,44 @@ class Graph extends PureComponent {
 
   onZoomStart = () => {
     // console.log("onZoomStart");
+    const { onZoomStart } = this.props;
     this.setState({
       isZooming: true,
     });
-
-    if (this.props.onZoomStart) {
-      this.props.onZoomStart();
+    if (onZoomStart) {
+      onZoomStart();
     }
   };
 
   onZoomMove = scale => {
     // console.log("onZoomMove");
-    const { eventTime } = this.props;
-    const graphScalableLayoutInfo = new GraphScalableLayoutInfo({
-      graphFixedLayoutInfo: this.state.graphFixedLayoutInfo,
-      scale: this.scale * scale,
-      eventTime,
+    this.setState((prevState, props) => {
+      const { eventTime } = props;
+      const graphScalableLayoutInfo = new GraphScalableLayoutInfo({
+        graphFixedLayoutInfo: prevState.graphFixedLayoutInfo,
+        scale: this.scale * scale,
+        eventTime,
+      });
+      return {
+        graphScalableLayoutInfo,
+      };
     });
-    this.setState({ graphScalableLayoutInfo });
   };
 
   onZoomCommit = () => {
     // console.log("onZoomCommit");
-    this.scale = this.state.graphScalableLayoutInfo.scale; // Use last graphScalableLayoutInfo, not the scale passed to onZoomCommi (graphScalableLayoutInfo scale is constrained)
+    const { graphScalableLayoutInfo } = this.state;
+    this.scale = graphScalableLayoutInfo.scale; // Use last graphScalableLayoutInfo, not the scale passed to onZoomCommi (graphScalableLayoutInfo scale is constrained)
   };
 
   onZoomEnd = () => {
     // console.log("onZoomEnd");
+    const { onZoomEnd } = this.props;
     this.setState({
       isZooming: false,
     });
-
-    if (this.props.onZoomEnd) {
-      this.props.onZoomEnd();
+    if (onZoomEnd) {
+      onZoomEnd();
     }
   };
 
@@ -128,9 +133,9 @@ class Graph extends PureComponent {
       <glamorous.View
         position="absolute"
         pointerEvents="none"
-        top={this.state.graphFixedLayoutInfo.headerHeight}
-        width={this.state.graphFixedLayoutInfo.width}
-        height={this.state.graphFixedLayoutInfo.graphLayerHeight}
+        top={graphFixedLayoutInfo.headerHeight}
+        width={graphFixedLayoutInfo.width}
+        height={graphFixedLayoutInfo.graphLayerHeight}
         backgroundColor={theme.graphBackgroundColor}
       >
         <GraphYAxisLabels

@@ -9,7 +9,7 @@ import setHours from "date-fns/set_hours";
 import setMinutes from "date-fns/set_minutes";
 import addMinutes from "date-fns/add_minutes";
 
-import StoryContainerComponent from "../../__stories__/utils/StoryContainerComponent";
+import StoryContainerComponent from "../utils/StoryContainerComponent";
 import NotesListItem from "../../src/components/NotesListItem";
 import {
   DEFAULT_LOW_BG_BOUNDARY_VALUE,

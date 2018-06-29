@@ -21,8 +21,10 @@ function withExpoFontPreload(WrappedComponent, fonts) {
     }
 
     render() {
+      const { isLoaded } = this.state;
+
       let result = null;
-      if (this.state.isLoaded) {
+      if (isLoaded) {
         result = <WrappedComponent {...this.props} />;
       }
       return result;

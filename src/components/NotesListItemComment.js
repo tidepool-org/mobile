@@ -11,13 +11,13 @@ import { CommentPropType } from "../prop-types/comment";
 
 class NotesListItemComment extends PureComponent {
   onPressDeleteComment = () => {
-    const { note, comment } = this.props;
-    this.props.onPressDeleteComment({ note, comment });
+    const { note, comment, onPressDeleteComment } = this.props;
+    onPressDeleteComment({ note, comment });
   };
 
   onPressEditComment = () => {
-    const { comment } = this.props;
-    this.props.onPressEditComment({ comment });
+    const { comment, onPressEditComment } = this.props;
+    onPressEditComment({ comment });
   };
 
   renderDeleteButton() {
@@ -76,10 +76,7 @@ class NotesListItemComment extends PureComponent {
 
     return (
       <glamorous.View style={style} backgroundColor="white">
-        <glamorous.View
-          flexDirection="row"
-          justifyContent="flex-start"
-        >
+        <glamorous.View flexDirection="row" justifyContent="flex-start">
           <glamorous.Text
             style={theme.notesListItemUserFullNameStyle}
             flexShrink={1}

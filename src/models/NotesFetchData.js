@@ -1,4 +1,4 @@
-import HashtagCollection from "../models/HashtagCollection";
+import HashtagCollection from "./HashtagCollection";
 
 class NotesFetchData {
   userId = "";
@@ -157,7 +157,7 @@ class NotesFetchData {
       filteredNotes = this.unfilteredNotes.filter(note => {
         if (note.messageText.toLowerCase().includes(searchTextLowerCase)) {
           return true;
-        } else if (
+        } if (
           note.userFullName.toLowerCase().includes(searchTextLowerCase)
         ) {
           return true;

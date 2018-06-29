@@ -4,7 +4,7 @@ import { storiesOf } from "@storybook/react-native";
 import faker from "faker";
 import subDays from "date-fns/sub_days";
 
-import StoryContainerComponent from "../../__stories__/utils/StoryContainerComponent";
+import StoryContainerComponent from "../utils/StoryContainerComponent";
 import NotesList from "../../src/components/NotesList";
 import {
   DEFAULT_LOW_BG_BOUNDARY_VALUE,

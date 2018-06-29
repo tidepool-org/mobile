@@ -21,8 +21,11 @@ class VersionAndApiEnvironment extends PureComponent {
             small ? theme.smallVersionStringStyle : theme.versionStringStyle
           }
         >
-          v{version}
-          {apiEnvironment !== API_ENVIRONMENT_PRODUCTION ? ` on ${apiEnvironment}` : ""}
+          v
+          {version}
+          {apiEnvironment !== API_ENVIRONMENT_PRODUCTION
+            ? ` on ${apiEnvironment}`
+            : ""}
         </glamorous.Text>
       </glamorous.View>
     );

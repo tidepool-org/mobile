@@ -12,9 +12,13 @@ module.exports = {
     "react/no-did-mount-set-state": OFF,
     "react/prefer-stateless-function": OFF,
     "react/forbid-prop-types": OFF,
-
+    "lines-between-class-members": [
+      "error",
+      "always",
+      { exceptAfterSingleLine: true },
+    ],
+    "no-else-return": ["error", { allowElseIf: true }],
     "import/prefer-default-export": OFF,
-
     "comma-dangle": ["error", "always-multiline"],
 
     // Disable for now, latest version of eslint-plugin-react is confused. Revisit this.

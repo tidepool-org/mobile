@@ -1,5 +1,5 @@
 import { AsyncStorage } from "react-native";
-import { authSignOutAsync } from "../actions/auth";
+import { authSignOutAsync } from "./auth";
 import { switchApiEnvironment, API_ENVIRONMENT_PRODUCTION } from "../api";
 
 const API_ENVIRONMENT_SET = "API_ENVIRONMENT_SET";

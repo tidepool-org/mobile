@@ -1,5 +1,5 @@
 import api from "../api";
-import { currentProfileSaveAsync } from "../actions/currentProfile";
+import { currentProfileSaveAsync } from "./currentProfile";
 
 const NOTES_FETCH_SET_SEARCH_FILTER = "NOTES_FETCH_SET_SEARCH_FILTER";
 const NOTES_FETCH_DID_START = "NOTES_FETCH_DID_START";
