@@ -6,6 +6,8 @@
 //  Copyright © 2016 Branch Metrics. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 #import "BranchViewHandler.h"
 #import "Branch.h"
 #import "BranchView.h"
@@ -17,17 +19,17 @@
 
 @end
 
-static NSString * const BRANCH_VIEW_REDIRECT_SCHEME = @"branch-cta";
-static NSString * const BRANCH_VIEW_REDIRECT_ACTION_ACCEPT = @"accept";
-static NSString * const BRANCH_VIEW_REDIRECT_ACTION_CANCEL = @"cancel";
-static NSInteger  const BRANCH_VIEW_ERR_TEMP_UNAVAILABLE = -202;
+NSString * const BRANCH_VIEW_REDIRECT_SCHEME = @"branch-cta";
+NSString * const BRANCH_VIEW_REDIRECT_ACTION_ACCEPT = @"accept";
+NSString * const BRANCH_VIEW_REDIRECT_ACTION_CANCEL = @"cancel";
+const NSInteger BRANCH_VIEW_ERR_TEMP_UNAVAILABLE = -202;
 
 @implementation BranchViewHandler
 
 static BranchViewHandler *branchViewHandler;
-static BOOL isBranchViewAccepted = NO;
-static NSString *currentActionName;
-static NSString *currentBranchViewID;
+BOOL isBranchViewAccepted = NO;
+NSString *currentActionName;
+NSString *currentBranchViewID;
 
 + (BranchViewHandler *)getInstance {
     if (!branchViewHandler) {
@@ -85,7 +87,8 @@ static NSString *currentBranchViewID;
 }
 
 - (void)closeBranchView {
-    UIViewController *presentingViewController = [UIViewController bnc_currentViewController];
+    Class UIApplicationClass = NSClassFromString(@"UIApplication");
+    UIViewController *presentingViewController = [[[[UIApplicationClass sharedApplication] windows] firstObject] rootViewController];
     [presentingViewController dismissViewControllerAnimated:YES completion:nil];
     
     if (self.branchViewCallback) {
@@ -113,8 +116,8 @@ static NSString *currentBranchViewID;
         if (self.pendingBranchView != nil && self.pendingWebview != nil) {
             UIViewController *holderView = [[UIViewController alloc] init];
             [holderView.view insertSubview:self.pendingWebview atIndex:0];
-
-            UIViewController *presentingViewController = [UIViewController bnc_currentViewController];
+            Class UIApplicationClass = NSClassFromString(@"UIApplication");
+            UIViewController *presentingViewController = [[[[UIApplicationClass sharedApplication] windows] firstObject] rootViewController];
             [presentingViewController presentViewController:holderView animated:YES completion:nil];
             
             [self.pendingBranchView updateUsageCount];

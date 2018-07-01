@@ -89,15 +89,12 @@ RCT_REMAP_METHOD(askAsync,
         ![_kernelPermissionsServiceDelegate hasGrantedPermission:type forExperience:self.experienceId]) {
       __weak typeof(self) weakSelf = self;
       UIAlertAction *allow = [UIAlertAction actionWithTitle:@"Allow" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        if (strongSelf) {
-          if ([strongSelf.kernelPermissionsServiceDelegate savePermission:systemPermissions ofType:type forExperience:strongSelf.experienceId]) {
-            resolve(systemPermissions);
-          } else {
-            NSMutableDictionary *deniedResult = [[NSMutableDictionary alloc] initWithDictionary:systemPermissions];
-            deniedResult[@"status"] = [[weakSelf class] permissionStringForStatus:EXPermissionStatusDenied];
-            resolve(deniedResult);
-          }
+        if ([_kernelPermissionsServiceDelegate savePermission:systemPermissions ofType:type forExperience:self.experienceId]) {
+          resolve(systemPermissions);
+        } else {
+          NSMutableDictionary *deniedResult = [[NSMutableDictionary alloc] initWithDictionary:systemPermissions];
+          deniedResult[@"status"] = [[weakSelf class] permissionStringForStatus:EXPermissionStatusDenied];
+          resolve(deniedResult);
         }
       }];
       

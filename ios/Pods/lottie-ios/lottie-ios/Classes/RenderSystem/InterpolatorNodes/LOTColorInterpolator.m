@@ -12,37 +12,24 @@
 
 @implementation LOTColorInterpolator
 
-- (CGColorRef)colorForFrame:(NSNumber *)frame {
+- (UIColor *)colorForFrame:(NSNumber *)frame {
   CGFloat progress = [self progressForFrame:frame];
-  UIColor *returnColor;
-
   if (progress == 0) {
-    returnColor = self.leadingKeyframe.colorValue;
-  } else if (progress == 1) {
-    returnColor = self.trailingKeyframe.colorValue;
-  } else {
-    returnColor = [UIColor LOT_colorByLerpingFromColor:self.leadingKeyframe.colorValue toColor:self.trailingKeyframe.colorValue amount:progress];
+    return self.leadingKeyframe.colorValue;
   }
-  if (self.hasDelegateOverride) {
-    return [self.delegate colorForFrame:frame.floatValue
-                          startKeyframe:self.leadingKeyframe.keyframeTime.floatValue
-                            endKeyframe:self.trailingKeyframe.keyframeTime.floatValue
-                   interpolatedProgress:progress
-                             startColor:self.leadingKeyframe.colorValue.CGColor
-                               endColor:self.trailingKeyframe.colorValue.CGColor
-                           currentColor:returnColor.CGColor];
+  if (progress == 1) {
+    return self.trailingKeyframe.colorValue;
   }
-
-  return returnColor.CGColor;
+  UIColor *returnColor = [UIColor LOT_colorByLerpingFromColor:self.leadingKeyframe.colorValue toColor:self.trailingKeyframe.colorValue amount:progress];
+  return returnColor;
 }
 
-- (void)setValueDelegate:(id<LOTValueDelegate>)delegate {
-  NSAssert(([delegate conformsToProtocol:@protocol(LOTColorValueDelegate)]), @"Color Interpolator set with incorrect callback type. Expected LOTColorValueDelegate");
-  self.delegate = (id<LOTColorValueDelegate>)delegate;
-}
-
-- (BOOL)hasDelegateOverride {
-  return self.delegate != nil;
+- (id)keyframeDataForValue:(id)value {
+  if ([value isKindOfClass:[UIColor class]]) {
+    NSArray *colorComponents = [(UIColor *)value LOT_arrayFromRGBAComponents];
+    return colorComponents;
+  }
+  return nil;
 }
 
 @end

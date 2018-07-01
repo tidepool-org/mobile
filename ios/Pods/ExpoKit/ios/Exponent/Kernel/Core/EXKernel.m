@@ -254,7 +254,7 @@ const NSUInteger kEXErrorCodeAppForbidden = 424242;
   
   if (_visibleApp != _appRegistry.homeAppRecord) {
     [EXUtil performSynchronouslyOnMainThread:^{
-      [self->_browserController toggleMenuWithCompletion:nil];
+      [_browserController toggleMenuWithCompletion:nil];
     }];
   } else {
     EXKernelAppRegistry *appRegistry = [EXKernel sharedInstance].appRegistry;
@@ -374,7 +374,7 @@ const NSUInteger kEXErrorCodeAppForbidden = 424242;
 {
   if (_browserController) {
     [EXUtil performSynchronouslyOnMainThread:^{
-      [self->_browserController moveAppToVisible:appRecord];
+      [_browserController moveAppToVisible:appRecord];
     }];
   }
 }

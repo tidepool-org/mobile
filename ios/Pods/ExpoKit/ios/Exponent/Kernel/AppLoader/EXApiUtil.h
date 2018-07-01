@@ -26,7 +26,6 @@ typedef void (^EXVerifySignatureErrorBlock)(NSError *error);
                              errorBlock:(EXVerifySignatureErrorBlock)errorBlock;
 
 + (NSURL *)bundleUrlFromManifest:(NSDictionary *)manifest;
-+ (NSURL *)encodedUrlFromString:(NSString *)urlString;
 
 @end
 

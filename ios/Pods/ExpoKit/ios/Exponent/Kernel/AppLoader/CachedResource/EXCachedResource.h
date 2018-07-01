@@ -25,14 +25,14 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (NSString *)resourceCachePath;
 /**
- *  NSBundle path to the embedded copy of this resource.
+ *  Returns [self resourceCachePath] if a file exists there. Otherwise returns a NSBundle path.
  */
-- (NSString *)resourceBundlePath;
+- (NSString *)resourceLocalPathPreferringCache;
+
 /**
- *  Indicates whether or not local copies of this resource are loaded from the NSBundle
- *  rather than the cache.
+ *  Returns true if `CachesDirectory` is a miss, but `NSBundle ... pathForResource` has a hit.
  */
-- (BOOL)isUsingEmbeddedResource;
+- (BOOL)isLocalPathFromNSBundle;
 
 - (NSError *)_validateResponseData:(NSData *)data response:(NSURLResponse *)response;
 - (NSError *)_validateErrorData:(NSError *)error response:(NSURLResponse *)response;

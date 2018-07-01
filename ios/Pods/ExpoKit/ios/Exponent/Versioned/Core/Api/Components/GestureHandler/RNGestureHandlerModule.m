@@ -8,7 +8,6 @@
 #import <React/RCTUIManagerObserverCoordinator.h>
 
 #import "RNGestureHandlerState.h"
-#import "RNGestureHandlerDirection.h"
 #import "RNGestureHandler.h"
 #import "RNGestureHandlerManager.h"
 
@@ -170,12 +169,6 @@ RCT_EXPORT_METHOD(handleClearJSResponder)
                       @"CANCELLED": @(RNGestureHandlerStateCancelled),
                       @"FAILED": @(RNGestureHandlerStateFailed),
                       @"END": @(RNGestureHandlerStateEnd)
-                      },
-              @"Direction": @{
-                      @"RIGHT": @(RNGestureHandlerDirectionRight),
-                      @"LEFT": @(RNGestureHandlerDirectionLeft),
-                      @"UP": @(RNGestureHandlerDirectionUp),
-                      @"DOWN": @(RNGestureHandlerDirectionDown)
                       }
               };
 }

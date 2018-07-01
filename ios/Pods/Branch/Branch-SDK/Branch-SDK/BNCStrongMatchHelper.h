@@ -6,11 +6,10 @@
 //  Copyright © 2015 Branch Metrics. All rights reserved.
 //
 
-#if __has_feature(modules)
-@import Foundation;
-#else
+
 #import <Foundation/Foundation.h>
-#endif
+#import <UIKit/UIKit.h>
+
 
 @interface BNCStrongMatchHelper : NSObject
 

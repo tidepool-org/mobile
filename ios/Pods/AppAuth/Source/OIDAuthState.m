@@ -104,14 +104,14 @@ static const NSUInteger kExpiryTimeTolerance = 60;
 
 #pragma mark - Convenience initializers
 
-+ (id<OIDExternalUserAgentSession, OIDAuthorizationFlowSession>)
++ (id<OIDAuthorizationFlowSession>)
     authStateByPresentingAuthorizationRequest:(OIDAuthorizationRequest *)authorizationRequest
-                            externalUserAgent:(id<OIDExternalUserAgent>)externalUserAgent
+                                UICoordinator:(id<OIDAuthorizationUICoordinator>)UICoordinator
                                      callback:(OIDAuthStateAuthorizationCallback)callback {
   // presents the authorization request
-  id<OIDExternalUserAgentSession, OIDAuthorizationFlowSession> authFlowSession = [OIDAuthorizationService
+  id<OIDAuthorizationFlowSession> authFlowSession = [OIDAuthorizationService
       presentAuthorizationRequest:authorizationRequest
-                externalUserAgent:externalUserAgent
+                    UICoordinator:UICoordinator
                          callback:^(OIDAuthorizationResponse *_Nullable authorizationResponse,
                                     NSError *_Nullable authorizationError) {
                            // inspects response and processes further if needed (e.g. authorization
@@ -124,9 +124,9 @@ static const NSUInteger kExpiryTimeTolerance = 60;
                                // code exchange
                                OIDTokenRequest *tokenExchangeRequest =
                                    [authorizationResponse tokenExchangeRequest];
-                               [OIDAuthorizationService performTokenRequest:tokenExchangeRequest
-                                              originalAuthorizationResponse:authorizationResponse
-                                   callback:^(OIDTokenResponse *_Nullable tokenResponse,
+                               [OIDAuthorizationService
+                                   performTokenRequest:tokenExchangeRequest
+                                              callback:^(OIDTokenResponse *_Nullable tokenResponse,
                                                          NSError *_Nullable tokenError) {
                                                 OIDAuthState *authState;
                                                 if (tokenResponse) {
@@ -136,7 +136,7 @@ static const NSUInteger kExpiryTimeTolerance = 60;
                                                                       tokenResponse:tokenResponse];
                                                 }
                                                 callback(authState, tokenError);
-                               }];
+                                              }];
                              } else {
                                // implicit or hybrid flow (hybrid flow assumes code is not for this
                                // client)
@@ -154,10 +154,10 @@ static const NSUInteger kExpiryTimeTolerance = 60;
 #pragma mark - Initializers
 
 - (nonnull instancetype)init
-    OID_UNAVAILABLE_USE_INITIALIZER(@selector(initWithAuthorizationResponse:tokenResponse:))
+    OID_UNAVAILABLE_USE_INITIALIZER(@selector(initWithAuthorizationResponse:tokenResponse:));
 
 /*! @brief Creates an auth state from an authorization response.
-    @param authorizationResponse The authorization response.
+    @param response The authorization response.
  */
 - (instancetype)initWithAuthorizationResponse:(OIDAuthorizationResponse *)authorizationResponse {
   return [self initWithAuthorizationResponse:authorizationResponse tokenResponse:nil];
@@ -165,7 +165,7 @@ static const NSUInteger kExpiryTimeTolerance = 60;
 
 
 /*! @brief Designated initializer.
-    @param authorizationResponse The authorization response.
+    @param response The authorization response.
     @discussion Creates an auth state from an authorization response and token response.
  */
 - (instancetype)initWithAuthorizationResponse:(OIDAuthorizationResponse *)authorizationResponse
@@ -216,7 +216,7 @@ static const NSUInteger kExpiryTimeTolerance = 60;
                                      "lastAuthorizationResponse: %@, lastTokenResponse: %@, "
                                      "lastRegistrationResponse: %@, authorizationError: %@>",
                                     NSStringFromClass([self class]),
-                                    (void *)self,
+                                    self,
                                     (self.isAuthorized) ? @"YES" : @"NO",
                                     _refreshToken,
                                     _scope,
@@ -457,7 +457,7 @@ static const NSUInteger kExpiryTimeTolerance = 60;
   }
 
   // access token is expired, first refresh the token, then perform action
-  NSAssert(_pendingActionsSyncObject, @"_pendingActionsSyncObject cannot be nil", @"");
+  NSAssert(_pendingActionsSyncObject, @"_pendingActionsSyncObject cannot be nil");
   @synchronized(_pendingActionsSyncObject) {
     // if a token is already in the process of being refreshed, adds to pending actions
     if (_pendingActions) {
@@ -473,31 +473,30 @@ static const NSUInteger kExpiryTimeTolerance = 60;
   OIDTokenRequest *tokenRefreshRequest =
       [self tokenRefreshRequestWithAdditionalParameters:additionalParameters];
   [OIDAuthorizationService performTokenRequest:tokenRefreshRequest
-                 originalAuthorizationResponse:_lastAuthorizationResponse
                                       callback:^(OIDTokenResponse *_Nullable response,
                                                  NSError *_Nullable error) {
     dispatch_async(dispatch_get_main_queue(), ^() {
       // update OIDAuthState based on response
       if (response) {
-        self->_needsTokenRefresh = NO;
+        _needsTokenRefresh = NO;
         [self updateWithTokenResponse:response error:nil];
       } else {
         if (error.domain == OIDOAuthTokenErrorDomain) {
-          self->_needsTokenRefresh = NO;
+          _needsTokenRefresh = NO;
           [self updateWithAuthorizationError:error];
         } else {
-          if ([self->_errorDelegate respondsToSelector:
+          if ([_errorDelegate respondsToSelector:
               @selector(authState:didEncounterTransientError:)]) {
-            [self->_errorDelegate authState:self didEncounterTransientError:error];
+            [_errorDelegate authState:self didEncounterTransientError:error];
           }
         }
       }
 
       // nil the pending queue and process everything that was queued up
       NSArray *actionsToProcess;
-      @synchronized(self->_pendingActionsSyncObject) {
-        actionsToProcess = self->_pendingActions;
-        self->_pendingActions = nil;
+      @synchronized(_pendingActionsSyncObject) {
+        actionsToProcess = _pendingActions;
+        _pendingActions = nil;
       }
       for (OIDAuthStateAction actionToProcess in actionsToProcess) {
         actionToProcess(self.accessToken, self.idToken, error);

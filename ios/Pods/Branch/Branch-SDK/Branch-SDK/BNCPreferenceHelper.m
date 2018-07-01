@@ -10,59 +10,61 @@
 #import "BNCEncodingUtils.h"
 #import "BNCConfig.h"
 #import "Branch.h"
-#import "BNCLog.h"
-#import "BNCFabricAnswers.h"
-#import "BranchConstants.h"
-#import "NSString+Branch.h"
+#import "../Fabric/Fabric+FABKits.h"
 
 static const NSTimeInterval DEFAULT_TIMEOUT = 5.5;
 static const NSTimeInterval DEFAULT_RETRY_INTERVAL = 0;
 static const NSInteger DEFAULT_RETRY_COUNT = 3;
 
-static NSString * const BRANCH_PREFS_FILE = @"BNCPreferences";
+NSString * const BRANCH_PREFS_FILE = @"BNCPreferences";
 
-static NSString * const BRANCH_PREFS_KEY_APP_VERSION = @"bnc_app_version";
-static NSString * const BRANCH_PREFS_KEY_LAST_RUN_BRANCH_KEY = @"bnc_last_run_branch_key";
-static NSString * const BRANCH_PREFS_KEY_LAST_STRONG_MATCH_DATE = @"bnc_strong_match_created_date";
-static NSString * const BRANCH_PREFS_KEY_DEVICE_FINGERPRINT_ID = @"bnc_device_fingerprint_id";
-static NSString * const BRANCH_PREFS_KEY_SESSION_ID = @"bnc_session_id";
-static NSString * const BRANCH_PREFS_KEY_IDENTITY_ID = @"bnc_identity_id";
-static NSString * const BRANCH_PREFS_KEY_IDENTITY = @"bnc_identity";
-static NSString * const BRANCH_PREFS_KEY_CHECKED_FACEBOOK_APP_LINKS = @"bnc_checked_fb_app_links";
-static NSString * const BRANCH_PREFS_KEY_CHECKED_APPLE_SEARCH_ADS = @"bnc_checked_apple_search_ads";
-static NSString * const BRANCH_PREFS_KEY_APPLE_SEARCH_ADS_INFO = @"bnc_apple_search_ads_info";
-static NSString * const BRANCH_PREFS_KEY_LINK_CLICK_IDENTIFIER = @"bnc_link_click_identifier";
-static NSString * const BRANCH_PREFS_KEY_SPOTLIGHT_IDENTIFIER = @"bnc_spotlight_identifier";
-static NSString * const BRANCH_PREFS_KEY_UNIVERSAL_LINK_URL = @"bnc_universal_link_url";
-static NSString * const BRANCH_PREFS_KEY_SESSION_PARAMS = @"bnc_session_params";
-static NSString * const BRANCH_PREFS_KEY_INSTALL_PARAMS = @"bnc_install_params";
-static NSString * const BRANCH_PREFS_KEY_USER_URL = @"bnc_user_url";
-static NSString * const BRANCH_PREFS_KEY_BRANCH_UNIVERSAL_LINK_DOMAINS = @"branch_universal_link_domains";
+NSString * const BRANCH_PREFS_KEY_APP_VERSION = @"bnc_app_version";
+NSString * const BRANCH_PREFS_KEY_LAST_RUN_BRANCH_KEY = @"bnc_last_run_branch_key";
+NSString * const BRANCH_PREFS_KEY_LAST_STRONG_MATCH_DATE = @"bnc_strong_match_created_date";
+NSString * const BRANCH_PREFS_KEY_DEVICE_FINGERPRINT_ID = @"bnc_device_fingerprint_id";
+NSString * const BRANCH_PREFS_KEY_SESSION_ID = @"bnc_session_id";
+NSString * const BRANCH_PREFS_KEY_IDENTITY_ID = @"bnc_identity_id";
+NSString * const BRANCH_PREFS_KEY_IDENTITY = @"bnc_identity";
+NSString * const BRANCH_PREFS_KEY_CHECKED_FACEBOOK_APP_LINKS = @"bnc_checked_fb_app_links";
+NSString * const BRANCH_PREFS_KEY_CHECKED_APPLE_SEARCH_ADS = @"bnc_checked_apple_search_ads";
+NSString * const BRANCH_PREFS_KEY_APPLE_SEARCH_ADS_INFO = @"bnc_apple_search_ads_info";
+NSString * const BRANCH_PREFS_KEY_LINK_CLICK_IDENTIFIER = @"bnc_link_click_identifier";
+NSString * const BRANCH_PREFS_KEY_SPOTLIGHT_IDENTIFIER = @"bnc_spotlight_identifier";
+NSString * const BRANCH_PREFS_KEY_UNIVERSAL_LINK_URL = @"bnc_universal_link_url";
+NSString * const BRANCH_PREFS_KEY_SESSION_PARAMS = @"bnc_session_params";
+NSString * const BRANCH_PREFS_KEY_INSTALL_PARAMS = @"bnc_install_params";
+NSString * const BRANCH_PREFS_KEY_USER_URL = @"bnc_user_url";
+NSString * const BRANCH_PREFS_KEY_BRANCH_UNIVERSAL_LINK_DOMAINS = @"branch_universal_link_domains";
+NSString * const BRANCH_REQUEST_KEY_EXTERNAL_INTENT_URI = @"external_intent_uri";
 
-static NSString * const BRANCH_PREFS_KEY_CREDITS = @"bnc_credits";
-static NSString * const BRANCH_PREFS_KEY_CREDIT_BASE = @"bnc_credit_base_";
+NSString * const BRANCH_PREFS_KEY_CREDITS = @"bnc_credits";
+NSString * const BRANCH_PREFS_KEY_CREDIT_BASE = @"bnc_credit_base_";
 
-static NSString * const BRANCH_PREFS_KEY_BRANCH_VIEW_USAGE_CNT = @"bnc_branch_view_usage_cnt_";
-static NSString * const BRANCH_PREFS_KEY_ANALYTICAL_DATA = @"bnc_branch_analytical_data";
-static NSString * const BRANCH_PREFS_KEY_ANALYTICS_MANIFEST = @"bnc_branch_analytics_manifest";
+NSString * const BRANCH_PREFS_KEY_BRANCH_VIEW_USAGE_CNT = @"bnc_branch_view_usage_cnt_";
+NSString * const BRANCH_PREFS_KEY_ANALYTICAL_DATA = @"bnc_branch_analytical_data";
+NSString * const BRANCH_PREFS_KEY_ANALYTICS_MANIFEST = @"bnc_branch_analytics_manifest";
+
+// The name of this key was specified in the account-creation API integration
+static NSString * const BNC_BRANCH_FABRIC_APP_KEY_KEY = @"branch_key";
 
 @interface BNCPreferenceHelper () {
     NSOperationQueue *_persistPrefsQueue;
     NSString         *_lastSystemBuildVersion;
     NSString         *_browserUserAgentString;
     NSString         *_branchAPIURL;
-    NSString         *_referringURL;
 }
 
 @property (strong, nonatomic) NSMutableDictionary *persistenceDict;
 @property (strong, nonatomic) NSMutableDictionary *creditsDictionary;
 @property (strong, nonatomic) NSMutableDictionary *requestMetadataDictionary;
 @property (strong, nonatomic) NSMutableDictionary *instrumentationDictionary;
+@property (assign, nonatomic) BOOL isUsingLiveKey;
+
 @end
 
 @implementation BNCPreferenceHelper
 
-@synthesize
+@synthesize branchKey = _branchKey,
             lastRunBranchKey = _lastRunBranchKey,
             appVersion = _appVersion,
             deviceFingerprintID = _deviceFingerprintID,
@@ -78,6 +80,7 @@ static NSString * const BRANCH_PREFS_KEY_ANALYTICS_MANIFEST = @"bnc_branch_analy
             externalIntentURI = _externalIntentURI,
             isDebug = _isDebug,
             shouldWaitForInit = _shouldWaitForInit,
+            suppressWarningLogs = _suppressWarningLogs,
             retryCount = _retryCount,
             retryInterval = _retryInterval,
             timeout = _timeout,
@@ -100,16 +103,15 @@ static NSString * const BRANCH_PREFS_KEY_ANALYTICS_MANIFEST = @"bnc_branch_analy
 }
 
 - (id)init {
-    self = [super init];
-    if (!self) return self;
-
-    _timeout = DEFAULT_TIMEOUT;
-    _retryCount = DEFAULT_RETRY_COUNT;
-    _retryInterval = DEFAULT_RETRY_INTERVAL;
-    _isDebug = NO;
-    _persistPrefsQueue = [[NSOperationQueue alloc] init];
-    _persistPrefsQueue.maxConcurrentOperationCount = 1;
-
+    if (self = [super init]) {
+        _timeout = DEFAULT_TIMEOUT;
+        _retryCount = DEFAULT_RETRY_COUNT;
+        _retryInterval = DEFAULT_RETRY_INTERVAL;
+        
+        _isDebug = NO;
+        _suppressWarningLogs = NO;
+    }
+    
     return self;
 }
 
@@ -124,7 +126,36 @@ static NSString * const BRANCH_PREFS_KEY_ANALYTICS_MANIFEST = @"bnc_branch_analy
     return preferenceHelper;
 }
 
+
+/*
+
+    This creates one global queue.  Not so desirable.
+
+- (NSOperationQueue *)persistPrefsQueue {
+    static NSOperationQueue *persistPrefsQueue;
+    static dispatch_once_t persistOnceToken;
+    
+    dispatch_once(&persistOnceToken, ^{
+        persistPrefsQueue = [[NSOperationQueue alloc] init];
+        persistPrefsQueue.maxConcurrentOperationCount = 1;
+    });
+
+    return persistPrefsQueue;
+}
+*/
+
+- (NSOperationQueue *)persistPrefsQueue {
+    @synchronized (self) {
+        if (_persistPrefsQueue)
+            return _persistPrefsQueue;
+        _persistPrefsQueue = [[NSOperationQueue alloc] init];
+        _persistPrefsQueue.maxConcurrentOperationCount = 1;
+        return _persistPrefsQueue;
+    }
+}
+
 - (void) synchronize {
+    //  Flushes preference queue to persistence.
     [_persistPrefsQueue waitUntilAllOperationsAreFinished];
 }
 
@@ -132,7 +163,23 @@ static NSString * const BRANCH_PREFS_KEY_ANALYTICS_MANIFEST = @"bnc_branch_analy
     [self synchronize];
 }
 
-#pragma mark - API methods
+#pragma mark - Debug methods
+
+- (void)log:(NSString *)filename line:(int)line message:(NSString *)format, ... {
+    if (self.isDebug) {
+        va_list args;
+        va_start(args, format);
+        NSString *log = [NSString stringWithFormat:@"[%@:%d] %@", filename, line, [[NSString alloc] initWithFormat:format arguments:args]];
+        va_end(args);
+        NSLog(@"%@", log);
+    }
+}
+
+- (void)logWarning:(NSString *)message {
+    if (!self.suppressWarningLogs) {
+        NSLog(@"[Branch Warning] %@", message);
+    }
+}
 
 - (void) setBranchAPIURL:(NSString*)branchAPIURL_ {
     @synchronized (self) {
@@ -170,10 +217,57 @@ static NSString * const BRANCH_PREFS_KEY_ANALYTICS_MANIFEST = @"bnc_branch_analy
 
 #pragma mark - Preference Storage
 
+- (NSString *)getBranchKey:(BOOL)isLive {
+    // Already loaded a key, and it's the same state (live/test)
+    if (_branchKey && isLive == self.isUsingLiveKey) {
+        return _branchKey;
+    }
+    
+    self.isUsingLiveKey = isLive;
+
+    id ret = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"branch_key"];
+    if (ret) {
+        if ([ret isKindOfClass:[NSString class]]) {
+            self.branchKey = ret;
+        }
+        else if ([ret isKindOfClass:[NSDictionary class]]) {
+            self.branchKey = isLive ? ret[@"live"] : ret[@"test"];
+        }
+
+    } else {
+
+        Class fabric = NSClassFromString(@"Fabric");
+        if ([fabric respondsToSelector:@selector(configurationDictionaryForKitClass:)]) {
+
+            NSDictionary *configDictionary = [fabric configurationDictionaryForKitClass:[Branch class]];
+            ret = [configDictionary objectForKey:BNC_BRANCH_FABRIC_APP_KEY_KEY];
+            
+            if ([ret isKindOfClass:[NSString class]]) {
+
+                self.branchKey = ret;
+
+            } else if ([ret isKindOfClass:[NSDictionary class]]) {
+
+                self.branchKey = isLive ? ret[@"live"] : ret[@"test"];
+                if (![self.branchKey isKindOfClass:NSString.class])
+                    self.branchKey = nil;
+
+            }
+        }
+    }
+    
+    return _branchKey;
+}
+
+- (void)setBranchKey:(NSString *)branchKey {
+    _branchKey = branchKey;
+}
+
 - (NSString *)lastRunBranchKey {
     if (!_lastRunBranchKey) {
         _lastRunBranchKey = [self readStringFromDefaults:BRANCH_PREFS_KEY_LAST_RUN_BRANCH_KEY];
     }
+    
     return _lastRunBranchKey;
 }
 
@@ -188,11 +282,12 @@ static NSString * const BRANCH_PREFS_KEY_ANALYTICS_MANIFEST = @"bnc_branch_analy
     if (!_lastStrongMatchDate) {
         _lastStrongMatchDate = (NSDate *)[self readObjectFromDefaults:BRANCH_PREFS_KEY_LAST_STRONG_MATCH_DATE];
     }
+    
     return _lastStrongMatchDate;
 }
 
 - (void)setLastStrongMatchDate:(NSDate *)lastStrongMatchDate {
-    if (lastStrongMatchDate == nil || ![_lastStrongMatchDate isEqualToDate:lastStrongMatchDate]) {
+    if (![_lastStrongMatchDate isEqualToDate:lastStrongMatchDate]) {
         _lastStrongMatchDate = lastStrongMatchDate;
         [self writeObjectToDefaults:BRANCH_PREFS_KEY_LAST_STRONG_MATCH_DATE value:lastStrongMatchDate];
     }
@@ -202,6 +297,7 @@ static NSString * const BRANCH_PREFS_KEY_ANALYTICS_MANIFEST = @"bnc_branch_analy
     if (!_appVersion) {
         _appVersion = [self readStringFromDefaults:BRANCH_PREFS_KEY_APP_VERSION];
     }
+    
     return _appVersion;
 }
 
@@ -221,7 +317,7 @@ static NSString * const BRANCH_PREFS_KEY_ANALYTICS_MANIFEST = @"bnc_branch_analy
 }
 
 - (void)setDeviceFingerprintID:(NSString *)deviceFingerprintID {
-    if (deviceFingerprintID == nil || ![_deviceFingerprintID isEqualToString:deviceFingerprintID]) {
+    if (![_deviceFingerprintID isEqualToString:deviceFingerprintID]) {
         _deviceFingerprintID = deviceFingerprintID;
         [self writeObjectToDefaults:BRANCH_PREFS_KEY_DEVICE_FINGERPRINT_ID value:deviceFingerprintID];
     }
@@ -236,82 +332,99 @@ static NSString * const BRANCH_PREFS_KEY_ANALYTICS_MANIFEST = @"bnc_branch_analy
 }
 
 - (void)setSessionID:(NSString *)sessionID {
-    if (sessionID == nil || ![_sessionID isEqualToString:sessionID]) {
+    if (![_sessionID isEqualToString:sessionID]) {
         _sessionID = sessionID;
         [self writeObjectToDefaults:BRANCH_PREFS_KEY_SESSION_ID value:sessionID];
     }
 }
 
 - (NSString *)identityID {
-    return [self readStringFromDefaults:BRANCH_PREFS_KEY_IDENTITY_ID];
+    if (!_identityID) {
+        _identityID = [self readStringFromDefaults:BRANCH_PREFS_KEY_IDENTITY_ID];
+    }
+    
+    return _identityID;
 }
 
 - (void)setIdentityID:(NSString *)identityID {
-    [self writeObjectToDefaults:BRANCH_PREFS_KEY_IDENTITY_ID value:identityID];
+    if (![_identityID isEqualToString:identityID]) {
+        _identityID = identityID;
+        [self writeObjectToDefaults:BRANCH_PREFS_KEY_IDENTITY_ID value:identityID];
+    }
 }
 
 - (NSString *)userIdentity {
-    return [self readStringFromDefaults:BRANCH_PREFS_KEY_IDENTITY];
+    if (!_userIdentity) {
+        _userIdentity = [self readStringFromDefaults:BRANCH_PREFS_KEY_IDENTITY];
+    }
+
+    return _userIdentity;
 }
 
 - (void)setUserIdentity:(NSString *)userIdentity {
-    [self writeObjectToDefaults:BRANCH_PREFS_KEY_IDENTITY value:userIdentity];
+    if (![_userIdentity isEqualToString:userIdentity]) {
+        _userIdentity = userIdentity;
+        [self writeObjectToDefaults:BRANCH_PREFS_KEY_IDENTITY value:userIdentity];
+    }
 }
 
 - (NSString *)linkClickIdentifier {
-    return [self readStringFromDefaults:BRANCH_PREFS_KEY_LINK_CLICK_IDENTIFIER];
+    if (!_linkClickIdentifier) {
+        _linkClickIdentifier = [self readStringFromDefaults:BRANCH_PREFS_KEY_LINK_CLICK_IDENTIFIER];
+    }
+
+    return _linkClickIdentifier;
 }
 
 - (void)setLinkClickIdentifier:(NSString *)linkClickIdentifier {
-    [self writeObjectToDefaults:BRANCH_PREFS_KEY_LINK_CLICK_IDENTIFIER value:linkClickIdentifier];
+    if (![_linkClickIdentifier isEqualToString:linkClickIdentifier]) {
+        _linkClickIdentifier = linkClickIdentifier;
+        [self writeObjectToDefaults:BRANCH_PREFS_KEY_LINK_CLICK_IDENTIFIER value:linkClickIdentifier];
+    }
 }
 
 - (NSString *)spotlightIdentifier {
-    return [self readStringFromDefaults:BRANCH_PREFS_KEY_SPOTLIGHT_IDENTIFIER];
+    if (!_spotlightIdentifier) {
+        _spotlightIdentifier = [self readStringFromDefaults:BRANCH_PREFS_KEY_SPOTLIGHT_IDENTIFIER];
+    }
+    
+    return _spotlightIdentifier;
 }
 
 - (void)setSpotlightIdentifier:(NSString *)spotlightIdentifier {
-    [self writeObjectToDefaults:BRANCH_PREFS_KEY_SPOTLIGHT_IDENTIFIER value:spotlightIdentifier];
+    if (![_spotlightIdentifier isEqualToString:spotlightIdentifier]) {
+        _spotlightIdentifier = spotlightIdentifier;
+        [self writeObjectToDefaults:BRANCH_PREFS_KEY_SPOTLIGHT_IDENTIFIER value:spotlightIdentifier];
+    }
 }
 
 - (NSString *)externalIntentURI {
-    @synchronized(self) {
-        if (!_externalIntentURI) {
-            _externalIntentURI = [self readStringFromDefaults:BRANCH_REQUEST_KEY_EXTERNAL_INTENT_URI];
-        }
-        return _externalIntentURI;
+    if (!_externalIntentURI) {
+        _externalIntentURI = [self readStringFromDefaults:BRANCH_REQUEST_KEY_EXTERNAL_INTENT_URI];
     }
+    return _externalIntentURI;
 }
 
 - (void)setExternalIntentURI:(NSString *)externalIntentURI {
-    @synchronized(self) {
-        if (externalIntentURI == nil || ![_externalIntentURI isEqualToString:externalIntentURI]) {
-            _externalIntentURI = externalIntentURI;
-            [self writeObjectToDefaults:BRANCH_REQUEST_KEY_EXTERNAL_INTENT_URI value:externalIntentURI];
-        }
-    }
-}
-
-- (NSString*) referringURL {
-    @synchronized (self) {
-        if (!_referringURL) _referringURL = [self readStringFromDefaults:@"referringURL"];
-        return _referringURL;
-    }
-}
-
-- (void) setReferringURL:(NSString *)referringURL {
-    @synchronized (self) {
-        _referringURL = [referringURL copy];
-        [self writeObjectToDefaults:@"referringURL" value:_referringURL];
+    if (![_externalIntentURI isEqualToString:externalIntentURI]) {
+        _externalIntentURI = externalIntentURI;
+        [self writeObjectToDefaults:BRANCH_REQUEST_KEY_EXTERNAL_INTENT_URI value:externalIntentURI];
     }
 }
 
 - (NSString *)universalLinkUrl {
-    return [self readStringFromDefaults:BRANCH_PREFS_KEY_UNIVERSAL_LINK_URL];
+    if (!_universalLinkUrl) {
+        _universalLinkUrl = [self readStringFromDefaults:BRANCH_PREFS_KEY_UNIVERSAL_LINK_URL];
+    }
+    
+    return _universalLinkUrl;
 }
 
 - (void)setUniversalLinkUrl:(NSString *)universalLinkUrl {
-    [self writeObjectToDefaults:BRANCH_PREFS_KEY_UNIVERSAL_LINK_URL value:universalLinkUrl];
+    if (![_universalLinkUrl isEqualToString:universalLinkUrl]) {
+        _universalLinkUrl = universalLinkUrl;
+        [self writeObjectToDefaults:BRANCH_PREFS_KEY_UNIVERSAL_LINK_URL value:universalLinkUrl];
+    }
 }
 
 - (NSString *)sessionParams {
@@ -325,7 +438,7 @@ static NSString * const BRANCH_PREFS_KEY_ANALYTICS_MANIFEST = @"bnc_branch_analy
 
 - (void)setSessionParams:(NSString *)sessionParams {
     @synchronized (self) {
-        if (sessionParams == nil || ![_sessionParams isEqualToString:sessionParams]) {
+        if (![_sessionParams isEqualToString:sessionParams]) {
             _sessionParams = sessionParams;
             [self writeObjectToDefaults:BRANCH_PREFS_KEY_SESSION_PARAMS value:sessionParams];
         }
@@ -333,31 +446,29 @@ static NSString * const BRANCH_PREFS_KEY_ANALYTICS_MANIFEST = @"bnc_branch_analy
 }
 
 - (NSString *)installParams {
-    @synchronized(self) {
-        if (!_installParams) {
-            id installParamsFromCache = [self readStringFromDefaults:BRANCH_PREFS_KEY_INSTALL_PARAMS];
-            if ([installParamsFromCache isKindOfClass:[NSString class]]) {
-                _installParams = [self readStringFromDefaults:BRANCH_PREFS_KEY_INSTALL_PARAMS];
-            }
-            else if ([installParamsFromCache isKindOfClass:[NSDictionary class]]) {
-                [self writeObjectToDefaults:BRANCH_PREFS_KEY_INSTALL_PARAMS value:nil];
-            }
+    if (!_installParams) {
+        id installParamsFromCache = [self readStringFromDefaults:BRANCH_PREFS_KEY_INSTALL_PARAMS];
+        if ([installParamsFromCache isKindOfClass:[NSString class]]) {
+            _installParams = [self readStringFromDefaults:BRANCH_PREFS_KEY_INSTALL_PARAMS];
         }
-        return _installParams;
+        else if ([installParamsFromCache isKindOfClass:[NSDictionary class]]) {
+            [self writeObjectToDefaults:BRANCH_PREFS_KEY_INSTALL_PARAMS value:nil];
+        }
     }
+    
+    return _installParams;
 }
 
 - (void)setInstallParams:(NSString *)installParams {
-    @synchronized(self) {
-        if ([installParams isKindOfClass:[NSDictionary class]]) {
-            _installParams = [BNCEncodingUtils encodeDictionaryToJsonString:(NSDictionary *)installParams];
-            [self writeObjectToDefaults:BRANCH_PREFS_KEY_INSTALL_PARAMS value:_installParams];
-            return;
-        }
-        if (installParams == nil || ![_installParams isEqualToString:installParams]) {
-            _installParams = installParams;
-            [self writeObjectToDefaults:BRANCH_PREFS_KEY_INSTALL_PARAMS value:installParams];
-        }
+    if ([installParams isKindOfClass:[NSDictionary class]]) {
+        _installParams = [BNCEncodingUtils encodeDictionaryToJsonString:(NSDictionary *)installParams];
+        [self writeObjectToDefaults:BRANCH_PREFS_KEY_INSTALL_PARAMS value:_installParams];
+        return;
+    }
+    
+    if (![_installParams isEqualToString:installParams]) {
+        _installParams = installParams;
+        [self writeObjectToDefaults:BRANCH_PREFS_KEY_INSTALL_PARAMS value:installParams];
     }
 }
 
@@ -373,14 +484,6 @@ static NSString * const BRANCH_PREFS_KEY_ANALYTICS_MANIFEST = @"bnc_branch_analy
         _appleSearchAdDetails = (NSDictionary *) [self readObjectFromDefaults:BRANCH_PREFS_KEY_APPLE_SEARCH_ADS_INFO];
     }
     return [_appleSearchAdDetails isKindOfClass:[NSDictionary class]] ? _appleSearchAdDetails : nil;
-}
-
-- (void) setAppleSearchAdNeedsSend:(BOOL)appleSearchAdNeedsSend {
-    [self writeBoolToDefaults:@"_appleSearchAdNeedsSend" value:appleSearchAdNeedsSend];
-}
-
-- (BOOL) appleSearchAdNeedsSend {
-    return [self readBoolFromDefaults:@"_appleSearchAdNeedsSend"];
 }
 
 - (NSString*) lastSystemBuildVersion {
@@ -424,24 +527,6 @@ static NSString * const BRANCH_PREFS_KEY_ANALYTICS_MANIFEST = @"bnc_branch_analy
         _userUrl = userUrl;
         [self writeObjectToDefaults:BRANCH_PREFS_KEY_USER_URL value:userUrl];
     }
-}
-
-- (NSMutableString*) sanitizedMutableBaseURL:(NSString*)baseUrl_ {
-    NSMutableString *baseUrl = [baseUrl_ mutableCopy];
-    if (self.trackingDisabled) {
-        NSString *id_string = [NSString stringWithFormat:@"%%24identity_id=%@", self.identityID];
-        NSRange range = [baseUrl rangeOfString:id_string];
-        if (range.location != NSNotFound) [baseUrl replaceCharactersInRange:range withString:@""];
-    } else
-    if ([baseUrl hasSuffix:@"&"] || [baseUrl hasSuffix:@"?"]) {
-    } else
-    if ([baseUrl bnc_containsString:@"?"]) {
-        [baseUrl appendString:@"&"];
-    }
-    else {
-        [baseUrl appendString:@"?"];
-    }
-    return baseUrl;
 }
 
 - (BOOL)checkedAppleSearchAdAttribution {
@@ -512,116 +597,9 @@ static NSString * const BRANCH_PREFS_KEY_ANALYTICS_MANIFEST = @"bnc_branch_analy
 - (void)clearInstrumentationDictionary {
     @synchronized (self) {
         NSArray *keys = [_instrumentationDictionary allKeys];
-        for (NSUInteger i = 0 ; i < [keys count]; i++) {
+        for (int i = 0 ; i < [keys count]; i++) {
             [_instrumentationDictionary removeObjectForKey:keys[i]];
         }
-    }
-}
-
-- (BOOL) limitFacebookTracking {
-    @synchronized (self) {
-        return [self readBoolFromDefaults:@"_limitFacebookTracking"];
-    }
-}
-
-- (void) setLimitFacebookTracking:(BOOL)limitFacebookTracking {
-    @synchronized (self) {
-        [self writeBoolToDefaults:@"_limitFacebookTracking" value:limitFacebookTracking];
-    }
-}
-
-- (NSDate*) previousAppBuildDate {
-    @synchronized (self) {
-        NSDate *date = (NSDate*) [self readObjectFromDefaults:@"_previousAppBuildDate"];
-        if ([date isKindOfClass:[NSDate class]]) return date;
-        return nil;
-    }
-}
-
-- (void) setPreviousAppBuildDate:(NSDate*)date {
-    @synchronized (self) {
-        if (date == nil || [date isKindOfClass:[NSDate class]])
-            [self writeObjectToDefaults:@"_previousAppBuildDate" value:date];
-    }
-}
-
-- (NSArray<NSString*>*) URLBlackList {
-    @synchronized(self) {
-        id a = [self readObjectFromDefaults:@"URLBlackList"];
-        if ([a isKindOfClass:NSArray.class]) return a;
-        return nil;
-    }
-}
-
-- (void) setURLBlackList:(NSArray<NSString *> *)URLBlackList {
-    @synchronized(self) {
-        [self writeObjectToDefaults:@"URLBlackList" value:URLBlackList];
-    }
-}
-
-- (NSInteger) URLBlackListVersion {
-    @synchronized(self) {
-        return [self readIntegerFromDefaults:@"URLBlackListVersion"];
-    }
-}
-
-- (void) setURLBlackListVersion:(NSInteger)URLBlackListVersion {
-    @synchronized(self) {
-        [self writeIntegerToDefaults:@"URLBlackListVersion" value:URLBlackListVersion];
-    }
-}
-
-- (BOOL) blacklistURLOpen {
-    @synchronized(self) {
-        return [self readBoolFromDefaults:@"blacklistURLOpen"];
-    }
-}
-
-- (void) setBlacklistURLOpen:(BOOL)value {
-    @synchronized(self) {
-        [self writeBoolToDefaults:@"blacklistURLOpen" value:value];
-    }
-}
-
-
-- (BOOL) trackingDisabled {
-    @synchronized(self) {
-        NSNumber *b = (id) [self readObjectFromDefaults:@"trackingDisabled"];
-        if ([b isKindOfClass:NSNumber.class]) return [b boolValue];
-        return false;
-    }
-}
-
-- (void) setTrackingDisabled:(BOOL)disabled {
-    @synchronized(self) {
-        NSNumber *b = [NSNumber numberWithBool:disabled];
-        [self writeObjectToDefaults:@"trackingDisabled" value:b];
-        if (disabled) [self clearTrackingInformation];
-    }
-}
-
-- (void) clearTrackingInformation {
-    @synchronized(self) {
-        /* Don't clear these:
-        self.deviceFingerprintID = nil;
-        self.userIdentity = nil;
-        self.identityID = nil;
-        self.installParams = nil;
-        */
-        self.sessionID = nil;
-        self.linkClickIdentifier = nil;
-        self.spotlightIdentifier = nil;
-        self.referringURL = nil;
-        self.universalLinkUrl = nil;
-        self.installParams = nil;
-        self.appleSearchAdDetails = nil;
-        self.appleSearchAdNeedsSend = NO;
-        self.sessionParams = nil;
-        self.externalIntentURI = nil;
-        self.savedAnalyticsData = nil;
-        self.previousAppBuildDate = nil;
-        self.requestMetadataDictionary = nil;
-        self.lastStrongMatchDate = nil;
     }
 }
 
@@ -733,7 +711,9 @@ static NSString * const BRANCH_PREFS_KEY_ANALYTICS_MANIFEST = @"bnc_branch_analy
     return (NSDictionary *)[self readObjectFromDefaults:BRANCH_PREFS_KEY_ANALYTICS_MANIFEST];
 }
 
+
 #pragma mark - Writing To Persistence
+
 
 - (void)writeIntegerToDefaults:(NSString *)key value:(NSInteger)value {
     [self writeObjectToDefaults:key value:@(value)];
@@ -764,10 +744,12 @@ static NSString * const BRANCH_PREFS_KEY_ANALYTICS_MANIFEST = @"bnc_branch_analy
         }
         @catch (id exception) {
             data = nil;
-            BNCLogWarning(@"Exception creating preferences data: %@.", exception);
+            [self logWarning:
+                [NSString stringWithFormat:@"Exception creating preferences data: %@.",
+                    exception]];
         }
         if (!data) {
-            BNCLogWarning(@"Can't create preferences data.");
+            [self logWarning:@"Can't create preferences data."];
             return;
         }
         NSURL *prefsURL = [self.class.URLForPrefsFile copy];
@@ -775,74 +757,68 @@ static NSString * const BRANCH_PREFS_KEY_ANALYTICS_MANIFEST = @"bnc_branch_analy
             NSError *error = nil;
             [data writeToURL:prefsURL options:NSDataWritingAtomic error:&error];
             if (error) {
-                BNCLogWarning(@"Failed to persist preferences: %@.", error);
+                [self logWarning:
+                    [NSString stringWithFormat:
+                        @"Failed to persist preferences to disk: %@.", error]];
             }
         }];
-        [_persistPrefsQueue addOperation:newPersistOp];
+        [self.persistPrefsQueue addOperation:newPersistOp];
     }
 }
 
 #pragma mark - Reading From Persistence
 
 - (NSMutableDictionary *)persistenceDict {
-    @synchronized(self) {
-        if (!_persistenceDict) {
-            NSDictionary *persistenceDict = nil;
-            @try {
-                NSError *error = nil;
-                NSData *data = [NSData dataWithContentsOfURL:self.class.URLForPrefsFile
-                    options:0 error:&error];
-                if (!error && data)
-                    persistenceDict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-            }
-            @catch (NSException*) {
-                BNCLogWarning(@"Failed to load preferences from storage.");
-            }
-
-            if ([persistenceDict isKindOfClass:[NSDictionary class]])
-                _persistenceDict = [persistenceDict mutableCopy];
-            else
-                _persistenceDict = [[NSMutableDictionary alloc] init];
+    if (!_persistenceDict) {
+        NSDictionary *persistenceDict = nil;
+        @try {
+            NSError *error = nil;
+            NSData *data = [NSData dataWithContentsOfURL:self.class.URLForPrefsFile
+                options:0 error:&error];
+            if (!error && data)
+                persistenceDict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
         }
-        return _persistenceDict;
+        @catch (NSException *exception) {
+            [self logWarning:@"Failed to load preferences from disk."];
+        }
+
+        if ([persistenceDict isKindOfClass:[NSDictionary class]])
+            _persistenceDict = [persistenceDict mutableCopy];
+        else
+            _persistenceDict = [[NSMutableDictionary alloc] init];
     }
+    return _persistenceDict;
 }
 
 - (NSObject *)readObjectFromDefaults:(NSString *)key {
-    @synchronized(self) {
-        NSObject *obj = self.persistenceDict[key];
-        return obj;
-    }
+    NSObject *obj = self.persistenceDict[key];
+    return obj;
 }
 
 - (NSString *)readStringFromDefaults:(NSString *)key {
-    @synchronized(self) {
-        id str = self.persistenceDict[key];
-        if ([str isKindOfClass:[NSNumber class]]) {
-            str = [str stringValue];
-        }
-        return str;
+    id str = self.persistenceDict[key];
+    
+    if ([str isKindOfClass:[NSNumber class]]) {
+        str = [str stringValue];
     }
+    
+    return str;
 }
 
 - (BOOL)readBoolFromDefaults:(NSString *)key {
-    @synchronized(self) {
-        BOOL boo = [self.persistenceDict[key] boolValue];
-        return boo;
-    }
+    BOOL boo = [self.persistenceDict[key] boolValue];
+    return boo;
 }
 
 - (NSInteger)readIntegerFromDefaults:(NSString *)key {
-    @synchronized(self) {
-        NSNumber *number = self.persistenceDict[key];
-        if (number != nil) {
-            return [number integerValue];
-        }
-        return NSNotFound;
+    NSNumber *number = self.persistenceDict[key];
+    
+    if (number) {
+        return [number integerValue];
     }
+    
+    return NSNotFound;
 }
-
-#pragma mark - Preferences File URL
 
 + (NSString *)prefsFile_deprecated {
     NSString * path =
@@ -852,8 +828,63 @@ static NSString * const BRANCH_PREFS_KEY_ANALYTICS_MANIFEST = @"bnc_branch_analy
     return path;
 }
 
++ (NSURL* _Nonnull) URLForBranchDirectory {
+    NSSearchPathDirectory kSearchDirectories[] = {
+        NSApplicationSupportDirectory,
+        NSCachesDirectory,
+        NSDocumentDirectory,
+    };
+
+    #define _countof(array)     (sizeof(array)/sizeof(array[0]))
+
+    for (NSSearchPathDirectory directory = 0; directory < _countof(kSearchDirectories); directory++) {
+        NSURL *URL = [self createDirectoryForBranchURLWithPath:kSearchDirectories[directory]];
+        if (URL) return URL;
+    }
+
+    #undef _countof
+
+    //  Worst case backup plan:
+    NSString *path = [@"~/Library/io.branch" stringByExpandingTildeInPath];
+    NSURL *branchURL = [NSURL fileURLWithPath:path isDirectory:YES];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSError *error = nil;
+    BOOL success =
+        [fileManager
+            createDirectoryAtURL:branchURL
+            withIntermediateDirectories:YES
+            attributes:nil
+            error:&error];
+    if (!success) {
+        NSLog(@"Worst case CreateBranchURL error: %@ URL: %@.", error, branchURL);
+    }
+    return branchURL;
+}
+
++ (NSURL* _Null_unspecified) createDirectoryForBranchURLWithPath:(NSSearchPathDirectory)directory {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSArray *URLs = [fileManager URLsForDirectory:directory inDomains:NSUserDomainMask | NSLocalDomainMask];
+
+    for (NSURL *URL in URLs) {
+        NSError *error = nil;
+        NSURL *branchURL = [URL URLByAppendingPathComponent:@"io.branch" isDirectory:YES];
+        BOOL success =
+            [fileManager
+                createDirectoryAtURL:branchURL
+                withIntermediateDirectories:YES
+                attributes:nil
+                error:&error];
+        if (success) {
+            return branchURL;
+        } else  {
+            NSLog(@"CreateBranchURL error: %@ URL: %@.", error, branchURL);
+        }
+    }
+    return nil;
+}
+
 + (NSURL* _Nonnull) URLForPrefsFile {
-    NSURL *URL = BNCURLForBranchDirectory();
+    NSURL *URL = [self URLForBranchDirectory];
     URL = [URL URLByAppendingPathComponent:BRANCH_PREFS_FILE isDirectory:NO];
     return URL;
 }
@@ -877,7 +908,7 @@ static NSString * const BRANCH_PREFS_KEY_ANALYTICS_MANIFEST = @"bnc_branch_analy
                 removeItemAtURL:oldURL
                 error:&error];
         } else {
-            BNCLogError(@"Can't move prefs file: %@.", error);
+            NSLog(@"Error moving prefs file: %@.", error);
         }
     }
 }
@@ -889,67 +920,3 @@ static NSString * const BRANCH_PREFS_KEY_ANALYTICS_MANIFEST = @"bnc_branch_analy
 }
 
 @end
-
-#pragma mark - BNCURLForBranchDirectory
-
-NSURL* _Null_unspecified BNCCreateDirectoryForBranchURLWithSearchPath_Unthreaded(NSSearchPathDirectory directory) {
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSArray *URLs = [fileManager URLsForDirectory:directory inDomains:NSUserDomainMask | NSLocalDomainMask];
-
-    for (NSURL *URL in URLs) {
-        NSError *error = nil;
-        NSURL *branchURL = [[NSURL alloc] initWithString:@"io.branch" relativeToURL:URL];
-        BOOL success =
-            [fileManager
-                createDirectoryAtURL:branchURL
-                withIntermediateDirectories:YES
-                attributes:nil
-                error:&error];
-        if (success) {
-            return branchURL;
-        } else  {
-            NSLog(@"[branch.io] Info: CreateBranchURL failed: %@ URL: %@.", error, branchURL);
-        }
-    }
-    return nil;
-}
-
-NSURL* _Nonnull BNCURLForBranchDirectory_Unthreaded() {
-    NSArray *kSearchDirectories = @[
-        @(NSApplicationSupportDirectory),
-        @(NSLibraryDirectory),
-        @(NSCachesDirectory),
-        @(NSDocumentDirectory),
-    ];
-
-    for (NSNumber *directory in kSearchDirectories) {
-        NSSearchPathDirectory directoryValue = [directory unsignedLongValue];
-        NSURL *URL = BNCCreateDirectoryForBranchURLWithSearchPath_Unthreaded(directoryValue);
-        if (URL) return URL;
-    }
-
-    //  Worst case backup plan:
-    NSString *path = [@"~/Library/io.branch" stringByExpandingTildeInPath];
-    NSURL *branchURL = [NSURL fileURLWithPath:path isDirectory:YES];
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSError *error = nil;
-    BOOL success =
-        [fileManager
-            createDirectoryAtURL:branchURL
-            withIntermediateDirectories:YES
-            attributes:nil
-            error:&error];
-    if (!success) {
-        NSLog(@"[io.branch] Error: Worst case CreateBranchURL error was: %@ URL: %@.", error, branchURL);
-    }
-    return branchURL;
-}
-
-NSURL* _Nonnull BNCURLForBranchDirectory() {
-    static NSURL *urlForBranchDirectory = nil;
-    static dispatch_once_t onceToken = 0;
-    dispatch_once(&onceToken, ^ {
-        urlForBranchDirectory = BNCURLForBranchDirectory_Unthreaded();
-    });
-    return urlForBranchDirectory;
-}

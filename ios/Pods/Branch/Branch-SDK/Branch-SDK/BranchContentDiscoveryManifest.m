@@ -7,9 +7,11 @@
 //
 
 
+#import <Foundation/Foundation.h>
 #import "BranchContentDiscoveryManifest.h"
 #import "BNCPreferenceHelper.h"
 #import "BranchContentPathProperties.h"
+#import <UIKit/UIKit.h>
 #import "BranchConstants.h"
 
 
@@ -43,8 +45,8 @@
     }
 }
 
-- (void)onBranchInitialised:(NSDictionary *)branchInitDict withUrl:(NSString *)referringURL {
-    _referredLink = referringURL;
+- (void)onBranchInitialised:(NSDictionary *)branchInitDict withUrl:(NSString *)referredUrl {
+    _referredLink = referredUrl;
     if ([branchInitDict objectForKey:BRANCH_CONTENT_DISCOVER_KEY]) {
         _isCDEnabled = YES;
         NSDictionary *cdManifestDict = [branchInitDict objectForKey:BRANCH_CONTENT_DISCOVER_KEY];

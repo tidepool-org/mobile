@@ -6,15 +6,17 @@
 //  Copyright © 2016 Branch Metrics. All rights reserved.
 //
 
-#import <CommonCrypto/CommonDigest.h>
+
+#import <Foundation/Foundation.h>
 #import "BranchContentDiscoverer.h"
 #import "BranchContentDiscoveryManifest.h"
 #import "BranchContentPathProperties.h"
 #import "BNCPreferenceHelper.h"
 #import "BranchConstants.h"
+#import <UIKit/UIKit.h>
+#import <CommonCrypto/CommonDigest.h>
 #import "BNCEncodingUtils.h"
-#import "BNCLog.h"
-#import "UIViewController+Branch.h"
+
 
 @interface BranchContentDiscoverer ()
 @property (nonatomic, strong) NSString *lastViewControllerName;
@@ -51,7 +53,7 @@
 
 - (void)startDiscoveryTask {
     if (![NSThread isMainThread]) {
-        BNCLogError(@"Discovery should be called on main thread.");
+        NSLog(@"Error: Should be called on main thread!");
     }
     [_contentDiscoveryTimer invalidate];
     _contentDiscoveryTimer =
@@ -72,7 +74,7 @@
 
 - (void)readContentDataIfNeeded {
     if (_numOfViewsDiscovered < self.contentManifest.maxViewHistoryLength) {
-        UIViewController *presentingViewController = [UIViewController bnc_currentViewController];
+        UIViewController *presentingViewController = [self getActiveViewController];
         if (presentingViewController) {
             NSString *presentingViewControllerName = NSStringFromClass([presentingViewController class]);
             if (_lastViewControllerName == nil || ![_lastViewControllerName isEqualToString:presentingViewControllerName]) {
@@ -244,6 +246,25 @@
         }
     }
     return viewTxt;
+}
+
+- (UIViewController *)getActiveViewController {
+    Class UIApplicationClass = NSClassFromString(@"UIApplication");
+    UIViewController *rootViewController = [UIApplicationClass sharedApplication].keyWindow.rootViewController;
+    return [self getActiveViewController:rootViewController];
+    
+}
+
+- (UIViewController *)getActiveViewController:(UIViewController *)rootViewController {
+    UIViewController *activeController;
+    if ([rootViewController isKindOfClass:[UINavigationController class]]) {
+        activeController = ((UINavigationController *)rootViewController).topViewController;
+    } else if ([rootViewController isKindOfClass:[UITabBarController class]]) {
+        activeController = ((UITabBarController *)rootViewController).selectedViewController;
+    } else {
+        activeController = rootViewController;
+    }
+    return activeController;
 }
 
 - (void)addFormattedContentData:(NSMutableArray *)contentDataArray

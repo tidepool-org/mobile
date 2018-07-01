@@ -18,8 +18,5 @@
 - (void)setContentIndexingMode:(NSString *)contentIndexingMode;
 - (void)setExpirationDateWithString:(NSString *)expirationDate;
 - (void)setPriceWithNumber:(NSNumber *)price;
-- (void)setLocallyIndexWithNumber:(NSNumber *)locallyIndex;
-- (void)setPubliclyIndexWithNumber:(NSNumber *)publiclyIndex;
-- (void)setContentMetadataWithMap:(NSDictionary *)map;
 
 @end

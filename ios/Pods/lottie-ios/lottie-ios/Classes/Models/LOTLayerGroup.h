@@ -17,8 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface LOTLayerGroup : NSObject
 
 - (instancetype)initWithLayerJSON:(NSArray *)layersJSON
-                   withAssetGroup:(LOTAssetGroup * _Nullable)assetGroup
-                    withFramerate:(NSNumber *)framerate;
+                   withAssetGroup:(LOTAssetGroup * _Nullable)assetGroup;
 
 @property (nonatomic, readonly) NSArray <LOTLayer *> *layers;
 

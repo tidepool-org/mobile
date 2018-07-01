@@ -53,7 +53,7 @@ typedef NS_OPTIONS(NSUInteger, FBSDKServerConfigurationSmartLoginOptions)
          advertisingIDEnabled:(BOOL)advertisingIDEnabled
        implicitLoggingEnabled:(BOOL)implicitLoggingEnabled
 implicitPurchaseLoggingEnabled:(BOOL)implicitPurchaseLoggingEnabled
-        codelessEventsEnabled:(BOOL)codelessEventsEnabled
+    appIndexingTriggerEnabled:(BOOL)appIndexingTriggerEnabled
   systemAuthenticationEnabled:(BOOL)systemAuthenticationEnabled
         nativeAuthFlowEnabled:(BOOL)nativeAuthFlowEnabled
          dialogConfigurations:(NSDictionary *)dialogConfigurations
@@ -66,8 +66,6 @@ implicitPurchaseLoggingEnabled:(BOOL)implicitPurchaseLoggingEnabled
             smartLoginOptions:(FBSDKServerConfigurationSmartLoginOptions)smartLoginOptions
     smartLoginBookmarkIconURL:(NSURL *)smartLoginBookmarkIconURL
         smartLoginMenuIconURL:(NSURL *)smartLoginMenuIconURL
-                updateMessage:(NSString *)updateMessage
-                eventBindings:(NSArray *)eventBindings
 NS_DESIGNATED_INITIALIZER;
 
 @property (nonatomic, assign, readonly, getter=isAdvertisingIDEnabled) BOOL advertisingIDEnabled;
@@ -78,7 +76,7 @@ NS_DESIGNATED_INITIALIZER;
 @property (nonatomic, strong, readonly) FBSDKErrorConfiguration *errorConfiguration;
 @property (nonatomic, assign, readonly, getter=isImplicitLoggingSupported) BOOL implicitLoggingEnabled;
 @property (nonatomic, assign, readonly, getter=isImplicitPurchaseLoggingSupported) BOOL implicitPurchaseLoggingEnabled;
-@property (nonatomic, assign, readonly, getter=isCodelessEventsEnabled) BOOL codelessEventsEnabled;
+@property (nonatomic, assign, readonly, getter=isAppIndexingTriggerEnabled) BOOL appIndexingTriggerEnabled;
 @property (nonatomic, assign, readonly, getter=isLoginTooltipEnabled) BOOL loginTooltipEnabled;
 @property (nonatomic, assign, readonly, getter=isNativeAuthFlowEnabled) BOOL nativeAuthFlowEnabled;
 @property (nonatomic, assign, readonly, getter=isSystemAuthenticationEnabled) BOOL systemAuthenticationEnabled;
@@ -89,8 +87,6 @@ NS_DESIGNATED_INITIALIZER;
 @property (nonatomic, assign, readonly) FBSDKServerConfigurationSmartLoginOptions smartLoginOptions;
 @property (nonatomic, copy, readonly) NSURL *smartLoginBookmarkIconURL;
 @property (nonatomic, copy, readonly) NSURL *smartLoginMenuIconURL;
-@property (nonatomic, copy, readonly) NSString *updateMessage;
-@property (nonatomic, copy, readonly) NSArray *eventBindings;
 @property (nonatomic, readonly) NSInteger version;
 
 - (FBSDKDialogConfiguration *)dialogConfigurationForDialogName:(NSString *)dialogName;

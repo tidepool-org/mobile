@@ -16,7 +16,7 @@ NSString * const EXAudioSessionManagerErrorDomain = @"EXAudioSessionManager";
 @property (nonatomic, assign) AVAudioSessionCategoryOptions activeOptions;
 
 @property (nonatomic, weak) id activeScopedModule;
-@property (nonatomic, strong) NSMapTable<NSString *, id> *allModules;
+@property (nonatomic, strong) NSMutableSet<id> *allModules;
 @property (nonatomic, strong) NSMutableSet<NSString *> *activeModules;
 @property (nonatomic, strong) NSMutableDictionary<NSString *, NSString *> *moduleCategory;
 @property (nonatomic, strong) NSMutableDictionary<NSString *, NSNumber *> *moduleCategoryOptions;
@@ -29,7 +29,7 @@ NSString * const EXAudioSessionManagerErrorDomain = @"EXAudioSessionManager";
 {
   if ((self = [super init])) {
     _sessionIsActive = NO;
-    _allModules = [NSMapTable strongToWeakObjectsMapTable];
+    _allModules = [[NSMutableSet alloc] init];
     _activeModules = [[NSMutableSet alloc] init];
     _moduleCategory = [[NSMutableDictionary alloc] init];
     _moduleCategoryOptions = [[NSMutableDictionary alloc] init];
@@ -122,10 +122,7 @@ NSString * const EXAudioSessionManagerErrorDomain = @"EXAudioSessionManager";
 - (void)scopedModuleDidForeground:(id)scopedModule
 {
   _activeScopedModule = scopedModule;
-  NSString *experienceId = [EXScopedEventEmitter getExperienceIdFromEventEmitter:scopedModule];
-  @synchronized (_allModules) {
-    [_allModules setObject:scopedModule forKey:experienceId];
-  }
+  [_allModules addObject:scopedModule];
 
   // Any possible failures are silent
   [self _updateSessionConfigurationForScopedModule:_activeScopedModule];
@@ -140,11 +137,7 @@ NSString * const EXAudioSessionManagerErrorDomain = @"EXAudioSessionManager";
   }
 
   NSString *experienceId = [EXScopedEventEmitter getExperienceIdFromEventEmitter:scopedModule];
-  @synchronized (_allModules) {
-    if ([_allModules objectForKey:experienceId] == scopedModule) {
-      [_allModules removeObjectForKey:experienceId];
-    }
-  }
+  [_allModules removeObject:scopedModule];
   [_activeModules removeObject:experienceId];
   [_moduleCategory removeObjectForKey:experienceId];
   [_moduleCategoryOptions removeObjectForKey:experienceId];

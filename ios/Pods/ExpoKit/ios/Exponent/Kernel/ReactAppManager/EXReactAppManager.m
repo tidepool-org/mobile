@@ -1,7 +1,6 @@
 #import "EXApiUtil.h"
 #import "EXAppLoadingManager.h"
 #import "EXBuildConstants.h"
-#import "EXEnvironment.h"
 #import "EXErrorRecoveryManager.h"
 #import "EXKernel.h"
 #import "EXAppLoader.h"
@@ -13,6 +12,7 @@
 #import "ExpoKit.h"
 #import "EXReactAppManager.h"
 #import "EXReactAppManager+Private.h"
+#import "EXShellManager.h"
 #import "EXVersionManager.h"
 #import "EXVersions.h"
 
@@ -191,9 +191,9 @@ typedef void (^SDK21RCTSourceLoadBlock)(NSError *error, NSData *source, int64_t 
 
 - (NSString *)bundleResourceNameForAppFetcher:(EXAppFetcher *)appFetcher withManifest:(nonnull NSDictionary *)manifest
 {
-  if ([EXEnvironment sharedEnvironment].isDetached) {
-    NSLog(@"Standalone bundle remote url is %@", [EXEnvironment sharedEnvironment].standaloneManifestUrl);
-    return kEXEmbeddedBundleResourceName;
+  if ([EXShellManager sharedInstance].isShell) {
+    NSLog(@"Standalone bundle remote url is %@", [EXShellManager sharedInstance].shellManifestUrl);
+    return kEXShellBundleResourceName;
   } else {
     return manifest[@"id"];
   }
@@ -238,7 +238,7 @@ typedef void (^SDK21RCTSourceLoadBlock)(NSError *error, NSData *source, int64_t 
 - (NSArray *)extraModulesForBridge:(RCTBridge *)bridge
 {
   // we allow the vanilla RN dev menu in some circumstances.
-  BOOL isDetached = [EXEnvironment sharedEnvironment].isDetached;
+  BOOL isDetached = [EXShellManager sharedInstance].isDetached;
   BOOL isStandardDevMenuAllowed = [EXKernelDevKeyCommands sharedInstance].isLegacyMenuBehaviorEnabled || isDetached;
   
   _exceptionHandler = [[EXReactAppExceptionHandler alloc] initWithAppRecord:_appRecord];
@@ -256,7 +256,7 @@ typedef void (^SDK21RCTSourceLoadBlock)(NSError *error, NSData *source, int64_t 
                            @"initialUri": RCTNullIfNil([EXKernelLinkingManager initialUriWithManifestUrl:_appRecord.appLoader.manifestUrl]),
                            @"isDeveloper": @([self enablesDeveloperTools]),
                            @"isStandardDevMenuAllowed": @(isStandardDevMenuAllowed),
-                           @"testEnvironment": @([EXEnvironment sharedEnvironment].testEnvironment),
+                           @"testEnvironment": @([EXShellManager sharedInstance].testEnvironment),
                            @"services": [EXKernel sharedInstance].serviceRegistry.allServices,
                            };
   return [self.versionManager extraModulesWithParams:params];
@@ -498,8 +498,8 @@ typedef void (^SDK21RCTSourceLoadBlock)(NSError *error, NSData *source, int64_t 
 
 - (NSDictionary *)launchOptionsForBridge
 {
-  if ([EXEnvironment sharedEnvironment].isDetached) {
-    // pass the native app's launch options to standalone bridge.
+  if ([EXShellManager sharedInstance].isShell) {
+    // pass the native app's launch options to shell bridge.
     return [ExpoKit sharedInstance].launchOptions;
   }
   return @{};

@@ -11,8 +11,6 @@
 #import <OpenGLES/EAGL.h>
 #import "EXGLObjectManager.h"
 
-NS_ASSUME_NONNULL_BEGIN
-
 @class EXGLContext;
 
 @protocol EXGLContextDelegate <NSObject>
@@ -26,8 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface EXGLContext : NSObject
 
-- (instancetype)initWithDelegate:(nullable id<EXGLContextDelegate>)delegate andManager:(nonnull EXGLObjectManager *)manager;
-- (void)initialize:(void(^ _Nullable)(BOOL))callback;
+- (instancetype)initWithDelegate:(id<EXGLContextDelegate>)delegate andManager:(nonnull EXGLObjectManager *)manager;
+- (void)initialize:(void(^)(BOOL))callback;
 - (BOOL)isInitialized;
 - (EAGLContext *)createSharedEAGLContext;
 - (void)runAsync:(void(^)(void))callback;
@@ -41,5 +39,3 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak, nullable) id <EXGLContextDelegate> delegate;
 
 @end
-
-NS_ASSUME_NONNULL_END
