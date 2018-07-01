@@ -18,20 +18,17 @@
 @implementation LOTLayer
 
 - (instancetype)initWithJSON:(NSDictionary *)jsonDictionary
-              withAssetGroup:(LOTAssetGroup *)assetGroup
-               withFramerate:(NSNumber *)framerate {
+              withAssetGroup:(LOTAssetGroup *)assetGroup {
   self = [super init];
   if (self) {
     [self _mapFromJSON:jsonDictionary
-     withAssetGroup:assetGroup
-     withFramerate:framerate];
+     withAssetGroup:assetGroup];
   }
   return self;
 }
 
 - (void)_mapFromJSON:(NSDictionary *)jsonDictionary
-      withAssetGroup:(LOTAssetGroup *)assetGroup
-       withFramerate:(NSNumber *)framerate {
+      withAssetGroup:(LOTAssetGroup *)assetGroup {
 
   _layerName = [jsonDictionary[@"nm"] copy];
   _layerID = [jsonDictionary[@"ind"] copy];
@@ -51,18 +48,12 @@
   _inFrame = [jsonDictionary[@"ip"] copy];
   _outFrame = [jsonDictionary[@"op"] copy];
 
-  if (jsonDictionary[@"sr"]) {
-    _timeStretch = [jsonDictionary[@"sr"] copy];
-  } else {
-    _timeStretch = @1;
-  }
-
   if (_layerType == LOTLayerTypePrecomp) {
     _layerHeight = [jsonDictionary[@"h"] copy];
     _layerWidth = [jsonDictionary[@"w"] copy];
-    [assetGroup buildAssetNamed:_referenceID withFramerate:framerate];
+    [assetGroup buildAssetNamed:_referenceID];
   } else if (_layerType == LOTLayerTypeImage) {
-    [assetGroup buildAssetNamed:_referenceID withFramerate:framerate];
+    [assetGroup buildAssetNamed:_referenceID];
     _imageAsset = [assetGroup assetModelForID:_referenceID];
     _layerWidth = [_imageAsset.assetWidth copy];
     _layerHeight = [_imageAsset.assetHeight copy];
@@ -82,14 +73,6 @@
     _opacity = [[LOTKeyframeGroup alloc] initWithData:opacity];
     [_opacity remapKeyframesWithBlock:^CGFloat(CGFloat inValue) {
       return LOT_RemapValue(inValue, 0, 100, 0, 1);
-    }];
-  }
-
-  NSDictionary *timeRemap = jsonDictionary[@"tm"];
-  if (timeRemap) {
-    _timeRemapping = [[LOTKeyframeGroup alloc] initWithData:timeRemap];
-    [_timeRemapping remapKeyframesWithBlock:^CGFloat(CGFloat inValue) {
-      return inValue * framerate.doubleValue;
     }];
   }
   
@@ -122,7 +105,7 @@
   if (scale) {
     _scale = [[LOTKeyframeGroup alloc] initWithData:scale];
     [_scale remapKeyframesWithBlock:^CGFloat(CGFloat inValue) {
-      return LOT_RemapValue(inValue, -100, 100, -1, 1);
+      return LOT_RemapValue(inValue, 0, 100, 0, 1);
     }];
   }
   

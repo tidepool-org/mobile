@@ -16,12 +16,11 @@
 @property (nonatomic, readonly, nullable) NSBundle *assetBundle;
 
 - (instancetype _Nonnull)initWithJSON:(NSArray * _Nonnull)jsonArray
-                      withAssetBundle:(NSBundle *_Nullable)bundle
-                        withFramerate:(NSNumber * _Nonnull)framerate;
+                      withAssetBundle:(NSBundle *_Nullable)bundle;
 
-- (void)buildAssetNamed:(NSString * _Nonnull)refID withFramerate:(NSNumber * _Nonnull)framerate;
+- (void)buildAssetNamed:(NSString * _Nonnull)refID;
 
-- (void)finalizeInitializationWithFramerate:(NSNumber * _Nonnull)framerate;
+- (void)finalizeInitialization;
 
 - (LOTAsset * _Nullable)assetModelForID:(NSString * _Nonnull)assetID;
 

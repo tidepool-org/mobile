@@ -70,14 +70,9 @@
   BOOL crossFadeViews = NO;
   
   if (toLayerName_.length) {
-    LOTKeypath *toKeypath = [LOTKeypath keypathWithString:toLayerName_];
-    CGRect convertedBounds = [tranistionAnimationView_ convertRect:containerView.bounds toKeypathLayer:toKeypath];
+    CGRect convertedBounds = [tranistionAnimationView_ convertRect:containerView.bounds toLayerNamed:toLayerName_];
     toSnapshot.frame = convertedBounds;
-    if (_applyTransform) {
-      [tranistionAnimationView_ addSubview:toSnapshot toKeypathLayer:toKeypath];
-    } else {
-      [tranistionAnimationView_ maskSubview:toSnapshot toKeypathLayer:toKeypath];
-    }
+    [tranistionAnimationView_ addSubview:toSnapshot toLayerNamed:toLayerName_ applyTransform:_applyTransform];
   } else {
     [containerView addSubview:toSnapshot];
     [containerView sendSubviewToBack:toSnapshot];
@@ -86,14 +81,9 @@
   }
   
   if (fromLayerName_.length) {
-    LOTKeypath *fromKeypath = [LOTKeypath keypathWithString:fromLayerName_];
-    CGRect convertedBounds = [tranistionAnimationView_ convertRect:containerView.bounds fromKeypathLayer:fromKeypath];
+    CGRect convertedBounds = [tranistionAnimationView_ convertRect:containerView.bounds toLayerNamed:fromLayerName_];
     fromSnapshot.frame = convertedBounds;
-    if (_applyTransform) {
-      [tranistionAnimationView_ addSubview:fromSnapshot toKeypathLayer:fromKeypath];
-    } else {
-      [tranistionAnimationView_ maskSubview:fromSnapshot toKeypathLayer:fromKeypath];
-    }
+    [tranistionAnimationView_ addSubview:fromSnapshot toLayerNamed:fromLayerName_ applyTransform:_applyTransform];
   } else {
     [containerView addSubview:fromSnapshot];
     [containerView sendSubviewToBack:fromSnapshot];

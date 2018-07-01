@@ -16,18 +16,15 @@
 }
 
 - (instancetype)initWithLayerJSON:(NSArray *)layersJSON
-                   withAssetGroup:(LOTAssetGroup * _Nullable)assetGroup
-                    withFramerate:(NSNumber *)framerate {
+                   withAssetGroup:(LOTAssetGroup * _Nullable)assetGroup {
   self = [super init];
   if (self) {
-    [self _mapFromJSON:layersJSON withAssetGroup:assetGroup withFramerate:framerate];
+    [self _mapFromJSON:layersJSON withAssetGroup:assetGroup];
   }
   return self;
 }
 
-- (void)_mapFromJSON:(NSArray *)layersJSON
-      withAssetGroup:(LOTAssetGroup * _Nullable)assetGroup
-       withFramerate:(NSNumber *)framerate {
+- (void)_mapFromJSON:(NSArray *)layersJSON withAssetGroup:(LOTAssetGroup * _Nullable)assetGroup {
   
   NSMutableArray *layers = [NSMutableArray array];
   NSMutableDictionary *modelMap = [NSMutableDictionary dictionary];
@@ -35,8 +32,7 @@
   
   for (NSDictionary *layerJSON in layersJSON) {
     LOTLayer *layer = [[LOTLayer alloc] initWithJSON:layerJSON
-                                      withAssetGroup:assetGroup
-                                       withFramerate:framerate];
+                                      withAssetGroup:assetGroup];
     [layers addObject:layer];
     modelMap[layer.layerID] = layer;
     if (layer.referenceID) {

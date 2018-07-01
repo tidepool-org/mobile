@@ -6,10 +6,12 @@
 //  Copyright (c) 2015 Branch Metrics. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
 #import "BNCLinkData.h"
 
 @interface BNCLinkCache : NSObject
+
 - (void)setObject:(NSString *)anObject forKey:(BNCLinkData *)aKey;
 - (NSString *)objectForKey:(BNCLinkData *)aKey;
-- (void) clear;
+
 @end

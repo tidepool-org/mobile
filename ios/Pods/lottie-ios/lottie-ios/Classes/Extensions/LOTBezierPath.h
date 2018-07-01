@@ -12,8 +12,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface LOTBezierPath : NSObject
 
-+ (instancetype)pathWithCGPath:(CGPathRef)path;
-
 + (instancetype)newPath;
 
 - (void)LOT_moveToPoint:(CGPoint)point;

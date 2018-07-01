@@ -14,15 +14,13 @@
 
 + (RNGestureHandlerEventExtraData *)forPosition:(CGPoint)position
                            withAbsolutePosition:(CGPoint)absolutePosition
-                            withNumberOfTouches:(NSUInteger)numberOfTouches
 {
     return [[RNGestureHandlerEventExtraData alloc]
             initWithData:@{
                            @"x": @(position.x),
                            @"y": @(position.y),
                            @"absoluteX": @(absolutePosition.x),
-                           @"absoluteY": @(absolutePosition.y),
-                           @"numberOfPointers": @(numberOfTouches)}];
+                           @"absoluteY": @(absolutePosition.y)}];
 }
 
 + (RNGestureHandlerEventExtraData *)forPan:(CGPoint)position
@@ -41,7 +39,7 @@
                            @"translationY": @(translation.y),
                            @"velocityX": SAFE_VELOCITY(velocity.x),
                            @"velocityY": SAFE_VELOCITY(velocity.y),
-                           @"numberOfPointers": @(numberOfTouches)}];
+                           @"numberOfTouches": @(numberOfTouches)}];
 }
 
 + (RNGestureHandlerEventExtraData *)forPinch:(CGFloat)scale
@@ -55,7 +53,7 @@
                            @"focalX": @(focalPoint.x),
                            @"focalY": @(focalPoint.y),
                            @"velocity": SAFE_VELOCITY(velocity),
-                           @"numberOfPointers": @(numberOfTouches)}];
+                           @"numberOfTouches": @(numberOfTouches)}];
 }
 
 + (RNGestureHandlerEventExtraData *)forRotation:(CGFloat)rotation
@@ -68,13 +66,12 @@
                            @"anchorX": @(anchorPoint.x),
                            @"anchorY": @(anchorPoint.y),
                            @"velocity": SAFE_VELOCITY(velocity),
-                           @"numberOfPointers": @(numberOfTouches)}];
+                           @"numberOfTouches": @(numberOfTouches)}];
 }
 
-+ (RNGestureHandlerEventExtraData *)forPointerInside:(BOOL)pointerInside
++ (RNGestureHandlerEventExtraData *)forPointerInside:(BOOL)pointerInside;
 {
-    return [[RNGestureHandlerEventExtraData alloc]
-            initWithData:@{@"pointerInside": @(pointerInside)}];
+    return [[RNGestureHandlerEventExtraData alloc] initWithData:@{@"pointerInside": @(pointerInside)}];
 }
 
 @end

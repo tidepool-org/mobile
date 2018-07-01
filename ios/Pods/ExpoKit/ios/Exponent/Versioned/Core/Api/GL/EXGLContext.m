@@ -36,7 +36,7 @@
 
 @implementation EXGLContext
 
-- (instancetype)initWithDelegate:(nullable id<EXGLContextDelegate>)delegate andManager:(nonnull EXGLObjectManager *)manager
+- (instancetype)initWithDelegate:(id<EXGLContextDelegate>)delegate andManager:(nonnull EXGLObjectManager *)manager
 {
   if (self = [super init]) {
     self.delegate = delegate;
@@ -70,12 +70,12 @@
 {
   if (_glQueue) {
     dispatch_async(_glQueue, ^{
-      [self runInEAGLContext:self->_eaglCtx callback:callback];
+      [self runInEAGLContext:_eaglCtx callback:callback];
     });
   }
 }
 
-- (void)initialize:(void(^ _Nullable)(BOOL))callback
+- (void)initialize:(void(^)(BOOL))callback
 {
   RCTBridge *bridge = _manager.bridge;
 
@@ -100,10 +100,10 @@
         return;
       }
 
-      self->_contextId = UEXGLContextCreate(jsContextRef);
-      [self->_manager saveContext:self];
+      _contextId = UEXGLContextCreate(jsContextRef);
+      [_manager saveContext:self];
 
-      UEXGLContextSetFlushMethodObjc(self->_contextId, ^{
+      UEXGLContextSetFlushMethodObjc(_contextId, ^{
         [self flush];
       });
 
@@ -121,7 +121,7 @@
 - (void)flush
 {
   [self runAsync:^{
-    UEXGLContextFlush(self->_contextId);
+    UEXGLContextFlush(_contextId);
 
     if ([self.delegate respondsToSelector:@selector(glContextFlushed:)]) {
       [self.delegate glContextFlushed:self];
@@ -137,13 +137,13 @@
     }
 
     // Flush all the stuff
-    UEXGLContextFlush(self->_contextId);
+    UEXGLContextFlush(_contextId);
 
     // Destroy JS binding
-    UEXGLContextDestroy(self->_contextId);
+    UEXGLContextDestroy(_contextId);
 
     // Remove from dictionary of contexts
-    [self->_manager deleteContextWithId:@(self->_contextId)];
+    [_manager deleteContextWithId:@(_contextId)];
   }];
 }
 

@@ -149,7 +149,7 @@ RCT_REMAP_METHOD(createCameraTextureAsync,
 
     EXGLCameraObject *cameraTexture = [[EXGLCameraObject alloc] initWithView:exglView andCamera:exCameraView];
 
-    self->_objects[@(cameraTexture.exglObjId)] = cameraTexture;
+    _objects[@(cameraTexture.exglObjId)] = cameraTexture;
     resolve(@{ @"exglObjId": @(cameraTexture.exglObjId) });
   });
 }

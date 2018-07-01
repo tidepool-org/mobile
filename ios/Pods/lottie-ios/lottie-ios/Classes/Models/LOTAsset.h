@@ -19,8 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithJSON:(NSDictionary *)jsonDictionary
               withAssetGroup:(LOTAssetGroup * _Nullable)assetGroup
-             withAssetBundle:(NSBundle *_Nonnull)bundle
-               withFramerate:(NSNumber *)framerate;
+             withAssetBundle:(NSBundle *_Nonnull)bundle;
 
 @property (nonatomic, readonly, nullable) NSString *referenceID;
 @property (nonatomic, readonly, nullable) NSNumber *assetWidth;

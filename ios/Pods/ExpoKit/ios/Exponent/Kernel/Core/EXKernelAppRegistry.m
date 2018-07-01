@@ -2,9 +2,9 @@
 
 #import "EXKernelAppRegistry.h"
 #import "EXAppLoader.h"
-#import "EXEnvironment.h"
 #import "EXReactAppManager.h"
 #import "EXKernel.h"
+#import "EXShellManager.h"
 
 #import <React/RCTBridge.h>
 
@@ -69,11 +69,11 @@
 
 - (EXKernelAppRecord *)standaloneAppRecord
 {
-  if ([EXEnvironment sharedEnvironment].isDetached) {
+  if ([EXShellManager sharedInstance].isShell) {
     for (NSString *recordId in self.appEnumerator) {
       EXKernelAppRecord *record = [self recordForId:recordId];
       if (record.appLoader.manifestUrl
-          && [record.appLoader.manifestUrl.absoluteString isEqualToString:[EXEnvironment sharedEnvironment].standaloneManifestUrl]) {
+          && [record.appLoader.manifestUrl.absoluteString isEqualToString:[EXShellManager sharedInstance].shellManifestUrl]) {
         return record;
       }
     }

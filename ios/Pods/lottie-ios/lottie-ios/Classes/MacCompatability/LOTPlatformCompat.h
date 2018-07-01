@@ -9,7 +9,7 @@
 #ifndef LOTPlatformCompat_h
 #define LOTPlatformCompat_h
 
-#include <TargetConditionals.h>
+#import "TargetConditionals.h"
 
 #if TARGET_OS_IPHONE || TARGET_OS_SIMULATOR
 
@@ -21,7 +21,6 @@
 #import "UIColor.h"
 #import "CALayer+Compat.h"
 #import "NSValue+Compat.h"
-#import "UIBezierPath.h"
 
 NS_INLINE NSString *NSStringFromCGRect(CGRect rect) {
     return NSStringFromRect(rect);

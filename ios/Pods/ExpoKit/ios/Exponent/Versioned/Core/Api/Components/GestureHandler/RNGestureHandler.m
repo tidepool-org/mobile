@@ -144,8 +144,7 @@ CGRect RNGHHitSlopInsetRect(CGRect rect, RNGHHitSlop hitSlop) {
 {
     return [RNGestureHandlerEventExtraData
             forPosition:[recognizer locationInView:recognizer.view]
-            withAbsolutePosition:[recognizer locationInView:recognizer.view.window]
-            withNumberOfTouches:recognizer.numberOfTouches];
+            withAbsolutePosition:[recognizer locationInView:recognizer.view.window]];
 }
 
 - (void)handleGesture:(UIGestureRecognizer *)recognizer

@@ -8,13 +8,11 @@
 
 
 #import "BNCStrongMatchHelper.h"
+#import <objc/runtime.h>
 #import "BNCConfig.h"
 #import "BNCPreferenceHelper.h"
 #import "BNCSystemObserver.h"
 #import "BranchConstants.h"
-#import "BNCLog.h"
-#import "UIViewController+Branch.h"
-#import <objc/runtime.h>
 
 
 #pragma mark BNCStrongMatchHelper iOS 8.0
@@ -45,14 +43,7 @@
 
 
 #else   // ------------------------------------------------------------------------------ iOS >= 9.0
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wpartial-availability"
-
-#if __has_feature(modules)
-@import SafariServices;
-#else
 #import <SafariServices/SafariServices.h>
-#endif
 
 
 #pragma mark - BNCMatchView
@@ -141,7 +132,7 @@
 
 + (NSURL *)getUrlForCookieBasedMatchingWithBranchKey:(NSString *)branchKey
                                          redirectUrl:(NSString *)redirectUrl {
-    if (!branchKey || !self.cookiesAvailableInOS) {
+    if (!branchKey) {
         return nil;
     }
     
@@ -164,7 +155,7 @@
         [BNCSystemObserver getUniqueHardwareId:&isRealHardwareId
             isDebug:preferenceHelper.isDebug andType:&hardwareIdType];
     if (!hardwareId || !isRealHardwareId) {
-        BNCLogWarning(@"Cannot use cookie-based matching while setDebug is enabled.");
+        [preferenceHelper logWarning:@"Cannot use cookie-based matching while setDebug is enabled"];
         return nil;
     }
     
@@ -200,13 +191,7 @@
     #pragma clang diagnostic pop
 }
 
-+ (BOOL)cookiesAvailableInOS {
-    return [UIDevice currentDevice].systemVersion.doubleValue < 11.0;
-}
-
 - (void)createStrongMatchWithBranchKey:(NSString *)branchKey {
-    if (!self.class.cookiesAvailableInOS) return;
-
     @synchronized (self) {
         if (self.requestInProgress) return;
 
@@ -260,6 +245,33 @@
     return YES;
 }
 
+- (UIWindow*) keyWindow {
+    Class UIApplicationClass = NSClassFromString(@"UIApplication");
+    UIWindow *keyWindow = [UIApplicationClass sharedApplication].keyWindow;
+    if (keyWindow) return keyWindow;
+	// ToDo: Put different code for extensions here.
+    return nil;
+}
+
+/**
+  Find the top view controller that is not of type UINavigationController or UITabBarController
+ */
+- (UIViewController *)topViewController:(UIViewController *)baseViewController {
+    if ([baseViewController isKindOfClass:[UINavigationController class]]) {
+        return [self topViewController: ((UINavigationController *)baseViewController).visibleViewController];
+    }
+
+    if ([baseViewController isKindOfClass:[UITabBarController class]]) {
+        return [self topViewController: ((UITabBarController *)baseViewController).selectedViewController];
+    }
+
+    if ([baseViewController presentedViewController] != nil) {
+        return [self topViewController: [baseViewController presentedViewController]];
+    }
+
+    return baseViewController;
+}
+
 - (BOOL) willLoadViewControllerWithURL:(NSURL*)matchURL {
     if (self.primaryWindow) return NO;
 
@@ -269,10 +281,7 @@
     //  when it is.
 
     Class SFSafariViewControllerClass = NSClassFromString(@"SFSafariViewController");
-    if (!SFSafariViewControllerClass) {
-        BNCLogWarning(@"cookieBasedMatching is enabled but SafariServices framework is not available.");
-        return NO;
-    }
+    if (!SFSafariViewControllerClass) return NO;
 
     Class BNCMatchViewControllerSubclass = NSClassFromString(@"BNCMatchViewController_Safari");
     if (!BNCMatchViewControllerSubclass) {
@@ -293,8 +302,8 @@
         objc_registerClassPair(BNCMatchViewControllerSubclass);
     }
 
-    BNCLogDebugSDK(@"Safari is initializing.");
-    self.primaryWindow = [UIViewController bnc_currentWindow];
+    //NSLog(@"Safari initializing."); //  eDebug
+    self.primaryWindow = [self keyWindow];
 
     self.matchViewController = [[BNCMatchViewControllerSubclass alloc] initWithURL:matchURL];
     if (!self.matchViewController) return NO;
@@ -306,7 +315,7 @@
     self.matchView.alpha = 1.0;
     [self.matchView addSubview:self.matchViewController.view];
 
-    UIViewController *rootViewController = [self.primaryWindow.rootViewController bnc_currentViewController];
+    UIViewController *rootViewController = [self topViewController:self.primaryWindow.rootViewController];
 
     [rootViewController addChildViewController:self.matchViewController];
     UIView *parentView = rootViewController.view ?: self.primaryWindow;
@@ -318,7 +327,7 @@
 }
 
 - (void) unloadViewController {
-    BNCLogDebugSDK(@"Safari unloadViewController called.");
+    //NSLog(@"Safari unloadViewController");  // eDebug
     
     [self.matchViewController willMoveToParentViewController:nil];
     [self.matchViewController.view removeFromSuperview];
@@ -338,11 +347,10 @@
 
 - (void)safariViewController:(SFSafariViewController *)controller
       didCompleteInitialLoad:(BOOL)didLoadSuccessfully {
-    BNCLogDebugSDK(@"Safari did load. Success: %d.", didLoadSuccessfully);
+    //NSLog(@"Safari Did load. Success: %d.", didLoadSuccessfully);   //  eDebug
     [self unloadViewController];
 }
 
 @end
 
-#pragma clang diagnostic pop
 #endif  // ------------------------------------------------------------------------------ iOS >= 9.0

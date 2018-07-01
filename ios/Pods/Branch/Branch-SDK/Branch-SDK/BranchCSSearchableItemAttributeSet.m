@@ -6,14 +6,13 @@
 //  Copyright © 2015 Branch Metrics. All rights reserved.
 //
 
-#import "BranchCSSearchableItemAttributeSet.h"
-
 #if defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 90000
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wpartial-availability"
 
-#import "Branch.h"
+#import "BranchCSSearchableItemAttributeSet.h"
 #import "BNCSystemObserver.h"
+#import "BNCError.h"
+#import "BranchConstants.h"
+#import <MobileCoreServices/MobileCoreServices.h>
 
 #ifndef kUTTypeGeneric
 #define kUTTypeGeneric @"public.content"
@@ -39,26 +38,26 @@
 
 - (void)setIdentifier:(NSString *)identifier {
     if (![identifier hasPrefix:BRANCH_SPOTLIGHT_PREFIX]) {
-        BNCLogWarning(@"Do not set BranchCSSearchableItemAttributeSet's identifier. It will be overwritten.");
+        NSLog(@"Warning: do not set BranchCSSearchableItemAttributeSet's identifier. It will be overwritten.");
     }
 }
 
 - (void)indexWithCallback:(callbackWithUrlAndSpotlightIdentifier)callback {
     if ([BNCSystemObserver getOSVersion].integerValue < 9) {
         if (callback) {
-            callback(nil, nil, [NSError branchErrorWithCode:BNCSpotlightNotAvailableError]);
+            callback(nil, nil, [NSError errorWithDomain:BNCErrorDomain code:BNCVersionError userInfo:@{ NSLocalizedDescriptionKey: @"Cannot use CoreSpotlight indexing service prior to iOS 9" }]);
         }
         return;
     }
     if (![CSSearchableIndex isIndexingAvailable]) {
         if (callback) {
-            callback(nil, nil, [NSError branchErrorWithCode:BNCSpotlightNotAvailableError]);
+            callback(nil, nil, [NSError errorWithDomain:BNCErrorDomain code:BNCVersionError userInfo:@{ NSLocalizedDescriptionKey: @"Cannot use CoreSpotlight indexing service on this device" }]);
         }
         return;
     }
     if (!self.title) {
         if (callback) {
-            callback(nil, nil, [NSError branchErrorWithCode:BNCSpotlightTitleError]);
+            callback(nil, nil, [NSError errorWithDomain:BNCErrorDomain code:BNCBadRequestError userInfo:@{ NSLocalizedDescriptionKey: @"Spotlight Indexing requires a title" }]);
         }
         return;
     }

@@ -6,9 +6,8 @@
 //  Copyright © 2018 650 Industries. All rights reserved.
 //
 
-#import <Photos/Photos.h>
-#import "EXScopedEventEmitter.h"
+#import "EXScopedBridgeModule.h"
 
-@interface EXMediaLibrary : EXScopedEventEmitter <PHPhotoLibraryChangeObserver>
+@interface EXMediaLibrary : EXScopedBridgeModule
 
 @end

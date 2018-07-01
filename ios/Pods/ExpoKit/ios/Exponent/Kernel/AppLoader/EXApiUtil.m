@@ -17,11 +17,6 @@ static NSString* kPublicKeyTag = @"exp.host.publickey";
 {
   NSString *urlString = [manifest objectForKey:@"bundleUrl"];
   RCTAssert([urlString isKindOfClass:[NSString class]], @"Manifest contains a bundleUrl which is not a string: %@", urlString);
-  return [[self class] encodedUrlFromString:urlString];
-}
-
-+ (NSURL *)encodedUrlFromString:(NSString *)urlString
-{
   NSURL *url = [NSURL URLWithString:urlString];
   if (!url) {
     url = [NSURL URLWithString:[urlString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];

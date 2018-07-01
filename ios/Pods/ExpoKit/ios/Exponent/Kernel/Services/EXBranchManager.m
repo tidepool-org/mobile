@@ -4,8 +4,8 @@
 
 #import <Branch/Branch.h>
 
-#import "EXEnvironment.h"
 #import "EXKernel.h"
+#import "EXShellManager.h"
 #import "EXKernelAppRecord.h"
 #import "RNBranch.h"
 
@@ -76,16 +76,13 @@ NSString * const EXBranchLinkOpenedNotification = @"RNBranchLinkOpenedNotificati
 
 - (void)branchModuleDidInit:(id)versionedBranchModule
 {
-  if (_isInitialized || ![[self class] isBranchEnabled]) {
+  if (_isInitialized) {
     return;
   }
   RNBranch *branchModule = (RNBranch *)versionedBranchModule;
   EXKernelAppRecord *appForModule = [[EXKernel sharedInstance].appRegistry newestRecordWithExperienceId:branchModule.experienceId];
   if (appForModule && appForModule == [EXKernel sharedInstance].appRegistry.standaloneAppRecord) {
     _isInitialized = YES;
-    
-    // branch is going to retain the init callback
-    __block typeof(self) blockSelf = self;
 
     [[Branch getInstance] initSessionWithLaunchOptions:_launchOptions
                                           isReferrable:YES
@@ -97,8 +94,8 @@ NSString * const EXBranchLinkOpenedNotification = @"RNBranchLinkOpenedNotificati
       if (params) {
         result[EXBranchLinkOpenedNotificationParamsKey] = params;
       }
-      if (blockSelf->_url) {
-        result[EXBranchLinkOpenedNotificationUriKey] = blockSelf->_url;
+      if (_url) {
+        result[EXBranchLinkOpenedNotificationUriKey] = _url;
       }
 
       // We can't use RNBranch static methods directly because it uses event dispatch

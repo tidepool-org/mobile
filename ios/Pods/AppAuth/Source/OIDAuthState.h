@@ -24,10 +24,9 @@
 @class OIDTokenResponse;
 @class OIDTokenRequest;
 @protocol OIDAuthorizationFlowSession;
+@protocol OIDAuthorizationUICoordinator;
 @protocol OIDAuthStateChangeDelegate;
 @protocol OIDAuthStateErrorDelegate;
-@protocol OIDExternalUserAgent;
-@protocol OIDExternalUserAgentSession;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -143,15 +142,16 @@ typedef void (^OIDAuthStateAuthorizationCallback)(OIDAuthState *_Nullable authSt
 /*! @brief Convenience method to create a @c OIDAuthState by presenting an authorization request
         and performing the authorization code exchange in the case of code flow requests.
     @param authorizationRequest The authorization request to present.
-    @param externalUserAgent A external user agent that can present an external user-agent request.
+    @param UICoordinator Generic authorization UI coordinator that can present an authorization
+        request.
     @param callback The method called when the request has completed or failed.
-    @return A @c OIDExternalUserAgentSession instance which will terminate when it
-        receives a @c OIDExternalUserAgentSession.cancel message, or after processing a
-        @c OIDExternalUserAgentSession.resumeExternalUserAgentFlowWithURL: message.
+    @return A @c OIDAuthorizationFlowSession instance which will terminate when it
+        receives a @c OIDAuthorizationFlowSession.cancel message, or after processing a
+        @c OIDAuthorizationFlowSession.resumeAuthorizationFlowWithURL: message.
  */
-+ (id<OIDExternalUserAgentSession, OIDAuthorizationFlowSession>)
++ (id<OIDAuthorizationFlowSession>)
     authStateByPresentingAuthorizationRequest:(OIDAuthorizationRequest *)authorizationRequest
-                            externalUserAgent:(id<OIDExternalUserAgent>)externalUserAgent
+                                UICoordinator:(id<OIDAuthorizationUICoordinator>)UICoordinator
                                      callback:(OIDAuthStateAuthorizationCallback)callback;
 
 /*! @internal

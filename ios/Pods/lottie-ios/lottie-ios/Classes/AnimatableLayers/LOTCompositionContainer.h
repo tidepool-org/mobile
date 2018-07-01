@@ -16,29 +16,13 @@
                         withLayerGroup:(LOTLayerGroup * _Nullable)childLayerGroup
                        withAssestGroup:(LOTAssetGroup * _Nullable)assetGroup;
 
-- (nullable NSArray *)keysForKeyPath:(nonnull LOTKeypath *)keypath;
-
-- (CGPoint)convertPoint:(CGPoint)point
-         toKeypathLayer:(nonnull LOTKeypath *)keypath
-        withParentLayer:(CALayer *_Nonnull)parent;
-
-- (CGRect)convertRect:(CGRect)rect
-       toKeypathLayer:(nonnull LOTKeypath *)keypath
-      withParentLayer:(CALayer *_Nonnull)parent;
-
-- (CGPoint)convertPoint:(CGPoint)point
-       fromKeypathLayer:(nonnull LOTKeypath *)keypath
-        withParentLayer:(CALayer *_Nonnull)parent;
-
-- (CGRect)convertRect:(CGRect)rect
-     fromKeypathLayer:(nonnull LOTKeypath *)keypath
-      withParentLayer:(CALayer *_Nonnull)parent;
-
 - (void)addSublayer:(nonnull CALayer *)subLayer
-    toKeypathLayer:(nonnull LOTKeypath *)keypath;
+       toLayerNamed:(nonnull NSString *)layerName
+     applyTransform:(BOOL)applyTransform;
 
-- (void)maskSublayer:(nonnull CALayer *)subLayer
-     toKeypathLayer:(nonnull LOTKeypath *)keypath;
+- (CGRect)convertRect:(CGRect)rect
+            fromLayer:(CALayer *_Nonnull)fromlayer
+         toLayerNamed:(NSString *_Nonnull)layerName;
 
 @property (nonatomic, readonly, nonnull) NSArray<LOTLayerContainer *> *childLayers;
 @property (nonatomic, readonly, nonnull)  NSDictionary *childMap;

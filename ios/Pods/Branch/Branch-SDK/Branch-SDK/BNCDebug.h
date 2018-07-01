@@ -1,19 +1,25 @@
+
+
+//--------------------------------------------------------------------------------------------------
+//
+//                                                                                        BNCDebug.h
+//                                                                                  Branch.framework
+//
+//                                                                                 Debugging Support
+//                                                                        Edward Smith, October 2016
+//
+//                                             -©- Copyright © 2016 Branch, all rights reserved. -©-
+//
+//--------------------------------------------------------------------------------------------------
+
+
+//--------------------------------------------------------------------------------------------------
 /**
- @file          BNCDebug.h
- @package       Branch-SDK
- @brief         Debugging Support.
 
- @author        Edward Smith
- @date          October 2016
- @copyright     Copyright © 2016 Branch. All rights reserved.
-*/
+    BNCDebug
+    ========
 
-/**
-    @discusion
-
-    # BNCDebug
-
-    ## Useful run time debugging environmental variables
+    # Useful run time debugging environmental variables
 
     Set DYLD_IMAGE_SUFFIX to _debug to load debug versions of dynamic libraries.
     Set NSDebugEnabled to YES to enable obj-c debug checks.
@@ -21,8 +27,7 @@
     Set NSAutoreleaseFreedObjectCheckEnabled to YES to catch autorelease problems.
     Set MallocStackLoggingNoCompact to YES to track and save all memory allocations. Memory intensive.
 
-    Check NSDebug.h for more debug switches. 
-    Also check Apple Technical Note TN2124, TN2239, and question QA1887 for more info.
+    Check NSDebug.h for more debug switches. Also check Technical Note TN2124 and TN2239 for more info.
 
     Useful exception breakpoints to set:
 
@@ -38,13 +43,13 @@
     Search the heap for all references to the pointer 0x0000000116e13920:
 
        ptr_refs -m 0x0000000116e13920
-*/
 
-#if __has_feature(modules)
-@import Foundation;
-#else
+*/
+//--------------------------------------------------------------------------------------------------
+
+
 #import <Foundation/Foundation.h>
-#endif
+
 
 #ifdef __cplusplus
 extern "C" {
@@ -55,7 +60,7 @@ extern "C" {
 
 
 ///@return  Returns true if the app is currently attached to a debugger.
-extern BOOL BNCDebuggerIsAttached(void);
+extern BOOL BNCDebuggerIsAttached();
 
 
 ///@param   object An obj-c instance, class, or meta-class.
@@ -65,7 +70,7 @@ extern NSString* _Nonnull BNCDebugStringFromObject(id _Nullable object);
 
 
 ///@return  Returns the names of all loaded classes as an array of NSStrings.
-extern NSArray<NSString*> * _Nonnull BNCDebugArrayOfReqisteredClasses(void);
+extern NSArray<NSString*> * _Nonnull BNCDebugArrayOfReqisteredClasses();
 
 
 ///@return  Returns an NSString indicating the name of the enclosing method.

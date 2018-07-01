@@ -6,11 +6,8 @@
 //  Copyright © 2016 Branch Metrics. All rights reserved.
 //
 
-#if __has_feature(modules)
-@import Foundation;
-#else
-#import <Foundation/Foundation.h>
-#endif
+#ifndef BNCCallbacks_h
+#define BNCCallbacks_h
 
 @class BranchUniversalObject, BranchLinkProperties;
 
@@ -20,3 +17,5 @@ typedef void (^callbackWithStatus) (BOOL changed, NSError * _Nullable error);
 typedef void (^callbackWithList) (NSArray * _Nullable list, NSError * _Nullable error);
 typedef void (^callbackWithUrlAndSpotlightIdentifier) (NSString * _Nullable url, NSString * _Nullable spotlightIdentifier, NSError * _Nullable error);
 typedef void (^callbackWithBranchUniversalObject) (BranchUniversalObject * _Nullable universalObject, BranchLinkProperties * _Nullable linkProperties, NSError * _Nullable error);
+
+#endif /* BNCCallbacks_h */

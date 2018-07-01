@@ -5,11 +5,16 @@
 //  Created by Sojan P.R. on 8/18/16.
 //  Copyright © 2016 Branch Metrics. All rights reserved.
 //
-
 #import "BranchContentPathProperties.h"
+#import <UIKit/UIKit.h>
+#ifndef ContentDiscoverManifest_h
+#define ContentDiscoverManifest_h
+
+
+#endif /* ContentDiscoverManifest_h */
 
 @interface BranchContentDiscoveryManifest : NSObject
-
+//---- Properties---------------//
 @property (strong, nonatomic) NSMutableDictionary *cdManifest;
 @property (strong, nonatomic) NSString *referredLink;
 @property (nonatomic) NSInteger maxTextLen;
@@ -21,5 +26,6 @@
 + (BranchContentDiscoveryManifest *)getInstance;
 - (NSString *)getManifestVersion;
 - (BranchContentPathProperties *)getContentPathProperties:(UIViewController *)viewController;
-- (void)onBranchInitialised:(NSDictionary *)branchInitDict withUrl:(NSString *)referringURL;
+- (void)onBranchInitialised:(NSDictionary *)branchInitDict withUrl:(NSString *)referredUrl;
+
 @end

@@ -31,7 +31,7 @@
         [videoOutput setSampleBufferDelegate:self queue:camera.sessionQueue];
         [videoOutput setAlwaysDiscardsLateVideoFrames:YES];
         [camera.session addOutput:videoOutput];
-        self.cameraOutput = videoOutput;
+        _cameraOutput = videoOutput;
       }
     });
   }

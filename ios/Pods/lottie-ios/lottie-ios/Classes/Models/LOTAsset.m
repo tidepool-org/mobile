@@ -15,21 +15,18 @@
 
 - (instancetype)initWithJSON:(NSDictionary *)jsonDictionary
               withAssetGroup:(LOTAssetGroup * _Nullable)assetGroup
-             withAssetBundle:(NSBundle *_Nonnull)bundle
-               withFramerate:(NSNumber *)framerate {
+             withAssetBundle:(NSBundle *_Nonnull)bundle {
   self = [super init];
   if (self) {
     _assetBundle = bundle;
     [self _mapFromJSON:jsonDictionary
-        withAssetGroup:assetGroup
-     withFramerate:framerate];
+        withAssetGroup:assetGroup];
   }
   return self;
 }
 
 - (void)_mapFromJSON:(NSDictionary *)jsonDictionary
-      withAssetGroup:(LOTAssetGroup * _Nullable)assetGroup
-       withFramerate:(NSNumber *)framerate {
+      withAssetGroup:(LOTAssetGroup * _Nullable)assetGroup {
   _referenceID = [jsonDictionary[@"id"] copy];
   
   if (jsonDictionary[@"w"]) {
@@ -51,8 +48,7 @@
   NSArray *layersJSON = jsonDictionary[@"layers"];
   if (layersJSON) {
     _layerGroup = [[LOTLayerGroup alloc] initWithLayerJSON:layersJSON
-                                            withAssetGroup:assetGroup
-                                             withFramerate:framerate];
+                                            withAssetGroup:assetGroup];
   }
 }
 
