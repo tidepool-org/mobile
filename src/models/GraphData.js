@@ -32,7 +32,11 @@ export default class GraphData {
     this.cbgData = [];
     this.smbgData = [];
     this.basalData = [];
+    this.bolusData = [];
+    this.wizardData = [];
     this.maxBasalValue = 0;
+    this.maxBolusValue = 0;
+    this.maxRecommendedBolusValue = 0;
 
     this.splitAndTransformResponseDataByType();
 
@@ -47,6 +51,23 @@ export default class GraphData {
     const minBasalScaleValue = 1.0;
     this.maxBasalValue = Math.max(this.maxBasalValue, minBasalScaleValue);
     // console.log(`maxBasalValue: ${this.maxBasalValue}`);
+
+    // console.log("sortAndDeduplicate bolusData");
+    this.bolusData = this.sortAndDeduplicate(this.bolusData);
+    const minBolusScaleValue = 1.0;
+    this.maxBolusValue = Math.max(this.maxBolusValue, minBolusScaleValue);
+    // console.log(`maxBolusValue: ${this.maxBolusValue}`);
+    // console.log(`bolusData: ${JSON.stringify(this.bolusData, null, 2)}`);
+
+    // console.log("sortAndDeduplicate wizardData");
+    this.wizardData = this.sortAndDeduplicate(this.wizardData);
+    // console.log(`maxRecommendedBolusValue: ${this.maxRecommendedBolusValue}`);
+    this.maxBolusValue = Math.max(
+      this.maxBolusValue,
+      this.maxRecommendedBolusValue
+    );
+    // console.log(`maxBolusValue: ${this.maxBolusValue}`);
+    // console.log(`wizardData: ${JSON.stringify(this.wizardData, null, 2)}`);
   }
 
   //
@@ -69,6 +90,12 @@ export default class GraphData {
               this.basalData.push(transformedItem);
             }
           }
+          break;
+        case "bolus":
+          this.bolusData.push(this.transformBolusResponseDataItem(item));
+          break;
+        case "wizard":
+          this.wizardData.push(this.transformWizardResponseDataItem(item));
           break;
         default:
           break;
@@ -145,6 +172,74 @@ export default class GraphData {
     }
 
     return null;
+  }
+
+  transformBolusResponseDataItem(item) {
+    const {
+      id,
+      normal,
+      extended,
+      duration,
+
+      // For interrupted bolus, expectedNormal will exist
+      expectedNormal,
+
+      // For interrupted extended bolus, expectedExtended and expectedDuration will exist
+      expectedExtended,
+      expectedDuration,
+    } = item;
+    const time = parse(item.time).getTime() / 1000;
+    let value = 0;
+    if (normal) {
+      value += normal;
+    }
+    if (extended) {
+      value += extended;
+    }
+
+    let maxValue = value;
+    if (expectedNormal > maxValue) {
+      maxValue = expectedNormal;
+    }
+    if (maxValue > this.maxBolusValue) {
+      this.maxBolusValue = maxValue;
+    }
+
+    const transformedItem = {
+      id,
+      time,
+      value,
+      normal,
+      extended,
+      duration: duration !== undefined ? duration / 1000 : undefined,
+      expectedNormal,
+      expectedExtended,
+      expectedDuration:
+        expectedDuration !== undefined ? expectedDuration / 1000 : undefined,
+    };
+
+    return transformedItem;
+  }
+
+  transformWizardResponseDataItem(item) {
+    const { carbInput, recommended, bolus: bolusId } = item;
+    const time = parse(item.time).getTime() / 1000;
+    const value = carbInput || 0;
+    const recommendedNet =
+      recommended && recommended.net ? recommended.net : undefined;
+
+    if (recommendedNet > this.maxRecommendedBolusValue) {
+      this.maxRecommendedBolusValue = recommendedNet;
+    }
+
+    const transformedItem = {
+      time,
+      value,
+      bolusId,
+      recommendedNet,
+    };
+
+    return transformedItem;
   }
 
   getSuppressedBasalRate(item) {
