@@ -189,30 +189,13 @@ class Graph extends PureComponent {
   }
 
   renderGraphScrollable() {
-    const {
-      isLoading,
-      graphRenderer,
-      yAxisBGBoundaryValues,
-      yAxisLabelValues,
-      cbgData,
-      smbgData,
-      basalData,
-      maxBasalValue,
-    } = this.props;
     const { graphScalableLayoutInfo, isZooming } = this.state;
 
     return (
       <GraphScrollable
-        isLoading={isLoading}
+        {...this.props}
         isZooming={isZooming}
         graphScalableLayoutInfo={graphScalableLayoutInfo}
-        graphRenderer={graphRenderer}
-        yAxisBGBoundaryValues={yAxisBGBoundaryValues}
-        yAxisLabelValues={yAxisLabelValues}
-        cbgData={cbgData}
-        smbgData={smbgData}
-        basalData={basalData}
-        maxBasalValue={maxBasalValue}
       />
     );
   }
@@ -238,6 +221,9 @@ Graph.propTypes = {
   smbgData: PropTypes.arrayOf(PropTypes.object.isRequired),
   basalData: PropTypes.arrayOf(PropTypes.object.isRequired),
   maxBasalValue: PropTypes.number,
+  bolusData: PropTypes.arrayOf(PropTypes.object.isRequired),
+  maxBolusValue: PropTypes.number,
+  minBolusScaleValue: PropTypes.number,
   scale: PropTypes.number,
   eventTime: PropTypes.instanceOf(Date),
   navigateHowToUpload: PropTypes.func.isRequired,
@@ -253,6 +239,9 @@ Graph.defaultProps = {
   smbgData: [],
   basalData: [],
   maxBasalValue: 1.0,
+  bolusData: [],
+  maxBolusValue: 1.0,
+  minBolusScaleValue: 1.0,
   onZoomStart: null,
   onZoomEnd: null,
 };

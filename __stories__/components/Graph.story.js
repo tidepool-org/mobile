@@ -158,6 +158,9 @@ stories.add("data 1, three y-axis labels, default scale", () => (
       smbgData={graphData1.smbgData}
       basalData={graphData1.basalData}
       maxBasalValue={graphData1.maxBasalValue}
+      bolusData={graphData1.bolusData}
+      maxBolusValue={graphData1.maxBolusValue}
+      minBolusScaleValue={graphData1.minBolusScaleValue}
       graphRenderer={selectGraphRenderer()}
     />
   </StoryContainerComponent>
@@ -180,6 +183,9 @@ stories.add("data 1, four y-axis labels, default scale", () => (
       smbgData={graphData1.smbgData}
       basalData={graphData1.basalData}
       maxBasalValue={graphData1.maxBasalValue}
+      bolusData={graphData1.bolusData}
+      maxBolusValue={graphData1.maxBolusValue}
+      minBolusScaleValue={graphData1.minBolusScaleValue}
       graphRenderer={selectGraphRenderer()}
     />
   </StoryContainerComponent>
@@ -202,6 +208,9 @@ stories.add("data 1, four y-axis labels, 1.0 scale", () => (
       smbgData={graphData1.smbgData}
       basalData={graphData1.basalData}
       maxBasalValue={graphData1.maxBasalValue}
+      bolusData={graphData1.bolusData}
+      maxBolusValue={graphData1.maxBolusValue}
+      minBolusScaleValue={graphData1.minBolusScaleValue}
       scale={1.0}
       graphRenderer={selectGraphRenderer()}
     />
@@ -225,6 +234,9 @@ stories.add("data 1, four y-axis labels, max scale", () => (
       smbgData={graphData1.smbgData}
       basalData={graphData1.basalData}
       maxBasalValue={graphData1.maxBasalValue}
+      bolusData={graphData1.bolusData}
+      maxBolusValue={graphData1.maxBolusValue}
+      minBolusScaleValue={graphData1.minBolusScaleValue}
       scale={100.0}
       graphRenderer={selectGraphRenderer()}
     />
@@ -248,6 +260,9 @@ stories.add("data 2, four y-axis labels, default scale", () => (
       smbgData={graphData2.smbgData}
       basalData={graphData2.basalData}
       maxBasalValue={graphData2.maxBasalValue}
+      bolusData={graphData2.bolusData}
+      maxBolusValue={graphData2.maxBolusValue}
+      minBolusScaleValue={graphData2.minBolusScaleValue}
       graphRenderer={selectGraphRenderer()}
     />
   </StoryContainerComponent>

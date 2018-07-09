@@ -81,33 +81,11 @@ class GraphScrollable extends PureComponent {
   };
 
   getPropsForGraphScrollable() {
-    const {
-      theme,
-      isLoading,
-      isZooming,
-      graphScalableLayoutInfo,
-      yAxisBGBoundaryValues,
-      yAxisLabelValues,
-      cbgData,
-      smbgData,
-      basalData,
-      maxBasalValue,
-    } = this.props;
-
     const props = {
       ref: graphScrollableRef => {
         this.graphScrollableRef = graphScrollableRef;
       },
-      theme,
-      isLoading,
-      isZooming,
-      graphScalableLayoutInfo,
-      yAxisBGBoundaryValues,
-      yAxisLabelValues,
-      cbgData,
-      smbgData,
-      basalData,
-      maxBasalValue,
+      ...this.props,
     };
 
     return props;
@@ -228,6 +206,9 @@ GraphScrollable.propTypes = {
   smbgData: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
   basalData: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
   maxBasalValue: PropTypes.number.isRequired,
+  bolusData: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+  maxBolusValue: PropTypes.number.isRequired,
+  minBolusScaleValue: PropTypes.number.isRequired,
 };
 
 GraphScrollable.defaultProps = {

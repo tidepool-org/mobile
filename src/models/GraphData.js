@@ -48,14 +48,14 @@ export default class GraphData {
 
     // console.log("sortAndDeduplicate basalData");
     this.basalData = this.sortAndDeduplicate(this.basalData);
-    const minBasalScaleValue = 1.0;
-    this.maxBasalValue = Math.max(this.maxBasalValue, minBasalScaleValue);
+    this.minBasalScaleValue = 1.0;
+    this.maxBasalValue = Math.max(this.maxBasalValue, this.minBasalScaleValue);
     // console.log(`maxBasalValue: ${this.maxBasalValue}`);
 
     // console.log("sortAndDeduplicate bolusData");
     this.bolusData = this.sortAndDeduplicate(this.bolusData);
-    const minBolusScaleValue = 1.0;
-    this.maxBolusValue = Math.max(this.maxBolusValue, minBolusScaleValue);
+    this.minBolusScaleValue = 1.0;
+    this.maxBolusValue = Math.max(this.maxBolusValue, this.minBolusScaleValue);
     // console.log(`maxBolusValue: ${this.maxBolusValue}`);
     // console.log(`bolusData: ${JSON.stringify(this.bolusData, null, 2)}`);
 
