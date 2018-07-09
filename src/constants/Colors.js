@@ -9,7 +9,9 @@ const Colors = {
   blackish: "#3c3c3c",
   white: "#ffffff",
 
+  blue: "#7aceef",
   brightBlue: "#627cff",
+  mediumBlue: "#6db7d4",
   peach: "#f88d79",
   green: "#98ca63",
   purple: "#b29ac9",

@@ -348,7 +348,15 @@ class NotesListItem extends PureComponent {
       const {
         graphDataFetchData: {
           fetching,
-          graphData: { cbgData, smbgData, basalData, maxBasalValue },
+          graphData: {
+            cbgData,
+            smbgData,
+            basalData,
+            maxBasalValue,
+            bolusData,
+            maxBolusValue,
+            minBolusScaleValue,
+          },
         },
         currentProfile: { lowBGBoundary, highBGBoundary },
         note: { timestamp: eventTime },
@@ -377,6 +385,9 @@ class NotesListItem extends PureComponent {
           smbgData={smbgData}
           basalData={basalData}
           maxBasalValue={maxBasalValue}
+          bolusData={bolusData}
+          maxBolusValue={maxBolusValue}
+          minBolusScaleValue={minBolusScaleValue}
           eventTime={eventTime}
           navigateHowToUpload={navigateHowToUpload}
           onZoomStart={onGraphZoomStart}

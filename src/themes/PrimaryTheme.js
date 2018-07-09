@@ -173,7 +173,9 @@ const PrimaryTheme = {
     ...FontStyles.smallRegularFont,
   },
   graphBasalRectColor: "#c5e5f1#",
-  graphBasalLineColor: "#7aceef",
+  graphBasalLineColor: Colors.blue,
+  graphBolusLabelColor: Colors.mediumBlue,
+  graphBolusRectColor: Colors.blue,
   toolTipContentTextStyle: {
     color: Colors.blackish,
     ...FontStyles.mediumSmallSemiboldFont,
