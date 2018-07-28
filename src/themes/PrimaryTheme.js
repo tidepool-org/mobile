@@ -172,10 +172,13 @@ const PrimaryTheme = {
   graphSmbgLabelStyle: {
     ...FontStyles.smallRegularFont,
   },
-  graphBasalRectColor: "#c5e5f1#",
+  graphBasalRectColor: "#c5e5f1",
   graphBasalLineColor: Colors.blue,
   graphBolusLabelColor: Colors.mediumBlue,
   graphBolusRectColor: Colors.blue,
+  graphBolusOverrideLine: Colors.blue,
+  graphBolusInterruptBarColor: Colors.peach,
+  bolusOverrideIconColor: "#0c6999",
   toolTipContentTextStyle: {
     color: Colors.blackish,
     ...FontStyles.mediumSmallSemiboldFont,

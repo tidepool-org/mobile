@@ -161,6 +161,7 @@ stories.add("data 1, three y-axis labels, default scale", () => (
       bolusData={graphData1.bolusData}
       maxBolusValue={graphData1.maxBolusValue}
       minBolusScaleValue={graphData1.minBolusScaleValue}
+      wizardData={graphData1.wizardData}
       graphRenderer={selectGraphRenderer()}
     />
   </StoryContainerComponent>
@@ -186,6 +187,7 @@ stories.add("data 1, four y-axis labels, default scale", () => (
       bolusData={graphData1.bolusData}
       maxBolusValue={graphData1.maxBolusValue}
       minBolusScaleValue={graphData1.minBolusScaleValue}
+      wizardData={graphData1.wizardData}
       graphRenderer={selectGraphRenderer()}
     />
   </StoryContainerComponent>
@@ -211,6 +213,7 @@ stories.add("data 1, four y-axis labels, 1.0 scale", () => (
       bolusData={graphData1.bolusData}
       maxBolusValue={graphData1.maxBolusValue}
       minBolusScaleValue={graphData1.minBolusScaleValue}
+      wizardData={graphData1.wizardData}
       scale={1.0}
       graphRenderer={selectGraphRenderer()}
     />
@@ -237,6 +240,7 @@ stories.add("data 1, four y-axis labels, max scale", () => (
       bolusData={graphData1.bolusData}
       maxBolusValue={graphData1.maxBolusValue}
       minBolusScaleValue={graphData1.minBolusScaleValue}
+      wizardData={graphData1.wizardData}
       scale={100.0}
       graphRenderer={selectGraphRenderer()}
     />
@@ -263,6 +267,7 @@ stories.add("data 2, four y-axis labels, default scale", () => (
       bolusData={graphData2.bolusData}
       maxBolusValue={graphData2.maxBolusValue}
       minBolusScaleValue={graphData2.minBolusScaleValue}
+      wizardData={graphData2.wizardData}
       graphRenderer={selectGraphRenderer()}
     />
   </StoryContainerComponent>

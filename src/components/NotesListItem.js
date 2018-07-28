@@ -356,6 +356,7 @@ class NotesListItem extends PureComponent {
             bolusData,
             maxBolusValue,
             minBolusScaleValue,
+            wizardData,
           },
         },
         currentProfile: { lowBGBoundary, highBGBoundary },
@@ -388,6 +389,7 @@ class NotesListItem extends PureComponent {
           bolusData={bolusData}
           maxBolusValue={maxBolusValue}
           minBolusScaleValue={minBolusScaleValue}
+          wizardData={wizardData}
           eventTime={eventTime}
           navigateHowToUpload={navigateHowToUpload}
           onZoomStart={onGraphZoomStart}
