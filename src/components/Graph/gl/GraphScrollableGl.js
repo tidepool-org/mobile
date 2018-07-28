@@ -38,38 +38,38 @@ class GraphScrollableGl extends PureComponent {
       zStart: 200,
       zEnd: 299,
     });
+    const graphBasalGl = new GraphBasalGl({
+      ...graphLayerCommonProps,
+      zStart: 300,
+      zEnd: 399,
+    });
     const graphCbgGl = new GraphCbgGl({
       ...graphLayerCommonProps,
       zStart: 300,
       zEnd: 399,
     });
-    const graphSmbgGl = new GraphSmbgGl({
+    const graphNoteEventGl = new GraphNoteEventGl({
       ...graphLayerCommonProps,
       zStart: 400,
       zEnd: 499,
     });
-    const graphBasalGl = new GraphBasalGl({
+    const graphSmbgGl = new GraphSmbgGl({
       ...graphLayerCommonProps,
       zStart: 500,
       zEnd: 599,
     });
-    const graphNoteEventGl = new GraphNoteEventGl({
+    const graphBolusGl = new GraphBolusGl({
       ...graphLayerCommonProps,
       zStart: 600,
       zEnd: 699,
     });
-    const graphBolusGl = new GraphBolusGl({
-      ...graphLayerCommonProps,
-      zStart: 700,
-      zEnd: 799,
-    });
     this.graphRenderLayers = [
       graphYAxisGl,
       graphXAxisGl,
-      graphCbgGl,
-      graphSmbgGl,
       graphBasalGl,
+      graphCbgGl,
       graphNoteEventGl,
+      graphSmbgGl,
       graphBolusGl,
     ];
 

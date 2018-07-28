@@ -209,6 +209,7 @@ GraphScrollable.propTypes = {
   bolusData: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
   maxBolusValue: PropTypes.number.isRequired,
   minBolusScaleValue: PropTypes.number.isRequired,
+  wizardData: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
 };
 
 GraphScrollable.defaultProps = {

@@ -64,6 +64,7 @@ class AddOrEditCommentScreenNote extends PureComponent {
           bolusData,
           maxBolusValue,
           minBolusScaleValue,
+          wizardData,
         },
       },
       currentProfile: { lowBGBoundary, highBGBoundary },
@@ -98,6 +99,7 @@ class AddOrEditCommentScreenNote extends PureComponent {
         bolusData={bolusData}
         maxBolusValue={maxBolusValue}
         minBolusScaleValue={minBolusScaleValue}
+        wizardData={wizardData}
         eventTime={eventTime}
         navigateHowToUpload={navigateHowToUpload}
         graphRenderer={graphRenderer}

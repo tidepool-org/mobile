@@ -224,6 +224,7 @@ Graph.propTypes = {
   bolusData: PropTypes.arrayOf(PropTypes.object.isRequired),
   maxBolusValue: PropTypes.number,
   minBolusScaleValue: PropTypes.number,
+  wizardData: PropTypes.arrayOf(PropTypes.object.isRequired),
   scale: PropTypes.number,
   eventTime: PropTypes.instanceOf(Date),
   navigateHowToUpload: PropTypes.func.isRequired,
@@ -242,6 +243,7 @@ Graph.defaultProps = {
   bolusData: [],
   maxBolusValue: 1.0,
   minBolusScaleValue: 1.0,
+  wizardData: [],
   onZoomStart: null,
   onZoomEnd: null,
 };
