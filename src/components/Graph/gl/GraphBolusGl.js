@@ -335,8 +335,8 @@ class GraphBolusGl extends GraphRenderLayerGl {
 
         // Set up x and z (constant for each mesh)
         const x = timeOffset;
-        const backgroundZ = this.zStart + i * 0.01;
-        const foregroundZ = this.zStart + i * 0.01 + 0.001;
+        const backgroundZ = this.zStart + (i + 1) * 0.01;
+        const foregroundZ = this.zStart + (i + 1) * 0.02;
 
         // Make bolus label text mesh
         const {
