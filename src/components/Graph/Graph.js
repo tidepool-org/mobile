@@ -155,13 +155,21 @@ class Graph extends PureComponent {
       isLoading,
       cbgData,
       smbgData,
+      basalData,
+      bolusData,
+      wizardData,
       navigateHowToUpload,
       graphRenderer,
     } = this.props;
     const { graphScalableLayoutInfo, graphFixedLayoutInfo } = this.state;
     const shouldRenderLoadingIndicator = isLoading;
-    const shouldRenderNoData =
-      !isLoading && cbgData.length === 0 && smbgData.length === 0;
+    const hasData =
+      cbgData.length ||
+      smbgData.length ||
+      basalData.length ||
+      bolusData.length ||
+      wizardData.length;
+    const shouldRenderNoData = !isLoading && !hasData;
 
     if (graphScalableLayoutInfo.scaledContentWidth) {
       return (
