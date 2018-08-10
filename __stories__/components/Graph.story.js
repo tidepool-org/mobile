@@ -272,5 +272,3 @@ stories.add("data 2, four y-axis labels, default scale", () => (
     />
   </StoryContainerComponent>
 ));
-
-export { makeYAxisLabelValues };
