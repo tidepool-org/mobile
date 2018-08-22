@@ -13,8 +13,8 @@ class GraphBasalGl extends GraphRenderLayerGl {
     this.suppressedLineMaterial = new THREE.LineDashedMaterial({
       color: convertHexColorStringToInt(this.theme.graphBasalLineColor),
       linewidth: 2 * this.pixelRatio,
-      dashSize: 2 * this.pixelRatio,
-      gapSize: 4 * this.pixelRatio,
+      dashSize: 4 * this.pixelRatio,
+      gapSize: 2 * this.pixelRatio,
     });
     this.basalRectMaterial = new THREE.MeshBasicMaterial({
       color: convertHexColorStringToInt(this.theme.graphBasalRectColor),

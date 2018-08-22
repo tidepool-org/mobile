@@ -5,11 +5,11 @@ import GraphTextMeshFactory from "./GraphTextMeshFactory";
 import GraphRenderLayerGl from "./GraphRenderLayerGl";
 import { convertHexColorStringToInt } from "../helpers";
 
+const EXTENSION_INTERRUPT_BAR_WIDTH = 6.0;
+const EXTENSION_END_SHAPE_WIDTH = 7.0;
+const EXTENSION_END_SHAPE_HEIGHT = 11.0;
+const EXTENSION_LINE_HEIGHT = 2.0;
 const BOLUS_RECT_WIDTH = 14;
-
-// TODO: Refactor. This was a fairly straight port of the legacy iOS app. The render helpers and
-// main renderSelf methods are kind of long and confusing. And the use of params vs. ivars in
-// render helpers is confusing.
 
 class GraphBolusGl extends GraphRenderLayerGl {
   constructor(props) {
@@ -30,6 +30,18 @@ class GraphBolusGl extends GraphRenderLayerGl {
       dashSize: 2 * this.pixelRatio,
       gapSize: 2 * this.pixelRatio,
     });
+    this.bolusExtensionDashedLineMaterial = new THREE.LineDashedMaterial({
+      color: convertHexColorStringToInt(this.theme.graphBolusRectColor),
+      linewidth: 1 * this.pixelRatio,
+      dashSize: 2 * this.pixelRatio,
+      gapSize: 2 * this.pixelRatio,
+    });
+    this.bolusExtensionDashedArrowMaterial = new THREE.LineDashedMaterial({
+      color: convertHexColorStringToInt(this.theme.graphBolusRectColor),
+      linewidth: 1 * this.pixelRatio,
+      dashSize: 2 * this.pixelRatio,
+      gapSize: 2 * this.pixelRatio,
+    });
 
     this.bolusOverrideUpIconGeometry = this.makeBolusOverrideIconGeometry({
       isUp: true,
@@ -40,6 +52,13 @@ class GraphBolusGl extends GraphRenderLayerGl {
     this.bolusOverrideIconMaterial = new THREE.MeshBasicMaterial({
       color: convertHexColorStringToInt(this.theme.bolusOverrideIconColor),
     });
+  }
+
+  updateBolusExtensionDashedLineMaterial() {
+    this.bolusExtensionDashedLineMaterial.dashSize =
+      (2 * this.pixelRatio) / this.pixelsPerSecond;
+    this.bolusExtensionDashedLineMaterial.gapSize =
+      (2 * this.pixelRatio) / this.pixelsPerSecond;
   }
 
   makeBolusOverrideIconGeometry({ isUp }) {
@@ -99,7 +118,7 @@ class GraphBolusGl extends GraphRenderLayerGl {
       formattedValue = value.toFixed(1);
     }
 
-    // TODO: We should probably use the bold text like the legacy Tidepool Mobile iOS app. (Need a new bmfont for it.)
+    // TODO: We should probably use the bold text like the legacy Tidepool Mobile iOS app. (Need a new bmFont for it.)
     return GraphTextMeshFactory.makeTextMesh({
       text: formattedValue,
       color: this.theme.graphBolusLabelColor,
@@ -228,7 +247,9 @@ class GraphBolusGl extends GraphRenderLayerGl {
 
   renderBolusRect({ x, z }) {
     const width = BOLUS_RECT_WIDTH;
-    const height = this.yAxisBolusPixelsPerValue * this.constrainedBolusValue;
+    const height = Math.ceil(
+      this.yAxisBolusPixelsPerValue * this.constrainedBolusValue
+    );
     const y = this.yAxisBottomOfBolus;
     const centerY = y - height / 2;
 
@@ -258,6 +279,220 @@ class GraphBolusGl extends GraphRenderLayerGl {
     };
   }
 
+  renderBolusExtensionShape({ x, z, centerY, width, borderOnly, noEndShape }) {
+    const xFinalPixelAdjust = (this.bolusRect.width / 2) * this.pixelRatio;
+
+    if (noEndShape) {
+      // Line
+      const lineShape = new THREE.Shape();
+      lineShape.moveTo(0, (-EXTENSION_LINE_HEIGHT / 2) * this.pixelRatio);
+      lineShape.lineTo(
+        (width / this.pixelsPerSecond) * this.pixelRatio,
+        (-EXTENSION_LINE_HEIGHT / 2) * this.pixelRatio
+      );
+      lineShape.lineTo(
+        (width / this.pixelsPerSecond) * this.pixelRatio,
+        (EXTENSION_LINE_HEIGHT / 2) * this.pixelRatio
+      );
+      lineShape.lineTo(0, (EXTENSION_LINE_HEIGHT / 2) * this.pixelRatio);
+      lineShape.lineTo(0, -(EXTENSION_LINE_HEIGHT / 2) * this.pixelRatio);
+      let line;
+      if (borderOnly) {
+        const points = lineShape.getPoints();
+        const geometry = new THREE.Geometry().setFromPoints(points);
+        this.updateBolusExtensionDashedLineMaterial();
+        line = new THREE.Line(geometry, this.bolusExtensionDashedLineMaterial);
+        line.computeLineDistances();
+      } else {
+        const lineGeometry = new THREE.ShapeGeometry(lineShape);
+        line = new THREE.Mesh(lineGeometry, this.bolusRectMaterial);
+      }
+      this.addAutoScrollableObjectToScene(this.scene, line, {
+        x,
+        y: centerY + 0.5,
+        z,
+        contentOffsetX: this.contentOffsetX,
+        pixelsPerSecond: this.pixelsPerSecond,
+        shouldScrollX: true,
+        shouldScaleX: true,
+        xFinalPixelAdjust,
+      });
+    } else {
+      // Arrow
+      const arrowShape = new THREE.Shape();
+      arrowShape.moveTo(0, (-EXTENSION_LINE_HEIGHT / 2) * this.pixelRatio);
+      arrowShape.lineTo(
+        EXTENSION_END_SHAPE_WIDTH * this.pixelRatio,
+        -(EXTENSION_END_SHAPE_HEIGHT / 2) * this.pixelRatio
+      );
+      arrowShape.lineTo(
+        EXTENSION_END_SHAPE_WIDTH * this.pixelRatio,
+        (EXTENSION_END_SHAPE_HEIGHT / 2) * this.pixelRatio
+      );
+      arrowShape.lineTo(0, (EXTENSION_LINE_HEIGHT / 2) * this.pixelRatio);
+      arrowShape.lineTo(0, (-EXTENSION_LINE_HEIGHT / 2) * this.pixelRatio);
+      let arrow;
+      if (borderOnly) {
+        const points = arrowShape.getPoints();
+        const geometry = new THREE.Geometry().setFromPoints(points);
+        arrow = new THREE.Line(
+          geometry,
+          this.bolusExtensionDashedArrowMaterial
+        );
+        arrow.computeLineDistances();
+        // FIXME: The dashed line encroaches the arrow to the right side of arrow and looks bad in
+        // some scenarios. We should fix this. (Not a trivial fix.)
+      } else {
+        const geometry = new THREE.ShapeGeometry(arrowShape);
+        arrow = new THREE.Mesh(geometry, this.bolusRectMaterial);
+      }
+      this.addAutoScrollableObjectToScene(this.scene, arrow, {
+        x: x + width / this.pixelsPerSecond,
+        y: centerY + 0.5,
+        z,
+        contentOffsetX: this.contentOffsetX,
+        pixelsPerSecond: this.pixelsPerSecond,
+        shouldScrollX: true,
+        shouldScaleX: false,
+        xFinalPixelAdjust:
+          xFinalPixelAdjust - EXTENSION_END_SHAPE_WIDTH * this.pixelRatio,
+      });
+
+      // Line
+      const lineShape = new THREE.Shape();
+      lineShape.moveTo(0, (-EXTENSION_LINE_HEIGHT / 2) * this.pixelRatio);
+      lineShape.lineTo(
+        (width / this.pixelsPerSecond) * this.pixelRatio,
+        (-EXTENSION_LINE_HEIGHT / 2) * this.pixelRatio
+      );
+      lineShape.lineTo(
+        (width / this.pixelsPerSecond) * this.pixelRatio,
+        (EXTENSION_LINE_HEIGHT / 2) * this.pixelRatio
+      );
+      lineShape.lineTo(0, (EXTENSION_LINE_HEIGHT / 2) * this.pixelRatio);
+      lineShape.lineTo(0, -(EXTENSION_LINE_HEIGHT / 2) * this.pixelRatio);
+      let line;
+      if (borderOnly) {
+        const points = lineShape.getPoints();
+        const geometry = new THREE.Geometry().setFromPoints(points);
+        this.updateBolusExtensionDashedLineMaterial();
+        line = new THREE.Line(geometry, this.bolusExtensionDashedLineMaterial);
+        line.computeLineDistances();
+      } else {
+        const lineGeometry = new THREE.ShapeGeometry(lineShape);
+        line = new THREE.Mesh(lineGeometry, this.bolusRectMaterial);
+      }
+      this.addAutoScrollableObjectToScene(this.scene, line, {
+        x,
+        y: centerY + 0.5,
+        z,
+        contentOffsetX: this.contentOffsetX,
+        pixelsPerSecond: this.pixelsPerSecond,
+        shouldScrollX: true,
+        shouldScaleX: true,
+        xFinalPixelAdjust,
+      });
+    }
+  }
+
+  renderBolusExtensionInterruptBar({ x, z, centerY }) {
+    // Line
+    const xFinalPixelAdjust = (this.bolusRect.width / 2) * this.pixelRatio;
+    const lineShape = new THREE.Shape();
+    lineShape.moveTo(0, (-EXTENSION_LINE_HEIGHT / 2) * this.pixelRatio);
+    lineShape.lineTo(
+      EXTENSION_INTERRUPT_BAR_WIDTH * this.pixelRatio,
+      (-EXTENSION_LINE_HEIGHT / 2) * this.pixelRatio
+    );
+    lineShape.lineTo(
+      EXTENSION_INTERRUPT_BAR_WIDTH * this.pixelRatio,
+      (EXTENSION_LINE_HEIGHT / 2) * this.pixelRatio
+    );
+    lineShape.lineTo(0, (EXTENSION_LINE_HEIGHT / 2) * this.pixelRatio);
+    lineShape.lineTo(0, -(EXTENSION_LINE_HEIGHT / 2) * this.pixelRatio);
+    const lineGeometry = new THREE.ShapeGeometry(lineShape);
+    const line = new THREE.Mesh(lineGeometry, this.bolusInterruptBarMaterial);
+
+    this.addAutoScrollableObjectToScene(this.scene, line, {
+      x,
+      y: centerY + 0.5,
+      z,
+      contentOffsetX: this.contentOffsetX,
+      pixelsPerSecond: this.pixelsPerSecond,
+      shouldScrollX: true,
+      shouldScaleX: false,
+      xFinalPixelAdjust,
+    });
+  }
+
+  renderBolusExtension({
+    x,
+    z,
+    extended,
+    duration,
+    expectedExtended,
+    expectedDuration,
+  }) {
+    const width = Math.floor(duration * this.pixelsPerSecond);
+    let height = Math.ceil(extended * this.yAxisBolusPixelsPerValue);
+    if (height < EXTENSION_LINE_HEIGHT / 2.0) {
+      // tweak to align extension rect with bottom of bolus rect
+      height = EXTENSION_LINE_HEIGHT / 2.0;
+    }
+    let originalWidth;
+    if (expectedExtended !== undefined && expectedDuration !== undefined) {
+      // extension was interrupted...
+      if (expectedDuration > duration) {
+        originalWidth = Math.floor(expectedDuration * this.pixelsPerSecond);
+      } else {
+        // console.log(
+        //   `UNEXPECTED DATA - expectedDuration ${expectedDuration} not > duration ${duration}`
+        // );
+      }
+    }
+
+    let yOrigin = this.yAxisBottomOfBolus - height;
+    if (yOrigin === this.bolusRect.y - this.bolusRect.height) {
+      yOrigin += EXTENSION_LINE_HEIGHT / 2.0;
+    }
+    const centerY = Math.round(yOrigin);
+
+    // only draw original end shape if bolus was not interrupted!
+    this.renderBolusExtensionShape({
+      x,
+      z,
+      centerY,
+      width,
+      duration,
+      borderOnly: false,
+      noEndShape: originalWidth !== undefined,
+    });
+
+    // handle interrupted extended bolus
+    if (originalWidth !== undefined) {
+      // draw original extension, but make sure it is at least as large as the end shape!
+      let extensionWidth = originalWidth - width;
+      if (extensionWidth < EXTENSION_END_SHAPE_WIDTH) {
+        extensionWidth = EXTENSION_END_SHAPE_WIDTH;
+      }
+      this.renderBolusExtensionShape({
+        x: x + width / this.pixelsPerSecond,
+        z,
+        centerY,
+        duration,
+        width: extensionWidth,
+        borderOnly: true,
+      });
+
+      // always draw an interrupt bar at the end of the delivered part of the extension
+      this.renderBolusExtensionInterruptBar({
+        x: x + width / this.pixelsPerSecond,
+        z,
+        centerY,
+      });
+    }
+  }
+
   getWizardForBolusId(bolusId) {
     return this.wizardData.find(wizard => wizard.bolusId === bolusId);
   }
@@ -284,11 +519,6 @@ class GraphBolusGl extends GraphRenderLayerGl {
   }) {
     // console.log(`GraphBolusGl renderSelf`);
 
-    if (this.isScrollOrZoomRender) {
-      // No need to render for scroll or zoom since we're only using auto-scrollable objects
-      return;
-    }
-
     const {
       pixelsPerSecond,
       graphStartTimeSeconds,
@@ -309,15 +539,29 @@ class GraphBolusGl extends GraphRenderLayerGl {
     this.yAxisBolusHeight = yAxisBolusHeight;
     this.yAxisBottomOfBolus = yAxisBottomOfBolus;
 
+    if (this.isScrollOrZoomRender) {
+      // During zoom, update dashed lines with new dashed line material with new pixelsPerSecond
+      // (during zoom) so that the dashed lines appear the same width at all zoom levels.
+      // FIXME: Ideally we should plumb support for detecting renders due to zoom or scroll
+      // (distinguishing between them), rather than treating the same. We don't need to update the
+      // materials of the lines during scroll, only during zoom!
+      this.updateBolusExtensionDashedLineMaterial();
+
+      // Return early since all our objects are auto-updated during zoom/scale, so, no need for any
+      // further rendering (other than the update to the line dashed material above)
+      return;
+    }
+
     for (let i = 0; i < bolusData.length; i += 1) {
       const {
         id,
         time,
         value,
         extended,
+        duration,
         expectedNormal,
         expectedExtended,
-        duration,
+        expectedDuration,
       } = bolusData[i];
 
       if (time >= graphStartTimeSeconds && time <= graphEndTimeSeconds) {
@@ -335,8 +579,8 @@ class GraphBolusGl extends GraphRenderLayerGl {
 
         // Set up x and z (constant for each mesh)
         const x = timeOffset;
-        const backgroundZ = this.zStart + (i + 1) * 0.01;
-        const foregroundZ = this.zStart + (i + 1) * 0.02;
+        const z1 = this.zStart + (i + 1) * 0.01;
+        const z2 = this.zStart + (i + 1) * 0.02;
 
         // Make bolus label text mesh
         const {
@@ -355,7 +599,7 @@ class GraphBolusGl extends GraphRenderLayerGl {
         // Render bolus rect
         this.renderBolusRect({
           x,
-          z: foregroundZ,
+          z: z2,
         });
 
         let override = false;
@@ -414,20 +658,20 @@ class GraphBolusGl extends GraphRenderLayerGl {
           if (this.originalValue > this.constrainedBolusValue) {
             bolusOverrideIconY = this.bolusRect.y - this.bolusRect.height;
             this.renderBolusOverrideBar({
-              z: foregroundZ,
+              z: z2,
             });
           }
           if (interrupted) {
             this.renderBolusInterruptBar({
               x,
               y: bolusOverrideIconY,
-              z: foregroundZ,
+              z: z2,
             });
           } else {
             this.renderBolusOverrideIcon({
               x,
               y: bolusOverrideIconY,
-              z: foregroundZ,
+              z: z2,
               isUp: this.originalValue < this.constrainedBolusValue,
             });
           }
@@ -436,13 +680,13 @@ class GraphBolusGl extends GraphRenderLayerGl {
         // Render bolus rect background
         this.renderBolusRectBackground({
           x,
-          z: backgroundZ,
+          z: z1,
         });
 
         // Render bolus label
         this.renderBolusLabel({
           x,
-          z: foregroundZ,
+          z: z2,
           textMesh,
           bolusLabelWidth,
           bolusLabelHeight,
@@ -450,7 +694,14 @@ class GraphBolusGl extends GraphRenderLayerGl {
         });
 
         if (extended !== undefined && duration !== undefined) {
-          // TODO: render bolus extension
+          this.renderBolusExtension({
+            x,
+            z: z2,
+            extended,
+            duration,
+            expectedExtended,
+            expectedDuration,
+          });
         }
       }
     }
