@@ -179,6 +179,8 @@ const PrimaryTheme = {
   graphBolusOverrideLine: Colors.blue,
   graphBolusInterruptBarColor: Colors.peach,
   bolusOverrideIconColor: "#0c6999",
+  graphWizardCircleColor: Colors.gold,
+  graphWizardLabelColor: Colors.darkPurple,
   toolTipContentTextStyle: {
     color: Colors.blackish,
     ...FontStyles.mediumSmallSemiboldFont,

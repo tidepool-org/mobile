@@ -27,13 +27,15 @@ class GraphTextMeshFactory {
   constructor() {
     this.geometryPool = new Map();
     this.materialPool = new Map();
+    this.bmFonts = new Map();
+    this.bmFontSpriteSheetTextures = new Map();
     this.pixelRatioBase = 3.0; // The sprite sheet targets a 3.0 base pixel ratio
     this.pixelRatio = PixelRatio.get();
     this.pixelRatioScale = this.pixelRatio / this.pixelRatioBase;
     this.textHeightScale = 0.75; // Adjust scale to get desired pixel height
   }
 
-  makeTextMesh({ text, width, color, align = "center" }) {
+  makeTextMesh({ text, fontName, width, color, align = "center" }) {
     const {
       geometry,
       measuredWidth,
@@ -41,10 +43,11 @@ class GraphTextMeshFactory {
       capHeight,
     } = this.getGeometry({
       text,
+      fontName,
       width,
       align,
     });
-    const material = this.getMaterial({ color });
+    const material = this.getMaterial({ fontName, color });
     const textMesh = new THREE.Mesh(geometry, material);
     textMesh.applyMatrix(
       new THREE.Matrix4().makeScale(
@@ -58,47 +61,65 @@ class GraphTextMeshFactory {
 
   async loadAssetsAsync() {
     if (!this.assetsAreLoaded) {
-      this.bmFont = require("../../../../assets/bmfonts/OpenSans-Regular-56px.json");
-      this.bmFontSpriteSheetTexture = await createTextureAsync({
+      let font = require("../../../../assets/bmfonts/OpenSans-Regular-56px.json");
+      let spriteSheetTexture = await createTextureAsync({
         asset: require("../../../../assets/bmfonts/OpenSans-Regular-56px.png"),
       });
+      this.bmFonts.set("OpenSans-Regular-56px", font);
+      this.bmFontSpriteSheetTextures.set(
+        "OpenSans-Regular-56px",
+        spriteSheetTexture
+      );
+      font = require("../../../../assets/bmfonts/OpenSans-Semibold-56px.json");
+      spriteSheetTexture = await createTextureAsync({
+        asset: require("../../../../assets/bmfonts/OpenSans-Semibold-56px.png"),
+      });
+      this.bmFonts.set("OpenSans-Semibold-56px", font);
+      this.bmFontSpriteSheetTextures.set(
+        "OpenSans-Semibold-56px",
+        spriteSheetTexture
+      );
     }
     this.assetsAreLoaded = true;
   }
 
-  getGeometry({ text, width, align }) {
-    const key = `${text}-${width}-${align}`;
+  getGeometry({ text, fontName, width, align }) {
+    const key = `${text}-${fontName}-${width}-${align}`;
     let geometry = this.geometryPool.get(key);
     if (!geometry) {
       geometry = createGeometry({
         text,
-        font: this.bmFont,
+        font: this.bmFonts.get(fontName),
         width: width
-          ? (width * this.pixelRatioBase) / this.textHeightScale
+          ? width / this.textHeightScale / this.pixelRatioScale
           : undefined,
+        // width: width
+        //   ? (width * this.pixelRatioBase) / this.textHeightScale
+        //   : undefined,
         align,
       });
       this.geometryPool.set(key, geometry);
     }
 
     const measuredWidth =
-      (geometry.layout.width / this.pixelRatio) * this.textHeightScale;
+      (geometry.layout.width * this.textHeightScale) / this.pixelRatioBase;
     const measuredHeight =
-      (geometry.layout.height / this.pixelRatio) * this.textHeightScale;
+      (geometry.layout.height * this.textHeightScale) / this.pixelRatioBase;
     const capHeight =
-      (geometry.layout.capHeight / this.pixelRatio) * this.textHeightScale;
+      (geometry.layout.capHeight * this.textHeightScale) / this.pixelRatioBase;
     return { geometry, measuredWidth, measuredHeight, capHeight };
   }
 
-  getMaterial({ color }) {
-    let material = this.materialPool.get(color);
+  getMaterial({ fontName, color }) {
+    const key = `${fontName}-${color}`;
+    let material = this.materialPool.get(key);
     if (!material) {
       material = new THREE.MeshBasicMaterial({
-        map: this.bmFontSpriteSheetTexture,
+        map: this.bmFontSpriteSheetTextures.get(fontName),
         color,
         transparent: true,
       });
-      this.materialPool.set(color, material);
+      this.materialPool.set(key, material);
     }
     return material;
   }

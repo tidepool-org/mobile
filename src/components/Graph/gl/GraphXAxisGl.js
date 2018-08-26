@@ -94,7 +94,8 @@ class GraphXAxisGl extends GraphRenderLayerGl {
       if (!this.tickLabelTextMeshes.get(text)) {
         const { textMesh } = GraphTextMeshFactory.makeTextMesh({
           text,
-          width: this.tickLabelTextWidth,
+          fontName: "OpenSans-Regular-56px",
+          width: this.tickLabelTextWidth * this.pixelRatio,
           color: convertHexColorStringToInt("#58595b"),
         });
         this.tickLabelTextMeshes.set(text, textMesh);

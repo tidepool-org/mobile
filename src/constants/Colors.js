@@ -16,6 +16,7 @@ const Colors = {
   green: "#98ca63",
   purple: "#b29ac9",
   darkPurple: "#281946",
+  gold: "#ffd382",
 
   redError: "#ff354e",
 };

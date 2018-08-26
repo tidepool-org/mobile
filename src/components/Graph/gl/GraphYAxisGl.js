@@ -43,7 +43,8 @@ class GraphYAxisGl extends GraphRenderLayerGl {
     const text = value.toString();
     const { textMesh } = GraphTextMeshFactory.makeTextMesh({
       text,
-      width,
+      fontName: "OpenSans-Regular-56px",
+      width: width * this.pixelRatio,
       color: this.theme.graphYAxisLabelStyle.color,
       align: "right",
     });
