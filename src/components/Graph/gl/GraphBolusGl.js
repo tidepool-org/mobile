@@ -52,6 +52,8 @@ class GraphBolusGl extends GraphRenderLayerGl {
     this.bolusOverrideIconMaterial = new THREE.MeshBasicMaterial({
       color: convertHexColorStringToInt(this.theme.bolusOverrideIconColor),
     });
+
+    this.allCompleteBolusRects = [];
   }
 
   updateBolusExtensionDashedLineMaterial() {
@@ -118,9 +120,9 @@ class GraphBolusGl extends GraphRenderLayerGl {
       formattedValue = value.toFixed(1);
     }
 
-    // TODO: We should probably use the bold text like the legacy Tidepool Mobile iOS app. (Need a new bmFont for it.)
     return GraphTextMeshFactory.makeTextMesh({
       text: formattedValue,
+      fontName: "OpenSans-Semibold-56px",
       color: this.theme.graphBolusLabelColor,
     });
   }
@@ -160,6 +162,7 @@ class GraphBolusGl extends GraphRenderLayerGl {
     });
 
     // Add bolus label
+    const xFinalPixelAdjust = (-bolusLabelWidth * this.pixelRatio) / 2;
     this.addAutoScrollableObjectToScene(this.scene, textMesh, {
       x,
       y,
@@ -167,8 +170,13 @@ class GraphBolusGl extends GraphRenderLayerGl {
       contentOffsetX: this.contentOffsetX,
       pixelsPerSecond: this.pixelsPerSecond,
       shouldScrollX: true,
-      xFinalPixelAdjust: (-bolusLabelWidth * this.pixelRatio) / 2,
+      xFinalPixelAdjust,
     });
+
+    this.completeBolusRect = {
+      ...this.bolusWithOverrideRect,
+      height: this.bolusWithOverrideRect.y - y + bolusLabelHeight,
+    };
   }
 
   renderBolusInterruptBar({ x, y, z }) {
@@ -703,8 +711,22 @@ class GraphBolusGl extends GraphRenderLayerGl {
             expectedDuration,
           });
         }
+
+        this.allCompleteBolusRects.push(this.completeBolusRect);
+        if (wizard) {
+          wizard.bolusTopY =
+            this.completeBolusRect.y - this.completeBolusRect.height;
+        }
       }
     }
+
+    // console.log(
+    //   `completeBolusRects: ${JSON.stringify(
+    //     this.allCompleteBolusRects,
+    //     null,
+    //     2
+    //   )}`
+    // );
   }
 }
 

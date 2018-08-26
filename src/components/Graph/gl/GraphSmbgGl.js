@@ -223,6 +223,7 @@ class GraphSmbgGl extends GraphRenderLayerGl {
           capHeight,
         } = GraphTextMeshFactory.makeTextMesh({
           text,
+          fontName: "OpenSans-Semibold-56px",
           color,
         });
 
@@ -249,6 +250,7 @@ class GraphSmbgGl extends GraphRenderLayerGl {
         });
 
         // Add text
+        const xFinalPixelAdjust = (-measuredWidth * this.pixelRatio) / 2;
         this.addAutoScrollableObjectToScene(scene, textMesh, {
           x,
           y: y + capHeight + textTopToCircleBottom,
@@ -256,7 +258,7 @@ class GraphSmbgGl extends GraphRenderLayerGl {
           contentOffsetX,
           pixelsPerSecond,
           shouldScrollX: true,
-          xFinalPixelAdjust: (-measuredWidth * this.pixelRatio) / 2,
+          xFinalPixelAdjust,
         });
       }
     }
