@@ -9,7 +9,7 @@ const WIZARD_BOTTOM_PADDING = 3;
 
 class GraphWizardGl extends GraphRenderLayerGl {
   constructor(props) {
-    // console.log(`GraphSmbgGl ctor`);
+    // console.log(`GraphWizardGl ctor`);
 
     super(props);
 
