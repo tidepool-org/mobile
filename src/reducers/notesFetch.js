@@ -6,6 +6,7 @@ import {
   NOTES_FETCH_ADD_NOTE,
   NOTES_FETCH_UPDATE_NOTE,
   NOTES_FETCH_DELETE_NOTE,
+  NOTES_FETCH_ADVANCE_TOGGLE_EXPANDED_NOTES_COUNT,
 } from "../actions/notesFetch";
 import { AUTH_SIGN_IN_RESET } from "../actions/auth";
 import NotesFetchData from "../models/NotesFetchData";
@@ -72,6 +73,12 @@ function notesFetch(
       const { profile, note } = action.payload;
       const { notesFetchData } = state;
       notesFetchData.deleteNote({ profile, note });
+      nextState = { ...notesFetchData, notesFetchData };
+      break;
+    }
+    case NOTES_FETCH_ADVANCE_TOGGLE_EXPANDED_NOTES_COUNT: {
+      const { notesFetchData } = state;
+      notesFetchData.advanceToggleExpandedNotesCount();
       nextState = { ...notesFetchData, notesFetchData };
       break;
     }

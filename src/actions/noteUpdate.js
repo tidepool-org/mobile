@@ -1,6 +1,9 @@
 import api from "../api";
 
-import { notesFetchUpdateNote } from "./notesFetch";
+import {
+  notesFetchUpdateNote,
+  notesFetchAdvanceToggleExpandedNotesCount,
+} from "./notesFetch";
 
 const NOTE_UPDATE_DID_START = "NOTE_UPDATE_DID_START";
 const NOTE_UPDATE_DID_SUCCEED = "NOTE_UPDATE_DID_SUCCEED";
@@ -38,6 +41,13 @@ const noteUpdateAsync = ({
     dispatch(
       notesFetchUpdateNote({ note, originalNote, profile: currentProfile })
     );
+
+    const { timestamp } = note;
+    const { timestamp: originalNoteTimestamp } = originalNote;
+    if (timestamp !== originalNoteTimestamp) {
+      // HACK: Toggle expanded notes if the time has changed. See: See: https://trello.com/c/c32gFG1U
+      dispatch(notesFetchAdvanceToggleExpandedNotesCount());
+    }
   }
 };
 

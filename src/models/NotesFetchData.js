@@ -10,6 +10,7 @@ class NotesFetchData {
   searchText = "";
   unfilteredNotes = [];
   notes = [];
+  toggleExpandedNotesCount = 0; // HACK: This is a hack to force toggling of expanded note state to workaround some GL renderer issues when updating notes in list with expanded graphs. See: https://trello.com/c/c32gFG1U
 
   didStart({ userId }) {
     this.userId = userId;
@@ -145,6 +146,10 @@ class NotesFetchData {
     }
   }
 
+  advanceToggleExpandedNotesCount() {
+    this.toggleExpandedNotesCount += 1;
+  }
+
   setSearchFilter({ searchText }) {
     this.searchText = searchText;
     this.filterNotes();
@@ -157,9 +162,8 @@ class NotesFetchData {
       filteredNotes = this.unfilteredNotes.filter(note => {
         if (note.messageText.toLowerCase().includes(searchTextLowerCase)) {
           return true;
-        } if (
-          note.userFullName.toLowerCase().includes(searchTextLowerCase)
-        ) {
+        }
+        if (note.userFullName.toLowerCase().includes(searchTextLowerCase)) {
           return true;
         }
         return false;

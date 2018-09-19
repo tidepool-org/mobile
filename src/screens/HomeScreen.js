@@ -147,7 +147,13 @@ class HomeScreen extends PureComponent {
       graphDataFetchDataByMessageId,
       graphRenderer,
       currentProfile,
-      notesFetch: { errorMessage, fetching, notes, searchText },
+      notesFetch: {
+        errorMessage,
+        fetching,
+        notes,
+        searchText,
+        toggleExpandedNotesCount,
+      },
       notesFetchAsync,
       notesFetchSetSearchFilter,
       navigateEditNote,
@@ -163,6 +169,7 @@ class HomeScreen extends PureComponent {
           <NotesList
             currentUser={currentUser}
             notes={notes}
+            toggleExpandedNotesCount={toggleExpandedNotesCount}
             searchText={searchText}
             fetching={fetching}
             errorMessage={errorMessage}

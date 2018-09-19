@@ -4,6 +4,7 @@ import {
   GRAPH_RENDERER_SVG,
   GRAPH_RENDERER_THREE_JS,
 } from "../components/Graph/helpers";
+import { notesFetchAdvanceToggleExpandedNotesCount } from "./notesFetch";
 
 const GRAPH_RENDERER_SET = "GRAPH_RENDERER_SET";
 
@@ -53,6 +54,7 @@ const graphRendererSetAndSaveAsync = graphRenderer => async dispatch => {
   }
 
   dispatch(graphRendererSet(graphRenderer));
+  dispatch(notesFetchAdvanceToggleExpandedNotesCount());
 };
 
 export {
