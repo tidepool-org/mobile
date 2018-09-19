@@ -8,6 +8,8 @@ const NOTES_FETCH_DID_FAIL = "NOTES_FETCH_DID_FAIL";
 const NOTES_FETCH_ADD_NOTE = "NOTES_FETCH_ADD_NOTE";
 const NOTES_FETCH_UPDATE_NOTE = "NOTES_FETCH_UPDATE_NOTE";
 const NOTES_FETCH_DELETE_NOTE = "NOTES_FETCH_DELETE_NOTE";
+const NOTES_FETCH_ADVANCE_TOGGLE_EXPANDED_NOTES_COUNT =
+  "NOTES_FETCH_ADVANCE_TOGGLE_EXPANDED_NOTES_COUNT";
 
 // TODO: fetch - cancel outstanding request if we get another request to start fetching while one is in progress.
 // TODO: fetch - cancel outstanding request if we sign out while fetch is in progress
@@ -61,6 +63,10 @@ const notesFetchDeleteNote = ({ note, profile }) => ({
   payload: { note, profile },
 });
 
+const notesFetchAdvanceToggleExpandedNotesCount = () => ({
+  type: NOTES_FETCH_ADVANCE_TOGGLE_EXPANDED_NOTES_COUNT,
+});
+
 const notesSwitchProfileAndFetchAsync = ({
   authUser,
   profile,
@@ -75,6 +81,7 @@ export {
   notesFetchAddNote,
   notesFetchUpdateNote,
   notesFetchDeleteNote,
+  notesFetchAdvanceToggleExpandedNotesCount,
   notesSwitchProfileAndFetchAsync,
   NOTES_FETCH_SET_SEARCH_FILTER,
   NOTES_FETCH_DID_START,
@@ -83,4 +90,5 @@ export {
   NOTES_FETCH_ADD_NOTE,
   NOTES_FETCH_UPDATE_NOTE,
   NOTES_FETCH_DELETE_NOTE,
+  NOTES_FETCH_ADVANCE_TOGGLE_EXPANDED_NOTES_COUNT,
 };

@@ -175,6 +175,7 @@ class NotesList extends PureComponent {
       navigateEditComment,
       onDeleteCommentPressed,
       graphRenderer,
+      toggleExpandedNotesCount,
     } = this.props;
     return (
       <NotesListItem
@@ -193,6 +194,7 @@ class NotesList extends PureComponent {
         onGraphZoomStart={this.onGraphZoomStart}
         onGraphZoomEnd={this.onGraphZoomEnd}
         graphRenderer={graphRenderer}
+        toggleExpandedNotesCount={toggleExpandedNotesCount}
       />
     );
   };
@@ -239,13 +241,8 @@ class NotesList extends PureComponent {
 NotesList.propTypes = {
   currentUser: UserPropType.isRequired,
   currentProfile: ProfilePropType.isRequired,
-  notes: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      timestamp: PropTypes.instanceOf(Date),
-      messageText: PropTypes.string.isRequired,
-    })
-  ).isRequired,
+  notes: PropTypes.arrayOf(PropTypes.object).isRequired,
+  toggleExpandedNotesCount: PropTypes.number,
   searchText: PropTypes.string,
   errorMessage: PropTypes.string,
   fetching: PropTypes.bool,
@@ -283,6 +280,7 @@ NotesList.defaultProps = {
   fetching: false,
   commentsFetchDataByMessageId: {},
   graphDataFetchDataByMessageId: {},
+  toggleExpandedNotesCount: 0,
 };
 
 export default withTheme(NotesList);

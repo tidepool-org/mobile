@@ -1,4 +1,5 @@
 import React, { PureComponent } from "react";
+
 import PropTypes from "prop-types";
 import {
   Alert,
@@ -100,19 +101,17 @@ class NotesListItem extends PureComponent {
       });
     }
 
-    const { note } = this.props;
-    const { note: nextNote } = nextProps;
-    const { graphRenderer } = this.props;
-    const { graphRenderer: nextGraphRenderer } = nextProps;
+    const { toggleExpandedNotesCount } = this.props;
+    const {
+      toggleExpandedNotesCount: nextToggleExpandedNotesCount,
+    } = nextProps;
     const { expanded } = this.state;
-    const graphRendererChanged =
-      graphRenderer && nextGraphRenderer && graphRenderer !== nextGraphRenderer;
-    if (nextNote.userUpdatedAt !== note.userUpdatedAt || graphRendererChanged) {
-      if (expanded) {
-        this.setState({ expanded: false }, () => {
-          this.toggleNote({ animationDuration: 350, fetchComments: false });
-        });
-      }
+    const shouldToggleNote =
+      expanded && toggleExpandedNotesCount !== nextToggleExpandedNotesCount;
+    if (shouldToggleNote) {
+      this.setState({ expanded: false }, () => {
+        this.toggleNote({ animationDuration: 350, fetchComments: false });
+      });
     }
   }
 
@@ -473,6 +472,7 @@ NotesListItem.propTypes = {
   allowEditing: PropTypes.bool,
   initiallyExpanded: PropTypes.bool,
   allowExpansionToggle: PropTypes.bool,
+  toggleExpandedNotesCount: PropTypes.number,
   currentUser: UserPropType.isRequired,
   currentProfile: ProfilePropType.isRequired,
   note: PropTypes.shape({
@@ -509,6 +509,7 @@ NotesListItem.defaultProps = {
   allowEditing: true,
   initiallyExpanded: false,
   allowExpansionToggle: true,
+  toggleExpandedNotesCount: 0,
   commentsFetchData: {
     comments: [],
     errorMessage: "",
