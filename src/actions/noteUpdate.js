@@ -38,16 +38,17 @@ const noteUpdateAsync = ({
     dispatch(noteUpdateDidFail({ note, errorMessage }));
   } else {
     dispatch(noteUpdateDidSucceed({ note }));
-    dispatch(
-      notesFetchUpdateNote({ note, originalNote, profile: currentProfile })
-    );
-
-    const { timestamp } = note;
-    const { timestamp: originalNoteTimestamp } = originalNote;
-    if (timestamp !== originalNoteTimestamp) {
-      // HACK: Toggle expanded notes if the time has changed. See: See: https://trello.com/c/c32gFG1U
-      dispatch(notesFetchAdvanceToggleExpandedNotesCount());
-    }
+    setTimeout(() => {
+      dispatch(
+        notesFetchUpdateNote({ note, originalNote, profile: currentProfile })
+      );
+      const { timestamp } = note;
+      const { timestamp: originalNoteTimestamp } = originalNote;
+      if (timestamp !== originalNoteTimestamp) {
+        // HACK: Toggle expanded notes if the time has changed. See: See: https://trello.com/c/c32gFG1U
+        dispatch(notesFetchAdvanceToggleExpandedNotesCount());
+      }
+    }, 100);
   }
 };
 
