@@ -1,0 +1,1 @@
+../../../Rollbar/Rollbar/RollbarKSCrashInstallation.h

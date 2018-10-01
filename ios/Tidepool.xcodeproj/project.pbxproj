@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4D640DA32158346F00552B07 /* NativeNotifications.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D640DA22158346F00552B07 /* NativeNotifications.m */; };
 		4DF7011320AF15C700B2FDC6 /* LaunchScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF7011120AF15C700B2FDC6 /* LaunchScreen.m */; };
 		4DF7011620AF15DC00B2FDC6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DF7011420AF15DC00B2FDC6 /* LaunchScreen.storyboard */; };
 		B501732B1DC01252003445D9 /* EXShell.plist in Resources */ = {isa = PBXBuildFile; fileRef = B501732A1DC01252003445D9 /* EXShell.plist */; };
@@ -22,6 +23,8 @@
 
 /* Begin PBXFileReference section */
 		2C1548D9E4CB1AEFA5CCAE6D /* Pods-Tidepool.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tidepool.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tidepool/Pods-Tidepool.debug.xcconfig"; sourceTree = "<group>"; };
+		4D640DA12158346E00552B07 /* NativeNotifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NativeNotifications.h; sourceTree = "<group>"; };
+		4D640DA22158346F00552B07 /* NativeNotifications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NativeNotifications.m; sourceTree = "<group>"; };
 		4DF7011120AF15C700B2FDC6 /* LaunchScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchScreen.m; sourceTree = "<group>"; };
 		4DF7011220AF15C700B2FDC6 /* LaunchScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchScreen.h; sourceTree = "<group>"; };
 		4DF7011520AF15DC00B2FDC6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -92,6 +95,8 @@
 			children = (
 				B56386471DB9693800A0598C /* AppDelegate.h */,
 				B56386481DB9693800A0598C /* AppDelegate.m */,
+				4D640DA12158346E00552B07 /* NativeNotifications.h */,
+				4D640DA22158346F00552B07 /* NativeNotifications.m */,
 				B56386501DB9693800A0598C /* Assets.xcassets */,
 				B563865B1DB96A5E00A0598C /* Supporting */,
 			);
@@ -127,7 +132,6 @@
 				B563863D1DB9693800A0598C /* Sources */,
 				B563863E1DB9693800A0598C /* Frameworks */,
 				B563863F1DB9693800A0598C /* Resources */,
-				8D34C7FE3D99F20E5EA1B18A /* [CP] Embed Pods Frameworks */,
 				AA38385B7D8D0854176B72FC /* [CP] Copy Pods Resources */,
 				19D233B7204FDD7D0087ED51 /* Bundle Expo Assets */,
 				4D4F482120B0860B00A2D0EE /* Update bundle version based on git commit count on current branch */,
@@ -239,21 +243,6 @@
 			shellPath = /bin/sh;
 			shellScript = "COMMITS=$(git rev-list HEAD | wc -l)\nCOMMITS=$((COMMITS * 100)) # Multiply by 100 so we could do manual releases, manually bumping build number if needed. When it ends in 00, it should correspond to git commit number on current branch\ndefaults write \"${BUILT_PRODUCTS_DIR}/${INFOPLIST_PATH%.*}\" \"CFBundleVersion\" \"${COMMITS}\"";
 		};
-		8D34C7FE3D99F20E5EA1B18A /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Tidepool/Pods-Tidepool-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		AA38385B7D8D0854176B72FC /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -318,6 +307,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4DF7011320AF15C700B2FDC6 /* LaunchScreen.m in Sources */,
+				4D640DA32158346F00552B07 /* NativeNotifications.m in Sources */,
 				B56386611DB96A5E00A0598C /* main.m in Sources */,
 				B56386491DB9693800A0598C /* AppDelegate.m in Sources */,
 			);

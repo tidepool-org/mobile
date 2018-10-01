@@ -1,6 +1,7 @@
 import { THREE } from "expo-three";
 
 import GraphRenderLayerGl from "./GraphRenderLayerGl";
+// import Logger from "../../../models/Logger";
 
 class GraphNoteEventGl extends GraphRenderLayerGl {
   constructor(props) {
@@ -24,10 +25,10 @@ class GraphNoteEventGl extends GraphRenderLayerGl {
       tickTriangleWidth * tickTriangleWidth - tickTriangleWidth / 2
     );
     const tickTriangleShape = new THREE.Shape();
-    tickTriangleShape.moveTo(-tickTriangleWidth / 2 * this.pixelRatio, 0);
-    tickTriangleShape.lineTo(tickTriangleWidth / 2 * this.pixelRatio, 0);
+    tickTriangleShape.moveTo((-tickTriangleWidth / 2) * this.pixelRatio, 0);
+    tickTriangleShape.lineTo((tickTriangleWidth / 2) * this.pixelRatio, 0);
     tickTriangleShape.lineTo(0, -tickTriangleHeight * this.pixelRatio);
-    tickTriangleShape.lineTo(-tickTriangleWidth / 2 * this.pixelRatio, 0);
+    tickTriangleShape.lineTo((-tickTriangleWidth / 2) * this.pixelRatio, 0);
     this.tickTriangleGeometry = new THREE.ShapeGeometry(tickTriangleShape);
     this.tickTriangleMaterial = new THREE.MeshBasicMaterial({
       color: 0x000000,

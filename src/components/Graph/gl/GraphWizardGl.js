@@ -3,6 +3,7 @@ import { THREE } from "expo-three";
 import GraphTextMeshFactory from "./GraphTextMeshFactory";
 import GraphRenderLayerGl from "./GraphRenderLayerGl";
 import { convertHexColorStringToInt } from "../helpers";
+// import Logger from "../../../models/Logger";
 
 const WIZARD_RADIUS = 15;
 const WIZARD_BOTTOM_PADDING = 3;

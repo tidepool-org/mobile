@@ -1,0 +1,1 @@
+../../../Rollbar/Rollbar/RollbarKSCrashReportSink.h

@@ -142,12 +142,12 @@ class NotesList extends PureComponent {
   };
 
   onGraphZoomStart = () => {
-    // console.log("onGraphZoomStart");
+    // console.log(`onGraphZoomStart`);
     this.setState({ isZoomingGraph: true });
   };
 
   onGraphZoomEnd = () => {
-    // console.log("onGraphZoomEnd");
+    // console.log(`onGraphZoomEnd`);
     this.setState({ isZoomingGraph: false });
   };
 

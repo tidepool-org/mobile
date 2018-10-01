@@ -7,6 +7,7 @@ import PrimaryTheme from "../themes/PrimaryTheme";
 import Colors from "../constants/Colors";
 import DebugSettingsApiEnvironmentList from "../components/DebugSettingsApiEnvironmentList";
 import DebugSettingsGraphRendererList from "../components/DebugSettingsGraphRendererList";
+// import DebugSettingsLoggingList from "../components/DebugSettingsLoggingList";
 import DebugSettingsOtherList from "../components/DebugSettingsOtherList";
 
 class DebugSettingsScreen extends PureComponent {
@@ -43,6 +44,19 @@ class DebugSettingsScreen extends PureComponent {
     navigateGoBack();
   };
 
+  onLogLevelSelected = newLogLevel => {
+    const { selectedLogLevel, navigateGoBack } = this.props;
+
+    if (newLogLevel !== selectedLogLevel) {
+      // Delay this so the Modal closes faster
+      const { logLevelSetAndSaveAsync } = this.props;
+      setTimeout(() => {
+        logLevelSetAndSaveAsync(newLogLevel);
+      }, 250);
+    }
+    navigateGoBack();
+  };
+
   renderItem = ({ item }) => (
     <glamorous.Text
       style={this.theme.debugSettingsListItemTextStyle}
@@ -59,6 +73,7 @@ class DebugSettingsScreen extends PureComponent {
       firstTimeTipsResetTips,
       selectedApiEnvironment,
       selectedGraphRenderer,
+      // selectedLogLevel,
     } = this.props;
 
     return (
@@ -113,6 +128,17 @@ class DebugSettingsScreen extends PureComponent {
                 justifyContent="space-between"
                 padding={8}
               />
+              {/*
+                <DebugSettingsLoggingList
+                  onLogLevelSelected={this.onLogLevelSelected}
+                  selectedLogLevel={selectedLogLevel}
+                />
+                */}
+              <glamorous.View
+                flexDirection="row"
+                justifyContent="space-between"
+                padding={8}
+              />
               <DebugSettingsOtherList
                 navigateGoBack={navigateGoBack}
                 firstTimeTipsResetTips={firstTimeTipsResetTips}
@@ -132,11 +158,14 @@ DebugSettingsScreen.propTypes = {
   firstTimeTipsResetTips: PropTypes.func.isRequired,
   graphRendererSetAndSaveAsync: PropTypes.func.isRequired,
   selectedGraphRenderer: PropTypes.string,
+  logLevelSetAndSaveAsync: PropTypes.func.isRequired,
+  selectedLogLevel: PropTypes.string,
 };
 
 DebugSettingsScreen.defaultProps = {
   selectedApiEnvironment: "",
   selectedGraphRenderer: "",
+  selectedLogLevel: "",
 };
 
 export default DebugSettingsScreen;

@@ -6,11 +6,22 @@ import glamorous, { withTheme } from "glamorous-native";
 import { ThemePropType } from "../prop-types/theme";
 import Colors from "../constants/Colors";
 import DebugSettingsResetFirstTimeSettingsListItem from "./DebugSettingsResetFirstTimeSettingsListItem";
+import DebugSettingsForceCrashListItem from "./DebugSettingsForceCrashListItem";
+import DebugSettingsForceLogListItem from "./DebugSettingsForceLogListItem";
+import Logger from "../models/Logger";
 
-const ITEM_RESET_FIRST_TIME_TIPS = "Reset ITEM_RESET_FIRST_TIME_TIPS";
+const ITEM_RESET_FIRST_TIME_TIPS = "ITEM_RESET_FIRST_TIME_TIPS";
+const ITEM_FORCE_CRASH = "ITEM_FORCE_CRASH";
+const ITEM_FORCE_LOG_WARNING = "ITEM_FORCE_LOG_WARNING";
+const ITEM_FORCE_LOG_ERROR = "ITEM_FORCE_LOG_ERROR";
 
 class DebugSettingsOtherList extends PureComponent {
-  data = [ITEM_RESET_FIRST_TIME_TIPS];
+  data = [
+    ITEM_RESET_FIRST_TIME_TIPS,
+    ITEM_FORCE_CRASH,
+    ITEM_FORCE_LOG_WARNING,
+    ITEM_FORCE_LOG_ERROR,
+  ];
 
   renderSeparator = () => (
     <glamorous.View
@@ -29,6 +40,29 @@ class DebugSettingsOtherList extends PureComponent {
             key={item}
             navigateGoBack={navigateGoBack}
             firstTimeTipsResetTips={firstTimeTipsResetTips}
+          />
+        );
+      case ITEM_FORCE_CRASH:
+        return (
+          <DebugSettingsForceCrashListItem
+            key={item}
+            navigateGoBack={navigateGoBack}
+          />
+        );
+      case ITEM_FORCE_LOG_WARNING:
+        return (
+          <DebugSettingsForceLogListItem
+            key={item}
+            navigateGoBack={navigateGoBack}
+            logLevel={Logger.LOG_LEVEL_WARNING}
+          />
+        );
+      case ITEM_FORCE_LOG_ERROR:
+        return (
+          <DebugSettingsForceLogListItem
+            key={item}
+            navigateGoBack={navigateGoBack}
+            logLevel={Logger.LOG_LEVEL_ERROR}
           />
         );
       default:

@@ -1,4 +1,5 @@
 import HashtagCollection from "./HashtagCollection";
+import Logger from "./Logger";
 
 class NotesFetchData {
   userId = "";
@@ -37,9 +38,11 @@ class NotesFetchData {
       this.unfilteredNotes = notes;
       this.filterNotes();
     } else {
-      // console.log(
-      //   `didSucceed called for unexpected user, or when user was signed out, ignoring, userId: ${this.userId}`
-      // );
+      Logger.logWarning(
+        `didSucceed called for unexpected user, or when user was signed out, ignoring, userId: ${
+          this.userId
+        }`
+      );
     }
   }
 
@@ -51,9 +54,11 @@ class NotesFetchData {
       this.unfilteredNotes = [];
       this.notes = [];
     } else {
-      // console.log(
-      //   `didFail called for unexpected user, or when user was signed out, ignoring, userId: ${this.userId}`
-      // );
+      Logger.logWarning(
+        `didFail called for unexpected user, or when user was signed out, ignoring, userId: ${
+          this.userId
+        }`
+      );
     }
   }
 
@@ -71,11 +76,11 @@ class NotesFetchData {
       this.unfilteredNotes = sortedNotes;
       this.filterNotes();
     } else {
-      // console.log(
-      //   `Unexpected insert of note with profile userId: ${
-      //     profile.userId
-      //   } in notes list for profile userId: ${this.userId}`
-      // );
+      Logger.logWarning(
+        `Unexpected insert of note with profile userId: ${
+          profile.userId
+        } in notes list for profile userId: ${this.userId}`
+      );
     }
   }
 
@@ -102,16 +107,16 @@ class NotesFetchData {
         this.unfilteredNotes = sortedNotes;
         this.filterNotes();
       } else {
-        // console.log(
-        //   `Could not find the edited note in current notes, this is unexpected`
-        // );
+        Logger.logWarning(
+          `Could not find the edited note in current notes, this is unexpected`
+        );
       }
     } else {
-      // console.log(
-      //   `Unexpected update of note with profile userId: ${
-      //     profile.userId
-      //   } in notes list for profile userId: ${this.userId}`
-      // );
+      Logger.logWarning(
+        `Unexpected update of note with profile userId: ${
+          profile.userId
+        } in notes list for profile userId: ${this.userId}`
+      );
     }
   }
 
@@ -133,16 +138,16 @@ class NotesFetchData {
         this.unfilteredNotes = sortedNotes;
         this.filterNotes();
       } else {
-        // console.log(
-        //   `Could not find the deleted note in current notes, this is unexpected`
-        // );
+        Logger.logWarning(
+          `Could not find the deleted note in current notes, this is unexpected`
+        );
       }
     } else {
-      // console.log(
-      //   `Unexpected delete of note with profile userId: ${
-      //     profile.userId
-      //   } in notes list for profile userId: ${this.userId}`
-      // );
+      Logger.logWarning(
+        `Unexpected delete of note with profile userId: ${
+          profile.userId
+        } in notes list for profile userId: ${this.userId}`
+      );
     }
   }
 

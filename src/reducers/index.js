@@ -12,6 +12,7 @@ import notesFetch from "./notesFetch";
 import currentProfile from "./currentProfile";
 import profilesFetch from "./profilesFetch";
 import firstTimeTips from "./firstTimeTips";
+import logLevel from "./logLevel";
 
 const reducers = combineReducers({
   appInitDidFinish,
@@ -26,6 +27,7 @@ const reducers = combineReducers({
   currentProfile,
   profilesFetch,
   firstTimeTips,
+  logLevel,
 });
 
 export default reducers;

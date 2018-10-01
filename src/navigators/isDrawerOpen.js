@@ -1,3 +1,5 @@
+// import Logger from "../models/Logger";
+
 const isDrawerOpen = ({ navigation: rootNavigationState }) => {
   let result = false;
 

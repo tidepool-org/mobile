@@ -1,6 +1,7 @@
 import { AsyncStorage } from "react-native";
 import { authSignOutAsync } from "./auth";
 import { switchApiEnvironment, API_ENVIRONMENT_PRODUCTION } from "../api";
+import Logger from "../models/Logger";
 
 const API_ENVIRONMENT_SET = "API_ENVIRONMENT_SET";
 
@@ -48,9 +49,9 @@ const apiEnvironmentSetAndSaveAsync = apiEnvironment => async dispatch => {
     //   `apiEnvironmentSetAndSaveAsync save succeeded, apiEnvironment: ${apiEnvironment}`
     // );
   } catch (error) {
-    // console.log(
-    //   `apiEnvironmentSetAndSaveAsync failed to save apiEnvironment, error: ${error}`
-    // );
+    Logger.logError(
+      `apiEnvironmentSetAndSaveAsync failed to save apiEnvironment, error: ${error}`
+    );
   }
 
   dispatch(apiEnvironmentSet(apiEnvironment));

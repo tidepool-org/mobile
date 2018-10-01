@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import { AppNavigator } from "../navigators/AppNavigator";
 import { HOME_ROUTE_NAME, SIGN_IN_ROUTE_NAME } from "../navigators/routeNames";
 import getRouteName from "../navigators/getRouteName";
+// import Logger from "../models/Logger";
 
 class AppWithNavigationState extends PureComponent {
   componentDidMount() {
@@ -32,7 +33,7 @@ class AppWithNavigationState extends PureComponent {
   };
 
   render() {
-    // console.log("AppWithNavigationState: render");
+    // console.log(`AppWithNavigationState: render`);
     const { addListener, dispatch, navigation } = this.props;
 
     return (

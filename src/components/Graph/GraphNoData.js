@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import glamorous, { withTheme } from "glamorous-native";
 
 import { ThemePropType } from "../../prop-types/theme";
+// import Logger from "../../models/Logger";
 
 class GraphNoData extends PureComponent {
   onPressHowToUpload = () => {
@@ -46,7 +47,7 @@ class GraphNoData extends PureComponent {
   }
 
   render() {
-    // console.log("GraphNoData: render");
+    // console.log(`GraphNoData: render`);
 
     const { theme, graphFixedLayoutInfo } = this.props;
 

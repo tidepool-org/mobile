@@ -6,10 +6,12 @@ import { navigateGoBack } from "../actions/navigation";
 import { apiEnvironmentSetAndSaveAsync } from "../actions/apiEnvironment";
 import { graphRendererSetAndSaveAsync } from "../actions/graphRenderer";
 import { firstTimeTipsResetTips } from "../actions/firstTimeTips";
+import { logLevelSetAndSaveAsync } from "../actions/logLevel";
 
 const mapStateToProps = state => ({
   selectedApiEnvironment: state.apiEnvironment,
   selectedGraphRenderer: state.graphRenderer,
+  selectedLogLevel: state.logLevel,
 });
 
 const mapDispatchToProps = dispatch =>
@@ -19,6 +21,7 @@ const mapDispatchToProps = dispatch =>
       apiEnvironmentSetAndSaveAsync,
       firstTimeTipsResetTips,
       graphRendererSetAndSaveAsync,
+      logLevelSetAndSaveAsync,
     },
     dispatch
   );
