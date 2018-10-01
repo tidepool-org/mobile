@@ -14,6 +14,7 @@ import GraphBasalGl from "./GraphBasalGl";
 import GraphBolusGl from "./GraphBolusGl";
 import GraphWizardGl from "./GraphWizardGl";
 import { convertHexColorStringToInt } from "../helpers";
+// import Logger from "../../../models/Logger";
 
 const { createRenderer } = ExpoTHREE;
 
@@ -140,13 +141,12 @@ class GraphScrollableGl extends PureComponent {
     //   `GraphScrollableGl: onContextCreate: about to do initial render: width: ${drawingBufferWidth /
     //     pixelRatio}`
     // );
-
     this.renderScene();
   };
 
   renderScene() {
     if (this.scene) {
-      // console.log("GraphScrollableGl: renderScene");
+      // console.log(`GraphScrollableGl: renderScene`);
 
       this.graphRenderLayers.forEach(graphRenderLayer => {
         graphRenderLayer.render({
@@ -158,12 +158,14 @@ class GraphScrollableGl extends PureComponent {
       this.renderer.render(this.scene, this.camera);
       this.gl.endFrameEXP();
     } else {
-      // console.log("GraphScrollableGl: renderScene: No scene, skipped render");
+      // console.log(
+      //   `GraphScrollableGl: renderScene: No scene, skipped render`
+      // );
     }
   }
 
   render() {
-    // console.log("GraphScrollableGl: render");
+    // console.log(`GraphScrollableGl: render`);
 
     const {
       graphScalableLayoutInfo: {

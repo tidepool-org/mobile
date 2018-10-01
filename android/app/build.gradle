@@ -99,9 +99,9 @@ android {
       storePassword tidepoolKeystoreStorePassword
       keyAlias System.getenv("TIDEPOOL_KEYSTORE_KEY_ALIAS")
       keyPassword tidepoolKeystoreKeyPassword
-    }    
-  }    
-  
+    }
+  }
+
   buildTypes {
     debug {
       debuggable true
@@ -135,6 +135,8 @@ apply from: 'expo.gradle'
 
 
 dependencies {
+    compile project(':react-native-device-info')
+    compile project(':rollbar-react-native')
   compile project(':react-native-device-info')
   compile fileTree(dir: 'libs', include: ['*.jar'])
 
@@ -200,12 +202,12 @@ dependencies {
   androidTestCompile 'com.azimolabs.conditionwatcher:conditionwatcher:0.2'
 
 
-  
+
   compile('host.exp.exponent:expoview:27.0.0@aar') {
     transitive = true
   }
-  
-  
+
+
 }
 
 // This has to be down here for some reason

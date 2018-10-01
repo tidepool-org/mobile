@@ -12,6 +12,7 @@ import GraphYAxisBGBoundaryLinesSvg from "./svg/GraphYAxisBGBoundaryLinesSvg";
 import GraphNoData from "./GraphNoData";
 import GraphScrollable from "./GraphScrollable";
 import GraphZoomable from "./GraphZoomable";
+// import Logger from "../../models/Logger";
 
 class Graph extends PureComponent {
   constructor(props) {
@@ -47,7 +48,7 @@ class Graph extends PureComponent {
   };
 
   onZoomStart = () => {
-    // console.log("onZoomStart");
+    // console.log(`onZoomStart`);
     const { onZoomStart } = this.props;
     this.setState({
       isZooming: true,
@@ -58,7 +59,7 @@ class Graph extends PureComponent {
   };
 
   onZoomMove = scale => {
-    // console.log("onZoomMove");
+    // console.log(`onZoomMove`);
     this.setState((prevState, props) => {
       const { eventTime } = props;
       const graphScalableLayoutInfo = new GraphScalableLayoutInfo({
@@ -73,13 +74,13 @@ class Graph extends PureComponent {
   };
 
   onZoomCommit = () => {
-    // console.log("onZoomCommit");
+    // console.log(`onZoomCommit`);
     const { graphScalableLayoutInfo } = this.state;
     this.scale = graphScalableLayoutInfo.scale; // Use last graphScalableLayoutInfo, not the scale passed to onZoomCommi (graphScalableLayoutInfo scale is constrained)
   };
 
   onZoomEnd = () => {
-    // console.log("onZoomEnd");
+    // console.log(`onZoomEnd`);
     const { onZoomEnd } = this.props;
     this.setState({
       isZooming: false,
@@ -209,7 +210,7 @@ class Graph extends PureComponent {
   }
 
   render() {
-    // console.log("Graph: render");
+    // console.log(`Graph: render`);
 
     return (
       <glamorous.View height={180} onLayout={this.onContainerViewLayout}>

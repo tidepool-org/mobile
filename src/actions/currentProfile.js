@@ -1,6 +1,7 @@
 import { AsyncStorage } from "react-native";
 
 import api from "../api";
+import Logger from "../models/Logger";
 
 const CURRENT_PROFILE_SET = "CURRENT_PROFILE_SET";
 const CURRENT_PROFILE_SETTINGS_FETCH_DID_SUCCEED =
@@ -61,7 +62,7 @@ const currentProfileSaveAsync = ({ authUser, profile }) => async dispatch => {
       JSON.stringify(profile)
     );
   } catch (error) {
-    // console.log(`currentProfileSaveAsync: error: ${error}`);
+    Logger.logError(`currentProfileSaveAsync: error: ${error}`);
   }
 
   dispatch(currentProfileSet({ profile }));

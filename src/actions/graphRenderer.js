@@ -1,5 +1,6 @@
 import { AsyncStorage } from "react-native";
 
+import Logger from "../models/Logger";
 import {
   GRAPH_RENDERER_SVG,
   GRAPH_RENDERER_THREE_JS,
@@ -48,9 +49,9 @@ const graphRendererSetAndSaveAsync = graphRenderer => async dispatch => {
     //   `graphRendererSetAndSaveAsync save succeeded, graphRenderer: ${graphRenderer}`
     // );
   } catch (error) {
-    // console.log(
-    //   `graphRendererSetAndSaveAsync failed to save graphRenderer, error: ${error}`
-    // );
+    Logger.logError(
+      `graphRendererSetAndSaveAsync failed to save graphRenderer, error: ${error}`
+    );
   }
 
   dispatch(graphRendererSet(graphRenderer));

@@ -3,10 +3,12 @@ import { THREE } from "expo-three";
 import GraphRenderLayerGl from "./GraphRenderLayerGl";
 import GraphTextMeshFactory from "./GraphTextMeshFactory";
 import { convertHexColorStringToInt } from "../helpers";
+// import Logger from "../../../models/Logger";
 
 class GraphYAxisGl extends GraphRenderLayerGl {
   constructor(props) {
     // console.log(`GraphYAxisGl ctor`);
+
     super(props);
 
     const { width } = this.graphFixedLayoutInfo;

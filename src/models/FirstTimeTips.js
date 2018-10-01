@@ -3,6 +3,7 @@ import { AsyncStorage, Platform } from "react-native";
 import { HOME_ROUTE_NAME } from "../navigators/routeNames";
 import isDrawerOpen from "../navigators/isDrawerOpen";
 import isCurrentRoute from "../navigators/isCurrentRoute";
+import Logger from "./Logger";
 
 const FIRST_TIME_TIPS_SETTINGS_KEY = "FIRST_TIME_TIPS_SETTINGS_KEY";
 
@@ -135,13 +136,13 @@ class FirstTimeTips {
           //   )}`
           // );
         } else {
-          // console.log(
-          //   `FirstTimeTips.showTip failed: ${JSON.stringify(
-          //     this.settings,
-          //     null,
-          //     2
-          //   )}, error: ${error}`
-          // );
+          Logger.logError(
+            `FirstTimeTips.showTip failed: ${JSON.stringify(
+              this.settings,
+              null,
+              2
+            )}, error: ${error}`
+          );
         }
       }
     );

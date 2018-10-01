@@ -1,4 +1,7 @@
+import { NativeModules } from "react-native";
+
 import TidepoolApi from "./TidepoolApi";
+import Logger from "../models/Logger";
 
 const API_ENVIRONMENT_PRODUCTION = "Production";
 const API_ENVIRONMENT_INTEGRATION = "Integration";
@@ -36,6 +39,15 @@ const switchApiEnvironment = apiEnvironment => {
   }
 
   tidepoolApi = new TidepoolApi({ baseUrl });
+
+  Logger.updateRollbarWithConfig({ environment: apiEnvironment });
+
+  try {
+    const { NativeNotifications } = NativeModules;
+    NativeNotifications.setEnvironment(apiEnvironment);
+  } catch (error) {
+    // console.log(`error: ${error}`);
+  }
 };
 
 const api = () => tidepoolApi;

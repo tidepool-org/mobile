@@ -4,47 +4,20 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools">
 
-  <permission
-    android:name="io.tidepool.urchinRN.permission.C2D_MESSAGE"
-    android:protectionLevel="signature"/>
-
-  <!-- These are required permissions to make the app run -->
-  <uses-permission android:name="io.tidepool.urchinRN.permission.C2D_MESSAGE" />
-  <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+  <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
   <uses-permission android:name="android.permission.INTERNET" />
-  <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-  <uses-permission android:name="android.permission.WAKE_LOCK" />
+  <uses-permission android:name="android.permission.READ_LOGS" />
 
-  
-      
-      <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" tools:node="remove" />
-<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" tools:node="remove" />
-<uses-permission android:name="android.permission.CAMERA" tools:node="remove" />
-<uses-permission android:name="android.permission.MANAGE_DOCUMENTS" tools:node="remove" />
-<uses-permission android:name="android.permission.READ_CONTACTS" tools:node="remove" />
-<uses-permission android:name="android.permission.READ_CALENDAR" tools:node="remove" />
-<uses-permission android:name="android.permission.WRITE_CALENDAR" tools:node="remove" />
-<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" tools:node="remove" />
-<uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" tools:node="remove" />
-<uses-permission android:name="android.permission.READ_PHONE_STATE" tools:node="remove" />
-<uses-permission android:name="android.permission.RECORD_AUDIO" tools:node="remove" />
-<uses-permission android:name="android.permission.USE_FINGERPRINT" tools:node="remove" />
-<uses-permission android:name="android.permission.VIBRATE" tools:node="remove" />
-<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" tools:node="remove" />
-<uses-permission android:name="com.anddoes.launcher.permission.UPDATE_COUNT" tools:node="remove" />
-<uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" tools:node="remove" />
-<uses-permission android:name="com.google.android.gms.permission.ACTIVITY_RECOGNITION" tools:node="remove" />
-<uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" tools:node="remove" />
-<uses-permission android:name="com.htc.launcher.permission.READ_SETTINGS" tools:node="remove" />
-<uses-permission android:name="com.htc.launcher.permission.UPDATE_SHORTCUT" tools:node="remove" />
-<uses-permission android:name="com.majeur.launcher.permission.UPDATE_BADGE" tools:node="remove" />
-<uses-permission android:name="com.sec.android.provider.badge.permission.READ" tools:node="remove" />
-<uses-permission android:name="com.sec.android.provider.badge.permission.WRITE" tools:node="remove" />
-<uses-permission android:name="com.sonyericsson.home.permission.BROADCAST_BADGE" tools:node="remove" />
-      
+  <!-- To auto-complete the email text field in the login form with the user's emails -->
+  <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+  <uses-permission android:name="android.permission.READ_PROFILE" />
+  <uses-permission android:name="android.permission.READ_CONTACTS" />
 
-  <!-- ADD TEST PERMISSIONS HERE -->
+  <!-->
+  <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" tools:node="remove" />
+  <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" tools:node="remove" />
+  -->
 
   <uses-feature android:glEsVersion="0x00020000" android:required="false" />
 
@@ -250,12 +223,9 @@
     </activity>
 
 
-    <!-- ADD FABRIC CONFIG HERE -->
-    <!-- BEGIN FABRIC CONFIG -->
     <meta-data
       android:name="io.fabric.ApiKey"
-      android:value="a25fafe9f9edee11a9882b32e0cd7a26df6e2c42"/>
-    <!-- END FABRIC CONFIG -->
+      android:value="310a9ba63f367e9d97590907af96678814f57495"/>
 
     <!-- ADD GOOGLE MAPS CONFIG HERE -->
     <!-- BEGIN GOOGLE MAPS CONFIG -->

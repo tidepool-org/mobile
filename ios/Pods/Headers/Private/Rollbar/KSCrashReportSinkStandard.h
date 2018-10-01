@@ -1,0 +1,1 @@
+../../../Rollbar/KSCrash/Source/KSCrash/Reporting/Sinks/KSCrashReportSinkStandard.h

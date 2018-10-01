@@ -4,6 +4,7 @@ import GraphRenderLayerGl from "./GraphRenderLayerGl";
 import GraphShapeGeometryFactory from "./GraphShapeGeometryFactory";
 import GraphTextMeshFactory from "./GraphTextMeshFactory";
 import { MAX_BG_VALUE, convertHexColorStringToInt } from "../helpers";
+// import Logger from "../../../models/Logger";
 
 const { createTextureAsync } = ExpoTHREE;
 

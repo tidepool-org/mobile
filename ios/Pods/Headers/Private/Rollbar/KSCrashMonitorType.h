@@ -1,0 +1,1 @@
+../../../Rollbar/KSCrash/Source/KSCrash/Recording/Monitors/KSCrashMonitorType.h

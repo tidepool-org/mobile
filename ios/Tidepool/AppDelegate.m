@@ -3,6 +3,11 @@
 #import "AppDelegate.h"
 #import "ExpoKit.h"
 #import "EXViewController.h"
+#import "NativeNotifications.h"
+
+#import "EXKernel.h"
+#import <React/RCTBridge.h>
+#import <RollbarReactNative/RollbarReactNative.h>
 
 @interface AppDelegate ()
 
@@ -14,6 +19,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [RollbarReactNative initWithAccessToken:@"00788919100a467e8fb08144b427890e"];
+
     _window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     _window.backgroundColor = [UIColor whiteColor];
     [[ExpoKit sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
@@ -21,7 +28,7 @@
     _window.rootViewController = _rootViewController;
 
     [_window makeKeyAndVisible];
-    
+
     return YES;
 }
 
@@ -62,6 +69,45 @@
 - (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(nonnull UIUserNotificationSettings *)notificationSettings
 {
     [[ExpoKit sharedInstance] application:application didRegisterUserNotificationSettings:notificationSettings];
+}
+
+#pragma mark - NativeNotifications
+
+- (void)setEnvironment:(NSString *)environment
+{
+  _environment = environment;
+  [[Rollbar currentConfiguration] setEnvironment:environment];
+}
+
+- (void)setUser:(NSString *)userId username:(NSString *)username userFullName:(NSString *)userFullName
+{
+  _userId = userId;
+  _username = username;
+  _userFullName = userFullName;
+  [[Rollbar currentConfiguration] setPersonId:_userId username:_userFullName email:_username];
+}
+
+- (void)clearUser {
+  _userId = nil;
+  _username = nil;
+  _userFullName = nil;
+  [[Rollbar currentConfiguration] setPersonId:_userId username:_userFullName email:_username];
+}
+
+- (void)testNativeCrash {
+  dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)),
+                 dispatch_get_main_queue(),
+                 ^{
+                   @throw NSInternalInconsistencyException;
+                 });
+}
+
+- (void)testLogWarning:(NSString *)message {
+  [RollbarReactNative warningWithMessage:message];
+}
+
+- (void)testLogError:(NSString *)message {
+  [RollbarReactNative errorWithMessage:message];
 }
 
 @end

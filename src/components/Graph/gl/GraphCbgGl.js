@@ -2,6 +2,7 @@ import ExpoTHREE, { THREE } from "expo-three";
 
 import GraphRenderLayerGl from "./GraphRenderLayerGl";
 import { MAX_BG_VALUE, convertHexColorStringToInt } from "../helpers";
+// import Logger from "../../../models/Logger";
 
 const { createTextureAsync } = ExpoTHREE;
 

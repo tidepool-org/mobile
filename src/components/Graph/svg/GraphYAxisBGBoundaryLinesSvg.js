@@ -4,6 +4,7 @@ import { withTheme } from "glamorous-native";
 import { Svg } from "expo";
 
 import { ThemePropType } from "../../../prop-types/theme";
+// import Logger from "../../../models/Logger";
 
 const { Path } = Svg;
 
@@ -11,7 +12,11 @@ class GraphYAxisBGBoundaryLinesSvg extends PureComponent {
   renderBGBoundaryLine(value) {
     const {
       theme,
-      graphFixedLayoutInfo: { yAxisGlucoseHeight, yAxisGlucosePixelsPerValue, width },
+      graphFixedLayoutInfo: {
+        yAxisGlucoseHeight,
+        yAxisGlucosePixelsPerValue,
+        width,
+      },
     } = this.props;
 
     const yOffset = Math.round(
@@ -37,7 +42,7 @@ class GraphYAxisBGBoundaryLinesSvg extends PureComponent {
   }
 
   render() {
-    // console.log("GraphYAxisBGBoundaryLinesSvg: render");
+    // console.log(`GraphYAxisBGBoundaryLinesSvg: render`);
 
     const {
       yAxisBGBoundaryValues,

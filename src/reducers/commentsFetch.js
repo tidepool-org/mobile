@@ -8,6 +8,7 @@ import {
 } from "../actions/commentsFetch";
 import { AUTH_SIGN_IN_RESET } from "../actions/auth";
 import { NOTES_FETCH_DID_START } from "../actions/notesFetch";
+import Logger from "../models/Logger";
 
 const initialState = {};
 
@@ -94,9 +95,9 @@ function commentsFetch(state = initialState, action) {
           },
         };
       } else {
-        // console.log(
-        //   `commentsFetch COMMENTS_FETCH_UPDATE_COMMENT reducer: Comment wasn't found, this is unexpected`
-        // );
+        Logger.logWarning(
+          `commentsFetch COMMENTS_FETCH_UPDATE_COMMENT reducer: Comment wasn't found, this is unexpected`
+        );
       }
       break;
     }
@@ -120,9 +121,9 @@ function commentsFetch(state = initialState, action) {
           },
         };
       } else {
-        // console.log(
-        //   `commentsFetch COMMENTS_FETCH_DELETE_COMMENT reducer: Comment wasn't found, this is unexpected`
-        // );
+        Logger.logWarning(
+          `commentsFetch COMMENTS_FETCH_DELETE_COMMENT reducer: Comment wasn't found, this is unexpected`
+        );
       }
       break;
     }
