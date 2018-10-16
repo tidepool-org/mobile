@@ -52,7 +52,7 @@ android {
   buildToolsVersion '26.0.1'
 
   defaultConfig {
-    applicationId 'io.tidepool.urchinRN'
+    applicationId 'io.tidepool.urchin'
     targetSdkVersion 25
     versionCode getVersionCode()
     versionName '3.0'

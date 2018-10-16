@@ -16,7 +16,7 @@
       "publishManifestPath": "ios/tidepool/Supporting/shell-app-manifest.json"
     },
     "android": {
-      "package": "io.tidepool.urchinRN",
+      "package": "io.tidepool.urchin",
       "icon": "./assets/images/Icon-App-512x512@2x.png",
       "permissions": [],
       "publishBundlePath": "android/app/src/main/assets/shell-app.bundle",
