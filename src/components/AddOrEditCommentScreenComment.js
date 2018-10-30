@@ -45,16 +45,6 @@ class AddOrEditCommentScreenComment extends PureComponent {
     SignificantTimeChangeNotification.unsubscribe(this.timeChanged);
   }
 
-  timeChanged = () => {
-    const { comment } = this.props;
-
-    this.setState({
-      formattedTimestamp: comment
-        ? formatDateForNoteList(comment.timestamp)
-        : "",
-    });
-  };
-
   onPressSave = () => {
     const { timestampAddComment, onPressSave } = this.props;
     const { messageText } = this.state;
@@ -86,6 +76,16 @@ class AddOrEditCommentScreenComment extends PureComponent {
     }
     return isDirty;
   }
+
+  timeChanged = () => {
+    const { comment } = this.props;
+
+    this.setState({
+      formattedTimestamp: comment
+        ? formatDateForNoteList(comment.timestamp)
+        : "",
+    });
+  };
 
   renderCancelButton() {
     const { theme } = this.props;

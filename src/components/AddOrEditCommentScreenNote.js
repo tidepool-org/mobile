@@ -135,7 +135,7 @@ class AddOrEditCommentScreenNote extends PureComponent {
   }
 
   renderDateSection() {
-    const { theme, note } = this.props;
+    const { theme } = this.props;
     const { formattedTimestamp } = this.state;
 
     return (
