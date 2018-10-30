@@ -56,7 +56,7 @@ class FirstTimeTips {
     }
   }
 
-  getNextTip({ notesFetch, currentUser }) {
+  getNextTip({ /* notesFetch, */ currentUser }) {
     let nextTip = null;
 
     if (
@@ -65,9 +65,9 @@ class FirstTimeTips {
       !this.settings[this.TIP_CONNECT_TO_HEALTH]
     ) {
       nextTip = this.TIP_CONNECT_TO_HEALTH;
-// Per spec review, remove the Add Note tip for now
-//  } else if (notesFetch.fetched && notesFetch.unfilteredNotes.length === 0) {
-//    nextTip = this.TIP_ADD_NOTE;
+      // Per spec review, remove the Add Note tip for now. See also: https://trello.com/c/MwECDRZm
+      //  } else if (notesFetch.fetched && notesFetch.unfilteredNotes.length === 0) {
+      //    nextTip = this.TIP_ADD_NOTE;
     } else if (!this.settings[this.TIP_GET_DESKTOP_UPLOADER]) {
       nextTip = this.TIP_GET_DESKTOP_UPLOADER;
     }

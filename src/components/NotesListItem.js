@@ -22,6 +22,7 @@ import Graph from "./Graph/Graph";
 import HashtagText from "./HashtagText";
 import AddCommentButton from "./AddCommentButton";
 import NotesListItemComment from "./NotesListItemComment";
+import SignificantTimeChangeNotification from "../models/SignificantTimeChangeNotification";
 import { formatDateForNoteList } from "../utils/formatDate";
 import { ThemePropType } from "../prop-types/theme";
 import { CommentPropType } from "../prop-types/comment";
@@ -50,6 +51,7 @@ class NotesListItem extends PureComponent {
     this.state = {
       expanded: props.initiallyExpanded,
       fadeAnimation: new Animated.Value(0),
+      formattedTimestamp: formatDateForNoteList(props.note.timestamp),
     };
   }
 
@@ -73,6 +75,8 @@ class NotesListItem extends PureComponent {
     if (graphDataFetchErrorMessage) {
       NotesListItem.showErrorMessageAlert();
     }
+
+    SignificantTimeChangeNotification.subscribe(this.timeChanged);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -115,6 +119,10 @@ class NotesListItem extends PureComponent {
     }
   }
 
+  componentWillUnmount() {
+    SignificantTimeChangeNotification.unsubscribe(this.timeChanged);
+  }
+
   onPressDeleteNote = () => {
     const { note, onDeleteNotePressed } = this.props;
     onDeleteNotePressed({ note });
@@ -141,6 +149,14 @@ class NotesListItem extends PureComponent {
     navigateEditComment({
       note,
       comment,
+    });
+  };
+
+  timeChanged = () => {
+    const { note } = this.props;
+
+    this.setState({
+      formattedTimestamp: formatDateForNoteList(note.timestamp),
     });
   };
 
@@ -295,7 +311,8 @@ class NotesListItem extends PureComponent {
   }
 
   renderDateSection() {
-    const { theme, note } = this.props;
+    const { theme } = this.props;
+    const { formattedTimestamp } = this.state;
 
     return (
       <glamorous.View
@@ -310,7 +327,7 @@ class NotesListItem extends PureComponent {
           marginLeft={12}
           marginRight={12}
         >
-          {formatDateForNoteList(note.timestamp)}
+          {formattedTimestamp}
         </glamorous.Text>
         {!this.shouldRenderUserLabelSection() && this.renderDeleteButton()}
         {!this.shouldRenderUserLabelSection() && this.renderEditButton()}
