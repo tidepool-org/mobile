@@ -4,6 +4,7 @@ import { ViewPropTypes } from "react-native";
 import glamorous, { withTheme } from "glamorous-native";
 
 import HashtagText from "./HashtagText";
+import SignificantTimeChangeNotification from "../models/SignificantTimeChangeNotification";
 import { ThemePropType } from "../prop-types/theme";
 import { formatDateForNoteList } from "../utils/formatDate";
 import { CommentPropType } from "../prop-types/comment";
@@ -16,6 +17,9 @@ class AddOrEditCommentScreenComment extends PureComponent {
     this.state = {
       isDirty: false,
       messageText,
+      formattedTimestamp: props.comment
+        ? formatDateForNoteList(props.comment.timestamp)
+        : "",
     };
 
     this.originalMessageText = messageText;
@@ -29,13 +33,27 @@ class AddOrEditCommentScreenComment extends PureComponent {
         this.textInput.focus();
       }, 450);
     }
+
+    SignificantTimeChangeNotification.subscribe(this.timeChanged);
   }
 
   componentWillUnmount() {
     if (this.focusTimer) {
       clearTimeout(this.focusTimer);
     }
+
+    SignificantTimeChangeNotification.unsubscribe(this.timeChanged);
   }
+
+  timeChanged = () => {
+    const { comment } = this.props;
+
+    this.setState({
+      formattedTimestamp: comment
+        ? formatDateForNoteList(comment.timestamp)
+        : "",
+    });
+  };
 
   onPressSave = () => {
     const { timestampAddComment, onPressSave } = this.props;
@@ -163,6 +181,7 @@ class AddOrEditCommentScreenComment extends PureComponent {
 
   renderNonEditableComment() {
     const { theme, style, comment } = this.props;
+    const { formattedTimestamp } = this.state;
 
     return (
       <glamorous.View style={style} backgroundColor="white">
@@ -185,7 +204,7 @@ class AddOrEditCommentScreenComment extends PureComponent {
             marginRight={10}
             marginTop={7}
           >
-            {formatDateForNoteList(comment.timestamp)}
+            {formattedTimestamp}
           </glamorous.Text>
         </glamorous.View>
         <glamorous.Text

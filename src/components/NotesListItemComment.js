@@ -4,12 +4,29 @@ import { ViewPropTypes } from "react-native";
 import glamorous, { withTheme } from "glamorous-native";
 
 import HashtagText from "./HashtagText";
+import SignificantTimeChangeNotification from "../models/SignificantTimeChangeNotification";
 import { ThemePropType } from "../prop-types/theme";
 import { formatDateForNoteList } from "../utils/formatDate";
 import { NotePropType } from "../prop-types/note";
 import { CommentPropType } from "../prop-types/comment";
 
 class NotesListItemComment extends PureComponent {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      formattedTimestamp: formatDateForNoteList(props.comment.timestamp),
+    };
+  }
+
+  componentDidMount() {
+    SignificantTimeChangeNotification.subscribe(this.timeChanged);
+  }
+
+  componentWillUnmount() {
+    SignificantTimeChangeNotification.unsubscribe(this.timeChanged);
+  }
+
   onPressDeleteComment = () => {
     const { note, comment, onPressDeleteComment } = this.props;
     onPressDeleteComment({ note, comment });
@@ -73,6 +90,7 @@ class NotesListItemComment extends PureComponent {
 
   render() {
     const { theme, style, comment } = this.props;
+    const { formattedTimestamp } = this.state;
 
     return (
       <glamorous.View style={style} backgroundColor="white">
@@ -95,7 +113,7 @@ class NotesListItemComment extends PureComponent {
             marginRight={10}
             marginTop={7}
           >
-            {formatDateForNoteList(comment.timestamp)}
+            {formattedTimestamp}
           </glamorous.Text>
           {this.renderDeleteButton()}
           {this.renderEditButton()}

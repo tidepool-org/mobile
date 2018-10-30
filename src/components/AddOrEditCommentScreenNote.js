@@ -6,6 +6,7 @@ import glamorous, { withTheme } from "glamorous-native";
 import Urls from "../constants/Urls";
 import Colors from "../constants/Colors";
 import HashtagText from "./HashtagText";
+import SignificantTimeChangeNotification from "../models/SignificantTimeChangeNotification";
 import {
   makeYAxisLabelValues,
   makeYAxisBGBoundaryValues,
@@ -24,6 +25,30 @@ class AddOrEditCommentScreenNote extends PureComponent {
       [{ text: "OK" }]
     );
   }
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      formattedTimestamp: formatDateForNoteList(props.note.timestamp),
+    };
+  }
+
+  componentDidMount() {
+    SignificantTimeChangeNotification.subscribe(this.timeChanged);
+  }
+
+  componentWillUnmount() {
+    SignificantTimeChangeNotification.unsubscribe(this.timeChanged);
+  }
+
+  timeChanged = () => {
+    const { note } = this.props;
+
+    this.setState({
+      formattedTimestamp: formatDateForNoteList(note.timestamp),
+    });
+  };
 
   shouldRenderUserLabelSection() {
     const { note } = this.props;
@@ -111,6 +136,7 @@ class AddOrEditCommentScreenNote extends PureComponent {
 
   renderDateSection() {
     const { theme, note } = this.props;
+    const { formattedTimestamp } = this.state;
 
     return (
       <glamorous.View flexDirection="row" justifyContent="flex-start">
@@ -121,7 +147,7 @@ class AddOrEditCommentScreenNote extends PureComponent {
           marginLeft={12}
           marginRight={12}
         >
-          {formatDateForNoteList(note.timestamp)}
+          {formattedTimestamp}
         </glamorous.Text>
       </glamorous.View>
     );
