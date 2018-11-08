@@ -17,15 +17,6 @@ import { ThemePropType } from "../prop-types/theme";
 import { ProfilePropType } from "../prop-types/profile";
 
 class AddOrEditCommentScreenNote extends PureComponent {
-  static showErrorMessageAlert() {
-    // TODO: strings - Use some i18n module for these and other UI strings
-    Alert.alert(
-      "Unknown Error Occurred",
-      "An unknown error occurred. We are working hard to resolve this issue.",
-      [{ text: "OK" }]
-    );
-  }
-
   constructor(props) {
     super(props);
 

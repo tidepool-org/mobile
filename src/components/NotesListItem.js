@@ -23,6 +23,8 @@ import HashtagText from "./HashtagText";
 import AddCommentButton from "./AddCommentButton";
 import NotesListItemComment from "./NotesListItemComment";
 import SignificantTimeChangeNotification from "../models/SignificantTimeChangeNotification";
+import ConnectionStatus from "../models/ConnectionStatus";
+import ErrorAlertManager from "../models/ErrorAlertManager";
 import { formatDateForNoteList } from "../utils/formatDate";
 import { ThemePropType } from "../prop-types/theme";
 import { CommentPropType } from "../prop-types/comment";
@@ -36,15 +38,6 @@ import { ProfilePropType } from "../prop-types/profile";
 // TODO: consider showing an activity indicator for the loading of graph and comments data, and then animate all of that (graph and comments) together when loaded
 
 class NotesListItem extends PureComponent {
-  static showErrorMessageAlert() {
-    // TODO: strings - Use some i18n module for these and other UI strings
-    Alert.alert(
-      "Unknown Error Occurred",
-      "An unknown error occurred. We are working hard to resolve this issue.",
-      [{ text: "OK" }]
-    );
-  }
-
   constructor(props) {
     super(props);
 
@@ -69,11 +62,11 @@ class NotesListItem extends PureComponent {
     }).start();
 
     if (commentsFetchErrorMessage) {
-      NotesListItem.showErrorMessageAlert();
+      ErrorAlertManager.show(commentsFetchErrorMessage);
     }
 
     if (graphDataFetchErrorMessage) {
-      NotesListItem.showErrorMessageAlert();
+      ErrorAlertManager.show(graphDataFetchErrorMessage);
     }
 
     SignificantTimeChangeNotification.subscribe(this.timeChanged);
@@ -92,7 +85,10 @@ class NotesListItem extends PureComponent {
       shouldShowCommentsFetchErrorMessage ||
       shouldShowGraphDataFetchErrorMessage
     ) {
-      NotesListItem.showErrorMessageAlert();
+      ErrorAlertManager.show(
+        nextProps.commentsFetchData.errorMessage ||
+          nextProps.graphDataFetchData.errorMessage
+      );
     }
     if (
       nextProps.commentsFetchData.comments.length > 0 &&
@@ -130,13 +126,21 @@ class NotesListItem extends PureComponent {
 
   onPressEditNote = () => {
     const { note, navigateEditNote } = this.props;
-    navigateEditNote({ note });
+    if (ConnectionStatus.isOffline()) {
+      ErrorAlertManager.showOfflineNetworkError();
+    } else {
+      navigateEditNote({ note });
+    }
   };
 
   onPressAddComment = () => {
     // TODO: If comments are still loading and user taps Add Comment, then the existing comments won't be shown on the Add Comment screen, even once commentsFetch has completed. We should probably fix that so that the while commentsFetch is in fetching state, and completes, while Add Comment screen is current, that it loads those comments? Should probably also have a comments loading indicator both in notes list and in Add Comment screen?
     const { note, navigateAddComment } = this.props;
-    navigateAddComment({ note });
+    if (ConnectionStatus.isOffline()) {
+      ErrorAlertManager.showOfflineNetworkError();
+    } else {
+      navigateAddComment({ note });
+    }
   };
 
   onPressDeleteComment = ({ note, comment }) => {
@@ -146,10 +150,14 @@ class NotesListItem extends PureComponent {
 
   onPressEditComment = ({ comment }) => {
     const { note, navigateEditComment } = this.props;
-    navigateEditComment({
-      note,
-      comment,
-    });
+    if (ConnectionStatus.isOffline()) {
+      ErrorAlertManager.showOfflineNetworkError();
+    } else {
+      navigateEditComment({
+        note,
+        comment,
+      });
+    }
   };
 
   timeChanged = () => {
