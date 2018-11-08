@@ -9,6 +9,7 @@ import PrimaryTheme from "../themes/PrimaryTheme";
 import Colors from "../constants/Colors";
 import AddOrEditCommentScreenNote from "../components/AddOrEditCommentScreenNote";
 import AddOrEditCommentScreenCommentsList from "../components/AddOrEditCommentScreenCommentsList";
+import ErrorAlertManager from "../models/ErrorAlertManager";
 import { NotePropType } from "../prop-types/note";
 import { CommentPropType } from "../prop-types/comment";
 import { ProfilePropType } from "../prop-types/profile";
@@ -48,15 +49,6 @@ class AddOrEditCommentScreen extends PureComponent {
       ),
     };
   };
-
-  static showErrorMessageAlert() {
-    // TODO: strings - Use some i18n module for these and other UI strings
-    Alert.alert(
-      "Unknown Error Occurred",
-      "An unknown error occurred. We are working hard to resolve this issue.",
-      [{ text: "OK" }]
-    );
-  }
 
   constructor(props) {
     super(props);
@@ -111,7 +103,9 @@ class AddOrEditCommentScreen extends PureComponent {
     }
 
     if (commentsFetchData.errorMessage || graphDataFetchData.errorMessage) {
-      AddOrEditCommentScreen.showErrorMessageAlert();
+      ErrorAlertManager.show(
+        commentsFetchData.errorMessage || graphDataFetchData.errorMessage
+      );
     }
 
     this.keyboardDidShowListener = Keyboard.addListener(
@@ -133,7 +127,10 @@ class AddOrEditCommentScreen extends PureComponent {
       nextProps.graphDataFetchData.errorMessage &&
       !graphDataFetchData.errorMessage;
     if (shouldShowCommentsFetchError || shouldShowGraphDataFetchError) {
-      AddOrEditCommentScreen.showErrorMessageAlert();
+      ErrorAlertManager.show(
+        nextProps.commentsFetchData.errorMessage ||
+          nextProps.graphDataFetchData.errorMessage
+      );
     }
   }
 

@@ -5,6 +5,8 @@ import { Image, Platform, TouchableOpacity } from "react-native";
 import FirstTimeTips from "../models/FirstTimeTips";
 import Tooltip from "./Tooltip";
 import SimpleTextTooltipContent from "./Tooltips/SimpleTextTooltipContent";
+import ConnectionStatus from "../models/ConnectionStatus";
+import ErrorAlertManager from "../models/ErrorAlertManager";
 
 class HomeScreenHeaderRight extends PureComponent {
   state = {
@@ -25,7 +27,11 @@ class HomeScreenHeaderRight extends PureComponent {
   onPress = () => {
     const { navigateAddNote } = this.props;
     this.hideTipIfNeeded();
-    navigateAddNote();
+    if (ConnectionStatus.isOffline()) {
+      ErrorAlertManager.showOfflineNetworkError();
+    } else {
+      navigateAddNote();
+    }
   };
 
   showTipIfNeeded(params) {

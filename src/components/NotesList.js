@@ -12,6 +12,7 @@ import glamorous, { withTheme } from "glamorous-native";
 import Colors from "../constants/Colors";
 import NotesListItem from "./NotesListItem";
 import SearchBar from "./SearchBar";
+import ErrorAlertManager from "../models/ErrorAlertManager";
 import { ProfilePropType } from "../prop-types/profile";
 import { CommentPropType } from "../prop-types/comment";
 import { UserPropType } from "../prop-types/user";
@@ -19,15 +20,6 @@ import { UserPropType } from "../prop-types/user";
 // TODO: use NotePropType for notes and add full schema for it
 
 class NotesList extends PureComponent {
-  static showErrorMessageAlert() {
-    // TODO: strings - Use some i18n module for these and other UI strings
-    Alert.alert(
-      "Unknown Error Occurred",
-      "An unknown error occurred. We are working hard to resolve this issue.",
-      [{ text: "OK" }]
-    );
-  }
-
   constructor(props) {
     super(props);
 
@@ -40,14 +32,14 @@ class NotesList extends PureComponent {
   componentDidMount() {
     const { errorMessage } = this.props;
     if (errorMessage) {
-      NotesList.showErrorMessageAlert();
+      ErrorAlertManager.show(errorMessage);
     }
   }
 
   componentWillReceiveProps(nextProps) {
     const { errorMessage, fetching } = this.props;
     if (nextProps.errorMessage && !errorMessage) {
-      NotesList.showErrorMessageAlert();
+      ErrorAlertManager.show(nextProps.errorMessage);
     }
 
     if (!nextProps.fetching && fetching) {

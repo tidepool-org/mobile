@@ -4,19 +4,11 @@ import PropTypes from "prop-types";
 import glamorous, { withTheme } from "glamorous-native";
 
 import ProfileListItem from "./ProfileListItem";
+import ErrorAlertManager from "../models/ErrorAlertManager";
 import { UserPropType } from "../prop-types/user";
 import { ProfileListItemPropType } from "../prop-types/profile";
 
 class ProfileList extends PureComponent {
-  static showErrorMessageAlert() {
-    // TODO: strings - Use some i18n module for these and other UI strings
-    Alert.alert(
-      "Unknown Error Occurred",
-      "An unknown error occurred. We are working hard to resolve this issue.",
-      [{ text: "OK" }]
-    );
-  }
-
   constructor(props) {
     super(props);
 
@@ -26,14 +18,14 @@ class ProfileList extends PureComponent {
   componentDidMount() {
     const { errorMessage } = this.props;
     if (errorMessage) {
-      ProfileList.showErrorMessageAlert();
+      ErrorAlertManager.show(errorMessage);
     }
   }
 
   componentWillReceiveProps(nextProps) {
     const { errorMessage, fetching } = this.props;
     if (nextProps.errorMessage && !errorMessage) {
-      ProfileList.showErrorMessageAlert();
+      ErrorAlertManager.show(nextProps.errorMessage);
     }
 
     if (!nextProps.fetching && fetching) {
