@@ -4,6 +4,7 @@ import { ViewPropTypes, Switch } from "react-native";
 import glamorous, { withTheme } from "glamorous-native";
 
 import Colors from "../constants/Colors";
+import Metrics from "../models/Metrics";
 import { ThemePropType } from "../prop-types/theme";
 
 class DrawerHealth extends PureComponent {
@@ -15,6 +16,11 @@ class DrawerHealth extends PureComponent {
   }
 
   onConnectToHealthValueChange = value => {
+    if (value) {
+      Metrics.track({ metric: "Connect to health on" });
+    } else {
+      Metrics.track({ metric: "Connect to health off" });
+    }
     this.setState({ connectToHealth: value });
   };
 

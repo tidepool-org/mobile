@@ -7,6 +7,7 @@ import Tooltip from "./Tooltip";
 import SimpleTextTooltipContent from "./Tooltips/SimpleTextTooltipContent";
 import ConnectionStatus from "../models/ConnectionStatus";
 import ErrorAlertManager from "../models/ErrorAlertManager";
+import Metrics from "../models/Metrics";
 
 class HomeScreenHeaderRight extends PureComponent {
   state = {
@@ -30,6 +31,7 @@ class HomeScreenHeaderRight extends PureComponent {
     if (ConnectionStatus.isOffline()) {
       ErrorAlertManager.showOfflineNetworkError();
     } else {
+      Metrics.track({ metric: "Clicked add a note (Home screen)" });
       navigateAddNote();
     }
   };

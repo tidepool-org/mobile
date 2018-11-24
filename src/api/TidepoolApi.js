@@ -1,15 +1,16 @@
 import axios from "axios";
 import uuidv4 from "uuid/v4";
 import parse from "date-fns/parse";
+import DeviceInfo from "react-native-device-info";
 
 import GraphData from "../models/GraphData";
-
-// TODO: api - default timeout for requests
 
 // TODO: api - update User-Agent in the header for all requests to indicate the app name and version, build info,
 // iOS version, etc, similar to Tidepool Mobile, e.g.:
 // "Nutshell/2.0.3 (org.tidepool.blipnotes; build:460; iOS 11.1.0) Alamofire/4.3.0")
 // "Nutshell/460 CFNetwork/889.9 Darwin/17.2.0"
+
+const timeout = 10000;
 
 class TidepoolApi {
   constructor({ baseUrl }) {
@@ -33,6 +34,8 @@ class TidepoolApi {
         errorMessage: error.message,
       }));
 
+    this.sessionToken = sessionToken;
+
     return { sessionToken, userId, errorMessage };
   }
 
@@ -48,6 +51,8 @@ class TidepoolApi {
       .catch(error => ({
         errorMessage: error.message,
       }));
+
+    this.sessionToken = sessionToken;
 
     return { sessionToken, userId, errorMessage };
   }
@@ -316,6 +321,18 @@ class TidepoolApi {
     return { graphData, errorMessage };
   }
 
+  async trackMetricAsync({ metric }) {
+    const { errorMessage } = await this.trackMetric({
+      metric,
+    })
+      .then(() => ({}))
+      .catch(error => ({
+        errorMessage: error.message,
+      }));
+
+    return { errorMessage };
+  }
+
   //
   // Lower-level promise-based methods
   //
@@ -327,7 +344,7 @@ class TidepoolApi {
     const headers = { "x-tidepool-session-token": previousSessionToken };
 
     return new Promise((resolve, reject) => {
-      axios({ method, url, baseURL, headers })
+      axios({ method, url, baseURL, headers, timeout })
         .then(response => {
           this.sessionToken =
             response.headers["x-tidepool-session-token"] || "";
@@ -371,7 +388,7 @@ class TidepoolApi {
     };
 
     return new Promise((resolve, reject) => {
-      axios({ method, url, baseURL, auth })
+      axios({ method, url, baseURL, auth, timeout })
         .then(response => {
           this.sessionToken =
             response.headers["x-tidepool-session-token"] || "";
@@ -407,7 +424,7 @@ class TidepoolApi {
     const headers = { "x-tidepool-session-token": this.sessionToken };
 
     return new Promise((resolve, reject) => {
-      axios({ method, url, baseURL, headers })
+      axios({ method, url, baseURL, headers, timeout })
         .then(response => {
           resolve({ userId, ...response.data });
         })
@@ -424,7 +441,7 @@ class TidepoolApi {
     const headers = { "x-tidepool-session-token": this.sessionToken };
 
     return new Promise((resolve, reject) => {
-      axios({ method, url, baseURL, headers })
+      axios({ method, url, baseURL, headers, timeout })
         .then(({ data: { bgTarget } }) => {
           if (bgTarget && bgTarget.low && bgTarget.high) {
             const settings = {
@@ -453,13 +470,13 @@ class TidepoolApi {
     const headers = { "x-tidepool-session-token": this.sessionToken };
 
     return new Promise((resolve, reject) => {
-      axios({ method, url, baseURL, headers })
+      axios({ method, url, baseURL, headers, timeout })
         .then(response => {
           const notes = response.data.messages;
           resolve({ notes });
         })
         .catch(error => {
-          if (error.response.status === 404) {
+          if (error.response && error.response.status === 404) {
             // console.log(
             //   `fetchNotes: No notes retrieved, status code: ${
             //     error.response.status
@@ -480,7 +497,7 @@ class TidepoolApi {
     const headers = { "x-tidepool-session-token": this.sessionToken };
 
     return new Promise((resolve, reject) => {
-      axios({ method, url, baseURL, headers })
+      axios({ method, url, baseURL, headers, timeout })
         .then(response => {
           const comments = response.data.messages;
           resolve({ comments });
@@ -498,7 +515,7 @@ class TidepoolApi {
     const headers = { "x-tidepool-session-token": this.sessionToken };
 
     return new Promise((resolve, reject) => {
-      axios({ method, url, baseURL, headers })
+      axios({ method, url, baseURL, headers, timeout })
         .then(response => {
           const userIds = Object.keys(response.data);
 
@@ -542,7 +559,7 @@ class TidepoolApi {
           messagetext: note.messageText,
         },
       };
-      axios({ method, url, baseURL, headers, data })
+      axios({ method, url, baseURL, headers, data, timeout })
         .then(response => {
           note.id = response.data.id;
           resolve({ note });
@@ -566,7 +583,7 @@ class TidepoolApi {
     };
 
     return new Promise((resolve, reject) => {
-      axios({ method, url, baseURL, headers, data })
+      axios({ method, url, baseURL, headers, data, timeout })
         .then(() => {
           resolve({});
         })
@@ -602,7 +619,7 @@ class TidepoolApi {
           messagetext: comment.messageText,
         },
       };
-      axios({ method, url, baseURL, headers, data })
+      axios({ method, url, baseURL, headers, data, timeout })
         .then(response => {
           comment.id = response.data.id;
           resolve({ comment });
@@ -626,7 +643,7 @@ class TidepoolApi {
     };
 
     return new Promise((resolve, reject) => {
-      axios({ method, url, baseURL, headers, data })
+      axios({ method, url, baseURL, headers, data, timeout })
         .then(() => {
           resolve({});
         })
@@ -643,7 +660,7 @@ class TidepoolApi {
     const headers = { "x-tidepool-session-token": this.sessionToken };
 
     return new Promise((resolve, reject) => {
-      axios({ method, url, baseURL, headers })
+      axios({ method, url, baseURL, headers, timeout })
         .then(() => {
           resolve({});
         })
@@ -673,7 +690,7 @@ class TidepoolApi {
     const headers = { "x-tidepool-session-token": this.sessionToken };
 
     return new Promise((resolve, reject) => {
-      axios({ method, url, params, baseURL, headers })
+      axios({ method, url, params, baseURL, headers, timeout })
         .then(response => {
           const noteTimeSeconds = noteDate.getTime() / 1000;
           const startDateSeconds = startDate.getTime() / 1000;
@@ -689,69 +706,43 @@ class TidepoolApi {
           resolve({ graphData });
         })
         .catch(error => {
+          // console.log({ error });
+
           reject(error);
         });
     });
   }
-  /*
-    func getReadOnlyUserData(_ startDate: Date? = nil, endDate: Date? = nil, objectTypes: String = "smbg,bolus,cbg,wizard,basal", completion: @escaping (Result<JSON>) -> (Void)) {
-        // Set our endpoint for the user data
-        // TODO: centralize define of read-only events!
-        // request format is like: https://api.tidepool.org/data/f934a287c4?endDate=2015-11-17T08%3A00%3A00%2E000Z&startDate=2015-11-16T12%3A00%3A00%2E000Z&type=smbg%2Cbolus%2Ccbg%2Cwizard%2Cbasal
-        let userId = TidepoolMobileDataController.sharedInstance.currentViewedUser!.userid
-        let endpoint = "data/" + userId
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
-        DDLogInfo("getReadOnlyUserData request start")
-        // TODO: If there is no data returned, I get a failure case with status code 200, and error FAILURE: Error Domain=NSCocoaErrorDomain Code=3840 "Invalid value around character 0." UserInfo={NSDebugDescription=Invalid value around character 0.} ] Maybe an Alamofire issue?
-        var parameters: Dictionary = ["type": objectTypes]
-        if let startDate = startDate {
-            // NOTE: start date is excluded (i.e., dates > start date)
-            parameters.updateValue(TidepoolMobileUtils.dateToJSON(startDate), forKey: "startDate")
-        }
-        if let endDate = endDate {
-            // NOTE: end date is included (i.e., dates <= end date)
-            parameters.updateValue(TidepoolMobileUtils.dateToJSON(endDate), forKey: "endDate")
-        }
-        sendRequest(.get, endpoint: endpoint, parameters: parameters as [String : AnyObject]?).responseJSON { response in
-            UIApplication.shared.isNetworkActivityIndicatorVisible = false
-            DDLogInfo("getReadOnlyUserData request complete")
-            if (response.result.isSuccess) {
-                let json = JSON(response.result.value!)
-                var validResult = true
-                if let status = json["status"].number {
-                    let statusCode = Int(status)
-                    DDLogInfo("getReadOnlyUserData includes status field: \(statusCode)")
-                    // TODO: determine if any status is indicative of failure here! Note that if call was successful, there will be no status field in the json result. The only verified error response is 403 which happens when we pass an invalid token.
-                    if statusCode == 401 || statusCode == 403 {
-                        validResult = false
-                        self.lastNetworkError = statusCode
-                        completion(Result.failure(NSError(domain: self.kTidepoolMobileErrorDomain,
-                            code: statusCode,
-                            userInfo: nil)))
-                    }
-                }
-                if validResult {
-                    completion(Result.success(json))
-                }
-            } else {
-                // Failure: typically, no data were found:
-                // Error Domain=NSCocoaErrorDomain Code=3840 "Invalid value around character 0." UserInfo={NSDebugDescription=Invalid value around character 0.}
-                if let theResponse = response.response {
-                    let statusCode = theResponse.statusCode
-                    if statusCode != 200 {
-                        DDLogError("Failure status code: \(statusCode) for getReadOnlyUserData")
-                        APIConnector.connector().trackMetric("Tidepool Data Fetch Failure - Code " + String(statusCode))
-                    }
-                    // Otherwise, just indicates no data were found...
-                } else {
-                    DDLogError("Invalid response for getReadOnlyUserData metric")
-                }
-                completion(Result.failure(response.result.error!))
-            }
-        }
-    }
 
-  */
+  trackMetric({ metric }) {
+    const method = "get";
+    const url = `/metrics/thisuser/tidepool-${metric}`;
+    const baseURL = this.baseUrl;
+    const headers = { "x-tidepool-session-token": this.sessionToken };
+    let sourceVersion = "3.0 (Expo)";
+    try {
+      sourceVersion = `${DeviceInfo.getVersion()} (${DeviceInfo.getBuildNumber()})`;
+    } catch (error) {
+      // console.log(
+      //   `Failed to get DeviceInfo version, defaulting to ${version}, error: ${error}`
+      // );
+    }
+    const params = {
+      source: "tidepool",
+      sourceVersion,
+    };
+
+    return new Promise((resolve, reject) => {
+      axios({ method, url, baseURL, headers, params, timeout })
+        .then(() => {
+          // console.log(`trackMetric succeeded with metric: ${metric}`);
+          resolve();
+        })
+        .catch(error => {
+          // console.log(`trackMetric error: ${error}, with metric: ${metric}`);
+          reject(error);
+        });
+    });
+  }
 }
 
 export default TidepoolApi;

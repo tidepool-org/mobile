@@ -2,7 +2,6 @@ import React, { PureComponent } from "react";
 
 import PropTypes from "prop-types";
 import {
-  Alert,
   Animated,
   LayoutAnimation,
   Linking,
@@ -25,6 +24,7 @@ import NotesListItemComment from "./NotesListItemComment";
 import SignificantTimeChangeNotification from "../models/SignificantTimeChangeNotification";
 import ConnectionStatus from "../models/ConnectionStatus";
 import ErrorAlertManager from "../models/ErrorAlertManager";
+import Metrics from "../models/Metrics";
 import { formatDateForNoteList } from "../utils/formatDate";
 import { ThemePropType } from "../prop-types/theme";
 import { CommentPropType } from "../prop-types/comment";
@@ -119,6 +119,16 @@ class NotesListItem extends PureComponent {
     SignificantTimeChangeNotification.unsubscribe(this.timeChanged);
   }
 
+  onPressToggleNote = () => {
+    const { expanded } = this.state;
+    if (expanded) {
+      Metrics.track({ metric: "Closed data viz" });
+    } else {
+      Metrics.track({ metric: "Opened data viz" });
+    }
+    this.toggleNote();
+  };
+
   onPressDeleteNote = () => {
     const { note, onDeleteNotePressed } = this.props;
     onDeleteNotePressed({ note });
@@ -129,6 +139,7 @@ class NotesListItem extends PureComponent {
     if (ConnectionStatus.isOffline()) {
       ErrorAlertManager.showOfflineNetworkError();
     } else {
+      Metrics.track({ metric: "Clicked edit a note (Home screen)" });
       navigateEditNote({ note });
     }
   };
@@ -139,6 +150,7 @@ class NotesListItem extends PureComponent {
     if (ConnectionStatus.isOffline()) {
       ErrorAlertManager.showOfflineNetworkError();
     } else {
+      Metrics.track({ metric: "Clicked add comment" });
       navigateAddComment({ note });
     }
   };
@@ -153,6 +165,7 @@ class NotesListItem extends PureComponent {
     if (ConnectionStatus.isOffline()) {
       ErrorAlertManager.showOfflineNetworkError();
     } else {
+      Metrics.track({ metric: "Clicked edit comment" });
       navigateEditComment({
         note,
         comment,
@@ -477,7 +490,10 @@ class NotesListItem extends PureComponent {
       <Animated.View
         style={[style, { backgroundColor: "white", opacity: fadeAnimation }]}
       >
-        <glamorous.TouchableOpacity activeOpacity={1} onPress={this.toggleNote}>
+        <glamorous.TouchableOpacity
+          activeOpacity={1}
+          onPress={this.onPressToggleNote}
+        >
           {this.renderUserLabelSection()}
           {this.renderDateSection()}
           {this.renderNote()}

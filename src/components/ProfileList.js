@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { Alert, RefreshControl, StyleSheet } from "react-native";
+import { RefreshControl, StyleSheet } from "react-native";
 import PropTypes from "prop-types";
 import glamorous, { withTheme } from "glamorous-native";
 

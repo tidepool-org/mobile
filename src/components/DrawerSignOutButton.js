@@ -2,10 +2,12 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 
 import DrawerButton from "./DrawerButton";
+import Metrics from "../models/Metrics";
 
 class DrawerSignOutButton extends PureComponent {
   onPress = () => {
     const { authSignOutAsync } = this.props;
+    Metrics.track({ metric: "Clicked Log Out (Hamburger)" });
     authSignOutAsync();
   };
 

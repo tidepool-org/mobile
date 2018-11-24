@@ -2,12 +2,14 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import glamorous, { withTheme } from "glamorous-native";
 
+import Metrics from "../../models/Metrics";
 import { ThemePropType } from "../../prop-types/theme";
 // import Logger from "../../models/Logger";
 
 class GraphNoData extends PureComponent {
   onPressHowToUpload = () => {
     const { navigateHowToUpload } = this.props;
+    Metrics.track({ metric: "Clicked how to upload button" });
     navigateHowToUpload();
   };
 

@@ -1,11 +1,13 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 
+import Metrics from "../models/Metrics";
 import DrawerButton from "./DrawerButton";
 
 class DrawerSupportButton extends PureComponent {
   onPress = () => {
     const { navigateSupport } = this.props;
+    Metrics.track({ metric: "Clicked Tidepool Support (Hamburger)" });
     navigateSupport();
   };
 

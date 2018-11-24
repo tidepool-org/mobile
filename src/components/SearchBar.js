@@ -6,11 +6,14 @@ import glamorous, { withTheme } from "glamorous-native";
 // TODO: When touching anywhere outside the SearchBar, should dismiss keyboard
 // TODO: Add the auto show/hide of SearchBar, similar to Tidepool Mobile app
 
+import Metrics from "../models/Metrics";
 import { ThemePropType } from "../prop-types/theme";
 
 class SearchBar extends PureComponent {
   constructor(props) {
     super(props);
+
+    this.okToSendOnChangeTextMetric = true;
 
     const searchText = props.searchText || "";
     this.state = {
@@ -20,6 +23,12 @@ class SearchBar extends PureComponent {
 
   onChangeText = searchText => {
     const { onChangeText } = this.props;
+    if (searchText.length && this.okToSendOnChangeTextMetric) {
+      Metrics.track({ metric: "Typed into Search (Home Screen)" });
+      this.okToSendOnChangeTextMetric = false;
+    } else if (searchText.length === 0) {
+      this.okToSendOnChangeTextMetric = true;
+    }
     this.setState({
       searchText,
     });

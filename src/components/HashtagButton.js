@@ -4,10 +4,12 @@ import glamorous, { withTheme } from "glamorous-native";
 
 import { ThemePropType } from "../prop-types/theme";
 import Colors from "../constants/Colors";
+import Metrics from "../models/Metrics";
 
 class HashtagButton extends PureComponent {
   onPressHashtagButton = () => {
     const { onPress, hashtag } = this.props;
+    Metrics.track({ metric: "Clicked Hashtag" });
     onPress(hashtag);
   };
 

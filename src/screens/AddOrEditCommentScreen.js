@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { Alert, Keyboard, StatusBar } from "react-native";
+import { Keyboard, StatusBar } from "react-native";
 import glamorous, { ThemeProvider } from "glamorous-native";
 import addHours from "date-fns/add_hours";
 import subHours from "date-fns/sub_hours";
@@ -10,6 +10,7 @@ import Colors from "../constants/Colors";
 import AddOrEditCommentScreenNote from "../components/AddOrEditCommentScreenNote";
 import AddOrEditCommentScreenCommentsList from "../components/AddOrEditCommentScreenCommentsList";
 import ErrorAlertManager from "../models/ErrorAlertManager";
+import Metrics from "../models/Metrics";
 import { NotePropType } from "../prop-types/note";
 import { CommentPropType } from "../prop-types/comment";
 import { ProfilePropType } from "../prop-types/profile";
@@ -213,6 +214,7 @@ class AddOrEditCommentScreen extends PureComponent {
         note,
         comment: { ...comment, messageText },
       });
+      Metrics.track({ metric: "Clicked save edited comment" });
     } else {
       commentAddAsync({
         currentUser,
@@ -221,6 +223,7 @@ class AddOrEditCommentScreen extends PureComponent {
         messageText,
         timestamp: timestampAddComment,
       });
+      Metrics.track({ metric: "Clicked post comment" });
     }
     this.goBack();
   };
