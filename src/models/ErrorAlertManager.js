@@ -18,8 +18,8 @@ class ErrorAlertManager {
     if (Math.abs(differenceInMilliseconds(this.date, date)) > 500) {
       if (errorMessage === "Network Error") {
         Alert.alert(
-          errorMessage,
-          `This application requires a network to access the Tidepool service!`,
+          "No Network Connection",
+          `It seems you’re offline, so your notes can’t be loaded or saved.`,
           [{ text: "OK" }]
         );
       } else {
