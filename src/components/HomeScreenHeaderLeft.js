@@ -5,6 +5,7 @@ import { Image, TouchableOpacity } from "react-native";
 import FirstTimeTips from "../models/FirstTimeTips";
 import Tooltip from "./Tooltip";
 import ConnectHealthTooltipContent from "./Tooltips/ConnectHealthTooltipContent";
+import Metrics from "../models/Metrics";
 
 class HomeScreenHeaderLeft extends PureComponent {
   state = {
@@ -25,6 +26,8 @@ class HomeScreenHeaderLeft extends PureComponent {
   onPress = () => {
     const { navigateDrawerOpen } = this.props;
     navigateDrawerOpen();
+    Metrics.track({ metric: "Clicked Hamburger (Home Screen)" });
+    // TODO: metrics - we also need "Viewed Hamburger Menu (Hamburger)" (for when menu is opened, even via gesture)
     this.hideTipIfNeeded();
   };
 

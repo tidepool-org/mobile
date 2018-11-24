@@ -4,6 +4,7 @@ import { PanResponder } from "react-native";
 import glamorous, { withTheme } from "glamorous-native";
 
 import { ThemePropType } from "../../prop-types/theme";
+import Metrics from "../../models/Metrics";
 
 class GraphZoomable extends PureComponent {
   constructor(props) {
@@ -85,6 +86,7 @@ class GraphZoomable extends PureComponent {
       this.commitZoom();
       onZoomEnd(this.scale);
       this.isZooming = false;
+      Metrics.track({ metric: "Data viz zoom" });
     }
   }
 

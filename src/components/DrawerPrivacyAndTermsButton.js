@@ -1,11 +1,13 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 
+import Metrics from "../models/Metrics";
 import DrawerButton from "./DrawerButton";
 
 class DrawerPrivacyAndTermsButton extends PureComponent {
   onPress = () => {
     const { navigatePrivacyAndTerms } = this.props;
+    Metrics.track({ metric: "Clicked Privacy and Terms (Hamburger)" });
     navigatePrivacyAndTerms();
   };
 

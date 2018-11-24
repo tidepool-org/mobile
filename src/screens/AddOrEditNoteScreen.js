@@ -30,6 +30,7 @@ import ModalScreenHeaderTitle from "../components/ModalScreenHeaderTitle";
 import ModalScreenHeaderRight from "../components/ModalScreenHeaderRight";
 import ModalScreenHeaderLeft from "../components/ModalScreenHeaderLeft";
 import HashtagText from "../components/HashtagText";
+import Metrics from "../models/Metrics";
 import { formatDateAndTimeForAddOrEditNote } from "../utils/formatDate";
 import { ProfilePropType } from "../prop-types/profile";
 import { UserPropType } from "../prop-types/user";
@@ -58,6 +59,7 @@ class AddOrEditNoteScreen extends PureComponent {
     super(props);
 
     this.theme = PrimaryTheme;
+    this.okToSendOnChangeTextMetric = true;
 
     const { note, timestampAddNote } = props;
     const timestamp = note ? note.timestamp : timestampAddNote;
@@ -165,6 +167,11 @@ class AddOrEditNoteScreen extends PureComponent {
   };
 
   onChangeText = messageText => {
+    if (this.okToSendOnChangeTextMetric) {
+      this.okToSendOnChangeTextMetric = false;
+      Metrics.track({ metric: "Clicked On Message Box" });
+    }
+
     this.setState(prevState => ({
       messageText,
       isDirty: this.getDirtyState({ ...prevState, messageText }),
@@ -180,6 +187,8 @@ class AddOrEditNoteScreen extends PureComponent {
 
   onCloseAction = () => {
     const { isDirty } = this.state;
+
+    Metrics.track({ metric: "Close Add or Edit Note" });
 
     if (isDirty) {
       if (this.isAddNoteMode()) {
@@ -235,14 +244,16 @@ class AddOrEditNoteScreen extends PureComponent {
     return isDirty;
   }
 
-  setIsEditingTimestamp = isEditingTimestamp => {
+  setIsEditingTimestamp = isEditingTimestampParam => {
     LayoutAnimation.configureNext({
       ...LayoutAnimation.Presets.easeInEaseOut,
       duration: 175,
       useNativeDriver: true,
     });
 
-    if (isEditingTimestamp) {
+    const { isEditingTimestamp } = this.state;
+    if (isEditingTimestampParam && !isEditingTimestamp) {
+      Metrics.track({ metric: "Clicked Change Date" });
       this.textInput.blur();
       if (this.dummyTextInputIOS) {
         this.dummyTextInputIOS.focus();
@@ -252,7 +263,7 @@ class AddOrEditNoteScreen extends PureComponent {
     }
 
     this.setState({
-      isEditingTimestamp,
+      isEditingTimestampParam,
     });
   };
 
@@ -306,6 +317,7 @@ class AddOrEditNoteScreen extends PureComponent {
         note: editedNote,
         originalNote: note,
       });
+      Metrics.track({ metric: "Clicked Save Note" });
     } else {
       noteAddAsync({
         currentUser,
@@ -313,6 +325,7 @@ class AddOrEditNoteScreen extends PureComponent {
         messageText: messageText.trim(),
         timestamp,
       });
+      Metrics.track({ metric: "Clicked Post Note" });
     }
     navigateGoBack();
     this.textInput.blur();

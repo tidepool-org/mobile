@@ -1,7 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import {
-  Alert,
   Keyboard,
   LayoutAnimation,
   Platform,
@@ -13,6 +12,7 @@ import Colors from "../constants/Colors";
 import NotesListItem from "./NotesListItem";
 import SearchBar from "./SearchBar";
 import ErrorAlertManager from "../models/ErrorAlertManager";
+import Metrics from "../models/Metrics";
 import { ProfilePropType } from "../prop-types/profile";
 import { CommentPropType } from "../prop-types/comment";
 import { UserPropType } from "../prop-types/user";
@@ -147,7 +147,7 @@ class NotesList extends PureComponent {
     const { notesFetchAsync, currentProfile } = this.props;
 
     this.setState({ refreshing: true });
-
+    Metrics.track({ metric: "Swiped down to refresh" });
     notesFetchAsync({ profile: currentProfile });
   };
 

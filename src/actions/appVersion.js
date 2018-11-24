@@ -8,7 +8,7 @@ const appVersionLoad = () => {
     version = `${DeviceInfo.getVersion()} (${DeviceInfo.getBuildNumber()})`;
   } catch (error) {
     // console.log(
-    //   `Failed to load get DeviceInfo version, defaulting to ${version}, error: ${error}`
+    //   `Failed to get DeviceInfo version, defaulting to ${version}, error: ${error}`
     // );
   }
 

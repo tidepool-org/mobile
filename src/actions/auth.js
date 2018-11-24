@@ -3,6 +3,7 @@ import { currentProfileRestoreAsync } from "./currentProfile";
 import { navigateHome, navigateSignIn } from "./navigation";
 import api from "../api";
 import Logger from "../models/Logger";
+import Metrics from "../models/Metrics";
 
 const AUTH_SIGN_IN_RESET = "AUTH_SIGN_IN_RESET";
 const AUTH_SIGN_IN_DID_START = "AUTH_SIGN_IN_DID_START";
@@ -56,6 +57,8 @@ const authSignOutAsync = () => async dispatch => {
     // );
   }
 
+  Metrics.track({ metric: "Logged Out", shouldFlushBuffer: true });
+
   dispatch(authSignInReset());
   dispatch(navigateSignIn());
 };
@@ -107,6 +110,7 @@ const authSignInAsync = ({ username, password }) => async dispatch => {
       try {
         AsyncStorage.setItem(AUTH_USER_KEY, JSON.stringify(authUser));
         dispatch(authSignInDidSucceed({ authUser }));
+        Metrics.track({ metric: "Logged In" });
         await dispatch(currentProfileRestoreAsync({ authUser }));
         dispatch(navigateHome());
       } catch (error) {

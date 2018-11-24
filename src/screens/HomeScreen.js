@@ -18,6 +18,7 @@ import ErrorAlertManager from "../models/ErrorAlertManager";
 import { ProfilePropType } from "../prop-types/profile";
 import { CommentPropType } from "../prop-types/comment";
 import { UserPropType } from "../prop-types/user";
+import Metrics from "../models/Metrics";
 
 class HomeScreen extends PureComponent {
   constructor(props) {
@@ -31,7 +32,7 @@ class HomeScreen extends PureComponent {
 
   componentDidMount() {
     const { currentProfile, notesFetchAsync } = this.props;
-
+    Metrics.track({ metric: "Viewed Home Screen (Home Screen)" });
     notesFetchAsync({
       profile: currentProfile,
     });
@@ -98,11 +99,13 @@ class HomeScreen extends PureComponent {
   };
 
   onPressTooltipEmailLink = () => {
+    Metrics.track({ metric: "Clicked email a link" });
     this.composeEmailWithDesktopUploaderLink();
     this.hideTipIfNeeded();
   };
 
   onPressTooltipOk = () => {
+    Metrics.track({ metric: "Clicked first time need uploader" });
     this.hideTipIfNeeded();
   };
 

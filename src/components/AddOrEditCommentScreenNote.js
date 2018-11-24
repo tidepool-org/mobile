@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { Alert, Linking } from "react-native";
+import { Linking } from "react-native";
 import PropTypes from "prop-types";
 import glamorous, { withTheme } from "glamorous-native";
 
