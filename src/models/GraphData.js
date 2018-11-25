@@ -1,5 +1,7 @@
 import parse from "date-fns/parse";
 
+import { MMOL_PER_L_TO_MG_PER_DL } from "../components/Graph/helpers";
+
 // TODO: Currently GraphData is responsible for too much. It processes response data and holds the
 // processed / partitioned data. The discrete graph data types (cbg, smbg, basal, etc) are kind of
 // buried as anonymous objects instead of classes. Should refactor to have those be discrete
@@ -108,8 +110,7 @@ export default class GraphData {
 
   transformCbgResponseDataItem(item) {
     const time = parse(item.time).getTime() / 1000;
-    const glucoseConversionToMgDl = 18.0;
-    const value = Math.round(item.value * glucoseConversionToMgDl);
+    const value = Math.round(item.value * MMOL_PER_L_TO_MG_PER_DL);
     const isLow = value < this.lowBGBoundary;
     const isHigh = value > this.highBGBoundary;
 
@@ -123,8 +124,7 @@ export default class GraphData {
 
   transformSmbgResponseDataItem(item) {
     const time = parse(item.time).getTime() / 1000;
-    const glucoseConversionToMgDl = 18.0;
-    const value = Math.round(item.value * glucoseConversionToMgDl);
+    const value = Math.round(item.value * MMOL_PER_L_TO_MG_PER_DL);
     const isLow = value < this.lowBGBoundary;
     const isHigh = value > this.highBGBoundary;
 

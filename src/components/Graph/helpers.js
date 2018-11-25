@@ -6,6 +6,9 @@ const HIGH_BG_LABEL_VALUE = 300;
 const DEFAULT_LOW_BG_BOUNDARY_VALUE = 70;
 const DEFAULT_HIGH_BG_BOUNDARY_VALUE = 180;
 const MAX_BG_VALUE = 340;
+const MMOL_PER_L_TO_MG_PER_DL = 18.01559;
+const UNITS_MMOL_PER_L = "mmol/L";
+const UNITS_MG_PER_DL = "mg/dl";
 
 const GRAPH_RENDERER_SVG = "SVG";
 const GRAPH_RENDERER_THREE_JS = "Three.js (OpenGL)";
@@ -112,6 +115,19 @@ function convertHexColorStringToInt(colorString) {
   return parseInt(colorString.replace("#", "0x"), 16);
 }
 
+function formatBloodGlucoseValueText({ value, units }) {
+  const unitsAreMmolPerL = units === UNITS_MMOL_PER_L;
+  const unitsAreMgPerDl = !unitsAreMmolPerL;
+  const convertedValue = unitsAreMmolPerL
+    ? value / MMOL_PER_L_TO_MG_PER_DL
+    : value;
+  let text = convertedValue.toFixed(1).toString();
+  if (unitsAreMgPerDl && text.endsWith("0")) {
+    text = convertedValue.toFixed(0);
+  }
+  return text;
+}
+
 export {
   calculateRelativeCenterTimeSeconds,
   calculateScrollXAndRelativeCenterTimeSeconds,
@@ -119,6 +135,10 @@ export {
   convertHexColorStringToInt,
   makeYAxisLabelValues,
   makeYAxisBGBoundaryValues,
+  formatBloodGlucoseValueText,
+  MMOL_PER_L_TO_MG_PER_DL,
+  UNITS_MMOL_PER_L,
+  UNITS_MG_PER_DL,
   DEFAULT_LOW_BG_BOUNDARY_VALUE,
   DEFAULT_HIGH_BG_BOUNDARY_VALUE,
   MAX_BG_VALUE,

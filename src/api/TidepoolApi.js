@@ -3,6 +3,10 @@ import uuidv4 from "uuid/v4";
 import parse from "date-fns/parse";
 import DeviceInfo from "react-native-device-info";
 
+import {
+  MMOL_PER_L_TO_MG_PER_DL,
+  UNITS_MMOL_PER_L,
+} from "../components/Graph/helpers";
 import GraphData from "../models/GraphData";
 
 // TODO: api - update User-Agent in the header for all requests to indicate the app name and version, build info,
@@ -442,11 +446,18 @@ class TidepoolApi {
 
     return new Promise((resolve, reject) => {
       axios({ method, url, baseURL, headers, timeout })
-        .then(({ data: { bgTarget } }) => {
+        .then(({ data: { bgTarget, units } }) => {
           if (bgTarget && bgTarget.low && bgTarget.high) {
+            const shouldConvertToMgPerDl =
+              units && units.bg === UNITS_MMOL_PER_L;
             const settings = {
-              lowBGBoundary: bgTarget.low,
-              highBGBoundary: bgTarget.high,
+              lowBGBoundary: shouldConvertToMgPerDl
+                ? Math.round(bgTarget.low * MMOL_PER_L_TO_MG_PER_DL)
+                : bgTarget.low,
+              highBGBoundary: shouldConvertToMgPerDl
+                ? Math.round(bgTarget.high * MMOL_PER_L_TO_MG_PER_DL)
+                : bgTarget.high,
+              units: units ? units.bg : undefined,
             };
             resolve({ settings });
           } else {

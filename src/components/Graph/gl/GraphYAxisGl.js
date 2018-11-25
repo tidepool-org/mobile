@@ -2,7 +2,11 @@ import { THREE } from "expo-three";
 
 import GraphRenderLayerGl from "./GraphRenderLayerGl";
 import GraphTextMeshFactory from "./GraphTextMeshFactory";
-import { convertHexColorStringToInt } from "../helpers";
+import {
+  convertHexColorStringToInt,
+  formatBloodGlucoseValueText,
+} from "../helpers";
+
 // import Logger from "../../../models/Logger";
 
 class GraphYAxisGl extends GraphRenderLayerGl {
@@ -19,7 +23,7 @@ class GraphYAxisGl extends GraphRenderLayerGl {
       dashSize: 5 * this.pixelRatio,
       gapSize: 4 * this.pixelRatio,
     });
-    const leftMargin = 30;
+    const leftMargin = 35;
     const rightMargin = 4;
     const xStart = leftMargin * this.pixelRatio;
     const xEnd = width * this.pixelRatio - rightMargin * this.pixelRatio;
@@ -33,16 +37,15 @@ class GraphYAxisGl extends GraphRenderLayerGl {
     this.yAxisLabelTextMeshes = new Map();
   }
 
-  addLabelForValue({ scene, graphFixedLayoutInfo, value }) {
+  addLabelForValue({ scene, graphFixedLayoutInfo, value, text }) {
     const {
       yAxisBottomOfGlucose,
       yAxisGlucosePixelsPerValue,
     } = graphFixedLayoutInfo;
 
     // FIXME: We should really measure the text here for the width and height
-    const width = 25;
+    const width = 30;
     const height = 9;
-    const text = value.toString();
     const { textMesh } = GraphTextMeshFactory.makeTextMesh({
       text,
       fontName: "OpenSans-Regular-56px",
@@ -58,7 +61,7 @@ class GraphYAxisGl extends GraphRenderLayerGl {
       y: y + height / 2,
       z: this.zStart,
     });
-    this.yAxisLabelTextMeshes[value] = textMesh;
+    this.yAxisLabelTextMeshes[text] = textMesh;
     scene.add(textMesh);
   }
 
@@ -86,6 +89,7 @@ class GraphYAxisGl extends GraphRenderLayerGl {
   }) {
     // console.log(`GraphYAxisGl renderSelf`);
     const { graphFixedLayoutInfo } = graphScalableLayoutInfo;
+    const { units } = graphFixedLayoutInfo;
 
     // Hide existing lines
     /* eslint-disable no-param-reassign */
@@ -117,15 +121,17 @@ class GraphYAxisGl extends GraphRenderLayerGl {
     /* eslint-enable no-param-reassign */
     // Add new labels and/or show existing labels
     yAxisLabelValues.forEach(value => {
-      if (this.yAxisLabelTextMeshes[value]) {
+      const text = formatBloodGlucoseValueText({ value, units });
+      if (this.yAxisLabelTextMeshes[text]) {
         // Show existing label for this value
-        this.yAxisLabelTextMeshes[value].visible = true;
+        this.yAxisLabelTextMeshes[text].visible = true;
       } else {
         // Add new label for this value
         this.addLabelForValue({
           scene,
           graphFixedLayoutInfo,
           value,
+          text,
         });
       }
     });

@@ -18,8 +18,8 @@ class Graph extends PureComponent {
   constructor(props) {
     super(props);
 
-    const { scale, eventTime } = props;
-    const graphFixedLayoutInfo = new GraphFixedLayoutInfo({});
+    const { scale, eventTime, units } = props;
+    const graphFixedLayoutInfo = new GraphFixedLayoutInfo({ units });
     const graphScalableLayoutInfo = new GraphScalableLayoutInfo({
       graphFixedLayoutInfo,
       scale,
@@ -34,10 +34,11 @@ class Graph extends PureComponent {
 
   onContainerViewLayout = event => {
     const { scale } = this;
-    const { eventTime } = this.props;
+    const { eventTime, units } = this.props;
     const { layout } = event.nativeEvent;
     const graphFixedLayoutInfo = new GraphFixedLayoutInfo({
       width: layout.width,
+      units,
     });
     const graphScalableLayoutInfo = new GraphScalableLayoutInfo({
       graphFixedLayoutInfo,
@@ -226,6 +227,7 @@ Graph.propTypes = {
   yAxisLabelValues: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
   yAxisBGBoundaryValues: PropTypes.arrayOf(PropTypes.number.isRequired)
     .isRequired,
+  units: PropTypes.string,
   cbgData: PropTypes.arrayOf(PropTypes.object.isRequired),
   smbgData: PropTypes.arrayOf(PropTypes.object.isRequired),
   basalData: PropTypes.arrayOf(PropTypes.object.isRequired),
@@ -245,6 +247,7 @@ Graph.propTypes = {
 Graph.defaultProps = {
   scale: 2.5,
   eventTime: new Date(),
+  units: undefined,
   cbgData: [],
   smbgData: [],
   basalData: [],

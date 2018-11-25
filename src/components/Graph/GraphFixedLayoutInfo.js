@@ -1,6 +1,7 @@
-// TODO: graph - parameterize this more like Tidepool Mobile?
+import { UNITS_MG_PER_DL } from "./helpers";
+
 class GraphFixedLayoutInfo {
-  constructor({ width = 0 }) {
+  constructor({ width = 0, units }) {
     // console.log('GraphFixedLayoutInfo: ctor')
 
     this.width = width;
@@ -8,6 +9,7 @@ class GraphFixedLayoutInfo {
     this.headerHeight = 24;
     this.footerHeight = 8;
     this.graphLayerHeight = this.height - this.headerHeight;
+    this.units = units || UNITS_MG_PER_DL;
 
     // The largest section is for the glucose readings just below the header
     const glucoseRange = 340;
