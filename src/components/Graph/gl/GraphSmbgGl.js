@@ -3,7 +3,11 @@ import ExpoTHREE, { THREE } from "expo-three";
 import GraphRenderLayerGl from "./GraphRenderLayerGl";
 import GraphShapeGeometryFactory from "./GraphShapeGeometryFactory";
 import GraphTextMeshFactory from "./GraphTextMeshFactory";
-import { MAX_BG_VALUE, convertHexColorStringToInt } from "../helpers";
+import {
+  MAX_BG_VALUE,
+  convertHexColorStringToInt,
+  formatBloodGlucoseValueText,
+} from "../helpers";
 // import Logger from "../../../models/Logger";
 
 const { createTextureAsync } = ExpoTHREE;
@@ -172,7 +176,9 @@ class GraphSmbgGl extends GraphRenderLayerGl {
       pixelsPerSecond,
       graphStartTimeSeconds,
       graphEndTimeSeconds,
+      graphFixedLayoutInfo: { units },
     } = graphScalableLayoutInfo;
+
     for (let i = 0; i < smbgData.length; i += 1) {
       const { time, value, isLow, isHigh } = smbgData[i];
       if (time >= graphStartTimeSeconds && time <= graphEndTimeSeconds) {
@@ -217,7 +223,7 @@ class GraphSmbgGl extends GraphRenderLayerGl {
         }
 
         // Make text mesh
-        const text = value.toString();
+        const text = formatBloodGlucoseValueText({ value, units });
         const {
           textMesh,
           measuredWidth,

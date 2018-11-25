@@ -83,7 +83,7 @@ class AddOrEditCommentScreenNote extends PureComponent {
           wizardData,
         },
       },
-      currentProfile: { lowBGBoundary, highBGBoundary },
+      currentProfile: { lowBGBoundary, highBGBoundary, units },
       note: { timestamp: eventTime },
       graphRenderer,
       onGraphZoomStart,
@@ -108,6 +108,7 @@ class AddOrEditCommentScreenNote extends PureComponent {
         isLoading={isLoading}
         yAxisLabelValues={yAxisLabelValues}
         yAxisBGBoundaryValues={yAxisBGBoundaryValues}
+        units={units}
         cbgData={cbgData}
         smbgData={smbgData}
         basalData={basalData}
