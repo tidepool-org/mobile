@@ -263,7 +263,7 @@ class AddOrEditNoteScreen extends PureComponent {
     }
 
     this.setState({
-      isEditingTimestampParam,
+      isEditingTimestamp: isEditingTimestampParam,
     });
   };
 
