@@ -40,8 +40,6 @@ import {
   NAVIGATE_GO_BACK,
 } from "../actions/navigation";
 
-// TODO: metrics - need metrics for navigation
-
 const shouldIgnoreNextNavigate = ({ nextState, state }) => {
   // Prevent double navigation for some routes (e.g. when tapping UI elements that cause navigation quickly)
   // TODO: Revisit this. It's kind of hacky / fragile
