@@ -16,7 +16,7 @@
     <dependency>
       <groupId>com.google.android.gms</groupId>
       <artifactId>play-services-wallet</artifactId>
-      <version>9.8.0</version>
+      <version>11.2.0</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
