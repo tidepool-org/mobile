@@ -119,15 +119,15 @@
     <dependency org="de.greenrobot" name="eventbus" rev="2.4.0" conf="compile-&gt;default"/>
     <dependency org="com.amplitude" name="android-sdk" rev="2.9.2" conf="compile-&gt;default"/>
     <dependency org="com.squareup.picasso" name="picasso" rev="2.5.2" conf="compile-&gt;default"/>
-    <dependency org="com.google.android.gms" name="play-services-gcm" rev="9.8.0" conf="compile-&gt;default"/>
-    <dependency org="com.google.android.gms" name="play-services-analytics" rev="9.8.0" conf="compile-&gt;default"/>
-    <dependency org="com.google.android.gms" name="play-services-maps" rev="9.8.0" conf="compile-&gt;default"/>
-    <dependency org="com.google.android.gms" name="play-services-auth" rev="9.8.0" conf="compile-&gt;default"/>
-    <dependency org="com.google.android.gms" name="play-services-location" rev="9.8.0" conf="compile-&gt;default"/>
-    <dependency org="com.google.android.gms" name="play-services-ads" rev="9.8.0" conf="compile-&gt;default"/>
-    <dependency org="com.google.android.gms" name="play-services-fitness" rev="9.8.0" conf="compile-&gt;default"/>
-    <dependency org="com.google.android.gms" name="play-services-vision" rev="9.8.0" conf="compile-&gt;default"/>
-    <dependency org="com.google.android.gms" name="play-services-wallet" rev="9.8.0" conf="compile-&gt;default"/>
+    <dependency org="com.google.android.gms" name="play-services-gcm" rev="11.2.0" conf="compile-&gt;default"/>
+    <dependency org="com.google.android.gms" name="play-services-analytics" rev="11.2.0" conf="compile-&gt;default"/>
+    <dependency org="com.google.android.gms" name="play-services-maps" rev="11.2.0" conf="compile-&gt;default"/>
+    <dependency org="com.google.android.gms" name="play-services-auth" rev="11.2.0" conf="compile-&gt;default"/>
+    <dependency org="com.google.android.gms" name="play-services-location" rev="11.2.0" conf="compile-&gt;default"/>
+    <dependency org="com.google.android.gms" name="play-services-ads" rev="11.2.0" conf="compile-&gt;default"/>
+    <dependency org="com.google.android.gms" name="play-services-fitness" rev="11.2.0" conf="compile-&gt;default"/>
+    <dependency org="com.google.android.gms" name="play-services-vision" rev="11.2.0" conf="compile-&gt;default"/>
+    <dependency org="com.google.android.gms" name="play-services-wallet" rev="11.2.0" conf="compile-&gt;default"/>
     <dependency org="com.stripe" name="stripe-android" rev="2.1.+" conf="compile-&gt;default"/>
     <dependency org="com.github.thefuntasty" name="CreditCardEntry" rev="1.4.8.4" conf="compile-&gt;default"/>
     <dependency org="com.raizlabs.android" name="DBFlow-Core" rev="2.2.1" conf="compile-&gt;default"/>
@@ -151,8 +151,8 @@
     <dependency org="io.nlopez.smartlocation" name="library" rev="3.2.11" transitive="false" conf="compile-&gt;default"/>
     <dependency org="com.android.support" name="exifinterface" rev="26.0.1" conf="compile-&gt;default"/>
     <dependency org="com.google.android" name="cameraview" rev="1.0.0" conf="compile-&gt;default"/>
-    <dependency org="com.google.firebase" name="firebase-core" rev="9.8.0" conf="compile-&gt;default"/>
-    <dependency org="com.google.firebase" name="firebase-messaging" rev="9.8.0" conf="compile-&gt;default"/>
+    <dependency org="com.google.firebase" name="firebase-core" rev="11.2.0" conf="compile-&gt;default"/>
+    <dependency org="com.google.firebase" name="firebase-messaging" rev="11.2.0" conf="compile-&gt;default"/>
     <dependency org="com.google.maps.android" name="android-maps-utils" rev="0.5+" conf="compile-&gt;default"/>
     <dependency org="com.squareup.leakcanary" name="leakcanary-android-no-op" rev="1.4-beta1" conf="debugCompile-&gt;default"/>
     <dependency org="org.glassfish" name="javax.annotation" rev="3.1.1" conf="provided-&gt;default"/>

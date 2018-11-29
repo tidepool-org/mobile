@@ -41,7 +41,7 @@ allprojects {
 }
 
 ext {
-  googlePlayServicesVersion = '9.8.0'
+  googlePlayServicesVersion = '11.2.0'
 }
 
 task clean(type: Delete) {
