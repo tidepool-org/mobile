@@ -76,7 +76,16 @@ class NotesListItem extends PureComponent {
     const {
       commentsFetchData: { comments, errorMessage: commentsFetchErrorMessage },
       graphDataFetchData: { errorMessage: graphDataFetchErrorMessage },
+      note: { timestamp },
     } = this.props;
+    const { note: nextNote } = nextProps;
+
+    if (nextNote.timestamp !== timestamp) {
+      this.setState({
+        formattedTimestamp: formatDateForNoteList(nextNote.timestamp),
+      });
+    }
+
     const shouldShowCommentsFetchErrorMessage =
       nextProps.commentsFetchData.errorMessage && !commentsFetchErrorMessage;
     const shouldShowGraphDataFetchErrorMessage =
