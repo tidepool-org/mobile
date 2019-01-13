@@ -44,7 +44,7 @@ class DrawerHealth extends PureComponent {
           </glamorous.Text>
           <Switch
             style={{ transform: [{ scaleX: 0.75 }, { scaleY: 0.75 }] }}
-            onTintColor={Colors.brightBlue}
+            trackColor={{ true: Colors.brightBlue, false: null }}
             onValueChange={this.onConnectToHealthValueChange}
             value={connectToHealth}
           />

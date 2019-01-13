@@ -33,9 +33,7 @@ exports[`Storyshots VersionAndApiEnvironment Production 1`] = `
       }
     >
       <Text
-        accessible={true}
         allowFontScaling={false}
-        ellipsizeMode="tail"
         style={
           Array [
             Object {
@@ -88,9 +86,7 @@ exports[`Storyshots VersionAndApiEnvironment Staging 1`] = `
       }
     >
       <Text
-        accessible={true}
         allowFontScaling={false}
-        ellipsizeMode="tail"
         style={
           Array [
             Object {

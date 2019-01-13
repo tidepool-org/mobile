@@ -1,6 +1,6 @@
 #import "EXApiUtil.h"
-#import "EXAppLoadingManager.h"
 #import "EXBuildConstants.h"
+#import "EXEnvironment.h"
 #import "EXErrorRecoveryManager.h"
 #import "EXKernel.h"
 #import "EXAppLoader.h"
@@ -12,14 +12,29 @@
 #import "ExpoKit.h"
 #import "EXReactAppManager.h"
 #import "EXReactAppManager+Private.h"
-#import "EXShellManager.h"
 #import "EXVersionManager.h"
 #import "EXVersions.h"
+#import <EXCore/EXModuleRegistryProvider.h>
 
 #import <React/RCTBridge.h>
 #import <React/RCTRootView.h>
 
+@interface EXVersionManager (Legacy)
+// TODO: remove after non-unimodules SDK versions are dropped
+
+- (void)bridgeDidForeground;
+- (void)bridgeDidBackground;
+
+@end
+
 typedef void (^SDK21RCTSourceLoadBlock)(NSError *error, NSData *source, int64_t sourceLength);
+
+@protocol EXSplashScreenManagerProtocol
+
+@property (assign) BOOL started;
+@property (assign) BOOL finished;
+
+@end
 
 @implementation RCTSource (EXReactAppManager)
 
@@ -179,21 +194,26 @@ typedef void (^SDK21RCTSourceLoadBlock)(NSError *error, NSData *source, int64_t 
 
 - (void)appStateDidBecomeActive
 {
-  [_versionManager bridgeDidForeground];
+  if ([_versionManager respondsToSelector:@selector(bridgeDidForeground)]) {
+    // supported before SDK 29 / unimodules
+    [_versionManager bridgeDidForeground];
+  }
 }
 
 - (void)appStateDidBecomeInactive
 {
-  [_versionManager bridgeDidBackground];
+  if ([_versionManager respondsToSelector:@selector(bridgeDidBackground)]) {
+    [_versionManager bridgeDidBackground];
+  }
 }
 
 #pragma mark - EXAppFetcherDataSource
 
 - (NSString *)bundleResourceNameForAppFetcher:(EXAppFetcher *)appFetcher withManifest:(nonnull NSDictionary *)manifest
 {
-  if ([EXShellManager sharedInstance].isShell) {
-    NSLog(@"Standalone bundle remote url is %@", [EXShellManager sharedInstance].shellManifestUrl);
-    return kEXShellBundleResourceName;
+  if ([EXEnvironment sharedEnvironment].isDetached) {
+    NSLog(@"Standalone bundle remote url is %@", [EXEnvironment sharedEnvironment].standaloneManifestUrl);
+    return kEXEmbeddedBundleResourceName;
   } else {
     return manifest[@"id"];
   }
@@ -238,16 +258,18 @@ typedef void (^SDK21RCTSourceLoadBlock)(NSError *error, NSData *source, int64_t 
 - (NSArray *)extraModulesForBridge:(RCTBridge *)bridge
 {
   // we allow the vanilla RN dev menu in some circumstances.
-  BOOL isDetached = [EXShellManager sharedInstance].isDetached;
+  BOOL isDetached = [EXEnvironment sharedEnvironment].isDetached;
   BOOL isStandardDevMenuAllowed = [EXKernelDevKeyCommands sharedInstance].isLegacyMenuBehaviorEnabled || isDetached;
   
   _exceptionHandler = [[EXReactAppExceptionHandler alloc] initWithAppRecord:_appRecord];
 
   NSDictionary *params = @{
+                           @"bridge": bridge,
                            @"manifest": _appRecord.appLoader.manifest,
                            @"constants": @{
                                @"linkingUri": RCTNullIfNil([EXKernelLinkingManager linkingUriForExperienceUri:_appRecord.appLoader.manifestUrl useLegacy:[self _compareVersionTo:27] == NSOrderedAscending]),
-                               @"deviceId": [EXKernel deviceInstallUUID],
+                               @"experienceUrl": RCTNullIfNil(_appRecord.appLoader.manifestUrl? _appRecord.appLoader.manifestUrl.absoluteString: nil),
+                               @"installationId": [EXKernel deviceInstallUUID],
                                @"expoRuntimeVersion": [EXBuildConstants sharedInstance].expoRuntimeVersion,
                                @"manifest": _appRecord.appLoader.manifest,
                                @"appOwnership": [self _appOwnership],
@@ -256,8 +278,10 @@ typedef void (^SDK21RCTSourceLoadBlock)(NSError *error, NSData *source, int64_t 
                            @"initialUri": RCTNullIfNil([EXKernelLinkingManager initialUriWithManifestUrl:_appRecord.appLoader.manifestUrl]),
                            @"isDeveloper": @([self enablesDeveloperTools]),
                            @"isStandardDevMenuAllowed": @(isStandardDevMenuAllowed),
-                           @"testEnvironment": @([EXShellManager sharedInstance].testEnvironment),
+                           @"testEnvironment": @([EXEnvironment sharedEnvironment].testEnvironment),
                            @"services": [EXKernel sharedInstance].serviceRegistry.allServices,
+                           @"singletonModules": [EXModuleRegistryProvider singletonModules],
+                           @"moduleRegistryDelegateClass": RCTNullIfNil([self moduleRegistryDelegateClass]),
                            };
   return [self.versionManager extraModulesWithParams:params];
 }
@@ -372,7 +396,12 @@ typedef void (^SDK21RCTSourceLoadBlock)(NSError *error, NSData *source, int64_t 
 
 - (id)_appLoadingManagerInstance
 {
-  Class loadingManagerClass = [self versionedClassFromString:@"EXAppLoadingManager"];
+  Class loadingManagerClass;
+  if ([self _compareVersionTo:29] == NSOrderedAscending) {
+    loadingManagerClass = [self versionedClassFromString:@"EXAppLoadingManager"];
+  } else {
+    loadingManagerClass = [self versionedClassFromString:@"EXSplashScreen"];
+  }
   for (Class class in [self.reactBridge moduleClasses]) {
     if ([class isSubclassOfClass:loadingManagerClass]) {
       return [self.reactBridge moduleForClass:loadingManagerClass];
@@ -389,8 +418,9 @@ typedef void (^SDK21RCTSourceLoadBlock)(NSError *error, NSData *source, int64_t 
   if ([_appRecord.appManager rootView] &&
       [_appRecord.appManager rootView].subviews.count > 0 &&
       [_appRecord.appManager rootView].subviews.firstObject.subviews.count > 0) {
-    EXAppLoadingManager *appLoading = [self _appLoadingManagerInstance];
-    if (!appLoading || !appLoading.started || appLoading.finished) {
+    id<EXSplashScreenManagerProtocol> splashManager = [self _appLoadingManagerInstance];
+    
+    if (!splashManager || !splashManager.started || splashManager.finished) {
       [self _appLoadingFinished];
     }
   }
@@ -498,11 +528,19 @@ typedef void (^SDK21RCTSourceLoadBlock)(NSError *error, NSData *source, int64_t 
 
 - (NSDictionary *)launchOptionsForBridge
 {
-  if ([EXShellManager sharedInstance].isShell) {
-    // pass the native app's launch options to shell bridge.
+  if ([EXEnvironment sharedEnvironment].isDetached) {
+    // pass the native app's launch options to standalone bridge.
     return [ExpoKit sharedInstance].launchOptions;
   }
   return @{};
+}
+
+- (Class)moduleRegistryDelegateClass
+{
+  if ([EXEnvironment sharedEnvironment].isDetached) {
+    return [ExpoKit sharedInstance].moduleRegistryDelegateClass;
+  }
+  return nil;
 }
 
 - (NSString *)applicationKeyForRootView
