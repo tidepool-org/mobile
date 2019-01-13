@@ -1,38 +1,54 @@
-//
-//  RollbarThread.m
-//  Rollbar
-//
-//  Created by Sergei Bezborodko on 4/8/14.
-//  Copyright (c) 2014 Rollbar, Inc. All rights reserved.
-//
+//  Copyright (c) 2018 Rollbar, Inc. All rights reserved.
 
 #import "RollbarThread.h"
+#import "RollbarLogger.h"
 
-@implementation RollbarThread
+@implementation RollbarThread {
+    @private RollbarNotifier *_notifier;
+    @private NSUInteger _maxReportsPerMinute;
+    @private NSTimer *_timer;
+}
 
-- (id)initWithNotifier:(RollbarNotifier *)aNotifier {
+- (id)initWithNotifier:(RollbarNotifier*)notifier andWithReportingRate:(NSUInteger)reportsPerMinute {
+    
+    _timer = nil;
+    _maxReportsPerMinute = 60;
+    
     if ((self = [super initWithTarget:self selector:@selector(run) object:nil])) {
-        notifier = aNotifier;
+        _notifier = notifier;
+        if(reportsPerMinute > 0) {
+            _maxReportsPerMinute = reportsPerMinute;
+        }
         self.active = YES;
     }
-    
     return self;
 }
 
 - (void)checkItems {
+    if (self.cancelled) {
+        if (_timer) {
+            [_timer invalidate];
+            _timer = nil;
+        }
+        [NSThread exit];
+    }
     @autoreleasepool {
-        [notifier processSavedItems];
+        [_notifier processSavedItems];
     }
 }
 
 - (void)run {
     @autoreleasepool {
+        
+        NSTimeInterval timeIntervalInSeconds = 60.0 / _maxReportsPerMinute;
+        _timer = [NSTimer timerWithTimeInterval:timeIntervalInSeconds
+                                        target:self
+                                      selector:@selector(checkItems)
+                                      userInfo:nil
+                                       repeats:YES
+                 ];
         NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
-        
-        NSTimer *timer = [NSTimer timerWithTimeInterval:10 target:self selector:@selector(checkItems) userInfo:nil repeats:YES];
-        
-        [runLoop addTimer:timer forMode:NSDefaultRunLoopMode];
-        
+        [runLoop addTimer:_timer forMode:NSDefaultRunLoopMode];
         while (self.active) {
             [runLoop runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
         }

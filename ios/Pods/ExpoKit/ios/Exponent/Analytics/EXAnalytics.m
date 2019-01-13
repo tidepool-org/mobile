@@ -2,13 +2,11 @@
 
 #import "EXAnalytics.h"
 #import "EXBuildConstants.h"
+#import "EXEnvironment.h"
 #import "EXKernel.h"
 #import "ExpoKit.h"
-#import "EXShellManager.h"
 
 #import "Amplitude.h"
-
-NSString * const kEXAnalyticsDisabledConfigKey = @"EXAnalyticsDisabled";
 
 @import UIKit;
 
@@ -52,7 +50,11 @@ NSString * const kEXAnalyticsDisabledConfigKey = @"EXAnalyticsDisabled";
 
 + (BOOL)_isAnalyticsDisabled
 {
-  return [[[NSBundle mainBundle].infoDictionary objectForKey:kEXAnalyticsDisabledConfigKey] boolValue];
+#ifdef EX_DETACHED
+  return YES;
+#else
+  return NO;
+#endif
 }
 
 - (instancetype)init
@@ -118,8 +120,8 @@ NSString * const kEXAnalyticsDisabledConfigKey = @"EXAnalyticsDisabled";
   // hack owls
   // 🦉🦉🦉
   //             🦉
-  if (![EXShellManager sharedInstance].isShell && ![eventId isEqualToString:@"LOAD_EXPERIENCE"]) {
-    // if not a shell, and some other event besides LOAD_EXPERIENCE, omit
+  if (![EXEnvironment sharedEnvironment].isDetached && ![eventId isEqualToString:@"LOAD_EXPERIENCE"]) {
+    // if not detached, and some other event besides LOAD_EXPERIENCE, omit
     return;
   }
   [[Amplitude instance] logEvent:eventId withEventProperties:props];

@@ -6,8 +6,8 @@
 #import "EXDisabledDevMenu.h"
 #import "EXDisabledRedBox.h"
 #import "EXFileSystem.h"
-#import "EXHomeModule.h"
 #import "EXVersionManager.h"
+#import "EXScopedBridgeModule.h"
 #import "EXStatusBarManager.h"
 #import "EXUnversioned.h"
 #import "EXTest.h"
@@ -26,7 +26,11 @@
 
 #import <objc/message.h>
 
-static NSNumber *EXVersionManagerIsFirstLoad;
+#import <EXCore/EXModuleRegistry.h>
+#import <EXCore/EXModuleRegistryDelegate.h>
+#import <EXReactNativeAdapter/EXNativeModulesProxy.h>
+#import "EXScopedModuleRegistryAdapter.h"
+#import "EXScopedModuleRegistryDelegate.h"
 
 // used for initializing scoped modules which don't tie in to any kernel service.
 #define EX_KERNEL_SERVICE_NONE @"EXKernelServiceNone"
@@ -69,6 +73,12 @@ void EXRegisterScopedModule(Class moduleClass, ...)
   }
 }
 
+@interface RCTBridgeHack <NSObject>
+
+- (void)reload;
+
+@end
+
 @interface EXVersionManager ()
 
 // is this the first time this ABI has been touched at runtime?
@@ -96,31 +106,6 @@ void EXRegisterScopedModule(Class moduleClass, ...)
 }
 
 - (void)bridgeFinishedLoading
-{
-
-}
-
-- (void)bridgeDidForeground
-{
-  if (_isFirstLoad) {
-    _isFirstLoad = NO; // in case the same VersionManager instance is used between multiple bridge loads
-  } else {
-    // some state is shared between bridges, for example status bar
-    [self resetSharedState];
-  }
-}
-
-- (void)bridgeDidBackground
-{
-  [self saveSharedState];
-}
-
-- (void)saveSharedState
-{
-
-}
-
-- (void)resetSharedState
 {
 
 }
@@ -195,7 +180,9 @@ void EXRegisterScopedModule(Class moduleClass, ...)
   RCTAssertMainQueue();
   RCTDevSettings *devSettings = [self _moduleInstanceForBridge:bridge named:@"DevSettings"];
   if ([key isEqualToString:@"dev-reload"]) {
-    [bridge reload];
+    // bridge could be an RCTBridge of any version and we need to cast it since ARC needs to know
+    // the return type
+    [(RCTBridgeHack *)bridge reload];
   } else if ([key isEqualToString:@"dev-remote-debug"]) {
     devSettings.isDebuggingRemotely = !devSettings.isDebuggingRemotely;
   } else if ([key isEqualToString:@"dev-live-reload"]) {
@@ -269,11 +256,6 @@ void EXRegisterScopedModule(Class moduleClass, ...)
                          logFunction:(void (^)(NSInteger, NSInteger, NSString *, NSNumber *, NSString *))logFunction
                         logThreshold:(NSInteger)threshold
 {
-  if (EXVersionManagerIsFirstLoad == nil) {
-    // first time initializing this RN version at runtime
-    _isFirstLoad = YES;
-  }
-  EXVersionManagerIsFirstLoad = @(NO);
   RCTSetFatalHandler(fatalHandler);
   RCTSetLogThreshold(threshold);
   RCTSetLogFunction(logFunction);
@@ -301,11 +283,12 @@ void EXRegisterScopedModule(Class moduleClass, ...)
   NSString *experienceId = manifest[@"id"];
   NSDictionary *services = params[@"services"];
   NSString *localStorageDirectory = [[EXFileSystem documentDirectoryForExperienceId:experienceId] stringByAppendingPathComponent:EX_UNVERSIONED(@"RCTAsyncLocalStorage")];
+  BOOL isOpeningHomeInProductionMode = params[@"browserModuleClass"] && !manifest[@"developer"];
 
   NSMutableArray *extraModules = [NSMutableArray arrayWithArray:
                                   @[
                                     [[EXAppState alloc] init],
-                                    [[EXDevSettings alloc] initWithExperienceId:experienceId isDevelopment:isDeveloper],
+                                    [[EXDevSettings alloc] initWithExperienceId:experienceId isDevelopment:(!isOpeningHomeInProductionMode && isDeveloper)],
                                     [[EXDisabledDevLoadingView alloc] init],
                                     [[EXStatusBarManager alloc] init],
                                     [[RCTAsyncLocalStorage alloc] initWithStorageDirectory:localStorageDirectory],
@@ -330,8 +313,9 @@ void EXRegisterScopedModule(Class moduleClass, ...)
     }
   }
   
-  if (params[@"kernel"]) {
-    EXHomeModule *homeModule = [[EXHomeModule alloc] initWithExperienceId:experienceId
+  if (params[@"browserModuleClass"]) {
+    Class browserModuleClass = params[@"browserModuleClass"];
+    id homeModule = [[browserModuleClass alloc] initWithExperienceId:experienceId
                                                     kernelServiceDelegate:services[EX_UNVERSIONED(@"EXHomeModuleManager")]
                                                                    params:params];
     [extraModules addObject:homeModule];
@@ -348,6 +332,23 @@ void EXRegisterScopedModule(Class moduleClass, ...)
     // additionally disable RCTRedBox
     [extraModules addObject:[[EXDisabledRedBox alloc] init]];
   }
+
+  EXModuleRegistryProvider *moduleRegistryProvider = [[EXModuleRegistryProvider alloc] initWithSingletonModules:params[@"singletonModules"]];
+
+  Class resolverClass = [EXScopedModuleRegistryDelegate class];
+  if (params[@"moduleRegistryDelegateClass"] && params[@"moduleRegistryDelegateClass"] != [NSNull null]) {
+    resolverClass = params[@"moduleRegistryDelegateClass"];
+  }
+
+  id<EXModuleRegistryDelegate> moduleRegistryDelegate = [[resolverClass alloc] initWithParams:params];
+  [moduleRegistryProvider setModuleRegistryDelegate:moduleRegistryDelegate];
+
+  EXScopedModuleRegistryAdapter *moduleRegistryAdapter = [[EXScopedModuleRegistryAdapter alloc] initWithModuleRegistryProvider:moduleRegistryProvider];
+
+  NSArray<id<RCTBridgeModule>> *expoModules = [moduleRegistryAdapter extraModulesForParams:params andExperience:experienceId withScopedModulesArray:extraModules withKernelServices:services];
+
+  [extraModules addObjectsFromArray:expoModules];
+
   return extraModules;
 }
 

@@ -24,12 +24,12 @@
  3. Link to https://github.com/adamwulf/PerformanceBezier
 
  */
-static CGFloat idealFlatness = .01;
+static CGFloat idealFlatness = (CGFloat).01;
 
 /**
  * returns the distance between two points
  */
-CGFloat distance(CGPoint p1, CGPoint p2)
+CGFloat RNSVGPerformanceBezier_distance(CGPoint p1, CGPoint p2)
 {
     CGFloat dx = p2.x - p1.x;
     CGFloat dy = p2.y - p1.y;
@@ -68,7 +68,7 @@ CGFloat distance(CGPoint p1, CGPoint p2)
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  */
-void subdivideBezierAtT(const CGPoint bez[4], CGPoint bez1[4], CGPoint bez2[4], CGFloat t)
+void RNSVGPerformanceBezier_subdivideBezierAtT(const CGPoint bez[4], CGPoint bez1[4], CGPoint bez2[4], CGFloat t)
 {
     CGPoint q;
     CGFloat mt = 1 - t;
@@ -94,10 +94,10 @@ void subdivideBezierAtT(const CGPoint bez[4], CGPoint bez1[4], CGPoint bez2[4], 
     bez1[3].y = bez2[0].y = mt * bez1[2].y + t * bez2[1].y;
 }
 
-void addLine(CGPoint *last, const CGPoint *next, NSMutableArray *lines, CGFloat *length, NSMutableArray *lengths) {
+void RNSVGPerformanceBezier_addLine(CGPoint *last, const CGPoint *next, NSMutableArray *lines, CGFloat *length, NSMutableArray *lengths) {
     NSArray *line = @[[NSValue valueWithCGPoint:*last], [NSValue valueWithCGPoint:*next]];
     [lines addObject:line];
-    *length += distance(*last, *next);
+    *length += RNSVGPerformanceBezier_distance(*last, *next);
     [lengths addObject:[NSNumber numberWithDouble:*length]];
     *last = *next;
 }
@@ -112,10 +112,63 @@ void addLine(CGPoint *last, const CGPoint *next, NSMutableArray *lines, CGFloat 
     BOOL isClosed;
 }
 
+- (void)setHref:(NSString *)href
+{
+    if ([href isEqualToString:_href]) {
+        return;
+    }
+    [self invalidate];
+    _href = href;
+}
+
+- (void)setSide:(NSString *)side
+{
+    if ([side isEqualToString:_side]) {
+        return;
+    }
+    [self invalidate];
+    _side = side;
+}
+
+- (void)setMethod:(NSString *)method
+{
+    if ([method isEqualToString:_method]) {
+        return;
+    }
+    [self invalidate];
+    _method = method;
+}
+
+- (void)setMidLine:(NSString *)midLine
+{
+    if ([midLine isEqualToString:_midLine]) {
+        return;
+    }
+    [self invalidate];
+    _midLine = midLine;
+}
+
+- (void)setSpacing:(NSString *)spacing
+{
+    if ([spacing isEqualToString:_spacing]) {
+        return;
+    }
+    [self invalidate];
+    _spacing = spacing;
+}
+
+- (void)setStartOffset:(RNSVGLength *)startOffset
+{
+    if ([startOffset isEqualTo:_startOffset]) {
+        return;
+    }
+    [self invalidate];
+    _startOffset = startOffset;
+}
+
 - (void)getPathLength:(CGFloat*)lengthP lineCount:(NSUInteger*)lineCountP lengths:(NSArray* __strong *)lengthsP lines:(NSArray* __strong *)linesP isClosed:(BOOL*)isClosedP
 {
-    RNSVGSvgView *svg = [self getSvgView];
-    RNSVGNode *template = [svg getDefinedTemplate:self.href];
+    RNSVGNode *template = [self.svgView getDefinedTemplate:self.href];
     CGPathRef path = [template getPath:nil];
 
     if (_path != path) {
@@ -138,7 +191,7 @@ void addLine(CGPoint *last, const CGPoint *next, NSMutableArray *lines, CGFloat 
 
                 case kCGPathElementAddLineToPoint: {
                     CGPoint next = element.point;
-                    addLine(&last, &next, lines, &length, lengths);
+                    RNSVGPerformanceBezier_addLine(&last, &next, lines, &length, lengths);
                     lineCount++;
                     break;
                 }
@@ -166,20 +219,20 @@ void addLine(CGPoint *last, const CGPoint *next, NSMutableArray *lines, CGFloat 
                         CGPoint ctrl2 = bez[2];
                         CGPoint next = bez[3];
                         CGFloat polyLen =
-                            distance(last, ctrl1) +
-                            distance(ctrl1, ctrl2) +
-                            distance(ctrl2, next);
-                        CGFloat chordLen = distance(last, next);
+                            RNSVGPerformanceBezier_distance(last, ctrl1) +
+                            RNSVGPerformanceBezier_distance(ctrl1, ctrl2) +
+                            RNSVGPerformanceBezier_distance(ctrl2, next);
+                        CGFloat chordLen = RNSVGPerformanceBezier_distance(last, next);
                         CGFloat error = polyLen - chordLen;
 
                         // if the error is less than our accepted level of error
                         // then add a line, else, split the curve in half
                         if (error <= idealFlatness) {
-                            addLine(&last, &next, lines, &length, lengths);
+                            RNSVGPerformanceBezier_addLine(&last, &next, lines, &length, lengths);
                             lineCount++;
                         } else {
                             CGPoint bez1[4], bez2[4];
-                            subdivideBezierAtT(bez, bez1, bez2, .5);
+                            RNSVGPerformanceBezier_subdivideBezierAtT(bez, bez1, bez2, .5);
                             [curves addObject:[NSValue valueWithBytes:&bez2 objCType:@encode(CGPoint[4])]];
                             [curves addObject:[NSValue valueWithBytes:&bez1 objCType:@encode(CGPoint[4])]];
                             curveIndex += 2;
@@ -190,7 +243,7 @@ void addLine(CGPoint *last, const CGPoint *next, NSMutableArray *lines, CGFloat 
 
                 case kCGPathElementCloseSubpath: {
                     CGPoint next = origin;
-                    addLine(&last, &next, lines, &length, lengths);
+                    RNSVGPerformanceBezier_addLine(&last, &next, lines, &length, lengths);
                     lineCount++;
                     isClosed = YES;
                     break;
@@ -209,9 +262,9 @@ void addLine(CGPoint *last, const CGPoint *next, NSMutableArray *lines, CGFloat 
     *linesP = lines;
 }
 
-- (void)renderLayerTo:(CGContextRef)context
+- (void)renderLayerTo:(CGContextRef)context rect:(CGRect)rect
 {
-    [self renderGroupTo:context];
+    [self renderGroupTo:context rect:rect];
 }
 
 - (CGPathRef)getPath:(CGContextRef)context

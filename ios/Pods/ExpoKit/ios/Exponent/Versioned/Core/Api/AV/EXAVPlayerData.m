@@ -6,6 +6,7 @@
 
 NSString *const EXAVPlayerDataStatusIsLoadedKeyPath = @"isLoaded";
 NSString *const EXAVPlayerDataStatusURIKeyPath = @"uri";
+NSString *const EXAVPlayerDataStatusHeadersKeyPath = @"headers";
 NSString *const EXAVPlayerDataStatusProgressUpdateIntervalMillisKeyPath = @"progressUpdateIntervalMillis";
 NSString *const EXAVPlayerDataStatusDurationMillisKeyPath = @"durationMillis";
 NSString *const EXAVPlayerDataStatusPositionMillisKeyPath = @"positionMillis";
@@ -34,6 +35,7 @@ NSString *const EXAVPlayerDataObserverPlaybackBufferEmptyKeyPath = @"playbackBuf
 @property (nonatomic, weak) EXAV *exAV;
 
 @property (nonatomic, assign) BOOL isLoaded;
+@property (nonatomic, strong) NSDictionary *headers;
 @property (nonatomic, strong) void (^loadFinishBlock)(BOOL success, NSDictionary *successStatus, NSString *error);
 
 @property (nonatomic, strong) id <NSObject> timeObserver;
@@ -81,6 +83,7 @@ NSString *const EXAVPlayerDataObserverPlaybackBufferEmptyKeyPath = @"playbackBuf
     _player = nil;
   
     _url = [NSURL URLWithString:[source objectForKey:EXAVPlayerDataStatusURIKeyPath]];
+    _headers = [self validatedRequestHeaders:source[EXAVPlayerDataStatusHeadersKeyPath]];
   
     _timeObserver = nil;
     _finishObserver = nil;
@@ -110,7 +113,7 @@ NSString *const EXAVPlayerDataObserverPlaybackBufferEmptyKeyPath = @"playbackBuf
 - (void)_loadNewPlayer
 {
   NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies];
-  AVURLAsset *avAsset = [AVURLAsset URLAssetWithURL:_url options:@{AVURLAssetHTTPCookiesKey : cookies}];
+  AVURLAsset *avAsset = [AVURLAsset URLAssetWithURL:_url options:@{AVURLAssetHTTPCookiesKey : cookies, @"AVURLAssetHTTPHeaderFieldsKey": _headers}];
   
   // unless we preload, the asset will not necessarily load the duration by the time we try to play it.
   // http://stackoverflow.com/questions/20581567/avplayer-and-avfoundationerrordomain-code-11819
@@ -282,17 +285,18 @@ NSString *const EXAVPlayerDataObserverPlaybackBufferEmptyKeyPath = @"playbackBuf
     if (![self _shouldPlayerPlay]) {
       [_player pause];
     }
+
     if (_isMuted || ![self _isPlayerPlaying]) {
       _player.muted = _isMuted;
     }
-    [_exAV demoteAudioSessionIfPossible];
-    
+
     // Apply idempotent parameters.
     if (_shouldCorrectPitch) {
       _player.currentItem.audioTimePitchAlgorithm = AVAudioTimePitchAlgorithmLowQualityZeroLatency;
     } else {
       _player.currentItem.audioTimePitchAlgorithm = AVAudioTimePitchAlgorithmVarispeed;
     }
+
     _player.volume = _volume.floatValue;
     
     
@@ -325,12 +329,14 @@ NSString *const EXAVPlayerDataObserverPlaybackBufferEmptyKeyPath = @"playbackBuf
           [strongSelf _callStatusUpdateCallback];
         }
       }
+
+      [strongSelf.exAV demoteAudioSessionIfPossible];
     };
     
     // Apply seek if necessary.
     if (mustSeek) {
       [_player seekToTime:newPosition toleranceBefore:toleranceBefore toleranceAfter:toleranceAfter completionHandler:^(BOOL seekSucceeded) {
-        dispatch_async(_exAV.methodQueue, ^{
+        dispatch_async(self->_exAV.methodQueue, ^{
           applyPostSeekParameters(seekSucceeded);
         });
       }];
@@ -653,7 +659,21 @@ NSString *const EXAVPlayerDataObserverPlaybackBufferEmptyKeyPath = @"playbackBuf
     return;
   }
   
-  __weak EXAVPlayerData *weakSelf = self;
+  __weak EXAVPlayerData *weakSelf = nil;
+
+  // Specification of Objective-C always allows creation of weak references,
+  // however on iOS trying to create a weak reference to a deallocated object
+  // results in throwing an exception. If this happens we have nothing to do
+  // as the EXAVPlayerData is being deallocated, so let's early return.
+  //
+  // See Stackoverflow question:
+  // https://stackoverflow.com/questions/35991363/why-setting-object-that-is-undergoing-deallocation-to-weak-property-results-in-c#42329741
+  @try {
+     weakSelf = self;
+  } @catch (NSException *exception) {
+    return;
+  }
+
   __strong EXAV *strongEXAV = _exAV;
   if (strongEXAV == nil) {
     return;
@@ -674,7 +694,7 @@ NSString *const EXAVPlayerDataObserverPlaybackBufferEmptyKeyPath = @"playbackBuf
               break;
             case AVPlayerStatusFailed: {
               strongSelf.isLoaded = NO;
-              NSString *errorMessage = [NSString stringWithFormat:@"The AVPlayer instance has failed with the error code %li and domain \"%@\".", _player.error.code, _player.error.domain];
+              NSString *errorMessage = [NSString stringWithFormat:@"The AVPlayer instance has failed with the error code %li and domain \"%@\".", strongSelf.player.error.code, strongSelf.player.error.domain];
               if (strongSelf.player.error.localizedFailureReason) {
                 NSString *reasonMessage = [strongSelf.player.error.localizedFailureReason stringByAppendingString:@" - "];
                 errorMessage = [reasonMessage stringByAppendingString:errorMessage];
@@ -695,7 +715,7 @@ NSString *const EXAVPlayerDataObserverPlaybackBufferEmptyKeyPath = @"playbackBuf
           // If replayResolve is not nil here, it means that we had to pause playback due to empty queue of rewinded items.
           // This clause handles iOS 9.
           if (strongSelf.player.rate > 0 && strongSelf.replayResolve) {
-            strongSelf.replayResolve([self getStatus]);
+            strongSelf.replayResolve([strongSelf getStatus]);
             strongSelf.replayResolve = nil;
           }
 
@@ -715,7 +735,7 @@ NSString *const EXAVPlayerDataObserverPlaybackBufferEmptyKeyPath = @"playbackBuf
           // If replayResolve is not nil here, it means that we had to pause playback due to empty queue of rewinded items.
           // This clause handles iOS 10+.
           if (strongSelf.timeControlStatus == AVPlayerTimeControlStatusPlaying && strongSelf.replayResolve) {
-            strongSelf.replayResolve([self getStatus]);
+            strongSelf.replayResolve([strongSelf getStatus]);
             strongSelf.replayResolve = nil;
           }
         } else if ([keyPath isEqualToString:EXAVPlayerDataObserverCurrentItemKeyPath]) {
@@ -860,6 +880,24 @@ NSString *const EXAVPlayerDataObserverPlaybackBufferEmptyKeyPath = @"playbackBuf
 {
   [self _removeTimeObserver];
   [self _removeObservers];
+}
+
+# pragma mark - Utilities
+
+/*
+ * For a given NSDictionary returns a new NSDictionary with
+ * entries only of type (String, String).
+ */
+- (NSDictionary *)validatedRequestHeaders:(NSDictionary *)requestHeaders
+{
+  NSMutableDictionary *validatedHeaders = [NSMutableDictionary new];
+  for (id key in requestHeaders.allKeys) {
+    id value = requestHeaders[key];
+    if ([key isKindOfClass:[NSString class]] && [value isKindOfClass:[NSString class]]) {
+      validatedHeaders[key] = value;
+    }
+  }
+  return validatedHeaders;
 }
 
 @end

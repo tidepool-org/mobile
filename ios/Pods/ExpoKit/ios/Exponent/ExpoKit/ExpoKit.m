@@ -4,6 +4,7 @@
 #import "EXViewController.h"
 #import "EXAnalytics.h"
 #import "EXBuildConstants.h"
+#import "EXEnvironment.h"
 #import "EXFacebook.h"
 #import "EXGoogleAuthManager.h"
 #import "EXKernel.h"
@@ -13,14 +14,13 @@
 #import "EXRemoteNotificationManager.h"
 #import "EXLocalNotificationManager.h"
 #import "EXBranchManager.h"
-#import "EXShellManager.h"
 
 #import <Crashlytics/Crashlytics.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <GoogleMaps/GoogleMaps.h>
 
-NSString * const EXAppDidRegisterForRemoteNotificationsNotification = @"EXAppDidRegisterForRemoteNotificationsNotification";
-NSString * const EXAppDidRegisterUserNotificationSettingsNotification = @"EXAppDidRegisterUserNotificationSettingsNotification";
+NSString * const EXAppDidRegisterForRemoteNotificationsNotification = @"kEXAppDidRegisterForRemoteNotificationsNotification";
+NSString * const EXAppDidRegisterUserNotificationSettingsNotification = @"kEXAppDidRegisterUserNotificationSettingsNotification";
 
 @interface ExpoKit () <CrashlyticsDelegate>
 {
@@ -89,12 +89,8 @@ NSString * const EXAppDidRegisterUserNotificationSettingsNotification = @"EXAppD
 
 - (void)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-  if (@available(iOS 10, *)) {
-    [DDLog addLogger:[DDOSLogger sharedInstance]];
-  } else {
-    [DDLog addLogger:[DDASLLogger sharedInstance]];
-    [DDLog addLogger:[DDTTYLogger sharedInstance]];
-  }
+  [DDLog addLogger:[DDOSLogger sharedInstance]];
+  
 
   RCTSetFatalHandler(handleFatalReactError);
 
@@ -140,7 +136,7 @@ NSString * const EXAppDidRegisterUserNotificationSettingsNotification = @"EXAppD
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)token
 {
   [[EXKernel sharedInstance].serviceRegistry.remoteNotificationManager registerAPNSToken:token registrationError:nil];
-  [[NSNotificationCenter defaultCenter] postNotificationName:EXAppDidRegisterForRemoteNotificationsNotification object:nil];
+  [[NSNotificationCenter defaultCenter] postNotificationName:EXAppDidRegisterForRemoteNotificationsNotification object:nil userInfo:@{ @"token": token }];
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)err
@@ -209,7 +205,7 @@ NSString * const EXAppDidRegisterUserNotificationSettingsNotification = @"EXAppD
   
   if ([userActivity.activityType isEqualToString:NSUserActivityTypeBrowsingWeb]) {
     NSURL *webpageURL = userActivity.webpageURL;
-    if ([EXShellManager sharedInstance].isShell) {
+    if ([EXEnvironment sharedEnvironment].isDetached) {
       return [EXKernelLinkingManager application:application continueUserActivity:userActivity restorationHandler:restorationHandler];
     } else {
       NSString *path = [webpageURL path];
