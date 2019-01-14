@@ -731,7 +731,7 @@ class TidepoolApi {
     const headers = { "x-tidepool-session-token": this.sessionToken };
     let sourceVersion = "3.0 (Expo)";
     try {
-      sourceVersion = `${DeviceInfo.getVersion()} (${DeviceInfo.getBuildNumber()})`;
+      sourceVersion = `${DeviceInfo.getSystemName()} ${DeviceInfo.getVersion()} (${DeviceInfo.getBuildNumber()})`;
     } catch (error) {
       // console.log(
       //   `Failed to get DeviceInfo version, defaulting to ${version}, error: ${error}`
