@@ -21,7 +21,7 @@ matrix:
           - android-sdk-license-.+
           - google-gdk-license-.+
       script:
-        - cd android && ./gradlew assembleDebug && ./gradlew assembleRelease
+        - cd android && ./gradlew assembleDebug
       before_install:
         - openssl aes-256-cbc -K $encrypted_4beaf9ef68f9_key -iv $encrypted_4beaf9ef68f9_iv
           -in release-keystore.jks.enc -out android/release-keystore.jks -d
