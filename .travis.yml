@@ -10,12 +10,11 @@ before_install:
     -in release-keystore.jks.enc -out android/release-keystore.jks -d
   - expo login -u tidepool -p $EXPO_PASSWORD
 install:
-  - df -h
   - yarn install
   - yarn run pre
-  - df -h
-  - expo publish
-  - df -h
+# expo publish is currently throwing exception in Travis: Error: ENOSPC: System limit for number of file watchers reached, watch '/home/travis/build/tidepool-org/mobile/node_modules/expo-image-loader-interface/android/src/main/java/expo
+# As such, should probably publish before pusing. Need to revisit this. Eventually we won't need to publish anyway. It's currently just for a couple assets for bmfonts
+#  - expo publish
 matrix:
   include:
     - language: android
