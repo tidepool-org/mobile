@@ -11,6 +11,7 @@ before_install:
   - expo login -u tidepool -p $EXPO_PASSWORD
 install:
   - yarn install
+  - yarn run pre
   - expo publish
 matrix:
   include:
