@@ -1,16 +1,13 @@
-language: node_js
-node_js: 8.12.0
-sudo: false
 before_install:
+  - nvm install 8.2.0
+  - curl -o- -L https://yarnpkg.com/install.sh | bash
+  - export PATH="$HOME/.yarn/bin:$PATH"
   - expo login -u $EXPO_USERNAME -p $EXPO_PASSWORD
-install:
-  - yarn install
 script:
   - expo publish
 matrix:
   include:
     - language: android
-      os: linux
       jdk: oraclejdk8
       android:
         components:
@@ -23,8 +20,8 @@ matrix:
           - android-sdk-preview-license-52d11cd2
           - android-sdk-license-.+
           - google-gdk-license-.+
+      script:
+        - cd android && ./gradlew assembleDebug && ./gradlew assembleRelease
       before_install:
         - openssl aes-256-cbc -K $encrypted_4beaf9ef68f9_key -iv $encrypted_4beaf9ef68f9_iv
           -in release-keystore.jks.enc -out android/release-keystore.jks -d
-      script:
-        - cd android && ./gradlew assembleDebug && ./gradlew assembleRelease
