@@ -2,8 +2,11 @@ before_install:
   - nvm install 8.2.0
   - curl -o- -L https://yarnpkg.com/install.sh | bash
   - export PATH="$HOME/.yarn/bin:$PATH"
+  - openssl aes-256-cbc -K $encrypted_4beaf9ef68f9_key -iv $encrypted_4beaf9ef68f9_iv
+    -in release-keystore.jks.enc -out android/release-keystore.jks -d
   - expo login -u $EXPO_USERNAME -p $EXPO_PASSWORD
-script:
+install:
+  - yarn install
   - expo publish
 matrix:
   include:
@@ -21,7 +24,5 @@ matrix:
           - android-sdk-license-.+
           - google-gdk-license-.+
       script:
-        - cd android && ./gradlew assembleDebug --debug
-      before_install:
-        - openssl aes-256-cbc -K $encrypted_4beaf9ef68f9_key -iv $encrypted_4beaf9ef68f9_iv
-          -in release-keystore.jks.enc -out android/release-keystore.jks -d
+        - pushd android
+        - ./gradlew assembleDebug
