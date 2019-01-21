@@ -22,6 +22,7 @@ matrix:
       android:
         components:
           - build-tools-27.0.3
+          - android-23
           - android-24
           - android-27
           - extra-google-google_play_services
