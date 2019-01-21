@@ -10,9 +10,12 @@ before_install:
     -in release-keystore.jks.enc -out android/release-keystore.jks -d
   - expo login -u tidepool -p $EXPO_PASSWORD
 install:
+  - df -h
   - yarn install
   - yarn run pre
+  - df -h
   - expo publish
+  - df -h
 matrix:
   include:
     - language: android
