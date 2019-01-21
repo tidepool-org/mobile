@@ -15,6 +15,8 @@ repositories {
   maven { url 'https://maven.fabric.io/public' }
 }
 
+def isRunningOnTravis = System.getenv("CI") == "true"
+
 def getVersionCode = { ->
     try {
         def stdout = new ByteArrayOutputStream()
@@ -43,9 +45,6 @@ def getPassword(String keyChain) {
     }
     stdout.toString().trim()
 }
-
-def tidepoolKeystoreStorePassword = getPassword("tidepool_keystore_store_password")
-def tidepoolKeystoreKeyPassword = getPassword("tidepool_keystore_key_password")
 
 android {
   compileSdkVersion 27
@@ -90,17 +89,6 @@ android {
       minSdkVersion 21
     }
   }
-  signingConfigs {
-    debug {
-      storeFile file('../debug.keystore')
-    }
-    release {
-      storeFile file(System.getenv("TIDEPOOL_KEYSTORE_FILE"))
-      storePassword tidepoolKeystoreStorePassword
-      keyAlias System.getenv("TIDEPOOL_KEYSTORE_KEY_ALIAS")
-      keyPassword tidepoolKeystoreKeyPassword
-    }
-  }
   buildTypes {
     debug {
       debuggable true
@@ -110,17 +98,27 @@ android {
       minifyEnabled true
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
       zipAlignEnabled true
-      signingConfig signingConfigs.release
     }
   }
 
-  def isRunningOnTravis = System.getenv("CI") == "true"
+  // Configure keystore
+  signingConfigs {
+    debug {
+      storeFile = file('../debug.keystore')
+    }
+    release {
+    }   
+  }
   if (isRunningOnTravis) {
-      // configure keystore
       signingConfigs.release.storeFile = file("../release-keystore.jks")
       signingConfigs.release.storePassword = System.getenv("keystore_password")
       signingConfigs.release.keyAlias = System.getenv("keystore_alias")
       signingConfigs.release.keyPassword = System.getenv("keystore_alias_password")
+  } else {
+      signingConfigs.release.storeFile = file(System.getenv("TIDEPOOL_KEYSTORE_FILE"))
+      signingConfigs.release.storePassword = getPassword("tidepool_keystore_store_password")
+      signingConfigs.release.keyAlias = System.getenv("TIDEPOOL_KEYSTORE_KEY_ALIAS")
+      signingConfigs.release.keyPassword = getPassword("tidepool_keystore_key_password")
   }
 
   lintOptions {
