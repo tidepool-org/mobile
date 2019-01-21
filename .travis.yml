@@ -6,6 +6,7 @@ before_install:
   - npm install expo-cli --global
   - curl -o- -L https://yarnpkg.com/install.sh | bash
   - export PATH="$HOME/.yarn/bin:$PATH"
+  - yes | sdkmanager --sdk_root=$ANDROID_SDK_ROOT "tools" "build-tools;27.0.3" "extras;android;m2repository"
   - openssl aes-256-cbc -K $encrypted_4beaf9ef68f9_key -iv $encrypted_4beaf9ef68f9_iv
     -in release-keystore.jks.enc -out android/release-keystore.jks -d
   - expo login -u tidepool -p $EXPO_PASSWORD
