@@ -23,7 +23,8 @@
 
 -dontnote **
 
--keep class host.exp.exponent.generated.AppConstants { *; }
+# Keep all of exp
+-keep class **.exp.** { *; }
 
 ##### Crashlytics #####
 -keepattributes SourceFile,LineNumberTable
@@ -152,3 +153,6 @@
 -keep class org.spongycastle.**
 -dontwarn org.spongycastle.jce.provider.X509LDAPCertStoreSpi
 -dontwarn org.spongycastle.x509.util.LDAPStoreHelper
+
+# Temporary work-around for exception: "Method must be overridden in [proguard.classfile.editor.AttributeAdder] if ever called"
+-optimizations !class/merging/*
