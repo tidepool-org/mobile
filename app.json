@@ -26,8 +26,8 @@
       "config": {
         "usesNonExemptEncryption": false
       },
-      "publishBundlePath": "ios/Tidepool/Supporting/shell-app.bundle",
-      "publishManifestPath": "ios/Tidepool/Supporting/shell-app-manifest.json"
+      "publishBundlePath": "ios/tidepool/Supporting/shell-app.bundle",
+      "publishManifestPath": "ios/tidepool/Supporting/shell-app-manifest.json"
     },
     "android": {
       "package": "io.tidepool.urchin",
