@@ -7,6 +7,10 @@ before_install:
   - echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf
   - sudo sysctl -p
 
+  # Fix case issue for ios/tidepool
+  - echo $TRAVIS_BUILD_DIR
+  - mv $TRAVIS_BUILD_DIR/ios/Tidepool $TRAVIS_BUILD_DIR/ios/tidepool
+
   - nvm install 10.15.0
   - npm install expo-cli --global
   - curl -o- -L https://yarnpkg.com/install.sh | bash
