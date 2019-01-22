@@ -1,6 +1,7 @@
 env:
   global:
     - secure: 0YNWM5/PqK2AAwANlfRbm8iTRZgMgcofnvo3/nkpRMIctmTzCtiLDxiz3UDnddtCsqapaUtBhrdk8VwicWVpNMqJNqScKEmOP/eN2YHfxQ/FyGnr/arqpwXnmgXGJ1GkXeJnV2EyBnBAwEzQ5Zc95TTZhb3wszj140HryqNqfNom8TUtAPSzrdgr2/adXYo861/20y3fcmhTT1j/Tw/JHZbj6EE9tpsRuS5TG4UMHA/DNGgPCj4bDZjXXjDTX8AXs8sY65XWTsV9BXZV5AUr/v3IYW30fCVGNVZU1nbiMWfEYWRJPoSMbFqXsrIDK/KOXk//+EI4zVbgHhE5IsRW5uv7ybBgqlDbd+OU8xABrzq032nAs/9AvrEATJJGecddgC5JM7T1F9uxgsC0uxEVZXvSPL870nMOPo+NYkcRyTqAKciyo/NjtfM78W4FHyflC8eCme+QIUp9VXQpT7Fdk5f1c057IMiL6E/tI2+0FNTTNs/m5avbYfiDBrRFH9Mf+FHry2wSr7W0QhG1zpCs6/7tQpn+kRyOjGY4DdA2nCHn/L5lDHBD2YuEFKRyOSCMCbYVy7S5VjQtAyvxtLO9vCeE1Aj9WM3I0GDrN6sPcWPUwFfZA6tp1r4kOuQIE4AvD44avzzm/NibNIo5pZRoScsyxPdNxiBOkbOz9PXTq80=
+    - EXPO_DEBUG=true
 before_install:
   # Increase watches to fix issue with expo publish, See: https://forums.expo.io/t/error-when-running-exp-publish-socket-hang-up/2082/10
   - echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf
