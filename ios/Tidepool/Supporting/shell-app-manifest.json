@@ -82,8 +82,8 @@
     "icon": "./assets/images/Icon-App-512x512@2x.png",
     "iconUrl":
       "https://d1wp6m56sqw74a.cloudfront.net/~assets/f4429e4582c198f2093d35bef9b994cb",
-    "publishBundlePath": "ios/tidepool/Supporting/shell-app.bundle",
-    "publishManifestPath": "ios/tidepool/Supporting/shell-app-manifest.json"
+    "publishBundlePath": "ios/Tidepool/Supporting/shell-app.bundle",
+    "publishManifestPath": "ios/Tidepool/Supporting/shell-app-manifest.json"
   },
   "isDetached": true,
   "locales": {},
