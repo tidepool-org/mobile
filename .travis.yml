@@ -1,16 +1,15 @@
 env:
   global:
     - secure: 0YNWM5/PqK2AAwANlfRbm8iTRZgMgcofnvo3/nkpRMIctmTzCtiLDxiz3UDnddtCsqapaUtBhrdk8VwicWVpNMqJNqScKEmOP/eN2YHfxQ/FyGnr/arqpwXnmgXGJ1GkXeJnV2EyBnBAwEzQ5Zc95TTZhb3wszj140HryqNqfNom8TUtAPSzrdgr2/adXYo861/20y3fcmhTT1j/Tw/JHZbj6EE9tpsRuS5TG4UMHA/DNGgPCj4bDZjXXjDTX8AXs8sY65XWTsV9BXZV5AUr/v3IYW30fCVGNVZU1nbiMWfEYWRJPoSMbFqXsrIDK/KOXk//+EI4zVbgHhE5IsRW5uv7ybBgqlDbd+OU8xABrzq032nAs/9AvrEATJJGecddgC5JM7T1F9uxgsC0uxEVZXvSPL870nMOPo+NYkcRyTqAKciyo/NjtfM78W4FHyflC8eCme+QIUp9VXQpT7Fdk5f1c057IMiL6E/tI2+0FNTTNs/m5avbYfiDBrRFH9Mf+FHry2wSr7W0QhG1zpCs6/7tQpn+kRyOjGY4DdA2nCHn/L5lDHBD2YuEFKRyOSCMCbYVy7S5VjQtAyvxtLO9vCeE1Aj9WM3I0GDrN6sPcWPUwFfZA6tp1r4kOuQIE4AvD44avzzm/NibNIo5pZRoScsyxPdNxiBOkbOz9PXTq80=
+    - secure: uDQdpxJt+L4QPaBmi3BXtLKmnliz4kBcKRUiN9hQf6HFUu4vH+fLbR8uudoEzrtkUSe5FNRblv2x62fGBEvQNBsZlW63QgW0B1CFHDKDyyQNrUHxtO0MBiQKI4aJmnAOhIFp29hzLnxuuPrPtYTBSDbd9uZB2AsHUBkjL5WUjXYDK1fftfscYnbZnXcSldO4BANrWCNwPI6LhrCyEwlDliCD6A3g6P9SDSk0Z7X7cb1Z/u+h4b1mYj5xK5cYKYs0KG1N6gQtNZPFKOJPz67v7jpZO6OIqPnnqpFXqVT+EkiTHbY8XhvPqTJ8kUijQPq/9ZfoXq/8a4h0T7I+aSIoJpWZcDIKSeOv64GhGZcmwEuL3tB2ecOwfxh4uPF0bc5LQlN13QGy5WgIZ+aMH4AoBAOr4kDgjxk2JdBcZURyXCLzhYjRYyflaQL1QnER5uoFhxVdfRf838YtfJu+3Vle5aLjtamiuevFrgMdntx39Vafvp9IVzC1lVQejUFXRL8AeXsE/+lXoCa3mEzU6OewN0dXCsaZNrINS+43dddF9wahjhgeuPPy7xNuA6PsAYNZO9PeYzcIK+8mcG8F05RL2MoDiGz1fSve2+XQFYLre9Bd43EMi2gmGWW4yNP8aZlQmWJVsw2k0zrNTTOSPoXv+cHGi3x2yN58RmB47wBzWDg=
+    - secure: o35C0wt+Px4jbeX7r/oZMS6h3NJ5ZAnPSFHJ6aC35ojRe4QU6mX8NNb1bTLGg8lFP0tXHTVdvsRMUubfztnKfrcXxoYlJcjxdlNDfbOKXJhPA/HyhutfEqDus16AkP1pF91x7c/Ky3jHjGnjI0ffcql7qfWgMGjFSeVwIMXEL/WftjnNsggkR9YzKtwvZaD7aTn0hU/I0exTTQ/zRpiwQ9xm+BrJV7UgKsmW8Ahq98Q583f6ZWQATUujQ9t9FSztdkK2iW9tg28XHkyYrhpr+23OA5PmjkSrs3CBp19FctmjpL4FVf4u6FuqCoROvpTrlj185ssiB8l86HcevkSHTyXllgxAmF+47dBGiDEmM0ptxpL6xuyF/eNiNwqs6x3Mdf3KOGq07ikJAwlNnaBOuDgCPgPSGPVib1mGOYQIc2MW3Tt1i+dhRn6VA0kLsZn7riFsJXlg00P4nEQKcqjksfteEXduHXikKGyr1hH59zkjHrXTnjBYAAgarS2ohPCPEkvIBj9jhC6X6qvLuVXfuAZbMleSE5b40xKzUl0h+0oDB67KG+g5bT1lXLHkPj7zFagouhtsAHN/XlH09R2F3uUOn8wZpmpXCYg9Wqeq7vtjQMA0f39wXXgv9SDnZjAkCkmpegPb8zdH6lZbY/MklJyGdaXtr2+iDhgGuF+sS2I=
+    - secure: O+PlbXXlJV3+qabIGlEhR0c4JrzTAfXRl31S9llH7CeKI/YSlSt2O2xb4VCA35WY8IusSWFEpL3WV1czJKWR5+gJrWPaKMDd1VKRwiVEhLyc5dcYOZki59C8ae2FQJfUQze8KAAUhFrycil2a6FvavdB5/W2L/iIwGxTDvJ1gKLjMS5MM27Wel9WGBO3wynuFRR99ekHH06zobA7f8SsninrYh+JrNGwEYswoNjf/j20Pg+CKoWEkSUDYTkSqUIB2Bm5NprvAs3Jqd/X6j95l9mCdIGv81vpMp1Noc9GAwBTdLo8MKoinmHU4SK3VYMfgBNtWATo/yvAe60gtUNp6TOwXZ8zh47DvixiJLKzWWIIOl82KWZfsB3Hs5JvU/ag8HUAST7AdoPcaXDZQH2vrbBB1E9REf4JdWUGu7NCWSFhoPUdGThnSZSk6iA36f4bINVd/RwkhsMEUoR3ttBu84MMhoiSUlk5GPJzqDHQAN2AdCw9nfd7OuJW/0o+FPaiCd9rNnHeURM/eQARa6FoyVZNCgE2EU+5garh/Oa+Z6Ir4lCvcmi2eGrYJyHk/f454m+YSViYe2Hd01dqFJtbBq1L0CUoMAJiXkp6mH6ikP8a25gS7ojKZPRuns+5N1txfky1nV6QEwPnKU3R/1+4/dKW3YyZCeiiO0ISmSXzVpU=
     - EXPO_DEBUG=true
 before_install:
-  # Increase watches to fix issue with expo publish, See: https://forums.expo.io/t/error-when-running-exp-publish-socket-hang-up/2082/10
   - echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf
   - sudo sysctl -p
-
-  # Fix case issue for ios/tidepool
   - echo $TRAVIS_BUILD_DIR
   - mv $TRAVIS_BUILD_DIR/ios/Tidepool $TRAVIS_BUILD_DIR/ios/tidepool
-
   - nvm install 10.15.0
   - npm install expo-cli --global
   - curl -o- -L https://yarnpkg.com/install.sh | bash
@@ -42,3 +41,4 @@ matrix:
       script:
         - pushd android
         - ./gradlew assembleDebug
+        - ./gradlew assembleRelease
