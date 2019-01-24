@@ -1,3 +1,6 @@
+
+def isRunningOnTravis = System.getenv("CI") == "true"
+
 buildscript {
   repositories {
     google()
@@ -8,14 +11,24 @@ buildscript {
     classpath 'io.fabric.tools:gradle:1.+'
   }
 }
+
+subprojects {
+    afterEvaluate {project ->
+        if (project.hasProperty("android")) {
+          android {
+            compileSdkVersion 27
+            buildToolsVersion "27.0.3"
+          }
+        }
+    }
+}
+
 apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
 
 repositories {
   maven { url 'https://maven.fabric.io/public' }
 }
-
-def isRunningOnTravis = System.getenv("CI") == "true"
 
 def getVersionCode = { ->
     try {
@@ -89,17 +102,6 @@ android {
       minSdkVersion 21
     }
   }
-  buildTypes {
-    debug {
-      debuggable true
-      ext.enableCrashlytics = false
-    }
-    release {
-      minifyEnabled true
-      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-      zipAlignEnabled true
-    }
-  }
 
   // Configure keystore
   signingConfigs {
@@ -108,7 +110,8 @@ android {
     }
     release {
     }   
-  }
+  }  
+
   if (isRunningOnTravis) {
       signingConfigs.release.storeFile = file("../release-keystore.jks")
       signingConfigs.release.storePassword = System.getenv("keystore_password")
@@ -119,6 +122,20 @@ android {
       signingConfigs.release.storePassword = getPassword("tidepool_keystore_store_password")
       signingConfigs.release.keyAlias = System.getenv("TIDEPOOL_KEYSTORE_KEY_ALIAS")
       signingConfigs.release.keyPassword = getPassword("tidepool_keystore_key_password")
+  }
+
+  buildTypes {
+    debug {
+      debuggable true
+      ext.enableCrashlytics = false
+      signingConfig signingConfigs.debug
+    }
+    release {
+      minifyEnabled true
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+      zipAlignEnabled true
+      signingConfig signingConfigs.release
+    }
   }
 
   lintOptions {
@@ -139,9 +156,7 @@ configurations.all {
   }
 }
 
-
 apply from: 'expo.gradle'
-
 
 dependencies {
     compile project(':react-native-device-info')
