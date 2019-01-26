@@ -11,9 +11,13 @@ before_install:
   - echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf
   - sudo sysctl -p
   - echo $TRAVIS_BUILD_DIR
-  - echo $keystore_alias_password_test_1
-  - echo $keystore_alias_password_test_2
-  - echo $keystore_alias_password_test_3
+  - if [ $keystore_alias_password_test_1 == "test\$\#" ]; then echo "matched 1"; fi
+  - if [ $keystore_alias_password_test_1 == "test$#" ]; then echo "matched 2"; fi
+  - if [ $keystore_alias_password_test_2 == "test\$\#" ]; then echo "matched 3"; fi
+  - if [ $keystore_alias_password_test_2 == "test$#" ]; then echo "matched 4"; fi
+  - if [ $keystore_alias_password_test_3 == "test\$\#" ]; then echo "matched 5"; fi
+  - if [ $keystore_alias_password_test_3 == "test$#" ]; then echo "matched 6"; fi
+
   - mv $TRAVIS_BUILD_DIR/ios/Tidepool $TRAVIS_BUILD_DIR/ios/tidepool
   - nvm install 10.15.0
   - npm install expo-cli --global
