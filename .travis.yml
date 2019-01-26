@@ -1,42 +1,43 @@
 env:
   global:
-    - secure: ebmwrb12LOXRlgQ5bFH7tNyRdSWrLtPrJcVnmqDf/h7CEQkRCuzP3CKsOKgr5yOcOOkfTHdarsK017llzvOID54BHM5Av8vnUW2gkdz8BSRu5+wyjX+TG4h2zuLhtjhG/nArSSNILqjvoZzA3ogMm12ua2Jh4NcjjO9nBSnn6OpGqlNXS2o856N7m6N4tuQlmQCOpA0rplfji8Pn/lzfZzun0jE2s6kWJ3WFmv685SjtDyCcaZxJyIZ9NVs5N1ghQPeztC7yaGyRZImdh1wUnFuabSqm7LFDGUYThoodM1QqOWfgFrNeUYT40J1hr0LVTfvWopyhLvOdJ70sJPjUnGZHUzUGfx0rxvR04JzGl9TnuVALxAciYu6kV0Dextf+J/XDstsjbDDsPsDX6UBjPGzZ5Mfyof6CUbMb6Mwlvgfymy3uKnPCnqZ/97nhsVwQv7NwM3n8pxhpwHdrpHdkXc2Fbczbuk3G65ZoTK7ir13rtUNiI9jWGb6cUofnrxQk1p5kaBNrTsU3zcz2irBXz8B/IsPsoTjZgX+eU0HtsSfrmLO/j6OEHa7iz9TO6G3ayZBUIHFQ9eMSU9EUwOmJzEHZwDaP7xsGvsKmM3tFnR+1NOJWeWSK8fmhfC9Kgg+iulYiwwgs5zsKVB1QCygrF21lO5sQ254UtGqgWjpaqjY=
-    - secure: xCrWe+bvpFknRB62w7rUyeE9lYV9g2ArOSnogKfMLuKCNq2KUJrpBulhZ75gwFQrn0yFZnEzXW9HWQjon46SMvt9YkeficNq/svszUDX8y7yd/Jyd85Wu9SI5WzIqFnERPRQZOfu9Mrl7tl+QKCG/LMraMQdij+rO2/WMwHlvXEupPPqc9PHN0C7AGYumY/tOCxFe18ZmLop9R1Bdjv1qB+Nc0pHRXbbeQUtrztuIc24nPo7QuKO5xtWZzVxuCBcujfsVTgbvdQsqqK9iNlt8vHSFz4z/oj3IMlh15AcZxmp+pf/5qrDnrylczcyefpD2gBBna323KmjCRhtwR6OFIa3M5Cmdtso0PtoWme6YmTaIK78wSrz0nnsBT4JWwxKLPNailB1seNm1YlCIg8MpsnFH8Dfkmi46nNaVa7zxZU0Ipa3ZdbWs3T6E8b78JD/Vrxwg2OVzOYwqGtoZcLUKz/ccB/LTW9ptU0qFun7obuDzDEyYQcFMDxZzu5/BeDiXXIW7teSSwlMsG62fVMfaii5rHdTFKU9N9cP3qWhxVNag7galox2SEWvI7X8+fDeBk3yfjFtIcMKywJT70FF7fVEjrcQr2krWEiJZWzW+k5MErILFKGJW2YlgBJu46VE62vKXCSv8hly5yToehWqPlRO2GmJt3jX8FAztU7Sh0k=
-    - secure: KCtPXKJ2SaGbkWaT78/jLaBvprf2YTir6D+wuAbcitxJCNw9e/KS95NJ3P/Wde4WTxuRE3/eJzgqep6djXnMlxDeugjPdzvQ++rnHsgCUPXnz1xvVNIxh2lWq1DLRQ+IecP1PK1g7UPF356h2Xnk/Ga0nBzZLPyhVDv+KsARxriKg0GjR1TKQS7+YJ8qXN+aNbFN7PaTRZ6zgA9YBund1TjBVvUs8CEp7B4UwneU2UFVhZ/QZ3cDETTyZ6/lbKC/42cia2VbhHjSDIbQ0lJ1q8gyxaHqGPtvIKaCIpysgifJrcmahtgpoP5XHZK6WUMP+9wwejUeHzjr1WiDwR9/zXFJRfqf4hGgz5EtgFBviTBf2+ZGiu9Axd9nlY9xucTp0o8aWDsbEqcof1aylBIclofHGuicIcKZj03nBovnZv8V16k+KaD/8jwlDyNlgDACO9NwgCnmog3FYgcDjZiUAls/ie+3LZ7i1ukfwPbBRRxDljoYYlwZkw9yZZ9H2N6mVbfD7Vb+FdMFf12Vq9SzkTxtjb0qmgxaE0uLr1KeT36WZCB8XjZL/aQabBXqV9YF45FdLj0+6AGNsOT+sLg475LbAzT+LQS+Fg2SdewZ5x4DYfvYTe6BCvM1AhfAZIopwghea0olz4WFHBIwikGboUCxFZb0OoMo3zr8KajSYUc=
+  - secure: QlgqWWsr7D2X5W+stb2Y643yGPIJENqb65Gu84f9evgksgkrXGULuyKnK/OXWkDcnDjbL/HeD53Tq0v51g5r1PnGs9BIhMY7ietHsN0wVBxBeKy4pbU5EMTI98C2jHMtqYAywnyOSQMEXb/dhps1CZmrhoicqf33zbpnU3MqPwOXK0kRUcw9Rn+UhytAOF7PkmK4VN26tHCgnfWYk9RtrLd6BzPErGKvAx4PuAvbyviIvYFAf6N1mmOLuishllQdeUkOcerq9Ex4m6eZIajmUSjtWREKX3I452KOzv+rACN7bNFipSdwOFIKHj0YMHZSgtEH8+dEmNEH20BmlsuB99Z9kIjCU/qkybtxh0nf6Vn4pBdyskefSc5tzPd6a5QwANJt4Bo8YrpVskgJHpmti2IVyytGC0TK7GgdBkDKyP+myGenbmL8omqHXfkI/4NSsw1HT4Fduqu6hUbuSFE10yNXCdVdtOMYn3XAEAzIkgZmi9PPJ63yBBVRJoTLbTQ5eTd/mNhhQeWuhY5x6gDmyNiEOX3ApNNcaS/O5R0n9qPvrbbUhMv9X4RnoJV/NG97K2zElryiSvA9cYVW34IUhb/1zO7KUYjVBGT1JWmbfWwNygkFt2/xwg1n44EpJGkUxrYvocSyo7PN5kTjaPBgFrRvs/li7zt7UIu5/dzYy0c=
+  - secure: fsKNwfe1AaLWSLXU8hl8SWFGKYz6wCEohJQl2oyfVXdLoBS9/QKFJXMHQb04VOjHqAbPnD/wczcs1oXc4P2jkUYvUvICJSNecZLYeKvDpVBVaqFPwCZBgyxHf83gZ6QDALPgHQrb4MK1f2Pk4AfMKFnsCz2XjSSjzOWSv7oajtIDax/z9fKBD8XWBcBv5ori9U3VIpyYIViHWpsAeFhOEwJsAq+m/o7RiSd+l1t3PIVpuvgxdgHKk57OgFrUms79wzx/d/tV2ge2OpKfaJWsJRDyZyaE2nsU95UkSrFB6yspYoHZ2tTQ2ijm2JgTdMQBEPI7n9kBJ39othZqVer4awOSznx+pQH8an643JHwqRHCZaVn525cAoO+tuewthzRMnDa00pwQXoqUrBMvaxgu96W9PCzIK2r/kXAlnmQR8xZRx0dbKrBqP4OT1G0L4YHbyxaourWbP5bCp+7ABo4fiHpMZFev9du5WjqFi00c4zRoYGbuxX7JZ6whD4itHMZS9vwn8cpYi+mvLk6DbDBH4uhnG/XZ1UXr7nxA8xMZneQSQdof0DuF16hl4/kMi+oQf6xalY32SQ4LXvMOzs5or8K2ga4fZG2wL4ANHhjFV1iZPn23hXhMdd+rrZb9LjsMEXs+VRhkpnkbCvYrj6xADOy3ccS2x/+VIEn8dFVqTg=
+  - secure: tbu3lAsZ8IZq2+YoIz9p1Iow2cGDT2c+9AwUxETnm/+RXLzWbwEX8LEL3cWMdH+ScXqbwYVOHWXx8ttoxNVM3Tncea7UgB7lg7rzwYEinHjHNZdEpDIchFpmIuf+6YikvBFzbGrEmGXk6YXGZSMNZpOZ+IlBA4xsQQ5uVIc8J9s+swhJDwiW+QD4a5wr/L5dmPfobb5SAfEczSFKptWJoi+H2iDuOMBHF05xn7LYAr8s0ztFWVf1q5smdIbt9CzginZpHt9BrQz1YdSyyBbn4h9GcEXbs7A0SKyzOSD8KaljkwEPSAFGMYb8xpnmm3f+4/OI1TkbjdTnlwCpVw9dyp9F4XyBz97TtIEvc9yJIwWAKeNsGjaAjd8n91LBoh9fPp9y7Kn1Ox54h+Pd28QU/hfhSdOMxOlOLj4OUtAAgRmOs8Orj1xWzb5Wu3p6/K23Yfqllt8Xe/VXaK/drxTImvsf38F/q8g52+xGMmdilntoSum6JLVi95NLcqxB7QcbIfYMRYU0uXZBT9mg8yTqjjCIqSMg181ZgFV2Cn53poXxX0+wbt4z/S0psF6+hFzCwuECjgJFmI/dOR70FTqcPIu+sVQgiW4wjYWi9TRrZyzzqV38Vfmhj9jt6gSSutr3FiVWtD7dpouokyZKZHyrAFXZq7mVVS7Q5x8Ft5XHQBs=
+  - secure: njJyAOJW8iBEfem8adrt3llGU46An9QXpJTvgbUIzt1kCzRCwlwqWRQNKvjA8M40qgl1Rbxm2K6puv7qoxFI0rkxs5GCWXiPSC/m3nWjlJG22AIq6xit1KkmRPtSV2mf4JPqATRAuCExN+sEa7FSJYyIcta7ddLrGb7gs+LxrZ69jExEeO4Oyxt+sbZi+BfzKVEWFIHCAGJQNOiOIlcyDqF79vKbDy2NBqB3QAoicfcCrvhqgWUqM2El+0/efcH2WuHyFhp1t+HrUZM2Vmg7pJ/QS7zKYsca9TFWlSDSsTju6q1wHBkSAstOMR4VZAEh4SoGvzxjZcHCcq76G+ayJsaw6AckkuaFCrYt7aBhnztqDwz85d8u14BU2KzrFWzghNG3iO5vxuLo2ewXzpGTgPcfrH/ka3KMi4Vbft/9IABSSSqnwpdRp7zzc1bhPLvkD95XIxQtfot7S6uyi+x1x1b/Thn9lonViPbAyxVZ9rJo22Ft0wowat0raa79iHT6MODaU3YHNuZYFlTcbKk6hwUm35Gx1Ez0o5NM5W0Q/Cnn1ryqzn6qNyhypVtTKpDVVKDDpdx441eOrQNjboIDhupKGU8bhJNjYJgaGpX6c0/O9Fuaw8XfoYdhJvbNt6FtU0sXOhv6hxTjq5OyVDABN5cgF11Ec8cb4qGluESCFFQ=
 before_install:
-  - echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf
-  - sudo sysctl -p
-  - echo $TRAVIS_BUILD_DIR
-  - mv $TRAVIS_BUILD_DIR/ios/Tidepool $TRAVIS_BUILD_DIR/ios/tidepool
-  - nvm install 10.15.0
-  - npm install expo-cli --global
-  - curl -o- -L https://yarnpkg.com/install.sh | bash
-  - export PATH="$HOME/.yarn/bin:$PATH"
-  - openssl aes-256-cbc -K $encrypted_4beaf9ef68f9_key -iv $encrypted_4beaf9ef68f9_iv
-    -in release-keystore.jks.enc -out android/release-keystore.jks -d
-  - expo login -u tidepool -p $EXPO_PASSWORD
+- echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf
+- sudo sysctl -p
+- echo $TRAVIS_BUILD_DIR
+- mv $TRAVIS_BUILD_DIR/ios/Tidepool $TRAVIS_BUILD_DIR/ios/tidepool
+- nvm install 10.15.0
+- npm install expo-cli --global
+- curl -o- -L https://yarnpkg.com/install.sh | bash
+- export PATH="$HOME/.yarn/bin:$PATH"
+- openssl aes-256-cbc -K $encrypted_4beaf9ef68f9_key -iv $encrypted_4beaf9ef68f9_iv
+  -in release-keystore.jks.enc -out android/release-keystore.jks -d
+- expo login -u tidepool -p $EXPO_PASSWORD
 install:
-  - yarn install
-  - yarn run pre
-  - expo publish
+- yarn install
+- yarn run pre
+- expo publish
 matrix:
   include:
-    - language: android
-      jdk: oraclejdk8
-      android:
-        components:
-          - build-tools-27.0.3
-          - android-23
-          - android-24
-          - android-27
-          - extra-google-google_play_services
-          - extra-google-m2repository
-          - extra-android-m2repository
-        licenses:
-          - android-sdk-preview-license-52d11cd2
-          - android-sdk-license-.+
-          - google-gdk-license-.+
-      script:
-        - pushd android
-        - "./gradlew :app:assembleProdMinSdkProdKernelRelease"
-        - "./gradlew :app:assembleDevMinSdkDevKernelDebug"
+  - language: android
+    jdk: oraclejdk8
+    android:
+      components:
+      - build-tools-27.0.3
+      - android-23
+      - android-24
+      - android-27
+      - extra-google-google_play_services
+      - extra-google-m2repository
+      - extra-android-m2repository
+      licenses:
+      - android-sdk-preview-license-52d11cd2
+      - android-sdk-license-.+
+      - google-gdk-license-.+
+    script:
+    - pushd android
+    - "./gradlew :app:assembleProdMinSdkProdKernelRelease"
+    - "./gradlew :app:assembleDevMinSdkDevKernelDebug"
