@@ -5,6 +5,8 @@ env:
     - secure: YI50SskmUCCDJibPA6tZXJwpmMoKsw5QU+9v2XhO751tkwe2MuuLxqlE+UnbE4jrk7RMiM8UqYYvTC0XuA8G8Ue++4btid32kpAwaqqJRcsP7y/HSlVji21YeIxQIr+RIEDDVk2EH1ImbR/1SRdNzSjwPesfTVyIKNt6bzaloDtEXaCtaZz6dNVrkLM+Mw2Bb9ZQwtHPkODOeOz51c6BPZqpslVFK7mNtb8HQe+WUMqnEhpyNxLRMlqvfd9TNWLHQaIbgSqkep4AZKuKns26mv/zsYx5D1i76Lt2qDh5e2IUJyZqb2Cq+bwri/roUHD/nnMoTRrKFU6dioLjHL/l0QD84ib/xa8eYClmZ1o47BqL5OtBwcJvele4tWv6G99FanTfNPAgONqVjT1qq0bPBzu//tEgi8GhM38KsgxmgHHcU8noPqksPfXNbo8pET0067laX5D07iv8/whe5q7qb+Ci0ckxnj1fKhAlMHLU6xMkGSK5RCqHXViSM6JPfZWLFbnUWxN9BA88mqQG4zlsB8aPkh2oFwuXIaHZMuPw4SAyHPwYlGmxckreuCOCm6pXuHzpZ2ndOD+Ujtfs5T+QVFUESZr5aWJr53x/QhUiays3YPOQ+mi2pAcO0mBiyFs8Y9pPr83+f4svXkSWrA3hWBm4a0gqDgZaRICMDUiHE2M=
     - secure: 6wJztYDvUMfa+OHCawpQuxUOJeji+UpvzInN0RZfvDzqHtVz3DZLpK5MlLnOiArQQ+SjwCfL1/vmSpOXNlUOxfjVBvO8HtgmuhPJl3gZumrl8V/i+5DSVixkbqaj/l2viMnmxOb8O9JngWGhUzw3iVWe3des7CAtZxGDyVEBFkPp6HPsKAE2DdkFcFq1amdILJ3DWMDnu/TG904leolMCV5+BFFY+A8GazZj2m6ZGKVakDkFG1aehlgMS0zvTOOKYE6ib8AGFapuI+3wg+DxSiybo7tD8F1HOTgYFKfJ3T5PJQTlBEsMm7nUkSAwXI2Huxl9UxKP6lzwJEDrqta3xuKesV6QWrq77Slr25zJjNoc+VbuEyhLNdqObJeJGgXbP8IWhpuo8ixcKYemEwbBXQmFF2Q9Zfb7fVgjCcaFIbO27CDbhyu9JwrUH6Y0p+sbCxMlkDHlp2WnOOx9pD7A0XVjFXNBnyN6Hl5rCU/LP0jGsvCZZ5vTYQrYgBqKBnqF52/kNZSo4zlgGMC0YtjCXss1yEY0DVhIIIxPbNA3AFGqBtYrIMRPQ9pJwPbAvEbwubG+RfMjZQjGFxdExCfOmSY9eIcBrK04R5CA6avLt8m0bklgmZChkCP8uJ8iYMWOdx326p484P4wDF6M9p2Px+EWWSu9j1yAlIyj00ElTm4=
 before_install:
+  - openssl aes-256-cbc -K $encrypted_4beaf9ef68f9_key -iv $encrypted_4beaf9ef68f9_iv
+    -in release-keystore.jks.enc -out ./android/release-keystore.jks -d
   - echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf
   - sudo sysctl -p
   - echo $TRAVIS_BUILD_DIR
@@ -13,8 +15,6 @@ before_install:
   - npm install expo-cli --global
   - curl -o- -L https://yarnpkg.com/install.sh | bash
   - export PATH="$HOME/.yarn/bin:$PATH"
-  - openssl aes-256-cbc -K $encrypted_4beaf9ef68f9_key -iv $encrypted_4beaf9ef68f9_iv
-    -in release-keystore.jks.enc -out android/release-keystore.jks -d
   - expo login -u tidepool -p $EXPO_PASSWORD
 install:
   - yarn install
