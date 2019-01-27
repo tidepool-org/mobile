@@ -39,7 +39,7 @@ matrix:
           - google-gdk-license-.+
       script:
         - pushd android
-        - "./gradlew :app:assembleProdMinSdkProdKernelRelease --debug"
+        - "./gradlew :app:assembleProdMinSdkProdKernelRelease --info"
         - "./gradlew signingReport"
         - "./gradlew :app:assembleDevMinSdkDevKernelDebug"
       deploy:
