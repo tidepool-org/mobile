@@ -1,17 +1,22 @@
 
 def isRunningOnTravis = System.getenv("CI") == "true"
-
-if (System.getenv("test1").equalsIgnoreCase("1234$#")) {
+if (System.getenv("CI").equals("true")) {
+  println "CI works"
+}
+if (System.getenv("test1").equals("1234$#")) {
   println "test1 works"
 }
-if (System.getenv("test2").equalsIgnoreCase("test")) {
+if (System.getenv("test2").equals("test")) {
   println "test2 works"
 }
-if (System.getenv("test3").equalsIgnoreCase("foo bar")) {
+if (System.getenv("test3").equals("foo bar")) {
   println "test3 works"
 }
-if (System.getenv("test4").equalsIgnoreCase("foo")) {
+if (System.getenv("test4").equals("foo")) {
   println "test4 works"
+}
+if (System.getenv("test5").equals("foo")) {
+  println "test5 works"
 }
 
 buildscript {
