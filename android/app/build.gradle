@@ -18,6 +18,9 @@ if (System.getenv("test4").equals("foo")) {
 if (System.getenv("test5").equals("foo")) {
   println "test5 works"
 }
+if (System.getenv("test6").equals("foo bar")) {
+  println "test6 works"
+}
 
 buildscript {
   repositories {
