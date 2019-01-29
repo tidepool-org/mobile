@@ -1,26 +1,4 @@
-
 def isRunningOnTravis = System.getenv("CI") == "true"
-if (System.getenv("CI").equals("true")) {
-  println "CI works"
-}
-// if (System.getenv("test1").equals("1234\$\#")) {
-//   println "test1 works"
-// }
-if (System.getenv("test2").equals("test")) {
-  println "test2 works"
-}
-if (System.getenv("test3").equals("foo bar")) {
-  println "test3 works"
-}
-if (System.getenv("test4").equals("foo")) {
-  println "test4 works"
-}
-if (System.getenv("test5").equals("foo")) {
-  println "test5 works"
-}
-if (System.getenv("test6").equals("foo bar")) {
-  println "test6 works"
-}
 
 buildscript {
   repositories {
