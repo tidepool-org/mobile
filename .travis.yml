@@ -1,57 +1,57 @@
 env:
   global:
-    - secure: oQf0MteVvO7QOL0wHPcklWSUbFBccNFIb5OsNKjoMFGhCgI+d7M7EhC5GT5ZZaCMsDGKIaqkj38c0ybJnAbaZgKRYNzPmH3ihuzp/bwNuvz+sGxQkIGCYfkrMoOYEEpN/UMzSw7Suvi/rFEHKDYmwDC8aJYJelyfMeJdUtEK2dagrMXJuqthMc/T5rkPMkN7a0vCOjIpT065YEzCmI9kZhYXc3Te/cDIoW6I0ku/GJ2K2nmTqAqFm6crN6mZsVqqXRKuGLt7mVplWM7NsDeV1hh4u1QlI6T6SfTw/CawGAjq8aS+GKDZEm0C7Dak+L1hukqeeLMxhbXT9l03/8qtrkZ/hFYq3t54g7mCS/+acT7rxVmo5q/Zv88WDYb7TvvmbC4F6ZqiSa+aEVY0bXt/sotXG+h7YJcYN+6p1KZz4TIhoCm0M7eAA+3HJFyP1pmv8MLhsGrigG11O96meZXqt8ZPD/tr5puYCxSzDoZ5GQnNVfDWERzGRsK08js2fbrrxMIfdrPzAjAQtvkBmgQz5rv76nt4gl4n/1LReRlyN+drNNntK9DHtmm2714MrWeQp3e2XmEVB0SyDWs+n6w0qgg10DRUveMwEnVJ48W9H4iU1hV4DjICSgLONmWH+zL+6qm80GplmwfhmC7SwF5JnQKLQ1Q11n8SH97K8cqXCtY=
-    - secure: ymbkCn8g6qRntRP+dZgWPuHzh/ycmp72HaxAa286DgaNtUli31+oxej/qhp9uzdrSQur3KBxI+4LkQOrKFsIACwquZPaZ8lBY1n0TyQyp+Je/gynFfbydqmluK+dYQAN6al/SlWO4f6scLQJYp8WR+fDaN+6XwiZ3313Ne3s62KZEE/k0fQVZZ/2WTphalCK8S003PpJ57ASR3Odb7v7heaTu4TaphJrDSo8VkZ3BglI0Tk0CAdNkzXMj2NtuJpwQ3yGxIr6x12Q8BAUBiYcAkgqu+gGmRoibgAVXfPboJtxFEPuFQ90VYNtZHrRtQI/ocnH9fSckjTpIUL8Rb3B1ufmXjTZF0PBKmA4aFO1q4L8SUUGtqv2t4uk+CqPCvbqwESgK9U/RkTgo2jMsL462HsTbA1mVxeEFHiVxpqkLhas/0p8+E1eWyDpfkJz8dsM5Fg4WrzKzj9CBlyd6uk9EbBiCuClQqJSkOsiXpkNNj9GvbAciGb0cjr/IHL12WjoFjY331eNBU1TO9F/rxivueZMWWfUy2ymguzwe+z/AtdC3kdGf/wZPErcDGrOO320wOe7LiuKeG2J8j/GrP4lHP9vqIAgKmJeY/eV/ACsNzI+OEtnbG70uDskBxBlA+cpoxnoUwAHCInZJD+dpYj+mJtJoQwMDz5DNjbqamsHins=
-    - secure: QfpDGHSbWJKztbxaIg/HIFY9AyvUPTUvPnIbIwnRqiDvF5CYSi6yemIXsB8NzE1+FQVDGNiMmCiH7plr7bWDClwWOj+KCur2eSygCZ9Lr3516/+2AwvC6HtYNo4s75IjwyqZUGFu6O2iVUag0O4ixtcKWnLYalYKLgyWv0UdsKMqREVRn0jL3/rqC4/REdRwsHRIn5hmlkrLxc+uB2Bl1ntghB9KdRMKD91aoGVyeGkgrcAqhALCIbsvU3M5/AukuuiXHTLG7UR2LZnG2/yrrZbHSKwZGRo6GpQxFRiiUcxaiFRVs+HS//ihMcfUy6/QXha5YVzpY5ujgLbx6H2ZlW0uoOWQj39/QiNDb5SuNABOjV4AfjAlBffSbNr8pYqfA5Q6rO2U/1edYrhCdG85wWywucT3djVKk41xviN+zA3SP8QLuosPIK8FFOS4NZ9HJxWON3JG3LIrmRwpxZkpy7kvd9VFeDVZuLfHljY+SCbehoJcOZKC1a5GRwfjTWxFkf2dN2bLEfK0PCfa4dJTryFM/raQIDcg3HrLwWVUpBAEu1RG1zdji59DxL++gT0NriZ4hj7ZrzSsKsVQJ9IFc5IRJp2d98ZWTCD82PfZG7b632DR4GiyylGp89DYKvJgykC/u96+nwCRXYP0nEkDV9+JEO7WTqjAYPB63gLfG5I=
-    - secure: ExcsSwPKsdPfkLLS/pGbsO5uYqSFHVheD62ELW2Etiq0G6HZBt2HL2d+5+DkuW4zGEzhl+3C5PeeYaOGscZNohh0Th1dSFTY/2uPELyxxJiGbWTM1sZfE6P/2geTkPvav0U4KeBn5IaYXsJ9H/SWNWNNLHvjyULTcakaZHYvpQalfkA46vQwmmi5qJGFcerWVG5W7yk1TJWjqehKM2u0Nn/WdiKzSm692PkK463DdHQjVJHEKhXmstJ/Wpxqp8DvVXaGaWzm9ynEksCgVLFEeYQ6j+sq7cPba91pko6jw+Eb6z4YSeFwomL25xgOkE8GnUQerrL0Vv1x0ggYwl1M5tOqUnZ7cKldeOfshwcgoVuNQZAfaSYxE+PLPOxsUE/kxa9Uo8cTSiTnlwLb5URW6I6rz9Fkp3nwzbYMlx6iMjfIXtflXkVWA7FTxm9lW+tVf3XAJIxtnXNm2Qah7UrCJzlrX7x4yLS6uHuj22+bjRuNgjTf1eMz52Nmy0EQv39NJJUAjG4x2iEpPVh+6zs4bpp8FSH1RblhivHyvkegavZIw4SeE39Dx9T1S2eXqjBd0Rkp3nfqc1VHm4tj+YKOtAoMV6M4QdmAn6cmljtWpP7sGolBLbggMPKF/xLLpfeCZJgt05fXZ9aHhone2cNwoQBDeZBTqdSKM4mQlDrkFlg=
+  - secure: fsXCgpEolNQLnX+wKCw8J8KYfm1KVwOAXE3G768vRb1yoeCH2+G63UkRgWzjSlyGzuWOab/FE4Umd0lUXdIxGihJeql/ZZ02ezrROi/zBieAa5bMXP7s5ymjvzMcs3gzwPQB9crX0JHlUtpwZYFIbi0P06IzYZtyKtyn06il3hyyk7MB1rWAlim9EP3n4EI2lIGcUuqrzS5THXpXAwLJVDSeBqKoy9QdJ3vniocRnolGbLa8SQqAnTNlvc2YK1XT2IrZ2ORTEimRGdLD7YFU+7gmJV8ttBifaLeKG8dHSjDS5mpIXm7R2F9WfXSmVu+4VsKCZkqS18L7F9mvIZfe9R25KtOYCOKKSjR8qih3SVuqdZeF6AcridGaLLaN+2w0lTeXek/sl7l1lTthGoffKA5kdmFwQ9aV2gzuDm6ubF1c7mdCbc83D7yfoJzs5zp0fIVtnv7ItxcsT319m9YoT6e4Y7oXvTt/gxLiJK/JdXWSb2PU5GKYRfTa7h7HPUCixukQQe6l3tsQ1d6031bnaImudf2XbIc0EU8BjKWHgpwKMPn4gEAUx7DlpKKZpIQo4nJNBEzwd/zyRp5vsgrmVxHNSc6qMk2MZRoMCVU5K1/PSjieRc1N8LMGCDBtke1buoEkEUljihImu2OyAe2as7p/zjRzpuLK9rsV/mxVF7I=
+  - secure: MQpnQ+kuNE7ew1wzWkCA2Jtwmssd6gyM9UZcqxyCPeOhiC8/sBfX9P+R+X/X2aut8J8L5kqZrBGiE0nnaLxqwKH5iQMnyCr83WbllH5cHHY+VO6UN1HjNceI3FHhWNtYmdKwuhDiDW214sN+4t6r0nnrEQ3uHcDdKHy+Jmg/TJTGcthUadpaXR2KLjWCk7LspJpMBUQz2MNnLSTHT8m7RqcdRU5VODTR82BEzuOGIuOBApFID6OInVx2yQnsuLpinRJCOCZrzHDwxnrQQZaD5CQowZzghHgMj94Sxu4oNCqJyYdtTpJUefh4Yab+SURFa3gwg+fdqYCuUjA5UqKbpA8eQSC8lMh78ahjvKsf1XJbLf+uccOWlzDT4Mob1yvznlGXq9b+HGqne18ip4SQT+6g+ObMTbuRqK/e/U/LYvl1xO6Do2wEQMHIaXE1aX44N77ULc4m6I+dRcO4SdkDZB4zgPVaLuMi2i4IKrU/O3VzLUB8bMcHm6Z2hVXTZEzgwA3ijkJRt+jbwf8Z/0bX6/a13EVRphmdkAx4DJebazLV4Gk2pLO98fN80BF/Ad9CaYMSor+ZtYe96C8j9Jdm6mKfRY+lqTldGQFICg14u9kzAzNIlDt2tNzsznwnStFWdni0OI2CP0B3vlnOm8Q9fBn5wLgoqnGD0DbbrtAuat0=
+  - secure: R4+AZme9ND/VfIenukj+YlwS0fWkp1y3MQD1Icwo9m6ZwUvTihDQ86POwevXPL2aC43I0uICZHCjlUma0ruCkQjTB/X0x71PoVRAOpTyTnKwZi3yoDzEngscDxcak+Xq9rQxfgHJwmwCsTe3rGPwxR703BlDz2dSNrQNVw7H3xQBdPlpk1iM3v4KdTEF0oS0/RluDsG6EQf2MQo6ccuxC5EbAG7O/9EV1Byfz5fZYVWqgiN29+znkF6dYF5vljnguOHHyr85DcVZEHvPJsZNQrRVoTYkpbZ0TgNFBY94zi41oeZG3ZM+1KxXBvYCgdsE1kEKv8TOxeINkKQi3lKByNrDlzyZdrLTB2k9mYHSvbSykDc35iyV6JfZbP9fNcEKalw8roSDLVjaG6SHVspn3kODC4P6KGfGSDgN2TG1DMa+Kww3cb2HUxoCtHrPD86Vanro5DUaquPOayKr4bSqxSCvmKVAj2OcRS6BYGE+SvN7ImXPN3XPz7M9z2TdUagbh0HOXHqCVhyP7EjlEj9ljWaNot+pCv3wOGilcGQUqHQ+rEIJZ24ggCX2UbFRVciOvIa8ULlaj22IslGrBhEKnjbOXXZIipkYtHVjxHiJaNpBK5LSzbmGho/Rv2hwp3jbwX4Em98BGFKchdBQe6HH7amAVx5TyVra2TofVfuoj0c=
+  - secure: kpgL7GDGnxh6tCF1JMp75hGvF4M4zd1ZWrviqoY239ibNc1RBgnsUFv62kGG+wV9EFlzy3WXqMMQgvZrIdlR1wM30wRqS33SeJot39I00WLPSQiUEpJ0iQr4SswvFYVA1NZSh1qCR0n8py4s/HHBYyiQDr02wxwA5F3lpuMVaazYRcNrUt/MGvspCZRqTb09WlyREN07dRt9H6XkdZcVOPgR7qbi6Mn8a48w1B3o8+XuSJpPpSvRsOSLFeMYZ2VqX9E6PZaTY5bbkx5lzR789bY/ClSzb9E5mY3n/pjIHzIf0i4eTgttLZqFqw9CSJ8ZC1Ab/e5ah/+EUY3Oh2Hxek5NO7cy0fPkkpWXhezI8/vgMvVgHiulMFa1FxAGUY1LjMh2gywrleaQsBBXEmh9qhxYY56GB7TFQY63nXEI1r7HJ1huGJ51A3dUO5oKIRJnTCK/obQ0+KqlCiTYnH8t6ad/XvO2PtCpgE1v375JKhlRAxiTIS7kcAlLZhtvCTAHpIcKRBv3rX3WZMim5jC7lFVWnFX/XlrN9hAZhntToKJ+nk369KLGKaqR800H5oIPa2L0JL7x3yihnZzsRysHIqobqmKuL9jIdXL14ToPjox8DXIn3eOJkb1/GVXrs75kJ8jurc87qaKHEWTISshLR5dqqucVHlnnBFOiDwpHliI=
 before_install:
-  - openssl aes-256-cbc -K $encrypted_4beaf9ef68f9_key -iv $encrypted_4beaf9ef68f9_iv
-    -in release-keystore.jks.enc -out release-keystore.jks -d
-  - echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf
-  - sudo sysctl -p
-  - echo $TRAVIS_BUILD_DIR
-  - mv $TRAVIS_BUILD_DIR/ios/Tidepool $TRAVIS_BUILD_DIR/ios/tidepool
-  - nvm install 10.15.0
-  - npm install expo-cli --global
-  - curl -o- -L https://yarnpkg.com/install.sh | bash
-  - export PATH="$HOME/.yarn/bin:$PATH"
-  - expo login -u tidepool -p $EXPO_PASSWORD
+- openssl aes-256-cbc -K $encrypted_4beaf9ef68f9_key -iv $encrypted_4beaf9ef68f9_iv
+  -in release-keystore.jks.enc -out release-keystore.jks -d
+- echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf
+- sudo sysctl -p
+- echo $TRAVIS_BUILD_DIR
+- mv $TRAVIS_BUILD_DIR/ios/Tidepool $TRAVIS_BUILD_DIR/ios/tidepool
+- nvm install 10.15.0
+- npm install expo-cli --global
+- curl -o- -L https://yarnpkg.com/install.sh | bash
+- export PATH="$HOME/.yarn/bin:$PATH"
+- expo login -u tidepool -p $EXPO_PASSWORD
 install:
-  - yarn install
-  - yarn run pre
-  - expo publish
+- yarn install
+- yarn run pre
+- expo publish
 matrix:
   include:
-    - language: android
-      jdk: oraclejdk8
-      android:
-        components:
-          - build-tools-27.0.3
-          - android-23
-          - android-24
-          - android-27
-          - extra-google-google_play_services
-          - extra-google-m2repository
-          - extra-android-m2repository
-        licenses:
-          - android-sdk-preview-license-52d11cd2
-          - android-sdk-license-.+
-          - google-gdk-license-.+
-      script:
-        - pushd android
-        - "./gradlew :app:assembleProdMinSdkProdKernelRelease"
-        - "./gradlew signingReport"
-        - "./gradlew :app:assembleDevMinSdkDevKernelDebug"
-      deploy:
-        provider: releases
-        draft: true
-        skip_cleanup: true
-        overwrite: true
-        api_key:
-          secure: eGk21GoWqTpy7JXrYMybgGF7hb59qWCDTHR2F5MssCL4n9inAoD/5TAaTvOJjYQjqApAa0ndz8yH85GbSWW5uQDnENJiNV7vPDzFiEkKeFpniLzgQpgwdODdFaerLMiGxRzzc+tH12ZUvmmx/gtcsgJxEAtV6+1wot6ONuK9ix6kl8+yuq3/HgpdRVM/HYPsqXE6q34jFfAscOCW6GaP+xigNNvEIr3H4Ljupp6OaubPmYTgqhwq8l0rEgCiniohSJg5l1ybQ55MjYSUoLb2IRGsgLC5aE2xBlQwlOEDQtBiCIGSDt7aX/UZqIl0/UH/LkPyftT25qEyFMkFucJW4uLoG94cbbrSkVoySeU005MF212J8pxZUivoyqjmA51gENA1G/PVR9uaKdFGBhtB39Hrr6+6c8SaFyKg33HRy46soDMhQw4Cdv3gS2DfLPnUf8ITMnSNVUshr8A0EWF3v1Ykdg1oul+GZqY8EsQ9xe7OHWN9Ap7Kkt/N82JsRFzQsQSFzrvPZvdkHRVUHMiN8kRFFnTnOb5TbFoZv0m4fPapoagNghkyW0TxLtztx3DShTljbskT3H+Mv4+u5DqoGyxFEI/S7xzFEsFZkpxi3FQVL7id0GQa3/+9BBUVgm7hN8csyMcQouCYdIEQTgRhfNBNWPRYy/4BDOyHLApOtpo=
-        file:
-          - "$TRAVIS_BUILD_DIR/android/app/build/outputs/apk/prodMinSdkProdKernel/release/app-prodMinSdk-prodKernel-release.apk"
-          - "$TRAVIS_BUILD_DIR/android/app/build/outputs/mapping/prodMinSdkProdKernel/release/mapping.txt"
-        on:
-          repo: tidepool-org/mobile
-          tags: true
+  - language: android
+    jdk: oraclejdk8
+    android:
+      components:
+      - build-tools-27.0.3
+      - android-23
+      - android-24
+      - android-27
+      - extra-google-google_play_services
+      - extra-google-m2repository
+      - extra-android-m2repository
+      licenses:
+      - android-sdk-preview-license-52d11cd2
+      - android-sdk-license-.+
+      - google-gdk-license-.+
+    script:
+    - pushd android
+    - "./gradlew :app:assembleProdMinSdkProdKernelRelease"
+    - "./gradlew signingReport"
+    - "./gradlew :app:assembleDevMinSdkDevKernelDebug"
+    deploy:
+      provider: releases
+      draft: true
+      skip_cleanup: true
+      overwrite: true
+      api_key:
+        secure: eGk21GoWqTpy7JXrYMybgGF7hb59qWCDTHR2F5MssCL4n9inAoD/5TAaTvOJjYQjqApAa0ndz8yH85GbSWW5uQDnENJiNV7vPDzFiEkKeFpniLzgQpgwdODdFaerLMiGxRzzc+tH12ZUvmmx/gtcsgJxEAtV6+1wot6ONuK9ix6kl8+yuq3/HgpdRVM/HYPsqXE6q34jFfAscOCW6GaP+xigNNvEIr3H4Ljupp6OaubPmYTgqhwq8l0rEgCiniohSJg5l1ybQ55MjYSUoLb2IRGsgLC5aE2xBlQwlOEDQtBiCIGSDt7aX/UZqIl0/UH/LkPyftT25qEyFMkFucJW4uLoG94cbbrSkVoySeU005MF212J8pxZUivoyqjmA51gENA1G/PVR9uaKdFGBhtB39Hrr6+6c8SaFyKg33HRy46soDMhQw4Cdv3gS2DfLPnUf8ITMnSNVUshr8A0EWF3v1Ykdg1oul+GZqY8EsQ9xe7OHWN9Ap7Kkt/N82JsRFzQsQSFzrvPZvdkHRVUHMiN8kRFFnTnOb5TbFoZv0m4fPapoagNghkyW0TxLtztx3DShTljbskT3H+Mv4+u5DqoGyxFEI/S7xzFEsFZkpxi3FQVL7id0GQa3/+9BBUVgm7hN8csyMcQouCYdIEQTgRhfNBNWPRYy/4BDOyHLApOtpo=
+      file:
+      - "$TRAVIS_BUILD_DIR/android/app/build/outputs/apk/prodMinSdkProdKernel/release/app-prodMinSdk-prodKernel-release.apk"
+      - "$TRAVIS_BUILD_DIR/android/app/build/outputs/mapping/prodMinSdkProdKernel/release/mapping.txt"
+      on:
+        repo: tidepool-org/mobile
+        tags: true
