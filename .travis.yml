@@ -1,57 +1,62 @@
 env:
   global:
-  - secure: 3zbx8ajAIKWXDlQN5ijm77e1/dJliWDLjRKknsmQ3AH4gTivqoo0Np+KXX6tG4TCfiizLGgU6m9SZoxiiCWOe4U4yuAR4xQhe2W8/rcXgKc8mbXtLbXrwVRBqrJJZ99fOURtJopnaxby1xHy/6vhxX6yW0ojz2VvmLdiflEjriE0udvUksGPfsmsr3A2nN3dEyaKYwVwK953AArx404H4pSJCwNPQaYjmOWDhZ1XRQGlr1ttcgGYlgmx9YU2pGZjmlmXbrITpwd+eG/jHv2kAWSJdC1KYzntNr/ETMTzuy8lnRG3BOL06n8Gx57F9hX6PS8eWMpZ3bY9BjW49SMb6ocqKbsrwrYj8r+Im1nNCAiwttmnsUtzgGdb+He1HiLPIZPEUVB9iAxH0Ny6mX8tYw7buNU/poZwRhHpUgjBzOp7bKGgvmtB5q6jNdixaDijUs8RlUixcsAt8t+LRqKPgqkTsPX8rdsTZXUlPA+v08FxJMwwREbWzBDEhMjYS8/muSmZPenR9dUbG+Mmoq4OjICE76YqAAjIzJHUkVKve/yJvqMsLWa86Qp8oah4N1jzK7rYt+ar1Wnm1PI+wXXEWGNIeC/jYAXawiJnEzXmoxUFumyR8WtqSsz+LY2rWDFbEt+TpiPfwgX6CH9F3GXzdqxx6mNs28YOGudYoPXBUNc=
-  - secure: hxYBSEciPUwbvSDSkf+HMdVGbT2e48Ri9JYFTDCf8qz2AnhKVwW2lXPZ3aYijfhgtazeA4j0ZzSQYMdEvOv8eDN9gEJ1ERujZPqlEmJrP2cL4tzG+nIVsrw14gMkoftHteQFzjchKMpdNIyNfvg/+WHX6xb/QnA5Q4Ly8bTG/+wCsJiqCDfqfgHPAGKy8gnXdFFNDvJ5UtHBKo5zyKrxv1x9SX1UH6scOZWmbVsBqx897NrDjK0y/oqsU1rLLsTOvOnTk0zsYbCZYxgaajZEPT3YLpk1pfz3rTD5AGrGGojIUc15ujVuOD4tN8Lcs6BKR2mSlfo0/JSabPEW5BhYIAQReJH5VIQtGoOLhWwjR0h8PHqcOKOLqEGbswSIEfP/PjjPdK4YQ+LHvbFuspnN+uT+xscvpM85/wcWdM86oLcu5Llg6x7XRAU+xkVjb3+ljHA3iKKoiFXI9PkAZYoZJgNrqUR9JebyswM8rnOXY6rYzMDrUgNnxY+ZG9I48iM5oq5+ENQomMb85LR8FxO//okwP5oSMyMi8WqvjJFMZIQSXaDEGqNkw5OAH+ruDbVkrOoqhupvyrbqzbWQQw7ur46VoZqvPPgA0Iz0LnhXiMGitfM49GE3xgeXlQVDO2ONYpdmnE6kQDx0hUPSZUjl0+xAJlB8rzukbwV/2OJjlRE=
-  - secure: XHTLtV5y0FHnI+/J5FB8BixOHIzfjov9trTqegpyJEiZUszl1IPUf0CkkCNYOrdjEu0ElntNkaZiXlLuLlfe6ZcQX4UqJEck9Z1Okhh7jQ+es197Ni41yW5CMJE0nk27FDb25nYXCCjebpMDsTOugQuF9s7mPYtsQyWfi6jj57VSzA49fxXon1aEb3Pg9dow4rIgsCvxuVvmuQT0mVALGZlWnGYOQss7xXmARnoTi8LmoN0ZEPmpoDWKC/Wir2l73kQvdunfcP8sf9GgMSsQOu/W6sgEVey8K2R6U6keQbprqH0yWNO0G3rp3CY4It+AhoPejYpscjRR7PHkdll8u6I6cMAxF1WMtAgnMVidubRzb1HlfFLY7qmni1DTQ9pyukyTxLmTPGZEI/Vt8hbPI3gqAD9ZRmpzwPwNFP3hOkqVH6aVNEXzBd8jzELDgK5VijBe3khqE4gKg7I1Vesn95YEidr8lEtXv9U8Y/c4r3hRBGaW/NW8zb9XGQdcWdGI4vl3jVTJdxigiyZzE17q8o6YabVQ2iAvx7vp487DQRApFBUN9UPbr4CdAzWxm1GE7Q+8kUPcFbXb3bZGwybCzqRG8UjwbDuF009wKQkavQj+4QiAUhlgJ/p38OhJbFpEr6XXctvexq3fsLUPNRjyVBiCADdTyBt+Xo12OObSc6g=
-  - secure: WgmeznZSt3goEIJZSRy9/xm5Jj3UqLO7goTZNKC4u5G3cDoq5IbD7o3fzZwzhJS54/VKM8N/9bIpSe4odnRWdDel7QabyHZCqLhK+pOgMWKPyk4EYbOZa9IA6+Tiug965nKomhdC7PHpp8cPWd5RY67/60KEqKvMVVVk3TrfQ1I2HI/GLKLyNxjAwIXyUaZil1h5d1yMsm7gAymuxKOnj5ZSX8qCEz6bwF7ay87rIsDEz6f96FVDYk5TxkZNsnaoUqk8Z/SHFmrTFBG7F7xt7i3NllAX67vHoEIBtMbJiQ5XpHB6OB4eK+7z5UI9/bNWgKt63Y13GNep9FLP1cHyMLPu1os7FOUt4s+dFxWGbYZR4/lFLnF6JDkJhfdc5909uF/x94CA/1d0FY4WToVX9apSk3mdtOsaW3TPOLZlvVx7WdJBYPo4Okz6/HLJeCLhQ90pWRzhBohaep8vSYQ4LCyN+0cLaJf6bpV2IKWHw5TFZdDbq5eVUG/N9Eo5e2VWhGFfFg1QKr10uk7SedVd5N/0sQKIaB6VtHMwa2Wuj6FCxQudTXYeddPj0/lxSD7Z/Gjih8UpExHNlFPbbR5GInaSK9RQAn1ZYSqd1ufNEgFUu5yzcFuLHsA5DRba7oD2/vHCgYy9Dd8RUQgwrRiOJcQiGRYFYjMXD+UXVPfcCLw=
+    - secure: u/g0Wgj2SebyLYshN1y+pIsJgsh5gNtIjXanVFcI0vSDJSVBXkNuCz/iJfXfKCvkmODakuzeekXg26xF9HzWMSQ+7J5Vodldm+0a5d05ybQQiJL548RBkXuTfSl4pUAFm5zgkeQjnFNO7+fze57Ezj0IHUIksOV9kriY+x8mITSfUZr/oAR1SYIaL3/tnf88fmpv1XIVQgH0nzOoALAfye3PMSQPtAWrccZTSFtkZ+lbthFgFWWxxOtj6clKtXIh3PL1dUOqdB0z636JzwfzqnYpPMfmFe8O1Kff0plCPEU75Oo7XZXFiHL48BKm8VqRWd9RSYndMPyALZXJddUYEhCQS+RolfY09xK8b4hBQZdPQZ2V+fFPQw7XJO/P+e0N3VqsuRobVM6jkQVCatvaAiMMPJKKRCqUEjN0pTyqzSWQs2lRYHluu8dpwNukQhBpdo3oTGftLkFznJ2TpPsTqVNHFg41ijX4jBl54uIpiOFCCxw3V7okEJzKPeCSG9Qp4EG2+1LKCFvGmbyLQd6Qa+ONBsi6PV6FyZQwzqoqx+ptulyiGNSYy+K+lizOj78XkMklsv5pXA3TQgnnb5KsKmQDFp1ArYnp238xG8N47fR17THGRko8E9q1YREglRmfPdWO/6fi2GtgvPntWqbvQC/c9jEsHC9TmYzeQykp7pQ=
+    - secure: ZEPwXWX7aEAIJNU9sdLjmoQECk//VK7o7xPrt3IcNQHCcGDd/GaXlTfPBklefa4lFVRAZyVyBSGmioIZ2dylYw2xpilUvR/xAvlcjZ0yYv60EcGEcurKOde8j2M5al5krkOeZH4xM93I/t6Z/VTKVw12H5AGHTZDZUQ5BtgnKj9olF90EtvTN1OK6SVQtxp6EYLmgf5juzsUv4wDK1FQgXxhTlVoHHnQ0iW/VwvCPlO5XdTgDMlZafIYnNgoUUnIaGYYYZ+6SLwsVFpaYEBCu1fF/KEKcMOpncMWVQivUC/++ZHTgiNLLPXJVcDlXE6HMTvfZvzD2esIaGHhBzdIyNoqONJNnp23ShUaJebm244iTnrPBxSV1fsoCUldibqKX6zJa6J/jDBlErr7Jlot8LIkrZdBdwadSnnJcC+7loXP55hAgH9m4T09ef1gvqSx2lecpZ9pBgKXXytV+01Au8ZRrlVrXCQaamPrhJ1VGnNKSmUJA3XSgOAidJejA9aJ0NHz8I2DIXygO+pWaVnc2GnsrrcXIkBd8SaYDuu7J5DnXMC2v+bhqaqvO/XgmDy8JudsAZ5nyEfnxX38uF3nkCWSTm9OLOn2ZpzFk0KK3zxbUUXbVe5QdjJxRlqn9buT9ndiXtQoN7EZn4haiTBMYurV1hbM2V9VdZvtAwvt2bI=
+    - secure: CHxnfSousglzfvg2GufVO5Fxg/EWVS7A05tHOWbU++L/8G6TOW6JdCl7ORyeEPaWbUWylt2kMSix/Gd04b7CWzllA+VwXouZA9DgRiu8v6kIo2Q508VRcPcWJcRoDvjmNbOW+Kd8b1APgyAL7cWfFiP2Ci0VxOcn+il69CgbrQOfqJa2J+F/xdAqTGNDqYrX2UHWjfjHUvUSArr6m7c1AJSWfgagwvrT8uAvCKDSy8K4R3LNNa3T//YyGYs71RlrV/OQ7CqxASECnSjgfCnSy4gL/4JEV9ewEE8D4KyAi2zwj5ci8q7CyxE1C9Y0BWY3qdjemn3m8iBUsrDmEdMSphq0BI73rQw2ZndbpfBqluUKCPOTzuDrT6Ct2xqovUq7GhXd3FmLfskXqj3mw5DjEvL+NAopCDh3sIor99MPkaJjHHdkgqzDMj+sa1LiA9W2fbuW5vrV3jKYw5hoC/uEmgrOnKIji8Gn0+3klihvz85jNVHXtK4LmKvQo2GE9rksdRkZEAmJxYgn4lyJZxoniUbUv9+9xMrQAjJ0WTGF16DYEbcwd71gT18PeUULhXSAAqZuN/4/2WkjIOqcXapKz7Vcn8Mx/bBypRmpiZkWOA6sH/tcn3yp29alubIP7Q6xG/2Y722mNZdlwXN01sqJBh2QCVzsXbCtzlRCBjROM9k=
+    - secure: M+oeoHMwbUVOWUJyjt8AtmhMcS5yJnRgtzOkGkMcOO+h8jFkjV9cJyYwB8t6kMEsxqldN6CMOMeqxCSE3gGAb2UQGq8VIIlxf+iXomg5TZJS7CX9emhMU/NHLXCVeeZnWKJuavkTBAPJujUr7GPlY0YexTUnaRkEb/t6JxsmmyU2pHpoy8vfXBhdm6JdxCiw3BP1rLzIgDeBWZQY/O51/GUSC9RYfyHKrOwQA8+PNRuCrvcEk2vYGjXDDFLwQZyCnNP5SdT+gLtO9Fc48xRmG6UNOo+Oj06sPta58PnaYaIAu5V9RTIkTfqngQX33n4xq07XJKANz7tJpoEUQQ0Av7sfVcyn0wK/GUD1t1Ii4hSfkRNj3u1mlNTtn5vmxBp/HRzR6mOWRnd5mGfu5BodydrB6rbf9hEWIss2rIpq9qvdUlKJezc94w+PQ3SmcIou9cQM6HLlmXiJ19Y3FtH5wsa6LwD2LgOwSywIb0Yszw2LiZ8oxEiQEQFgVsd0QvwwcDNNgO12128Uzc1sK+WFpRA05jyWXOtqjMZqXXfP3SW6p9nHRusrC3pwWl5zcwdR2MRSmLJoOeYSdhqMN262F0Ijlnz6DBp2vGKwLD6j4opTmDWQNZR08GB9nmVvTLqBlakCEZ/ue/JxWVJPukcCq6Xqb4ngyequCfI6M0S4+oA=
+    - secure: AV7X/gwP5YOJV5y0CcUy10dInDRcCsDl3HXGOIu0fSabsizhMoCrc6WBiPIm3AsxdtTLqAMkMF9KV+GAgw2r+3yLSTXPaXMyvoqNDwCQV/y0hqRx/zfHxHboi+a+AG3WeT9MstTIN5FYFXEHPGFtx94IFN2Ci4a005Y2IZBbtfqqNCq3VBNUM3HjE9xaX+ZvrbwNIsyjVtv4iDz3fRq91IJjfsCFquu46UhSoI05vIbma8bwa9JANOxbMsJE0qWVwzQogCuzNn6GJHHrwCdxi9YHUoRajNQNBOUStklICXDmC24cYEu/VYXkCsOYCUwG2PNI4uo7+k7DyA6jJvZFFzMlg2X5L9Z2azKL8VuGHlYUpCyjUKKlD+8oib13a4ASvlUHUyjqW6WVG+orODlbnbBG/OZm0bd5oyD62Usd2l2JhjCC1g3RggidAI0fWddq6YKHfZehv+YkzKPeuWid0BiC6E8WegmEdMecv0NIELutzmm45O80HmLJ5Rj7s7DdQT1IDjFVxJ0G0GMyu7j8d9L9zRBvcw5czf8u/rm0KqvtvXPmaw3w5PQVKj/COUA1wdN9tjroy85IpcVARJnNI8cCiMK4jqqDqmhehdY6W7gJZYyLydNZNm09TEqsxvz+Jvn3WeOvNTXyRYKtXfZTo62vCuGORRDj6w0BOXXPRhI=
+    - secure: Sm5U/S0lW2YHWi5DNOIq8c4rhR+DGeRmepXVehL6LOSh88pC0EEM4b3WFaFvf+G36o765J/s6l2LWgLynXBuDxOucZTCagGsRfKqz6pwuhoVW6abWLAGKMqOc9/zSFFhfGi0FLF/UVBywn6wP+HYtDSXNGH/jmtBu+7is68fNyx32otIEjlSQ8WjaDleRVviZODqRWad1nbyXil7z41nmOXaHWgPy4tjZXgHXOJgfAzNHiyoFsH5foQZXDgnq6GSUY+adivOBf+oDnINxN0c8HtX+y3luvuolfDpR/rkiVIJeelxoOh3FbAffE5/3QhgpuZLEQ8vysNrJTkUWTK9oQI2fIUvBnZfw3jG+zsoxereEQ5jc698N9iPff8EEKp9NiyN8KiF+RvXS4w+mZAAvzDvKjwheNdhQ7Yq7LUqCYBDZ80ktphF0APhR/GCUoVfEbxxdsCHJWGAEZLrSQ8/qUtV8voF+cLNV5yHAyxIhzAqcmwmH0bHRO8yjpL7OfZck4U/5A3dIx0JehSzt0a7OhRlKdLjNX92sjgfAGgCHLCz6sASvdHbETvVjFMRQlSpw0ZOKSFfueRiy57pjOdVJ4kzoDPn7XRfR/Mu4qwFMx2i15PAXGqGkLmL6yD9/rN80LZPHBQeHn5r8uLQ4ow25AD7K7oneezxWfIf3ugtxsY=
+    - secure: yshpTPuZNX7dzU7A/6opLIUV3/vrz1o9HgnDKMcCKln+b5cSg2efkYF0MkRTTXesrfOnx5gwrkFarC7PBqMbPUI4dIRm0CWGzSGMRkpqQi67ebSNdQuzdwWZ3D9FfFhCKx8y2TOMCh498qbUqImx7QmujzNkJ2y06bJvHzR+9X6k7s7jeDixn53VHkPqCxYvOcZ5tuBH0qetsyd7/Q2yvKOcxSrsWbKUA/cj9UqG8CCTL8CeAAdSqN8gQcaTWnc1wj/YfaDpmOX93D4bCkNrpfAwov98NY0NUvcBXQhoRi0c/kIT3kGLQO2UIsGyitsZRMoEU3FMSgiH67kiLxsgTlci+IIECQ8brv3QoemTOsvkPNYjYtNi65Tz0TCxLkaoDGOgq3IKQQv+Z4sWd/yBDdO73FPWH4xUH4XupXWKHzJUUmVQt2qmwpBWTcLE0yqxn8RZwhgvGA7YAB1mOKTOLQ5kPXOUdzhr5VjPYxfQJWdnWAXSNL1EH8nKXF6j3tfxL3nuu7nay1nm5ufoUWWW3d+d3JwsmnqpGcnCRUMs6dibCc3nhYD9RJTMlop4TdsnLwJojxSTjJJqyARGY3amAN47rk6B3DHSkfizNuxgnOBwY8LdjEezQPQ/WqC/DIdTX9ojKGhXrmNMUvz4PFIYKPFAXNBSIaMDHYJBwzrxMEU=
+    - secure: WQSYSa6DWV8KFs9+DFZpa3czjUf6bQ/uFtHQT1ZpOK4qg1Zig77M8bPrBnUQeauNzl7Tq0UPdq4CNVCZEWSNHGlBuCd0WEKZ5wwzQ6MT7CgCnz7WORt6tcQ56HsckVpszE5ltK4vL1vQds9KWRVxfqA6Kami6YWVhJGx8IAgodUhxq8Ek6O1QTVtVw66mHAKpYLa/XaUkB5lFCT0ETB+Y9VoU/mYtjxR/MutH1gZD7hvcVe5fTpXDnA5zQoLN9dXHb9NcyAmaCYJg/haMBkJOWA3ZYbl80B0atB+O4pC7TBXXoDcY2HaGoAqN/SKZZJhn3AMji28J22kKmFyOnbrPk+1LVI7kbu3cB4QbuvcuXRd8hR6TBMWrsawRA1aioMhsDTfZQj2EiAYAFnpo+m5qunYhGDL3WkBwRlgswL5R6P3FXkcV+mTMKA06iTHUwpNpivmocdP/gQJ63pAdvkr1gX/5UfLcqKcVwauKSmYvzNV6wIP0Xs95TgyF9sWe5DQunSBYzwfJdHrr60Cf1yiaDSa42ZGyDXb0cOqAld/5joAAzWghsmC/b6MCiWumX/2oXJLTuXlaeZ+nyrNMGmF7bO9asumw0ybv6KiVDBXbB9C68N4Z/g7UVcO/lhFm0TILyKap/mw6x6M9enSHVvanSiQLfLcRbujGNa93badmCI=
+    - secure: rCarn/MA7Zh4KoGHZw9PJZPrhCi+PPGIOgK8wrG4wliifs45yE/0vibSDnyGBUsz7eXmRYLW4bmkJGoJBwJakXzDvPcjghNNfLR9Bpm+VEgvYEoHWo/Kf8J/rmUJvXIvB2XhDDnvYhClMg2vDGNxpzx5AHh7qA2ifhHeaqkDEzWbsF2zSzgR4qmxSMiP7zdSbrD9/JpOgSJz/2DYaFu5bm6fHXwvgfYQz6yuFeCvoW4CZLsY/IDttRca1ucuASGZoYsen0/2qAR85bYT9Ex/zYMOldgRvotPcFWsufN60hd8GXx5MaYdg1NxeyROu9WwRMKdC2zsAqMM0Kc3kf4/gCE8UDOJhXyErb3FAw0HcXqo8MBKggAlqoDIWxNrWt3XQ7LygMUGbLrPhCLCO2YLOTAmVy39DnrPgVjnRuw4NbkSq2uQ2Yuj/F9j3pHC5RnCu69dD1rQKkWLjGArwXeClplhFqdHvVME28YaEeP0+x85j33sxNNyPo8q70omLXr+6oEnr8v2qWAQ9tZ33BR9t+WutHDUS+L0ytWqT9prRsAkpEhNj2f3Pt+WaQnUW8BTZ55i0/ONz8iFAWPaqOx2T200KlA4F8UBjyZPVfiyc4ksApCByr/AvHi62L+cDDFq6aDTVGHtzCEC3NzV0RS0K/GKPEQMk0NsEORFyv9uXDg=
 before_install:
-- openssl aes-256-cbc -K $encrypted_4beaf9ef68f9_key -iv $encrypted_4beaf9ef68f9_iv
-  -in release-keystore.jks.enc -out release-keystore.jks -d
-- echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf
-- sudo sysctl -p
-- echo $TRAVIS_BUILD_DIR
-- mv $TRAVIS_BUILD_DIR/ios/Tidepool $TRAVIS_BUILD_DIR/ios/tidepool
-- nvm install 10.15.0
-- npm install expo-cli --global
-- curl -o- -L https://yarnpkg.com/install.sh | bash
-- export PATH="$HOME/.yarn/bin:$PATH"
-- expo login -u tidepool -p $EXPO_PASSWORD
+  - openssl aes-256-cbc -K $encrypted_4beaf9ef68f9_key -iv $encrypted_4beaf9ef68f9_iv
+    -in release-keystore.jks.enc -out release-keystore.jks -d
+  - echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf
+  - sudo sysctl -p
+  - echo $TRAVIS_BUILD_DIR
+  - mv $TRAVIS_BUILD_DIR/ios/Tidepool $TRAVIS_BUILD_DIR/ios/tidepool
+  - nvm install 10.15.0
+  - npm install expo-cli --global
+  - curl -o- -L https://yarnpkg.com/install.sh | bash
+  - export PATH="$HOME/.yarn/bin:$PATH"
+  - expo login -u tidepool -p $EXPO_PASSWORD
 install:
-- yarn install
-- yarn run pre
-- expo publish
+  - yarn install
+  - yarn run pre
+  - expo publish
 matrix:
   include:
-  - language: android
-    jdk: oraclejdk8
-    android:
-      components:
-      - build-tools-27.0.3
-      - android-23
-      - android-24
-      - android-27
-      - extra-google-google_play_services
-      - extra-google-m2repository
-      - extra-android-m2repository
-      licenses:
-      - android-sdk-preview-license-52d11cd2
-      - android-sdk-license-.+
-      - google-gdk-license-.+
-    script:
-    - pushd android
-    - "./gradlew :app:assembleProdMinSdkProdKernelRelease"
-    - "./gradlew signingReport"
-    - "./gradlew :app:assembleDevMinSdkDevKernelDebug"
-    deploy:
-      provider: releases
-      draft: true
-      skip_cleanup: true
-      overwrite: true
-      api_key:
-        secure: eGk21GoWqTpy7JXrYMybgGF7hb59qWCDTHR2F5MssCL4n9inAoD/5TAaTvOJjYQjqApAa0ndz8yH85GbSWW5uQDnENJiNV7vPDzFiEkKeFpniLzgQpgwdODdFaerLMiGxRzzc+tH12ZUvmmx/gtcsgJxEAtV6+1wot6ONuK9ix6kl8+yuq3/HgpdRVM/HYPsqXE6q34jFfAscOCW6GaP+xigNNvEIr3H4Ljupp6OaubPmYTgqhwq8l0rEgCiniohSJg5l1ybQ55MjYSUoLb2IRGsgLC5aE2xBlQwlOEDQtBiCIGSDt7aX/UZqIl0/UH/LkPyftT25qEyFMkFucJW4uLoG94cbbrSkVoySeU005MF212J8pxZUivoyqjmA51gENA1G/PVR9uaKdFGBhtB39Hrr6+6c8SaFyKg33HRy46soDMhQw4Cdv3gS2DfLPnUf8ITMnSNVUshr8A0EWF3v1Ykdg1oul+GZqY8EsQ9xe7OHWN9Ap7Kkt/N82JsRFzQsQSFzrvPZvdkHRVUHMiN8kRFFnTnOb5TbFoZv0m4fPapoagNghkyW0TxLtztx3DShTljbskT3H+Mv4+u5DqoGyxFEI/S7xzFEsFZkpxi3FQVL7id0GQa3/+9BBUVgm7hN8csyMcQouCYdIEQTgRhfNBNWPRYy/4BDOyHLApOtpo=
-      file:
-      - "$TRAVIS_BUILD_DIR/android/app/build/outputs/apk/prodMinSdkProdKernel/release/app-prodMinSdk-prodKernel-release.apk"
-      - "$TRAVIS_BUILD_DIR/android/app/build/outputs/mapping/prodMinSdkProdKernel/release/mapping.txt"
-      on:
-        repo: tidepool-org/mobile
-        tags: true
+    - language: android
+      jdk: oraclejdk8
+      android:
+        components:
+          - build-tools-27.0.3
+          - android-23
+          - android-24
+          - android-27
+          - extra-google-google_play_services
+          - extra-google-m2repository
+          - extra-android-m2repository
+        licenses:
+          - android-sdk-preview-license-52d11cd2
+          - android-sdk-license-.+
+          - google-gdk-license-.+
+      script:
+        - pushd android
+        - "./gradlew :app:assembleProdMinSdkProdKernelRelease"
+        - "./gradlew signingReport"
+        - "./gradlew :app:assembleDevMinSdkDevKernelDebug"
+      deploy:
+        provider: releases
+        draft: true
+        skip_cleanup: true
+        overwrite: true
+        api_key:
+          secure: eGk21GoWqTpy7JXrYMybgGF7hb59qWCDTHR2F5MssCL4n9inAoD/5TAaTvOJjYQjqApAa0ndz8yH85GbSWW5uQDnENJiNV7vPDzFiEkKeFpniLzgQpgwdODdFaerLMiGxRzzc+tH12ZUvmmx/gtcsgJxEAtV6+1wot6ONuK9ix6kl8+yuq3/HgpdRVM/HYPsqXE6q34jFfAscOCW6GaP+xigNNvEIr3H4Ljupp6OaubPmYTgqhwq8l0rEgCiniohSJg5l1ybQ55MjYSUoLb2IRGsgLC5aE2xBlQwlOEDQtBiCIGSDt7aX/UZqIl0/UH/LkPyftT25qEyFMkFucJW4uLoG94cbbrSkVoySeU005MF212J8pxZUivoyqjmA51gENA1G/PVR9uaKdFGBhtB39Hrr6+6c8SaFyKg33HRy46soDMhQw4Cdv3gS2DfLPnUf8ITMnSNVUshr8A0EWF3v1Ykdg1oul+GZqY8EsQ9xe7OHWN9Ap7Kkt/N82JsRFzQsQSFzrvPZvdkHRVUHMiN8kRFFnTnOb5TbFoZv0m4fPapoagNghkyW0TxLtztx3DShTljbskT3H+Mv4+u5DqoGyxFEI/S7xzFEsFZkpxi3FQVL7id0GQa3/+9BBUVgm7hN8csyMcQouCYdIEQTgRhfNBNWPRYy/4BDOyHLApOtpo=
+        file:
+          - "$TRAVIS_BUILD_DIR/android/app/build/outputs/apk/prodMinSdkProdKernel/release/app-prodMinSdk-prodKernel-release.apk"
+          - "$TRAVIS_BUILD_DIR/android/app/build/outputs/mapping/prodMinSdkProdKernel/release/mapping.txt"
+        on:
+          repo: tidepool-org/mobile
+          tags: true
