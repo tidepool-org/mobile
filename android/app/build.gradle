@@ -108,20 +108,12 @@ android {
       storeFile = file('../debug.keystore')
     }
     release {
+      storeFile = isRunningOnTravis ? file("../../release-keystore.jks") : file(System.getenv("TIDEPOOL_KEYSTORE_FILE"))
+      storePassword = isRunningOnTravis ? System.getenv("keystore_password") : getPassword("tidepool_keystore_store_password")
+      signingConfigs.release.keyAlias = isRunningOnTravis ? System.getenv("keystore_alias") : System.getenv("TIDEPOOL_KEYSTORE_KEY_ALIAS")
+      signingConfigs.release.keyPassword = isRunningOnTravis ? System.getenv("keystore_alias_password") : getPassword("tidepool_keystore_key_password")
     }   
   }  
-
-  if (isRunningOnTravis) {
-      signingConfigs.release.storeFile = file("../../release-keystore.jks")
-      signingConfigs.release.storePassword = System.getenv("keystore_password")
-      signingConfigs.release.keyAlias = System.getenv("keystore_alias")
-      signingConfigs.release.keyPassword = System.getenv("keystore_alias_password")
-  } else {
-      signingConfigs.release.storeFile = file(System.getenv("TIDEPOOL_KEYSTORE_FILE"))
-      signingConfigs.release.storePassword = getPassword("tidepool_keystore_store_password")
-      signingConfigs.release.keyAlias = System.getenv("TIDEPOOL_KEYSTORE_KEY_ALIAS")
-      signingConfigs.release.keyPassword = getPassword("tidepool_keystore_key_password")
-  }
 
   buildTypes {
     debug {
