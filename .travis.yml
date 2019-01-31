@@ -57,7 +57,8 @@ matrix:
           secure: eGk21GoWqTpy7JXrYMybgGF7hb59qWCDTHR2F5MssCL4n9inAoD/5TAaTvOJjYQjqApAa0ndz8yH85GbSWW5uQDnENJiNV7vPDzFiEkKeFpniLzgQpgwdODdFaerLMiGxRzzc+tH12ZUvmmx/gtcsgJxEAtV6+1wot6ONuK9ix6kl8+yuq3/HgpdRVM/HYPsqXE6q34jFfAscOCW6GaP+xigNNvEIr3H4Ljupp6OaubPmYTgqhwq8l0rEgCiniohSJg5l1ybQ55MjYSUoLb2IRGsgLC5aE2xBlQwlOEDQtBiCIGSDt7aX/UZqIl0/UH/LkPyftT25qEyFMkFucJW4uLoG94cbbrSkVoySeU005MF212J8pxZUivoyqjmA51gENA1G/PVR9uaKdFGBhtB39Hrr6+6c8SaFyKg33HRy46soDMhQw4Cdv3gS2DfLPnUf8ITMnSNVUshr8A0EWF3v1Ykdg1oul+GZqY8EsQ9xe7OHWN9Ap7Kkt/N82JsRFzQsQSFzrvPZvdkHRVUHMiN8kRFFnTnOb5TbFoZv0m4fPapoagNghkyW0TxLtztx3DShTljbskT3H+Mv4+u5DqoGyxFEI/S7xzFEsFZkpxi3FQVL7id0GQa3/+9BBUVgm7hN8csyMcQouCYdIEQTgRhfNBNWPRYy/4BDOyHLApOtpo=
         file:
           - "$TRAVIS_BUILD_DIR/android/app/build/outputs/apk/prodMinSdkProdKernel/**/*.apk"
-          - "$TRAVIS_BUILD_DIR/android/app/build/outputs/apk/prodMinSdkProdKernel/**/mapping.txt"
+          - "$TRAVIS_BUILD_DIR/android/app/build/outputs/mapping/prodMinSdkProdKernel/release/mapping.txt"
+
         on:
           repo: tidepool-org/mobile
           tags: true
