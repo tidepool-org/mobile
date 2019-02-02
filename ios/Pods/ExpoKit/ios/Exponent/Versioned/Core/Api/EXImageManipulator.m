@@ -10,6 +10,9 @@
 #import "EXFileSystem.h"
 #import "EXImageUtils.h"
 #import <React/RCTLog.h>
+#import <Photos/Photos.h>
+#import "EXModuleRegistryBinding.h"
+#import <EXFileSystemInterface/EXFileSystemInterface.h>
 
 @implementation EXImageManipulator
 
@@ -35,22 +38,133 @@ RCT_EXPORT_METHOD(manipulate:(NSString *)uri
 {
   NSURL *url = [NSURL URLWithString:uri];
   NSString *path = [url.path stringByStandardizingPath];
-  if (!([self.bridge.scopedModules.fileSystem permissionsForURI:url] & EXFileSystemPermissionRead)) {
+  id<EXFileSystemInterface> fileSystem = [self.bridge.scopedModules.moduleRegistry getModuleImplementingProtocol:@protocol(EXFileSystemInterface)];
+  if (!fileSystem) {
+    reject(@"E_MISSING_MODULE", @"No FileSystem module.", nil);
+    return;
+  }
+  if (!([fileSystem permissionsForURI:url] & EXFileSystemPermissionRead)) {
     reject(@"E_FILESYSTEM_PERMISSIONS", [NSString stringWithFormat:@"File '%@' isn't readable.", uri], nil);
     return;
   }
-  
-  if (![[NSFileManager defaultManager] fileExistsAtPath:path]) {
-    reject(@"E_IMAGE_MANIPULATION_FAILED", [NSString stringWithFormat:@"The file does not exist. Given path: `%@`.", path], nil);
+
+  if ([[url scheme] isEqualToString:@"assets-library"]) {
+    PHFetchResult<PHAsset *> *fetchResult = [PHAsset fetchAssetsWithALAssetURLs:@[url] options:nil];
+    if (fetchResult.count > 0) {
+      PHAsset *asset = fetchResult[0];
+      CGSize size = CGSizeMake([asset pixelWidth], [asset pixelHeight]);
+      PHImageRequestOptions *options = [PHImageRequestOptions new];
+      [options setResizeMode:PHImageRequestOptionsResizeModeExact];
+      [options setNetworkAccessAllowed:YES];
+      [options setSynchronous:NO];
+      [options setDeliveryMode:PHImageRequestOptionsDeliveryModeHighQualityFormat];
+
+      [[PHImageManager defaultManager] requestImageForAsset:asset targetSize:size contentMode:PHImageContentModeAspectFit options:options resultHandler:^(UIImage * _Nullable image, NSDictionary * _Nullable info) {
+        if (!image) {
+          reject(@"E_IMAGE_MANIPULATION_FAILED", [NSString stringWithFormat:@"The file isn't convertable to image. Given path: `%@`.", path], nil);
+          return;
+        }
+        image = [self fixOrientation:image];
+        [self manipulateImage:image actions:actions saveOptions:saveOptions resolver:resolve rejecter:reject];
+      }];
+      return;
+    } else {
+      reject(@"E_IMAGE_MANIPULATION_FAILED", [NSString stringWithFormat:@"The file does not exist. Given path: `%@`.", path], nil);
+      return;
+    }
+  } else {
+    if (![[NSFileManager defaultManager] fileExistsAtPath:path]) {
+      reject(@"E_IMAGE_MANIPULATION_FAILED", [NSString stringWithFormat:@"The file does not exist. Given path: `%@`.", path], nil);
+      return;
+    }
+
+    UIImage *image = [[UIImage alloc] initWithContentsOfFile:path];
+    if (image == nil) {
+      reject(@"E_CANNOT_OPEN", @"Could not open provided image", nil);
+      return;
+    }
+
+    image = [self fixOrientation:image];
+    [self manipulateImage:image actions:actions saveOptions:saveOptions resolver:resolve rejecter:reject];
     return;
   }
-  
-  UIImage *image = [[UIImage alloc] initWithContentsOfFile:path];
-  if (image == nil) {
-    reject(@"E_CANNOT_OPEN", @"Could not open provided image", nil);
-    return;
+}
+
+-(UIImage *)fixOrientation:(UIImage *)image
+{
+  if (image.imageOrientation == UIImageOrientationUp) {
+    return image;
   }
   
+  CGAffineTransform transform = CGAffineTransformIdentity;
+  switch (image.imageOrientation) {
+    case UIImageOrientationDown:
+    case UIImageOrientationDownMirrored:
+      transform = CGAffineTransformTranslate(transform, image.size.width, image.size.height);
+      transform = CGAffineTransformRotate(transform, M_PI);
+      break;
+      
+    case UIImageOrientationLeft:
+    case UIImageOrientationLeftMirrored:
+      transform = CGAffineTransformTranslate(transform, image.size.width, 0);
+      transform = CGAffineTransformRotate(transform, M_PI_2);
+      break;
+      
+    case UIImageOrientationRight:
+    case UIImageOrientationRightMirrored:
+      transform = CGAffineTransformTranslate(transform, 0, image.size.height);
+      transform = CGAffineTransformRotate(transform, -M_PI_2);
+      break;
+    
+    default:
+      break;
+  }
+  
+  switch (image.imageOrientation) {
+    case UIImageOrientationUpMirrored:
+    case UIImageOrientationDownMirrored:
+      transform = CGAffineTransformTranslate(transform, image.size.width, 0);
+      transform = CGAffineTransformScale(transform, -1, 1);
+      break;
+      
+    case UIImageOrientationLeftMirrored:
+    case UIImageOrientationRightMirrored:
+      transform = CGAffineTransformTranslate(transform, image.size.height, 0);
+      transform = CGAffineTransformScale(transform, -1, 1);
+      break;
+   
+    default:
+      break;
+  }
+  
+  CGContextRef ctx = CGBitmapContextCreate(NULL, image.size.width, image.size.height, CGImageGetBitsPerComponent(image.CGImage), 0, CGImageGetColorSpace(image.CGImage), CGImageGetBitmapInfo(image.CGImage));
+  CGContextConcatCTM(ctx, transform);
+  switch (image.imageOrientation) {
+    case UIImageOrientationLeft:
+    case UIImageOrientationLeftMirrored:
+    case UIImageOrientationRight:
+    case UIImageOrientationRightMirrored:
+      CGContextDrawImage(ctx, CGRectMake(0, 0, image.size.height, image.size.width), image.CGImage);
+      break;
+      
+    default:
+      CGContextDrawImage(ctx, CGRectMake(0, 0, image.size.width, image.size.height), image.CGImage);
+      break;
+  }
+  
+  CGImageRef cgimg = CGBitmapContextCreateImage(ctx);
+  UIImage *img = [UIImage imageWithCGImage:cgimg];
+  CGContextRelease(ctx);
+  CGImageRelease(cgimg);
+  return img;
+}
+
+-(void)manipulateImage:(UIImage *)image
+               actions:(NSArray *)actions
+           saveOptions:(NSDictionary *)saveOptions
+              resolver:(RCTPromiseResolveBlock)resolve
+              rejecter:(RCTPromiseRejectBlock)reject
+{
   for (NSDictionary *options in actions) {
     if (options[@"resize"]) {
       float imageWidth = image.size.width;
@@ -153,8 +267,9 @@ RCT_EXPORT_METHOD(manipulate:(NSString *)uri
     extension = @".jpg";
   }
 
-  NSString *directory = [self.bridge.scopedModules.fileSystem.cachesDirectory stringByAppendingPathComponent:@"ImageManipulator"];
-  [EXFileSystem ensureDirExistsWithPath:directory];
+  id<EXFileSystemInterface> fileSystem = [self.bridge.scopedModules.moduleRegistry getModuleImplementingProtocol:@protocol(EXFileSystemInterface)];
+  NSString *directory = [fileSystem.cachesDirectory stringByAppendingPathComponent:@"ImageManipulator"];
+  [fileSystem ensureDirExistsWithPath:directory];
   NSString *fileName = [[[NSUUID UUID] UUIDString] stringByAppendingString:extension];
   NSString *newPath = [directory stringByAppendingPathComponent:fileName];
   [imageData writeToFile:newPath atomically:YES];

@@ -1,6 +1,5 @@
 // Based off of DDFileReader from http://stackoverflow.com/a/8027618
 
-
 #import "RollbarFileReader.h"
 
 @implementation RollbarFileReader
@@ -79,6 +78,10 @@
     
     NSString * line = [[NSString alloc] initWithData:currentData encoding:NSUTF8StringEncoding];
     return line;
+}
+
+- (NSUInteger) getCurrentOffset {
+    return currentOffset;
 }
 
 - (void) enumerateLinesUsingBlock:(void(^)(NSString*, NSUInteger, BOOL*))block {

@@ -1,10 +1,4 @@
-//
-//  RollbarNotifier.h
-//  Rollbar
-//
-//  Created by Sergei Bezborodko on 3/18/14.
-//  Copyright (c) 2014 Rollbar, Inc. All rights reserved.
-//
+//  Copyright (c) 2018 Rollbar, Inc. All rights reserved.
 
 #import <Foundation/Foundation.h>
 #import "RollbarConfiguration.h"
@@ -18,7 +12,11 @@
 - (void)processSavedItems;
 
 - (void)logCrashReport:(NSString*)crashReport;
-- (void)log:(NSString*)level message:(NSString*)message exception:(NSException*)exception data:(NSDictionary*)data context:(NSString*)context;
+- (void)log:(NSString*)level
+    message:(NSString*)message
+  exception:(NSException*)exception
+       data:(NSDictionary*)data
+    context:(NSString*)context;
 
 /**
  Sends an item batch in a blocking manner.
@@ -40,5 +38,6 @@
 - (void)updateAccessToken:(NSString*)accessToken configuration:(RollbarConfiguration *)configuration isRoot:(BOOL)isRoot;
 - (void)updateConfiguration:(RollbarConfiguration*)configuration isRoot:(BOOL)isRoot;
 - (void)updateAccessToken:(NSString*)accessToken;
+- (void)updateReportingRate:(NSUInteger)maximumReportsPerMinute;
 
 @end

@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Alert, StatusBar } from "react-native";
 import glamorous, { ThemeProvider } from "glamorous-native";
-import Expo from "expo";
+import { MailComposer } from "expo";
 
 import PrimaryTheme from "../themes/PrimaryTheme";
 import Colors from "../constants/Colors";
@@ -114,7 +114,7 @@ class HomeScreen extends PureComponent {
     const currentUserEmail = currentUser.username;
 
     try {
-      await Expo.MailComposer.composeAsync({
+      await MailComposer.composeAsync({
         subject: "How to set up the Tidepool Uploader",
         body:
           "Please go to the following link on your computer to learn about setting up the Tidepool Uploader: http://support.tidepool.org/article/6-how-to-install-or-update-the-tidepool-uploader-gen",

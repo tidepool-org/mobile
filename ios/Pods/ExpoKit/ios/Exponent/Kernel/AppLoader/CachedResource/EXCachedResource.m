@@ -117,7 +117,7 @@ NS_ASSUME_NONNULL_BEGIN
 {
   BOOL hasLocalBundle = NO;
   NSString *resourceCachePath = [self resourceCachePath];
-  NSString *resourceLocalPath = [self resourceLocalPathPreferringCache];
+  NSString *resourceLocalPath = [self _resourceLocalPathPreferringCache];
   
   // check cache
   if (resourceLocalPath) {
@@ -173,7 +173,7 @@ NS_ASSUME_NONNULL_BEGIN
                                            error:(EXCachedResourceErrorBlock)errorBlock
 {
   NSString *resourceCachePath = [self resourceCachePath];
-  NSString *resourceLocalPath = [self resourceLocalPathPreferringCache];
+  NSString *resourceLocalPath = [self _resourceLocalPathPreferringCache];
 
   [self _loadRemoteResourceWithSuccess:^(NSData * _Nonnull data) {
     // write to cache for next time
@@ -205,38 +205,49 @@ NS_ASSUME_NONNULL_BEGIN
   }];
 }
 
+- (NSString *)_resourceCacheFilenameUsingLegacy:(BOOL)useLegacy
+{
+  NSString *base;
+
+  // this is versioned because it can persist between updates of native code
+  if (_shouldVersionCache) {
+    base = [NSString stringWithFormat:@"%@-%@", (_abiVersion) ?: [EXVersions sharedInstance].temporarySdkVersion, _resourceName];
+  } else {
+    base = _resourceName;
+  }
+
+  if (useLegacy) {
+    return base;
+  } else {
+    return [NSString stringWithFormat:@"%@-%lu", base, (unsigned long)[_remoteUrl hash]];
+  }
+}
+
 - (NSString *)resourceCachePath
 {
-  // this is versioned because it can persist between updates of native code
-  NSString *resourceFilename = [NSString stringWithFormat:@"%@.%@", _resourceName, _resourceType];
-  NSString *versionedResourceFilename;
-  if (_shouldVersionCache) {
-    versionedResourceFilename = [NSString stringWithFormat:@"%@-%@", (_abiVersion) ?: [EXVersions sharedInstance].temporarySdkVersion, resourceFilename];
-  } else {
-    versionedResourceFilename = resourceFilename;
-  }
+  NSString *versionedResourceFilename = [NSString stringWithFormat:@"%@.%@", [self _resourceCacheFilenameUsingLegacy:NO], _resourceType];
   return [_cachePath stringByAppendingPathComponent:versionedResourceFilename];
 }
 
-- (NSString *)resourceLocalPathPreferringCache
+- (NSString *)resourceBundlePath
 {
-  NSString *localPath = [self resourceCachePath];
-  if (![[NSFileManager defaultManager] fileExistsAtPath:localPath isDirectory:nil]) {
-    // nothing in cache, check NSBundle
-    localPath = [[NSBundle mainBundle] pathForResource:_resourceName ofType:_resourceType];
-  }
-  return localPath;
+  return [[NSBundle mainBundle] pathForResource:_resourceName ofType:_resourceType];
 }
 
-- (BOOL)isLocalPathFromNSBundle
+- (NSString *)_resourceLocalPathPreferringCache
 {
-  NSString *localPath = [self resourceCachePath];
-  if (![[NSFileManager defaultManager] fileExistsAtPath:localPath isDirectory:nil]) {
-    // nothing in cache, check NSBundle
-    localPath = [[NSBundle mainBundle] pathForResource:_resourceName ofType:_resourceType];
-    return (localPath != nil);
+  if ([self isUsingEmbeddedResource]) {
+    return [self resourceBundlePath];
   }
-  return NO;
+  return [self resourceCachePath];
+}
+
+- (BOOL)isUsingEmbeddedResource
+{
+  // by default, only use the embedded resource if no cached copy exists
+  // but this behavior can be overridden by subclasses
+  NSString *localPath = [self resourceCachePath];
+  return ![[NSFileManager defaultManager] fileExistsAtPath:localPath isDirectory:nil];
 }
 
 - (BOOL)removeCache
