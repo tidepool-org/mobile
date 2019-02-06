@@ -1,10 +1,21 @@
 env:
   global:
+    - IOS_APP_NAME=Tidepool
+    - IOS_CODE_SIGN_IDENTITY='iPhone Distribution: Tidepool Project (75U4X84TEG)''
+    - IOS_PROFILE_NAME=orgtidepoolblipnotesRN_AppStore
+    - IOS_DEVELOPMENT_TEAM='Tidepool Project'
     - secure: xryOkFcyrYb4+nCpBXEtdhB44++/GFHMU3VmITm/o60nR3Tcq0ADzGCVaH8XvqUjUJaBmo2Zu5waGz15r/wUb7Yi9aH6VQ0C74kcxlX26ZcKQjelpnz4D4l1CyYZVtesOWliqPVC32HtSGBJI5Qpez9SWRfKatNsvBX9D0e9MKNaEi33GX/jpMIhU3XoQV62r0KFiuINVXpmVB2a9VLh61zoq3BTsb6f4xlCSiRpas0Hg28Rty9PdqvGPsr+NFgm6QVEECj+doVhvQPFxOHdEf1Ptvn0/VJndVDZ4D5bmYR98/dqYCdQ3AGWAg7ASLM3rAqzCkuBBFQFfAqhsKqs+gfRHC+qrrPMjReIW9s/Yp/lz0kezDIdcuTIAym30gYTIlzSFNzh5SoNa9qTVYsvU9ZHbx4lsY4t0cyihsMam3tgz3/CuLF32NYyvW37M1H4xVEH7EhzoBKhtPASVOjsZvtzuWSd3zr1N6PhllpndapU+DQZhlU2tOnfbtXkIxMJEpXChF0AgGRYil9A8g5Zmw9U/Rzp7r65/HCl3Qt0Ack+T+I5dqh9MBKxeGNLTylaRJvTlcip5hZB8Wc1OBy9hTvXkIaScMzxPjAzwyDq3Ufz/yepQxjS5Gm7CBQLyTiMR2qdtxn9b9IjtpdqGx+lJRiy+bgpuJ9JgWby7QpN+HU=
     - secure: THaNfrIoHfefYKKfu279HgY9PhJ7LKMNEnUexD7VbYEgGC2vxsY0nGRR0lPmg1LDRpOaeCuRuuu0no4CiUrAA2tgJpFlDcD6ct6hnjGwYCoI9dDADQ2HFQvPlri366KRpS+rTPih9THf0nfwLBy9UBDHJVAU4l0COvf34JsYAd2S6JzVCFu4Eg8BsAN2UMh0pAINgNNj7uSOAe4wu6npMnEPpKS5ig/0DNHXa8cvUZTqbuo7qEzp5ATdEkVRSxtH/iBMF1MBOiDunYq8bVhwqXs8bZxVmalsGc1maOBlrWnf1fML/5hRp2Q7mrIg5kCr7WMInKxrqeovgTJqaZklxJlxHiBl36t1isRbHHBHuX9C9joz0jHB41dHQl7/rF9UXdyLHuJATdGl1/xtgCC156Ta0CbVWtgRjwivnlstL1ZMUI4JJ6wSd8egWuyQhNDW0ryfvd9nbYFA/p2hRu4qkQ2BQ7c0kxioyO/T8HtK2MFthdL0MHp5MBZ5WdlcHdnHCLxyR//MAJBbncFR6w+SuR8V3Jx1WgQSQXarGKX5c+4zHWdAXgYmGy9+QGKsNkwDptVbpArvN/Cdusq8r3HCiidvpV3OR/EVvLCHc4DbWwxLxhBiwNyWcMAr91Dc8kKmybl4aHmXw59iN01+N3vm9qLFjY+bGggMDRQd22R0NqM=
     - secure: PHJY0AW2dMJafA3UGqOyj+9OQd+9tY5tOfxbqnvCBygQ6t1LfUeZBNOpa9r+pxBToFHLp38j+jNVNZsCNh/LIf9qJbryfMi3Ou3h2E08GNTiuLXUm5d+uDjEUyV3NDMno/c+IFHEaXNatzIQSAklWjTw39KhKhHM8+d4uAd/mmj9yEcbPZivhDrDOACRBXBcdDthkw9Yg/Q7YLmwL5SEx7mw9od8R+c4HPON/y69c2v5BbikdtE/OR6RhngtLiL0MmKhtXQJHc6QPiV1Uo6WE93xdBnPJDkVFKjLUVBn4sWnl6EnZKAvW3be//cnPF/L+S5U4u5WvkXDk3Z4IaPPiIEVcjmkdrtCjPzRGCDt0GedadkQKFsViFw8w4361nTWL2wYNDbKg8+mVtCoEDMsM951bqp9GkZoWR/DHluz0g945i7lXhlqCoC/fkfphwscJ1qH1AXjneAb3fOAHaAmbZhxD2Uv1PN4NQY9ROdt+gck1BObYHvmB2fII016HRQ+l9a82KmUFSkseQV7jaqfgmtgumH425OUupJxAoUYpPwR+hye+fLfA+o32O2cyIJ58PiMiuXeRmb+tjyukdRNpNViu+cBCm/HCyZHAbtllOCFSTJVeNcq4Ty6PrDAU2W6g1APhJRSJ6enfwISW8gyo8jb9Ib56Hu78CqFP6WZ7lE=
     - secure: LRiDMIHHHIWDsg4oG49jv8gaiotYOVvHKGaucJJ492RpKZ5baVTQm1lOu/YSnbM9lSQImNlPh4KsdpT7n1K6sYtaIDPBI148/+C9pLy4eisp+0r6qYxDYSxINYetti7mUuU1qWGMuX/zP5PCB7FrhyyS69lcWnA9hW3nwlbaqqzFxwxOSANpUiDurZNHJToygnO5ew/ljDZFoFPzJt7QV/tYBRyPRl5lniHLH9OYAJL2MBTUN3LTB/0NVgMo32JKpEgB8IUXWciEg7QF7vFHQ1mfn8e0gt8RhGnKjQmEUyUyX/t7T9wPForQqenPcvJPG4Ns6h8E6aFrsch7HIjR0Sau2ZBPc3tjpMvdJB/XnX6DP5SYMrn6X6R0qCpvMPaCo2QTR9WwoflXMk1FYtBFXKmvSfXajOvODDPVh45OtAa6Nn75MMPHqbr7lA7UwfpX8jVWgJWpxuv/8wU20eLdW+mwOBqKej2iJpGvCLgGfKjAiFf206Vq6zEpKsWTiywue3QEudpWACOjaewpRIY0vnbFoopgTAZ54cOrcEHaMrATAjTzRf8FYAIlZFFMXrmWp4OBKSaOP2CvzOqs3LorLxgRvkHCQ85KVjQ1AyMflxQ19uTewEUlpTGUoDRbdpipH4sqHe5jdgz9+mVF8uRxCI4k7K01J6Ps9UNJ+8XJg/E=
+    - secure: iV8/ztwcxqRaHuWWLQZ0zKR+gaqOltUVPg0OyOd91Jgkl/qAbaLuX++kNBja/2U35SISuCXNLOr+B0xPxHnszrFMeniR0/nIBGEGdwYGxT/5+KxB7t66GLQOPB/iTixkBVUhbACmdWl+OYTYeqRshmk10b0hrXfRh8nfExYmZ3O2SIS+BhKLRTdp8956nynLBLeTtDzIa/7pX458Nsh0WIJsdOyMqYrAx8x2RFvddEqDs0L2KGTBUntK/t4JzWlPdw0qKbc5QU5uxI/ts3c339HitBdNMHz9myufT96aEVOCg+v6W4LzVHA16Ppt/53wN8JDwFw7voiudcfRg5/kpLqCib0rFZ2plhvxHBykeVg01ETHTf1WJD6TB0lMTBhpxLoIfYnCwA8Hw4j8F6BzJTLkoKnmUXLwXXHNka6OraSI6AGDNJHa15BiOMZEP40C/ISqNL8uzFtZr2yPauNvKvLCUrz3tieOQ2DPEqdXz9K6+lXmbVrcUWTa4d7+4pbM1v7NtVHXK963QXWoGnaru4zScjQ6h07OpdN3CPLIorSwV0wfGQCZVyBivTp1O4Qqo3sB7M2Vjoi3yAH1OILvyXsFyX6HIEnlcECFCWsV1BYxQjlX0dUEqbJNu1GI72OY5tVS/FoNVBNVz1MYTcYH0YdEuZYC3nCUCxAFyc/M+4E=
 before_install:
+  - openssl aes-256-cbc -K $encrypted_4beaf9ef68f9_key -iv $encrypted_4beaf9ef68f9_iv
+    -in orgtidepoolblipnotesRN_AppStore.mobileprovision.enc -out orgtidepoolblipnotesRN_AppStore.mobileprovision
+    -d
+  - openssl aes-256-cbc -K $encrypted_4beaf9ef68f9_key -iv $encrypted_4beaf9ef68f9_iv
+    -in tidepool-ios-distribution-cert.p12.enc -out tidepool-ios-distribution-cert.p12
+    -d
   - openssl aes-256-cbc -K $encrypted_4beaf9ef68f9_key -iv $encrypted_4beaf9ef68f9_iv
     -in release-keystore.jks.enc -out release-keystore.jks -d
   - echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf
@@ -52,6 +63,28 @@ matrix:
         file:
           - "$TRAVIS_BUILD_DIR/android/app/build/outputs/**/*.apk"
           - "$TRAVIS_BUILD_DIR/android/app/build/outputs/**/mapping.txt"
+        on:
+          repo: tidepool-org/mobile
+          tags: true
+    - language: objective-c
+      osx_image: xcode10.1
+      script:
+        - pushd ios
+        - uuid=`grep UUID -A1 -a ../orgtidepoolblipnotesRN_AppStore.mobileprovision | grep -io "[-A-F0-9]\{36\}"`
+        - cp ../orgtidepoolblipnotesRN_AppStore.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/$uuid.mobileprovision
+        - xcodebuild archive -workspace $IOS_APP_NAME.xcworkspace -scheme $IOS_APP_NAME -configuration Release -archivePath $IOS_APP_NAME.xcarchive
+        - xcodebuild -exportArchive -exportOptionsPlist exportArchiveOptions.plist -archivePath $IOS_APP_NAME.xcarchive -exportPath ./
+        - zip -r $IOS_APP_NAME.xcarchive.zip $IOS_APP_NAME.xcarchive
+      deploy:
+        provider: releases
+        draft: true
+        skip_cleanup: true
+        overwrite: true
+        file_glob: true
+        api_key:
+          secure: eGk21GoWqTpy7JXrYMybgGF7hb59qWCDTHR2F5MssCL4n9inAoD/5TAaTvOJjYQjqApAa0ndz8yH85GbSWW5uQDnENJiNV7vPDzFiEkKeFpniLzgQpgwdODdFaerLMiGxRzzc+tH12ZUvmmx/gtcsgJxEAtV6+1wot6ONuK9ix6kl8+yuq3/HgpdRVM/HYPsqXE6q34jFfAscOCW6GaP+xigNNvEIr3H4Ljupp6OaubPmYTgqhwq8l0rEgCiniohSJg5l1ybQ55MjYSUoLb2IRGsgLC5aE2xBlQwlOEDQtBiCIGSDt7aX/UZqIl0/UH/LkPyftT25qEyFMkFucJW4uLoG94cbbrSkVoySeU005MF212J8pxZUivoyqjmA51gENA1G/PVR9uaKdFGBhtB39Hrr6+6c8SaFyKg33HRy46soDMhQw4Cdv3gS2DfLPnUf8ITMnSNVUshr8A0EWF3v1Ykdg1oul+GZqY8EsQ9xe7OHWN9Ap7Kkt/N82JsRFzQsQSFzrvPZvdkHRVUHMiN8kRFFnTnOb5TbFoZv0m4fPapoagNghkyW0TxLtztx3DShTljbskT3H+Mv4+u5DqoGyxFEI/S7xzFEsFZkpxi3FQVL7id0GQa3/+9BBUVgm7hN8csyMcQouCYdIEQTgRhfNBNWPRYy/4BDOyHLApOtpo=
+        file:
+          - "$TRAVIS_BUILD_DIR/ios/**/*.zip"
         on:
           repo: tidepool-org/mobile
           tags: true
