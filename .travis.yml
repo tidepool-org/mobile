@@ -11,11 +11,8 @@ env:
     - secure: iV8/ztwcxqRaHuWWLQZ0zKR+gaqOltUVPg0OyOd91Jgkl/qAbaLuX++kNBja/2U35SISuCXNLOr+B0xPxHnszrFMeniR0/nIBGEGdwYGxT/5+KxB7t66GLQOPB/iTixkBVUhbACmdWl+OYTYeqRshmk10b0hrXfRh8nfExYmZ3O2SIS+BhKLRTdp8956nynLBLeTtDzIa/7pX458Nsh0WIJsdOyMqYrAx8x2RFvddEqDs0L2KGTBUntK/t4JzWlPdw0qKbc5QU5uxI/ts3c339HitBdNMHz9myufT96aEVOCg+v6W4LzVHA16Ppt/53wN8JDwFw7voiudcfRg5/kpLqCib0rFZ2plhvxHBykeVg01ETHTf1WJD6TB0lMTBhpxLoIfYnCwA8Hw4j8F6BzJTLkoKnmUXLwXXHNka6OraSI6AGDNJHa15BiOMZEP40C/ISqNL8uzFtZr2yPauNvKvLCUrz3tieOQ2DPEqdXz9K6+lXmbVrcUWTa4d7+4pbM1v7NtVHXK963QXWoGnaru4zScjQ6h07OpdN3CPLIorSwV0wfGQCZVyBivTp1O4Qqo3sB7M2Vjoi3yAH1OILvyXsFyX6HIEnlcECFCWsV1BYxQjlX0dUEqbJNu1GI72OY5tVS/FoNVBNVz1MYTcYH0YdEuZYC3nCUCxAFyc/M+4E=
 before_install:
   - openssl aes-256-cbc -K $encrypted_4beaf9ef68f9_key -iv $encrypted_4beaf9ef68f9_iv
-    -in release-keystore.jks.enc -out release-keystore.jks -d
-  - openssl aes-256-cbc -K $encrypted_4beaf9ef68f9_key -iv $encrypted_4beaf9ef68f9_iv
-    -in tidepool-ios-distribution-cert.p12.enc -out tidepool-ios-distribution-cert.p12 -d
-  - openssl aes-256-cbc -K $encrypted_4beaf9ef68f9_key -iv $encrypted_4beaf9ef68f9_iv
-    -in orgtidepoolblipnotesRN_AppStore.mobileprovision.enc -out orgtidepoolblipnotesRN_AppStore.mobileprovision -d
+    -in secret-files.tar.enc -out secret-files.tar -d
+  - tar xvf secrets-files.tar
   - echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf
   - sudo sysctl -p
   - echo $TRAVIS_BUILD_DIR
