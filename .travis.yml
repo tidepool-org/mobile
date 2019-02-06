@@ -23,11 +23,26 @@ before_install:
   - export PATH="$HOME/.yarn/bin:$PATH"
   - expo login -u tidepool -p $EXPO_PASSWORD
 install:
+  - brew update
+  - brew install yarn
   - yarn install
   - yarn run pre
   - expo publish
 matrix:
   include:
+    - language: objective-c
+      osx_image: xcode10.1
+      script:
+        - pushd ios
+        - uuid=`grep UUID -A1 -a ../orgtidepoolblipnotesRN_AppStore.mobileprovision |
+          grep -io "[-A-F0-9]\{36\}"`
+        - cp ../orgtidepoolblipnotesRN_AppStore.mobileprovision ~/Library/MobileDevice/Provisioning\
+          Profiles/$uuid.mobileprovision
+        - xcodebuild archive -workspace $IOS_APP_NAME.xcworkspace -scheme $IOS_APP_NAME
+          -configuration Release -archivePath $IOS_APP_NAME.xcarchive
+        - xcodebuild -exportArchive -exportOptionsPlist exportArchiveOptions.plist -archivePath
+          $IOS_APP_NAME.xcarchive -exportPath ./
+        - zip -r $IOS_APP_NAME.xcarchive.zip $IOS_APP_NAME.xcarchive
     - language: android
       jdk: oraclejdk8
       android:
@@ -47,43 +62,18 @@ matrix:
         - pushd android
         - "./gradlew :app:assembleProdMinSdkProdKernelRelease"
         - "./gradlew :app:assembleDevMinSdkDevKernelDebug"
-      deploy:
-        provider: releases
-        draft: true
-        skip_cleanup: true
-        overwrite: true
-        file_glob: true
-        api_key:
-          secure: eGk21GoWqTpy7JXrYMybgGF7hb59qWCDTHR2F5MssCL4n9inAoD/5TAaTvOJjYQjqApAa0ndz8yH85GbSWW5uQDnENJiNV7vPDzFiEkKeFpniLzgQpgwdODdFaerLMiGxRzzc+tH12ZUvmmx/gtcsgJxEAtV6+1wot6ONuK9ix6kl8+yuq3/HgpdRVM/HYPsqXE6q34jFfAscOCW6GaP+xigNNvEIr3H4Ljupp6OaubPmYTgqhwq8l0rEgCiniohSJg5l1ybQ55MjYSUoLb2IRGsgLC5aE2xBlQwlOEDQtBiCIGSDt7aX/UZqIl0/UH/LkPyftT25qEyFMkFucJW4uLoG94cbbrSkVoySeU005MF212J8pxZUivoyqjmA51gENA1G/PVR9uaKdFGBhtB39Hrr6+6c8SaFyKg33HRy46soDMhQw4Cdv3gS2DfLPnUf8ITMnSNVUshr8A0EWF3v1Ykdg1oul+GZqY8EsQ9xe7OHWN9Ap7Kkt/N82JsRFzQsQSFzrvPZvdkHRVUHMiN8kRFFnTnOb5TbFoZv0m4fPapoagNghkyW0TxLtztx3DShTljbskT3H+Mv4+u5DqoGyxFEI/S7xzFEsFZkpxi3FQVL7id0GQa3/+9BBUVgm7hN8csyMcQouCYdIEQTgRhfNBNWPRYy/4BDOyHLApOtpo=
-        file:
-          - "$TRAVIS_BUILD_DIR/android/app/build/outputs/**/*.apk"
-          - "$TRAVIS_BUILD_DIR/android/app/build/outputs/**/mapping.txt"
-        on:
-          repo: tidepool-org/mobile
-          tags: true
-    - language: objective-c
-      osx_image: xcode10.1
-      script:
-        - pushd ios
-        - uuid=`grep UUID -A1 -a ../orgtidepoolblipnotesRN_AppStore.mobileprovision |
-          grep -io "[-A-F0-9]\{36\}"`
-        - cp ../orgtidepoolblipnotesRN_AppStore.mobileprovision ~/Library/MobileDevice/Provisioning\
-          Profiles/$uuid.mobileprovision
-        - xcodebuild archive -workspace $IOS_APP_NAME.xcworkspace -scheme $IOS_APP_NAME
-          -configuration Release -archivePath $IOS_APP_NAME.xcarchive
-        - xcodebuild -exportArchive -exportOptionsPlist exportArchiveOptions.plist -archivePath
-          $IOS_APP_NAME.xcarchive -exportPath ./
-        - zip -r $IOS_APP_NAME.xcarchive.zip $IOS_APP_NAME.xcarchive
-      deploy:
-        provider: releases
-        draft: true
-        skip_cleanup: true
-        overwrite: true
-        file_glob: true
-        api_key:
-          secure: eGk21GoWqTpy7JXrYMybgGF7hb59qWCDTHR2F5MssCL4n9inAoD/5TAaTvOJjYQjqApAa0ndz8yH85GbSWW5uQDnENJiNV7vPDzFiEkKeFpniLzgQpgwdODdFaerLMiGxRzzc+tH12ZUvmmx/gtcsgJxEAtV6+1wot6ONuK9ix6kl8+yuq3/HgpdRVM/HYPsqXE6q34jFfAscOCW6GaP+xigNNvEIr3H4Ljupp6OaubPmYTgqhwq8l0rEgCiniohSJg5l1ybQ55MjYSUoLb2IRGsgLC5aE2xBlQwlOEDQtBiCIGSDt7aX/UZqIl0/UH/LkPyftT25qEyFMkFucJW4uLoG94cbbrSkVoySeU005MF212J8pxZUivoyqjmA51gENA1G/PVR9uaKdFGBhtB39Hrr6+6c8SaFyKg33HRy46soDMhQw4Cdv3gS2DfLPnUf8ITMnSNVUshr8A0EWF3v1Ykdg1oul+GZqY8EsQ9xe7OHWN9Ap7Kkt/N82JsRFzQsQSFzrvPZvdkHRVUHMiN8kRFFnTnOb5TbFoZv0m4fPapoagNghkyW0TxLtztx3DShTljbskT3H+Mv4+u5DqoGyxFEI/S7xzFEsFZkpxi3FQVL7id0GQa3/+9BBUVgm7hN8csyMcQouCYdIEQTgRhfNBNWPRYy/4BDOyHLApOtpo=
-        file:
-          - "$TRAVIS_BUILD_DIR/ios/**/*.zip"
-        on:
-          repo: tidepool-org/mobile
-          tags: true
+deploy:
+  provider: releases
+  draft: true
+  skip_cleanup: true
+  overwrite: true
+  file_glob: true
+  api_key:
+    secure: eGk21GoWqTpy7JXrYMybgGF7hb59qWCDTHR2F5MssCL4n9inAoD/5TAaTvOJjYQjqApAa0ndz8yH85GbSWW5uQDnENJiNV7vPDzFiEkKeFpniLzgQpgwdODdFaerLMiGxRzzc+tH12ZUvmmx/gtcsgJxEAtV6+1wot6ONuK9ix6kl8+yuq3/HgpdRVM/HYPsqXE6q34jFfAscOCW6GaP+xigNNvEIr3H4Ljupp6OaubPmYTgqhwq8l0rEgCiniohSJg5l1ybQ55MjYSUoLb2IRGsgLC5aE2xBlQwlOEDQtBiCIGSDt7aX/UZqIl0/UH/LkPyftT25qEyFMkFucJW4uLoG94cbbrSkVoySeU005MF212J8pxZUivoyqjmA51gENA1G/PVR9uaKdFGBhtB39Hrr6+6c8SaFyKg33HRy46soDMhQw4Cdv3gS2DfLPnUf8ITMnSNVUshr8A0EWF3v1Ykdg1oul+GZqY8EsQ9xe7OHWN9Ap7Kkt/N82JsRFzQsQSFzrvPZvdkHRVUHMiN8kRFFnTnOb5TbFoZv0m4fPapoagNghkyW0TxLtztx3DShTljbskT3H+Mv4+u5DqoGyxFEI/S7xzFEsFZkpxi3FQVL7id0GQa3/+9BBUVgm7hN8csyMcQouCYdIEQTgRhfNBNWPRYy/4BDOyHLApOtpo=
+  file:
+    - "$TRAVIS_BUILD_DIR/android/app/build/outputs/**/*.apk"
+    - "$TRAVIS_BUILD_DIR/android/app/build/outputs/**/mapping.txt"
+    - "$TRAVIS_BUILD_DIR/ios/**/*.zip"
+  on:
+    repo: tidepool-org/mobile
+    tags: true
