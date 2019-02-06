@@ -22,16 +22,16 @@ before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash
   - export PATH="$HOME/.yarn/bin:$PATH"
   - expo login -u tidepool -p $EXPO_PASSWORD
-install:
-  - brew update
-  - brew install yarn
-  - yarn install
-  - yarn run pre
-  - expo publish
 matrix:
   include:
     - language: objective-c
       osx_image: xcode10.1
+      install:
+        - brew update
+        - brew install yarn
+        - yarn install
+        - yarn run pre
+        - expo publish
       script:
         - pushd ios
         - uuid=`grep UUID -A1 -a ../orgtidepoolblipnotesRN_AppStore.mobileprovision |
@@ -58,6 +58,10 @@ matrix:
           - android-sdk-preview-license-52d11cd2
           - android-sdk-license-.+
           - google-gdk-license-.+
+      install:
+        - yarn install
+        - yarn run pre
+        - expo publish
       script:
         - pushd android
         - "./gradlew :app:assembleProdMinSdkProdKernelRelease"
