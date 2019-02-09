@@ -33,7 +33,7 @@ matrix:
       script:
         - pushd ios
         - uuid=`grep UUID -A1 -a ../orgtidepoolblipnotesRN_AppStore.mobileprovision |
-          grep -io "[-A-F0-9]\{36\}"`
+        - mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
         - cp ../orgtidepoolblipnotesRN_AppStore.mobileprovision ~/Library/MobileDevice/Provisioning\
           Profiles/$uuid.mobileprovision
         - xcodebuild archive -workspace $IOS_APP_NAME.xcworkspace -scheme $IOS_APP_NAME
