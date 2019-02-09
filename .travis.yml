@@ -32,9 +32,21 @@ matrix:
         - expo publish
       script:
         - pushd ios
+
+        # Add signing certs to keychain
+        security create-keychain -p travis ios-build.keychain
+        security default-keychain -s ios-build.keychain
+        security unlock-keychain -p travis ios-build.keychain
+        security set-keychain-settings -t 3600 -l ~/Library/Keychains/ios-build.keychain
+        security import tidepool-ios-distribution-cert.p12 -k ~/Library/Keychains/ios-build.keychain -P $KEY_PASSWORD -T /usr/bin/codesign
+        security set-key-partition-list -S apple-tool:,apple: -s -k travis ios-build.keychain
+
+        # Install provisioning profile
         - uuid=`grep UUID -A1 -a ../orgtidepoolblipnotesRN_AppStore.mobileprovision | grep -io "[-A-F0-9]\{36\}"`
         - mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
         - cp ../orgtidepoolblipnotesRN_AppStore.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/$uuid.mobileprovision
+
+        # Build the archive for distribution
         - xcodebuild archive -workspace $IOS_APP_NAME.xcworkspace -scheme $IOS_APP_NAME -configuration Release -archivePath $IOS_APP_NAME.xcarchive
         - xcodebuild -exportArchive -exportOptionsPlist exportArchiveOptions.plist -archivePath $IOS_APP_NAME.xcarchive -exportPath ./
         - zip -r $IOS_APP_NAME.xcarchive.zip $IOS_APP_NAME.xcarchive
