@@ -26,9 +26,10 @@ matrix:
   include:
     - language: objective-c
       osx_image: xcode10.1
-      install:
+      before_install:
         - brew update
         - brew install yarn
+      install:
         - yarn install
         - yarn run pre
         - expo publish
