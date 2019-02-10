@@ -41,7 +41,7 @@ matrix:
         - security set-keychain-settings -t 3600 -l ~/Library/Keychains/ios-build.keychain
         - security import ../tidepool-ios-distribution-cert.p12 -k ~/Library/Keychains/ios-build.keychain -P $IOS_KEY_PASSWORD -T /usr/bin/codesign
         - "security set-key-partition-list -S apple-tool:,apple: -s -k travis ~/Library/Keychains/ios-build.keychain"
-
+x   
         # Install provisioning profile
         - uuid=`grep UUID -A1 -a ../orgtidepoolblipnotesRN_AppStore.mobileprovision | grep -io "[-A-F0-9]\{36\}"`
         - mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
@@ -86,7 +86,6 @@ matrix:
       script:
         - pushd android
         - "./gradlew :app:assembleProdMinSdkProdKernelRelease"
-        - "./gradlew :app:assembleDevMinSdkDevKernelDebug"
 deploy:
   provider: releases
   draft: true
