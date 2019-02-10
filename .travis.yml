@@ -16,6 +16,7 @@ matrix:
       before_install:
         - brew update
         - brew install yarn
+        - gem install xcpretty-travis-formatter
         - openssl aes-256-cbc -K $encrypted_4beaf9ef68f9_key -iv $encrypted_4beaf9ef68f9_iv
           -in secret-files.tar.enc -out secret-files.tar -d
         - tar xvf secret-files.tar
@@ -46,8 +47,8 @@ matrix:
         - cp ../orgtidepoolblipnotesRN_AppStore.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/$uuid.mobileprovision
 
         # Build the archive for distribution
-        - xcodebuild archive -workspace $IOS_APP_NAME.xcworkspace -scheme $IOS_APP_NAME -configuration Release -archivePath $IOS_APP_NAME.xcarchive -quiet
-        - xcodebuild exportArchive -exportOptionsPlist exportArchiveOptions.plist -archivePath $IOS_APP_NAME.xcarchive -exportPath ./ -quiet
+        - xcodebuild archive -workspace $IOS_APP_NAME.xcworkspace -scheme $IOS_APP_NAME -configuration Release -archivePath $IOS_APP_NAME.xcarchive | xcpretty -f `xcpretty-travis-formatter`
+        - xcodebuild exportArchive -exportOptionsPlist exportArchiveOptions.plist -archivePath $IOS_APP_NAME.xcarchive -exportPath ./ | xcpretty -f `xcpretty-travis-formatter`
         - zip -r $IOS_APP_NAME.xcarchive.zip $IOS_APP_NAME.xcarchive
     - language: android
       jdk: oraclejdk8
