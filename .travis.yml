@@ -48,8 +48,8 @@ matrix:
         - cp ../orgtidepoolblipnotesRN_AppStore.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/$uuid.mobileprovision
 
         # Build the archive for distribution
-        - travis_wait 40 xcodebuild archive -workspace $IOS_APP_NAME.xcworkspace -scheme $IOS_APP_NAME -configuration Release -archivePath $IOS_APP_NAME.xcarchive -quiet
-        - xcodebuild exportArchive -exportOptionsPlist exportArchiveOptions.plist -archivePath $IOS_APP_NAME.xcarchive -exportPath ./ -quiet
+        - travis_wait 40 xcodebuild archive -workspace $IOS_APP_NAME.xcworkspace -scheme $IOS_APP_NAME -configuration Release -archivePath $IOS_APP_NAME.xcarchive | xcpretty -f `xcpretty-travis-formatter`
+        - xcodebuild exportArchive -exportOptionsPlist exportArchiveOptions.plist -archivePath $IOS_APP_NAME.xcarchive -exportPath ./ | xcpretty -f `xcpretty-travis-formatter`
         - zip -r $IOS_APP_NAME.xcarchive.zip $IOS_APP_NAME.xcarchive
     - language: android
       jdk: oraclejdk8
