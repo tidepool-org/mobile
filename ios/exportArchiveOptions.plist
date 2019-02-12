@@ -9,8 +9,17 @@
         <key>uploadSymbols</key>
         <true/>
         <key>compileBitcode</key>
-        <true/>
+        <false/>
         <key>uploadBitcode</key>
         <true/>
+        <key>signingStyle</key>
+        <string>manual</string>
+        <key>signingCertificate</key>
+        <string>iPhone Distribution: Tidepool Project (75U4X84TEG)</string>
+        <key>provisioningProfiles</key>
+        <dict>
+            <key>org.tidepool.blipnotesRN</key>
+            <string>Distribution</string>
+        </dict>
 </dict>
 </plist>
