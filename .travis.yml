@@ -89,6 +89,10 @@ matrix:
 deploy:
   provider: releases
   draft: true
+  target_commitish: $TRAVIS_COMMIT
+  tag_name: $TRAVIS_TAG
+  name: Tidepool $TRAVIS_TAG
+  body: Automated draft release from Travis CI
   skip_cleanup: true
   overwrite: true
   file_glob: true
