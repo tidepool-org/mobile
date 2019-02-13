@@ -2,24 +2,16 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-        <key>teamID</key>
-        <string>Tidepool Project</string>
         <key>method</key>
         <string>app-store</string>
-        <key>uploadSymbols</key>
-        <true/>
-        <key>compileBitcode</key>
-        <false/>
-        <key>uploadBitcode</key>
-        <true/>
         <key>signingStyle</key>
         <string>manual</string>
         <key>signingCertificate</key>
-        <string>iPhone Distribution: Tidepool Project (75U4X84TEG)</string>
+        <string>iOS Distribution</string>
         <key>provisioningProfiles</key>
         <dict>
             <key>org.tidepool.blipnotesRN</key>
-            <string>Distribution</string>
+            <string>493febfe-e222-4d2d-acd2-ce1a25f12059</string>
         </dict>
 </dict>
 </plist>
