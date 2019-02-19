@@ -245,7 +245,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "COMMITS=$(git rev-list HEAD | wc -l)\nCOMMITS=$((COMMITS * 100)) # Multiply by 100 so we could do manual releases, manually bumping build number if needed. When it ends in 00, it should correspond to git commit number on current branch\ndefaults write \"${BUILT_PRODUCTS_DIR}/${INFOPLIST_PATH%.*}\" \"CFBundleVersion\" \"${COMMITS}\"\n";
+			shellScript = "COMMITS=$(git rev-list HEAD --count)\nCOMMITS=$((COMMITS * 100)) # Multiply by 100 so we could do manual releases, manually bumping build number if needed. When it ends in 00, it should correspond to git commit number on current branch\ndefaults write \"${BUILT_PRODUCTS_DIR}/${INFOPLIST_PATH%.*}\" \"CFBundleVersion\" \"${COMMITS}\"\n";
 		};
 		AA38385B7D8D0854176B72FC /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
