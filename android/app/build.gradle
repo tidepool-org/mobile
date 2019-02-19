@@ -37,7 +37,9 @@ def getVersionCode = { ->
             standardOutput = stdout
         }
 
-        return Integer.parseInt(stdout.toString().trim())
+        // Multiply by 100 so we could do manual releases, manually bumping vesionCode if needed.
+        // When it ends in 00, it should correspond to git commit number on current branch
+        return Integer.parseInt(stdout.toString().trim()) * 100
     }
     catch (ignored) {
         return -1;
