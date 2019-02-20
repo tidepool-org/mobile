@@ -1,6 +1,4 @@
 .expo/
-EXBuildConstants.json
-EXBuildConstants.plist*
 keys.json
 
 node_modules/

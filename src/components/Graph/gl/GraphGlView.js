@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Expo from "expo";
+import { GLView } from "expo";
 import { THREE } from "expo-three";
 
 class GraphGlView extends PureComponent {
@@ -12,11 +12,7 @@ class GraphGlView extends PureComponent {
     const { width, height, onContextCreate } = this.props;
 
     return (
-      <Expo.GLView
-        width={width}
-        height={height}
-        onContextCreate={onContextCreate}
-      />
+      <GLView width={width} height={height} onContextCreate={onContextCreate} />
     );
   }
 }

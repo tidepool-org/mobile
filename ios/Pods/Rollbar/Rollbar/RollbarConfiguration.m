@@ -1,10 +1,4 @@
-//
-//  RollbarConfiguration.m
-//  Rollbar
-//
-//  Created by Sergei Bezborodko on 3/21/14.
-//  Copyright (c) 2014 Rollbar, Inc. All rights reserved.
-//
+//  Copyright (c) 2018 Rollbar, Inc. All rights reserved.
 
 #import "RollbarConfiguration.h"
 #import "objc/runtime.h"
@@ -12,7 +6,7 @@
 #import "RollbarTelemetry.h"
 
 static NSString *NOTIFIER_NAME = @"rollbar-ios";
-static NSString *NOTIFIER_VERSION = @"1.0.0";
+static NSString *NOTIFIER_VERSION = @"1.4.2";
 static NSString *FRAMEWORK = @"ios";
 static NSString *CONFIGURATION_FILENAME = @"rollbar.config";
 static NSString *DEFAULT_ENDPOINT = @"https://api.rollbar.com/api/1/items/";
@@ -20,21 +14,9 @@ static NSString *DEFAULT_ENDPOINT = @"https://api.rollbar.com/api/1/items/";
 static NSString *configurationFilePath = nil;
 
 @interface RollbarConfiguration () {
-    NSMutableDictionary *customData;
+    NSMutableDictionary *_customData;
+    BOOL _isRootConfiguration;
 }
-
-@property (atomic, copy) NSString *personId;
-@property (atomic, copy) NSString *personUsername;
-@property (atomic, copy) NSString *personEmail;
-@property (atomic, copy) NSString *serverHost;
-@property (atomic, copy) NSString *serverRoot;
-@property (atomic, copy) NSString *serverBranch;
-@property (atomic, copy) NSString *serverCodeVersion;
-@property (atomic, copy) NSString *notifierName;
-@property (atomic, copy) NSString *notifierVersion;
-@property (atomic, copy) NSString *framework;
-@property (atomic) BOOL shouldCaptureConnectivity;
-@property (atomic) CaptureIpType captureIp;
 
 @end
 
@@ -46,30 +28,50 @@ static NSString *configurationFilePath = nil;
 
 - (id)init {
     if (!configurationFilePath) {
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-        NSString *cachesDirectory = [paths objectAtIndex:0];
-        configurationFilePath = [cachesDirectory stringByAppendingPathComponent:CONFIGURATION_FILENAME];
+        NSArray *paths =
+            NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+        NSString *cachesDirectory =
+            [paths objectAtIndex:0];
+        configurationFilePath =
+            [cachesDirectory stringByAppendingPathComponent:CONFIGURATION_FILENAME];
     }
 
     if (self = [super init]) {
-        customData = [NSMutableDictionary dictionaryWithCapacity:10];
-        self.endpoint = DEFAULT_ENDPOINT;
+        _customData = [NSMutableDictionary dictionaryWithCapacity:10];
+        _endpoint = DEFAULT_ENDPOINT;
 
         #ifdef DEBUG
-        self.environment = @"development";
+        _environment = @"development";
         #else
-        self.environment = @"unspecified";
+        _environment = @"unspecified";
         #endif
 
-        self.crashLevel = @"error";
-        self.scrubFields = [NSMutableSet new];
+        _crashLevel = @"error";
+        _scrubFields = [NSMutableSet new];
+        _scrubWhitelistFields = [NSMutableSet new];
+        self.telemetryViewInputsToScrub = [NSMutableSet new];
 
-        self.notifierName = NOTIFIER_NAME;
-        self.notifierVersion = NOTIFIER_VERSION;
-        self.framework = FRAMEWORK;
-        self.captureIp = CaptureIpFull;
+        _notifierName = NOTIFIER_NAME;
+        _notifierVersion = NOTIFIER_VERSION;
+        _framework = FRAMEWORK;
+        _captureIp = CaptureIpFull;
+        
+        _logLevel = @"info";
 
+        _enabled = true;
+        self.telemetryEnabled = false;
+        _maximumReportsPerMinute = 60;
         [self setCaptureLogAsTelemetryData:false];
+        
+        _httpProxyEnabled = NO;
+        _httpProxy = @"";
+        _httpProxyPort = [NSNumber numberWithInteger:0];
+
+        _httpsProxyEnabled = NO;
+        _httpsProxy = @"";
+        _httpsProxyPort = [NSNumber numberWithInteger:0];
+
+        [self save];
     }
 
     return self;
@@ -80,7 +82,9 @@ static NSString *configurationFilePath = nil;
 
     NSData *data = [NSData dataWithContentsOfFile:configurationFilePath];
     if (data) {
-        NSDictionary *config = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+        NSDictionary *config = [NSJSONSerialization JSONObjectWithData:data
+                                                               options:0
+                                                                 error:nil];
 
         if (!config) {
             return self;
@@ -95,52 +99,150 @@ static NSString *configurationFilePath = nil;
     return self;
 }
 
+- (void)setEnabled:(BOOL)enabled {
+    _enabled = enabled;
+    [self save];
+}
+
+- (void)setHttpProxyEnabled:(BOOL)httpProxyEnabled {
+    _httpProxyEnabled = httpProxyEnabled;
+    [self save];
+}
+
+- (void)setHttpProxy:(NSString *)proxy {
+    _httpProxy = proxy;
+    [self save];
+}
+
+- (void)setHttpProxyPort:(NSNumber *)port {
+    _httpProxyPort = port;
+    [self save];
+}
+
+- (void)setHttpsProxyEnabled:(BOOL)httpsProxyEnabled {
+    _httpsProxyEnabled = httpsProxyEnabled;
+    [self save];
+}
+
+- (void)setHttpsProxy:(NSString *)proxy {
+    _httpsProxy = proxy;
+    [self save];
+}
+
+- (void)setHttpsProxyPort:(NSNumber *)port {
+    _httpsProxyPort = port;
+    [self save];
+}
+
+- (void)setTelemetryEnabled:(BOOL)telemetryEnabled {
+    [RollbarTelemetry sharedInstance].enabled = telemetryEnabled;
+    [self save];
+}
+
+- (BOOL)telemetryEnabled {
+    return [RollbarTelemetry sharedInstance].enabled;
+}
+
+- (void)setScrubViewInputsTelemetry:(BOOL)scrubViewInputsTelemetry {
+    [RollbarTelemetry sharedInstance].scrubViewInputs = scrubViewInputsTelemetry;
+    [self save];
+}
+
+- (BOOL)scrubViewInputsTelemetry {
+    return [RollbarTelemetry sharedInstance].scrubViewInputs;
+}
+
+- (void)addTelemetryViewInputToScrub:(NSString *)input {
+    [[RollbarTelemetry sharedInstance].viewInputsToScrub addObject:input];
+    [self save];
+}
+
+- (void)removeTelemetryViewInputToScrub:(NSString *)input {
+    [[RollbarTelemetry sharedInstance].viewInputsToScrub removeObject:input];
+    [self save];
+}
+
+- (void)setRollbarLevel:(RollbarLevel)level {
+    _logLevel = RollbarStringFromLevel(level);
+    [self save];
+}
+
+- (RollbarLevel)getRollbarLevel {
+    return RollbarLevelFromString(_logLevel);
+}
+
+- (void)setReportingRate:(NSUInteger)maximumReportsPerMinute {
+    _maximumReportsPerMinute = maximumReportsPerMinute;
+    [self save];
+}
+
 - (void)setMaximumTelemetryData:(NSInteger)maximumTelemetryData {
     [[RollbarTelemetry sharedInstance] setDataLimit:maximumTelemetryData];
 }
 
-- (void)setPersonId:(NSString *)personId username:(NSString *)username email:(NSString *)email {
-    self.personId = personId;
-    self.personUsername = username;
-    self.personEmail = email;
-
+- (void)setPersonId:(NSString *)personId
+           username:(NSString *)username
+              email:(NSString *)email {
+    _personId = personId;
+    _personUsername = username;
+    _personEmail = email;
     [self save];
 }
 
-- (void)setServerHost:(NSString *)host root:(NSString*)root branch:(NSString*)branch codeVersion:(NSString*)codeVersion {
-    self.serverHost = host;
-    self.serverRoot = root ? [root stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"/"]] : root;
-    self.serverBranch = branch;
-    self.serverCodeVersion = codeVersion;
-
+- (void)setServerHost:(NSString *)host
+                 root:(NSString*)root
+               branch:(NSString*)branch
+          codeVersion:(NSString*)codeVersion {
+    
+    _serverHost = host;
+    _serverRoot = root ?
+        [root stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"/"]]
+        : root;
+    _serverBranch = branch;
+    _serverCodeVersion = codeVersion;
     [self save];
 }
 
-- (void)setNotifierName:(NSString *)name version:(NSString *)version {
-    self.notifierName = name ? name : NOTIFIER_NAME;
-    self.notifierVersion = version ? version : NOTIFIER_VERSION;
+- (void)setNotifierName:(NSString *)name
+                version:(NSString *)version {
+    
+    _notifierName = name ? name : NOTIFIER_NAME;
+    _notifierVersion = version ? version : NOTIFIER_VERSION;
     [self save];
 }
 
 - (void)setCodeFramework:(NSString *)framework {
-    self.framework = framework ? framework : FRAMEWORK;
+    _framework = framework ? framework : FRAMEWORK;
+    [self save];
+}
+
+- (void)setRequestId:(NSString *)requestId {
+    _requestId = requestId;
     [self save];
 }
 
 - (void)setPayloadModificationBlock:(void (^)(NSMutableDictionary*))payloadModificationBlock {
-    self.payloadModification = payloadModificationBlock;
+    _payloadModification = payloadModificationBlock;
 }
 
 - (void)setCheckIgnoreBlock:(BOOL (^)(NSDictionary *))checkIgnoreBlock {
-    self.checkIgnore = checkIgnoreBlock;
+    _checkIgnore = checkIgnoreBlock;
 }
 
 - (void)addScrubField:(NSString *)field {
-    [self.scrubFields addObject:field];
+    [_scrubFields addObject:field];
 }
 
 - (void)removeScrubField:(NSString *)field {
-    [self.scrubFields removeObject:field];
+    [_scrubFields removeObject:field];
+}
+
+- (void)addScrubWhitelistField:(NSString *)field {
+    [_scrubWhitelistFields addObject:field];
+}
+
+- (void)removeScrubWhitelistField:(NSString *)field {
+    [_scrubWhitelistFields removeObject:field];
 }
 
 - (void)setCaptureLogAsTelemetryData:(BOOL)captureLog {
@@ -148,35 +250,38 @@ static NSString *configurationFilePath = nil;
 }
 
 - (void)setCaptureConnectivityAsTelemetryData:(BOOL)captureConnectivity {
-    self.shouldCaptureConnectivity = captureConnectivity;
+    _shouldCaptureConnectivity = captureConnectivity;
 }
 
 - (void)setCaptureIpType:(CaptureIpType)captureIp {
-    self.captureIp = captureIp;
+    _captureIp = captureIp;
 }
 
 - (void)setValue:(id)value forUndefinedKey:(NSString *)key {
     if (value) {
-        customData[key] = value;
+        _customData[key] = value;
     } else {
-        [customData removeObjectForKey:key];
+        [_customData removeObjectForKey:key];
     }
     
     [self save];
 }
 
 - (id)valueForUndefinedKey:(NSString *)key {
-    return customData[key];
+    return _customData[key];
 }
 
 // Add a key value observer for all properties so that this object
 // is saved to disk every time a property is updated
 - (void)_setRoot {
-    isRootConfiguration = YES;
+    _isRootConfiguration = YES;
     
     for (NSString *propertyName in [self getProperties]) {
         if ([propertyName rangeOfString:@"person"].location == NSNotFound) {
-            [self addObserver:self forKeyPath:propertyName options:NSKeyValueObservingOptionNew context:nil];
+            [self addObserver:self
+                   forKeyPath:propertyName
+                      options:NSKeyValueObservingOptionNew
+                      context:nil];
         }
     }
 }
@@ -184,22 +289,30 @@ static NSString *configurationFilePath = nil;
 // Convert this object's properties into json and save it to disk only if
 // this is the root level configuration
 - (void)save {
-    if (isRootConfiguration) {
+    if (_isRootConfiguration) {
         NSMutableDictionary *config = [NSMutableDictionary dictionary];
         
         for (NSString *propertyName in [self getProperties]) {
             id value = [self valueForKey:propertyName];
             if (value) {
-                [config setObject:value forKey:propertyName];
+                [config setObject:value
+                           forKey:propertyName];
             }
         }
 
-        NSData *configJson = [NSJSONSerialization dataWithJSONObject:config options:0 error:nil safe:true];
-        [configJson writeToFile:configurationFilePath atomically:YES];
+        NSData *configJson = [NSJSONSerialization dataWithJSONObject:config
+                                                             options:0
+                                                               error:nil
+                                                                safe:true];
+        [configJson writeToFile:configurationFilePath
+                     atomically:YES];
     }
 }
 
-- (void)observeValueForKeyPath:(NSString*)keyPath ofObject:(id)object change:(NSDictionary*)change context:(void*)context {
+- (void)observeValueForKeyPath:(NSString*)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary*)change
+                       context:(void*)context {
     [self save];
 }
 
@@ -213,22 +326,21 @@ static NSString *configurationFilePath = nil;
         objc_property_t property = properties[i];
         const char *propName = property_getName(property);
         if(propName) {
-            NSString *propertyName = [NSString stringWithCString:propName encoding:[NSString defaultCStringEncoding]];
-            
+            NSString *propertyName = [NSString stringWithCString:propName
+                                                        encoding:[NSString defaultCStringEncoding]];            
             [result addObject:propertyName];
         }
     }
     
     free(properties);
     
-    [result addObjectsFromArray:customData.allKeys];
+    [result addObjectsFromArray:_customData.allKeys];
     
     return result;
 }
 
-
 - (NSDictionary *)customData {
-    return [NSDictionary dictionaryWithDictionary:customData];
+    return [NSDictionary dictionaryWithDictionary:_customData];
 }
 
 @end

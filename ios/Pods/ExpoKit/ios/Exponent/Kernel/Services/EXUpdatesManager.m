@@ -1,19 +1,20 @@
 // Copyright 2015-present 650 Industries. All rights reserved.
 
-#import "EXKernel.h"
 #import "EXAppLoader+Updates.h"
+#import "EXEnvironment.h"
+#import "EXKernel.h"
 #import "EXKernelAppRecord.h"
 #import "EXReactAppManager.h"
 #import "EXScopedModuleRegistry.h"
-#import "EXShellManager.h"
 #import "EXUpdates.h"
 #import "EXUpdatesManager.h"
+
 #import <React/RCTBridge.h>
 #import <React/RCTUtils.h>
 
 @interface EXUpdatesManager ()
 
-@property (nonatomic, strong) EXAppLoader *appLoader;
+@property (nonatomic, strong) EXAppLoader *manifestAppLoader;
 
 @end
 
@@ -74,16 +75,19 @@ ofDownloadWithManifest:(NSDictionary * _Nullable)manifest
 }
 
 - (void)updatesModule:(id)scopedModule
-didRequestManifestWithCacheBehavior:(EXCachedResourceBehavior)cacheBehavior
+didRequestManifestWithCacheBehavior:(EXManifestCacheBehavior)cacheBehavior
               success:(void (^)(NSDictionary * _Nonnull))success
               failure:(void (^)(NSError * _Nonnull))failure
 {
-  if ([EXShellManager sharedInstance].isShell && ![EXShellManager sharedInstance].areRemoteUpdatesEnabled) {
+  if ([EXEnvironment sharedEnvironment].isDetached && ![EXEnvironment sharedEnvironment].areRemoteUpdatesEnabled) {
     failure(RCTErrorWithMessage(@"Remote updates are disabled in app.json"));
     return;
   }
   EXAppLoader *appLoader = [self _appLoaderWithScopedModule:scopedModule];
   [appLoader fetchManifestWithCacheBehavior:cacheBehavior success:success failure:failure];
+  if (cacheBehavior == EXManifestPrepareToCache) {
+    _manifestAppLoader = appLoader;
+  }
 }
 
 - (void)updatesModule:(id)scopedModule
@@ -92,7 +96,7 @@ didRequestBundleWithManifest:(NSDictionary *)manifest
               success:(void (^)(NSData * _Nonnull))success
               failure:(void (^)(NSError * _Nonnull))failure
 {
-  if ([EXShellManager sharedInstance].isShell && ![EXShellManager sharedInstance].areRemoteUpdatesEnabled) {
+  if ([EXEnvironment sharedEnvironment].isDetached && ![EXEnvironment sharedEnvironment].areRemoteUpdatesEnabled) {
     failure(RCTErrorWithMessage(@"Remote updates are disabled in app.json"));
     return;
   }
@@ -103,13 +107,22 @@ didRequestBundleWithManifest:(NSDictionary *)manifest
                     @"total": progress.total
                     });
   };
-  EXAppLoader *appLoader = [self _appLoaderWithScopedModule:scopedModule];
+  EXAppLoader *appLoader = _manifestAppLoader ?: [self _appLoaderWithScopedModule:scopedModule];
   [appLoader fetchJSBundleWithManifest:manifest
                          cacheBehavior:EXCachedResourceWriteToCache
                        timeoutInterval:kEXJSBundleTimeout
                               progress:progressDictBlock
-                               success:success
-                                 error:failure];
+                               success:^(NSData * _Nonnull data) {
+                                         if (self->_manifestAppLoader) {
+                                           [self->_manifestAppLoader writeManifestToCache];
+                                         }
+                                         self->_manifestAppLoader = nil;
+                                         success(data);
+                                       }
+                                 error:^(NSError * _Nonnull error) {
+                                         self->_manifestAppLoader = nil;
+                                         failure(error);
+                                       }];
 }
 
 - (BOOL)_doesBridgeSupportUpdatesModule:(RCTBridge *)bridge

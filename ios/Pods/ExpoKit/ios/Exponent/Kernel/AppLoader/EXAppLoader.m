@@ -1,5 +1,6 @@
 // Copyright 2015-present 650 Industries. All rights reserved.
 
+#import "EXEnvironment.h"
 #import "EXErrorRecoveryManager.h"
 #import "EXFileDownloader.h"
 #import "EXKernel.h"
@@ -12,7 +13,6 @@
 #import "EXKernelAppRegistry.h"
 #import "EXKernelLinkingManager.h"
 #import "EXManifestResource.h"
-#import "EXShellManager.h"
 
 #import <React/RCTUtils.h>
 
@@ -29,8 +29,10 @@ NSTimeInterval const kEXJSBundleTimeout = 60 * 5;
 
 @property (nonatomic, strong) NSDictionary * _Nullable confirmedManifest; // manifest that is actually being used
 @property (nonatomic, strong) NSDictionary * _Nullable cachedManifest; // manifest that is cached and we definitely have, may fall back to it
+@property (nonatomic, strong) EXManifestResource * _Nullable manifestResource;
 
 @property (nonatomic, strong) EXAppFetcher * _Nullable appFetcher;
+@property (nonatomic, strong) EXAppFetcher * _Nullable previousAppFetcherWaitingForBundle;
 @property (nonatomic, strong) NSError * _Nullable error;
 
 @property (nonatomic, assign) BOOL hasFinished;
@@ -65,8 +67,10 @@ NSTimeInterval const kEXJSBundleTimeout = 60 * 5;
   _cachedManifest = nil;
   _error = nil;
   _appFetcher = nil;
+  _previousAppFetcherWaitingForBundle = nil;
   _hasFinished = NO;
   _shouldUseCacheOnly = NO;
+  _manifestResource = nil;
 }
 
 - (EXAppLoaderStatus)status
@@ -147,21 +151,27 @@ NSTimeInterval const kEXJSBundleTimeout = 60 * 5;
   }
 }
 
+- (void)writeManifestToCache
+{
+  if (_manifestResource) {
+    [_manifestResource writeToCache];
+    _manifestResource = nil;
+  }
+}
+
 #pragma mark - internal
 
 + (NSURL *)_httpUrlFromManifestUrl:(NSURL *)url
 {
   NSURLComponents *components = [NSURLComponents componentsWithURL:url resolvingAgainstBaseURL:YES];
-  // keep https if it's already there, otherwise replace any other scheme with http
-  if (!components.scheme || ![components.scheme isEqualToString:@"https"]) {
+  // if scheme is exps or https, use https. Else default to http
+  if (components.scheme && ([components.scheme isEqualToString:@"exps"] || [components.scheme isEqualToString:@"https"])){
+    components.scheme = @"https";
+  } else {
     components.scheme = @"http";
   }
   NSMutableString *path = [((components.path) ? components.path : @"") mutableCopy];
   path = [[EXKernelLinkingManager stringByRemovingDeepLink:path] mutableCopy];
-  if (path.length == 0 || [path characterAtIndex:path.length - 1] != '/') {
-    [path appendString:@"/"];
-  }
-  [path appendString:@"index.exp"];
   components.path = path;
   return [components URL];
 }
@@ -177,7 +187,7 @@ NSTimeInterval const kEXJSBundleTimeout = 60 * 5;
 {
   // if we're in dev mode, don't try loading cached manifest
   if ([_httpManifestUrl.host isEqualToString:@"localhost"]
-      || ([EXShellManager sharedInstance].isShell && [EXShellManager sharedInstance].isDebugXCodeScheme)) {
+      || ([EXEnvironment sharedEnvironment].isDetached && [EXEnvironment sharedEnvironment].isDebugXCodeScheme)) {
     // we can't pre-detect if this person is using a developer tool, but using localhost is a pretty solid indicator.
     [self _startAppFetcher:[[EXAppFetcherDevelopmentMode alloc] initWithAppLoader:self]];
   } else {
@@ -187,8 +197,8 @@ NSTimeInterval const kEXJSBundleTimeout = 60 * 5;
 
 - (void)_fetchCachedManifest
 {
-  [self fetchManifestWithCacheBehavior:EXCachedResourceOnlyCache success:^(NSDictionary * cachedManifest) {
-    _cachedManifest = cachedManifest;
+  [self fetchManifestWithCacheBehavior:EXManifestOnlyCache success:^(NSDictionary * cachedManifest) {
+    self.cachedManifest = cachedManifest;
     [self _fetchBundleWithManifest:cachedManifest];
   } failure:^(NSError * error) {
     [self _startAppFetcher:[[EXAppFetcherWithTimeout alloc] initWithAppLoader:self timeout:kEXAppLoaderDefaultTimeout]];
@@ -229,8 +239,8 @@ NSTimeInterval const kEXJSBundleTimeout = 60 * 5;
     }
   }
 
-  // only support checkAutomatically: ON_ERROR_RECOVERY in shell & detached apps
-  if (![EXShellManager sharedInstance].isShell) {
+  // only support checkAutomatically: ON_ERROR_RECOVERY in detached apps
+  if (![EXEnvironment sharedEnvironment].isDetached) {
     shouldCheckForUpdate = YES;
   }
 
@@ -242,7 +252,8 @@ NSTimeInterval const kEXJSBundleTimeout = 60 * 5;
 
   // if remote updates are disabled, or we're using `reloadFromCache`, don't check for an update.
   // these checks need to be here because they need to happen after the dev mode check above.
-  if (_shouldUseCacheOnly || ([EXShellManager sharedInstance].isShell && ![EXShellManager sharedInstance].areRemoteUpdatesEnabled)) {
+  if (_shouldUseCacheOnly ||
+      ([EXEnvironment sharedEnvironment].isDetached && ![EXEnvironment sharedEnvironment].areRemoteUpdatesEnabled)) {
     shouldCheckForUpdate = NO;
   }
 
@@ -294,8 +305,11 @@ NSTimeInterval const kEXJSBundleTimeout = 60 * 5;
 
 #pragma mark - EXAppFetcherDelegate
 
-- (void)appFetcher:(EXAppFetcher *)appFetcher didSwitchToAppFetcher:(EXAppFetcher *)newAppFetcher
+- (void)appFetcher:(EXAppFetcher *)appFetcher didSwitchToAppFetcher:(EXAppFetcher *)newAppFetcher retainingCurrent:(BOOL)shouldRetain
 {
+  if (shouldRetain) {
+    _previousAppFetcherWaitingForBundle = appFetcher;
+  }
   [self _startAppFetcher:newAppFetcher];
 }
 
@@ -316,10 +330,15 @@ NSTimeInterval const kEXJSBundleTimeout = 60 * 5;
 
 - (void)appFetcher:(EXAppFetcher *)appFetcher didFailWithError:(NSError *)error
 {
+  // don't nullify appFetcher - we need to use its state to record the circumstances of the error
   _error = error;
-  _appFetcher = nil;
   if (_delegate) {
     [_delegate appLoader:self didFailWithError:error];
+  }
+  if (appFetcher == _previousAppFetcherWaitingForBundle) {
+    // previous app fetcher errored while trying to fetch a new bundle
+    // so we can deallocate it now
+    _previousAppFetcherWaitingForBundle = nil;
   }
 }
 
@@ -339,19 +358,17 @@ NSTimeInterval const kEXJSBundleTimeout = 60 * 5;
   if (_delegate) {
     [_delegate appLoader:self didResolveUpdatedBundleWithManifest:manifest isFromCache:isFromCache error:error];
   }
+  if (appFetcher == _previousAppFetcherWaitingForBundle) {
+    // we no longer need to retain the previous app fetcher
+    // as the only reason to retain is to wait for it to finish downloading the new bundle
+    _previousAppFetcherWaitingForBundle = nil;
+  }
 }
 
 #pragma mark - helper methods for fetching
 
-- (void)fetchManifestWithCacheBehavior:(EXCachedResourceBehavior)cacheBehavior success:(void (^)(NSDictionary *))success failure:(void (^)(NSError *))failure
+- (void)fetchManifestWithCacheBehavior:(EXManifestCacheBehavior)manifestCacheBehavior success:(void (^)(NSDictionary *))success failure:(void (^)(NSError *))failure
 {
-  // this fetch behavior should never be used, as we re-create it ourselves within this class
-  if (cacheBehavior == EXCachedResourceFallBackToCache) {
-    @throw [NSException exceptionWithName:NSInternalInconsistencyException
-                                   reason:@"EXManifestResource should never be loaded with FallBackToCache behavior"
-                                 userInfo:nil];
-  }
-  
   // if we're using a localManifest, just return it immediately
   if (_localManifest) {
     success(_localManifest);
@@ -363,8 +380,18 @@ NSTimeInterval const kEXJSBundleTimeout = 60 * 5;
     components.scheme = @"http";
     _httpManifestUrl = [components URL];
   }
+
   EXManifestResource *manifestResource = [[EXManifestResource alloc] initWithManifestUrl:_httpManifestUrl originalUrl:_manifestUrl];
-  [manifestResource loadResourceWithBehavior:cacheBehavior progressBlock:nil successBlock:^(NSData * _Nonnull data) {
+
+  EXCachedResourceBehavior cachedResourceBehavior = EXCachedResourceNoCache;
+  if (manifestCacheBehavior == EXManifestOnlyCache) {
+    cachedResourceBehavior = EXCachedResourceOnlyCache;
+  } else if (manifestCacheBehavior == EXManifestPrepareToCache) {
+    // in this case, we don't want to use the cache but will prepare to write the resulting manifest
+    // to the cache later, after the bundle is finished downloading, so we save the reference
+    _manifestResource = manifestResource;
+  }
+  [manifestResource loadResourceWithBehavior:cachedResourceBehavior progressBlock:nil successBlock:^(NSData * _Nonnull data) {
     NSError *error;
     id manifest = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
     if (!manifest) {
@@ -383,7 +410,7 @@ NSTimeInterval const kEXJSBundleTimeout = 60 * 5;
     // insert loadedFromCache: boolean key into manifest
     NSMutableDictionary *mutableManifest = [(NSDictionary *)manifest mutableCopy];
     BOOL loadedFromCache = YES;
-    if (cacheBehavior == EXCachedResourceNoCache || cacheBehavior == EXCachedResourceWriteToCache) {
+    if (cachedResourceBehavior == EXCachedResourceNoCache) {
       loadedFromCache = NO;
     }
     mutableManifest[@"loadedFromCache"] = @(loadedFromCache);
@@ -391,7 +418,7 @@ NSTimeInterval const kEXJSBundleTimeout = 60 * 5;
     success([NSDictionary dictionaryWithDictionary:mutableManifest]);
   } errorBlock:^(NSError * _Nonnull error) {
 #if DEBUG
-    if ([EXShellManager sharedInstance].isShell && error &&
+    if ([EXEnvironment sharedEnvironment].isDetached && error &&
         (error.code == 404 || error.domain == EXNetworkErrorDomain)) {
       NSString *message = error.localizedDescription;
       message = [NSString stringWithFormat:@"Make sure you are serving your project from XDE or exp (%@)", message];

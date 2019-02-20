@@ -1,8 +1,9 @@
 // Copyright 2015-present 650 Industries. All rights reserved.
 
+#import "EXApiUtil.h"
+#import "EXEnvironment.h"
 #import "EXJavaScriptResource.h"
 #import "EXKernelUtil.h"
-#import "EXShellManager.h"
 
 #import <React/RCTJavaScriptLoader.h>
 
@@ -100,6 +101,25 @@
                       progressBlock:progressBlock
                        successBlock:successBlock
                          errorBlock:errorBlock];
+  }
+}
+
+- (BOOL)isUsingEmbeddedResource
+{
+  if ([EXEnvironment sharedEnvironment].isDetached) {
+    // if the URL of our request matches the remote URL of the embedded JS bundle,
+    // skip checking any caches and just immediately open the NSBundle copy
+    if ([EXEnvironment sharedEnvironment].embeddedBundleUrl &&
+        [self.remoteUrl isEqual:[EXApiUtil encodedUrlFromString:[EXEnvironment sharedEnvironment].embeddedBundleUrl]]) {
+      return YES;
+    } else {
+      return NO;
+    }
+  } else {
+    // we only need this because the bundle URL of prod home never changes, so we need
+    // to use the legacy logic and load embedded home if and only if a cached copy doesn't exist.
+    // TODO: get rid of this branch once prod home is loaded like any other bundle!!!!!!!
+    return [super isUsingEmbeddedResource];
   }
 }
 

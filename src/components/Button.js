@@ -6,6 +6,7 @@ import {
   View,
   Text,
   TouchableOpacity,
+  TouchableNativeFeedback,
   ViewPropTypes,
 } from "react-native";
 
@@ -61,10 +62,9 @@ class Button extends PureComponent {
     }
     const formattedTitle =
       Platform.OS === "android" ? title.toUpperCase() : title;
-    const Touchable = TouchableOpacity;
     // TODO: android - Revisit this. Do we want native feedback for Android? Or consistency/parity between iOS and Android
-    // const Touchable =
-    //   Platform.OS === "android" ? TouchableNativeFeedback : TouchableOpacity;
+    const Touchable =
+      Platform.OS === "android" ? TouchableNativeFeedback : TouchableOpacity;
     return (
       <Touchable
         accessibilityComponentType="button"

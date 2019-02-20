@@ -39,9 +39,7 @@ exports[`Storyshots SignInForm Sign in error 1`] = `
         }
       />
       <Text
-        accessible={true}
         allowFontScaling={false}
-        ellipsizeMode="tail"
         style={
           Array [
             Object {
@@ -69,7 +67,6 @@ exports[`Storyshots SignInForm Sign in error 1`] = `
         onChangeText={[Function]}
         onSubmitEditing={[Function]}
         placeholder="Email"
-        placeholderTextColor={undefined}
         returnKeyType="next"
         selectionColor="#657ef6"
         style={
@@ -98,7 +95,6 @@ exports[`Storyshots SignInForm Sign in error 1`] = `
         onChangeText={[Function]}
         onSubmitEditing={[Function]}
         placeholder="Password"
-        placeholderTextColor={undefined}
         returnKeyType="go"
         secureTextEntry={true}
         selectionColor="#657ef6"
@@ -132,16 +128,8 @@ exports[`Storyshots SignInForm Sign in error 1`] = `
         }
       >
         <View
-          accessibilityComponentType={undefined}
-          accessibilityLabel={undefined}
-          accessibilityTraits={undefined}
           accessible={true}
-          collapsable={undefined}
-          hasTVPreferredFocus={undefined}
-          hitSlop={undefined}
           isTVSelectable={true}
-          nativeID={undefined}
-          onLayout={undefined}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -154,13 +142,9 @@ exports[`Storyshots SignInForm Sign in error 1`] = `
               "padding": 8,
             }
           }
-          testID={undefined}
-          tvParallaxProperties={undefined}
         >
           <Text
-            accessible={true}
             allowFontScaling={false}
-            ellipsizeMode="tail"
             style={
               Array [
                 Object {
@@ -191,16 +175,8 @@ exports[`Storyshots SignInForm Sign in error 1`] = `
         }
       >
         <View
-          accessibilityComponentType="button"
-          accessibilityLabel={undefined}
-          accessibilityTraits={undefined}
           accessible={true}
-          collapsable={undefined}
-          hasTVPreferredFocus={undefined}
-          hitSlop={undefined}
           isTVSelectable={true}
-          nativeID={undefined}
-          onLayout={undefined}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -212,8 +188,6 @@ exports[`Storyshots SignInForm Sign in error 1`] = `
               "opacity": 1,
             }
           }
-          testID={undefined}
-          tvParallaxProperties={undefined}
         >
           <View
             style={
@@ -235,10 +209,8 @@ exports[`Storyshots SignInForm Sign in error 1`] = `
             }
           >
             <Text
-              accessible={true}
               allowFontScaling={false}
               disabled={true}
-              ellipsizeMode="tail"
               style={
                 Array [
                   Object {
@@ -312,9 +284,7 @@ exports[`Storyshots SignInForm Signing in 1`] = `
         }
       />
       <Text
-        accessible={true}
         allowFontScaling={false}
-        ellipsizeMode="tail"
         style={
           Array [
             Object {
@@ -342,7 +312,6 @@ exports[`Storyshots SignInForm Signing in 1`] = `
         onChangeText={[Function]}
         onSubmitEditing={[Function]}
         placeholder="Email"
-        placeholderTextColor={undefined}
         returnKeyType="next"
         selectionColor="#657ef6"
         style={
@@ -371,7 +340,6 @@ exports[`Storyshots SignInForm Signing in 1`] = `
         onChangeText={[Function]}
         onSubmitEditing={[Function]}
         placeholder="Password"
-        placeholderTextColor={undefined}
         returnKeyType="go"
         secureTextEntry={true}
         selectionColor="#657ef6"
@@ -405,16 +373,8 @@ exports[`Storyshots SignInForm Signing in 1`] = `
         }
       >
         <View
-          accessibilityComponentType={undefined}
-          accessibilityLabel={undefined}
-          accessibilityTraits={undefined}
           accessible={true}
-          collapsable={undefined}
-          hasTVPreferredFocus={undefined}
-          hitSlop={undefined}
           isTVSelectable={true}
-          nativeID={undefined}
-          onLayout={undefined}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -427,13 +387,9 @@ exports[`Storyshots SignInForm Signing in 1`] = `
               "padding": 8,
             }
           }
-          testID={undefined}
-          tvParallaxProperties={undefined}
         >
           <Text
-            accessible={true}
             allowFontScaling={false}
-            ellipsizeMode="tail"
             style={
               Array [
                 Object {
@@ -464,16 +420,8 @@ exports[`Storyshots SignInForm Signing in 1`] = `
         }
       >
         <View
-          accessibilityComponentType="button"
-          accessibilityLabel={undefined}
-          accessibilityTraits={undefined}
           accessible={true}
-          collapsable={undefined}
-          hasTVPreferredFocus={undefined}
-          hitSlop={undefined}
           isTVSelectable={true}
-          nativeID={undefined}
-          onLayout={undefined}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -485,8 +433,6 @@ exports[`Storyshots SignInForm Signing in 1`] = `
               "opacity": 1,
             }
           }
-          testID={undefined}
-          tvParallaxProperties={undefined}
         >
           <View
             style={
@@ -508,10 +454,8 @@ exports[`Storyshots SignInForm Signing in 1`] = `
             }
           >
             <Text
-              accessible={true}
               allowFontScaling={false}
               disabled={true}
-              ellipsizeMode="tail"
               style={
                 Array [
                   Object {
@@ -598,9 +542,7 @@ exports[`Storyshots SignInForm default 1`] = `
         }
       />
       <Text
-        accessible={true}
         allowFontScaling={false}
-        ellipsizeMode="tail"
         style={
           Array [
             Object {
@@ -628,7 +570,6 @@ exports[`Storyshots SignInForm default 1`] = `
         onChangeText={[Function]}
         onSubmitEditing={[Function]}
         placeholder="Email"
-        placeholderTextColor={undefined}
         returnKeyType="next"
         selectionColor="#657ef6"
         style={
@@ -657,7 +598,6 @@ exports[`Storyshots SignInForm default 1`] = `
         onChangeText={[Function]}
         onSubmitEditing={[Function]}
         placeholder="Password"
-        placeholderTextColor={undefined}
         returnKeyType="go"
         secureTextEntry={true}
         selectionColor="#657ef6"
@@ -691,16 +631,8 @@ exports[`Storyshots SignInForm default 1`] = `
         }
       >
         <View
-          accessibilityComponentType={undefined}
-          accessibilityLabel={undefined}
-          accessibilityTraits={undefined}
           accessible={true}
-          collapsable={undefined}
-          hasTVPreferredFocus={undefined}
-          hitSlop={undefined}
           isTVSelectable={true}
-          nativeID={undefined}
-          onLayout={undefined}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -713,13 +645,9 @@ exports[`Storyshots SignInForm default 1`] = `
               "padding": 8,
             }
           }
-          testID={undefined}
-          tvParallaxProperties={undefined}
         >
           <Text
-            accessible={true}
             allowFontScaling={false}
-            ellipsizeMode="tail"
             style={
               Array [
                 Object {
@@ -750,16 +678,8 @@ exports[`Storyshots SignInForm default 1`] = `
         }
       >
         <View
-          accessibilityComponentType="button"
-          accessibilityLabel={undefined}
-          accessibilityTraits={undefined}
           accessible={true}
-          collapsable={undefined}
-          hasTVPreferredFocus={undefined}
-          hitSlop={undefined}
           isTVSelectable={true}
-          nativeID={undefined}
-          onLayout={undefined}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -771,8 +691,6 @@ exports[`Storyshots SignInForm default 1`] = `
               "opacity": 1,
             }
           }
-          testID={undefined}
-          tvParallaxProperties={undefined}
         >
           <View
             style={
@@ -794,10 +712,8 @@ exports[`Storyshots SignInForm default 1`] = `
             }
           >
             <Text
-              accessible={true}
               allowFontScaling={false}
               disabled={true}
-              ellipsizeMode="tail"
               style={
                 Array [
                   Object {

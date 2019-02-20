@@ -19,7 +19,7 @@ const props = {
     username: "email@gmail.com",
     fullName: "Current User",
   },
-  version: "3.0.0",
+  version: "3.0.1",
   apiEnvironment: API_ENVIRONMENT_STAGING,
 };
 

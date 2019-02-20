@@ -1,5 +1,8 @@
+def isRunningOnTravis = System.getenv("CI") == "true"
+
 buildscript {
   repositories {
+    google()
     maven { url 'https://maven.fabric.io/public' }
   }
 
@@ -7,9 +10,20 @@ buildscript {
     classpath 'io.fabric.tools:gradle:1.+'
   }
 }
+
+subprojects {
+    afterEvaluate {project ->
+        if (project.hasProperty("android")) {
+          android {
+            compileSdkVersion 27
+            buildToolsVersion "27.0.3"
+          }
+        }
+    }
+}
+
 apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
-apply plugin: 'com.neenbedankt.android-apt'
 
 repositories {
   maven { url 'https://maven.fabric.io/public' }
@@ -19,7 +33,7 @@ def getVersionCode = { ->
     try {
         def stdout = new ByteArrayOutputStream()
         exec {
-            commandLine 'git', 'rev-list', '--first-parent', '--count', 'HEAD'
+            commandLine 'git', 'rev-list', '--count', 'HEAD'
             standardOutput = stdout
         }
 
@@ -44,18 +58,15 @@ def getPassword(String keyChain) {
     stdout.toString().trim()
 }
 
-def tidepoolKeystoreStorePassword = getPassword("tidepool_keystore_store_password")
-def tidepoolKeystoreKeyPassword = getPassword("tidepool_keystore_key_password")
-
 android {
-  compileSdkVersion 26
-  buildToolsVersion '26.0.1'
+  compileSdkVersion 27
+  buildToolsVersion '27.0.3'
 
   defaultConfig {
     applicationId 'io.tidepool.urchin'
     targetSdkVersion 26
     versionCode getVersionCode()
-    versionName '3.0'
+    versionName '3.0.1'
     ndk {
       abiFilters 'armeabi-v7a', 'x86'
     }
@@ -69,42 +80,46 @@ android {
   dexOptions {
     javaMaxHeapSize System.getenv("DISABLE_DEX_MAX_HEAP") ? null : "8g"
   }
+
+  flavorDimensions 'minSdk', 'remoteKernel'
   productFlavors {
-    // Define separate dev and prod product flavors.
-    dev {
+    devKernel {
+      dimension 'remoteKernel'
+    }
+    prodKernel {
+      dimension 'remoteKernel'
+    }
+    devMinSdk {
+      dimension 'minSdk'
       // dev utilizes minSDKVersion = 21 to allow the Android gradle plugin
       // to pre-dex each module and produce an APK that can be tested on
       // Android Lollipop without time consuming dex merging processes.
       minSdkVersion 21
     }
-    devRemoteKernel {
-      minSdkVersion 21
-    }
-    dev19 {
-      // For debugging / development on older SDK versions. Increases build
-      // time so use 'dev' if not running on older SDKs.
-      minSdkVersion 19
-    }
-    prod {
-      // The actual minSdkVersion for the application.
+    prodMinSdk {
+      dimension 'minSdk'
       minSdkVersion 21
     }
   }
+
+  // Configure keystore
   signingConfigs {
     debug {
-      storeFile file('../debug.keystore')
+      storeFile = file('../debug.keystore')
     }
     release {
-      storeFile file(System.getenv("TIDEPOOL_KEYSTORE_FILE"))
-      storePassword tidepoolKeystoreStorePassword
-      keyAlias System.getenv("TIDEPOOL_KEYSTORE_KEY_ALIAS")
-      keyPassword tidepoolKeystoreKeyPassword
-    }
-  }
+      storeFile = isRunningOnTravis ? file("../../release-keystore.jks") : file(System.getenv("TIDEPOOL_KEYSTORE_FILE"))
+      storePassword = isRunningOnTravis ? System.getenv("keystore_password") : getPassword("tidepool_keystore_store_password")
+      signingConfigs.release.keyAlias = isRunningOnTravis ? System.getenv("keystore_alias") : System.getenv("TIDEPOOL_KEYSTORE_KEY_ALIAS")
+      signingConfigs.release.keyPassword = isRunningOnTravis ? System.getenv("keystore_alias_password") : getPassword("tidepool_keystore_key_password")
+    }   
+  }  
 
   buildTypes {
     debug {
       debuggable true
+      ext.enableCrashlytics = false
+      signingConfig signingConfigs.debug
     }
     release {
       minifyEnabled true
@@ -113,100 +128,113 @@ android {
       signingConfig signingConfigs.release
     }
   }
+
   lintOptions {
     abortOnError false
   }
   packagingOptions {
     pickFirst "**"
   }
+  configurations.all {
+    resolutionStrategy.force 'com.android.support:design:27.1.0'
+  }
 }
 
-// Don't use modern jsc-android since it still has some critical bugs that
-// crash applications when the string for the JS bundle is loaded and when
-// locale-specific date functions are called.
-// configurations.all {
-//   resolutionStrategy {
-//     force 'org.webkit:android-jsc:r216113'
-//   }
-// }
 
+configurations.all {
+  resolutionStrategy {
+    force 'org.webkit:android-jsc:r224109'
+  }
+}
 
 apply from: 'expo.gradle'
-
 
 dependencies {
     compile project(':react-native-device-info')
     compile project(':rollbar-react-native')
-  compile project(':react-native-device-info')
-  compile fileTree(dir: 'libs', include: ['*.jar'])
+  implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-  compile 'com.android.support:multidex:1.0.1'
+  implementation 'com.android.support:multidex:1.0.1'
 
   // Our dependencies
-  compile 'com.android.support:appcompat-v7:26.0.1'
+  implementation 'com.android.support:appcompat-v7:27.1.1'
 
   // Our dependencies from ExpoView
   // DON'T ADD ANYTHING HERE THAT ISN'T IN EXPOVIEW. ONLY COPY THINGS FROM EXPOVIEW TO HERE.
-  compile 'com.android.support:appcompat-v7:26.0.1'
-  compile 'com.facebook.android:facebook-android-sdk:4.7.0'
-  compile('com.facebook.android:audience-network-sdk:4.22.1') {
+  implementation 'com.android.support:appcompat-v7:27.1.1'
+  implementation 'com.facebook.android:facebook-android-sdk:4.37.0'
+  implementation('com.facebook.android:audience-network-sdk:4.99.0') {
     exclude module: 'play-services-ads'
   }
-  provided 'org.glassfish:javax.annotation:3.1.1'
-  compile 'com.jakewharton:butterknife:7.0.1'
-  compile 'de.greenrobot:eventbus:2.4.0'
-  compile 'com.amplitude:android-sdk:2.9.2' // Be careful when upgrading! Upgrading might break experience scoping. Check with Jesse. See Analytics.resetAmplitudeDatabaseHelper
-  compile 'com.squareup.picasso:picasso:2.5.2'
-  compile 'com.google.android.gms:play-services-gcm:11.2.0'
-  compile 'com.google.android.gms:play-services-analytics:11.2.0'
-  compile 'com.google.android.gms:play-services-maps:11.2.0'
-  compile 'com.google.android.gms:play-services-auth:11.2.0'
-  compile 'com.google.android.gms:play-services-location:11.2.0'
-  compile 'com.google.android.gms:play-services-ads:11.2.0'
-  apt 'com.raizlabs.android:DBFlow-Compiler:2.2.1'
-  compile "com.raizlabs.android:DBFlow-Core:2.2.1"
-  compile "com.raizlabs.android:DBFlow:2.2.1"
-  compile "com.madgag.spongycastle:core:1.53.0.0"
-  compile "com.madgag.spongycastle:prov:1.53.0.0"
-  debugCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta1'
-  // debugCompile 'com.squareup.leakcanary:leakcanary-android:1.4-beta1'
-  releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta1'
-  compile 'com.facebook.device.yearclass:yearclass:1.0.1'
-  compile 'commons-io:commons-io:1.3.2'
-  compile 'me.leolin:ShortcutBadger:1.1.4@aar'
-  compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
-  compile 'com.theartofdev.edmodo:android-image-cropper:2.4.7'
-  compile 'com.yqritc:android-scalablevideoview:1.0.1'
-  compile 'commons-codec:commons-codec:1.10'
-  compile 'com.segment.analytics.android:analytics:4.3.0'
-  compile 'com.google.zxing:core:3.2.1'
-  compile 'net.openid:appauth:0.4.1'
-  compile 'com.airbnb.android:lottie:2.2.0'
-  compile 'io.branch.sdk.android:library:2.6.1'
-  compile('io.nlopez.smartlocation:library:3.2.11') {
+  compileOnly 'org.glassfish:javax.annotation:3.1.1'
+  implementation 'com.jakewharton:butterknife:8.4.0'
+  implementation 'de.greenrobot:eventbus:2.4.0'
+  implementation 'com.amplitude:android-sdk:2.9.2' // Be careful when upgrading! Upgrading might break experience scoping. Check with Jesse. See Analytics.resetAmplitudeDatabaseHelper
+  implementation 'com.squareup.picasso:picasso:2.5.2'
+  implementation 'com.google.android.gms:play-services-gcm:16.0.0'
+  implementation 'com.google.android.gms:play-services-analytics:16.0.0'
+  implementation 'com.google.android.gms:play-services-maps:16.0.0'
+  implementation 'com.google.android.gms:play-services-auth:16.0.0'
+  implementation 'com.google.android.gms:play-services-location:16.0.0'
+  implementation 'com.google.android.gms:play-services-ads:16.0.0'
+  annotationProcessor 'com.raizlabs.android:DBFlow-Compiler:2.2.1'
+  implementation "com.raizlabs.android:DBFlow-Core:2.2.1"
+  implementation "com.raizlabs.android:DBFlow:2.2.1"
+  implementation "com.madgag.spongycastle:core:1.53.0.0"
+  implementation "com.madgag.spongycastle:prov:1.53.0.0"
+  debugImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta1'
+  // debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.4-beta1'
+  releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta1'
+  implementation 'com.facebook.device.yearclass:yearclass:1.0.1'
+  implementation 'commons-io:commons-io:1.3.2'
+  implementation 'me.leolin:ShortcutBadger:1.1.4@aar'
+  implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
+  implementation 'com.theartofdev.edmodo:android-image-cropper:2.4.7'
+  implementation 'com.yqritc:android-scalablevideoview:1.0.1'
+  implementation 'commons-codec:commons-codec:1.10'
+  implementation 'com.segment.analytics.android:analytics:4.3.0'
+  implementation 'com.google.zxing:core:3.2.1'
+  implementation 'net.openid:appauth:0.4.1'
+  implementation('com.airbnb.android:lottie:2.5.5')  {
+      exclude group: 'com.android.support', module: 'appcompat-v7'
+  }
+  implementation 'io.branch.sdk.android:library:2.17.1'
+  implementation('io.nlopez.smartlocation:library:3.2.11') {
     transitive = false
   }
-  compile 'com.android.support:exifinterface:26.0.1'
-  compile 'com.squareup.okhttp3:okhttp:3.4.1'
-  compile 'com.squareup.okhttp3:okhttp-urlconnection:3.4.1'
-  compile 'com.squareup.okhttp3:okhttp-ws:3.4.1'
-  compile 'com.squareup.okio:okio:1.9.0'
+  implementation 'com.android.support:exifinterface:27.1.1'
+  implementation 'com.squareup.okio:okio:1.9.0'
+  implementation 'com.facebook.soloader:soloader:0.5.1'
+
+  implementation 'com.google.android.exoplayer:exoplayer:2.6.1'
+  implementation 'expolib_v1.com.google.android.exoplayer:expolib_v1-extension-okhttp:2.6.1@aar'
+
+  // expo-file-system
+  implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+  implementation 'com.squareup.okhttp3:okhttp-urlconnection:3.10.0'
 
   // Testing
-  androidTestCompile 'com.android.support.test.espresso:espresso-core:3.0.1'
+  androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
   // We use a modified build of com.android.support.test:runner:1.0.1. Explanation in maven-test/README
-  androidTestCompile 'com.android.support.test:runner:1.0.1'
-  androidTestCompile 'com.android.support:support-annotations:26.0.1'
-  androidTestCompile 'com.google.code.findbugs:jsr305:3.0.0'
-  androidTestCompile 'com.android.support.test.uiautomator:uiautomator-v18:2.1.1'
-  androidTestCompile 'com.azimolabs.conditionwatcher:conditionwatcher:0.2'
+  androidTestImplementation 'com.android.support.test:runner:1.0.1'
+  androidTestImplementation 'com.android.support:support-annotations:27.1.1'
+  androidTestImplementation 'com.google.code.findbugs:jsr305:3.0.0'
+  androidTestImplementation 'com.android.support.test.uiautomator:uiautomator-v18:2.1.1'
+  androidTestImplementation 'com.azimolabs.conditionwatcher:conditionwatcher:0.2'
 
+  testImplementation 'junit:junit:4.12'
+  testImplementation 'org.mockito:mockito-core:1.10.19'
+  testImplementation 'org.robolectric:robolectric:3.8'
+  testImplementation 'com.android.support.test:runner:1.0.2-alpha1'
+  testImplementation 'com.android.support.test:rules:1.0.2-alpha1'
 
-
-  compile('host.exp.exponent:expoview:27.0.0@aar') {
+  
+  implementation('host.exp.exponent:expoview:31.0.0@aar') {
     transitive = true
+    exclude group: 'com.squareup.okhttp3', module: 'okhttp'
+    exclude group: 'com.squareup.okhttp3', module: 'okhttp-urlconnection'
   }
-
+  
 
 }
 

@@ -1,7 +1,6 @@
 // This file is copied via prestorybook script to index.js
 
-import Expo from "expo";
-
+import { KeepAwake, registerRootComponent } from "expo";
 import Fonts from "./src/constants/Fonts";
 import withExpoFontPreload from "./src/enhancers/withExpoFontPreload";
 import App from "./storybook";
@@ -10,7 +9,7 @@ import GraphCbgGl from "./src/components/Graph/gl/GraphCbgGl";
 import GraphSmbgGl from "./src/components/Graph/gl/GraphSmbgGl";
 
 if (process.env.NODE_ENV === "development") {
-  Expo.KeepAwake.activate();
+  KeepAwake.activate();
 }
 
 const loadAssetsAsync = async () => {
@@ -21,4 +20,4 @@ const loadAssetsAsync = async () => {
 
 loadAssetsAsync();
 
-Expo.registerRootComponent(withExpoFontPreload(App, Fonts));
+registerRootComponent(withExpoFontPreload(App, Fonts));

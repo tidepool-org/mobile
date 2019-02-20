@@ -2,10 +2,24 @@
   "expo": {
     "name": "Tidepool",
     "slug": "Tidepool",
-    "version": "3.0",
-    "sdkVersion": "27.0.0",
+    "privacy": "public",
+    "sdkVersion": "31.0.0",
+    "platforms": ["ios", "android"],
+    "version": "3.0.1",
     "orientation": "portrait",
     "icon": "./assets/images/Icon-App-512x512@2x.png",
+    "assetBundlePatterns": ["**/fonts/*", "**/images/*"],
+    "updates": {
+      "enabled": false
+    },
+    "isDetached": true,
+    "detach": {
+      "iosExpoViewUrl":
+        "https://s3.amazonaws.com/exp-exponent-view-code/ios-v2.9.0-sdk31.0.0-250a3991-b623-4f9c-b07f-0b9ed7e8c4c9.tar.gz",
+      "androidExpoViewUrl":
+        "https://s3.amazonaws.com/exp-exponent-view-code/android-v2.9.2-sdk31.0.0-d1776f37-d524-4fee-872d-6807b0fd83ff.tar.gz"
+    },
+    "scheme": "exp0815d1104db745568824ac69a998de27",
     "ios": {
       "bundleIdentifier": "org.tidepool.blipnotesRN",
       "icon": "./assets/images/Icon-App-512x512@2x.png",
@@ -18,22 +32,11 @@
     "android": {
       "package": "io.tidepool.urchin",
       "icon": "./assets/images/Icon-App-512x512@2x.png",
-      "permissions": [],
+      "permissions": ["ACCESS_NETWORK_STATE", "ACCESS_WIFI_STATE", "INTERNET"],
       "publishBundlePath": "android/app/src/main/assets/shell-app.bundle",
       "publishManifestPath":
         "android/app/src/main/assets/shell-app-manifest.json"
     },
-    "updates": {
-      "enabled": false
-    },
-    "isDetached": true,
-    "detach": {
-      "scheme": "exp97874575306645aa9ca45e4ad7992729",
-      "iosExpoViewUrl":
-        "https://s3.amazonaws.com/exp-exponent-view-code/ios-v2.5.9-sdk27.0.0-da522861-77ed-40ba-b468-7bd999f7e4ee.tar.gz",
-      "androidExpoViewUrl":
-        "https://s3.amazonaws.com/exp-exponent-view-code/android-v2.5.3-sdk27.0.0-408c8d77-8d1f-4784-b7b4-93826250663a.tar.gz"
-    },
-    "assetBundlePatterns": ["**/fonts/*", "**/images/*"]
+    "description": ""
   }
 }

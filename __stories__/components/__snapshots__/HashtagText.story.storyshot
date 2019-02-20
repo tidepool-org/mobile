@@ -25,15 +25,10 @@ exports[`Storyshots HashtagText default 1`] = `
       style={null}
     >
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         style={null}
       >
         <Text
-          accessible={true}
           allowFontScaling={false}
-          ellipsizeMode="tail"
           style={
             Array [
               Object {
@@ -47,9 +42,7 @@ exports[`Storyshots HashtagText default 1`] = `
           #hash1
         </Text>
         <Text
-          accessible={true}
           allowFontScaling={false}
-          ellipsizeMode="tail"
           style={
             Array [
               Object {
@@ -63,9 +56,7 @@ exports[`Storyshots HashtagText default 1`] = `
            This some text with hash tags 
         </Text>
         <Text
-          accessible={true}
           allowFontScaling={false}
-          ellipsizeMode="tail"
           style={
             Array [
               Object {
@@ -80,9 +71,6 @@ exports[`Storyshots HashtagText default 1`] = `
         </Text>
       </Text>
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         style={
           Array [
             Object {
@@ -92,9 +80,7 @@ exports[`Storyshots HashtagText default 1`] = `
         }
       >
         <Text
-          accessible={true}
           allowFontScaling={false}
-          ellipsizeMode="tail"
           style={
             Array [
               Object {
@@ -108,9 +94,7 @@ exports[`Storyshots HashtagText default 1`] = `
           This is some more text with hash tags. This note is longer. It should be multi-line. See how long this note is? 
         </Text>
         <Text
-          accessible={true}
           allowFontScaling={false}
-          ellipsizeMode="tail"
           style={
             Array [
               Object {

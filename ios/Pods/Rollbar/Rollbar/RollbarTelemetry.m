@@ -1,10 +1,4 @@
-//
-//  RollbarTelemetry.m
-//  Rollbar
-//
-//  Created by Ben Wong on 11/21/17.
-//  Copyright © 2017 Rollbar. All rights reserved.
-//
+//  Copyright (c) 2018 Rollbar, Inc. All rights reserved.
 
 #import "RollbarTelemetry.h"
 #import "NSJSONSerialization+Rollbar.h"
@@ -45,7 +39,9 @@ static dispatch_queue_t fileQueue = nil;
     if (captureLog) {
         va_copy (argsCopy, args);
         NSString *message = [[NSString alloc] initWithFormat:format arguments:args];
-        [[RollbarTelemetry sharedInstance] recordLogEventForLevel:RollbarDebug message:message extraData:nil];
+        [[RollbarTelemetry sharedInstance] recordLogEventForLevel:RollbarDebug
+                                                          message:message
+                                                        extraData:nil];
         NSLogv(format, argsCopy);
     } else {
         NSLogv(format, args);
@@ -65,6 +61,8 @@ static dispatch_queue_t fileQueue = nil;
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
         NSString *cachesDirectory = [paths objectAtIndex:0];
         _dataFilePath = [cachesDirectory stringByAppendingPathComponent:TELEMETRY_FILE_NAME];
+        
+        _viewInputsToScrub = [NSMutableSet new];
         
         [self loadTelemetryData];
     }
@@ -103,11 +101,23 @@ static dispatch_queue_t fileQueue = nil;
 
 #pragma mark -
 
-- (void)recordEventForLevel:(RollbarLevel)level type:(RollbarTelemetryType)type data:(NSDictionary *)data {
+- (void)recordEventForLevel:(RollbarLevel)level
+                       type:(RollbarTelemetryType)type
+                       data:(NSDictionary *)data {
+    
+    if (!_enabled) {
+        return;
+    }
+    
     NSTimeInterval timestamp = NSDate.date.timeIntervalSince1970 * 1000.0;
     NSString *telemetryLvl = RollbarStringFromLevel(level);
     NSString *telemetryType = RollbarStringFromTelemetryType(type);
-    NSDictionary *info = @{@"level": telemetryLvl, @"type": telemetryType, @"source": @"client", @"timestamp_ms": [NSString stringWithFormat:@"%.0f", round(timestamp)], @"body": data };
+    NSDictionary *info = @{@"level": telemetryLvl,
+                           @"type": telemetryType,
+                           @"source": @"client",
+                           @"timestamp_ms": [NSString stringWithFormat:@"%.0f", round(timestamp)],
+                           @"body": data
+                           };
 
     dispatch_async(queue, ^{
         [self->_dataArray addObject:info];
@@ -121,12 +131,31 @@ static dispatch_queue_t fileQueue = nil;
 
 #pragma mark -
 
-- (void)recordViewEventForLevel:(RollbarLevel)level element:(NSString *)element extraData:(NSDictionary *)extraData {
+- (void)recordViewEventForLevel:(RollbarLevel)level
+                        element:(NSString *)element
+                      extraData:(NSDictionary *)extraData {
+    
     NSMutableDictionary *data = [NSMutableDictionary dictionary];
     if (extraData) {
         [data addEntriesFromDictionary:extraData];
     }
 
+    // check if the extradata needs some scrubbing based on the element name:
+    __block BOOL needsScrubbing = false;
+    [_viewInputsToScrub enumerateObjectsUsingBlock:^(id  _Nonnull obj, BOOL * _Nonnull stop) {
+        if( [element caseInsensitiveCompare:obj] == NSOrderedSame ) {
+            needsScrubbing = true;
+            *stop = YES;
+        }
+    }];
+    // scrub the extradata as needed:
+    if (needsScrubbing) {
+        for (NSString * key in data)
+        {
+            [data setValue:@"[scrubbed]" forKey:key];
+        }
+    }
+    // add the element name:
     [data setObject:element forKey:@"element"];
 
     [self recordEventForLevel:level type:RollbarTelemetryView data:data];
@@ -134,7 +163,12 @@ static dispatch_queue_t fileQueue = nil;
 
 #pragma mark -
 
-- (void)recordNetworkEventForLevel:(RollbarLevel)level method:(NSString *)method url:(NSString *)url statusCode:(NSString *)statusCode extraData:(NSDictionary *)extraData {
+- (void)recordNetworkEventForLevel:(RollbarLevel)level
+                            method:(NSString *)method
+                               url:(NSString *)url
+                        statusCode:(NSString *)statusCode
+                         extraData:(NSDictionary *)extraData {
+    
     NSMutableDictionary *data = [NSMutableDictionary dictionary];
     if (extraData) {
         [data addEntriesFromDictionary:extraData];
@@ -149,7 +183,10 @@ static dispatch_queue_t fileQueue = nil;
 
 #pragma mark -
 
-- (void)recordConnectivityEventForLevel:(RollbarLevel)level status:(NSString *)status extraData:(NSDictionary *)extraData {
+- (void)recordConnectivityEventForLevel:(RollbarLevel)level
+                                 status:(NSString *)status
+                              extraData:(NSDictionary *)extraData {
+    
     NSMutableDictionary *data = [NSMutableDictionary dictionary];
     if (extraData) {
         [data addEntriesFromDictionary:extraData];
@@ -162,7 +199,10 @@ static dispatch_queue_t fileQueue = nil;
 
 #pragma mark -
 
-- (void)recordErrorEventForLevel:(RollbarLevel)level message:(NSString *)message extraData:(NSDictionary *)extraData {
+- (void)recordErrorEventForLevel:(RollbarLevel)level
+                         message:(NSString *)message
+                       extraData:(NSDictionary *)extraData {
+    
     NSMutableDictionary *data = [NSMutableDictionary dictionary];
     if (extraData) {
         [data addEntriesFromDictionary:extraData];
@@ -175,7 +215,11 @@ static dispatch_queue_t fileQueue = nil;
 
 #pragma mark -
 
-- (void)recordNavigationEventForLevel:(RollbarLevel)level from:(NSString *)from to:(NSString *)to extraData:(NSDictionary *)extraData {
+- (void)recordNavigationEventForLevel:(RollbarLevel)level
+                                 from:(NSString *)from
+                                   to:(NSString *)to
+                            extraData:(NSDictionary *)extraData {
+    
     NSMutableDictionary *data = [NSMutableDictionary dictionary];
     if (extraData) {
         [data addEntriesFromDictionary:extraData];
@@ -189,7 +233,9 @@ static dispatch_queue_t fileQueue = nil;
 
 #pragma mark -
 
-- (void)recordManualEventForLevel:(RollbarLevel)level withData:(NSDictionary *)extraData {
+- (void)recordManualEventForLevel:(RollbarLevel)level
+                         withData:(NSDictionary *)extraData {
+    
     NSMutableDictionary *data = [NSMutableDictionary dictionary];
     if (extraData) {
         [data addEntriesFromDictionary:extraData];
@@ -200,7 +246,10 @@ static dispatch_queue_t fileQueue = nil;
 
 #pragma mark -
 
-- (void)recordLogEventForLevel:(RollbarLevel)level message:(NSString *)message extraData:(NSDictionary *)extraData {
+- (void)recordLogEventForLevel:(RollbarLevel)level
+                       message:(NSString *)message
+                     extraData:(NSDictionary *)extraData {
+    
     NSMutableDictionary *data = [NSMutableDictionary dictionary];
     if (extraData) {
         [data addEntriesFromDictionary:extraData];
@@ -241,7 +290,10 @@ static dispatch_queue_t fileQueue = nil;
     if (@available(iOS 10.0, *)) {
         dispatch_assert_queue_debug(queue);
     }
-    NSData *data = [NSJSONSerialization dataWithJSONObject:_dataArray options:0 error:nil safe:true];
+    NSData *data = [NSJSONSerialization dataWithJSONObject:_dataArray
+                                                   options:0
+                                                     error:nil
+                                                      safe:true];
     return data;
 }
 
@@ -259,7 +311,9 @@ static dispatch_queue_t fileQueue = nil;
     if ([[NSFileManager defaultManager] fileExistsAtPath:_dataFilePath]) {
         NSData *data = [NSData dataWithContentsOfFile:_dataFilePath];
         if (data) {
-            NSArray *telemetryDataList = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+            NSArray *telemetryDataList = [NSJSONSerialization JSONObjectWithData:data
+                                                                         options:NSJSONReadingMutableContainers
+                                                                           error:nil];
             if (telemetryDataList) {
                 _dataArray = [telemetryDataList mutableCopy];
             }

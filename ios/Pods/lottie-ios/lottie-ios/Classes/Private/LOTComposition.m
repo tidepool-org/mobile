@@ -32,10 +32,17 @@
   NSError *error;
   NSString *filePath = [bundle pathForResource:animationName ofType:@"json"];
   NSData *jsonData = [[NSData alloc] initWithContentsOfFile:filePath];
+  
+  if (@available(iOS 9.0, *)) {
+    if (!jsonData) {
+      jsonData = [[NSDataAsset alloc] initWithName:animationName].data;
+    }
+  }
+  
   NSDictionary  *JSONObject = jsonData ? [NSJSONSerialization JSONObjectWithData:jsonData
                                                                          options:0 error:&error] : nil;
   if (JSONObject && !error) {
-    LOTComposition *laScene = [[LOTComposition alloc] initWithJSON:JSONObject withAssetBundle:bundle];
+    LOTComposition *laScene = [[self alloc] initWithJSON:JSONObject withAssetBundle:bundle];
     [[LOTAnimationCache sharedCache] addAnimation:laScene forKey:animationName];
     laScene.cacheKey = animationName;
     return laScene;
@@ -57,7 +64,7 @@
   NSDictionary  *JSONObject = jsonData ? [NSJSONSerialization JSONObjectWithData:jsonData
                                                                          options:0 error:&error] : nil;
   if (JSONObject && !error) {
-    LOTComposition *laScene = [[LOTComposition alloc] initWithJSON:JSONObject withAssetBundle:[NSBundle mainBundle]];
+    LOTComposition *laScene = [[self alloc] initWithJSON:JSONObject withAssetBundle:[NSBundle mainBundle]];
     laScene.rootDirectory = [filePath stringByDeletingLastPathComponent];
     [[LOTAnimationCache sharedCache] addAnimation:laScene forKey:animationName];
     laScene.cacheKey = animationName;
@@ -73,7 +80,7 @@
 }
 
 + (nonnull instancetype)animationFromJSON:(nullable NSDictionary *)animationJSON inBundle:(nullable NSBundle *)bundle {
-  return [[LOTComposition alloc] initWithJSON:animationJSON withAssetBundle:bundle];
+  return [[self alloc] initWithJSON:animationJSON withAssetBundle:bundle];
 }
 
 #pragma mark - Initializer
@@ -112,16 +119,17 @@
   
   NSArray *assetArray = jsonDictionary[@"assets"];
   if (assetArray.count) {
-    _assetGroup = [[LOTAssetGroup alloc] initWithJSON:assetArray withAssetBundle:bundle];
+    _assetGroup = [[LOTAssetGroup alloc] initWithJSON:assetArray withAssetBundle:bundle withFramerate:_framerate];
   }
   
   NSArray *layersJSON = jsonDictionary[@"layers"];
   if (layersJSON) {
     _layerGroup = [[LOTLayerGroup alloc] initWithLayerJSON:layersJSON
-                                            withAssetGroup:_assetGroup];
+                                            withAssetGroup:_assetGroup
+                                             withFramerate:_framerate];
   }
   
-  [_assetGroup finalizeInitialization];
+  [_assetGroup finalizeInitializationWithFramerate:_framerate];
 }
   
 - (void)setRootDirectory:(NSString *)rootDirectory {
