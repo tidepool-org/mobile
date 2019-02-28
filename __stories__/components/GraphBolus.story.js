@@ -2,7 +2,7 @@
 import React from "react";
 import { Linking } from "react-native";
 import { storiesOf } from "@storybook/react-native";
-import { withKnobs, selectV2 } from "@storybook/addon-knobs";
+import { withKnobs, select } from "@storybook/addon-knobs";
 
 import StoryContainerComponent from "../utils/StoryContainerComponent";
 import Graph from "../../src/components/Graph/Graph";
@@ -56,11 +56,7 @@ const props = {
 };
 
 const selectGraphRenderer = () => {
-  const graphRenderer = selectV2(
-    rendererLabel,
-    rendererOptions,
-    defaultRenderer
-  );
+  const graphRenderer = select(rendererLabel, rendererOptions, defaultRenderer);
 
   return graphRenderer;
 };

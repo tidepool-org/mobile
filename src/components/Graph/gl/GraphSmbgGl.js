@@ -10,8 +10,6 @@ import {
 } from "../helpers";
 // import Logger from "../../../models/Logger";
 
-const { createTextureAsync } = ExpoTHREE;
-
 // Support rendering using circle geometry or sprites
 const useSprites = false;
 
@@ -72,19 +70,19 @@ class GraphSmbgGl extends GraphRenderLayerGl {
     }
 
     if (useSprites) {
-      GraphSmbgGl.lowSpriteTexture = await createTextureAsync({
-        asset: require("../../../../assets/images/smbg-circle-low.png"),
-      });
+      GraphSmbgGl.lowSpriteTexture = await ExpoTHREE.loadAsync(
+        require("../../../../assets/images/smbg-circle-low.png")
+      );
       GraphSmbgGl.lowSpriteTexture.magFilter = THREE.NearestFilter;
       GraphSmbgGl.lowSpriteTexture.minFilter = THREE.NearestFilter;
-      GraphSmbgGl.normalSpriteTexture = await createTextureAsync({
-        asset: require("../../../../assets/images/smbg-circle-normal.png"),
-      });
+      GraphSmbgGl.normalSpriteTexture = await ExpoTHREE.loadAsync(
+        require("../../../../assets/images/smbg-circle-normal.png")
+      );
       GraphSmbgGl.normalSpriteTexture.magFilter = THREE.NearestFilter;
       GraphSmbgGl.normalSpriteTexture.minFilter = THREE.NearestFilter;
-      GraphSmbgGl.highSpriteTexture = await createTextureAsync({
-        asset: require("../../../../assets/images/smbg-circle-high.png"),
-      });
+      GraphSmbgGl.highSpriteTexture = await ExpoTHREE.loadAsync(
+        require("../../../../assets/images/smbg-circle-high.png")
+      );
       GraphSmbgGl.highSpriteTexture.magFilter = THREE.NearestFilter;
       GraphSmbgGl.highSpriteTexture.minFilter = THREE.NearestFilter;
     }

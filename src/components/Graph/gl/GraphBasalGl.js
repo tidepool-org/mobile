@@ -64,6 +64,7 @@ class GraphBasalGl extends GraphRenderLayerGl {
     if (this.suppressedLinePath) {
       const points = this.suppressedLinePath.getPoints();
       const geometry = new THREE.Geometry().setFromPoints(points);
+      geometry.computeLineDistances();
       const { contentOffsetX, pixelsPerSecond } = this;
       const line = new THREE.Line(geometry, this.suppressedLineMaterial);
       this.updateSuppressedLineMaterial();
@@ -76,10 +77,6 @@ class GraphBasalGl extends GraphRenderLayerGl {
         shouldScrollX: true,
         shouldScaleX: true,
       });
-
-      // NOTE: computeLineDistances is Necessary to compute dashed material for the line, else the
-      // line won't be dashed
-      line.computeLineDistances();
 
       // Now that we've finished/added the line to the scene, reset so we can start next line
       this.suppressedLinePath = null;

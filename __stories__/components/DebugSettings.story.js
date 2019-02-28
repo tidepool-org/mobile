@@ -19,8 +19,13 @@ const props = {
   selectedLogLevel: Logger.LOG_LEVEL_DEFAULT,
 };
 
-storiesOf("DebugSettingsScreen", module).add("default", () => (
-  <StoryContainerScreen>
-    <DebugSettingsScreen {...props} />
-  </StoryContainerScreen>
-));
+// TODO: stories - There are modal issues with the way this is shown. Can't
+// dismiss it and it covers up the navigator stuff. Disable for now. Will
+// address this as separate fix later. For now, can still re-enable this
+// temporarily for targeted testing of the DebugSettings screen as needed.
+
+// storiesOf("DebugSettingsScreen", module).add("default", () => (
+//   <StoryContainerScreen>
+//     <DebugSettingsScreen {...props} />
+//   </StoryContainerScreen>
+// ));

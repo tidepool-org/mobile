@@ -16,8 +16,6 @@ import GraphWizardGl from "./GraphWizardGl";
 import { convertHexColorStringToInt } from "../helpers";
 // import Logger from "../../../models/Logger";
 
-const { createRenderer } = ExpoTHREE;
-
 class GraphScrollableGl extends PureComponent {
   componentDidMount() {
     const {
@@ -106,7 +104,7 @@ class GraphScrollableGl extends PureComponent {
     this.gl = gl;
 
     // Create renderer
-    this.renderer = createRenderer({ gl });
+    this.renderer = new ExpoTHREE.Renderer({ gl });
     this.renderer.sortObjects = false;
     this.renderer.setSize(gl.drawingBufferWidth, gl.drawingBufferHeight);
     this.renderer.setClearColor(

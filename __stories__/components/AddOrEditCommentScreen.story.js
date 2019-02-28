@@ -101,40 +101,46 @@ const props = {
   graphRenderer,
 };
 
-storiesOf("AddOrEditCommentScreen", module).add("add comment", () => (
-  <StoryContainerScreen>
-    <AddOrEditCommentScreen {...props} />
-  </StoryContainerScreen>
-));
+// TODO: stories - There are leyboard issues with on device UI for storybook
+// with this screen. The timer that shows the keyboard after screen is shown
+// doesn't play nicely with the component rendering and navigator for storybook.
+// Temporarily disabling these for now. They could be re-enabled (and the
+// focusTimer disabled) for targeted testing of this screen.
 
-storiesOf("AddOrEditCommentScreen", module).add("edit first comment", () => (
-  <StoryContainerScreen>
-    <AddOrEditCommentScreen
-      {...props}
-      comment={commentsFetchData.comments[0]}
-    />
-  </StoryContainerScreen>
-));
+// storiesOf("AddOrEditCommentScreen", module).add("add comment", () => (
+//   <StoryContainerScreen>
+//     <AddOrEditCommentScreen {...props} />
+//   </StoryContainerScreen>
+// ));
 
-storiesOf("AddOrEditCommentScreen", module).add(
-  "edit comment in middle",
-  () => (
-    <StoryContainerScreen>
-      <AddOrEditCommentScreen
-        {...props}
-        comment={commentsFetchData.comments[2]}
-      />
-    </StoryContainerScreen>
-  )
-);
+// storiesOf("AddOrEditCommentScreen", module).add("edit first comment", () => (
+//   <StoryContainerScreen>
+//     <AddOrEditCommentScreen
+//       {...props}
+//       comment={commentsFetchData.comments[0]}
+//     />
+//   </StoryContainerScreen>
+// ));
 
-storiesOf("AddOrEditCommentScreen", module).add("edit last comment", () => (
-  <StoryContainerScreen>
-    <AddOrEditCommentScreen
-      {...props}
-      comment={
-        commentsFetchData.comments[commentsFetchData.comments.length - 1]
-      }
-    />
-  </StoryContainerScreen>
-));
+// storiesOf("AddOrEditCommentScreen", module).add(
+//   "edit comment in middle",
+//   () => (
+//     <StoryContainerScreen>
+//       <AddOrEditCommentScreen
+//         {...props}
+//         comment={commentsFetchData.comments[2]}
+//       />
+//     </StoryContainerScreen>
+//   )
+// );
+
+// storiesOf("AddOrEditCommentScreen", module).add("edit last comment", () => (
+//   <StoryContainerScreen>
+//     <AddOrEditCommentScreen
+//       {...props}
+//       comment={
+//         commentsFetchData.comments[commentsFetchData.comments.length - 1]
+//       }
+//     />
+//   </StoryContainerScreen>
+// ));

@@ -13,7 +13,7 @@ const BASE_URL_INTEGRATION = "https://int-api.tidepool.org";
 const BASE_URL_STAGING = "https://stg-api.tidepool.org";
 const BASE_URL_DEVELOPMENT = "https://dev-api.tidepool.org";
 
-let tidepoolApi = null;
+let tidepoolApi = {};
 
 const switchApiEnvironment = apiEnvironment => {
   // console.log(`switchApiEnvironment: ${apiEnvironment}`);

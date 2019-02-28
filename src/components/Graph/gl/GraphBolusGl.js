@@ -237,12 +237,12 @@ class GraphBolusGl extends GraphRenderLayerGl {
       width: rect.width,
       height: rect.height,
     });
+    rectangleGeometry.computeLineDistances();
     const rectangleEdgesGeometry = new THREE.EdgesGeometry(rectangleGeometry);
     const rectangleLines = new THREE.LineSegments(
       rectangleEdgesGeometry,
       this.overrideBarLineMaterial
     );
-    rectangleLines.computeLineDistances();
 
     this.addAutoScrollableObjectToScene(this.scene, rectangleLines, {
       x: rect.x,
@@ -310,8 +310,8 @@ class GraphBolusGl extends GraphRenderLayerGl {
         const points = lineShape.getPoints();
         const geometry = new THREE.Geometry().setFromPoints(points);
         this.updateBolusExtensionDashedLineMaterial();
+        geometry.computeLineDistances();
         line = new THREE.Line(geometry, this.bolusExtensionDashedLineMaterial);
-        line.computeLineDistances();
       } else {
         const lineGeometry = new THREE.ShapeGeometry(lineShape);
         line = new THREE.Mesh(lineGeometry, this.bolusRectMaterial);
@@ -344,11 +344,11 @@ class GraphBolusGl extends GraphRenderLayerGl {
       if (borderOnly) {
         const points = arrowShape.getPoints();
         const geometry = new THREE.Geometry().setFromPoints(points);
+        geometry.computeLineDistances();
         arrow = new THREE.Line(
           geometry,
           this.bolusExtensionDashedArrowMaterial
         );
-        arrow.computeLineDistances();
         // FIXME: The dashed line encroaches the arrow to the right side of arrow and looks bad in
         // some scenarios. We should fix this. (Not a trivial fix.)
       } else {
@@ -385,8 +385,8 @@ class GraphBolusGl extends GraphRenderLayerGl {
         const points = lineShape.getPoints();
         const geometry = new THREE.Geometry().setFromPoints(points);
         this.updateBolusExtensionDashedLineMaterial();
+        geometry.computeLineDistances();
         line = new THREE.Line(geometry, this.bolusExtensionDashedLineMaterial);
-        line.computeLineDistances();
       } else {
         const lineGeometry = new THREE.ShapeGeometry(lineShape);
         line = new THREE.Mesh(lineGeometry, this.bolusRectMaterial);
