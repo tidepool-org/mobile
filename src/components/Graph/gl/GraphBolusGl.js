@@ -100,19 +100,21 @@ class GraphBolusGl extends GraphRenderLayerGl {
   renderBolusRectBackground({ x, z }) {
     const { width, height, y } = this.bolusWithOverrideRect;
     const centerY = y - height / 2;
-    const geometry = GraphShapeGeometryFactory.makeRectangleGeometry({
-      width,
-      height,
-    });
-    const object = new THREE.Mesh(geometry, this.backgroundMaterial);
-    this.addAutoScrollableObjectToScene(this.scene, object, {
-      x,
-      y: centerY,
-      z,
-      contentOffsetX: this.contentOffsetX,
-      pixelsPerSecond: this.pixelsPerSecond,
-      shouldScrollX: true,
-    });
+    if (width > 0 && height > 0) {
+      const geometry = GraphShapeGeometryFactory.makeRectangleGeometry({
+        width,
+        height,
+      });
+      const object = new THREE.Mesh(geometry, this.backgroundMaterial);
+      this.addAutoScrollableObjectToScene(this.scene, object, {
+        x,
+        y: centerY,
+        z,
+        contentOffsetX: this.contentOffsetX,
+        pixelsPerSecond: this.pixelsPerSecond,
+        shouldScrollX: true,
+      });
+    }
   }
 
   makeBolusLabelTextMesh({ value }) {
@@ -231,27 +233,30 @@ class GraphBolusGl extends GraphRenderLayerGl {
       height,
     };
     this.bolusWithOverrideRect.height += height;
-
     const centerY = rect.y + rect.height / 2;
-    const rectangleGeometry = GraphShapeGeometryFactory.makeRectangleGeometry({
-      width: rect.width,
-      height: rect.height,
-    });
-    rectangleGeometry.computeLineDistances();
-    const rectangleEdgesGeometry = new THREE.EdgesGeometry(rectangleGeometry);
-    const rectangleLines = new THREE.LineSegments(
-      rectangleEdgesGeometry,
-      this.overrideBarLineMaterial
-    );
+    if (rect.width > 0 && rect.height > 0) {
+      const rectangleGeometry = GraphShapeGeometryFactory.makeRectangleGeometry(
+        {
+          width: rect.width,
+          height: rect.height,
+        }
+      );
+      rectangleGeometry.computeLineDistances();
+      const rectangleEdgesGeometry = new THREE.EdgesGeometry(rectangleGeometry);
+      const rectangleLines = new THREE.LineSegments(
+        rectangleEdgesGeometry,
+        this.overrideBarLineMaterial
+      );
 
-    this.addAutoScrollableObjectToScene(this.scene, rectangleLines, {
-      x: rect.x,
-      y: centerY,
-      z,
-      contentOffsetX: this.contentOffsetX,
-      pixelsPerSecond: this.pixelsPerSecond,
-      shouldScrollX: true,
-    });
+      this.addAutoScrollableObjectToScene(this.scene, rectangleLines, {
+        x: rect.x,
+        y: centerY,
+        z,
+        contentOffsetX: this.contentOffsetX,
+        pixelsPerSecond: this.pixelsPerSecond,
+        shouldScrollX: true,
+      });
+    }
   }
 
   renderBolusRect({ x, z }) {
@@ -262,19 +267,24 @@ class GraphBolusGl extends GraphRenderLayerGl {
     const y = this.yAxisBottomOfBolus;
     const centerY = y - height / 2;
 
-    const geometry = GraphShapeGeometryFactory.makeRectangleGeometry({
-      width: width - 1,
-      height: height - 1,
-    });
-    const mesh = new THREE.Mesh(geometry, this.bolusRectMaterial);
-    this.addAutoScrollableObjectToScene(this.scene, mesh, {
-      x: x + 0.5,
-      y: centerY,
-      z,
-      contentOffsetX: this.contentOffsetX,
-      pixelsPerSecond: this.pixelsPerSecond,
-      shouldScrollX: true,
-    });
+    const rectangleGeometryWidth = width - 1;
+    const rectangleGeometryHeight = height - 1;
+    console.log(`rendering bolus rect, width: ${width}, height: ${height}`);
+    if (rectangleGeometryWidth > 0 && rectangleGeometryHeight > 0) {
+      const geometry = GraphShapeGeometryFactory.makeRectangleGeometry({
+        width: rectangleGeometryWidth,
+        height: rectangleGeometryHeight,
+      });
+      const mesh = new THREE.Mesh(geometry, this.bolusRectMaterial);
+      this.addAutoScrollableObjectToScene(this.scene, mesh, {
+        x: x + 0.5,
+        y: centerY,
+        z,
+        contentOffsetX: this.contentOffsetX,
+        pixelsPerSecond: this.pixelsPerSecond,
+        shouldScrollX: true,
+      });
+    }
 
     this.bolusRect = {
       x,
