@@ -269,7 +269,6 @@ class GraphBolusGl extends GraphRenderLayerGl {
 
     const rectangleGeometryWidth = width - 1;
     const rectangleGeometryHeight = height - 1;
-    console.log(`rendering bolus rect, width: ${width}, height: ${height}`);
     if (rectangleGeometryWidth > 0 && rectangleGeometryHeight > 0) {
       const geometry = GraphShapeGeometryFactory.makeRectangleGeometry({
         width: rectangleGeometryWidth,
