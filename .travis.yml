@@ -32,7 +32,7 @@ matrix:
       install:
         - yarn install
         - yarn run pre
-        - npx eslint src/
+        - npx eslint src/ --max-warnings 0
         - yarn test --forceExit
         - expo publish
       script:
@@ -86,7 +86,7 @@ matrix:
       install:
         - yarn install
         - yarn run pre
-        - npx eslint src/
+        - npx eslint src/ --max-warnings 0
         - yarn test --forceExit
         - expo publish
       script:
