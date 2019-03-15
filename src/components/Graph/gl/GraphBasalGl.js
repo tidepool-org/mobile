@@ -27,23 +27,25 @@ class GraphBasalGl extends GraphRenderLayerGl {
     const width = endTimeOffset - startTimeOffset;
     const height = this.yAxisBasalPixelsPerValue * value;
 
-    const shape = new THREE.Shape();
-    shape.moveTo(0, 0);
-    shape.lineTo(width * this.pixelRatio, 0);
-    shape.lineTo(width * this.pixelRatio, height * this.pixelRatio);
-    shape.lineTo(0, height * this.pixelRatio);
-    shape.moveTo(0, 0);
-    const geometry = new THREE.ShapeGeometry(shape);
-    const object = new THREE.Mesh(geometry, this.basalRectMaterial);
-    this.addAutoScrollableObjectToScene(this.scene, object, {
-      x: startTimeOffset,
-      y: this.yAxisBottomOfBasal,
-      z: this.zStart,
-      contentOffsetX,
-      pixelsPerSecond,
-      shouldScrollX: true,
-      shouldScaleX: true,
-    });
+    if (width > 0 && height > 0) {
+      const shape = new THREE.Shape();
+      shape.moveTo(0, 0);
+      shape.lineTo(width * this.pixelRatio, 0);
+      shape.lineTo(width * this.pixelRatio, height * this.pixelRatio);
+      shape.lineTo(0, height * this.pixelRatio);
+      shape.moveTo(0, 0);
+      const geometry = new THREE.ShapeGeometry(shape);
+      const object = new THREE.Mesh(geometry, this.basalRectMaterial);
+      this.addAutoScrollableObjectToScene(this.scene, object, {
+        x: startTimeOffset,
+        y: this.yAxisBottomOfBasal,
+        z: this.zStart,
+        contentOffsetX,
+        pixelsPerSecond,
+        shouldScrollX: true,
+        shouldScaleX: true,
+      });
+    }
 
     return {
       x: startTimeOffset,
@@ -64,6 +66,7 @@ class GraphBasalGl extends GraphRenderLayerGl {
     if (this.suppressedLinePath) {
       const points = this.suppressedLinePath.getPoints();
       const geometry = new THREE.Geometry().setFromPoints(points);
+      geometry.computeLineDistances();
       const { contentOffsetX, pixelsPerSecond } = this;
       const line = new THREE.Line(geometry, this.suppressedLineMaterial);
       this.updateSuppressedLineMaterial();
@@ -76,10 +79,6 @@ class GraphBasalGl extends GraphRenderLayerGl {
         shouldScrollX: true,
         shouldScaleX: true,
       });
-
-      // NOTE: computeLineDistances is Necessary to compute dashed material for the line, else the
-      // line won't be dashed
-      line.computeLineDistances();
 
       // Now that we've finished/added the line to the scene, reset so we can start next line
       this.suppressedLinePath = null;

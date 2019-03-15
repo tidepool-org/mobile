@@ -428,7 +428,7 @@ exports[`Storyshots SignInScreen Sign in error 1`] = `
                 }
               >
                 v
-                3.0.0
+                3.0.1
                  on Staging
               </Text>
             </View>
@@ -881,7 +881,7 @@ exports[`Storyshots SignInScreen Signing in 1`] = `
                 }
               >
                 v
-                3.0.0
+                3.0.1
                  on Staging
               </Text>
             </View>
@@ -1321,7 +1321,7 @@ exports[`Storyshots SignInScreen default 1`] = `
                 }
               >
                 v
-                3.0.0
+                3.0.1
                  on Staging
               </Text>
             </View>

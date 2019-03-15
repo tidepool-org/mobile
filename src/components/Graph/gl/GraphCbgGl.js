@@ -4,8 +4,6 @@ import GraphRenderLayerGl from "./GraphRenderLayerGl";
 import { MAX_BG_VALUE, convertHexColorStringToInt } from "../helpers";
 // import Logger from "../../../models/Logger";
 
-const { createTextureAsync } = ExpoTHREE;
-
 // Support rendering using circle geometry or sprites
 const useSprites = false;
 
@@ -58,19 +56,19 @@ class GraphCbgGl extends GraphRenderLayerGl {
     }
 
     if (useSprites) {
-      GraphCbgGl.lowSpriteTexture = await createTextureAsync({
-        asset: require("../../../../assets/images/cbg-circle-low.png"),
-      });
+      GraphCbgGl.lowSpriteTexture = await ExpoTHREE.loadAsync(
+        require("../../../../assets/images/cbg-circle-low.png")
+      );
       GraphCbgGl.lowSpriteTexture.magFilter = THREE.NearestFilter;
       GraphCbgGl.lowSpriteTexture.minFilter = THREE.NearestFilter;
-      GraphCbgGl.normalSpriteTexture = await createTextureAsync({
-        asset: require("../../../../assets/images/cbg-circle-normal.png"),
-      });
+      GraphCbgGl.normalSpriteTexture = await ExpoTHREE.loadAsync(
+        require("../../../../assets/images/cbg-circle-normal.png")
+      );
       GraphCbgGl.normalSpriteTexture.magFilter = THREE.NearestFilter;
       GraphCbgGl.normalSpriteTexture.minFilter = THREE.NearestFilter;
-      GraphCbgGl.highSpriteTexture = await createTextureAsync({
-        asset: require("../../../../assets/images/cbg-circle-high.png"),
-      });
+      GraphCbgGl.highSpriteTexture = await ExpoTHREE.loadAsync(
+        require("../../../../assets/images/cbg-circle-high.png")
+      );
       GraphCbgGl.highSpriteTexture.magFilter = THREE.NearestFilter;
       GraphCbgGl.highSpriteTexture.minFilter = THREE.NearestFilter;
     }

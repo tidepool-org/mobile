@@ -4,8 +4,6 @@ const { PixelRatio } = require("react-native");
 const ExpoTHREE = require("expo-three");
 const createGeometry = require("three-bmfont-text");
 
-const { createTextureAsync } = ExpoTHREE;
-
 // Creating bmfont json and sprite sheet
 // Create .fnt and .png from .ttf
 // http://www.angelcode.com/products/bmfont/
@@ -62,18 +60,18 @@ class GraphTextMeshFactory {
   async loadAssetsAsync() {
     if (!this.assetsAreLoaded) {
       let font = require("../../../../assets/bmfonts/OpenSans-Regular-56px.json");
-      let spriteSheetTexture = await createTextureAsync({
-        asset: require("../../../../assets/bmfonts/OpenSans-Regular-56px.png"),
-      });
+      let spriteSheetTexture = await ExpoTHREE.loadAsync(
+        require("../../../../assets/bmfonts/OpenSans-Regular-56px.png")
+      );
       this.bmFonts.set("OpenSans-Regular-56px", font);
       this.bmFontSpriteSheetTextures.set(
         "OpenSans-Regular-56px",
         spriteSheetTexture
       );
       font = require("../../../../assets/bmfonts/OpenSans-Semibold-56px.json");
-      spriteSheetTexture = await createTextureAsync({
-        asset: require("../../../../assets/bmfonts/OpenSans-Semibold-56px.png"),
-      });
+      spriteSheetTexture = await ExpoTHREE.loadAsync(
+        require("../../../../assets/bmfonts/OpenSans-Semibold-56px.png")
+      );
       this.bmFonts.set("OpenSans-Semibold-56px", font);
       this.bmFontSpriteSheetTextures.set(
         "OpenSans-Semibold-56px",

@@ -32,6 +32,7 @@ class GraphYAxisGl extends GraphRenderLayerGl {
       new THREE.Vector3(xStart, 0, 0),
       new THREE.Vector3(xEnd, 0, 0)
     );
+    this.lineGeometry.computeLineDistances();
 
     this.yAxisBGBoundaryValueLines = new Map();
     this.yAxisLabelTextMeshes = new Map();
@@ -75,7 +76,6 @@ class GraphYAxisGl extends GraphRenderLayerGl {
       yAxisBottomOfGlucose - value * yAxisGlucosePixelsPerValue
     );
     const line = new THREE.Line(this.lineGeometry, this.lineDashedMaterial);
-    line.computeLineDistances();
     this.updateObjectPosition(line, { x: 0, y, z: this.zStart });
     this.yAxisBGBoundaryValueLines[value] = line;
     scene.add(line);
