@@ -258,26 +258,30 @@ class NotesListItem extends PureComponent {
     const { theme, note, currentUser, allowEditing } = this.props;
     const { expanded } = this.state;
 
-    if (allowEditing && expanded && note.userId === currentUser.userId) {
-      return (
-        <glamorous.TouchableOpacity
-          marginLeft="auto"
-          marginRight={10}
-          marginTop={7}
-          hitSlop={{ left: 10, right: 10, top: 10, bottom: 10 }}
-          onPress={this.onPressDeleteNote}
-        >
-          <glamorous.Text
-            style={theme.editButtonTextStyle}
-            allowFontScaling={false}
-            numberOfLines={1}
-          >
-            Delete
-          </glamorous.Text>
-        </glamorous.TouchableOpacity>
-      );
-    }
+    if (allowEditing && expanded) {
+      const isNoteCreatedByCurrentUser = note.userId === currentUser.userId;
+      const isNoteForCurrentUser = note.groupId === currentUser.userId;
 
+      if (isNoteCreatedByCurrentUser || isNoteForCurrentUser) {
+        return (
+          <glamorous.TouchableOpacity
+            marginLeft="auto"
+            marginRight={10}
+            marginTop={7}
+            hitSlop={{ left: 10, right: 10, top: 10, bottom: 10 }}
+            onPress={this.onPressDeleteNote}
+          >
+            <glamorous.Text
+              style={theme.editButtonTextStyle}
+              allowFontScaling={false}
+              numberOfLines={1}
+            >
+              Delete
+            </glamorous.Text>
+          </glamorous.TouchableOpacity>
+        );
+      }
+    }
     return null;
   }
 
@@ -285,23 +289,26 @@ class NotesListItem extends PureComponent {
     const { theme, note, currentUser, allowEditing } = this.props;
     const { expanded } = this.state;
 
-    if (allowEditing && expanded && note.userId === currentUser.userId) {
-      return (
-        <glamorous.TouchableOpacity
-          marginRight={10}
-          marginTop={7}
-          hitSlop={{ left: 10, right: 10, top: 10, bottom: 10 }}
-          onPress={this.onPressEditNote}
-        >
-          <glamorous.Text
-            style={theme.editButtonTextStyle}
-            allowFontScaling={false}
-            numberOfLines={1}
+    if (allowEditing && expanded) {
+      const isNoteCreatedByCurrentUser = note.userId === currentUser.userId;
+      if (isNoteCreatedByCurrentUser) {
+        return (
+          <glamorous.TouchableOpacity
+            marginRight={10}
+            marginTop={7}
+            hitSlop={{ left: 10, right: 10, top: 10, bottom: 10 }}
+            onPress={this.onPressEditNote}
           >
-            Edit
-          </glamorous.Text>
-        </glamorous.TouchableOpacity>
-      );
+            <glamorous.Text
+              style={theme.editButtonTextStyle}
+              allowFontScaling={false}
+              numberOfLines={1}
+            >
+              Edit
+            </glamorous.Text>
+          </glamorous.TouchableOpacity>
+        );
+      }
     }
 
     return null;
@@ -332,6 +339,7 @@ class NotesListItem extends PureComponent {
           >
             {userLabelText}
           </glamorous.Text>
+          {this.renderDeleteButton()}
           {this.renderEditButton()}
         </glamorous.View>
       );
