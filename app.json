@@ -5,7 +5,7 @@
     "privacy": "public",
     "sdkVersion": "31.0.0",
     "platforms": ["ios", "android"],
-    "version": "3.0.1",
+    "version": "3.0.2",
     "orientation": "portrait",
     "icon": "./assets/images/Icon-App-512x512@2x.png",
     "assetBundlePatterns": ["**/fonts/*", "**/images/*"],
@@ -14,10 +14,8 @@
     },
     "isDetached": true,
     "detach": {
-      "iosExpoViewUrl":
-        "https://s3.amazonaws.com/exp-exponent-view-code/ios-v2.9.0-sdk31.0.0-250a3991-b623-4f9c-b07f-0b9ed7e8c4c9.tar.gz",
-      "androidExpoViewUrl":
-        "https://s3.amazonaws.com/exp-exponent-view-code/android-v2.9.2-sdk31.0.0-d1776f37-d524-4fee-872d-6807b0fd83ff.tar.gz"
+      "iosExpoViewUrl": "https://s3.amazonaws.com/exp-exponent-view-code/ios-v2.9.0-sdk31.0.0-250a3991-b623-4f9c-b07f-0b9ed7e8c4c9.tar.gz",
+      "androidExpoViewUrl": "https://s3.amazonaws.com/exp-exponent-view-code/android-v2.9.2-sdk31.0.0-d1776f37-d524-4fee-872d-6807b0fd83ff.tar.gz"
     },
     "scheme": "exp0815d1104db745568824ac69a998de27",
     "ios": {
@@ -34,8 +32,7 @@
       "icon": "./assets/images/Icon-App-512x512@2x.png",
       "permissions": ["ACCESS_NETWORK_STATE", "ACCESS_WIFI_STATE", "INTERNET"],
       "publishBundlePath": "android/app/src/main/assets/shell-app.bundle",
-      "publishManifestPath":
-        "android/app/src/main/assets/shell-app-manifest.json"
+      "publishManifestPath": "android/app/src/main/assets/shell-app-manifest.json"
     },
     "description": ""
   }
