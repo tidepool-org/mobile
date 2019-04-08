@@ -1,6 +1,7 @@
 const Colors = {
   altLightGreyColor: "#c9c9c9",
   altDarkGreyColor: "#4d4e4c",
+  alt2DarkGreyColor: "#58595b",
   veryLightGrey: "#f7f7f8",
   warmGrey: "#9b9b9b",
   mediumLightGrey: "#7e7e7e",

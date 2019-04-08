@@ -41,7 +41,7 @@ class GraphXAxisHeaderSvg {
         pointerEvents="none"
         left={left}
         top={top}
-        style={theme.graphYAxisLabelStyle}
+        style={theme.axesLabelStyle}
         width={width}
         textAlign="center"
       >

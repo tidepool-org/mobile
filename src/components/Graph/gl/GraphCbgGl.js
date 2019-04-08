@@ -13,7 +13,7 @@ class GraphCbgGl extends GraphRenderLayerGl {
 
     super(props);
 
-    const radius = 3.5;
+    const radius = 3.0;
     if (useSprites) {
       this.lowSpriteMaterial = new THREE.MeshBasicMaterial({
         map: GraphCbgGl.lowSpriteTexture,

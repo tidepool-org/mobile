@@ -151,8 +151,8 @@ const PrimaryTheme = {
     padding: 4,
     ...FontStyles.mediumRegularFont,
   },
-  graphYAxisLabelStyle: {
-    color: "#58595b",
+  axesLabelStyle: {
+    color: Colors.alt2DarkGreyColor,
     ...FontStyles.smallRegularFont,
   },
   graphNoDataLabelStyle: {
@@ -180,7 +180,7 @@ const PrimaryTheme = {
   graphBolusInterruptBarColor: Colors.peach,
   bolusOverrideIconColor: "#0c6999",
   graphWizardCircleColor: Colors.gold,
-  graphWizardLabelColor: Colors.darkPurple,
+  graphWizardLabelColor: Colors.alt2DarkGreyColor,
   toolTipContentTextStyle: {
     color: Colors.blackish,
     ...FontStyles.mediumSmallSemiboldFont,

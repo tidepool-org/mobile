@@ -217,7 +217,7 @@ class NotesListItem extends PureComponent {
           const { timestamp } = note;
           const startDate = subHours(timestamp, 12);
           const endDate = addHours(timestamp, 12);
-          const objectTypes = "smbg,bolus,cbg,wizard,basal";
+          const objectTypes = "smbg,bolus,cbg,wizard,basal,food";
           graphDataFetchAsync({
             messageId: note.id,
             userId,

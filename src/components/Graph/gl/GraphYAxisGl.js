@@ -15,7 +15,11 @@ class GraphYAxisGl extends GraphRenderLayerGl {
 
     super(props);
 
-    const { width } = this.graphFixedLayoutInfo;
+    const {
+      width,
+      yAxisLineLeftMargin,
+      yAxisLineRightMargin,
+    } = this.graphFixedLayoutInfo;
 
     this.lineDashedMaterial = new THREE.LineDashedMaterial({
       color: convertHexColorStringToInt(this.theme.graphLineStrokeColor),
@@ -23,10 +27,10 @@ class GraphYAxisGl extends GraphRenderLayerGl {
       dashSize: 5 * this.pixelRatio,
       gapSize: 4 * this.pixelRatio,
     });
-    const leftMargin = 35;
-    const rightMargin = 4;
-    const xStart = leftMargin * this.pixelRatio;
-    const xEnd = width * this.pixelRatio - rightMargin * this.pixelRatio;
+
+    const xStart = yAxisLineLeftMargin * this.pixelRatio;
+    const xEnd =
+      width * this.pixelRatio - yAxisLineRightMargin * this.pixelRatio;
     this.lineGeometry = new THREE.Geometry();
     this.lineGeometry.vertices.push(
       new THREE.Vector3(xStart, 0, 0),
@@ -51,7 +55,7 @@ class GraphYAxisGl extends GraphRenderLayerGl {
       text,
       fontName: "OpenSans-Regular-56px",
       width: width * this.pixelRatio,
-      color: this.theme.graphYAxisLabelStyle.color,
+      color: this.theme.axesLabelStyle.color,
       align: "right",
     });
     const y = Math.round(
