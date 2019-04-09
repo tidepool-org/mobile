@@ -257,19 +257,14 @@ export default class GraphData {
   /* eslint-disable class-methods-use-this */
   transformFoodResponseDataItem(item) {
     let transformedItem;
-    const { nutrition } = item;
-    if (nutrition) {
-      const { carbohydrate } = nutrition;
-      if (carbohydrate) {
-        const value = carbohydrate.net;
-        if (value) {
-          const time = parse(item.time).getTime() / 1000;
-          transformedItem = {
-            time,
-            value,
-          };
-        }
-      }
+
+    const { nutrition: { carbohydrate: { net: value = {} } = {} } = {} } = item;
+    if (value) {
+      const time = parse(item.time).getTime() / 1000;
+      transformedItem = {
+        time,
+        value,
+      };
     }
 
     return transformedItem;
