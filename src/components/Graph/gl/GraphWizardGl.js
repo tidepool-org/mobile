@@ -3,10 +3,8 @@ import { THREE } from "expo-three";
 import GraphTextMeshFactory from "./GraphTextMeshFactory";
 import GraphRenderLayerGl from "./GraphRenderLayerGl";
 import { convertHexColorStringToInt } from "../helpers";
+import { GraphLayoutConstants } from "../GraphFixedLayoutInfo";
 // import Logger from "../../../models/Logger";
-
-const WIZARD_RADIUS = 15;
-const WIZARD_BOTTOM_PADDING = 3;
 
 class GraphWizardGl extends GraphRenderLayerGl {
   constructor(props) {
@@ -18,11 +16,11 @@ class GraphWizardGl extends GraphRenderLayerGl {
       color: convertHexColorStringToInt(this.theme.graphWizardCircleColor),
     });
     this.circleOutlineGeometry = new THREE.CircleBufferGeometry(
-      WIZARD_RADIUS * this.pixelRatio,
+      GraphLayoutConstants.wizardRadius * this.pixelRatio,
       8 * this.pixelRatio
     );
     this.circleGeometry = new THREE.CircleBufferGeometry(
-      (WIZARD_RADIUS - 1) * this.pixelRatio,
+      (GraphLayoutConstants.wizardRadius - 1) * this.pixelRatio,
       8 * this.pixelRatio
     );
     this.backgroundMaterial = new THREE.MeshBasicMaterial({
@@ -86,36 +84,7 @@ class GraphWizardGl extends GraphRenderLayerGl {
     });
   }
 
-  bolusYAtPosition({ x }) {
-    let bolusY;
-
-    if (this.graphBolusGl) {
-      const rectLeft = x - WIZARD_RADIUS;
-      const rectRight = x + WIZARD_RADIUS;
-      for (
-        let i = 0;
-        i < this.graphBolusGl.allCompleteBolusRects.length;
-        i += 1
-      ) {
-        const bolusRect = this.graphBolusGl.allCompleteBolusRects[i];
-        const bolusLeftX = bolusRect.x;
-        const bolusRightX = bolusLeftX + bolusRect.width;
-        if (bolusRightX > rectLeft && bolusLeftX < rectRight) {
-          const previousHigh = bolusY || 0;
-          if (bolusRect.height > previousHigh) {
-            // return the bolusRect that is largest and intersects the x position of the target rect
-            bolusY = bolusRect.height;
-          }
-        }
-      }
-    }
-
-    return bolusY;
-  }
-
   renderSelf({ scene, graphScalableLayoutInfo, contentOffsetX, wizardData }) {
-    // console.log(`GraphWizardGl renderSelf`);
-
     if (this.isScrollOrZoomRender) {
       // No need to render for scroll or zoom since we're only using auto-scrollable objects
       return;
@@ -133,7 +102,7 @@ class GraphWizardGl extends GraphRenderLayerGl {
     this.wizardData = wizardData;
 
     for (let i = 0; i < wizardData.length; i += 1) {
-      const { time, value, bolusTopY } = wizardData[i];
+      const { time, value } = wizardData[i];
       if (
         value &&
         time >= graphStartTimeSeconds &&
@@ -141,20 +110,19 @@ class GraphWizardGl extends GraphRenderLayerGl {
       ) {
         const timeOffset = time - graphStartTimeSeconds;
         const x = timeOffset;
+        const y =
+          GraphLayoutConstants.yAxisBottomOfWizard -
+          GraphLayoutConstants.wizardRadius;
         const z = this.zStart + i * 0.01;
-        let y = bolusTopY;
-        if (!y) {
-          y = this.bolusYAtPosition({ x });
-        }
 
         this.renderCircle({
           x,
-          y: y - WIZARD_RADIUS - WIZARD_BOTTOM_PADDING,
+          y,
           z,
         });
         this.renderLabel({
           x,
-          y: y - WIZARD_RADIUS - WIZARD_BOTTOM_PADDING,
+          y,
           z,
           value,
         });

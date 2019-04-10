@@ -17,7 +17,7 @@ exports[`Storyshots Graph (Bolus) extended bolus with an override 1`] = `
       style={
         Array [
           Object {
-            "height": 180,
+            "height": 210,
           },
         ]
       }
@@ -43,7 +43,7 @@ exports[`Storyshots Graph (Bolus) extended bolus with override 1`] = `
       style={
         Array [
           Object {
-            "height": 180,
+            "height": 210,
           },
         ]
       }
@@ -69,7 +69,7 @@ exports[`Storyshots Graph (Bolus) interrupted bolus followed by a bolus underrid
       style={
         Array [
           Object {
-            "height": 180,
+            "height": 210,
           },
         ]
       }
@@ -95,7 +95,7 @@ exports[`Storyshots Graph (Bolus) interrupted extended bolus 1`] = `
       style={
         Array [
           Object {
-            "height": 180,
+            "height": 210,
           },
         ]
       }
@@ -121,7 +121,7 @@ exports[`Storyshots Graph (Bolus) series of extended boluses 1`] = `
       style={
         Array [
           Object {
-            "height": 180,
+            "height": 210,
           },
         ]
       }
@@ -147,7 +147,7 @@ exports[`Storyshots Graph (Bolus) underride and extended bolus 1`] = `
       style={
         Array [
           Object {
-            "height": 180,
+            "height": 210,
           },
         ]
       }

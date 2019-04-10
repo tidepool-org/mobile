@@ -5,7 +5,10 @@ import glamorous, { withTheme } from "glamorous-native";
 
 import { ThemePropType } from "../../prop-types/theme";
 import { GRAPH_RENDERER_SVG } from "./helpers";
-import GraphFixedLayoutInfo from "./GraphFixedLayoutInfo";
+import {
+  GraphFixedLayoutInfo,
+  GraphLayoutConstants,
+} from "./GraphFixedLayoutInfo";
 import GraphScalableLayoutInfo from "./GraphScalableLayoutInfo";
 import GraphYAxisLabels from "./GraphYAxisLabels";
 import GraphYAxisBGBoundaryLinesSvg from "./svg/GraphYAxisBGBoundaryLinesSvg";
@@ -214,7 +217,10 @@ class Graph extends PureComponent {
     // console.log(`Graph: render`);
 
     return (
-      <glamorous.View height={180} onLayout={this.onContainerViewLayout}>
+      <glamorous.View
+        height={GraphLayoutConstants.height}
+        onLayout={this.onContainerViewLayout}
+      >
         {this.renderGraphZoomable()}
       </glamorous.View>
     );

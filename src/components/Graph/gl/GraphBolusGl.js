@@ -723,10 +723,6 @@ class GraphBolusGl extends GraphRenderLayerGl {
         }
 
         this.allCompleteBolusRects.push(this.completeBolusRect);
-        if (wizard) {
-          wizard.bolusTopY =
-            this.completeBolusRect.y - this.completeBolusRect.height;
-        }
       }
     }
 

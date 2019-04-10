@@ -68,7 +68,6 @@ class GraphScrollableGl extends PureComponent {
       zStart: 700,
       zEnd: 799,
     });
-    graphWizardGl.graphBolusGl = graphBolusGl;
     this.graphRenderLayers = [
       graphYAxisGl,
       graphXAxisGl,
@@ -77,7 +76,7 @@ class GraphScrollableGl extends PureComponent {
       graphNoteEventGl,
       graphSmbgGl,
       graphBolusGl,
-      graphWizardGl, // NB: This must appear after graphBolusGl, since it's dependent on graphBolusGl rendering first
+      graphWizardGl,
     ];
 
     this.contentOffsetX = 0;
