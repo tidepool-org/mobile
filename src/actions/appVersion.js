@@ -3,7 +3,7 @@ import DeviceInfo from "react-native-device-info";
 const APP_VERSION_LOAD = "APP_VERSION_LOAD";
 
 const appVersionLoad = () => {
-  let version = "3.0.2 (Expo)";
+  let version = "3.0.3 (Expo)";
   try {
     version = `${DeviceInfo.getVersion()} (${DeviceInfo.getBuildNumber()})`;
   } catch (error) {
