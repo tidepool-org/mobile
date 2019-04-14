@@ -67,7 +67,7 @@
     "react-dom": "16.5.0",
     "react-native-debugger-open": "0.3.19",
     "react-native-storybook-loader": "1.8.0",
-    "react-test-renderer": "16.5.0"
+    "react-test-renderer": "16.3.2"
   },
   "config": {
     "react-native-storybook-loader": {
