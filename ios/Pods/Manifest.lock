@@ -21,71 +21,84 @@ PODS:
   - Crashlytics (3.12.0):
     - Fabric (~> 1.9.0)
   - DoubleConversion (1.1.6)
-  - EXAdsAdMob (1.1.0):
+  - EXAdsAdMob (2.0.0):
     - EXCore
     - Google-Mobile-Ads-SDK
-  - EXBarCodeScanner (1.1.0):
+  - EXAppAuth (2.0.0):
+    - AppAuth
     - EXCore
-  - EXBarCodeScannerInterface (1.1.0):
+  - EXAppLoaderProvider (1.0.0)
+  - EXBackgroundFetch (1.0.0):
     - EXCore
-  - EXCamera (1.2.0):
+    - EXTaskManagerInterface
+  - EXBarCodeScanner (2.0.0):
+    - EXCore
+  - EXBarCodeScannerInterface (2.0.0):
+    - EXCore
+  - EXCamera (2.0.0):
     - EXBarCodeScannerInterface
     - EXCore
     - EXFaceDetectorInterface
     - EXFileSystemInterface
     - EXImageLoaderInterface
     - EXPermissionsInterface
-  - EXCameraInterface (1.1.0):
+  - EXCameraInterface (2.0.0):
     - EXCore
-  - EXConstants (1.1.0):
+  - EXConstants (2.0.1):
     - EXConstantsInterface
     - EXCore
-  - EXConstantsInterface (1.1.0):
+  - EXConstantsInterface (2.0.0):
     - EXCore
-  - EXContacts (1.1.0):
+  - EXContacts (2.0.0):
     - EXCore
     - EXFileSystemInterface
     - EXPermissionsInterface
-  - EXCore (1.2.0)
-  - EXFaceDetectorInterface (1.1.0):
+  - EXCore (2.0.2)
+  - EXErrors (1.0.0):
     - EXCore
-  - EXFileSystem (1.1.0):
+  - EXFaceDetectorInterface (2.0.0):
+    - EXCore
+  - EXFileSystem (2.0.0):
     - EXCore
     - EXFileSystemInterface
-  - EXFileSystemInterface (1.1.0):
+  - EXFileSystemInterface (2.0.0):
     - EXCore
-  - EXFont (1.1.0):
+  - EXFont (2.0.0):
     - EXCore
     - EXFontInterface
-  - EXFontInterface (1.1.0):
+  - EXFontInterface (2.0.0):
     - EXCore
-  - EXGL (1.1.0):
+  - EXGL (2.0.0):
     - EXCameraInterface
     - EXCore
     - EXFileSystemInterface
     - EXGL-CPP
-  - EXGL-CPP (1.1.0):
-    - EXGL-CPP/UEXGL (= 1.1.0)
-  - EXGL-CPP/UEXGL (1.1.0)
-  - EXImageLoaderInterface (1.1.0):
+  - EXGL-CPP (2.0.0):
+    - EXGL-CPP/UEXGL (= 2.0.0)
+  - EXGL-CPP/UEXGL (2.0.0)
+  - EXGoogleSignIn (2.0.0):
     - EXCore
-  - EXLocalAuthentication (1.1.0):
+    - GoogleSignIn (~> 4.4)
+  - EXImageLoaderInterface (2.0.0):
+    - EXCore
+  - EXLocalAuthentication (2.0.0):
     - EXConstantsInterface
     - EXCore
-  - EXLocalization (1.0.0):
+  - EXLocalization (2.0.0):
     - EXCore
-  - EXLocation (1.1.0):
-    - EXCore
-    - EXPermissionsInterface
-  - EXMediaLibrary (1.1.0):
+  - EXLocation (2.0.1):
     - EXCore
     - EXPermissionsInterface
-  - EXPermissions (1.2.0):
+    - EXTaskManagerInterface
+  - EXMediaLibrary (2.0.0):
     - EXCore
     - EXPermissionsInterface
-  - EXPermissionsInterface (1.2.0):
+  - EXPermissions (2.0.0):
     - EXCore
-  - ExpoKit/Core (2.9.0):
+    - EXPermissionsInterface
+  - EXPermissionsInterface (2.0.0):
+    - EXCore
+  - ExpoKit/Core (32.0.0):
     - Amplitude-iOS (~> 3.8)
     - Analytics (~> 3.5)
     - AppAuth (~> 0.4)
@@ -101,9 +114,9 @@ PODS:
     - EXSensorsInterface
     - Fabric (~> 1.6)
     - FBAudienceNetwork (= 4.99.0)
-    - FBSDKCoreKit (= 4.37.0)
-    - FBSDKLoginKit (= 4.37.0)
-    - FBSDKShareKit (= 4.37.0)
+    - FBSDKCoreKit (= 4.39.1)
+    - FBSDKLoginKit (= 4.39.1)
+    - FBSDKShareKit (= 4.39.1)
     - Google-Maps-iOS-Utils (~> 2.1.0)
     - Google-Mobile-Ads-SDK (~> 7.22.0)
     - GoogleMaps (~> 2.5.0)
@@ -111,31 +124,37 @@ PODS:
     - JKBigInteger2 (= 0.0.5)
     - lottie-ios (~> 2.5.0)
     - React
-  - EXPrint (1.1.0):
+  - EXPrint (2.0.0):
     - EXCore
-  - EXReactNativeAdapter (1.2.0):
+  - EXReactNativeAdapter (2.0.0):
     - EXCore
     - EXFontInterface
     - React
-  - EXSegment (1.1.0):
+  - EXSegment (2.0.0):
     - Analytics (~> 3.5)
     - EXConstantsInterface
     - EXCore
-  - EXSensors (1.1.0):
+  - EXSensors (2.0.0):
     - EXCore
     - EXSensorsInterface
-  - EXSensorsInterface (1.1.0):
+  - EXSensorsInterface (2.0.0):
     - EXCore
-  - EXSMS (1.1.0):
+  - EXSMS (2.0.0):
+    - EXCore
+  - EXTaskManager (1.0.0):
+    - EXConstantsInterface
+    - EXCore
+    - EXTaskManagerInterface
+  - EXTaskManagerInterface (1.0.0):
     - EXCore
   - Fabric (1.9.0)
   - FBAudienceNetwork (4.99.0)
-  - FBSDKCoreKit (4.37.0):
-    - Bolts (~> 1.7)
-  - FBSDKLoginKit (4.37.0):
+  - FBSDKCoreKit (4.39.1):
+    - Bolts (~> 1.9)
+  - FBSDKLoginKit (4.39.1):
     - FBSDKCoreKit
-  - FBSDKShareKit (4.37.0):
-    - FBSDKCoreKit (~> 4.37.0)
+  - FBSDKShareKit (4.39.1):
+    - FBSDKCoreKit
   - Folly (2016.10.31.00):
     - boost-for-react-native
     - DoubleConversion
@@ -177,7 +196,7 @@ PODS:
   - "GoogleToolboxForMac/NSString+URLArguments (2.2.0)"
   - GTMSessionFetcher/Core (1.2.1)
   - JKBigInteger2 (0.0.5)
-  - lottie-ios (2.5.2)
+  - lottie-ios (2.5.3)
   - React (0.57.1):
     - React/Core (= 0.57.1)
   - React/ART (0.57.1):
@@ -228,15 +247,18 @@ PODS:
     - React/RCTBlob
   - RNDeviceInfo (0.21.5):
     - React
-  - Rollbar (1.4.2)
-  - RollbarReactNative (0.4.0):
+  - Rollbar (1.5.2)
+  - RollbarReactNative (0.5.0):
     - React
-    - Rollbar (~> 1.4.2)
+    - Rollbar (~> 1.5.0)
   - yoga (0.57.1.React)
 
 DEPENDENCIES:
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - EXAdsAdMob (from `../node_modules/expo-ads-admob/ios`)
+  - EXAppAuth (from `../node_modules/expo-app-auth/ios`)
+  - EXAppLoaderProvider (from `../node_modules/expo-app-loader-provider/ios`)
+  - EXBackgroundFetch (from `../node_modules/expo-background-fetch/ios`)
   - EXBarCodeScanner (from `../node_modules/expo-barcode-scanner/ios`)
   - EXBarCodeScannerInterface (from `../node_modules/expo-barcode-scanner-interface/ios`)
   - EXCamera (from `../node_modules/expo-camera/ios`)
@@ -245,6 +267,7 @@ DEPENDENCIES:
   - EXConstantsInterface (from `../node_modules/expo-constants-interface/ios`)
   - EXContacts (from `../node_modules/expo-contacts/ios`)
   - EXCore (from `../node_modules/expo-core/ios`)
+  - EXErrors (from `../node_modules/expo-errors/ios`)
   - EXFaceDetectorInterface (from `../node_modules/expo-face-detector-interface/ios`)
   - EXFileSystem (from `../node_modules/expo-file-system/ios`)
   - EXFileSystemInterface (from `../node_modules/expo-file-system-interface/ios`)
@@ -252,6 +275,7 @@ DEPENDENCIES:
   - EXFontInterface (from `../node_modules/expo-font-interface/ios`)
   - EXGL (from `../node_modules/expo-gl/ios`)
   - EXGL-CPP (from `../node_modules/expo-gl-cpp/cpp`)
+  - EXGoogleSignIn (from `../node_modules/expo-google-sign-in/ios`)
   - EXImageLoaderInterface (from `../node_modules/expo-image-loader-interface/ios`)
   - EXLocalAuthentication (from `../node_modules/expo-local-authentication/ios`)
   - EXLocalization (from `../node_modules/expo-localization/ios`)
@@ -259,13 +283,15 @@ DEPENDENCIES:
   - EXMediaLibrary (from `../node_modules/expo-media-library/ios`)
   - EXPermissions (from `../node_modules/expo-permissions/ios`)
   - EXPermissionsInterface (from `../node_modules/expo-permissions-interface/ios`)
-  - ExpoKit/Core (from `http://github.com/expo/expo.git`, tag `ios/2.9.0`)
+  - ExpoKit/Core (from `http://github.com/expo/expo.git`, tag `ios/2.10.6`)
   - EXPrint (from `../node_modules/expo-print/ios`)
   - EXReactNativeAdapter (from `../node_modules/expo-react-native-adapter/ios`)
   - EXSegment (from `../node_modules/expo-analytics-segment/ios`)
   - EXSensors (from `../node_modules/expo-sensors/ios`)
   - EXSensorsInterface (from `../node_modules/expo-sensors-interface/ios`)
   - EXSMS (from `../node_modules/expo-sms/ios`)
+  - EXTaskManager (from `../node_modules/expo-task-manager/ios`)
+  - EXTaskManagerInterface (from `../node_modules/expo-task-manager-interface/ios`)
   - Folly (from `../node_modules/react-native/third-party-podspecs/Folly.podspec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - React/ART (from `../node_modules/react-native`)
@@ -315,6 +341,12 @@ EXTERNAL SOURCES:
     :podspec: "../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec"
   EXAdsAdMob:
     :path: "../node_modules/expo-ads-admob/ios"
+  EXAppAuth:
+    :path: "../node_modules/expo-app-auth/ios"
+  EXAppLoaderProvider:
+    :path: "../node_modules/expo-app-loader-provider/ios"
+  EXBackgroundFetch:
+    :path: "../node_modules/expo-background-fetch/ios"
   EXBarCodeScanner:
     :path: "../node_modules/expo-barcode-scanner/ios"
   EXBarCodeScannerInterface:
@@ -331,6 +363,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/expo-contacts/ios"
   EXCore:
     :path: "../node_modules/expo-core/ios"
+  EXErrors:
+    :path: "../node_modules/expo-errors/ios"
   EXFaceDetectorInterface:
     :path: "../node_modules/expo-face-detector-interface/ios"
   EXFileSystem:
@@ -345,6 +379,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/expo-gl/ios"
   EXGL-CPP:
     :path: "../node_modules/expo-gl-cpp/cpp"
+  EXGoogleSignIn:
+    :path: "../node_modules/expo-google-sign-in/ios"
   EXImageLoaderInterface:
     :path: "../node_modules/expo-image-loader-interface/ios"
   EXLocalAuthentication:
@@ -361,7 +397,7 @@ EXTERNAL SOURCES:
     :path: "../node_modules/expo-permissions-interface/ios"
   ExpoKit:
     :git: http://github.com/expo/expo.git
-    :tag: ios/2.9.0
+    :tag: ios/2.10.6
   EXPrint:
     :path: "../node_modules/expo-print/ios"
   EXReactNativeAdapter:
@@ -374,6 +410,10 @@ EXTERNAL SOURCES:
     :path: "../node_modules/expo-sensors-interface/ios"
   EXSMS:
     :path: "../node_modules/expo-sms/ios"
+  EXTaskManager:
+    :path: "../node_modules/expo-task-manager/ios"
+  EXTaskManagerInterface:
+    :path: "../node_modules/expo-task-manager-interface/ios"
   Folly:
     :podspec: "../node_modules/react-native/third-party-podspecs/Folly.podspec"
   glog:
@@ -390,7 +430,7 @@ EXTERNAL SOURCES:
 CHECKOUT OPTIONS:
   ExpoKit:
     :git: http://github.com/expo/expo.git
-    :tag: ios/2.9.0
+    :tag: ios/2.10.6
 
 SPEC CHECKSUMS:
   Amplitude-iOS: 4a3c8807b2ea5369dc11e87e23825bff01e5a922
@@ -403,6 +443,9 @@ SPEC CHECKSUMS:
   Crashlytics: 07fb167b1694128c1c9a5a5cc319b0e9c3ca0933
   DoubleConversion: bb338842f62ab1d708ceb63ec3d999f0f3d98ecd
   EXAdsAdMob: 66a3c271540f54f4d964fa72f0c8a953faea5a03
+  EXAppAuth: df83ccf9fecfdfad741a930263524f4b75f8e962
+  EXAppLoaderProvider: 2638ca3d779c8baae37e63352c785e5e2dad70d5
+  EXBackgroundFetch: 1b5444a094fc71e0361c80720482946c4388c9b7
   EXBarCodeScanner: 0ed39b41ccec72935521823eceed3d60c73fc43d
   EXBarCodeScannerInterface: 4453aa03ca1e0a1c9b320aaf4ce5b7d88064d192
   EXCamera: 00936f79aafe16125c6cdc7c7ea2bf2d2c976dfe
@@ -411,6 +454,7 @@ SPEC CHECKSUMS:
   EXConstantsInterface: c60c068f94b78c8805bfeb35bd2bbaf859293de5
   EXContacts: 50843152d15328802c57b0382759595848959371
   EXCore: 81304a0284b7f2e0f691b8a6bc642854e730f5e2
+  EXErrors: 4f9a7181ac46a4acb5f11ff7d6035cd8ae36821e
   EXFaceDetectorInterface: 8727fe51fbd189a94ccd70152a25cdef913a0ae5
   EXFileSystem: 0872826fd9ebc7d842a5e389b088c93f5b9fab88
   EXFileSystemInterface: 8e1225e4e1776ea7abf997a7ded593b4b8e86863
@@ -418,25 +462,28 @@ SPEC CHECKSUMS:
   EXFontInterface: 06126ec4f6a67415426074c3383a82b241f087c1
   EXGL: 9a5dd454a7ed9660b25b71d82d8009ac9bd6f85a
   EXGL-CPP: 46b589a3ed0c59ae2e7f9434897b66cd8dd2e70c
+  EXGoogleSignIn: 646a6097f0e6ca5c4812b5dc2fcda1979ad9d333
   EXImageLoaderInterface: 3f460f6ff344ba6c4e00621806c0d1d76249cd8f
   EXLocalAuthentication: b70696613cb24d726d3c98a1818c22c481a46b01
   EXLocalization: 1243adc132eaad4793dd7e5b497135ad5d803441
-  EXLocation: c686b2b139bea46c653a96f62dc49e47c9b08fe5
+  EXLocation: 54f562edcc410be18699a364e80fcabcf97228f0
   EXMediaLibrary: f91c4f6ff2c9be8102e06d0a4d08987231a7e286
   EXPermissions: dd31cb432c078eed1f4c1e290bc32649d5280bd3
   EXPermissionsInterface: 76f80a0dcd16afde36498e3d3aa168cb43999558
-  ExpoKit: 56c02da01a88a33dcbac95a375b1fe503a9245a1
+  ExpoKit: 68b31d554c510f5cb4eadc58670fb9af7a22beea
   EXPrint: b6aab9715518cf67954ae260b71e28afd843353e
   EXReactNativeAdapter: 253efa069b53a6c8be7c3f2afd49ef6b4e97e902
   EXSegment: cfe9aed31dbd7f1455724afe89a4920e5dad0049
   EXSensors: 6aa3b3b9906beb0b574a88943d171ebc226b0fe5
   EXSensorsInterface: 9e845bc03ad23a846fa6bcd4e2a60f1d0b1a6906
   EXSMS: 2a2f1abfb2f37b686e892261678c70f39c9b7fa8
+  EXTaskManager: c4b3dd6936b827b040899a33e9788b42b17d5c25
+  EXTaskManagerInterface: f9869b0f902ba7ccead16e0768c6dd75603163e0
   Fabric: f988e33c97f08930a413e08123064d2e5f68d655
   FBAudienceNetwork: 80275c0a28574ff5ce820abdc251d05e07e6ae7a
-  FBSDKCoreKit: fe5f3474499a81963e11e3f3a5c753d0a95ca2b4
-  FBSDKLoginKit: 2f7249686d1e30ce8a5ef5400eedf50b3e3df332
-  FBSDKShareKit: 52e0083222c38e930eb6878007478326599195c3
+  FBSDKCoreKit: f442aa96179cc9b382bb4abeb7e340a47cca8f91
+  FBSDKLoginKit: c3079d9a4db27c492287b1eed7a4272b28cf8a59
+  FBSDKShareKit: 27d7b982e7b1f4638da2f2b1ab6eba5afc6b5888
   Folly: c89ac2d5c6ab169cd7397ef27485c44f35f742c7
   glog: e8acf0ebbf99759d3ff18c86c292a5898282dcde
   Google-Maps-iOS-Utils: c32891ff472eaaa1fca032beedafa1a013af7875
@@ -446,13 +493,13 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: ff31605b7d66400dcec09bed5861689aebadda4d
   GTMSessionFetcher: 32aeca0aa144acea523e1c8e053089dec2cb98ca
   JKBigInteger2: e91672035c42328c48b7dd015b66812ddf40ca9b
-  lottie-ios: 3fef45d3fabe63e3c7c2eb603dd64ddfffc73062
+  lottie-ios: a50d5c0160425cd4b01b852bb9578963e6d92d31
   React: 1fe0eb13d90b625d94c3b117c274dcfd2e760e11
   RNDeviceInfo: 568c5641057313b4912d08a7742ff0b2f753ed5c
-  Rollbar: 97bdc0b5ded953eafa07e8ba900f42ec0ade2f79
-  RollbarReactNative: 143b848bb2809429636091c0c558d3c9841c30f0
+  Rollbar: 5060e3fc9fa28ae75e70c61e95b1b31b2b22710c
+  RollbarReactNative: 4f8f872d8dae0c614c93aa800e8db88a10439ff5
   yoga: b1ce48b6cf950b98deae82838f5173ea7cf89e85
 
-PODFILE CHECKSUM: aedd3d2560e89e2b4a7817ce6e21c9890ae13103
+PODFILE CHECKSUM: c0ad332a7ee3141ccec30af9c82f4c4a6196a458
 
 COCOAPODS: 1.5.3
