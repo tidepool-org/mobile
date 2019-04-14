@@ -33,7 +33,7 @@ matrix:
         - yarn install
         - yarn run pre
         - npx eslint src/ --max-warnings 0
-        - yarn test --forceExit
+        - yarn test
         - expo publish
       script:
         - pushd ios
@@ -87,7 +87,7 @@ matrix:
         - yarn install
         - yarn run pre
         - npx eslint src/ --max-warnings 0
-        - yarn test --forceExit
+        - yarn test
         - expo publish
       script:
         - pushd android
