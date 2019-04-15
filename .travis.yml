@@ -26,9 +26,9 @@ matrix:
         - mv $TRAVIS_BUILD_DIR/ios/Tidepool $TRAVIS_BUILD_DIR/ios/tidepool
         - nvm install 10.15.0
         - npm install expo-cli --global
-        - npm install increase-memory-limit --global
         - curl -o- -L https://yarnpkg.com/install.sh | bash
         - export PATH="$HOME/.yarn/bin:$PATH"
+        - export NODE_OPTIONS=--max_old_space_size=4096
         - expo login -u tidepool -p $EXPO_PASSWORD
       install:
         - yarn install
@@ -81,9 +81,9 @@ matrix:
         - mv $TRAVIS_BUILD_DIR/ios/Tidepool $TRAVIS_BUILD_DIR/ios/tidepool
         - nvm install 10.15.0
         - npm install expo-cli --global
-        - npm install increase-memory-limit --global
         - curl -o- -L https://yarnpkg.com/install.sh | bash
         - export PATH="$HOME/.yarn/bin:$PATH"
+        - export NODE_OPTIONS=--max_old_space_size=4096
         - expo login -u tidepool -p $EXPO_PASSWORD
       install:
         - yarn install
