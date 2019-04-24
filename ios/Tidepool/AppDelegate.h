@@ -1,10 +1,9 @@
 // Copyright 2015-present 650 Industries. All rights reserved.
 
 #import <UIKit/UIKit.h>
+#import <ExpoKit/EXStandaloneAppDelegate.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
-
-@property (strong, nonatomic) UIWindow *window;
+@interface AppDelegate : EXStandaloneAppDelegate <UIApplicationDelegate>
 
 @property (copy, nonatomic) NSString *environment;
 @property (copy, nonatomic) NSString *userId;

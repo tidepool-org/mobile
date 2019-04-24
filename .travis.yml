@@ -28,6 +28,7 @@ matrix:
         - npm install expo-cli --global
         - curl -o- -L https://yarnpkg.com/install.sh | bash
         - export PATH="$HOME/.yarn/bin:$PATH"
+        - export NODE_OPTIONS=--max_old_space_size=4096
         - expo login -u tidepool -p $EXPO_PASSWORD
       install:
         - yarn install
@@ -82,6 +83,7 @@ matrix:
         - npm install expo-cli --global
         - curl -o- -L https://yarnpkg.com/install.sh | bash
         - export PATH="$HOME/.yarn/bin:$PATH"
+        - export NODE_OPTIONS=--max_old_space_size=4096
         - expo login -u tidepool -p $EXPO_PASSWORD
       install:
         - yarn install

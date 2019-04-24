@@ -19,7 +19,7 @@ class GraphSmbgGl extends GraphRenderLayerGl {
 
     super(props);
 
-    const radius = 9;
+    const radius = 8.0;
     if (useSprites) {
       this.lowSpriteMaterial = new THREE.MeshBasicMaterial({
         map: GraphSmbgGl.lowSpriteTexture,

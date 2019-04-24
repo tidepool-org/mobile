@@ -26,7 +26,7 @@ class GraphYAxisLabels extends PureComponent {
         allowFontScaling={false}
         position="absolute"
         pointerEvents="none"
-        style={theme.graphYAxisLabelStyle}
+        style={theme.axesLabelStyle}
         width={25}
         textAlign="right"
         top={yOffset - yAxisGlucoseLabelTextHalfHeight}

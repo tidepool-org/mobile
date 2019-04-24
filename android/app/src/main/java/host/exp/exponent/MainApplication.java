@@ -6,8 +6,13 @@ import com.facebook.react.ReactPackage;
 import java.util.Arrays;
 import java.util.List;
 
+import expo.core.interfaces.Package;
+import expo.loaders.provider.interfaces.AppLoaderPackagesProviderInterface;
+import expo.modules.constants.ConstantsPackage;
+import expo.modules.filesystem.FileSystemPackage;
+import expo.modules.font.FontLoaderPackage;
+import expo.modules.gl.GLPackage;
 import expolib_v1.okhttp3.OkHttpClient;
-
 // Needed for `react-native link`
 // import com.facebook.react.ReactApplication;
 import com.rollbar.RollbarReactNative;
@@ -19,7 +24,7 @@ import android.os.Handler;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import host.exp.exponent.NativeNotificationsPackage;
 
-public class MainApplication extends ExpoApplication {
+public class MainApplication extends ExpoApplication implements AppLoaderPackagesProviderInterface<ReactPackage> {
 
   @Override
   public boolean isDebug() {
@@ -43,6 +48,15 @@ public class MainApplication extends ExpoApplication {
         // new MainReactPackage(),
             RollbarReactNative.getPackage(),
             new RNDeviceInfo()
+    );
+  }
+
+  public List<Package> getExpoPackages() {
+    return Arrays.<Package>asList(
+        new ConstantsPackage(),
+        new FileSystemPackage(),
+        new FontLoaderPackage(),
+        new GLPackage()
     );
   }
 

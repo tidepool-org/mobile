@@ -8,6 +8,8 @@
 
 static const unsigned long payloadTotalBytesLimit = 512 * 1024;
 
+static NSString *const pathToRaw = @"body.crash_report.raw";
+
 static NSString *const pathToFrames = @"body.trace.frames";
 static const unsigned long payloadHeadFramesToKeep = 10;
 static const unsigned long payloadTailFramesToKeep = 10;
@@ -19,19 +21,19 @@ static const unsigned long payloadTailCrashThreadsToKeep = 10;
 static const unsigned long maxStringBytesLimit = 1024;
 static const unsigned long minStringBytesLimit = 256;
 
+static const unsigned long minRawStringByteLimit = 3072;
+
 static NSString *const pathToTrace = @"body.trace";
 static NSString *const pathToTraceChain = @"body.trace_chain";
 static const unsigned long maxExceptionMessageChars = 256;
 static const unsigned long maxTraceFrames = 1;
 
 +(void)truncatePayloads:(NSArray*)payloads {
-    
     [RollbarPayloadTruncator truncatePayloads:payloads toMaxByteSize:payloadTotalBytesLimit];
 }
 
 +(void)truncatePayloads:(NSArray*)payloads
           toMaxByteSize:(unsigned long)maxByteSize {
-    
     [payloads enumerateObjectsUsingBlock: ^(id item, NSUInteger idx, BOOL *stop) {
         
         [RollbarPayloadTruncator truncatePayload:item toTotalBytes:maxByteSize];
@@ -39,13 +41,11 @@ static const unsigned long maxTraceFrames = 1;
 }
 
 +(void)truncatePayload:(NSMutableDictionary*)payload {
-
     [RollbarPayloadTruncator truncatePayload:payload toTotalBytes:payloadTotalBytesLimit];
 }
 
 +(void)truncatePayload:(NSMutableDictionary*)payload
           toTotalBytes:(unsigned long) limit {
-    
     BOOL continueTruncation =
         [RollbarPayloadTruncator truncatePayload:payload
                                     toTotalBytes:limit
@@ -62,7 +62,7 @@ static const unsigned long maxTraceFrames = 1;
                                    keepingTailsCount:payloadTailCrashThreadsToKeep
              ];
     }
-    
+
     unsigned long stringLimit = maxStringBytesLimit;
     while (continueTruncation && (stringLimit >= minStringBytesLimit)) {
         continueTruncation = [RollbarPayloadTruncator truncatePayload:payload
@@ -71,13 +71,33 @@ static const unsigned long maxTraceFrames = 1;
                               ];
         stringLimit /= 2;
     }
-    
+
     if (continueTruncation) {
         continueTruncation = [RollbarPayloadTruncator truncatePayload:payload
                                                          toTotalBytes:limit
                                             withExceptionMessageLimit:maxExceptionMessageChars
                                                   andTraceFramesLimit:maxTraceFrames
                               ];
+    }
+
+    if (continueTruncation) {
+        [RollbarPayloadTruncator limitRawCrashReportInPayload:payload];
+    }
+}
+
++(void)limitRawCrashReportInPayload:(NSMutableDictionary *)payload {
+    id raw = [payload valueForKeyPath:pathToRaw];
+    if (!raw) {
+        return;
+    }
+    if ([raw isKindOfClass:[NSMutableString class]] && ![RollbarPayloadTruncator isMutable:raw]) {
+        NSMutableString *mutableRaw = [raw mutableCopy];
+        payload[@"body"][@"crash_report"][@"raw"] = mutableRaw;
+        [mutableRaw setString:[RollbarPayloadTruncator truncateString:mutableRaw
+                                                         toTotalBytes:minRawStringByteLimit]];
+    } else {
+        [raw setString:[RollbarPayloadTruncator truncateString:raw
+                                                         toTotalBytes:minRawStringByteLimit]];
     }
 }
 
@@ -147,16 +167,16 @@ withExceptionMessageLimit:(unsigned long)exeptionMessageLimit
     } else if ([obj isKindOfClass:[NSDictionary class]]) {
         //recurse the collection obj's items:
         [obj enumerateKeysAndObjectsUsingBlock: ^(id key, id item, BOOL *stop) {
-
-            if ([item isKindOfClass:[NSMutableString class]] && ![RollbarPayloadTruncator isMutable:item]) {
-                NSMutableString *mutableItem = [item mutableCopy];
-                [obj setObject:mutableItem forKey:key];
-                [RollbarPayloadTruncator itereateObjectStructure:mutableItem
-                                           whileTuncatingStrings:stringBytesLimit];
-            }
-            else {
-            [RollbarPayloadTruncator itereateObjectStructure:item
-                                       whileTuncatingStrings:stringBytesLimit];
+            if (![key isEqualToString:@"raw"]) {
+                if ([item isKindOfClass:[NSMutableString class]] && ![RollbarPayloadTruncator isMutable:item]) {
+                    NSMutableString *mutableItem = [item mutableCopy];
+                    [obj setObject:mutableItem forKey:key];
+                    [RollbarPayloadTruncator itereateObjectStructure:mutableItem
+                                               whileTuncatingStrings:stringBytesLimit];
+                } else {
+                    [RollbarPayloadTruncator itereateObjectStructure:item
+                                               whileTuncatingStrings:stringBytesLimit];
+                }
             }
         }];
     } else if ([obj isKindOfClass:[NSSet class]]) {
@@ -214,9 +234,6 @@ withExceptionMessageLimit:(unsigned long)exeptionMessageLimit
             ];
 }
 
-
-
-
 +(unsigned long)measureTotalEncodingBytes:(NSString*)string
                             usingEncoding:(NSStringEncoding)encoding {
 
@@ -230,34 +247,44 @@ withExceptionMessageLimit:(unsigned long)exeptionMessageLimit
     
     unsigned long currentStringEncoodingBytes =
         [RollbarPayloadTruncator measureTotalEncodingBytes:inputString];
-    if (currentStringEncoodingBytes <= totalBytesLimit)
-    {
+    
+    // let's take care if the trivial cases first:
+    
+    if (currentStringEncoodingBytes <= totalBytesLimit) {
         // no need to truncate:
         return inputString;
     }
     
     NSString *ellipsis = @"...";
-    unsigned long totalEllipsisEncodingBytes =
+    const unsigned long totalEllipsisEncodingBytes =
         [RollbarPayloadTruncator measureTotalEncodingBytes:ellipsis];
-    unsigned long bytesToRemove =
-        currentStringEncoodingBytes - totalBytesLimit + totalEllipsisEncodingBytes;
+    if (totalEllipsisEncodingBytes >= totalBytesLimit) {
+        // we have to have at least the ellipsis as a reasult of a string truncation:
+        return ellipsis;
+    }
+    
+    // let's try getting to the best fit target as close as possible in one shot:
 
-    NSMutableString *result =
-        [NSMutableString stringWithString:
-         [inputString substringToIndex:inputString.length - bytesToRemove]
-         ];
-    [result appendString:ellipsis];
+    NSUInteger cutOffCodeUnitIndex = (totalBytesLimit - totalEllipsisEncodingBytes);
+    if (cutOffCodeUnitIndex >= inputString.length) {
+        cutOffCodeUnitIndex = inputString.length - 1; // valid index == no trouble down the road...
+    }
+    NSRange cutOffCharRange = [inputString rangeOfComposedCharacterSequenceAtIndex:cutOffCodeUnitIndex];
+    NSRange truncationRange = NSMakeRange(0, cutOffCharRange.location);
+    NSString *truncatedSting = [inputString substringWithRange:truncationRange];
+    NSMutableString *result = [NSMutableString stringWithString:truncatedSting];
+    
+    // let's get even closer to the best fit target as much as possible:
+
     currentStringEncoodingBytes = [RollbarPayloadTruncator measureTotalEncodingBytes:result];
-    while (totalBytesLimit < currentStringEncoodingBytes) {
-        
-        bytesToRemove =
-            currentStringEncoodingBytes - totalBytesLimit + totalEllipsisEncodingBytes;
-        
-        [result deleteCharactersInRange:NSMakeRange(result.length - bytesToRemove, bytesToRemove)];
-        [result appendString:ellipsis];
-        
+    while (currentStringEncoodingBytes > (totalBytesLimit - totalEllipsisEncodingBytes)) {
+        cutOffCharRange = [result rangeOfComposedCharacterSequenceAtIndex:(result.length - 1)];
+        [result deleteCharactersInRange:cutOffCharRange];
         currentStringEncoodingBytes = [RollbarPayloadTruncator measureTotalEncodingBytes:result];
     }
+    
+    // add truncation signs:
+    [result appendString:ellipsis];
     
     return result;
 }

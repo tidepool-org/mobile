@@ -99,6 +99,18 @@ export default class GraphData {
         case "wizard":
           this.wizardData.push(this.transformWizardResponseDataItem(item));
           break;
+        case "food":
+          {
+            // NOTE: This is a quick and dirty way of adding food carb
+            // visualization - turning a food sample into a wizard that has a
+            // carb value but no associated bolus, allowing the graphing of
+            // wizard carbs to be leveraged.
+            const transformedItem = this.transformFoodResponseDataItem(item);
+            if (transformedItem) {
+              this.wizardData.push(transformedItem);
+            }
+          }
+          break;
         default:
           break;
       }
@@ -241,6 +253,23 @@ export default class GraphData {
 
     return transformedItem;
   }
+
+  /* eslint-disable class-methods-use-this */
+  transformFoodResponseDataItem(item) {
+    let transformedItem;
+
+    const { nutrition: { carbohydrate: { net: value = {} } = {} } = {} } = item;
+    if (value) {
+      const time = parse(item.time).getTime() / 1000;
+      transformedItem = {
+        time,
+        value,
+      };
+    }
+
+    return transformedItem;
+  }
+  /* eslint-enable class-methods-use-this */
 
   getSuppressedBasalRate(item) {
     let suppressedRate = null;
