@@ -14,7 +14,7 @@ import GraphData from "../models/GraphData";
 // "Nutshell/2.0.3 (org.tidepool.blipnotes; build:460; iOS 11.1.0) Alamofire/4.3.0")
 // "Nutshell/460 CFNetwork/889.9 Darwin/17.2.0"
 
-const timeout = 10000;
+const timeout = 30000;
 
 class TidepoolApi {
   constructor({ baseUrl }) {
