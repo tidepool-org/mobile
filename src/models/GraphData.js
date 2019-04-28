@@ -326,7 +326,7 @@ export default class GraphData {
       const dataWithoutDuplicates = [previousItem];
       for (let i = 1; i < processedData.length; i += 1) {
         const { value, time } = data[i];
-        if (value !== previousItem.value && time !== previousItem.time) {
+        if (value !== previousItem.value || time !== previousItem.time) {
           dataWithoutDuplicates.push(data[i]);
         }
         previousItem = data[i];
