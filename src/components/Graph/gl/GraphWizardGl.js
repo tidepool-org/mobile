@@ -113,7 +113,7 @@ class GraphWizardGl extends GraphRenderLayerGl {
         const y =
           GraphLayoutConstants.yAxisBottomOfWizard -
           GraphLayoutConstants.wizardRadius;
-        const z = this.zStart + i * 0.01;
+        const z = this.zStart + i * 0.1;
 
         this.renderCircle({
           x,

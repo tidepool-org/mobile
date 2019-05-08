@@ -195,7 +195,7 @@ class GraphSmbgGl extends GraphRenderLayerGl {
           color = this.theme.graphBgHighColor;
         }
 
-        const z = this.zStart + (i * 3 + 0) * 0.01;
+        const z = this.zStart + (i * 3 + 0) * 0.1;
         if (useSprites) {
           this.renderSelfUsingSprites({
             scene,
@@ -248,7 +248,7 @@ class GraphSmbgGl extends GraphRenderLayerGl {
         this.addAutoScrollableObjectToScene(scene, object, {
           x,
           y: y + capHeight / 2 + textTopToCircleBottom,
-          z: this.zStart + (i * 3 + 1) * 0.01,
+          z: this.zStart + (i * 3 + 1) * 0.1,
           contentOffsetX,
           pixelsPerSecond,
           shouldScrollX: true,
@@ -259,7 +259,7 @@ class GraphSmbgGl extends GraphRenderLayerGl {
         this.addAutoScrollableObjectToScene(scene, textMesh, {
           x,
           y: y + capHeight + textTopToCircleBottom,
-          z: this.zStart + (i * 3 + 2) * 0.01,
+          z: this.zStart + (i * 3 + 2) * 0.1,
           contentOffsetX,
           pixelsPerSecond,
           shouldScrollX: true,

@@ -159,7 +159,7 @@ class GraphCbgGl extends GraphRenderLayerGl {
           this.graphFixedLayoutInfo.yAxisBottomOfGlucose -
           constrainedValue *
             this.graphFixedLayoutInfo.yAxisGlucosePixelsPerValue;
-        const z = this.zStart + i * 0.01;
+        const z = this.zStart + i * 0.1;
 
         if (useSprites) {
           this.renderSelfUsingSprites({

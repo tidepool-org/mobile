@@ -74,7 +74,7 @@ class GraphXAxisGl extends GraphRenderLayerGl {
       const mesh = this.tickLineMeshes[i];
       const x = markerXCoordinates[i] - contentOffsetX;
       const y = this.graphFixedLayoutInfo.headerHeight - this.tickHeight;
-      this.updateObjectPosition(mesh, { x, y, z: this.zStart + i * 0.01 });
+      this.updateObjectPosition(mesh, { x, y, z: this.zStart + i * 0.1 });
       mesh.visible = true;
     }
 
@@ -119,7 +119,7 @@ class GraphXAxisGl extends GraphRenderLayerGl {
       this.updateObjectPosition(mesh, {
         x: x - this.tickLabelTextWidth / 2,
         y: y - 3,
-        z: this.zStart + i * 0.01,
+        z: this.zStart + i * 0.1,
       });
       mesh.visible = true;
     }
