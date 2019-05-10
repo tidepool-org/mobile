@@ -21,5 +21,3 @@ updateReleaseChannel
 expression="s/\<string\>default\<\/string\>/\<string\>"$releaseChannel"\<\/string\>/"
 target_file="ios/tidepool/Supporting/EXShell.plist"
 updateReleaseChannel
-
-cat ios/tidepool/Supporting/EXShell.plist # remove this later, just testing Travis CI
