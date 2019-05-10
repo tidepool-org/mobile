@@ -13,13 +13,13 @@ target_file="android/app/src/main/assets/shell-app-manifest.json"
 updateReleaseChannel
 target_file="android/app/src/main/assets/kernel-manifest.json"
 updateReleaseChannel
-target_file="ios/Tidepool/Supporting/shell-app-manifest.json"
+target_file="ios/tidepool/Supporting/shell-app-manifest.json"
 updateReleaseChannel
-target_file="ios/Tidepool/Supporting/EXShell.json"
+target_file="ios/tidepool/Supporting/EXShell.json"
 updateReleaseChannel
 
 expression="s/\<string\>default\<\/string\>/\<string\>"$releaseChannel"\<\/string\>/"
-target_file="ios/Tidepool/Supporting/EXShell.plist"
+target_file="ios/tidepool/Supporting/EXShell.plist"
 updateReleaseChannel
 
 cat ios/Tidepool/Supporting/EXShell.plist # remove this later, just testing Travis CI
