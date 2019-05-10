@@ -34,8 +34,12 @@ matrix:
         - npx eslint src/ --max-warnings 0
         - yarn test --forceExit
         - npx expo login -u tidepool -p $EXPO_PASSWORD
-        - npx expo publish
+        - npx expo publish --release-channel travis
       script:
+        # Update release channel to travis
+        - bash scripts/update-release-channel.sh travis
+
+        # Move to ios dir for iOS build
         - pushd ios
 
         # Add signing certs to keychain
@@ -88,9 +92,15 @@ matrix:
         - npx eslint src/ --max-warnings 0
         - yarn test --forceExit
         - npx expo login -u tidepool -p $EXPO_PASSWORD
-        - npx expo publish
+        - npx expo publish --release-channel travis
       script:
+        # Update release channel to travis
+        - bash scripts/update-release-channel.sh travis
+
+        # Move to android dir for Android build
         - pushd android
+
+        # Build the apk
         - "./gradlew :app:assembleProdMinSdkProdKernelRelease"
 deploy:
   provider: releases
