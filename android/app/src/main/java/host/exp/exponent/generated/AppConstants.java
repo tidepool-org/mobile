@@ -17,25 +17,16 @@ public class AppConstants {
   public static final String SHELL_APP_SCHEME = "exp0815d1104db745568824ac69a998de27";
   public static final String RELEASE_CHANNEL = "default";
   public static boolean SHOW_LOADING_VIEW_IN_SHELL_APP = false;
-  public static boolean ARE_REMOTE_UPDATES_ENABLED = true;
+  public static boolean ARE_REMOTE_UPDATES_ENABLED = false;
   public static final List<Constants.EmbeddedResponse> EMBEDDED_RESPONSES;
   public static boolean FCM_ENABLED = false;
 
   static {
     List<Constants.EmbeddedResponse> embeddedResponses = new ArrayList<>();
-
-    
-        
-        
-        
-        
-        
-        
-        
         // ADD EMBEDDED RESPONSES HERE
         // START EMBEDDED RESPONSES
         embeddedResponses.add(new Constants.EmbeddedResponse("https://exp.host/@tidepool/Tidepool", "assets://shell-app-manifest.json", "application/json"));
-        embeddedResponses.add(new Constants.EmbeddedResponse("https://d1wp6m56sqw74a.cloudfront.net/%40tidepool%2FTidepool%2F3.0.1%2F68a4210756221d7c05b770cd8bbf2925-31.0.0-android.js", "assets://shell-app.bundle", "application/javascript"));
+        embeddedResponses.add(new Constants.EmbeddedResponse("https://d1wp6m56sqw74a.cloudfront.net/%40tidepool%2FTidepool%2F3.0.3%2Fdd796d5321832166e7e64d9de6a89ddb-32.0.0-android.js", "assets://shell-app.bundle", "application/javascript"));
         // END EMBEDDED RESPONSES
     EMBEDDED_RESPONSES = embeddedResponses;
   }
