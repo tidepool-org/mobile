@@ -2,6 +2,10 @@ const NAVIGATE_LAUNCH = "NAVIGATE_LAUNCH";
 const NAVIGATE_HOME = "NAVIGATE_HOME";
 const NAVIGATE_SIGN_IN = "NAVIGATE_SIGN_IN";
 const NAVIGATE_SIGN_UP = "NAVIGATE_SIGN_UP";
+const NAVIGATE_SIGN_UP_CREATE_ACCOUNT = "NAVIGATE_SIGN_UP_CREATE_ACCOUNT";
+const NAVIGATE_SIGN_UP_TERMS_OF_USE = "NAVIGATE_SIGN_UP_TERMS_OF_USE";
+const NAVIGATE_SIGN_UP_DIABETES_DETAILS = "NAVIGATE_SIGN_UP_DIABETES_DETAILS";
+const NAVIGATE_SIGN_UP_ACTIVATE_ACCOUNT = "NAVIGATE_SIGN_UP_ACTIVATE_ACCOUNT";
 const NAVIGATE_FORGOT_PASSWORD = "NAVIGATE_FORGOT_PASSWORD";
 const NAVIGATE_HOW_TO_UPLOAD = "NAVIGATE_HOW_TO_UPLOAD";
 const NAVIGATE_SWITCH_PROFILE = "NAVIGATE_SWITCH_PROFILE";
@@ -30,6 +34,22 @@ function navigateSignIn() {
 
 function navigateSignUp() {
   return { type: NAVIGATE_SIGN_UP };
+}
+
+function navigateSignUpCreateAccount() {
+  return { type: NAVIGATE_SIGN_UP_CREATE_ACCOUNT };
+}
+
+function navigateSignUpTermsOfUse() {
+  return { type: NAVIGATE_SIGN_UP_TERMS_OF_USE };
+}
+
+function navigateSignUpDiabetesDetails() {
+  return { type: NAVIGATE_SIGN_UP_DIABETES_DETAILS };
+}
+
+function navigateSignUpActivateAccount() {
+  return { type: NAVIGATE_SIGN_UP_ACTIVATE_ACCOUNT };
 }
 
 function navigateForgotPassword() {
@@ -92,6 +112,10 @@ export {
   navigateHome,
   navigateSignIn,
   navigateSignUp,
+  navigateSignUpCreateAccount,
+  navigateSignUpTermsOfUse,
+  navigateSignUpDiabetesDetails,
+  navigateSignUpActivateAccount,
   navigateForgotPassword,
   navigateHowToUpload,
   navigateSwitchProfile,
@@ -109,6 +133,10 @@ export {
   NAVIGATE_HOME,
   NAVIGATE_SIGN_IN,
   NAVIGATE_SIGN_UP,
+  NAVIGATE_SIGN_UP_CREATE_ACCOUNT,
+  NAVIGATE_SIGN_UP_TERMS_OF_USE,
+  NAVIGATE_SIGN_UP_DIABETES_DETAILS,
+  NAVIGATE_SIGN_UP_ACTIVATE_ACCOUNT,
   NAVIGATE_FORGOT_PASSWORD,
   NAVIGATE_HOW_TO_UPLOAD,
   NAVIGATE_SWITCH_PROFILE,

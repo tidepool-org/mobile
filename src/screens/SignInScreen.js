@@ -209,7 +209,7 @@ class SignInScreen extends PureComponent {
           backgroundColor={this.theme.colors.lightBackground}
           onLayout={this.onContainerViewLayout}
         >
-          <StatusBar barStyle="dark-content" />
+          <StatusBar barStyle="light-content" />
           <SafeAreaView
             flex={1}
             justifyContent="space-between"
