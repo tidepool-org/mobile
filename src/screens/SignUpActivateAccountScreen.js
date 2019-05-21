@@ -34,6 +34,7 @@ class SignUpActivateAccountScreen extends PureComponent {
                 title="Back to Sign in"
                 onPress={this.onPressContinue}
                 containerStyle={{
+                  marginTop: 20,
                   marginLeft: 0,
                   marginRight: 0,
                 }}

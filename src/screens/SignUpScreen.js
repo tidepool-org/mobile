@@ -34,6 +34,7 @@ class SignUpScreen extends PureComponent {
                 title="Continue"
                 onPress={this.onPressContinue}
                 containerStyle={{
+                  marginTop: 20,
                   marginLeft: 0,
                   marginRight: 0,
                 }}
