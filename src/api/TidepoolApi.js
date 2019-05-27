@@ -9,6 +9,7 @@ import {
 } from "../components/Graph/helpers";
 import GraphData from "../models/GraphData";
 import { TidepoolApiCache } from "./TidepoolApiCache";
+import { TidepoolApiCacheControl } from "./TidepoolApiCacheControl";
 
 // TODO: api - update User-Agent in the header for all requests to indicate the app name and version, build info,
 // iOS version, etc, similar to Tidepool Mobile, e.g.:
@@ -21,6 +22,11 @@ class TidepoolApi {
   constructor({ baseUrl }) {
     this.baseUrl = baseUrl;
     this.sessionToken = "";
+    this.tasksInProgress = 0; // Count of in-flight TidepoolApi tasks
+
+    // Cache
+    this.cache = new TidepoolApiCache(); // Used internally in TidepoolApi to fetch from cache when offline and save to cache when online
+    this.cacheControl = new TidepoolApiCacheControl(this.cache); // Used by app to control cache (clear, trim, preload, etc)
   }
 
   //
@@ -31,6 +37,8 @@ class TidepoolApi {
     if (ConnectionStatus.isOffline()) {
       return authUser;
     }
+
+    this.tasksInProgress += 1;
 
     const { sessionToken: previousSessionToken } = authUser;
     const { sessionToken, userId, errorMessage } = await this.refreshToken({
@@ -46,6 +54,8 @@ class TidepoolApi {
 
     this.sessionToken = sessionToken;
 
+    this.tasksInProgress -= 1;
+
     return { sessionToken, userId, errorMessage };
   }
 
@@ -53,6 +63,8 @@ class TidepoolApi {
     if (ConnectionStatus.isOffline()) {
       return { errorMessage: "Check your Internet connection!" };
     }
+
+    this.tasksInProgress += 1;
 
     const { sessionToken, userId, errorMessage } = await this.signIn({
       username,
@@ -68,20 +80,24 @@ class TidepoolApi {
 
     this.sessionToken = sessionToken;
 
+    this.tasksInProgress -= 1;
+
     return { sessionToken, userId, errorMessage };
   }
 
   async fetchProfileAsync({ userId }) {
     if (ConnectionStatus.isOffline()) {
-      return TidepoolApiCache.fetchProfileAsync({ userId });
+      return this.cache.fetchProfileAsync({ userId });
     }
+
+    this.tasksInProgress += 1;
 
     const { errorMessage, ...rest } = await this.fetchProfile({
       userId,
     })
       .then(response => {
         const profile = response;
-        TidepoolApiCache.saveProfileAsync({ userId, profile });
+        this.cache.saveProfileAsync({ userId, profile });
         return {
           profile,
         };
@@ -90,19 +106,23 @@ class TidepoolApi {
         errorMessage: error.message,
       }));
 
+    this.tasksInProgress -= 1;
+
     return { userId, ...rest, errorMessage };
   }
 
   async fetchProfileSettingsAsync({ userId }) {
     if (ConnectionStatus.isOffline()) {
-      return TidepoolApiCache.fetchProfileSettingsAsync({ userId });
+      return this.cache.fetchProfileSettingsAsync({ userId });
     }
+
+    this.tasksInProgress += 1;
 
     const { settings, errorMessage } = await this.fetchProfileSettings({
       userId,
     })
       .then(response => {
-        TidepoolApiCache.saveProfileSettingsAsync({
+        this.cache.saveProfileSettingsAsync({
           userId,
           settings: response.settings,
         });
@@ -114,13 +134,17 @@ class TidepoolApi {
         errorMessage: error.message,
       }));
 
+    this.tasksInProgress -= 1;
+
     return { settings, errorMessage };
   }
 
   async fetchNotesAsync({ userId }) {
     if (ConnectionStatus.isOffline()) {
-      return TidepoolApiCache.fetchNotesAsync({ userId });
+      return this.cache.fetchNotesAsync({ userId });
     }
+
+    this.tasksInProgress += 1;
 
     const { notes, errorMessage } = await this.fetchNotes({
       userId,
@@ -148,20 +172,24 @@ class TidepoolApi {
         // Sort notes reverse chronologically by timestamp
         sortedNotes.sort((note1, note2) => note2.timestamp - note1.timestamp);
 
-        TidepoolApiCache.saveNotesAsync({ userId, notes: sortedNotes });
+        this.cache.saveNotesAsync({ userId, notes: sortedNotes });
         return { notes: sortedNotes };
       })
       .catch(error => ({
         errorMessage: error.message,
       }));
 
+    this.tasksInProgress -= 1;
+
     return { notes, errorMessage };
   }
 
   async fetchCommentsAsync({ messageId }) {
     if (ConnectionStatus.isOffline()) {
-      return TidepoolApiCache.fetchCommentsAsync({ messageId });
+      return this.cache.fetchCommentsAsync({ messageId });
     }
+
+    this.tasksInProgress += 1;
 
     const { comments, errorMessage } = await this.fetchComments({
       messageId,
@@ -186,7 +214,7 @@ class TidepoolApi {
           (comment1, comment2) => comment1.timestamp - comment2.timestamp
         );
 
-        TidepoolApiCache.saveCommentsAsync({
+        this.cache.saveCommentsAsync({
           messageId,
           comments: sortedComments,
         });
@@ -197,15 +225,19 @@ class TidepoolApi {
         errorMessage: error.message,
       }));
 
+    this.tasksInProgress -= 1;
+
     return { comments, errorMessage };
   }
 
   async fetchViewableUserProfilesAsync({ userId, fullName }) {
     if (ConnectionStatus.isOffline()) {
-      return TidepoolApiCache.fetchViewableUserProfilesAsync({
+      return this.cache.fetchViewableUserProfilesAsync({
         userId,
       });
     }
+
+    this.tasksInProgress += 1;
 
     let errorMessage;
     let profiles = [];
@@ -255,15 +287,19 @@ class TidepoolApi {
     // Add the specified user profile to front of list
     const viewableUserProfiles = [{ userId, fullName }, ...profiles];
 
-    TidepoolApiCache.saveViewableUserProfilesAsync({
+    this.cache.saveViewableUserProfilesAsync({
       userId,
       profiles: viewableUserProfiles,
     });
+
+    this.tasksInProgress -= 1;
 
     return { profiles: viewableUserProfiles, errorMessage };
   }
 
   async addNoteAsync({ currentUser, currentProfile, messageText, timestamp }) {
+    this.tasksInProgress += 1;
+
     const { errorMessage, note } = await this.addNote({
       currentUser,
       currentProfile,
@@ -277,10 +313,14 @@ class TidepoolApi {
         errorMessage: error.message,
       }));
 
+    this.tasksInProgress -= 1;
+
     return { errorMessage, note };
   }
 
   async updateNoteAsync({ note }) {
+    this.tasksInProgress += 1;
+
     const { errorMessage } = await this.updateNote({
       note,
     })
@@ -289,10 +329,14 @@ class TidepoolApi {
         errorMessage: error.message,
       }));
 
+    this.tasksInProgress -= 1;
+
     return { errorMessage };
   }
 
   async deleteNoteAsync({ note }) {
+    this.tasksInProgress += 1;
+
     const { id } = note;
     const { errorMessage } = await this.deleteCommentOrNote({
       id,
@@ -301,6 +345,8 @@ class TidepoolApi {
       .catch(error => ({
         errorMessage: error.message,
       }));
+
+    this.tasksInProgress -= 1;
 
     return { errorMessage };
   }
@@ -312,6 +358,8 @@ class TidepoolApi {
     messageText,
     timestamp,
   }) {
+    this.tasksInProgress += 1;
+
     const { errorMessage, comment } = await this.addComment({
       currentUser,
       currentProfile,
@@ -326,10 +374,14 @@ class TidepoolApi {
         errorMessage: error.message,
       }));
 
+    this.tasksInProgress -= 1;
+
     return { errorMessage, comment };
   }
 
   async updateCommentAsync({ comment }) {
+    this.tasksInProgress += 1;
+
     const { errorMessage } = await this.updateComment({
       comment,
     })
@@ -338,10 +390,14 @@ class TidepoolApi {
         errorMessage: error.message,
       }));
 
+    this.tasksInProgress -= 1;
+
     return { errorMessage };
   }
 
   async deleteCommentAsync({ comment }) {
+    this.tasksInProgress += 1;
+
     const { id } = comment;
     const { errorMessage } = await this.deleteCommentOrNote({
       id,
@@ -350,6 +406,8 @@ class TidepoolApi {
       .catch(error => ({
         errorMessage: error.message,
       }));
+
+    this.tasksInProgress -= 1;
 
     return { errorMessage };
   }
@@ -366,13 +424,15 @@ class TidepoolApi {
     let result;
 
     if (ConnectionStatus.isOffline()) {
-      result = await TidepoolApiCache.fetchGraphDataAsync({
+      result = await this.cache.fetchGraphDataAsync({
         userId,
         noteDate,
         startDate,
         endDate,
       });
     } else {
+      this.tasksInProgress += 1;
+
       result = await this.fetchGraphData({
         userId,
         noteDate,
@@ -393,6 +453,8 @@ class TidepoolApi {
             errorMessage: error.message,
           };
         });
+
+      this.tasksInProgress -= 1;
     }
 
     let graphData;
@@ -412,7 +474,7 @@ class TidepoolApi {
       });
 
       if (!ConnectionStatus.isOffline()) {
-        TidepoolApiCache.saveGraphDataAsync({
+        this.cache.saveGraphDataAsync({
           userId,
           noteDate,
           startDate,
@@ -428,6 +490,8 @@ class TidepoolApi {
   }
 
   async trackMetricAsync({ metric }) {
+    this.tasksInProgress += 1;
+
     const { errorMessage } = await this.trackMetric({
       metric,
     })
@@ -435,6 +499,8 @@ class TidepoolApi {
       .catch(error => ({
         errorMessage: error.message,
       }));
+
+    this.tasksInProgress -= 1;
 
     return { errorMessage };
   }

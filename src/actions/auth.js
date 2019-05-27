@@ -1,6 +1,5 @@
 import { AsyncStorage, NativeModules } from "react-native";
 
-import { TidepoolApiCache } from "../api/TidepoolApiCache";
 import { currentProfileRestoreAsync } from "./currentProfile";
 import { navigateHome, navigateSignIn } from "./navigation";
 import ConnectionStatus from "../models/ConnectionStatus";
@@ -47,7 +46,7 @@ const authSignInReset = () => (dispatch, getState) => {
   const { auth } = getState();
   if (auth.sessionToken) {
     loggerClearUser();
-    TidepoolApiCache.clear();
+    api().cacheControl.clear();
   }
   return {
     type: AUTH_SIGN_IN_RESET,

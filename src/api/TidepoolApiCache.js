@@ -1,6 +1,6 @@
 import Datastore from "react-native-local-mongodb";
 
-class TidepoolApiCacheSingleton {
+class TidepoolApiCache {
   constructor() {
     const config = {
       autoload: true,
@@ -31,17 +31,6 @@ class TidepoolApiCacheSingleton {
       filename: "graphDataCollection",
       ...config,
     });
-  }
-
-  // async trim() {} // TODO: Add support for trimming old items
-
-  async clear() {
-    this.profileCollection.remove({}, { multi: true });
-    this.profileSettingsCollection.remove({}, { multi: true });
-    this.viewableUserProfilesCollection.remove({}, { multi: true });
-    this.notesCollection.remove({}, { multi: true });
-    this.commentsCollection.remove({}, { multi: true });
-    this.graphDataCollection.remove({}, { multi: true });
   }
 
   async saveProfileAsync({ userId, profile }) {
@@ -228,7 +217,5 @@ class TidepoolApiCacheSingleton {
     }
   }
 }
-
-const TidepoolApiCache = new TidepoolApiCacheSingleton();
 
 export { TidepoolApiCache };
