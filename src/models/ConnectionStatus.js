@@ -17,6 +17,10 @@ class ConnectionStatus {
   isOffline() {
     return this.connectionInfo.type === "none";
   }
+
+  isOnline() {
+    return !this.isOffline();
+  }
 }
 
 export default new ConnectionStatus();

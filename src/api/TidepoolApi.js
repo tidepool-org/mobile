@@ -2,12 +2,13 @@ import axios from "axios";
 import uuidv4 from "uuid/v4";
 import parse from "date-fns/parse";
 import DeviceInfo from "react-native-device-info";
-
+import ConnectionStatus from "../models/ConnectionStatus";
 import {
   MMOL_PER_L_TO_MG_PER_DL,
   UNITS_MMOL_PER_L,
 } from "../components/Graph/helpers";
 import GraphData from "../models/GraphData";
+import { TidepoolApiCache } from "./TidepoolApiCache";
 
 // TODO: api - update User-Agent in the header for all requests to indicate the app name and version, build info,
 // iOS version, etc, similar to Tidepool Mobile, e.g.:
@@ -26,7 +27,12 @@ class TidepoolApi {
   // Async helpers
   //
 
-  async refreshTokenAsync({ sessionToken: previousSessionToken }) {
+  async refreshTokenAsync(authUser) {
+    if (ConnectionStatus.isOffline()) {
+      return authUser;
+    }
+
+    const { sessionToken: previousSessionToken } = authUser;
     const { sessionToken, userId, errorMessage } = await this.refreshToken({
       sessionToken: previousSessionToken,
     })
@@ -44,6 +50,10 @@ class TidepoolApi {
   }
 
   async signInAsync({ username, password }) {
+    if (ConnectionStatus.isOffline()) {
+      return { errorMessage: "Check your Internet connection!" };
+    }
+
     const { sessionToken, userId, errorMessage } = await this.signIn({
       username,
       password,
@@ -62,12 +72,20 @@ class TidepoolApi {
   }
 
   async fetchProfileAsync({ userId }) {
+    if (ConnectionStatus.isOffline()) {
+      return TidepoolApiCache.fetchProfileAsync({ userId });
+    }
+
     const { errorMessage, ...rest } = await this.fetchProfile({
       userId,
     })
-      .then(response => ({
-        profile: response,
-      }))
+      .then(response => {
+        const profile = response;
+        TidepoolApiCache.saveProfileAsync({ userId, profile });
+        return {
+          profile,
+        };
+      })
       .catch(error => ({
         errorMessage: error.message,
       }));
@@ -76,12 +94,22 @@ class TidepoolApi {
   }
 
   async fetchProfileSettingsAsync({ userId }) {
+    if (ConnectionStatus.isOffline()) {
+      return TidepoolApiCache.fetchProfileSettingsAsync({ userId });
+    }
+
     const { settings, errorMessage } = await this.fetchProfileSettings({
       userId,
     })
-      .then(response => ({
-        settings: response.settings,
-      }))
+      .then(response => {
+        TidepoolApiCache.saveProfileSettingsAsync({
+          userId,
+          settings: response.settings,
+        });
+        return {
+          settings: response.settings,
+        };
+      })
       .catch(error => ({
         errorMessage: error.message,
       }));
@@ -90,6 +118,10 @@ class TidepoolApi {
   }
 
   async fetchNotesAsync({ userId }) {
+    if (ConnectionStatus.isOffline()) {
+      return TidepoolApiCache.fetchNotesAsync({ userId });
+    }
+
     const { notes, errorMessage } = await this.fetchNotes({
       userId,
     })
@@ -115,6 +147,8 @@ class TidepoolApi {
         });
         // Sort notes reverse chronologically by timestamp
         sortedNotes.sort((note1, note2) => note2.timestamp - note1.timestamp);
+
+        TidepoolApiCache.saveNotesAsync({ userId, notes: sortedNotes });
         return { notes: sortedNotes };
       })
       .catch(error => ({
@@ -125,6 +159,10 @@ class TidepoolApi {
   }
 
   async fetchCommentsAsync({ messageId }) {
+    if (ConnectionStatus.isOffline()) {
+      return TidepoolApiCache.fetchCommentsAsync({ messageId });
+    }
+
     const { comments, errorMessage } = await this.fetchComments({
       messageId,
     })
@@ -147,6 +185,12 @@ class TidepoolApi {
         sortedComments.sort(
           (comment1, comment2) => comment1.timestamp - comment2.timestamp
         );
+
+        TidepoolApiCache.saveCommentsAsync({
+          messageId,
+          comments: sortedComments,
+        });
+
         return { comments: sortedComments };
       })
       .catch(error => ({
@@ -157,6 +201,12 @@ class TidepoolApi {
   }
 
   async fetchViewableUserProfilesAsync({ userId, fullName }) {
+    if (ConnectionStatus.isOffline()) {
+      return TidepoolApiCache.fetchViewableUserProfilesAsync({
+        userId,
+      });
+    }
+
     let errorMessage;
     let profiles = [];
 
@@ -167,9 +217,11 @@ class TidepoolApi {
     } = await this.fetchOtherViewableUserIds({
       userId,
     })
-      .then(response => ({
-        userIds: response.userIds,
-      }))
+      .then(response => {
+        return {
+          userIds: response.userIds,
+        };
+      })
       .catch(error => ({
         errorMessage: error.message,
       }));
@@ -202,6 +254,11 @@ class TidepoolApi {
 
     // Add the specified user profile to front of list
     const viewableUserProfiles = [{ userId, fullName }, ...profiles];
+
+    TidepoolApiCache.saveViewableUserProfilesAsync({
+      userId,
+      profiles: viewableUserProfiles,
+    });
 
     return { profiles: viewableUserProfiles, errorMessage };
   }
@@ -306,21 +363,66 @@ class TidepoolApi {
     lowBGBoundary,
     highBGBoundary,
   }) {
-    const { graphData, errorMessage } = await this.fetchGraphData({
-      userId,
-      noteDate,
-      startDate,
-      endDate,
-      objectTypes,
-      lowBGBoundary,
-      highBGBoundary,
-    })
-      .then(response => ({
-        graphData: response.graphData,
-      }))
-      .catch(error => ({
-        errorMessage: error.message,
-      }));
+    let result;
+
+    if (ConnectionStatus.isOffline()) {
+      result = await TidepoolApiCache.fetchGraphDataAsync({
+        userId,
+        noteDate,
+        startDate,
+        endDate,
+      });
+    } else {
+      result = await this.fetchGraphData({
+        userId,
+        noteDate,
+        startDate,
+        endDate,
+        objectTypes,
+        lowBGBoundary,
+        highBGBoundary,
+      })
+        .then(responseData => {
+          return {
+            responseData,
+          };
+        })
+        .catch(error => {
+          // console.log({ error });
+          return {
+            errorMessage: error.message,
+          };
+        });
+    }
+
+    let graphData;
+    const { responseData, errorMessage } = result;
+    if (responseData) {
+      // console.log({ responseData });
+      const noteTimeSeconds = noteDate.getTime() / 1000;
+      const startDateSeconds = startDate.getTime() / 1000;
+      const endDateSeconds = endDate.getTime() / 1000;
+      graphData = new GraphData();
+      graphData.addResponseData(responseData);
+      graphData.process({
+        eventTimeSeconds: noteTimeSeconds,
+        timeIntervalSeconds: endDateSeconds - startDateSeconds,
+        lowBGBoundary,
+        highBGBoundary,
+      });
+
+      if (!ConnectionStatus.isOffline()) {
+        TidepoolApiCache.saveGraphDataAsync({
+          userId,
+          noteDate,
+          startDate,
+          endDate,
+          responseData,
+        });
+      }
+    } else {
+      graphData = new GraphData();
+    }
 
     return { graphData, errorMessage };
   }
@@ -681,15 +783,7 @@ class TidepoolApi {
     });
   }
 
-  fetchGraphData({
-    userId,
-    noteDate,
-    startDate,
-    endDate,
-    objectTypes,
-    lowBGBoundary,
-    highBGBoundary,
-  }) {
+  fetchGraphData({ userId, startDate, endDate, objectTypes }) {
     const method = "get";
     const url = `/data/${userId}`;
     const params = {
@@ -703,22 +797,45 @@ class TidepoolApi {
     return new Promise((resolve, reject) => {
       axios({ method, url, params, baseURL, headers, timeout })
         .then(response => {
-          const noteTimeSeconds = noteDate.getTime() / 1000;
-          const startDateSeconds = startDate.getTime() / 1000;
-          const endDateSeconds = endDate.getTime() / 1000;
-          const graphData = new GraphData();
-          graphData.addResponseData(response.data);
-          graphData.process({
-            eventTimeSeconds: noteTimeSeconds,
-            timeIntervalSeconds: endDateSeconds - startDateSeconds,
-            lowBGBoundary,
-            highBGBoundary,
-          });
-          resolve({ graphData });
+          // Omit extra properties from response data. This would otherwise
+          // bloat the cached data, and, for some objects that have dots in key
+          // names, would throw exception when saving in db. This whitelisted
+          // response data is a superset of all the data for all the available
+          // types in the data array
+          let whitelistedResponseData = [];
+          if (response.data && response.data.length > 0) {
+            whitelistedResponseData = response.data.map(item => {
+              return {
+                // Common
+                id: item.id,
+                type: item.type,
+                time: item.time,
+                value: item.value,
+                // Basal
+                rate: item.rate,
+                deliveryType: item.deliveryType,
+                duration: item.duration,
+                suppressed: item.suppressed,
+                // Bolus
+                normal: item.normal,
+                extended: item.extended,
+                //  duration, // Bolus and Basal share this
+                expectedNormal: item.expectedNormal,
+                expectedExtended: item.expectedExtended,
+                expectedDuration: item.expectedDuration,
+                // Wizard
+                bolus: item.bolus,
+                carbInput: item.carbInput,
+                recommended: item.recommended,
+                // Food
+                nutrition: item.nutrition,
+              };
+            });
+          }
+          resolve(whitelistedResponseData);
         })
         .catch(error => {
           // console.log({ error });
-
           reject(error);
         });
     });
@@ -756,4 +873,4 @@ class TidepoolApi {
   }
 }
 
-export default TidepoolApi;
+export { TidepoolApi };

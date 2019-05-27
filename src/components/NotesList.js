@@ -11,7 +11,7 @@ import glamorous, { withTheme } from "glamorous-native";
 import Colors from "../constants/Colors";
 import NotesListItem from "./NotesListItem";
 import SearchBar from "./SearchBar";
-import ErrorAlertManager from "../models/ErrorAlertManager";
+import AlertManager from "../models/AlertManager";
 import Metrics from "../models/Metrics";
 import { ProfilePropType } from "../prop-types/profile";
 import { CommentPropType } from "../prop-types/comment";
@@ -32,14 +32,14 @@ class NotesList extends PureComponent {
   componentDidMount() {
     const { errorMessage } = this.props;
     if (errorMessage) {
-      ErrorAlertManager.show(errorMessage);
+      AlertManager.showErrorAlert(errorMessage);
     }
   }
 
   componentWillReceiveProps(nextProps) {
     const { errorMessage, fetching } = this.props;
     if (nextProps.errorMessage && !errorMessage) {
-      ErrorAlertManager.show(nextProps.errorMessage);
+      AlertManager.showErrorAlert(nextProps.errorMessage);
     }
 
     if (!nextProps.fetching && fetching) {

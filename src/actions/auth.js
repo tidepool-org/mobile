@@ -1,6 +1,9 @@
 import { AsyncStorage, NativeModules } from "react-native";
+
+import { TidepoolApiCache } from "../api/TidepoolApiCache";
 import { currentProfileRestoreAsync } from "./currentProfile";
 import { navigateHome, navigateSignIn } from "./navigation";
+import ConnectionStatus from "../models/ConnectionStatus";
 import api from "../api";
 import Logger from "../models/Logger";
 import Metrics from "../models/Metrics";
@@ -40,8 +43,12 @@ function loggerSetUser({ userId, username, fullName }) {
   Logger.setUser({ userId, username, fullName });
 }
 
-const authSignInReset = () => {
-  loggerClearUser();
+const authSignInReset = () => (dispatch, getState) => {
+  const { auth } = getState();
+  if (auth.sessionToken) {
+    loggerClearUser();
+    TidepoolApiCache.clear();
+  }
   return {
     type: AUTH_SIGN_IN_RESET,
   };
@@ -110,7 +117,9 @@ const authSignInAsync = ({ username, password }) => async dispatch => {
       try {
         AsyncStorage.setItem(AUTH_USER_KEY, JSON.stringify(authUser));
         dispatch(authSignInDidSucceed({ authUser }));
-        Metrics.track({ metric: "Logged In" });
+        if (ConnectionStatus.isOnline()) {
+          Metrics.track({ metric: "Logged In" });
+        }
         await dispatch(currentProfileRestoreAsync({ authUser }));
         dispatch(navigateHome());
       } catch (error) {

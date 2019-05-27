@@ -14,7 +14,7 @@ import Tooltip from "../components/Tooltip";
 import TidepoolUploaderTooltipContent from "../components/Tooltips/TidepoolUploaderTooltipContent";
 import FirstTimeTips from "../models/FirstTimeTips";
 import ConnectionStatus from "../models/ConnectionStatus";
-import ErrorAlertManager from "../models/ErrorAlertManager";
+import AlertManager from "../models/AlertManager";
 import { ProfilePropType } from "../prop-types/profile";
 import { CommentPropType } from "../prop-types/comment";
 import { UserPropType } from "../prop-types/user";
@@ -53,23 +53,16 @@ class HomeScreen extends PureComponent {
     const { noteDeleteAsync, currentProfile } = this.props;
 
     if (ConnectionStatus.isOffline()) {
-      ErrorAlertManager.showOfflineNetworkError();
-    } else {
-      Alert.alert(
-        "Delete Note?",
-        "Once you delete this note, it cannot be recovered.",
-        [
-          {
-            text: "Cancel",
-            style: "cancel",
-          },
-          {
-            text: "Delete",
-            onPress: () => noteDeleteAsync({ currentProfile, note }),
-            style: "destructive",
-          },
-        ]
+      AlertManager.showOfflineMessage(
+        "It seems you’re offline, so you can't delete notes."
       );
+    } else {
+      AlertManager.showCancelOrDestructiveAlert({
+        title: AlertManager.alertTitleDelete,
+        message: "Once you delete this note, it cannot be recovered.",
+        destructiveButtonText: AlertManager.alertButtonTextDelete,
+        onPress: () => noteDeleteAsync({ currentProfile, note }),
+      });
     }
   };
 
@@ -77,24 +70,16 @@ class HomeScreen extends PureComponent {
     const { commentDeleteAsync, currentProfile } = this.props;
 
     if (ConnectionStatus.isOffline()) {
-      ErrorAlertManager.showOfflineNetworkError();
-    } else {
-      Alert.alert(
-        "Delete Comment?",
-        "Once you delete this comment, it cannot be recovered.",
-        [
-          {
-            text: "Cancel",
-            style: "cancel",
-          },
-          {
-            text: "Delete",
-            onPress: () =>
-              commentDeleteAsync({ note, currentProfile, comment }),
-            style: "destructive",
-          },
-        ]
+      AlertManager.showOfflineMessage(
+        "It seems you’re offline, so you can't delete comments."
       );
+    } else {
+      AlertManager.showCancelOrDestructiveAlert({
+        title: AlertManager.alertTitleDelete,
+        message: "Once you delete this comment, it cannot be recovered.",
+        destructiveButtonText: AlertManager.alertButtonTextDelete,
+        onPress: () => commentDeleteAsync({ note, currentProfile, comment }),
+      });
     }
   };
 

@@ -9,7 +9,8 @@ import PrimaryTheme from "../themes/PrimaryTheme";
 import Colors from "../constants/Colors";
 import AddOrEditCommentScreenNote from "../components/AddOrEditCommentScreenNote";
 import AddOrEditCommentScreenCommentsList from "../components/AddOrEditCommentScreenCommentsList";
-import ErrorAlertManager from "../models/ErrorAlertManager";
+import ConnectionStatus from "../models/ConnectionStatus";
+import AlertManager from "../models/AlertManager";
 import Metrics from "../models/Metrics";
 import { NotePropType } from "../prop-types/note";
 import { CommentPropType } from "../prop-types/comment";
@@ -104,7 +105,7 @@ class AddOrEditCommentScreen extends PureComponent {
     }
 
     if (commentsFetchData.errorMessage || graphDataFetchData.errorMessage) {
-      ErrorAlertManager.show(
+      AlertManager.showErrorAlert(
         commentsFetchData.errorMessage || graphDataFetchData.errorMessage
       );
     }
@@ -128,7 +129,7 @@ class AddOrEditCommentScreen extends PureComponent {
       nextProps.graphDataFetchData.errorMessage &&
       !graphDataFetchData.errorMessage;
     if (shouldShowCommentsFetchError || shouldShowGraphDataFetchError) {
-      ErrorAlertManager.show(
+      AlertManager.showErrorAlert(
         nextProps.commentsFetchData.errorMessage ||
           nextProps.graphDataFetchData.errorMessage
       );
@@ -198,6 +199,13 @@ class AddOrEditCommentScreen extends PureComponent {
   };
 
   addOrSaveAndGoBack = ({ messageText, timestampAddComment }) => {
+    if (ConnectionStatus.isOffline()) {
+      AlertManager.showOfflineMessage(
+        "It seems you’re offline, so your comment can’t be saved."
+      );
+      return;
+    }
+
     const {
       currentUser,
       currentProfile,
