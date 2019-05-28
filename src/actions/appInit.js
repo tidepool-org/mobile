@@ -39,10 +39,10 @@ const appInitAsync = () => async dispatch => {
 
   dispatch(appInitDidFinish());
 
-  // Automatically navigate home if transitioning from offline to online
+  // Refresh token and navigate to home (or sign in) if transitioning from offline to online
   const connectionStatusListener = async ({ wasOffline }) => {
     if (wasOffline && ConnectionStatus.isOnline()) {
-      await dispatch(authRefreshTokenOrSignInAsync()); // This will navigateHome if refresh succeeds, else will navigate to sign in
+      await dispatch(authRefreshTokenOrSignInAsync()); // This will navigateHome if refresh succeeds
     }
   };
   ConnectionStatus.addListener(connectionStatusListener);
