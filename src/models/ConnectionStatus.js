@@ -13,7 +13,6 @@ class ConnectionStatus {
   }
 
   isOffline() {
-    // return true;
     return this.connectionInfo.type === "none";
   }
 
