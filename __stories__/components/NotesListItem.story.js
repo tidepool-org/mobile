@@ -135,11 +135,7 @@ storiesOf("NotesListItem", module).add("initially expanded", () => {
   return (
     <StoryContainerComponent>
       <glamorous.ScrollView>
-        <NotesListItem
-          {...props}
-          note={noteInitiallyExpanded}
-          initiallyExpanded
-        />
+        <NotesListItem {...props} note={noteInitiallyExpanded} />
       </glamorous.ScrollView>
     </StoryContainerComponent>
   );

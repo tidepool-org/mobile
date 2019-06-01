@@ -154,7 +154,6 @@ class NotesList extends PureComponent {
   keyExtractor = item => item.id;
 
   renderNote = ({ item }) => {
-    const { initiallyExpanded } = item;
     const {
       currentUser,
       currentProfile,
@@ -173,7 +172,6 @@ class NotesList extends PureComponent {
     return (
       <NotesListItem
         note={item}
-        initiallyExpanded={initiallyExpanded}
         currentUser={currentUser}
         currentProfile={currentProfile}
         commentsFetchData={commentsFetchDataByMessageId[item.id]}
