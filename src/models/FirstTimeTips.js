@@ -65,16 +65,7 @@ class FirstTimeTips {
       !this.settings[this.TIP_CONNECT_TO_HEALTH]
     ) {
       nextTip = this.TIP_CONNECT_TO_HEALTH;
-    } else if (
-      // NOTE: We also check that we haven't shown TIP_GET_DESKTOP_UPLOADER here
-      // since we only want to show the TIP_ADD_NOTE for fresh installs where
-      // tooltips haven't been shown yet. The sequence should be:
-      // 1. TIP_CONNECT_TO_HEALTH
-      // 2. TIP_ADD_NOTE
-      // 3. TIP_GET_DESKTOP_UPLOADER
-      !this.settings[this.TIP_ADD_NOTE] &&
-      !this.settings[this.TIP_GET_DESKTOP_UPLOADER]
-    ) {
+    } else if (!this.settings[this.TIP_ADD_NOTE]) {
       nextTip = this.TIP_ADD_NOTE;
     } else if (!this.settings[this.TIP_GET_DESKTOP_UPLOADER]) {
       nextTip = this.TIP_GET_DESKTOP_UPLOADER;
