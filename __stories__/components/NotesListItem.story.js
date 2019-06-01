@@ -130,13 +130,20 @@ storiesOf("NotesListItem", module).add("default", () => (
   </StoryContainerComponent>
 ));
 
-storiesOf("NotesListItem", module).add("initially expanded", () => (
-  <StoryContainerComponent>
-    <glamorous.ScrollView>
-      <NotesListItem {...props} note={note} initiallyExpanded />
-    </glamorous.ScrollView>
-  </StoryContainerComponent>
-));
+storiesOf("NotesListItem", module).add("initially expanded", () => {
+  const noteInitiallyExpanded = { ...note, initiallyExpanded: true };
+  return (
+    <StoryContainerComponent>
+      <glamorous.ScrollView>
+        <NotesListItem
+          {...props}
+          note={noteInitiallyExpanded}
+          initiallyExpanded
+        />
+      </glamorous.ScrollView>
+    </StoryContainerComponent>
+  );
+});
 
 storiesOf("NotesListItem", module).add("today", () => (
   <StoryContainerComponent>

@@ -536,7 +536,6 @@ NotesListItem.propTypes = {
   theme: ThemePropType.isRequired,
   style: ViewPropTypes.style,
   allowEditing: PropTypes.bool,
-  initiallyExpanded: PropTypes.bool,
   allowExpansionToggle: PropTypes.bool,
   toggleExpandedNotesCount: PropTypes.number,
   currentUser: UserPropType.isRequired,
@@ -573,7 +572,6 @@ NotesListItem.propTypes = {
 NotesListItem.defaultProps = {
   style: null,
   allowEditing: true,
-  initiallyExpanded: false,
   allowExpansionToggle: true,
   toggleExpandedNotesCount: 0,
   commentsFetchData: {
