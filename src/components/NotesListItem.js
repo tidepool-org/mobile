@@ -42,7 +42,7 @@ class NotesListItem extends PureComponent {
     super(props);
 
     this.state = {
-      expanded: props.initiallyExpanded,
+      expanded: false,
       fadeAnimation: new Animated.Value(0),
       formattedTimestamp: formatDateForNoteList(props.note.timestamp),
     };
@@ -53,6 +53,7 @@ class NotesListItem extends PureComponent {
     const {
       commentsFetchData: { errorMessage: commentsFetchErrorMessage },
       graphDataFetchData: { errorMessage: graphDataFetchErrorMessage },
+      note: { initiallyExpanded },
     } = this.props;
 
     Animated.timing(fadeAnimation, {
@@ -60,6 +61,12 @@ class NotesListItem extends PureComponent {
       duration: 250,
       useNativeDriver: true,
     }).start();
+
+    if (initiallyExpanded) {
+      setTimeout(() => {
+        this.toggleNote({ animationDuration: 350 });
+      }, 100);
+    }
 
     if (commentsFetchErrorMessage) {
       ErrorAlertManager.show(commentsFetchErrorMessage);
