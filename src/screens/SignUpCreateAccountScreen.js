@@ -1,10 +1,18 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { SafeAreaView, StatusBar } from "react-native";
+import { SafeAreaView, StatusBar, StyleSheet } from "react-native";
 import glamorous, { ThemeProvider } from "glamorous-native";
 
 import PrimaryTheme from "../themes/PrimaryTheme";
 import Button from "../components/Button";
+import ButtonFlow from "../components/ButtonFlow";
+
+const styles = StyleSheet.create({
+  bottom: {
+    flex: 1,
+    justifyContent: 'flex-end',
+  },
+});
 
 class SignUpCreateAccountScreen extends PureComponent {
   theme = PrimaryTheme;
@@ -26,20 +34,15 @@ class SignUpCreateAccountScreen extends PureComponent {
           <SafeAreaView
             flex={1}
             justifyContent="space-between"
-            marginLeft={20}
-            marginRight={20}
+            margin={16}
           >
-            <glamorous.View>
-              <Button
-                title="Continue"
-                onPress={this.onPressContinue}
-                containerStyle={{
-                  marginTop: 20,
-                  marginLeft: 0,
-                  marginRight: 0,
-                }}
-              />
+            <glamorous.View style={styles.bottom}>
+                <ButtonFlow
+                  title="Continue"
+                  onPress={this.onPressContinue}
+                />
             </glamorous.View>
+
           </SafeAreaView>
         </glamorous.View>
       </ThemeProvider>
