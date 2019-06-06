@@ -4,7 +4,6 @@ import { SafeAreaView, StatusBar, StyleSheet } from "react-native";
 import glamorous, { ThemeProvider } from "glamorous-native";
 
 import PrimaryTheme from "../themes/PrimaryTheme";
-import Button from "../components/Button";
 import ButtonFlow from "../components/ButtonFlow";
 
 const styles = StyleSheet.create({
