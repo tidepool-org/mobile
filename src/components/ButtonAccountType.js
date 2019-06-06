@@ -13,8 +13,10 @@ import {
 const styles = StyleSheet.create({
   button: {
     elevation: 4,
-    backgroundColor: "#ededed",
-    borderRadius: 3,
+    backgroundColor: "#f9f9f9",
+    borderColor: "#ededed",
+    borderRadius: 4,
+    borderWidth: 1,
     overflow: "hidden",
     height: 144,
     marginVertical: 8,
