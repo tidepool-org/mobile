@@ -11,6 +11,38 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-end',
   },
+  inputContainer: {
+    height: 50,
+    borderWidth: 1,
+    borderColor: '#ededed',
+    borderRadius: 4,
+    marginBottom: 20,
+  },
+  input: {
+    color: '#6582ff',
+    fontSize: 14,
+    paddingTop: 16,
+    paddingLeft: 16,
+  },
+});
+
+const TitleText = glamorous.text({
+  fontSize: 24,
+  textAlign: "center",
+  lineHeight: 32,
+  color: "#4f6a92",
+  marginTop: 17,
+  marginBottom: 14,
+  fontWeight: "bold",
+});
+
+const SubTitleText = glamorous.text({
+  fontSize: 16,
+  textAlign: "center",
+  lineHeight: 24,
+  color: "#7e98c3",
+  marginBottom: 26,
+  fontWeight: "500",
 });
 
 class SignUpCreateAccountScreen extends PureComponent {
@@ -30,11 +62,38 @@ class SignUpCreateAccountScreen extends PureComponent {
           backgroundColor={this.theme.colors.lightBackground}
         >
           <StatusBar barStyle="light-content" />
-          <SafeAreaView
-            flex={1}
-            justifyContent="space-between"
-            margin={16}
-          >
+          <SafeAreaView flex={1} justifyContent="space-between" margin={16}>
+            <TitleText>Create Account</TitleText>
+            <SubTitleText>See all your diabetes data in one place.</SubTitleText>
+
+            <glamorous.View style={styles.inputContainer}>
+              <glamorous.TextInput
+                style={styles.input}
+                placeholder="Full Name"
+                />
+            </glamorous.View>
+
+            <glamorous.View style={styles.inputContainer}>
+              <glamorous.TextInput
+                style={styles.input}
+                placeholder="Email"
+                />
+            </glamorous.View>
+
+            <glamorous.View style={styles.inputContainer}>
+              <glamorous.TextInput
+                style={styles.input}
+                placeholder="Password"
+                />
+            </glamorous.View>
+
+            <glamorous.View style={styles.inputContainer}>
+              <glamorous.TextInput
+                style={styles.input}
+                placeholder="Confirm Password"
+                />
+            </glamorous.View>
+
             <glamorous.View style={styles.bottom}>
                 <ButtonFlow
                   title="Continue"

@@ -3,7 +3,9 @@ import PropTypes from "prop-types";
 import { SafeAreaView, StatusBar, StyleSheet, ScrollView } from "react-native";
 import glamorous, { ThemeProvider } from "glamorous-native";
 
-import SignUpTheme from "../themes/SignUpTheme";
+// import SignUpTheme from "../themes/SignUpTheme";
+import PrimaryTheme from "../themes/PrimaryTheme";
+
 import ButtonFlow from "../components/ButtonFlow";
 import ButtonAccountType from "../components/ButtonAccountType";
 
@@ -33,14 +35,8 @@ const SubTitleText = glamorous.text({
   fontWeight: "500",
 });
 
-const LogoHold = glamorous.view({
-  width: 18,
-  height: 18,
-  backgroundColor: "white",
-});
-
 class SignUpScreen extends PureComponent {
-  theme = SignUpTheme;
+  theme = PrimaryTheme;
   state = {};
 
   onPressContinue = () => {
