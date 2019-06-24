@@ -2,25 +2,18 @@ import { NetInfo } from "react-native";
 
 class ConnectionStatus {
   constructor() {
-    this.connectionInfo = {
-      type: "unknown",
-    };
-
-    NetInfo.getConnectionInfo().then(this.onConnectionChange);
+    this.connectionInfo = "unknown";
     NetInfo.addEventListener("connectionChange", this.onConnectionChange);
 
+    this.isOnline = false;
+    this.isOffline = false;
     this.listeners = [];
   }
 
-  isOffline() {
-    return this.connectionInfo.type === "none";
-  }
-
-  isOnline() {
-    return (
-      this.connectionInfo.type !== "none" &&
-      this.connectionInfo.type !== "unknown"
-    );
+  async initAsync() {
+    const isOnline = await NetInfo.isConnected.fetch();
+    this.isOnline = isOnline;
+    this.isOffline = !isOnline;
   }
 
   addListener(listener) {
@@ -40,22 +33,31 @@ class ConnectionStatus {
 
   onConnectionChange = connectionInfo => {
     const previousConnectionInfo = this.connectionInfo;
-    const wasOnline =
-      previousConnectionInfo.type !== "none" &&
-      previousConnectionInfo.type !== "unknown";
-    const wasOffline = previousConnectionInfo.type === "none";
-
     this.connectionInfo = connectionInfo;
+    const wasOnline = this.isOnline;
+    const wasOffline = this.isOffline;
+    const isOnline =
+      connectionInfo.type === "wifi" || connectionInfo.type === "cellular";
+    const isOffline = connectionInfo.type === "none";
+    this.isOnline = isOnline;
+    this.isOffline = isOffline;
 
-    this.listeners.forEach(listener => {
-      listener({
-        connectionInfo,
-        previousConnectionInfo,
-        wasOnline,
-        wasOffline,
+    if (wasOnline !== isOnline) {
+      this.listeners.forEach(listener => {
+        listener({
+          connectionInfo,
+          previousConnectionInfo,
+          wasOnline,
+          wasOffline,
+          isOnline,
+          isOffline,
+        });
       });
-    });
+    }
   };
 }
 
-export default new ConnectionStatus();
+const connectionStatus = new ConnectionStatus();
+connectionStatus.initAsync();
+
+export default connectionStatus;

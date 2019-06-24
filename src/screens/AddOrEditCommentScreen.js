@@ -199,7 +199,7 @@ class AddOrEditCommentScreen extends PureComponent {
   };
 
   addOrSaveAndGoBack = ({ messageText, timestampAddComment }) => {
-    if (ConnectionStatus.isOffline()) {
+    if (ConnectionStatus.isOffline) {
       AlertManager.showOfflineMessage(
         "It seems you’re offline, so your comment can’t be saved."
       );

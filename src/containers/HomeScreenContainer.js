@@ -18,6 +18,7 @@ import {
 import { firstTimeTipsShowTip } from "../actions/firstTimeTips";
 
 const mapStateToProps = state => ({
+  isOffline: state.offline.isOffline,
   navigation: state.navigation,
   notesFetch: state.notesFetch,
   currentUser: state.auth,

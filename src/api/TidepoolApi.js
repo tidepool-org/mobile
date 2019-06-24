@@ -34,7 +34,7 @@ class TidepoolApi {
   //
 
   async refreshTokenAsync(authUser) {
-    if (ConnectionStatus.isOffline()) {
+    if (ConnectionStatus.isOffline) {
       return authUser;
     }
 
@@ -56,11 +56,16 @@ class TidepoolApi {
 
     this.tasksInProgress -= 1;
 
+    // If we transitioned to offline while this request was being fulfilled, just use the offline data instead
+    if (ConnectionStatus.isOffline) {
+      return authUser;
+    }
+
     return { sessionToken, userId, errorMessage };
   }
 
   async signInAsync({ username, password }) {
-    if (ConnectionStatus.isOffline()) {
+    if (ConnectionStatus.isOffline) {
       return { errorMessage: "Check your Internet connection!" };
     }
 
@@ -82,11 +87,16 @@ class TidepoolApi {
 
     this.tasksInProgress -= 1;
 
+    // If we transitioned to offline while this request was being fulfilled, just use the offline data instead
+    if (ConnectionStatus.isOffline) {
+      return { errorMessage: "Check your Internet connection!" };
+    }
+
     return { sessionToken, userId, errorMessage };
   }
 
   async fetchProfileAsync({ userId }) {
-    if (ConnectionStatus.isOffline()) {
+    if (ConnectionStatus.isOffline) {
       return this.cache.fetchProfileAsync({ userId });
     }
 
@@ -100,6 +110,7 @@ class TidepoolApi {
         this.cache.saveProfileAsync({ userId, profile });
         return {
           profile,
+          isAvailableOffline: true,
         };
       })
       .catch(error => ({
@@ -108,11 +119,16 @@ class TidepoolApi {
 
     this.tasksInProgress -= 1;
 
+    // If we transitioned to offline while this request was being fulfilled, just use the offline data instead
+    if (ConnectionStatus.isOffline) {
+      return this.cache.fetchProfileAsync({ userId });
+    }
+
     return { userId, ...rest, errorMessage };
   }
 
   async fetchProfileSettingsAsync({ userId }) {
-    if (ConnectionStatus.isOffline()) {
+    if (ConnectionStatus.isOffline) {
       return this.cache.fetchProfileSettingsAsync({ userId });
     }
 
@@ -128,6 +144,7 @@ class TidepoolApi {
         });
         return {
           settings: response.settings,
+          isAvailableOffline: true,
         };
       })
       .catch(error => ({
@@ -136,11 +153,16 @@ class TidepoolApi {
 
     this.tasksInProgress -= 1;
 
+    // If we transitioned to offline while this request was being fulfilled, just use the offline data instead
+    if (ConnectionStatus.isOffline) {
+      return this.cache.fetchProfileSettingsAsync({ userId });
+    }
+
     return { settings, errorMessage };
   }
 
   async fetchNotesAsync({ userId }) {
-    if (ConnectionStatus.isOffline()) {
+    if (ConnectionStatus.isOffline) {
       return this.cache.fetchNotesAsync({ userId });
     }
 
@@ -173,7 +195,7 @@ class TidepoolApi {
         sortedNotes.sort((note1, note2) => note2.timestamp - note1.timestamp);
 
         this.cache.saveNotesAsync({ userId, notes: sortedNotes });
-        return { notes: sortedNotes };
+        return { notes: sortedNotes, isAvailableOffline: true };
       })
       .catch(error => ({
         errorMessage: error.message,
@@ -181,11 +203,16 @@ class TidepoolApi {
 
     this.tasksInProgress -= 1;
 
+    // If we transitioned to offline while this request was being fulfilled, just use the offline data instead
+    if (ConnectionStatus.isOffline) {
+      return this.cache.fetchNotesAsync({ userId });
+    }
+
     return { notes, errorMessage };
   }
 
   async fetchCommentsAsync({ messageId }) {
-    if (ConnectionStatus.isOffline()) {
+    if (ConnectionStatus.isOffline) {
       return this.cache.fetchCommentsAsync({ messageId });
     }
 
@@ -219,7 +246,7 @@ class TidepoolApi {
           comments: sortedComments,
         });
 
-        return { comments: sortedComments };
+        return { comments: sortedComments, isAvailableOffline: true };
       })
       .catch(error => ({
         errorMessage: error.message,
@@ -227,11 +254,16 @@ class TidepoolApi {
 
     this.tasksInProgress -= 1;
 
+    // If we transitioned to offline while this request was being fulfilled, just use the offline data instead
+    if (ConnectionStatus.isOffline) {
+      return this.cache.fetchCommentsAsync({ messageId });
+    }
+
     return { comments, errorMessage };
   }
 
   async fetchViewableUserProfilesAsync({ userId, fullName }) {
-    if (ConnectionStatus.isOffline()) {
+    if (ConnectionStatus.isOffline) {
       return this.cache.fetchViewableUserProfilesAsync({
         userId,
       });
@@ -287,14 +319,25 @@ class TidepoolApi {
     // Add the specified user profile to front of list
     const viewableUserProfiles = [{ userId, fullName }, ...profiles];
 
+    this.tasksInProgress -= 1;
+
+    // If we transitioned to offline while this request was being fulfilled, just use the offline data instead
+    if (ConnectionStatus.isOffline) {
+      return this.cache.fetchViewableUserProfilesAsync({
+        userId,
+      });
+    }
+
     this.cache.saveViewableUserProfilesAsync({
       userId,
       profiles: viewableUserProfiles,
     });
 
-    this.tasksInProgress -= 1;
-
-    return { profiles: viewableUserProfiles, errorMessage };
+    return {
+      profiles: viewableUserProfiles,
+      errorMessage,
+      isAvailableOffline: true,
+    };
   }
 
   async addNoteAsync({ currentUser, currentProfile, messageText, timestamp }) {
@@ -423,7 +466,7 @@ class TidepoolApi {
   }) {
     let result;
 
-    if (ConnectionStatus.isOffline()) {
+    if (ConnectionStatus.isOffline) {
       result = await this.cache.fetchGraphDataAsync({
         userId,
         noteDate,
@@ -455,16 +498,27 @@ class TidepoolApi {
         });
 
       this.tasksInProgress -= 1;
+
+      // If we transitioned to offline while this request was being fulfilled, just use the offline data instead
+      if (ConnectionStatus.isOffline) {
+        result = await this.cache.fetchGraphDataAsync({
+          userId,
+          noteDate,
+          startDate,
+          endDate,
+        });
+      }
     }
 
     let graphData;
-    const { responseData, errorMessage } = result;
+    const { responseData, errorMessage, isAvailableOffline } = result;
     if (responseData) {
       // console.log({ responseData });
       const noteTimeSeconds = noteDate.getTime() / 1000;
       const startDateSeconds = startDate.getTime() / 1000;
       const endDateSeconds = endDate.getTime() / 1000;
       graphData = new GraphData();
+      graphData.isAvailableOffline = isAvailableOffline;
       graphData.addResponseData(responseData);
       graphData.process({
         eventTimeSeconds: noteTimeSeconds,
@@ -473,7 +527,7 @@ class TidepoolApi {
         highBGBoundary,
       });
 
-      if (!ConnectionStatus.isOffline()) {
+      if (ConnectionStatus.isOnline) {
         this.cache.saveGraphDataAsync({
           userId,
           noteDate,
@@ -481,6 +535,7 @@ class TidepoolApi {
           endDate,
           responseData,
         });
+        graphData.isAvailableOffline = true;
       }
     } else {
       graphData = new GraphData();

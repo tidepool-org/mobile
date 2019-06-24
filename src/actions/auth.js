@@ -117,15 +117,15 @@ const authSignInAsync = ({ username, password }) => async dispatch => {
       try {
         AsyncStorage.setItem(AUTH_USER_KEY, JSON.stringify(authUser));
         dispatch(authSignInDidSucceed({ authUser }));
-        const isOnline = ConnectionStatus.isOnline();
+        const { isOnline } = ConnectionStatus;
         if (isOnline) {
           Metrics.track({ metric: "Logged In" });
         }
         await dispatch(currentProfileRestoreAsync({ authUser }));
-        dispatch(navigateHome());
         if (isOnline) {
-          api().fetchViewableUserProfilesAsync({ userId, fullName }); // Fetch viewabhle user profiles to seed the offline cache        dispatch(navigateHome());
+          api().fetchViewableUserProfilesAsync({ userId, fullName }); // Fetch viewabhle user profiles to seed the offline cache
         }
+        dispatch(navigateHome());
       } catch (error) {
         dispatch(authSignInDidFail(error.errorMessage));
       }
@@ -215,11 +215,12 @@ const authRefreshTokenOrSignInAsync = () => async dispatch => {
           AsyncStorage.setItem(AUTH_USER_KEY, JSON.stringify(authUser));
           dispatch(authRefreshTokenDidSucceed({ authUser }));
           await dispatch(currentProfileRestoreAsync({ authUser }));
-          if (ConnectionStatus.isOnline()) {
-            api().fetchViewableUserProfilesAsync({ userId, fullName }); // Fetch viewabhle user profiles to seed the offline cache        dispatch(navigateHome());
+          if (ConnectionStatus.isOnline) {
+            api().fetchViewableUserProfilesAsync({ userId, fullName }); // Fetch viewabhle user profiles to seed the offline cache
           }
           dispatch(navigateHome());
         } catch (error) {
+          // console({ error });
           dispatch(authSignInDidFail(error.errorMessage));
         }
       }

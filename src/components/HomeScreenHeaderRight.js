@@ -28,7 +28,7 @@ class HomeScreenHeaderRight extends PureComponent {
   onPress = () => {
     const { navigateAddNote } = this.props;
     this.hideTipIfNeeded();
-    if (ConnectionStatus.isOffline()) {
+    if (ConnectionStatus.isOffline) {
       AlertManager.showOfflineMessage(
         "It seems you’re offline, so you can't add notes."
       );

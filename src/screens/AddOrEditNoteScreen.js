@@ -305,7 +305,7 @@ class AddOrEditNoteScreen extends PureComponent {
       navigateGoBack,
     } = this.props;
 
-    if (ConnectionStatus.isOffline()) {
+    if (ConnectionStatus.isOffline) {
       AlertManager.showOfflineMessage(
         "It seems you’re offline, so your note can’t be saved."
       );

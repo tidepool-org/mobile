@@ -50,12 +50,12 @@ class TidepoolApiCache {
       const doc = await this.profileCollection.findOneAsync({ userId });
       if (doc) {
         const { profile } = doc;
-        return { userId, profile, offlineAvailable: true };
+        return { userId, profile, isAvailableOffline: true };
       }
       return {
         userId,
         profile: {},
-        offlineAvailable: false,
+        isAvailableOffline: false,
         errorMessage: "Profile not available offline, this is unexpected!",
       };
     } catch (error) {
@@ -85,10 +85,10 @@ class TidepoolApiCache {
         return {
           userId,
           settings,
-          offlineAvailable: true,
+          isAvailableOffline: true,
         };
       }
-      return { userId, settings: {}, offlineAvailable: false };
+      return { userId, settings: {}, isAvailableOffline: false };
     } catch (error) {
       const errorMessage = error.message;
       // console.log({ errorMessage });
@@ -113,9 +113,9 @@ class TidepoolApiCache {
       const doc = await this.notesCollection.findOneAsync({ userId });
       if (doc) {
         const { notes } = doc;
-        return { userId, notes, offlineAvailable: true };
+        return { userId, notes, isAvailableOffline: true };
       }
-      return { userId, notes: [], offlineAvailable: false };
+      return { userId, notes: [], isAvailableOffline: false };
     } catch (error) {
       const errorMessage = error.message;
       // console.log({ errorMessage });
@@ -140,9 +140,9 @@ class TidepoolApiCache {
       const doc = await this.commentsCollection.findOneAsync({ messageId });
       if (doc) {
         const { comments } = doc;
-        return { comments, offlineAvailable: true };
+        return { comments, isAvailableOffline: true };
       }
-      return { comments: [], offlineAvailable: false };
+      return { comments: [], isAvailableOffline: false };
     } catch (error) {
       const errorMessage = error.message;
       // console.log({ errorMessage });
@@ -169,9 +169,9 @@ class TidepoolApiCache {
       });
       if (doc) {
         const { profiles } = doc;
-        return { profiles, offlineAvailable: true };
+        return { profiles, isAvailableOffline: true };
       }
-      return { profiles: [], offlineAvailable: false };
+      return { profiles: [], isAvailableOffline: false };
     } catch (error) {
       const errorMessage = error.message;
       // console.log({ errorMessage });
@@ -207,9 +207,9 @@ class TidepoolApiCache {
       });
       if (doc) {
         const { responseData } = doc;
-        return { responseData, offlineAvailable: true };
+        return { responseData, isAvailableOffline: true };
       }
-      return { responseData: [], offlineAvailable: false };
+      return { responseData: [], isAvailableOffline: false };
     } catch (error) {
       const errorMessage = error.message;
       // console.log({ errorMessage });

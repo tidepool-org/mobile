@@ -1,6 +1,7 @@
 import { combineReducers } from "redux";
 
-import appInitDidFinish from "./appInitDidFinish";
+import appInit from "./appInit";
+import offline from "./offline";
 import appVersion from "./appVersion";
 import auth from "./auth";
 import apiEnvironment from "./apiEnvironment";
@@ -15,19 +16,20 @@ import firstTimeTips from "./firstTimeTips";
 import logLevel from "./logLevel";
 
 const reducers = combineReducers({
-  appInitDidFinish,
+  apiEnvironment,
+  appInit,
   appVersion,
   auth,
-  apiEnvironment,
-  graphRenderer,
   commentsFetch,
+  currentProfile,
+  firstTimeTips,
   graphDataFetch,
+  graphRenderer,
+  logLevel,
   navigation,
   notesFetch,
-  currentProfile,
+  offline,
   profilesFetch,
-  firstTimeTips,
-  logLevel,
 });
 
 export default reducers;

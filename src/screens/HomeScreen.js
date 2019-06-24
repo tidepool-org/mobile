@@ -13,7 +13,6 @@ import NotesList from "../components/NotesList";
 import Tooltip from "../components/Tooltip";
 import TidepoolUploaderTooltipContent from "../components/Tooltips/TidepoolUploaderTooltipContent";
 import FirstTimeTips from "../models/FirstTimeTips";
-import ConnectionStatus from "../models/ConnectionStatus";
 import AlertManager from "../models/AlertManager";
 import { ProfilePropType } from "../prop-types/profile";
 import { CommentPropType } from "../prop-types/comment";
@@ -50,9 +49,9 @@ class HomeScreen extends PureComponent {
   }
 
   onDeleteNotePressed = ({ note }) => {
-    const { noteDeleteAsync, currentProfile } = this.props;
+    const { noteDeleteAsync, currentProfile, isOffline } = this.props;
 
-    if (ConnectionStatus.isOffline()) {
+    if (isOffline) {
       AlertManager.showOfflineMessage(
         "It seems you’re offline, so you can't delete notes."
       );
@@ -67,9 +66,9 @@ class HomeScreen extends PureComponent {
   };
 
   onDeleteCommentPressed = ({ note, comment }) => {
-    const { commentDeleteAsync, currentProfile } = this.props;
+    const { commentDeleteAsync, currentProfile, isOffline } = this.props;
 
-    if (ConnectionStatus.isOffline()) {
+    if (isOffline) {
       AlertManager.showOfflineMessage(
         "It seems you’re offline, so you can't delete comments."
       );
@@ -139,6 +138,7 @@ class HomeScreen extends PureComponent {
 
   render() {
     const {
+      isOffline,
       currentUser,
       commentsFetchAsync,
       commentsFetchDataByMessageId,
@@ -185,6 +185,7 @@ class HomeScreen extends PureComponent {
             navigateEditComment={navigateEditComment}
             onDeleteCommentPressed={this.onDeleteCommentPressed}
             graphRenderer={graphRenderer}
+            isOffline={isOffline}
           />
           <Tooltip
             isVisible={toolTipVisible}
@@ -254,11 +255,13 @@ HomeScreen.propTypes = {
   commentDeleteAsync: PropTypes.func.isRequired,
   navigation: PropTypes.object.isRequired,
   firstTimeTipsShowTip: PropTypes.func.isRequired,
+  isOffline: PropTypes.bool,
 };
 
 HomeScreen.defaultProps = {
   commentsFetchDataByMessageId: {},
   graphDataFetchDataByMessageId: {},
+  isOffline: false,
 };
 
 HomeScreen.navigationOptions = () => {
