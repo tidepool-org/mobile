@@ -1,3 +1,4 @@
+# TODO: my - 0 - add account info to Xcode project for auto signing .. using secure credentials
 env:
   global:
     - IOS_APP_NAME=Tidepool
@@ -60,6 +61,7 @@ matrix:
         - xcodebuild -exportArchive -exportOptionsPlist exportArchiveOptions.plist -archivePath $IOS_APP_NAME.xcarchive -exportPath ./
         - zip -r $IOS_APP_NAME.zip $IOS_APP_NAME.xcarchive $IOS_APP_NAME.ipa
     - language: android
+      dist: trusty
       jdk: oraclejdk8
       android:
         components:
