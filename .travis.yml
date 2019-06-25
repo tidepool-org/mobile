@@ -1,3 +1,4 @@
+# TODO: my - 0 - add account info to Xcode project for auto signing .. using secure credentials
 env:
   global:
     - IOS_APP_NAME=Tidepool
