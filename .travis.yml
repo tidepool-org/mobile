@@ -1,4 +1,3 @@
-# TODO: my - 0 - add account info to Xcode project for auto signing .. using secure credentials
 env:
   global:
     - IOS_APP_NAME=Tidepool
@@ -117,6 +116,7 @@ deploy:
     tags: true
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 before_install:
   - openssl aes-256-cbc -K $encrypted_4beaf9ef68f9_key -iv $encrypted_4beaf9ef68f9_iv
@@ -132,3 +132,9 @@ before_install:
 =======
     -in secret-files.tar.enc -out secret-files.tar -d
 >>>>>>> 52e84e71... Attempt to fix iOS provisioning
+=======
+before_install:
+  - openssl aes-256-cbc -K $encrypted_4beaf9ef68f9_key -iv $encrypted_4beaf9ef68f9_iv
+    -in orgtidepoolblipnotesRN_AppStore.mobileprovision.enc -out orgtidepoolblipnotesRN_AppStore.mobileprovision
+    -d
+>>>>>>> d2e8bdb3... Attempt to fix iOS provisioning in Travis CI
