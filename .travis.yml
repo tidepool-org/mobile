@@ -1,4 +1,3 @@
-# TODO: my - 0 - add account info to Xcode project for auto signing .. using secure credentials
 env:
   global:
     - IOS_APP_NAME=Tidepool
@@ -37,28 +36,24 @@ matrix:
         - npx expo login -u tidepool -p $EXPO_PASSWORD
         - npx expo publish --release-channel travis-ios
       script:
-        # Update release channel to travis
         - bash scripts/update-release-channel.sh travis-ios
-
-        # Move to ios dir for iOS build
         - pushd ios
-
-        # Add signing certs to keychain
         - security create-keychain -p travis ios-build.keychain
         - security default-keychain -s ios-build.keychain
         - security unlock-keychain -p travis ios-build.keychain
         - security set-keychain-settings -t 3600 -l ~/Library/Keychains/ios-build.keychain
-        - security import ../tidepool-ios-distribution-cert.p12 -k ~/Library/Keychains/ios-build.keychain -P $IOS_KEY_PASSWORD -T /usr/bin/codesign
+        - security import ../tidepool-ios-distribution-cert.p12 -k ~/Library/Keychains/ios-build.keychain
+          -P $IOS_KEY_PASSWORD -T /usr/bin/codesign
         - "security set-key-partition-list -S apple-tool:,apple: -s -k travis ~/Library/Keychains/ios-build.keychain"
-
-        # Install provisioning profile
-        - uuid=`grep UUID -A1 -a ../orgtidepoolblipnotesRN_AppStore.mobileprovision | grep -io "[-A-F0-9]\{36\}"`
+        - uuid=`grep UUID -A1 -a ../orgtidepoolblipnotesRN_AppStore.mobileprovision |
+          grep -io "[-A-F0-9]\{36\}"`
         - mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
-        - cp ../orgtidepoolblipnotesRN_AppStore.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/$uuid.mobileprovision
-
-        # Build the archive for distribution
-        - xcodebuild archive -workspace $IOS_APP_NAME.xcworkspace -scheme $IOS_APP_NAME -configuration Release -archivePath $IOS_APP_NAME.xcarchive | xcpretty -f `xcpretty-travis-formatter`
-        - xcodebuild -exportArchive -exportOptionsPlist exportArchiveOptions.plist -archivePath $IOS_APP_NAME.xcarchive -exportPath ./
+        - cp ../orgtidepoolblipnotesRN_AppStore.mobileprovision ~/Library/MobileDevice/Provisioning\
+          Profiles/$uuid.mobileprovision
+        - xcodebuild archive -workspace $IOS_APP_NAME.xcworkspace -scheme $IOS_APP_NAME
+          -configuration Release -archivePath $IOS_APP_NAME.xcarchive | xcpretty -f `xcpretty-travis-formatter`
+        - xcodebuild -exportArchive -exportOptionsPlist exportArchiveOptions.plist -archivePath
+          $IOS_APP_NAME.xcarchive -exportPath ./
         - zip -r $IOS_APP_NAME.zip $IOS_APP_NAME.xcarchive $IOS_APP_NAME.ipa
     - language: android
       dist: trusty
@@ -97,19 +92,14 @@ matrix:
         - npx expo login -u tidepool -p $EXPO_PASSWORD
         - npx expo publish --release-channel travis-android
       script:
-        # Update release channel to travis
         - bash scripts/update-release-channel.sh travis-android
-
-        # Move to android dir for Android build
         - pushd android
-
-        # Build the apk
         - "./gradlew :app:assembleProdMinSdkProdKernelRelease"
 deploy:
   provider: releases
   draft: true
-  target_commitish: $TRAVIS_COMMIT
-  tag_name: $TRAVIS_TAG
+  target_commitish: "$TRAVIS_COMMIT"
+  tag_name: "$TRAVIS_TAG"
   name: Tidepool $TRAVIS_TAG
   body: Automated draft release from Travis CI
   skip_cleanup: true
@@ -124,3 +114,7 @@ deploy:
   on:
     repo: tidepool-org/mobile
     tags: true
+before_install:
+  - openssl aes-256-cbc -K $encrypted_4beaf9ef68f9_key -iv $encrypted_4beaf9ef68f9_iv
+    -in orgtidepoolblipnotesRN_AppStore.mobileprovision.enc -out orgtidepoolblipnotesRN_AppStore.mobileprovision
+    -d
