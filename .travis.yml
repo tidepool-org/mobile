@@ -125,6 +125,10 @@ before_install:
 =======
 before_install:
   - openssl aes-256-cbc -K $encrypted_4beaf9ef68f9_key -iv $encrypted_4beaf9ef68f9_iv
+<<<<<<< HEAD
     -in orgtidepoolblipnotesRN_AppStore.mobileprovision.enc -out orgtidepoolblipnotesRN_AppStore.mobileprovision
     -d
 >>>>>>> d2e8bdb3... Attempt to fix iOS provisioning in Travis CI
+=======
+    -in secret-files.tar.enc -out secret-files.tar -d
+>>>>>>> 52e84e71... Attempt to fix iOS provisioning
