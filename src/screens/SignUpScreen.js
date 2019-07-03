@@ -54,7 +54,7 @@ class SignUpScreen extends PureComponent {
           <StatusBar barStyle="light-content" />
           <SafeAreaView flex={1} justifyContent="space-between" margin={16}>
             <TitleText>Sign Up for Tidepool</TitleText>
-            <SubTitleText>What kind of account do you need???</SubTitleText>
+            <SubTitleText>What kind of account do you need?</SubTitleText>
             <ButtonAccountType
               title="Personal Account"
               onPress={this.onPressContinue}
