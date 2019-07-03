@@ -12,8 +12,8 @@ import ButtonAccountType from "../components/ButtonAccountType";
 const styles = StyleSheet.create({
   bottom: {
     flex: 1,
-    justifyContent: "flex-end"
-  }
+    justifyContent: "flex-end",
+  },
 });
 
 const TitleText = glamorous.text({
@@ -23,7 +23,7 @@ const TitleText = glamorous.text({
   color: "#4f6a92",
   marginTop: 17,
   marginBottom: 14,
-  fontWeight: "bold"
+  fontWeight: "bold",
 });
 
 const SubTitleText = glamorous.text({
@@ -32,7 +32,7 @@ const SubTitleText = glamorous.text({
   lineHeight: 24,
   color: "#7e98c3",
   marginBottom: 26,
-  fontWeight: "500"
+  fontWeight: "500",
 });
 
 class SignUpScreen extends PureComponent {
@@ -54,7 +54,7 @@ class SignUpScreen extends PureComponent {
           <StatusBar barStyle="light-content" />
           <SafeAreaView flex={1} justifyContent="space-between" margin={16}>
             <TitleText>Sign Up for Tidepool</TitleText>
-            <SubTitleText>What kind of account do you need?</SubTitleText>
+            <SubTitleText>What kind of account do you need???</SubTitleText>
             <ButtonAccountType
               title="Personal Account"
               onPress={this.onPressContinue}
@@ -78,7 +78,7 @@ class SignUpScreen extends PureComponent {
 }
 
 SignUpScreen.propTypes = {
-  navigateSignUpCreateAccount: PropTypes.func.isRequired
+  navigateSignUpCreateAccount: PropTypes.func.isRequired,
 };
 
 export default SignUpScreen;
