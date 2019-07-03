@@ -54,6 +54,8 @@ class SignUpCreateAccountScreen extends PureComponent {
     navigateSignUpTermsOfUse();
   };
 
+// npx eslint src/ --max-warnings 0
+
   render() {
     return (
       <ThemeProvider theme={this.theme}>
