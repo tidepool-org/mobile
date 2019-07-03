@@ -118,5 +118,4 @@ deploy:
 
 before_install:
   - openssl aes-256-cbc -K $encrypted_4beaf9ef68f9_key -iv $encrypted_4beaf9ef68f9_iv
-    -in orgtidepoolblipnotesRN_AppStore.mobileprovision.enc -out orgtidepoolblipnotesRN_AppStore.mobileprovision
-    -d
+    -in orgtidepoolblipnotesRN_AppStore.mobileprovision.enc -out orgtidepoolblipnotesRN_AppStore.mobileprovision -d
