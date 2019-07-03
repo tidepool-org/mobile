@@ -9,21 +9,21 @@ import ButtonFlow from "../components/ButtonFlow";
 const styles = StyleSheet.create({
   bottom: {
     flex: 1,
-    justifyContent: 'flex-end',
+    justifyContent: "flex-end"
   },
   inputContainer: {
     height: 50,
     borderWidth: 1,
-    borderColor: '#ededed',
+    borderColor: "#ededed",
     borderRadius: 4,
-    marginBottom: 20,
+    marginBottom: 20
   },
   input: {
-    color: '#6582ff',
+    color: "#6582ff",
     fontSize: 14,
     paddingTop: 16,
-    paddingLeft: 16,
-  },
+    paddingLeft: 16
+  }
 });
 
 const TitleText = glamorous.text({
@@ -33,7 +33,7 @@ const TitleText = glamorous.text({
   color: "#4f6a92",
   marginTop: 17,
   marginBottom: 14,
-  fontWeight: "bold",
+  fontWeight: "bold"
 });
 
 const SubTitleText = glamorous.text({
@@ -42,7 +42,7 @@ const SubTitleText = glamorous.text({
   lineHeight: 24,
   color: "#7e98c3",
   marginBottom: 26,
-  fontWeight: "500",
+  fontWeight: "500"
 });
 
 class SignUpCreateAccountScreen extends PureComponent {
@@ -54,7 +54,7 @@ class SignUpCreateAccountScreen extends PureComponent {
     navigateSignUpTermsOfUse();
   };
 
-// npx eslint src/ --max-warnings 0
+  // npx eslint src/ --max-warnings 0
 
   render() {
     return (
@@ -66,43 +66,38 @@ class SignUpCreateAccountScreen extends PureComponent {
           <StatusBar barStyle="light-content" />
           <SafeAreaView flex={1} justifyContent="space-between" margin={16}>
             <TitleText>Create Account</TitleText>
-            <SubTitleText>See all your diabetes data in one place.</SubTitleText>
+            <SubTitleText>
+              See all your diabetes data in one place.
+            </SubTitleText>
 
             <glamorous.View style={styles.inputContainer}>
               <glamorous.TextInput
                 style={styles.input}
                 placeholder="Full Name"
-                />
+              />
             </glamorous.View>
 
             <glamorous.View style={styles.inputContainer}>
-              <glamorous.TextInput
-                style={styles.input}
-                placeholder="Email"
-                />
+              <glamorous.TextInput style={styles.input} placeholder="Email" />
             </glamorous.View>
 
             <glamorous.View style={styles.inputContainer}>
               <glamorous.TextInput
                 style={styles.input}
                 placeholder="Password"
-                />
+              />
             </glamorous.View>
 
             <glamorous.View style={styles.inputContainer}>
               <glamorous.TextInput
                 style={styles.input}
                 placeholder="Confirm Password"
-                />
+              />
             </glamorous.View>
 
             <glamorous.View style={styles.bottom}>
-                <ButtonFlow
-                  title="Continue"
-                  onPress={this.onPressContinue}
-                />
+              <ButtonFlow title="Continue" onPress={this.onPressContinue} />
             </glamorous.View>
-
           </SafeAreaView>
         </glamorous.View>
       </ThemeProvider>
@@ -111,7 +106,7 @@ class SignUpCreateAccountScreen extends PureComponent {
 }
 
 SignUpCreateAccountScreen.propTypes = {
-  navigateSignUpTermsOfUse: PropTypes.func.isRequired,
+  navigateSignUpTermsOfUse: PropTypes.func.isRequired
 };
 
 export default SignUpCreateAccountScreen;

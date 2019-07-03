@@ -36,7 +36,7 @@ class SignUpActivateAccountScreen extends PureComponent {
                 containerStyle={{
                   marginTop: 20,
                   marginLeft: 0,
-                  marginRight: 0,
+                  marginRight: 0
                 }}
               />
             </glamorous.View>
@@ -48,7 +48,7 @@ class SignUpActivateAccountScreen extends PureComponent {
 }
 
 SignUpActivateAccountScreen.propTypes = {
-  navigateSignIn: PropTypes.func.isRequired,
+  navigateSignIn: PropTypes.func.isRequired
 };
 
 export default SignUpActivateAccountScreen;

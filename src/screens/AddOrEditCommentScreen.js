@@ -44,10 +44,10 @@ class AddOrEditCommentScreen extends PureComponent {
         <glamorous.View
           style={{
             padding: 10,
-            marginRight: 6,
+            marginRight: 6
           }}
         />
-      ),
+      )
     };
   };
 
@@ -59,7 +59,7 @@ class AddOrEditCommentScreen extends PureComponent {
     this.state = {
       isKeyboardVisible: false,
       containerViewHeightWithoutKeyboard: null,
-      keyboardHeight: null,
+      keyboardHeight: null
     };
 
     this.noteViewHeight = null;
@@ -79,7 +79,7 @@ class AddOrEditCommentScreen extends PureComponent {
       commentsFetchData,
       commentsFetchAsync,
       graphDataFetchData,
-      graphDataFetchAsync,
+      graphDataFetchAsync
     } = this.props;
 
     if (!commentsFetchData.fetched && !commentsFetchData.fetching) {
@@ -99,7 +99,7 @@ class AddOrEditCommentScreen extends PureComponent {
         endDate,
         objectTypes,
         lowBGBoundary,
-        highBGBoundary,
+        highBGBoundary
       });
     }
 
@@ -172,7 +172,7 @@ class AddOrEditCommentScreen extends PureComponent {
 
     if (!isKeyboardVisible) {
       this.setState({
-        containerViewHeightWithoutKeyboard: height,
+        containerViewHeightWithoutKeyboard: height
       });
     }
     this.containerViewHeight = height;
@@ -182,14 +182,14 @@ class AddOrEditCommentScreen extends PureComponent {
   keyboardDidShow = event => {
     this.setState({
       isKeyboardVisible: true,
-      keyboardHeight: event.endCoordinates.height,
+      keyboardHeight: event.endCoordinates.height
     });
     this.scrollToEditableComment();
   };
 
   keyboardDidHide = () => {
     this.setState({
-      isKeyboardVisible: false,
+      isKeyboardVisible: false
     });
   };
 
@@ -204,7 +204,7 @@ class AddOrEditCommentScreen extends PureComponent {
       comment,
       note,
       commentUpdateAsync,
-      commentAddAsync,
+      commentAddAsync
     } = this.props;
 
     if (comment) {
@@ -212,7 +212,7 @@ class AddOrEditCommentScreen extends PureComponent {
         currentUser,
         currentProfile,
         note,
-        comment: { ...comment, messageText },
+        comment: { ...comment, messageText }
       });
       Metrics.track({ metric: "Clicked save edited comment" });
     } else {
@@ -221,7 +221,7 @@ class AddOrEditCommentScreen extends PureComponent {
         currentProfile,
         note,
         messageText,
-        timestamp: timestampAddComment,
+        timestamp: timestampAddComment
       });
       Metrics.track({ metric: "Clicked post comment" });
     }
@@ -259,7 +259,7 @@ class AddOrEditCommentScreen extends PureComponent {
       this.scrollView.scrollTo({
         x: 0,
         y: scrollY,
-        animated: isKeyboardVisible,
+        animated: isKeyboardVisible
       });
     }
   }
@@ -272,7 +272,7 @@ class AddOrEditCommentScreen extends PureComponent {
       currentProfile,
       commentsFetchData,
       graphDataFetchData,
-      graphRenderer,
+      graphRenderer
     } = this.props;
 
     return (
@@ -296,7 +296,7 @@ class AddOrEditCommentScreen extends PureComponent {
       note,
       currentUser,
       commentsFetchData,
-      timestampAddComment,
+      timestampAddComment
     } = this.props;
 
     return (
@@ -318,7 +318,7 @@ class AddOrEditCommentScreen extends PureComponent {
       isKeyboardVisible,
       isZoomingGraph,
       containerViewHeightWithoutKeyboard,
-      keyboardHeight,
+      keyboardHeight
     } = this.state;
     const containerViewHeight = isKeyboardVisible
       ? containerViewHeightWithoutKeyboard - keyboardHeight
@@ -367,16 +367,16 @@ AddOrEditCommentScreen.propTypes = {
     comments: PropTypes.arrayOf(CommentPropType),
     errorMessage: PropTypes.string,
     fetching: PropTypes.bool,
-    fetched: PropTypes.bool,
+    fetched: PropTypes.bool
   }),
   graphDataFetchAsync: PropTypes.func.isRequired,
   graphDataFetchData: PropTypes.shape({
     graphData: PropTypes.object,
     errorMessage: PropTypes.string,
     fetching: PropTypes.bool,
-    fetched: PropTypes.bool,
+    fetched: PropTypes.bool
   }),
-  graphRenderer: PropTypes.string.isRequired,
+  graphRenderer: PropTypes.string.isRequired
 };
 
 AddOrEditCommentScreen.defaultProps = {
@@ -386,14 +386,14 @@ AddOrEditCommentScreen.defaultProps = {
     comments: [],
     errorMessage: "",
     fetching: false,
-    fetched: false,
+    fetched: false
   },
   graphDataFetchData: {
     graphData: {},
     errorMessage: "",
     fetching: false,
-    fetched: false,
-  },
+    fetched: false
+  }
 };
 
 export default AddOrEditCommentScreen;

@@ -36,7 +36,7 @@ class SignUpDiabetesDetailsScreen extends PureComponent {
                 containerStyle={{
                   marginTop: 20,
                   marginLeft: 0,
-                  marginRight: 0,
+                  marginRight: 0
                 }}
               />
             </glamorous.View>
@@ -48,7 +48,7 @@ class SignUpDiabetesDetailsScreen extends PureComponent {
 }
 
 SignUpDiabetesDetailsScreen.propTypes = {
-  navigateSignUpActivateAccount: PropTypes.func.isRequired,
+  navigateSignUpActivateAccount: PropTypes.func.isRequired
 };
 
 export default SignUpDiabetesDetailsScreen;
