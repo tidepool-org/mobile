@@ -21,7 +21,7 @@ class DebugSettingsScreen extends PureComponent {
     const {
       selectedApiEnvironment,
       apiEnvironmentSetAndSaveAsync,
-      navigateGoBack
+      navigateGoBack,
     } = this.props;
 
     if (newSelectedApiEnvironment !== selectedApiEnvironment) {
@@ -72,7 +72,7 @@ class DebugSettingsScreen extends PureComponent {
       navigateGoBack,
       firstTimeTipsResetTips,
       selectedApiEnvironment,
-      selectedGraphRenderer
+      selectedGraphRenderer,
       // selectedLogLevel,
     } = this.props;
 
@@ -89,7 +89,7 @@ class DebugSettingsScreen extends PureComponent {
           <SafeAreaView
             style={{
               flex: 1,
-              backgroundColor: Colors.veryLightGrey
+              backgroundColor: Colors.veryLightGrey,
             }}
           >
             <glamorous.View
@@ -159,13 +159,13 @@ DebugSettingsScreen.propTypes = {
   graphRendererSetAndSaveAsync: PropTypes.func.isRequired,
   selectedGraphRenderer: PropTypes.string,
   logLevelSetAndSaveAsync: PropTypes.func.isRequired,
-  selectedLogLevel: PropTypes.string
+  selectedLogLevel: PropTypes.string,
 };
 
 DebugSettingsScreen.defaultProps = {
   selectedApiEnvironment: "",
   selectedGraphRenderer: "",
-  selectedLogLevel: ""
+  selectedLogLevel: "",
 };
 
 export default DebugSettingsScreen;

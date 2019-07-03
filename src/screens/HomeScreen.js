@@ -26,7 +26,7 @@ class HomeScreen extends PureComponent {
 
     this.theme = PrimaryTheme;
     this.state = {
-      toolTipVisible: false
+      toolTipVisible: false,
     };
   }
 
@@ -34,7 +34,7 @@ class HomeScreen extends PureComponent {
     const { currentProfile, notesFetchAsync } = this.props;
     Metrics.track({ metric: "Viewed Home Screen (Home Screen)" });
     notesFetchAsync({
-      profile: currentProfile
+      profile: currentProfile,
     });
   }
 
@@ -61,13 +61,13 @@ class HomeScreen extends PureComponent {
         [
           {
             text: "Cancel",
-            style: "cancel"
+            style: "cancel",
           },
           {
             text: "Delete",
             onPress: () => noteDeleteAsync({ currentProfile, note }),
-            style: "destructive"
-          }
+            style: "destructive",
+          },
         ]
       );
     }
@@ -85,14 +85,14 @@ class HomeScreen extends PureComponent {
         [
           {
             text: "Cancel",
-            style: "cancel"
+            style: "cancel",
           },
           {
             text: "Delete",
             onPress: () =>
               commentDeleteAsync({ note, currentProfile, comment }),
-            style: "destructive"
-          }
+            style: "destructive",
+          },
         ]
       );
     }
@@ -118,7 +118,7 @@ class HomeScreen extends PureComponent {
         subject: "How to set up the Tidepool Uploader",
         body:
           "Please go to the following link on your computer to learn about setting up the Tidepool Uploader: http://support.tidepool.org/article/6-how-to-install-or-update-the-tidepool-uploader-gen",
-        recipients: [currentUserEmail]
+        recipients: [currentUserEmail],
       });
     } catch (error) {
       Alert.alert(
@@ -166,13 +166,13 @@ class HomeScreen extends PureComponent {
         fetching,
         notes,
         searchText,
-        toggleExpandedNotesCount
+        toggleExpandedNotesCount,
       },
       notesFetchAsync,
       notesFetchSetSearchFilter,
       navigateEditNote,
       navigateAddComment,
-      navigateEditComment
+      navigateEditComment,
     } = this.props;
     const { toolTipVisible } = this.state;
 
@@ -204,16 +204,16 @@ class HomeScreen extends PureComponent {
           <Tooltip
             isVisible={toolTipVisible}
             placement="top"
-            content={
+            content={(
               <TidepoolUploaderTooltipContent
                 onPressEmailLink={this.onPressTooltipEmailLink}
                 onPressOk={this.onPressTooltipOk}
               />
-            }
+)}
             arrowSize={{ width: 0, height: 0 }}
             tooltipOriginOffset={{
               x: 0,
-              y: -24
+              y: -24,
             }}
           >
             <glamorous.View
@@ -249,7 +249,7 @@ HomeScreen.propTypes = {
       comments: PropTypes.arrayOf(CommentPropType),
       errorMessage: PropTypes.string,
       fetching: PropTypes.bool,
-      fetched: PropTypes.bool
+      fetched: PropTypes.bool,
     })
   ),
   graphDataFetchAsync: PropTypes.func.isRequired,
@@ -258,7 +258,7 @@ HomeScreen.propTypes = {
       graphData: PropTypes.object,
       errorMessage: PropTypes.string,
       fetching: PropTypes.bool,
-      fetched: PropTypes.bool
+      fetched: PropTypes.bool,
     })
   ),
   graphRenderer: PropTypes.string.isRequired,
@@ -268,12 +268,12 @@ HomeScreen.propTypes = {
   noteDeleteAsync: PropTypes.func.isRequired,
   commentDeleteAsync: PropTypes.func.isRequired,
   navigation: PropTypes.object.isRequired,
-  firstTimeTipsShowTip: PropTypes.func.isRequired
+  firstTimeTipsShowTip: PropTypes.func.isRequired,
 };
 
 HomeScreen.defaultProps = {
   commentsFetchDataByMessageId: {},
-  graphDataFetchDataByMessageId: {}
+  graphDataFetchDataByMessageId: {},
 };
 
 HomeScreen.navigationOptions = () => {
@@ -283,7 +283,7 @@ HomeScreen.navigationOptions = () => {
     headerStyle,
     headerTitle: <HomeScreenHeaderTitleContainer />,
     headerLeft: <HomeScreenHeaderLeftContainer />,
-    headerRight: <HomeScreenHeaderRightContainer />
+    headerRight: <HomeScreenHeaderRightContainer />,
   };
 };
 

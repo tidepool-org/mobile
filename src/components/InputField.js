@@ -1,29 +1,29 @@
 import React, { PureComponent } from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import {
   Platform,
-  StyleSheet,
-  View,
-  Text,
-  TouchableOpacity,
-  TouchableNativeFeedback,
-  ViewPropTypes,
-  Keyboard,
-  ActivityIndicator,
+  // StyleSheet,
+  // View,
+  // Text,
+  // TouchableOpacity,
+  // TouchableNativeFeedback,
+  // ViewPropTypes,
+  // Keyboard,
+  // ActivityIndicator,
 } from "react-native";
 
-import glamorous, { withTheme } from "glamorous-native";
+import glamorous from "glamorous-native";
 
-import { ThemePropType } from "../prop-types/theme";
+// import { ThemePropType } from "../prop-types/theme";
 
-const styles = StyleSheet.create({
-  text: {
-    color: "white",
-    textAlign: "center",
-    padding: 8,
-    fontWeight: "500",
-  },
-});
+// const styles = StyleSheet.create({
+//   text: {
+//     color: "white",
+//     textAlign: "center",
+//     padding: 8,
+//     fontWeight: "500",
+//   },
+// });
 
 class InputField extends PureComponent {
   render() {

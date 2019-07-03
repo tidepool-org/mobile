@@ -5,7 +5,7 @@ import {
   LayoutAnimation,
   Platform,
   SafeAreaView,
-  StatusBar
+  StatusBar,
 } from "react-native";
 import glamorous, { ThemeProvider } from "glamorous-native";
 
@@ -99,8 +99,8 @@ class SignInScreen extends PureComponent {
       animationConfig = {
         duration: event.duration,
         update: {
-          type: LayoutAnimation.Types[event.easing]
-        }
+          type: LayoutAnimation.Types[event.easing],
+        },
       };
     } else {
       animationConfig = { ...LayoutAnimation.Presets.easeInEaseOut };
@@ -108,7 +108,7 @@ class SignInScreen extends PureComponent {
     LayoutAnimation.configureNext({
       ...animationConfig,
       duration: 175,
-      useNativeDriver: true
+      useNativeDriver: true,
     });
 
     // Calculate scrollY
@@ -137,7 +137,7 @@ class SignInScreen extends PureComponent {
       <SignUp
         style={{
           alignSelf: "flex-end",
-          marginTop: 30
+          marginTop: 30,
         }}
         navigateSignUp={navigateSignUp}
       />
@@ -150,7 +150,7 @@ class SignInScreen extends PureComponent {
     return (
       <DebugSettingsTouchable
         style={{
-          marginBottom: 15
+          marginBottom: 15,
         }}
         navigateDebugSettings={navigateDebugSettings}
       >
@@ -175,7 +175,7 @@ class SignInScreen extends PureComponent {
       navigateForgotPassword,
       authSignInReset,
       authSignInAsync,
-      signingIn
+      signingIn,
     } = this.props;
 
     return (
@@ -193,7 +193,7 @@ class SignInScreen extends PureComponent {
   render() {
     const {
       containerViewHeightWithoutKeyboard,
-      signInFormContainerTop
+      signInFormContainerTop,
     } = this.state;
 
     return (
@@ -240,11 +240,11 @@ SignInScreen.propTypes = {
   signingIn: PropTypes.bool.isRequired,
   errorMessage: PropTypes.string,
   version: PropTypes.string.isRequired,
-  apiEnvironment: PropTypes.string.isRequired
+  apiEnvironment: PropTypes.string.isRequired,
 };
 
 SignInScreen.defaultProps = {
-  errorMessage: ""
+  errorMessage: "",
 };
 
 export default SignInScreen;

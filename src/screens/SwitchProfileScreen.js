@@ -30,10 +30,10 @@ class SwitchProfileScreen extends PureComponent {
         <glamorous.View
           style={{
             padding: 10,
-            marginRight: 6
+            marginRight: 6,
           }}
         />
-      )
+      ),
     };
   };
 
@@ -54,12 +54,12 @@ class SwitchProfileScreen extends PureComponent {
     const {
       currentUser,
       notesSwitchProfileAndFetchAsync,
-      navigateGoBack
+      navigateGoBack,
     } = this.props;
 
     notesSwitchProfileAndFetchAsync({
       authUser: currentUser,
-      profile: user
+      profile: user,
     });
     navigateGoBack();
   };
@@ -70,7 +70,7 @@ class SwitchProfileScreen extends PureComponent {
       fetching,
       profileListData,
       currentUser,
-      profilesFetchAsync
+      profilesFetchAsync,
     } = this.props;
 
     return (
@@ -98,12 +98,12 @@ SwitchProfileScreen.propTypes = {
   profilesFetchAsync: PropTypes.func.isRequired,
   notesSwitchProfileAndFetchAsync: PropTypes.func.isRequired,
   currentUser: UserPropType.isRequired,
-  navigateGoBack: PropTypes.func.isRequired
+  navigateGoBack: PropTypes.func.isRequired,
 };
 
 SwitchProfileScreen.defaultProps = {
   errorMessage: "",
-  fetching: false
+  fetching: false,
 };
 
 export default SwitchProfileScreen;

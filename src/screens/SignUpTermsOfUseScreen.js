@@ -36,7 +36,7 @@ class SignUpTermsOfUseScreen extends PureComponent {
                 containerStyle={{
                   marginTop: 20,
                   marginLeft: 0,
-                  marginRight: 0
+                  marginRight: 0,
                 }}
               />
             </glamorous.View>
@@ -48,7 +48,7 @@ class SignUpTermsOfUseScreen extends PureComponent {
 }
 
 SignUpTermsOfUseScreen.propTypes = {
-  navigateSignUpDiabetesDetails: PropTypes.func.isRequired
+  navigateSignUpDiabetesDetails: PropTypes.func.isRequired,
   // navigatePrivacyAndTerms: PropTypes.func.isRequired, // TODO: call this when tapping on link
 };
 

@@ -10,7 +10,7 @@ import {
   LayoutAnimation,
   Platform,
   StyleSheet,
-  TimePickerAndroid
+  TimePickerAndroid,
 } from "react-native";
 import glamorous, { ThemeProvider } from "glamorous-native";
 import { Header } from "react-navigation";
@@ -52,7 +52,7 @@ const ADD_OR_EDIT_SCREEN_EDIT_NOTE_TITLE = "Edit Note";
 
 class AddOrEditNoteScreen extends PureComponent {
   static navigationOptions = () => ({
-    gesturesEnabled: false // Disable the pull down gesture for dismissing the modal screen
+    gesturesEnabled: false, // Disable the pull down gesture for dismissing the modal screen
   });
 
   constructor(props) {
@@ -72,7 +72,7 @@ class AddOrEditNoteScreen extends PureComponent {
       isKeyboardVisible: false,
       containerViewY: null,
       keyboardY: null,
-      selection: { start: messageText.length, end: messageText.length }
+      selection: { start: messageText.length, end: messageText.length },
     };
   }
 
@@ -149,8 +149,8 @@ class AddOrEditNoteScreen extends PureComponent {
       messageText: newMessageText,
       isDirty: this.getDirtyState({
         ...prevState,
-        messageText: newMessageText
-      })
+        messageText: newMessageText,
+      }),
     }));
     this.textInput.focus();
   };
@@ -174,14 +174,14 @@ class AddOrEditNoteScreen extends PureComponent {
 
     this.setState(prevState => ({
       messageText,
-      isDirty: this.getDirtyState({ ...prevState, messageText })
+      isDirty: this.getDirtyState({ ...prevState, messageText }),
     }));
   };
 
   onDateChangeIOS = timestamp => {
     this.setState(prevState => ({
       timestamp,
-      isDirty: this.getDirtyState({ ...prevState, timestamp })
+      isDirty: this.getDirtyState({ ...prevState, timestamp }),
     }));
   };
 
@@ -207,7 +207,7 @@ class AddOrEditNoteScreen extends PureComponent {
 
     if (!isKeyboardVisible) {
       this.setState({
-        containerViewY: y
+        containerViewY: y,
       });
     }
   };
@@ -248,7 +248,7 @@ class AddOrEditNoteScreen extends PureComponent {
     LayoutAnimation.configureNext({
       ...LayoutAnimation.Presets.easeInEaseOut,
       duration: 175,
-      useNativeDriver: true
+      useNativeDriver: true,
     });
 
     const { isEditingTimestamp } = this.state;
@@ -263,7 +263,7 @@ class AddOrEditNoteScreen extends PureComponent {
     }
 
     this.setState({
-      isEditingTimestamp: isEditingTimestampParam
+      isEditingTimestamp: isEditingTimestampParam,
     });
   };
 
@@ -301,7 +301,7 @@ class AddOrEditNoteScreen extends PureComponent {
       note,
       noteAddAsync,
       noteUpdateAsync,
-      navigateGoBack
+      navigateGoBack,
     } = this.props;
     const { messageText, timestamp } = this.state;
 
@@ -309,13 +309,13 @@ class AddOrEditNoteScreen extends PureComponent {
       const editedNote = {
         ...note,
         messageText: messageText.trim(),
-        timestamp
+        timestamp,
       };
       noteUpdateAsync({
         currentUser,
         currentProfile,
         note: editedNote,
-        originalNote: note
+        originalNote: note,
       });
       Metrics.track({ metric: "Clicked Save Note" });
     } else {
@@ -323,7 +323,7 @@ class AddOrEditNoteScreen extends PureComponent {
         currentUser,
         currentProfile,
         messageText: messageText.trim(),
-        timestamp
+        timestamp,
       });
       Metrics.track({ metric: "Clicked Post Note" });
     }
@@ -341,12 +341,12 @@ class AddOrEditNoteScreen extends PureComponent {
       [
         {
           text: "Discard",
-          onPress: this.discardAndGoBack
+          onPress: this.discardAndGoBack,
         },
         {
           text: "Save",
-          onPress: this.saveAndGoBack
-        }
+          onPress: this.saveAndGoBack,
+        },
       ]
     );
   };
@@ -357,12 +357,12 @@ class AddOrEditNoteScreen extends PureComponent {
       "If you close this note, your note will be lost.",
       [
         {
-          text: "Cancel"
+          text: "Cancel",
         },
         {
           text: "OK",
-          onPress: this.discardAndGoBack
-        }
+          onPress: this.discardAndGoBack,
+        },
       ]
     );
   };
@@ -370,13 +370,13 @@ class AddOrEditNoteScreen extends PureComponent {
   keyboardDidShow = event => {
     this.setState({
       isKeyboardVisible: true,
-      keyboardY: event.endCoordinates.screenY
+      keyboardY: event.endCoordinates.screenY,
     });
   };
 
   keyboardDidHide = () => {
     this.setState({
-      isKeyboardVisible: false
+      isKeyboardVisible: false,
     });
   };
 
@@ -385,7 +385,7 @@ class AddOrEditNoteScreen extends PureComponent {
       const { timestamp } = this.state;
 
       const { action, year, month, day } = await DatePickerAndroid.open({
-        date: timestamp
+        date: timestamp,
       });
       if (action !== DatePickerAndroid.dismissedAction) {
         const newTimestamp = setDate(
@@ -396,8 +396,8 @@ class AddOrEditNoteScreen extends PureComponent {
           timestamp: newTimestamp,
           isDirty: this.getDirtyState({
             ...prevState,
-            timestamp: newTimestamp
-          })
+            timestamp: newTimestamp,
+          }),
         }));
 
         this.openAndroidTimePicker();
@@ -418,7 +418,7 @@ class AddOrEditNoteScreen extends PureComponent {
         hour: getHours(timestamp),
         minute: getMinutes(timestamp),
         is24Hour: false, // TODO: android - Should use something locale specific, respecting system settings?
-        mode: "default"
+        mode: "default",
       });
       if (action !== TimePickerAndroid.dismissedAction) {
         const newTimestamp = setMinutes(setHours(timestamp, hour), minute);
@@ -426,8 +426,8 @@ class AddOrEditNoteScreen extends PureComponent {
           timestamp: newTimestamp,
           isDirty: this.getDirtyState({
             ...prevState,
-            timestamp: newTimestamp
-          })
+            timestamp: newTimestamp,
+          }),
         }));
       }
     } catch ({ code, message }) {
@@ -691,9 +691,9 @@ class AddOrEditNoteScreen extends PureComponent {
                 disabled={!isDirty}
               />
             </ThemeProvider>
-          )
-        }
-      }
+          ),
+        },
+      },
     };
 
     return (
@@ -718,8 +718,8 @@ class AddOrEditNoteScreen extends PureComponent {
                   disabled={!isDirty}
                 />
               </ThemeProvider>
-            )
-          }
+            ),
+          },
         })}
       />
     );
@@ -765,22 +765,22 @@ AddOrEditNoteScreen.propTypes = {
   note: PropTypes.shape({
     id: PropTypes.string.isRequired,
     timestamp: PropTypes.instanceOf(Date),
-    messageText: PropTypes.string.isRequired
+    messageText: PropTypes.string.isRequired,
   }),
   timestampAddNote: PropTypes.instanceOf(Date),
   navigateGoBack: PropTypes.func.isRequired,
   noteUpdateAsync: PropTypes.func.isRequired,
   noteAddAsync: PropTypes.func.isRequired,
-  hashtags: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired
+  hashtags: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
 };
 
 AddOrEditNoteScreen.defaultProps = {
   note: null,
-  timestampAddNote: null
+  timestampAddNote: null,
 };
 
 export {
   ADD_OR_EDIT_SCREEN_ADD_NOTE_TITLE,
-  ADD_OR_EDIT_SCREEN_EDIT_NOTE_TITLE
+  ADD_OR_EDIT_SCREEN_EDIT_NOTE_TITLE,
 };
 export default AddOrEditNoteScreen;

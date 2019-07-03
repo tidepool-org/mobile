@@ -9,21 +9,21 @@ import ButtonFlow from "../components/ButtonFlow";
 const styles = StyleSheet.create({
   bottom: {
     flex: 1,
-    justifyContent: "flex-end"
+    justifyContent: "flex-end",
   },
   inputContainer: {
     height: 50,
     borderWidth: 1,
     borderColor: "#ededed",
     borderRadius: 4,
-    marginBottom: 20
+    marginBottom: 20,
   },
   input: {
     color: "#6582ff",
     fontSize: 14,
     paddingTop: 16,
-    paddingLeft: 16
-  }
+    paddingLeft: 16,
+  },
 });
 
 const TitleText = glamorous.text({
@@ -33,7 +33,7 @@ const TitleText = glamorous.text({
   color: "#4f6a92",
   marginTop: 17,
   marginBottom: 14,
-  fontWeight: "bold"
+  fontWeight: "bold",
 });
 
 const SubTitleText = glamorous.text({
@@ -42,7 +42,7 @@ const SubTitleText = glamorous.text({
   lineHeight: 24,
   color: "#7e98c3",
   marginBottom: 26,
-  fontWeight: "500"
+  fontWeight: "500",
 });
 
 class SignUpCreateAccountScreen extends PureComponent {
@@ -106,7 +106,7 @@ class SignUpCreateAccountScreen extends PureComponent {
 }
 
 SignUpCreateAccountScreen.propTypes = {
-  navigateSignUpTermsOfUse: PropTypes.func.isRequired
+  navigateSignUpTermsOfUse: PropTypes.func.isRequired,
 };
 
 export default SignUpCreateAccountScreen;
