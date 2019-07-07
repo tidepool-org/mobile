@@ -32,7 +32,7 @@ class DebugSettingsResetFirstTimeSettingsListItem extends PureComponent {
         numberOfLines={1}
         color={titleColor}
       >
-        Reset First-time Tips
+        Reset first-time tips
       </glamorous.Text>
     );
   }

@@ -42,12 +42,8 @@ function loggerSetUser({ userId, username, fullName }) {
   Logger.setUser({ userId, username, fullName });
 }
 
-const authSignInReset = () => (dispatch, getState) => {
-  const { auth } = getState();
-  if (auth.sessionToken) {
-    loggerClearUser();
-    api().cacheControl.clear();
-  }
+// NOTE: authSignInReset may be called on every keystroke in SignInForm
+const authSignInReset = () => () => {
   return {
     type: AUTH_SIGN_IN_RESET,
   };
@@ -65,6 +61,8 @@ const authSignOutAsync = () => async dispatch => {
 
   Metrics.track({ metric: "Logged Out", shouldFlushBuffer: true });
 
+  loggerClearUser();
+  api().cacheControl.clear();
   dispatch(authSignInReset());
   dispatch(navigateSignIn());
 };
@@ -183,6 +181,8 @@ const authRefreshTokenOrSignInAsync = () => async dispatch => {
       // console.log(
       //   `authRefreshTokenOrSignInAsync: Navigate to sign in due to error`
       // ); // TODO: sign in - what about client side errors? Those should not result in reset / sign in
+      loggerClearUser();
+      api().cacheControl.clear();
       dispatch(authSignInReset());
       dispatch(navigateSignIn());
     } else {
@@ -206,6 +206,8 @@ const authRefreshTokenOrSignInAsync = () => async dispatch => {
         // console.log(
         //   `authRefreshTokenOrSignInAsync: Navigate to sign in due to error`
         // ); // TODO: sign in - what about client side errors? Those should not result in reset / sign in
+        loggerClearUser();
+        api().cacheControl.clear();
         dispatch(authSignInReset());
         dispatch(navigateSignIn());
       } else {

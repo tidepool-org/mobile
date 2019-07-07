@@ -3,6 +3,7 @@
 import { appVersionLoad } from "./appVersion";
 import { authRefreshTokenOrSignInAsync } from "./auth";
 import { apiEnvironmentLoadAndSetAsync } from "./apiEnvironment";
+import { apiCacheExpirationLoadAndSetAsync } from "./apiCacheExpiration";
 import { graphRendererLoadAndSetAsync } from "./graphRenderer";
 import { navigateLaunch } from "./navigation";
 import GraphTextMeshFactory from "../components/Graph/gl/GraphTextMeshFactory";
@@ -30,6 +31,7 @@ const appInitAsync = () => async dispatch => {
   dispatch(navigateLaunch());
 
   await dispatch(apiEnvironmentLoadAndSetAsync());
+  await dispatch(apiCacheExpirationLoadAndSetAsync());
   await dispatch(graphRendererLoadAndSetAsync());
   await GraphTextMeshFactory.loadAssetsAsync();
   await GraphCbgGl.loadAssetsAsync();

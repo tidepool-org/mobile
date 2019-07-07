@@ -15,12 +15,12 @@ class AlertManager {
     Alert.alert("Save?", message, [
       {
         text: this.alertButtonTextDiscard,
-        onPress: onPressDiscard, // is this captured properly?
+        onPress: onPressDiscard,
         style: "destructive",
       },
       {
         text: this.alertButtonTextSave,
-        onPress: onPressSave, // is this captured properly?
+        onPress: onPressSave,
       },
     ]);
   }
@@ -38,7 +38,7 @@ class AlertManager {
       },
       {
         text: destructiveButtonText,
-        onPress, // is this captured properly?
+        onPress,
         style: "destructive",
       },
     ]);

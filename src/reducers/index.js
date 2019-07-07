@@ -4,6 +4,7 @@ import appInit from "./appInit";
 import offline from "./offline";
 import appVersion from "./appVersion";
 import auth from "./auth";
+import apiCacheExpiration from "./apiCacheExpiration";
 import apiEnvironment from "./apiEnvironment";
 import graphRenderer from "./graphRenderer";
 import commentsFetch from "./commentsFetch";
@@ -16,6 +17,7 @@ import firstTimeTips from "./firstTimeTips";
 import logLevel from "./logLevel";
 
 const reducers = combineReducers({
+  apiCacheExpiration,
   apiEnvironment,
   appInit,
   appVersion,

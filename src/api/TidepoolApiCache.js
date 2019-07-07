@@ -1,5 +1,11 @@
 import Datastore from "react-native-local-mongodb";
 
+/* eslint-disable no-bitwise */
+function jsonSize(s) {
+  return ~-encodeURI(JSON.stringify(s)).split(/%..|./).length;
+}
+/* eslint-enable no-bitwise */
+
 class TidepoolApiCache {
   constructor() {
     const config = {
@@ -31,6 +37,25 @@ class TidepoolApiCache {
       filename: "graphDataCollection",
       ...config,
     });
+  }
+
+  async calculateEstimatedSizeInBytes() {
+    let totalSize = 0;
+
+    await this.notesCollection.find({}, (err, docs) => {
+      const size = docs.length ? jsonSize(docs) : 0;
+      totalSize += size || 0;
+    });
+    await this.commentsCollection.find({}, (err, docs) => {
+      const size = docs.length ? jsonSize(docs) : 0;
+      totalSize += size || 0;
+    });
+    await this.graphDataCollection.find({}, (err, docs) => {
+      const size = docs.length ? jsonSize(docs) : 0;
+      totalSize += size || 0;
+    });
+
+    return totalSize;
   }
 
   async saveProfileAsync({ userId, profile }) {
