@@ -66,6 +66,7 @@ class NotesFetchData {
     const noteToAdd = note;
     if (profile.userId === this.userId) {
       noteToAdd.userAddedAt = new Date();
+      noteToAdd.initiallyExpanded = true;
       this.hashtagCollection.updateHashtagsForText({
         objectWithTextToAdd: noteToAdd,
         textPropertyName: "messageText",
@@ -108,7 +109,7 @@ class NotesFetchData {
         this.filterNotes();
       } else {
         Logger.logWarning(
-          `Could not find the edited note in current notes, this is unexpected`
+          `Could not find the note to update in current notes, this is unexpected`
         );
       }
     } else {
