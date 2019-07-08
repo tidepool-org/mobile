@@ -43,16 +43,25 @@ class TidepoolApiCache {
     let totalSize = 0;
 
     await this.notesCollection.find({}, (err, docs) => {
-      const size = docs.length ? jsonSize(docs) : 0;
-      totalSize += size || 0;
+      if (docs.length) {
+        totalSize += docs.reduce((size, doc) => {
+          return size + jsonSize(doc);
+        }, 0);
+      }
     });
     await this.commentsCollection.find({}, (err, docs) => {
-      const size = docs.length ? jsonSize(docs) : 0;
-      totalSize += size || 0;
+      if (docs.length) {
+        totalSize += docs.reduce((size, doc) => {
+          return size + jsonSize(doc);
+        }, 0);
+      }
     });
     await this.graphDataCollection.find({}, (err, docs) => {
-      const size = docs.length ? jsonSize(docs) : 0;
-      totalSize += size || 0;
+      if (docs.length) {
+        totalSize += docs.reduce((size, doc) => {
+          return size + jsonSize(doc);
+        }, 0);
+      }
     });
 
     return totalSize;
