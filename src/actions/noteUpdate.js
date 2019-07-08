@@ -32,7 +32,10 @@ const noteUpdateAsync = ({
 }) => async dispatch => {
   dispatch(noteUpdateDidStart({ note }));
 
-  const { errorMessage } = await api().updateNoteAsync({ note });
+  const { errorMessage } = await api().updateNoteAsync({
+    currentProfile,
+    note,
+  });
 
   if (errorMessage) {
     dispatch(noteUpdateDidFail({ note, errorMessage }));

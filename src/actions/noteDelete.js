@@ -25,6 +25,7 @@ const noteDeleteAsync = ({ note, currentProfile }) => async dispatch => {
   dispatch(noteDeleteDidStart({ note }));
 
   const { errorMessage } = await api().deleteNoteAsync({
+    currentProfile,
     note,
   });
 

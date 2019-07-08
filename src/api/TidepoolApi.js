@@ -358,10 +358,16 @@ class TidepoolApi {
 
     this.tasksInProgress -= 1;
 
+    if (!errorMessage && ConnectionStatus.isOnline) {
+      // Update notes in cache by fetching notes (which writes through to cache) for currentProfile
+      const { userId } = currentProfile;
+      this.fetchNotesAsync({ userId });
+    }
+
     return { errorMessage, note };
   }
 
-  async updateNoteAsync({ note }) {
+  async updateNoteAsync({ currentProfile, note }) {
     this.tasksInProgress += 1;
 
     const { errorMessage } = await this.updateNote({
@@ -374,10 +380,16 @@ class TidepoolApi {
 
     this.tasksInProgress -= 1;
 
+    if (!errorMessage && ConnectionStatus.isOnline) {
+      // Update notes in cache by fetching notes (which writes through to cache) for currentProfile
+      const { userId } = currentProfile;
+      this.fetchNotesAsync({ userId });
+    }
+
     return { errorMessage };
   }
 
-  async deleteNoteAsync({ note }) {
+  async deleteNoteAsync({ currentProfile, note }) {
     this.tasksInProgress += 1;
 
     const { id } = note;
@@ -390,6 +402,12 @@ class TidepoolApi {
       }));
 
     this.tasksInProgress -= 1;
+
+    if (!errorMessage && ConnectionStatus.isOnline) {
+      // Update notes in cache by fetching notes (which writes through to cache) for currentProfile
+      const { userId } = currentProfile;
+      this.fetchNotesAsync({ userId });
+    }
 
     return { errorMessage };
   }
@@ -419,10 +437,15 @@ class TidepoolApi {
 
     this.tasksInProgress -= 1;
 
+    if (!errorMessage && ConnectionStatus.isOnline) {
+      // Update comments in cache by fetching comments (which writes through to cache) for currentProfile
+      this.fetchCommentsAsync({ messageId: note.id });
+    }
+
     return { errorMessage, comment };
   }
 
-  async updateCommentAsync({ comment }) {
+  async updateCommentAsync({ note, comment }) {
     this.tasksInProgress += 1;
 
     const { errorMessage } = await this.updateComment({
@@ -435,10 +458,15 @@ class TidepoolApi {
 
     this.tasksInProgress -= 1;
 
+    if (!errorMessage && ConnectionStatus.isOnline) {
+      // Update comments in cache by fetching comments (which writes through to cache) for currentProfile
+      this.fetchCommentsAsync({ messageId: note.id });
+    }
+
     return { errorMessage };
   }
 
-  async deleteCommentAsync({ comment }) {
+  async deleteCommentAsync({ note, comment }) {
     this.tasksInProgress += 1;
 
     const { id } = comment;
@@ -451,6 +479,11 @@ class TidepoolApi {
       }));
 
     this.tasksInProgress -= 1;
+
+    if (!errorMessage && ConnectionStatus.isOnline) {
+      // Update comments in cache by fetching comments (which writes through to cache) for currentProfile
+      this.fetchCommentsAsync({ messageId: note.id });
+    }
 
     return { errorMessage };
   }
