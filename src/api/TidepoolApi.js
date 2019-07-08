@@ -457,6 +457,7 @@ class TidepoolApi {
 
   async fetchGraphDataAsync({
     userId,
+    messageId,
     noteDate,
     startDate,
     endDate,
@@ -469,9 +470,7 @@ class TidepoolApi {
     if (ConnectionStatus.isOffline) {
       result = await this.cache.fetchGraphDataAsync({
         userId,
-        noteDate,
-        startDate,
-        endDate,
+        messageId,
       });
     } else {
       this.tasksInProgress += 1;
@@ -503,9 +502,7 @@ class TidepoolApi {
       if (ConnectionStatus.isOffline) {
         result = await this.cache.fetchGraphDataAsync({
           userId,
-          noteDate,
-          startDate,
-          endDate,
+          messageId,
         });
       }
     }
@@ -530,9 +527,7 @@ class TidepoolApi {
       if (ConnectionStatus.isOnline) {
         this.cache.saveGraphDataAsync({
           userId,
-          noteDate,
-          startDate,
-          endDate,
+          messageId,
           responseData,
         });
         graphData.isAvailableOffline = true;

@@ -213,17 +213,11 @@ class TidepoolApiCache {
     }
   }
 
-  async saveGraphDataAsync({
-    userId,
-    noteDate,
-    startDate,
-    endDate,
-    responseData,
-  }) {
+  async saveGraphDataAsync({ userId, messageId, responseData }) {
     try {
       await this.graphDataCollection.updateAsync(
-        { userId, noteDate, startDate, endDate },
-        { userId, noteDate, startDate, endDate, responseData },
+        { userId, messageId },
+        { userId, messageId, responseData },
         { upsert: true }
       );
     } catch (error) {
@@ -231,13 +225,11 @@ class TidepoolApiCache {
     }
   }
 
-  async fetchGraphDataAsync({ userId, noteDate, startDate, endDate }) {
+  async fetchGraphDataAsync({ userId, messageId }) {
     try {
       const doc = await this.graphDataCollection.findOneAsync({
         userId,
-        noteDate,
-        startDate,
-        endDate,
+        messageId,
       });
       if (doc) {
         const { responseData } = doc;
