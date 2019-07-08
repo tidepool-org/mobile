@@ -66,7 +66,7 @@ android {
     applicationId 'io.tidepool.urchin'
     targetSdkVersion 26
     versionCode getVersionCode()
-    versionName '3.0.3'
+    versionName '3.0.5'
     ndk {
       abiFilters 'armeabi-v7a', 'x86'
     }
@@ -112,8 +112,8 @@ android {
       storePassword = isRunningOnTravis ? System.getenv("keystore_password") : getPassword("tidepool_keystore_store_password")
       signingConfigs.release.keyAlias = isRunningOnTravis ? System.getenv("keystore_alias") : System.getenv("TIDEPOOL_KEYSTORE_KEY_ALIAS")
       signingConfigs.release.keyPassword = isRunningOnTravis ? System.getenv("keystore_alias_password") : getPassword("tidepool_keystore_key_password")
-    }   
-  }  
+    }
+  }
 
   buildTypes {
     debug {
@@ -137,7 +137,7 @@ android {
   }
   configurations.all {
     resolutionStrategy.force 'com.android.support:design:27.1.0'
-    resolutionStrategy.force 'com.google.android.gms:play-services-gcm:16.0.0'    
+    resolutionStrategy.force 'com.google.android.gms:play-services-gcm:16.0.0'
   }
 }
 
@@ -241,7 +241,7 @@ dependencies {
     exclude group: 'com.squareup.okhttp3', module: 'okhttp'
     exclude group: 'com.squareup.okhttp3', module: 'okhttp-urlconnection'
   }
-  
+
   api 'com.facebook.react:react-native:32.0.0'
   api 'host.exp.exponent:expo-app-loader-provider:1.0.0'
   api 'host.exp.exponent:expo-core:2.0.0'

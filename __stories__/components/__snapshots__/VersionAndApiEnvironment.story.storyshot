@@ -45,7 +45,7 @@ exports[`Storyshots VersionAndApiEnvironment Production 1`] = `
         }
       >
         v
-        3.0.3
+        3.0.5
         
       </Text>
     </View>
@@ -98,7 +98,7 @@ exports[`Storyshots VersionAndApiEnvironment Staging 1`] = `
         }
       >
         v
-        3.0.3
+        3.0.5
          on Staging
       </Text>
     </View>

@@ -41,7 +41,7 @@ class NotesListItem extends PureComponent {
     super(props);
 
     this.state = {
-      expanded: props.initiallyExpanded,
+      expanded: false,
       fadeAnimation: new Animated.Value(0),
       formattedTimestamp: formatDateForNoteList(props.note.timestamp),
     };
@@ -52,6 +52,7 @@ class NotesListItem extends PureComponent {
     const {
       commentsFetchData: { errorMessage: commentsFetchErrorMessage },
       graphDataFetchData: { errorMessage: graphDataFetchErrorMessage },
+      note: { initiallyExpanded },
     } = this.props;
 
     Animated.timing(fadeAnimation, {
@@ -59,6 +60,12 @@ class NotesListItem extends PureComponent {
       duration: 250,
       useNativeDriver: true,
     }).start();
+
+    if (initiallyExpanded) {
+      setTimeout(() => {
+        this.toggleNote({ animationDuration: 350 });
+      }, 100);
+    }
 
     if (commentsFetchErrorMessage) {
       AlertManager.showErrorAlert(commentsFetchErrorMessage);
@@ -538,7 +545,6 @@ NotesListItem.propTypes = {
   theme: ThemePropType.isRequired,
   style: ViewPropTypes.style,
   allowEditing: PropTypes.bool,
-  initiallyExpanded: PropTypes.bool,
   isOffline: PropTypes.bool,
   allowExpansionToggle: PropTypes.bool,
   toggleExpandedNotesCount: PropTypes.number,
@@ -576,7 +582,6 @@ NotesListItem.propTypes = {
 NotesListItem.defaultProps = {
   style: null,
   allowEditing: true,
-  initiallyExpanded: false,
   isOffline: false,
   allowExpansionToggle: true,
   toggleExpandedNotesCount: 0,
