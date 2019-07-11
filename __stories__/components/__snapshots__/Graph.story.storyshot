@@ -259,3 +259,55 @@ exports[`Storyshots Graph no data, three y-axis labels, default scale 1`] = `
   </View>
 </RCTSafeAreaView>
 `;
+
+exports[`Storyshots Graph offline, available offline 1`] = `
+<RCTSafeAreaView
+  paddingTop={0}
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={Object {}}
+  >
+    <View
+      onLayout={[Function]}
+      style={
+        Array [
+          Object {
+            "height": 210,
+          },
+        ]
+      }
+    />
+  </View>
+</RCTSafeAreaView>
+`;
+
+exports[`Storyshots Graph offline, not available offline 1`] = `
+<RCTSafeAreaView
+  paddingTop={0}
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={Object {}}
+  >
+    <View
+      onLayout={[Function]}
+      style={
+        Array [
+          Object {
+            "height": 210,
+          },
+        ]
+      }
+    />
+  </View>
+</RCTSafeAreaView>
+`;

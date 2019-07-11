@@ -1,7 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import {
-  Alert,
   BackHandler,
   Keyboard,
   StatusBar,
@@ -35,6 +34,8 @@ import { formatDateAndTimeForAddOrEditNote } from "../utils/formatDate";
 import { ProfilePropType } from "../prop-types/profile";
 import { UserPropType } from "../prop-types/user";
 import HashtagPicker from "../components/HashtagPicker";
+import ConnectionStatus from "../models/ConnectionStatus";
+import AlertManager from "../models/AlertManager";
 
 // TODO: refactor - Refactor this screen. It's too complex and responsible for too much, it seems
 // TODO: refactor - Factor out some of the modal screen support
@@ -303,6 +304,14 @@ class AddOrEditNoteScreen extends PureComponent {
       noteUpdateAsync,
       navigateGoBack,
     } = this.props;
+
+    if (ConnectionStatus.isOffline) {
+      AlertManager.showOfflineMessage(
+        "It seems you’re offline, so your note can’t be saved."
+      );
+      return;
+    }
+
     const { messageText, timestamp } = this.state;
 
     if (this.isEditNoteMode()) {
@@ -335,36 +344,21 @@ class AddOrEditNoteScreen extends PureComponent {
   };
 
   showSaveChangesAlert = () => {
-    Alert.alert(
-      "Save Changes?",
-      "You have made changes to this note. Would you like to save these changes?",
-      [
-        {
-          text: "Discard",
-          onPress: this.discardAndGoBack,
-        },
-        {
-          text: "Save",
-          onPress: this.saveAndGoBack,
-        },
-      ]
-    );
+    AlertManager.showDiscardOrSaveAlert({
+      message:
+        "You have made changes to this note. Would you like to save these changes?",
+      onPressDiscard: this.discardAndGoBack,
+      onPressSave: this.saveAndGoBack,
+    });
   };
 
   showDiscardNoteAlert = () => {
-    Alert.alert(
-      "Discard Note?",
-      "If you close this note, your note will be lost.",
-      [
-        {
-          text: "Cancel",
-        },
-        {
-          text: "OK",
-          onPress: this.discardAndGoBack,
-        },
-      ]
-    );
+    AlertManager.showCancelOrDestructiveAlert({
+      title: AlertManager.alertTitleDiscard,
+      message: "If you close this note, your note will be lost.",
+      destructiveButtonText: AlertManager.alertButtonTextDiscard,
+      onPress: this.discardAndGoBack,
+    });
   };
 
   keyboardDidShow = event => {

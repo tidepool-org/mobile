@@ -36,6 +36,7 @@ const graphDataFetchAsync = ({
 
   const { graphData, errorMessage } = await api().fetchGraphDataAsync({
     userId,
+    messageId,
     noteDate,
     startDate,
     endDate,

@@ -6,7 +6,8 @@ import glamorous, { ThemeProvider } from "glamorous-native";
 import PrimaryTheme from "../themes/PrimaryTheme";
 import Colors from "../constants/Colors";
 import DebugSettingsApiEnvironmentList from "../components/DebugSettingsApiEnvironmentList";
-import DebugSettingsGraphRendererList from "../components/DebugSettingsGraphRendererList";
+import DebugSettingsCacheExpirationList from "../components/DebugSettingsCacheExpirationList";
+// import DebugSettingsGraphRendererList from "../components/DebugSettingsGraphRendererList";
 // import DebugSettingsLoggingList from "../components/DebugSettingsLoggingList";
 import DebugSettingsOtherList from "../components/DebugSettingsOtherList";
 
@@ -31,31 +32,45 @@ class DebugSettingsScreen extends PureComponent {
     }
   };
 
-  onGraphRendererSelected = newSelectedGraphRenderer => {
-    const { selectedGraphRenderer, navigateGoBack } = this.props;
+  onCacheExpirationSelected = newselectedApiCacheExpiration => {
+    const {
+      selectedApiCacheExpiration,
+      apiCacheExpirationSetAndSaveAsync,
+      navigateGoBack,
+    } = this.props;
 
-    if (newSelectedGraphRenderer !== selectedGraphRenderer) {
-      // Delay this so the Modal closes faster
-      const { graphRendererSetAndSaveAsync } = this.props;
-      setTimeout(() => {
-        graphRendererSetAndSaveAsync(newSelectedGraphRenderer);
-      }, 250);
+    if (newselectedApiCacheExpiration !== selectedApiCacheExpiration) {
+      apiCacheExpirationSetAndSaveAsync(newselectedApiCacheExpiration);
     }
+
     navigateGoBack();
   };
 
-  onLogLevelSelected = newLogLevel => {
-    const { selectedLogLevel, navigateGoBack } = this.props;
+  // onGraphRendererSelected = newSelectedGraphRenderer => {
+  //   const { selectedGraphRenderer, navigateGoBack } = this.props;
 
-    if (newLogLevel !== selectedLogLevel) {
-      // Delay this so the Modal closes faster
-      const { logLevelSetAndSaveAsync } = this.props;
-      setTimeout(() => {
-        logLevelSetAndSaveAsync(newLogLevel);
-      }, 250);
-    }
-    navigateGoBack();
-  };
+  //   if (newSelectedGraphRenderer !== selectedGraphRenderer) {
+  //     // Delay this so the Modal closes faster
+  //     const { graphRendererSetAndSaveAsync } = this.props;
+  //     setTimeout(() => {
+  //       graphRendererSetAndSaveAsync(newSelectedGraphRenderer);
+  //     }, 250);
+  //   }
+  //   navigateGoBack();
+  // };
+
+  // onLogLevelSelected = newLogLevel => {
+  //   const { selectedLogLevel, navigateGoBack } = this.props;
+
+  //   if (newLogLevel !== selectedLogLevel) {
+  //     // Delay this so the Modal closes faster
+  //     const { logLevelSetAndSaveAsync } = this.props;
+  //     setTimeout(() => {
+  //       logLevelSetAndSaveAsync(newLogLevel);
+  //     }, 250);
+  //   }
+  //   navigateGoBack();
+  // };
 
   renderItem = ({ item }) => (
     <glamorous.Text
@@ -72,7 +87,8 @@ class DebugSettingsScreen extends PureComponent {
       navigateGoBack,
       firstTimeTipsResetTips,
       selectedApiEnvironment,
-      selectedGraphRenderer,
+      selectedApiCacheExpiration,
+      // selectedGraphRenderer,
       // selectedLogLevel,
     } = this.props;
 
@@ -119,7 +135,16 @@ class DebugSettingsScreen extends PureComponent {
                 justifyContent="space-between"
                 padding={8}
               />
-              <DebugSettingsGraphRendererList
+              <DebugSettingsCacheExpirationList
+                onCacheExpirationSelected={this.onCacheExpirationSelected}
+                selectedApiCacheExpiration={selectedApiCacheExpiration}
+              />
+              <glamorous.View
+                flexDirection="row"
+                justifyContent="space-between"
+                padding={8}
+              />
+              {/* <DebugSettingsGraphRendererList
                 onGraphRendererSelected={this.onGraphRendererSelected}
                 selectedGraphRenderer={selectedGraphRenderer}
               />
@@ -127,18 +152,16 @@ class DebugSettingsScreen extends PureComponent {
                 flexDirection="row"
                 justifyContent="space-between"
                 padding={8}
+              /> */}
+              {/* <DebugSettingsLoggingList
+                onLogLevelSelected={this.onLogLevelSelected}
+                selectedLogLevel={selectedLogLevel}
               />
-              {/*
-                <DebugSettingsLoggingList
-                  onLogLevelSelected={this.onLogLevelSelected}
-                  selectedLogLevel={selectedLogLevel}
-                />
-                */}
               <glamorous.View
                 flexDirection="row"
                 justifyContent="space-between"
                 padding={8}
-              />
+              /> */}
               <DebugSettingsOtherList
                 navigateGoBack={navigateGoBack}
                 firstTimeTipsResetTips={firstTimeTipsResetTips}
@@ -155,17 +178,20 @@ DebugSettingsScreen.propTypes = {
   navigateGoBack: PropTypes.func.isRequired,
   apiEnvironmentSetAndSaveAsync: PropTypes.func.isRequired,
   selectedApiEnvironment: PropTypes.string,
+  apiCacheExpirationSetAndSaveAsync: PropTypes.func.isRequired,
+  selectedApiCacheExpiration: PropTypes.string,
   firstTimeTipsResetTips: PropTypes.func.isRequired,
-  graphRendererSetAndSaveAsync: PropTypes.func.isRequired,
-  selectedGraphRenderer: PropTypes.string,
-  logLevelSetAndSaveAsync: PropTypes.func.isRequired,
-  selectedLogLevel: PropTypes.string,
+  // graphRendererSetAndSaveAsync: PropTypes.func.isRequired,
+  // selectedGraphRenderer: PropTypes.string,
+  // logLevelSetAndSaveAsync: PropTypes.func.isRequired,
+  // selectedLogLevel: PropTypes.string,
 };
 
 DebugSettingsScreen.defaultProps = {
   selectedApiEnvironment: "",
-  selectedGraphRenderer: "",
-  selectedLogLevel: "",
+  selectedApiCacheExpiration: "",
+  // selectedGraphRenderer: "",
+  // selectedLogLevel: "",
 };
 
 export default DebugSettingsScreen;

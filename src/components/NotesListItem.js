@@ -22,8 +22,7 @@ import HashtagText from "./HashtagText";
 import AddCommentButton from "./AddCommentButton";
 import NotesListItemComment from "./NotesListItemComment";
 import SignificantTimeChangeNotification from "../models/SignificantTimeChangeNotification";
-import ConnectionStatus from "../models/ConnectionStatus";
-import ErrorAlertManager from "../models/ErrorAlertManager";
+import AlertManager from "../models/AlertManager";
 import Metrics from "../models/Metrics";
 import { formatDateForNoteList } from "../utils/formatDate";
 import { ThemePropType } from "../prop-types/theme";
@@ -69,11 +68,11 @@ class NotesListItem extends PureComponent {
     }
 
     if (commentsFetchErrorMessage) {
-      ErrorAlertManager.show(commentsFetchErrorMessage);
+      AlertManager.showErrorAlert(commentsFetchErrorMessage);
     }
 
     if (graphDataFetchErrorMessage) {
-      ErrorAlertManager.show(graphDataFetchErrorMessage);
+      AlertManager.showErrorAlert(graphDataFetchErrorMessage);
     }
 
     SignificantTimeChangeNotification.subscribe(this.timeChanged);
@@ -101,7 +100,7 @@ class NotesListItem extends PureComponent {
       shouldShowCommentsFetchErrorMessage ||
       shouldShowGraphDataFetchErrorMessage
     ) {
-      ErrorAlertManager.show(
+      AlertManager.showErrorAlert(
         nextProps.commentsFetchData.errorMessage ||
           nextProps.graphDataFetchData.errorMessage
       );
@@ -151,9 +150,11 @@ class NotesListItem extends PureComponent {
   };
 
   onPressEditNote = () => {
-    const { note, navigateEditNote } = this.props;
-    if (ConnectionStatus.isOffline()) {
-      ErrorAlertManager.showOfflineNetworkError();
+    const { note, navigateEditNote, isOffline } = this.props;
+    if (isOffline) {
+      AlertManager.showOfflineMessage(
+        "It seems you’re offline, so you can't edit notes."
+      );
     } else {
       Metrics.track({ metric: "Clicked edit a note (Home screen)" });
       navigateEditNote({ note });
@@ -162,9 +163,11 @@ class NotesListItem extends PureComponent {
 
   onPressAddComment = () => {
     // TODO: If comments are still loading and user taps Add Comment, then the existing comments won't be shown on the Add Comment screen, even once commentsFetch has completed. We should probably fix that so that the while commentsFetch is in fetching state, and completes, while Add Comment screen is current, that it loads those comments? Should probably also have a comments loading indicator both in notes list and in Add Comment screen?
-    const { note, navigateAddComment } = this.props;
-    if (ConnectionStatus.isOffline()) {
-      ErrorAlertManager.showOfflineNetworkError();
+    const { note, navigateAddComment, isOffline } = this.props;
+    if (isOffline) {
+      AlertManager.showOfflineMessage(
+        "It seems you’re offline, so you can't add comments."
+      );
     } else {
       Metrics.track({ metric: "Clicked add comment" });
       navigateAddComment({ note });
@@ -177,9 +180,11 @@ class NotesListItem extends PureComponent {
   };
 
   onPressEditComment = ({ comment }) => {
-    const { note, navigateEditComment } = this.props;
-    if (ConnectionStatus.isOffline()) {
-      ErrorAlertManager.showOfflineNetworkError();
+    const { note, navigateEditComment, isOffline } = this.props;
+    if (isOffline) {
+      AlertManager.showOfflineMessage(
+        "It seems you’re offline, so you can't edit comments."
+      );
     } else {
       Metrics.track({ metric: "Clicked edit comment" });
       navigateEditComment({
@@ -418,10 +423,12 @@ class NotesListItem extends PureComponent {
             maxBolusValue,
             minBolusScaleValue,
             wizardData,
+            isAvailableOffline,
           },
         },
         currentProfile: { lowBGBoundary, highBGBoundary, units },
         note: { timestamp: eventTime },
+        isOffline,
       } = this.props;
 
       const isLoading = fetching;
@@ -441,6 +448,8 @@ class NotesListItem extends PureComponent {
       return (
         <Graph
           isLoading={isLoading}
+          isOffline={isOffline}
+          isAvailableOffline={isAvailableOffline}
           yAxisLabelValues={yAxisLabelValues}
           yAxisBGBoundaryValues={yAxisBGBoundaryValues}
           units={units}
@@ -536,6 +545,7 @@ NotesListItem.propTypes = {
   theme: ThemePropType.isRequired,
   style: ViewPropTypes.style,
   allowEditing: PropTypes.bool,
+  isOffline: PropTypes.bool,
   allowExpansionToggle: PropTypes.bool,
   toggleExpandedNotesCount: PropTypes.number,
   currentUser: UserPropType.isRequired,
@@ -572,6 +582,7 @@ NotesListItem.propTypes = {
 NotesListItem.defaultProps = {
   style: null,
   allowEditing: true,
+  isOffline: false,
   allowExpansionToggle: true,
   toggleExpandedNotesCount: 0,
   commentsFetchData: {

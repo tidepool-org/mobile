@@ -94,7 +94,12 @@ class Graph extends PureComponent {
     }
   };
 
-  static renderNoData({ navigateHowToUpload, graphFixedLayoutInfo }) {
+  static renderNoData({
+    navigateHowToUpload,
+    graphFixedLayoutInfo,
+    isOffline,
+    isAvailableOffline,
+  }) {
     return (
       <glamorous.View
         position="absolute"
@@ -106,6 +111,8 @@ class Graph extends PureComponent {
         <GraphNoData
           graphFixedLayoutInfo={graphFixedLayoutInfo}
           navigateHowToUpload={navigateHowToUpload}
+          isOffline={isOffline}
+          isAvailableOffline={isAvailableOffline}
         />
       </glamorous.View>
     );
@@ -158,6 +165,8 @@ class Graph extends PureComponent {
   renderGraphZoomable() {
     const {
       isLoading,
+      isOffline,
+      isAvailableOffline,
       cbgData,
       smbgData,
       basalData,
@@ -191,7 +200,12 @@ class Graph extends PureComponent {
             : null}
           {this.renderGraphScrollable()}
           {shouldRenderNoData
-            ? Graph.renderNoData({ navigateHowToUpload, graphFixedLayoutInfo })
+            ? Graph.renderNoData({
+                navigateHowToUpload,
+                graphFixedLayoutInfo,
+                isOffline,
+                isAvailableOffline,
+              })
             : null}
           {shouldRenderLoadingIndicator ? Graph.renderLoadingIndicator() : null}
         </GraphZoomable>
@@ -248,6 +262,8 @@ Graph.propTypes = {
   graphRenderer: PropTypes.string.isRequired,
   onZoomStart: PropTypes.func,
   onZoomEnd: PropTypes.func,
+  isOffline: PropTypes.bool,
+  isAvailableOffline: PropTypes.bool,
 };
 
 Graph.defaultProps = {
@@ -264,6 +280,8 @@ Graph.defaultProps = {
   wizardData: [],
   onZoomStart: null,
   onZoomEnd: null,
+  isOffline: false,
+  isAvailableOffline: false,
 };
 
 export default withTheme(Graph);
