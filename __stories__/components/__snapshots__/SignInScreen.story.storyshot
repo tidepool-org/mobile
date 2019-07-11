@@ -574,7 +574,7 @@ exports[`Storyshots SignInScreen Signing in 1`] = `
               ]
             }
           >
-
+             
           </Text>
           <TextInput
             allowFontScaling={false}
@@ -1027,7 +1027,7 @@ exports[`Storyshots SignInScreen default 1`] = `
               ]
             }
           >
-
+             
           </Text>
           <TextInput
             allowFontScaling={false}
