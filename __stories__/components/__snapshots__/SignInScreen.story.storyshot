@@ -428,7 +428,7 @@ exports[`Storyshots SignInScreen Sign in error 1`] = `
                 }
               >
                 v
-                3.0.5
+                3.1.0
                  on Staging
               </Text>
             </View>
@@ -574,7 +574,7 @@ exports[`Storyshots SignInScreen Signing in 1`] = `
               ]
             }
           >
-             
+
           </Text>
           <TextInput
             allowFontScaling={false}
@@ -881,7 +881,7 @@ exports[`Storyshots SignInScreen Signing in 1`] = `
                 }
               >
                 v
-                3.0.5
+                3.1.0
                  on Staging
               </Text>
             </View>
@@ -1027,7 +1027,7 @@ exports[`Storyshots SignInScreen default 1`] = `
               ]
             }
           >
-             
+
           </Text>
           <TextInput
             allowFontScaling={false}
@@ -1321,7 +1321,7 @@ exports[`Storyshots SignInScreen default 1`] = `
                 }
               >
                 v
-                3.0.5
+                3.1.0
                  on Staging
               </Text>
             </View>
