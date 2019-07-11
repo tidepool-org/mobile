@@ -121,7 +121,7 @@ const authSignInAsync = ({ username, password }) => async dispatch => {
         }
         await dispatch(currentProfileRestoreAsync({ authUser }));
         if (isOnline) {
-          api().fetchViewableUserProfilesAsync({ userId, fullName }); // Fetch viewabhle user profiles to seed the offline cache
+          api().fetchViewableUserProfilesAsync({ userId, fullName }); // Fetch viewable user profiles to seed the offline cache
         }
         dispatch(navigateHome());
       } catch (error) {
@@ -218,7 +218,7 @@ const authRefreshTokenOrSignInAsync = () => async dispatch => {
           dispatch(authRefreshTokenDidSucceed({ authUser }));
           await dispatch(currentProfileRestoreAsync({ authUser }));
           if (ConnectionStatus.isOnline) {
-            api().fetchViewableUserProfilesAsync({ userId, fullName }); // Fetch viewabhle user profiles to seed the offline cache
+            api().fetchViewableUserProfilesAsync({ userId, fullName }); // Fetch viewable user profiles to seed the offline cache
           }
           dispatch(navigateHome());
         } catch (error) {
