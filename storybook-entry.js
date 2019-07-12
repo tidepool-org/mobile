@@ -1,5 +1,6 @@
 // This file is copied via prestorybook script to index.js
 
+import { registerRootComponent } from "expo";
 import { activateKeepAwake } from "expo-keep-awake";
 import Fonts from "./src/constants/Fonts";
 import withExpoFontPreload from "./src/enhancers/withExpoFontPreload";
