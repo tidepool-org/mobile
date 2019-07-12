@@ -552,8 +552,12 @@ NotesListItem.propTypes = {
   currentProfile: ProfilePropType.isRequired,
   note: PropTypes.shape({
     id: PropTypes.string.isRequired,
+    userId: PropTypes.string.isRequired,
+    groupId: PropTypes.string.isRequired,
+    userFullName: PropTypes.string.isRequired,
     timestamp: PropTypes.instanceOf(Date),
     messageText: PropTypes.string.isRequired,
+    initiallyExpanded: PropTypes.bool,
   }).isRequired,
   commentsFetchAsync: PropTypes.func.isRequired,
   commentsFetchData: PropTypes.shape({

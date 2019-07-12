@@ -10,7 +10,7 @@ import {
   GraphLayoutConstants,
 } from "./GraphFixedLayoutInfo";
 import GraphScalableLayoutInfo from "./GraphScalableLayoutInfo";
-import GraphYAxisLabels from "./GraphYAxisLabels";
+// import GraphYAxisLabels from "./GraphYAxisLabels";
 // import GraphYAxisBGBoundaryLinesSvg from "./svg/GraphYAxisBGBoundaryLinesSvg";
 import GraphNoData from "./GraphNoData";
 import GraphScrollable from "./GraphScrollable";
@@ -173,7 +173,7 @@ class Graph extends PureComponent {
       bolusData,
       wizardData,
       navigateHowToUpload,
-      graphRenderer,
+      // graphRenderer,
     } = this.props;
     const { graphScalableLayoutInfo, graphFixedLayoutInfo } = this.state;
     const shouldRenderLoadingIndicator = isLoading;
@@ -259,7 +259,7 @@ Graph.propTypes = {
   scale: PropTypes.number,
   eventTime: PropTypes.instanceOf(Date),
   navigateHowToUpload: PropTypes.func.isRequired,
-  graphRenderer: PropTypes.string.isRequired,
+  // graphRenderer: PropTypes.string.isRequired,
   onZoomStart: PropTypes.func,
   onZoomEnd: PropTypes.func,
   isOffline: PropTypes.bool,
