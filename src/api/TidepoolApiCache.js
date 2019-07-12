@@ -122,7 +122,13 @@ class TidepoolApiCache {
           isAvailableOffline: true,
         };
       }
-      return { userId, settings: {}, isAvailableOffline: false };
+
+      const errorMessage = "No profile settings available offline";
+      return {
+        userId,
+        errorMessage,
+        isAvailableOffline: false,
+      };
     } catch (error) {
       const errorMessage = error.message;
       // console.log({ errorMessage });
