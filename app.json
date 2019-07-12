@@ -3,7 +3,7 @@
     "name": "Tidepool",
     "slug": "Tidepool",
     "privacy": "public",
-    "sdkVersion": "32.0.0",
+    "sdkVersion": "33.0.0",
     "platforms": ["ios", "android"],
     "version": "3.1.0",
     "orientation": "portrait",
