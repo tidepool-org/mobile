@@ -1,7 +1,6 @@
-// Use require instead of import (for three-bmfont-text) and set global THREE due to: https://github.com/Jam3/three-bmfont-text/issues/13
-const THREE = require("three");
+import ExpoTHREE, { THREE } from "expo-three";
+
 const { PixelRatio } = require("react-native");
-const ExpoTHREE = require("expo-three");
 const createGeometry = require("three-bmfont-text");
 
 // Creating bmfont json and sprite sheet
@@ -85,7 +84,7 @@ class GraphTextMeshFactory {
     const key = `${text}-${fontName}-${width}-${align}`;
     let geometry = this.geometryPool.get(key);
     if (!geometry) {
-      geometry = createGeometry({
+      geometry = createGeometry(THREE, {
         text,
         font: this.bmFonts.get(fontName),
         width: width
