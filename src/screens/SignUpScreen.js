@@ -3,36 +3,17 @@ import PropTypes from "prop-types";
 import { SafeAreaView, StatusBar, StyleSheet } from "react-native";
 import glamorous, { ThemeProvider } from "glamorous-native";
 
-// import SignUpTheme from "../themes/SignUpTheme";
 import PrimaryTheme from "../themes/PrimaryTheme";
 
 import ButtonFlow from "../components/ButtonFlow";
 import ButtonAccountType from "../components/ButtonAccountType";
+import TextSignUpMidTitle from "../components/TextSignUpMidTitle";
 
 const styles = StyleSheet.create({
   bottom: {
     flex: 1,
     justifyContent: "flex-end",
   },
-});
-
-const TitleText = glamorous.text({
-  fontSize: 24,
-  textAlign: "center",
-  lineHeight: 32,
-  color: "#4f6a92",
-  marginTop: 17,
-  marginBottom: 14,
-  fontWeight: "bold",
-});
-
-const SubTitleText = glamorous.text({
-  fontSize: 16,
-  textAlign: "center",
-  lineHeight: 24,
-  color: "#7e98c3",
-  marginBottom: 26,
-  fontWeight: "500",
 });
 
 class SignUpScreen extends PureComponent {
@@ -53,8 +34,7 @@ class SignUpScreen extends PureComponent {
         >
           <StatusBar barStyle="light-content" />
           <SafeAreaView flex={1} justifyContent="space-between" margin={16}>
-            <TitleText>Sign Up for Tidepool</TitleText>
-            <SubTitleText>What kind of account do you need?</SubTitleText>
+            <TextSignUpMidTitle title="What kind of account do you need?" />
             <ButtonAccountType
               title="Personal Account"
               onPress={this.onPressContinue}

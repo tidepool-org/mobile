@@ -5,6 +5,7 @@ import glamorous, { ThemeProvider } from "glamorous-native";
 
 import PrimaryTheme from "../themes/PrimaryTheme";
 import ButtonFlow from "../components/ButtonFlow";
+import TextSignUpMidTitle from "../components/TextSignUpMidTitle";
 
 const styles = StyleSheet.create({
   bottom: {
@@ -54,8 +55,6 @@ class SignUpCreateAccountScreen extends PureComponent {
     navigateSignUpTermsOfUse();
   };
 
-  // npx eslint src/ --max-warnings 0
-
   render() {
     return (
       <ThemeProvider theme={this.theme}>
@@ -65,10 +64,7 @@ class SignUpCreateAccountScreen extends PureComponent {
         >
           <StatusBar barStyle="light-content" />
           <SafeAreaView flex={1} justifyContent="space-between" margin={16}>
-            <TitleText>Create Account</TitleText>
-            <SubTitleText>
-              See all your diabetes data in one place.
-            </SubTitleText>
+            <TextSignUpMidTitle title="See all your diabetes data in one place." />
 
             <glamorous.View style={styles.inputContainer}>
               <glamorous.TextInput
