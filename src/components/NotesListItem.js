@@ -40,8 +40,6 @@ class NotesListItem extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.isMounted = false;
-
     this.state = {
       expanded: false,
       fadeAnimation: new Animated.Value(0),
@@ -50,8 +48,6 @@ class NotesListItem extends PureComponent {
   }
 
   componentDidMount() {
-    this.isMounted = true;
-
     const { fadeAnimation } = this.state;
     const {
       commentsFetchData: { errorMessage: commentsFetchErrorMessage },
@@ -66,10 +62,8 @@ class NotesListItem extends PureComponent {
     }).start();
 
     if (initiallyExpanded) {
-      setTimeout(() => {
-        if (this.isMounted) {
-          this.toggleNote({ animationDuration: 350 });
-        }
+      this.toggleNoteTimeoutId = setTimeout(() => {
+        this.toggleNote({ animationDuration: 350 });
       }, 100);
     }
 
@@ -137,8 +131,9 @@ class NotesListItem extends PureComponent {
   }
 
   componentWillUnmount() {
-    this.isMounted = false;
-
+    if (this.toggleNoteTimeoutId) {
+      clearTimeout(this.toggleNoteTimeoutId);
+    }
     SignificantTimeChangeNotification.unsubscribe(this.timeChanged);
   }
 
@@ -203,7 +198,7 @@ class NotesListItem extends PureComponent {
   };
 
   timeChanged = () => {
-    if (this.isMounted) {
+    if (this.isComponentMounted) {
       const { note } = this.props;
 
       this.setState({
