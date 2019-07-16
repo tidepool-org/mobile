@@ -77,7 +77,7 @@ exports[`Storyshots NotesListItem default 1`] = `
                   ]
                 }
               >
-                Jan 1, 2018 at 9:41 am
+                Jul 27, 2015 at 10:29 pm
               </Text>
             </View>
             <Text
@@ -232,7 +232,7 @@ exports[`Storyshots NotesListItem initially expanded 1`] = `
                   ]
                 }
               >
-                Jan 1, 2018 at 9:41 am
+                Jul 27, 2015 at 10:29 pm
               </Text>
             </View>
             <Text
