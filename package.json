@@ -93,6 +93,8 @@
       "^image![a-zA-Z0-9$_-]+$": "GlobalImageStub",
       "^[@./a-zA-Z0-9$_-]+\\.(png|gif)$": "RelativeImageStub"
     },
-    "setupTestFrameworkScriptFile": "./jest-setupTestFramework.js"
+    "setupFilesAfterEnv": [
+      "./jest-setupTestFramework.js"
+    ]
   }
 }

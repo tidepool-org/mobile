@@ -2,6 +2,7 @@
 
 exports[`Storyshots NotesListItem default 1`] = `
 <RCTSafeAreaView
+  emulateUnlessSupported={true}
   paddingTop={0}
   style={
     Object {
@@ -20,12 +21,143 @@ exports[`Storyshots NotesListItem default 1`] = `
         "padding": 5,
       }
     }
-  />
+  >
+    <RCTScrollView
+      style={null}
+    >
+      <View>
+        <View
+          style={
+            Object {
+              "backgroundColor": "white",
+              "opacity": 0,
+            }
+          }
+        >
+          <View
+            accessible={true}
+            isTVSelectable={true}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "opacity": 1,
+              }
+            }
+          >
+            <View
+              style={
+                Array [
+                  Object {
+                    "flexDirection": "row",
+                    "justifyContent": "flex-start",
+                    "zIndex": 1,
+                  },
+                ]
+              }
+            >
+              <Text
+                allowFontScaling={false}
+                style={
+                  Array [
+                    Object {
+                      "color": "#4d4e4c",
+                      "fontFamily": "OpenSans-Regular",
+                      "fontSize": 12.5,
+                    },
+                    Object {
+                      "marginLeft": 12,
+                      "marginRight": 12,
+                      "marginTop": 7,
+                    },
+                  ]
+                }
+              >
+                Jan 1, 2018 at 9:41 am
+              </Text>
+            </View>
+            <Text
+              allowFontScaling={false}
+              style={
+                Array [
+                  Object {
+                    "color": "#3c3c3c",
+                    "fontFamily": "OpenSans-Regular",
+                    "fontSize": 15,
+                  },
+                  Object {
+                    "flexDirection": "row",
+                    "marginBottom": 7,
+                    "marginLeft": 12,
+                    "marginRight": 12,
+                    "marginTop": 7,
+                  },
+                ]
+              }
+            >
+              <Text
+                allowFontScaling={false}
+                style={
+                  Array [
+                    Object {
+                      "color": "#3c3c3c",
+                      "fontFamily": "OpenSans-Bold",
+                      "fontSize": 15,
+                    },
+                  ]
+                }
+              >
+                #hashtag1
+              </Text>
+              <Text
+                allowFontScaling={false}
+                style={
+                  Array [
+                    Object {
+                      "color": "#3c3c3c",
+                      "fontFamily": "OpenSans-Regular",
+                      "fontSize": 15,
+                    },
+                  ]
+                }
+              >
+                 This should not show up in comments. Quis molestiae tempora eligendi omnis quisquam quisquam quos. Dolor voluptatibus velit nobis culpa deleniti. Reprehenderit in nisi et. Quia odio et inventore eligendi in deserunt id. Sit odio quia vitae provident quo provident molestiae.
+              </Text>
+            </Text>
+          </View>
+          <ViewManagerAdapter_ExpoLinearGradient
+            proxiedProperties={
+              Object {
+                "colors": Array [
+                  4293190885,
+                  4293783022,
+                  4294440952,
+                ],
+                "endPoint": undefined,
+                "locations": undefined,
+                "startPoint": undefined,
+              }
+            }
+            style={
+              Object {
+                "height": 10,
+              }
+            }
+          />
+        </View>
+      </View>
+    </RCTScrollView>
+  </View>
 </RCTSafeAreaView>
 `;
 
 exports[`Storyshots NotesListItem initially expanded 1`] = `
 <RCTSafeAreaView
+  emulateUnlessSupported={true}
   paddingTop={0}
   style={
     Object {
@@ -44,12 +176,143 @@ exports[`Storyshots NotesListItem initially expanded 1`] = `
         "padding": 5,
       }
     }
-  />
+  >
+    <RCTScrollView
+      style={null}
+    >
+      <View>
+        <View
+          style={
+            Object {
+              "backgroundColor": "white",
+              "opacity": 0,
+            }
+          }
+        >
+          <View
+            accessible={true}
+            isTVSelectable={true}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "opacity": 1,
+              }
+            }
+          >
+            <View
+              style={
+                Array [
+                  Object {
+                    "flexDirection": "row",
+                    "justifyContent": "flex-start",
+                    "zIndex": 1,
+                  },
+                ]
+              }
+            >
+              <Text
+                allowFontScaling={false}
+                style={
+                  Array [
+                    Object {
+                      "color": "#4d4e4c",
+                      "fontFamily": "OpenSans-Regular",
+                      "fontSize": 12.5,
+                    },
+                    Object {
+                      "marginLeft": 12,
+                      "marginRight": 12,
+                      "marginTop": 7,
+                    },
+                  ]
+                }
+              >
+                Jan 1, 2018 at 9:41 am
+              </Text>
+            </View>
+            <Text
+              allowFontScaling={false}
+              style={
+                Array [
+                  Object {
+                    "color": "#3c3c3c",
+                    "fontFamily": "OpenSans-Regular",
+                    "fontSize": 15,
+                  },
+                  Object {
+                    "flexDirection": "row",
+                    "marginBottom": 7,
+                    "marginLeft": 12,
+                    "marginRight": 12,
+                    "marginTop": 7,
+                  },
+                ]
+              }
+            >
+              <Text
+                allowFontScaling={false}
+                style={
+                  Array [
+                    Object {
+                      "color": "#3c3c3c",
+                      "fontFamily": "OpenSans-Bold",
+                      "fontSize": 15,
+                    },
+                  ]
+                }
+              >
+                #hashtag1
+              </Text>
+              <Text
+                allowFontScaling={false}
+                style={
+                  Array [
+                    Object {
+                      "color": "#3c3c3c",
+                      "fontFamily": "OpenSans-Regular",
+                      "fontSize": 15,
+                    },
+                  ]
+                }
+              >
+                 This should not show up in comments. Quis molestiae tempora eligendi omnis quisquam quisquam quos. Dolor voluptatibus velit nobis culpa deleniti. Reprehenderit in nisi et. Quia odio et inventore eligendi in deserunt id. Sit odio quia vitae provident quo provident molestiae.
+              </Text>
+            </Text>
+          </View>
+          <ViewManagerAdapter_ExpoLinearGradient
+            proxiedProperties={
+              Object {
+                "colors": Array [
+                  4293190885,
+                  4293783022,
+                  4294440952,
+                ],
+                "endPoint": undefined,
+                "locations": undefined,
+                "startPoint": undefined,
+              }
+            }
+            style={
+              Object {
+                "height": 10,
+              }
+            }
+          />
+        </View>
+      </View>
+    </RCTScrollView>
+  </View>
 </RCTSafeAreaView>
 `;
 
 exports[`Storyshots NotesListItem today 1`] = `
 <RCTSafeAreaView
+  emulateUnlessSupported={true}
   paddingTop={0}
   style={
     Object {
@@ -68,12 +331,143 @@ exports[`Storyshots NotesListItem today 1`] = `
         "padding": 5,
       }
     }
-  />
+  >
+    <RCTScrollView
+      style={null}
+    >
+      <View>
+        <View
+          style={
+            Object {
+              "backgroundColor": "white",
+              "opacity": 0,
+            }
+          }
+        >
+          <View
+            accessible={true}
+            isTVSelectable={true}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "opacity": 1,
+              }
+            }
+          >
+            <View
+              style={
+                Array [
+                  Object {
+                    "flexDirection": "row",
+                    "justifyContent": "flex-start",
+                    "zIndex": 1,
+                  },
+                ]
+              }
+            >
+              <Text
+                allowFontScaling={false}
+                style={
+                  Array [
+                    Object {
+                      "color": "#4d4e4c",
+                      "fontFamily": "OpenSans-Regular",
+                      "fontSize": 12.5,
+                    },
+                    Object {
+                      "marginLeft": 12,
+                      "marginRight": 12,
+                      "marginTop": 7,
+                    },
+                  ]
+                }
+              >
+                Today at 9:41 am
+              </Text>
+            </View>
+            <Text
+              allowFontScaling={false}
+              style={
+                Array [
+                  Object {
+                    "color": "#3c3c3c",
+                    "fontFamily": "OpenSans-Regular",
+                    "fontSize": 15,
+                  },
+                  Object {
+                    "flexDirection": "row",
+                    "marginBottom": 7,
+                    "marginLeft": 12,
+                    "marginRight": 12,
+                    "marginTop": 7,
+                  },
+                ]
+              }
+            >
+              <Text
+                allowFontScaling={false}
+                style={
+                  Array [
+                    Object {
+                      "color": "#3c3c3c",
+                      "fontFamily": "OpenSans-Bold",
+                      "fontSize": 15,
+                    },
+                  ]
+                }
+              >
+                #hashtag1
+              </Text>
+              <Text
+                allowFontScaling={false}
+                style={
+                  Array [
+                    Object {
+                      "color": "#3c3c3c",
+                      "fontFamily": "OpenSans-Regular",
+                      "fontSize": 15,
+                    },
+                  ]
+                }
+              >
+                 This should not show up in comments. Pariatur quos est quod laborum. Quisquam esse quia expedita commodi. Tempora ut exercitationem doloribus harum. Sunt omnis et accusantium et quia quos sequi molestiae. Enim necessitatibus molestiae.
+              </Text>
+            </Text>
+          </View>
+          <ViewManagerAdapter_ExpoLinearGradient
+            proxiedProperties={
+              Object {
+                "colors": Array [
+                  4293190885,
+                  4293783022,
+                  4294440952,
+                ],
+                "endPoint": undefined,
+                "locations": undefined,
+                "startPoint": undefined,
+              }
+            }
+            style={
+              Object {
+                "height": 10,
+              }
+            }
+          />
+        </View>
+      </View>
+    </RCTScrollView>
+  </View>
 </RCTSafeAreaView>
 `;
 
 exports[`Storyshots NotesListItem yesterday 1`] = `
 <RCTSafeAreaView
+  emulateUnlessSupported={true}
   paddingTop={0}
   style={
     Object {
@@ -92,6 +486,136 @@ exports[`Storyshots NotesListItem yesterday 1`] = `
         "padding": 5,
       }
     }
-  />
+  >
+    <RCTScrollView
+      style={null}
+    >
+      <View>
+        <View
+          style={
+            Object {
+              "backgroundColor": "white",
+              "opacity": 0,
+            }
+          }
+        >
+          <View
+            accessible={true}
+            isTVSelectable={true}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "opacity": 1,
+              }
+            }
+          >
+            <View
+              style={
+                Array [
+                  Object {
+                    "flexDirection": "row",
+                    "justifyContent": "flex-start",
+                    "zIndex": 1,
+                  },
+                ]
+              }
+            >
+              <Text
+                allowFontScaling={false}
+                style={
+                  Array [
+                    Object {
+                      "color": "#4d4e4c",
+                      "fontFamily": "OpenSans-Regular",
+                      "fontSize": 12.5,
+                    },
+                    Object {
+                      "marginLeft": 12,
+                      "marginRight": 12,
+                      "marginTop": 7,
+                    },
+                  ]
+                }
+              >
+                Yesterday at 9:41 am
+              </Text>
+            </View>
+            <Text
+              allowFontScaling={false}
+              style={
+                Array [
+                  Object {
+                    "color": "#3c3c3c",
+                    "fontFamily": "OpenSans-Regular",
+                    "fontSize": 15,
+                  },
+                  Object {
+                    "flexDirection": "row",
+                    "marginBottom": 7,
+                    "marginLeft": 12,
+                    "marginRight": 12,
+                    "marginTop": 7,
+                  },
+                ]
+              }
+            >
+              <Text
+                allowFontScaling={false}
+                style={
+                  Array [
+                    Object {
+                      "color": "#3c3c3c",
+                      "fontFamily": "OpenSans-Bold",
+                      "fontSize": 15,
+                    },
+                  ]
+                }
+              >
+                #hashtag1
+              </Text>
+              <Text
+                allowFontScaling={false}
+                style={
+                  Array [
+                    Object {
+                      "color": "#3c3c3c",
+                      "fontFamily": "OpenSans-Regular",
+                      "fontSize": 15,
+                    },
+                  ]
+                }
+              >
+                 This should not show up in comments. Eligendi rerum excepturi et laudantium fuga similique fugit corporis voluptatem. Esse nobis et sint magnam aut. Dolores maiores incidunt occaecati iusto laborum. Quia deleniti dolorem quibusdam id veniam perspiciatis et nisi. Corporis laboriosam esse. Soluta accusamus officiis ut excepturi blanditiis libero ut.
+              </Text>
+            </Text>
+          </View>
+          <ViewManagerAdapter_ExpoLinearGradient
+            proxiedProperties={
+              Object {
+                "colors": Array [
+                  4293190885,
+                  4293783022,
+                  4294440952,
+                ],
+                "endPoint": undefined,
+                "locations": undefined,
+                "startPoint": undefined,
+              }
+            }
+            style={
+              Object {
+                "height": 10,
+              }
+            }
+          />
+        </View>
+      </View>
+    </RCTScrollView>
+  </View>
 </RCTSafeAreaView>
 `;
