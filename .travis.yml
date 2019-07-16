@@ -32,7 +32,7 @@ matrix:
         - yarn install
         - yarn run pre
         - npx eslint src/ --max-warnings 0
-        - yarn test --forceExit > test.log 2>&1
+        - yarn test --forceExit --silent
         - npx expo login -u tidepool -p $EXPO_PASSWORD
         - npx expo publish --release-channel travis-ios
       script:
@@ -88,7 +88,7 @@ matrix:
         - yarn install
         - yarn run pre
         - npx eslint src/ --max-warnings 0
-        - yarn test --forceExit > test.log 2>&1
+        - yarn test --forceExit --silent
         - npx expo login -u tidepool -p $EXPO_PASSWORD
         - npx expo publish --release-channel travis-android
       script:
