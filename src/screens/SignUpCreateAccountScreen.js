@@ -27,25 +27,6 @@ const styles = StyleSheet.create({
   },
 });
 
-const TitleText = glamorous.text({
-  fontSize: 24,
-  textAlign: "center",
-  lineHeight: 32,
-  color: "#4f6a92",
-  marginTop: 17,
-  marginBottom: 14,
-  fontWeight: "bold",
-});
-
-const SubTitleText = glamorous.text({
-  fontSize: 16,
-  textAlign: "center",
-  lineHeight: 24,
-  color: "#7e98c3",
-  marginBottom: 26,
-  fontWeight: "500",
-});
-
 class SignUpCreateAccountScreen extends PureComponent {
   theme = PrimaryTheme;
   state = {};
