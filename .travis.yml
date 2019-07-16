@@ -1,4 +1,3 @@
-# TODO: my - 0 - add account info to Xcode project for auto signing .. using secure credentials
 env:
   global:
     - IOS_APP_NAME=Tidepool
@@ -115,7 +114,6 @@ deploy:
   on:
     repo: tidepool-org/mobile
     tags: true
-
 before_install:
   - openssl aes-256-cbc -K $encrypted_4beaf9ef68f9_key -iv $encrypted_4beaf9ef68f9_iv
-    -in orgtidepoolblipnotesRN_AppStore.mobileprovision.enc -out orgtidepoolblipnotesRN_AppStore.mobileprovision -d
+    -in secret-files.tar.enc -out secret-files.tar -d
