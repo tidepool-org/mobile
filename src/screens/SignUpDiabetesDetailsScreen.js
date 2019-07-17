@@ -1,13 +1,14 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { SafeAreaView, StatusBar } from "react-native";
-import glamorous, { ThemeProvider } from "glamorous-native";
+import { SafeAreaView, View } from "react-native";
 
-import PrimaryTheme from "../themes/PrimaryTheme";
-import Button from "../components/Button";
+import { StyleProvider, Container, Text, Button } from "native-base";
+import getTheme from "../../native-base-theme/components";
+import commonColor from "../../native-base-theme/variables/commonColor";
+
+import TextSignUpMidTitle from "../components/TextSignUpMidTitle";
 
 class SignUpDiabetesDetailsScreen extends PureComponent {
-  theme = PrimaryTheme;
   state = {};
 
   onPressContinue = () => {
@@ -17,32 +18,21 @@ class SignUpDiabetesDetailsScreen extends PureComponent {
 
   render() {
     return (
-      <ThemeProvider theme={this.theme}>
-        <glamorous.View
-          flex={1}
-          backgroundColor={this.theme.colors.lightBackground}
-        >
-          <StatusBar barStyle="light-content" />
-          <SafeAreaView
-            flex={1}
-            justifyContent="space-between"
-            marginLeft={20}
-            marginRight={20}
-          >
-            <glamorous.View>
-              <Button
-                title="Continue"
-                onPress={this.onPressContinue}
-                containerStyle={{
-                  marginTop: 20,
-                  marginLeft: 0,
-                  marginRight: 0,
-                }}
-              />
-            </glamorous.View>
-          </SafeAreaView>
-        </glamorous.View>
-      </ThemeProvider>
+      <SafeAreaView style={{ flex: 1 }}>
+        <StyleProvider style={getTheme(commonColor)}>
+          <Container>
+            <View style={{ flex: 1, margin: 16 }}>
+              <TextSignUpMidTitle title="Enter your age and acknowledge terms of use." />
+
+              <View style={{ flex: 1, justifyContent: "flex-end" }}>
+                <Button block onPress={this.onPressContinue}>
+                  <Text>Continue</Text>
+                </Button>
+              </View>
+            </View>
+          </Container>
+        </StyleProvider>
+      </SafeAreaView>
     );
   }
 }

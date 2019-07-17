@@ -81,13 +81,13 @@ const SignInNavigator = createStackNavigator(
     [SIGN_UP_DIABETES_DETAILS_ROUTE_NAME]: {
       screen: props => <SignUpDiabetesDetailsScreenContainer {...props} />,
       navigationOptions: createNavigationOptions({
-        title: "Diabetes details",
+        title: "Diabetes Details",
       }),
     },
     [SIGN_UP_ACTIVATE_ACCOUNT_ROUTE_NAME]: {
       screen: props => <SignUpActivateAccountScreenContainer {...props} />,
       navigationOptions: createNavigationOptions({
-        title: "Activate your account",
+        title: "Activate Your Account",
       }),
     },
   },
