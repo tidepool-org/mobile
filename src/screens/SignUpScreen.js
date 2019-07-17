@@ -1,6 +1,8 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { SafeAreaView, StatusBar, StyleSheet } from "react-native";
+import { SafeAreaView, StatusBar, StyleSheet, View } from "react-native";
+import { Button, Text } from 'native-base';
+
 import glamorous, { ThemeProvider } from "glamorous-native";
 
 import PrimaryTheme from "../themes/PrimaryTheme";
@@ -28,13 +30,14 @@ class SignUpScreen extends PureComponent {
   render() {
     return (
       <ThemeProvider theme={this.theme}>
-        <glamorous.View
+        <View
           flex={1}
           backgroundColor={this.theme.colors.whiteBackground}
         >
           <StatusBar barStyle="light-content" />
           <SafeAreaView flex={1} justifyContent="space-between" margin={16}>
             <TextSignUpMidTitle title="What kind of account do you need?" />
+<Button><Text>Hello</Text></Button>
             <ButtonAccountType
               title="Personal Account"
               onPress={this.onPressContinue}
@@ -47,11 +50,11 @@ class SignUpScreen extends PureComponent {
               bodyText="You are a doctor, a clinic or other healthcare provider that wants to use Tidepool to help people in your care."
             />
 
-            <glamorous.View style={styles.bottom}>
+            <View style={styles.bottom}>
               <ButtonFlow title="Continue" onPress={this.onPressContinue} />
-            </glamorous.View>
+            </View>
           </SafeAreaView>
-        </glamorous.View>
+        </View>
       </ThemeProvider>
     );
   }
