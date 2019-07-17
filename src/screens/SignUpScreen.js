@@ -1,11 +1,30 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { SafeAreaView, StatusBar, StyleSheet, View } from "react-native";
-import { Button, Text } from 'native-base';
+// import { SafeAreaView, StatusBar, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 
-import glamorous, { ThemeProvider } from "glamorous-native";
+// import { Container, Content, StyleProvider, Button, Text } from 'native-base';
 
-import PrimaryTheme from "../themes/PrimaryTheme";
+import {
+  Container,
+  Header,
+  Body,
+  Title,
+  Left,
+  Right,
+  Content,
+  Text,
+  Card,
+  CardItem,
+  Button,
+  StyleProvider,
+} from "native-base";
+
+import getTheme from '../../native-base-theme/components';
+import commonColor from '../../native-base-theme/variables/commonColor';
+
+// import glamorous, { ThemeProvider } from "glamorous-native";
+// import PrimaryTheme from "../themes/PrimaryTheme";
 
 import ButtonFlow from "../components/ButtonFlow";
 import ButtonAccountType from "../components/ButtonAccountType";
@@ -19,7 +38,6 @@ const styles = StyleSheet.create({
 });
 
 class SignUpScreen extends PureComponent {
-  theme = PrimaryTheme;
   state = {};
 
   onPressContinue = () => {
@@ -29,33 +47,27 @@ class SignUpScreen extends PureComponent {
 
   render() {
     return (
-      <ThemeProvider theme={this.theme}>
-        <View
-          flex={1}
-          backgroundColor={this.theme.colors.whiteBackground}
-        >
-          <StatusBar barStyle="light-content" />
-          <SafeAreaView flex={1} justifyContent="space-between" margin={16}>
+      <StyleProvider style={getTheme(commonColor)}>
+        <Container>
+          <View style={{ flex: 1, justifyContent: "flex-end", margin: 16 }}>
             <TextSignUpMidTitle title="What kind of account do you need?" />
-<Button><Text>Hello</Text></Button>
-            <ButtonAccountType
-              title="Personal Account"
-              onPress={this.onPressContinue}
-              bodyText="You want to manage your diabetes data. You are caring for or supporting someone with diabetes."
-            />
-
             <ButtonAccountType
               title="Clinic Account"
               onPress={this.onPressContinue}
               bodyText="You are a doctor, a clinic or other healthcare provider that wants to use Tidepool to help people in your care."
             />
-
-            <View style={styles.bottom}>
-              <ButtonFlow title="Continue" onPress={this.onPressContinue} />
+            <View style={{ flex: 1, justifyContent: "flex-end" }}>
+              <Button
+              block
+              onPress={this.onPressContinue}
+              >
+            <Text>Continue</Text>
+            </Button>
             </View>
-          </SafeAreaView>
-        </View>
-      </ThemeProvider>
+          </View>
+        </Container>
+      </StyleProvider>
+
     );
   }
 }
