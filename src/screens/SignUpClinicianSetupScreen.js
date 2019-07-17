@@ -17,7 +17,7 @@ import commonColor from "../../native-base-theme/variables/commonColor";
 
 import TextSignUpMidTitle from "../components/TextSignUpMidTitle";
 
-class SignUpCreateAccountScreen extends PureComponent {
+class SignUpClinicianSetupScreen extends PureComponent {
   state = {};
 
   onPressContinue = () => {
@@ -31,19 +31,19 @@ class SignUpCreateAccountScreen extends PureComponent {
         <StyleProvider style={getTheme(commonColor)}>
           <Container>
             <View style={{ flex: 1, justifyContent: "flex-end", margin: 16 }}>
-              <TextSignUpMidTitle title="See all your diabetes data in one place." />
+              <TextSignUpMidTitle title="Help us support you better with this info." />
               <Form>
                 <Item>
                   <Input placeholder="Full Name" />
                 </Item>
                 <Item>
-                  <Input placeholder="Email" />
+                  <Input placeholder="Role - Dropdown" />
                 </Item>
                 <Item>
-                  <Input placeholder="Password" />
+                  <Input placeholder="Clinic Name" />
                 </Item>
                 <Item>
-                  <Input placeholder="Confirm Password" />
+                  <Input placeholder="Clinic Phone Number (Optional)" />
                 </Item>
               </Form>
               <View style={{ flex: 1, justifyContent: "flex-end" }}>
@@ -59,8 +59,8 @@ class SignUpCreateAccountScreen extends PureComponent {
   }
 }
 
-SignUpCreateAccountScreen.propTypes = {
+SignUpClinicianSetupScreen.propTypes = {
   navigateSignUpTermsOfUse: PropTypes.func.isRequired,
 };
 
-export default SignUpCreateAccountScreen;
+export default SignUpClinicianSetupScreen;

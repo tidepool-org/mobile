@@ -22,7 +22,7 @@ class SignUpDiabetesDetailsScreen extends PureComponent {
         <StyleProvider style={getTheme(commonColor)}>
           <Container>
             <View style={{ flex: 1, margin: 16 }}>
-              <TextSignUpMidTitle title="Enter your age and acknowledge terms of use." />
+              <TextSignUpMidTitle title="Whose diabetes data will you be managing?" />
 
               <View style={{ flex: 1, justifyContent: "flex-end" }}>
                 <Button block onPress={this.onPressContinue}>
