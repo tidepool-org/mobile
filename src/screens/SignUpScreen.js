@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { SafeAreaView, View } from "react-native";
 
 import { Container, Text, Button, StyleProvider } from "native-base";
-
 import getTheme from "../../native-base-theme/components";
 import commonColor from "../../native-base-theme/variables/commonColor";
 
@@ -24,7 +23,7 @@ class SignUpScreen extends PureComponent {
       <SafeAreaView style={{ flex: 1 }}>
         <StyleProvider style={getTheme(commonColor)}>
           <Container>
-            <View style={{ flex: 1, justifyContent: "flex-end", margin: 16 }}>
+            <View style={{ flex: 1, margin: 16 }}>
               <TextSignUpMidTitle title="What kind of account do you need?" />
               <ButtonAccountType
                 title="Personal Account"

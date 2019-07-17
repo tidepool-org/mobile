@@ -69,13 +69,13 @@ const SignInNavigator = createStackNavigator(
     [SIGN_UP_CREATE_ACCOUNT_ROUTE_NAME]: {
       screen: props => <SignUpCreateAccountScreenContainer {...props} />,
       navigationOptions: createNavigationOptions({
-        title: "Create account",
+        title: "Create Account",
       }),
     },
     [SIGN_UP_TERMS_OF_USE_ROUTE_NAME]: {
       screen: props => <SignUpTermsOfUseScreenContainer {...props} />,
       navigationOptions: createNavigationOptions({
-        title: "Terms of use",
+        title: "Terms of Use",
       }),
     },
     [SIGN_UP_DIABETES_DETAILS_ROUTE_NAME]: {
