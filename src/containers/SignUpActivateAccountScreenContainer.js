@@ -1,8 +1,8 @@
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
-import { navigateSignIn } from "../actions/navigation";
 import SignUpActivateAccountScreen from "../screens/SignUpActivateAccountScreen";
+import { navigateSignIn } from "../actions/navigation";
 
 const mapStateToProps = (/* state */) => {
   return {};

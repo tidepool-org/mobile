@@ -11,9 +11,9 @@ import TextSignUpMidTitle from "../components/TextSignUpMidTitle";
 class SignUpDiabetesDetailsScreen extends PureComponent {
   state = {};
 
-  onPressContinue = () => {
-    const { navigateSignUpActivateAccount } = this.props;
-    navigateSignUpActivateAccount();
+  onPressDiabetesDetailsTwo = () => {
+    const { navigateSignUpDiabetesDetailsTwo } = this.props;
+    navigateSignUpDiabetesDetailsTwo();
   };
 
   render() {
@@ -23,9 +23,8 @@ class SignUpDiabetesDetailsScreen extends PureComponent {
           <Container>
             <View style={{ flex: 1, margin: 16 }}>
               <TextSignUpMidTitle title="Whose diabetes data will you be managing?" />
-
               <View style={{ flex: 1, justifyContent: "flex-end" }}>
-                <Button block onPress={this.onPressContinue}>
+                <Button block onPress={this.onPressDiabetesDetailsTwo}>
                   <Text>Continue</Text>
                 </Button>
               </View>
@@ -38,7 +37,7 @@ class SignUpDiabetesDetailsScreen extends PureComponent {
 }
 
 SignUpDiabetesDetailsScreen.propTypes = {
-  navigateSignUpActivateAccount: PropTypes.func.isRequired,
+  navigateSignUpDiabetesDetailsTwo: PropTypes.func.isRequired,
 };
 
 export default SignUpDiabetesDetailsScreen;

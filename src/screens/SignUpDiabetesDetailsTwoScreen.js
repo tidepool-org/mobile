@@ -8,7 +8,7 @@ import commonColor from "../../native-base-theme/variables/commonColor";
 
 import TextSignUpMidTitle from "../components/TextSignUpMidTitle";
 
-class SignUpDiabetesDetails2Screen extends PureComponent {
+class SignUpDiabetesDetailsTwoScreen extends PureComponent {
   state = {};
 
   onPressContinue = () => {
@@ -37,8 +37,8 @@ class SignUpDiabetesDetails2Screen extends PureComponent {
   }
 }
 
-SignUpDiabetesDetails2Screen.propTypes = {
+SignUpDiabetesDetailsTwoScreen.propTypes = {
   navigateSignUpActivateAccount: PropTypes.func.isRequired,
 };
 
-export default SignUpDiabetesDetails2Screen;
+export default SignUpDiabetesDetailsTwoScreen;

@@ -20,8 +20,12 @@ import {
   SIGN_IN_ROUTE_NAME,
   SIGN_UP_ROUTE_NAME,
   SIGN_UP_CREATE_ACCOUNT_ROUTE_NAME,
+  SIGN_UP_CREATE_ACCOUNT_CLINICIAN_ROUTE_NAME,
+  SIGN_UP_CREATE_ACCOUNT_PERSONAL_ROUTE_NAME,
+  SIGN_UP_CLINICIAN_SETUP_ROUTE_NAME,
   SIGN_UP_TERMS_OF_USE_ROUTE_NAME,
   SIGN_UP_DIABETES_DETAILS_ROUTE_NAME,
+  SIGN_UP_DIABETES_DETAILS_TWO_ROUTE_NAME,
   SIGN_UP_ACTIVATE_ACCOUNT_ROUTE_NAME,
   SWITCH_PROFILE_ROUTE_NAME,
 } from "../navigators/routeNames";
@@ -31,8 +35,12 @@ import {
   NAVIGATE_SIGN_IN,
   NAVIGATE_SIGN_UP,
   NAVIGATE_SIGN_UP_CREATE_ACCOUNT,
+  NAVIGATE_SIGN_UP_CREATE_ACCOUNT_CLINICIAN,
+  NAVIGATE_SIGN_UP_CREATE_ACCOUNT_PERSONAL,
+  NAVIGATE_SIGN_UP_CLINICIAN_SETUP,
   NAVIGATE_SIGN_UP_TERMS_OF_USE,
   NAVIGATE_SIGN_UP_DIABETES_DETAILS,
+  NAVIGATE_SIGN_UP_DIABETES_DETAILS_TWO,
   NAVIGATE_SIGN_UP_ACTIVATE_ACCOUNT,
   NAVIGATE_FORGOT_PASSWORD,
   NAVIGATE_HOW_TO_UPLOAD,
@@ -143,6 +151,31 @@ function navigation(state = initialState, action) {
         state
       );
       break;
+    case NAVIGATE_SIGN_UP_CREATE_ACCOUNT_CLINICIAN:
+      nextState = AppNavigator.router.getStateForAction(
+        NavigationActions.navigate({
+          routeName: SIGN_UP_CREATE_ACCOUNT_CLINICIAN_ROUTE_NAME,
+        }),
+        state
+      );
+      break;
+
+    case NAVIGATE_SIGN_UP_CREATE_ACCOUNT_PERSONAL:
+      nextState = AppNavigator.router.getStateForAction(
+        NavigationActions.navigate({
+          routeName: SIGN_UP_CREATE_ACCOUNT_PERSONAL_ROUTE_NAME,
+        }),
+        state
+      );
+      break;
+    case NAVIGATE_SIGN_UP_CLINICIAN_SETUP:
+      nextState = AppNavigator.router.getStateForAction(
+        NavigationActions.navigate({
+          routeName: SIGN_UP_CLINICIAN_SETUP_ROUTE_NAME,
+        }),
+        state
+      );
+      break;
     case NAVIGATE_SIGN_UP_TERMS_OF_USE:
       nextState = AppNavigator.router.getStateForAction(
         NavigationActions.navigate({
@@ -155,6 +188,14 @@ function navigation(state = initialState, action) {
       nextState = AppNavigator.router.getStateForAction(
         NavigationActions.navigate({
           routeName: SIGN_UP_DIABETES_DETAILS_ROUTE_NAME,
+        }),
+        state
+      );
+      break;
+    case NAVIGATE_SIGN_UP_DIABETES_DETAILS_TWO:
+      nextState = AppNavigator.router.getStateForAction(
+        NavigationActions.navigate({
+          routeName: SIGN_UP_DIABETES_DETAILS_TWO_ROUTE_NAME,
         }),
         state
       );

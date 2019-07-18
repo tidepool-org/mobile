@@ -1,16 +1,26 @@
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
-import { navigateSignUpCreateAccount } from "../actions/navigation";
 import SignUpScreen from "../screens/SignUpScreen";
+import {
+  navigateSignUpCreateAccount,
+  navigateSignUpCreateAccountClinician,
+  navigateSignUpCreateAccountPersonal,
+} from "../actions/navigation";
 
 const mapStateToProps = (/* state */) => {
   return {};
 };
 
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ navigateSignUpCreateAccount }, dispatch);
-};
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      navigateSignUpCreateAccount,
+      navigateSignUpCreateAccountClinician,
+      navigateSignUpCreateAccountPersonal, 
+    },
+    dispatch
+  );
 
 export default connect(
   mapStateToProps,

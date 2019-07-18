@@ -17,12 +17,12 @@ import commonColor from "../../native-base-theme/variables/commonColor";
 
 import TextSignUpMidTitle from "../components/TextSignUpMidTitle";
 
-class SignUpClinicianSetupScreen extends PureComponent {
+class SignUpCreateAccountPersonalScreen extends PureComponent {
   state = {};
 
-  onPressActivateAccount = () => {
-    const { navigateSignUpActivateAccount } = this.props;
-    navigateSignUpActivateAccount();
+  onPressContinue = () => {
+    const { navigateSignUpTermsOfUse } = this.props;
+    navigateSignUpTermsOfUse();
   };
 
   render() {
@@ -31,23 +31,23 @@ class SignUpClinicianSetupScreen extends PureComponent {
         <StyleProvider style={getTheme(commonColor)}>
           <Container>
             <View style={{ flex: 1, justifyContent: "flex-end", margin: 16 }}>
-              <TextSignUpMidTitle title="Help us support you better with this info." />
+              <TextSignUpMidTitle title="Personal See all your diabetes data in one place." />
               <Form>
                 <Item>
                   <Input placeholder="Full Name" />
                 </Item>
                 <Item>
-                  <Input placeholder="Role - Dropdown" />
+                  <Input placeholder="Email" />
                 </Item>
                 <Item>
-                  <Input placeholder="Clinic Name" />
+                  <Input placeholder="Password" />
                 </Item>
                 <Item>
-                  <Input placeholder="Clinic Phone Number (Optional)" />
+                  <Input placeholder="Confirm Password" />
                 </Item>
               </Form>
               <View style={{ flex: 1, justifyContent: "flex-end" }}>
-                <Button block onPress={this.onPressActivateAccount}>
+                <Button block onPress={this.onPressContinue}>
                   <Text>Continue</Text>
                 </Button>
               </View>
@@ -59,8 +59,8 @@ class SignUpClinicianSetupScreen extends PureComponent {
   }
 }
 
-SignUpClinicianSetupScreen.propTypes = {
-  navigateSignUpActivateAccount: PropTypes.func.isRequired,
+SignUpCreateAccountPersonalScreen.propTypes = {
+  navigateSignUpTermsOfUse: PropTypes.func.isRequired,
 };
 
-export default SignUpClinicianSetupScreen;
+export default SignUpCreateAccountPersonalScreen;

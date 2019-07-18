@@ -13,9 +13,19 @@ import TextSignUpMidTitle from "../components/TextSignUpMidTitle";
 class SignUpScreen extends PureComponent {
   state = {};
 
-  onPressContinue = () => {
+  onPressCreateAccount = () => {
     const { navigateSignUpCreateAccount } = this.props;
     navigateSignUpCreateAccount();
+  };
+
+  onPressCreateAccountClinician = () => {
+    const { navigateSignUpCreateAccountClinician } = this.props;
+    navigateSignUpCreateAccountClinician();
+  };
+
+  onPressCreateAccountPersonal = () => {
+    const { navigateSignUpCreateAccountPersonal } = this.props;
+    navigateSignUpCreateAccountPersonal();
   };
 
   render() {
@@ -27,16 +37,16 @@ class SignUpScreen extends PureComponent {
               <TextSignUpMidTitle title="What kind of account do you need?" />
               <ButtonAccountType
                 title="Personal Account"
-                onPress={this.onPressContinue}
+                onPress={this.onPressCreateAccountPersonal}
                 bodyText="You want to manage your diabetes data. You are caring for or supporting someone with diabetes."
               />
               <ButtonAccountType
                 title="Clinic Account"
-                onPress={this.onPressContinue}
+                onPress={this.onPressCreateAccountClinician}
                 bodyText="You are a doctor, a clinic or other healthcare provider that wants to use Tidepool to help people in your care."
               />
               <View style={{ flex: 1, justifyContent: "flex-end" }}>
-                <Button block onPress={this.onPressContinue}>
+                <Button block onPress={this.onPressCreateAccount}>
                   <Text>Continue</Text>
                 </Button>
               </View>
@@ -50,6 +60,8 @@ class SignUpScreen extends PureComponent {
 
 SignUpScreen.propTypes = {
   navigateSignUpCreateAccount: PropTypes.func.isRequired,
+  navigateSignUpCreateAccountClinician: PropTypes.func.isRequired,
+  navigateSignUpCreateAccountPersonal: PropTypes.func.isRequired,
 };
 
 export default SignUpScreen;

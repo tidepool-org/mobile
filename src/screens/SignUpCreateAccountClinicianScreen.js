@@ -20,9 +20,9 @@ import TextSignUpMidTitle from "../components/TextSignUpMidTitle";
 class SignUpCreateAccountClinicianScreen extends PureComponent {
   state = {};
 
-  onPressContinue = () => {
-    const { navigateSignUpTermsOfUse } = this.props;
-    navigateSignUpTermsOfUse();
+  onPressClinicianSetup = () => {
+    const { navigateSignUpClinicianSetup } = this.props;
+    navigateSignUpClinicianSetup();
   };
 
   render() {
@@ -43,11 +43,11 @@ class SignUpCreateAccountClinicianScreen extends PureComponent {
                   <Input placeholder="Confirm Password" />
                 </Item>
                 <Item>
-                  <Input placeholder="TOU Checkbox"/>
+                  <Input placeholder="TOU Checkbox" />
                 </Item>
               </Form>
               <View style={{ flex: 1, justifyContent: "flex-end" }}>
-                <Button block onPress={this.onPressContinue}>
+                <Button block onPress={this.onPressClinicianSetup}>
                   <Text>Continue</Text>
                 </Button>
               </View>
@@ -60,7 +60,7 @@ class SignUpCreateAccountClinicianScreen extends PureComponent {
 }
 
 SignUpCreateAccountClinicianScreen.propTypes = {
-  navigateSignUpTermsOfUse: PropTypes.func.isRequired,
+  navigateSignUpClinicianSetup: PropTypes.func.isRequired,
 };
 
 export default SignUpCreateAccountClinicianScreen;
