@@ -65,7 +65,8 @@ class SignUpDiabetesDetailsTwoScreen extends PureComponent {
                   returnKeyType="done"
                 />
                 <Text>
-                  Date: {this.state.chosenDate.toString().substr(4, 12)}
+                  Date:
+                  {this.state.chosenDate.toString().substr(4, 12)}
                 </Text>
               </View>
 
@@ -86,7 +87,8 @@ class SignUpDiabetesDetailsTwoScreen extends PureComponent {
                   disabled={false}
                 />
                 <Text>
-                  Date: {this.state.chosenDate.toString().substr(4, 12)}
+                  Date:
+                  {this.state.chosenDate.toString().substr(4, 12)}
                 </Text>
               </View>
               <HrCustom />

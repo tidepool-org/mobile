@@ -1,7 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { SafeAreaView, View, Alert, StyleSheet } from "react-native";
-import Hr from "react-native-hr-component";
+import { SafeAreaView, View, Alert } from "react-native";
 
 import {
   StyleProvider,
@@ -15,17 +14,9 @@ import {
 import getTheme from "../../native-base-theme/components";
 import commonColor from "../../native-base-theme/variables/commonColor";
 
-
 import TextSignUpMidTitle from "../components/TextSignUpMidTitle";
 import ButtonSelectType from "../components/ButtonSelectType";
 import HrCustom from "../components/HrCustom";
-
-const styles = StyleSheet.create({
-  hr: {
-    paddingTop: 32,
-    paddingBottom: 32,
-  },
-});
 
 class SignUpDiabetesDetailsScreen extends PureComponent {
   state = {};

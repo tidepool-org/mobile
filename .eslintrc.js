@@ -23,6 +23,7 @@ module.exports = {
 
     // Disable for now, latest version of eslint-plugin-react is confused. Revisit this.
     "react/no-typos": OFF,
+    "react/destructuring-assignment": OFF,
 
     // Disable this rule for stories
     "import/no-extraneous-dependencies": [
