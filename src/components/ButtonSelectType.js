@@ -13,19 +13,23 @@ import {
 const styles = StyleSheet.create({
   button: {
     elevation: 4,
-    backgroundColor: "#627cff",
-    borderRadius: 3,
+    backgroundColor: "#f9f9f9",
+    borderColor: "#ededed",
+    borderRadius: 4,
+    borderWidth: 1,
     overflow: "hidden",
-    height: 44,
+    minHeight: 43,
+    marginVertical: 8,
   },
-  text: {
-    color: "white",
-    textAlign: "center",
-    paddingTop: 15,
-    fontWeight: "500",
+  titleText: {
+    color: "#4f6a92",
     fontSize: 16,
-    lineHeight: 14,
-    letterSpacing: 0,
+    fontWeight: "500",
+    marginTop: 11,
+    marginRight: 52,
+    marginBottom: 11,
+    marginLeft: 16,
+    flexWrap: 'wrap',
   },
   buttonDisabled: {
     elevation: 0,
@@ -34,13 +38,9 @@ const styles = StyleSheet.create({
   textDisabled: {
     color: "white",
   },
-  bottom: {
-    flex: 1,
-    justifyContent: "flex-end",
-  },
 });
 
-class ButtonFlow extends PureComponent {
+class ButtonSelectType extends PureComponent {
   render() {
     const {
       color,
@@ -77,23 +77,21 @@ class ButtonFlow extends PureComponent {
         disabled={disabled}
         onPress={onPress}
       >
-        <View style={styles.bottom}>
-          <View style={mergedButtonStyles}>
-            <Text
-              style={mergedTextStyles}
-              disabled={disabled}
-              allowFontScaling={false}
-            >
-              {formattedTitle}
-            </Text>
-          </View>
+        <View style={mergedButtonStyles}>
+          <Text
+            style={[mergedTextStyles, styles.titleText]}
+            disabled={disabled}
+            allowFontScaling={false}
+          >
+            {formattedTitle}
+          </Text>
         </View>
       </Touchable>
     );
   }
 }
 
-ButtonFlow.propTypes = {
+ButtonSelectType.propTypes = {
   title: PropTypes.string.isRequired,
   color: PropTypes.string,
   disabled: PropTypes.bool,
@@ -102,11 +100,11 @@ ButtonFlow.propTypes = {
   textStyle: Text.propTypes.style,
 };
 
-ButtonFlow.defaultProps = {
+ButtonSelectType.defaultProps = {
   color: null,
   disabled: false,
   containerStyle: null,
   textStyle: null,
 };
 
-export default ButtonFlow;
+export default ButtonSelectType;

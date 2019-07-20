@@ -1,12 +1,31 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { SafeAreaView, View } from "react-native";
+import { SafeAreaView, View, Alert, StyleSheet } from "react-native";
+import Hr from "react-native-hr-component";
 
-import { StyleProvider, Container, Text, Button } from "native-base";
+import {
+  StyleProvider,
+  Container,
+  Text,
+  Button,
+  Form,
+  Item,
+  Picker,
+} from "native-base";
 import getTheme from "../../native-base-theme/components";
 import commonColor from "../../native-base-theme/variables/commonColor";
 
+
 import TextSignUpMidTitle from "../components/TextSignUpMidTitle";
+import ButtonSelectType from "../components/ButtonSelectType";
+import HrCustom from "../components/HrCustom";
+
+const styles = StyleSheet.create({
+  hr: {
+    paddingTop: 32,
+    paddingBottom: 32,
+  },
+});
 
 class SignUpDiabetesDetailsScreen extends PureComponent {
   state = {};
@@ -16,6 +35,10 @@ class SignUpDiabetesDetailsScreen extends PureComponent {
     navigateSignUpDiabetesDetailsTwo();
   };
 
+  showAlert = () => {
+    Alert.alert("Alert!");
+  };
+
   render() {
     return (
       <SafeAreaView style={{ flex: 1 }}>
@@ -23,6 +46,33 @@ class SignUpDiabetesDetailsScreen extends PureComponent {
           <Container>
             <View style={{ flex: 1, margin: 16 }}>
               <TextSignUpMidTitle title="Whose diabetes data will you be managing?" />
+              <ButtonSelectType
+                title="This is for me, I have diabetes"
+                onPress={this.showAlert}
+              />
+              <ButtonSelectType
+                title="This is for someone I care for who has diabetes"
+                onPress={this.showAlert}
+              />
+
+              <HrCustom />
+
+              <Form style={{ flex: 1, margin: 16 }}>
+                <Item picker>
+                  <Picker
+                    mode="dropdown"
+                    placeholder="I have / They have..."
+                    placeholderStyle={{ color: "#bfc6ea" }}
+                    placeholderIconColor="#007aff"
+                  >
+                    <Picker.Item label="Type 1 Diabetes" value="key0" />
+                    <Picker.Item label="Type 2 Diabetes" value="key1" />
+                    <Picker.Item label="Gestational Diabetes" value="key2" />
+                    <Picker.Item label="LADA" value="key3" />
+                  </Picker>
+                </Item>
+              </Form>
+
               <View style={{ flex: 1, justifyContent: "flex-end" }}>
                 <Button block onPress={this.onPressDiabetesDetailsTwo}>
                   <Text>Continue</Text>

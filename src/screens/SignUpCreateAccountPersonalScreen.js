@@ -31,7 +31,7 @@ class SignUpCreateAccountPersonalScreen extends PureComponent {
         <StyleProvider style={getTheme(commonColor)}>
           <Container>
             <View style={{ flex: 1, justifyContent: "flex-end", margin: 16 }}>
-              <TextSignUpMidTitle title="Personal See all your diabetes data in one place." />
+              <TextSignUpMidTitle title="See all your diabetes data in one place." />
               <Form>
                 <Item>
                   <Input placeholder="Full Name" />

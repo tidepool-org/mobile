@@ -1,8 +1,19 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { SafeAreaView, View, Picker, Switch } from "react-native";
+import { SafeAreaView, View } from "react-native";
 
-import { StyleProvider, Container, Text, Button } from "native-base";
+import {
+  StyleProvider,
+  Container,
+  Text,
+  Button,
+  ListItem,
+  Left,
+  Right,
+  Body,
+  Switch,
+  Radio,
+ } from "native-base";
 import getTheme from "../../native-base-theme/components";
 import commonColor from "../../native-base-theme/variables/commonColor";
 
@@ -22,19 +33,55 @@ class SignUpTermsOfUseScreen extends PureComponent {
         <StyleProvider style={getTheme(commonColor)}>
           <Container>
             <View style={{ flex: 1, margin: 16 }}>
-              <TextSignUpMidTitle title="Enter your age and acknowledge terms of use." />
-              <Picker flex={1}>
-                <Picker.Item label="I am 18 years or older" value="18" />
-                <Picker.Item label="I am between 13 and 17 years old" value="13" />
-                <Picker.Item label="I am 12 years old or younger" value="12" />
-              </Picker>
-              <Switch />
-              <Text>I am 18 or older and accept the terms of the Tidepool App Terms of Use and Privacy Policy</Text>
+
+              <View>
+                <TextSignUpMidTitle title="Select your age." />
+                <ListItem>
+                  <Left>
+                    <Text>I am 18 years or older</Text>
+                  </Left>
+                  <Right>
+                    <Radio true />
+                  </Right>
+                </ListItem>
+
+                <ListItem>
+                  <Left>
+                    <Text>I am between 13 and 17 years old</Text>
+                  </Left>
+                  <Right>
+                    <Radio selected={false} />
+                  </Right>
+                </ListItem>
+
+                <ListItem>
+                  <Left>
+                    <Text>I am 12 years old or younger</Text>
+                  </Left>
+                  <Right>
+                    <Radio selected={false} />
+                  </Right>
+                </ListItem>
+              </View>
+
+
+              <View>
+                <TextSignUpMidTitle title="Acknowledge terms of use." />
+                <ListItem>
+                  <Switch value={false} />
+                  <Body>
+                    <Text>I am 18 or older and accept the terms of the Tidepool App Terms of Use and Privacy Policy</Text>
+                  </Body>
+                </ListItem>
+              </View>
+
+
               <View style={{ flex: 1, justifyContent: "flex-end" }}>
                 <Button block onPress={this.onPressContinue}>
                   <Text>Continue</Text>
                 </Button>
               </View>
+
             </View>
           </Container>
         </StyleProvider>
