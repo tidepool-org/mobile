@@ -16,7 +16,9 @@ matrix:
     - language: objective-c
       osx_image: xcode10.1
       before_install:
+        - npm uninstall -g watchman
         - brew update
+        - brew install watchman
         - brew install yarn
         - gem install xcpretty-travis-formatter
         - openssl aes-256-cbc -K $encrypted_4beaf9ef68f9_key -iv $encrypted_4beaf9ef68f9_iv
@@ -72,6 +74,10 @@ matrix:
           - android-sdk-license-.+
           - google-gdk-license-.+
       before_install:
+        - npm uninstall -g watchman
+        - brew update
+        - brew install watchman
+        - brew install yarn
         - yes | sdkmanager "platforms;android-27"
         - openssl aes-256-cbc -K $encrypted_4beaf9ef68f9_key -iv $encrypted_4beaf9ef68f9_iv
           -in secret-files.tar.enc -out secret-files.tar -d
