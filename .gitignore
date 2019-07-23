@@ -1,8 +1,6 @@
 .expo/
 keys.json
 
-node_modules/
-npm-debug.*
 yarn-debug.log*
 yarn-error.log*
 .vscode/.react/debuggerWorker.js
@@ -153,11 +151,6 @@ fastlane/screenshots
 fastlane/test_output
 fastlane/readme.md
 
-
-#
-# From https://raw.githubusercontent.com/expo/expo/master/.gitignore
-#
-
 # Xcode
 .DS_Store
 *.pbxuser
@@ -199,10 +192,6 @@ ReactAndroid-temp.aar
 
 # Tools
 jarjar-rules.txt
-
-# Node
-node_modules
-npm-debug.log
 
 # Hyperinstall
 .hyperinstall-state.json
@@ -256,5 +245,15 @@ android/app/fabric.properties
 ios/Exponent/Supporting/Generated/EXKeys.h
 ios/RCTTest.podspec
 
-# Open source
-.expo
+# Other
+node_modules/**/*
+.expo/*
+npm-debug.*
+*.jks
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+web-build/
+web-report/
+
