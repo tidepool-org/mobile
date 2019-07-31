@@ -9,6 +9,7 @@ function loadStories() {
   require('../__stories__/components/AddOrEditCommentScreen.story');
   require('../__stories__/components/AddOrEditNoteScreen.story');
   require('../__stories__/components/Button.story');
+  require('../__stories__/components/DatePicker.story');
   require('../__stories__/components/DebugSettings.story');
   require('../__stories__/components/Drawer.story');
   require('../__stories__/components/Graph.story');
@@ -35,6 +36,7 @@ const stories = [
   '../__stories__/components/AddOrEditCommentScreen.story',
   '../__stories__/components/AddOrEditNoteScreen.story',
   '../__stories__/components/Button.story',
+  '../__stories__/components/DatePicker.story',
   '../__stories__/components/DebugSettings.story',
   '../__stories__/components/Drawer.story',
   '../__stories__/components/Graph.story',
