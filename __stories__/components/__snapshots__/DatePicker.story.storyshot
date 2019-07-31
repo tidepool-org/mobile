@@ -78,7 +78,7 @@ exports[`Storyshots DatePicker default 1`] = `
             />
             <View>
               <RCTDatePicker
-                date={1564610609289}
+                date={1525417200000}
                 locale="en"
                 maximumDate={1612080000000}
                 minimumDate={949392000000}
