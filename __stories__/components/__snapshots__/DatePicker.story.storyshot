@@ -21,80 +21,280 @@ exports[`Storyshots DatePicker default 1`] = `
       }
     }
   >
-    <View>
-      <View>
-        <Text
-          onPress={[Function]}
+    <View
+      accessible={true}
+      isTVSelectable={true}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "width": 142,
+          },
+          Object {
+            "width": 200,
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "height": 40,
+              "justifyContent": "center",
+            },
+            undefined,
+          ]
+        }
+      >
+        <View
           style={
             Array [
               Object {
-                "color": "#000",
-                "fontFamily": "System",
-                "fontSize": 16,
+                "alignItems": "center",
+                "borderColor": "#aaa",
+                "borderWidth": 1,
+                "flex": 1,
+                "height": 40,
+                "justifyContent": "center",
               },
               Object {
-                "color": "#000",
-                "padding": 10,
+                "marginLeft": 36,
+              },
+              false,
+              false,
+            ]
+          }
+        >
+          <Text
+            allowFontScaling={true}
+            style={
+              Array [
+                Object {
+                  "color": "#333",
+                },
+                undefined,
+              ]
+            }
+          >
+            2016-05-15
+          </Text>
+        </View>
+        <Image
+          source={1}
+          style={
+            Array [
+              Object {
+                "height": 32,
+                "marginLeft": 5,
+                "marginRight": 5,
+                "width": 32,
               },
               Object {
-                "color": "#d3d3d3",
+                "left": 0,
+                "marginLeft": 0,
+                "position": "absolute",
+                "top": 4,
               },
             ]
           }
-          uppercase={false}
+        />
+        <Modal
+          animationType="none"
+          hardwareAccelerated={false}
+          onRequestClose={[Function]}
+          supportedOrientations={
+            Array [
+              "portrait",
+              "portrait-upside-down",
+              "landscape",
+              "landscape-left",
+              "landscape-right",
+            ]
+          }
+          transparent={true}
+          visible={false}
         >
-          Select date
-        </Text>
-        <View>
-          <Modal
-            animationType="fade"
-            hardwareAccelerated={false}
-            onRequestClose={[Function]}
-            supportedOrientations={
-              Array [
-                "portrait",
-                "landscape",
-              ]
-            }
-            transparent={false}
-            visible={false}
-          >
-            <Text
-              onPress={[Function]}
-              style={
-                Array [
-                  Object {
-                    "color": "#000",
-                    "fontFamily": "System",
-                    "fontSize": 16,
-                  },
-                  Object {
-                    "backgroundColor": "transparent",
-                    "flex": 1,
-                  },
-                ]
+          <View
+            style={
+              Object {
+                "flex": 1,
               }
-              uppercase={false}
-            />
-            <View>
-              <RCTDatePicker
-                date={1493881200000}
-                locale="en"
-                maximumDate={1612080000000}
-                minimumDate={949392000000}
-                mode="date"
-                onChange={[Function]}
+            }
+          >
+            <View
+              accessible={true}
+              isTVSelectable={true}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "alignItems": "flex-end",
+                  "backgroundColor": "#00000077",
+                  "flex": 1,
+                  "flexDirection": "row",
+                }
+              }
+            >
+              <View
+                accessible={true}
+                isTVSelectable={true}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
                   Object {
-                    "height": 216,
+                    "flex": 1,
                   }
                 }
-              />
+              >
+                <View
+                  style={
+                    Object {
+                      "backgroundColor": "#fff",
+                      "height": 0,
+                      "overflow": "hidden",
+                    }
+                  }
+                >
+                  <View
+                    pointerEvents="auto"
+                  >
+                    <View
+                      style={
+                        Array [
+                          Object {
+                            "borderTopColor": "#ccc",
+                            "borderTopWidth": 1,
+                            "marginTop": 42,
+                          },
+                          undefined,
+                        ]
+                      }
+                    >
+                      <RCTDatePicker
+                        date={1463295600000}
+                        maximumDate={1464764400000}
+                        minimumDate={1462086000000}
+                        mode="date"
+                        onChange={[Function]}
+                        onResponderTerminationRequest={[Function]}
+                        onStartShouldSetResponder={[Function]}
+                        style={
+                          Object {
+                            "height": 216,
+                          }
+                        }
+                        timeZoneOffsetInMinutes={null}
+                      />
+                    </View>
+                  </View>
+                  <View
+                    accessible={true}
+                    isTVSelectable={true}
+                    onResponderGrant={[Function]}
+                    onResponderMove={[Function]}
+                    onResponderRelease={[Function]}
+                    onResponderTerminate={[Function]}
+                    onResponderTerminationRequest={[Function]}
+                    onStartShouldSetResponder={[Function]}
+                    style={
+                      Array [
+                        Object {
+                          "alignItems": "center",
+                          "flexDirection": "row",
+                          "height": 42,
+                          "justifyContent": "center",
+                          "paddingHorizontal": 20,
+                          "position": "absolute",
+                          "top": 0,
+                        },
+                        Object {
+                          "left": 0,
+                        },
+                        undefined,
+                      ]
+                    }
+                  >
+                    <Text
+                      allowFontScaling={true}
+                      style={
+                        Array [
+                          Object {
+                            "color": "#46cf98",
+                            "fontSize": 16,
+                          },
+                          Object {
+                            "color": "#666",
+                          },
+                          undefined,
+                        ]
+                      }
+                    >
+                      Cancel
+                    </Text>
+                  </View>
+                  <View
+                    accessible={true}
+                    isTVSelectable={true}
+                    onResponderGrant={[Function]}
+                    onResponderMove={[Function]}
+                    onResponderRelease={[Function]}
+                    onResponderTerminate={[Function]}
+                    onResponderTerminationRequest={[Function]}
+                    onStartShouldSetResponder={[Function]}
+                    style={
+                      Array [
+                        Object {
+                          "alignItems": "center",
+                          "flexDirection": "row",
+                          "height": 42,
+                          "justifyContent": "center",
+                          "paddingHorizontal": 20,
+                          "position": "absolute",
+                          "top": 0,
+                        },
+                        Object {
+                          "right": 0,
+                        },
+                        undefined,
+                      ]
+                    }
+                  >
+                    <Text
+                      allowFontScaling={true}
+                      style={
+                        Array [
+                          Object {
+                            "color": "#46cf98",
+                            "fontSize": 16,
+                          },
+                          undefined,
+                        ]
+                      }
+                    >
+                      Confirm
+                    </Text>
+                  </View>
+                </View>
+              </View>
             </View>
-          </Modal>
-        </View>
+          </View>
+        </Modal>
       </View>
     </View>
   </View>

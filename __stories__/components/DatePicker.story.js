@@ -2,26 +2,36 @@
 import React from "react";
 import { storiesOf } from "@storybook/react-native";
 
+import DatePicker from "react-native-datepicker";
+
 import StoryContainerComponent from "../utils/StoryContainerComponent";
 
-import { DatePicker } from "native-base";
 
 storiesOf("DatePicker", module).add("default", () => (
   <StoryContainerComponent>
         <DatePicker
-            defaultDate={new Date(2017, 4, 4)}
-            minimumDate={new Date(2000, 1, 1)}
-            maximumDate={new Date(2020, 12, 31)}
-            locale={"en"}
-            timeZoneOffsetInMinutes={undefined}
-            modalTransparent={false}
-            animationType={"fade"}
-            androidMode={"default"}
-            placeHolderText="Select date"
-            textStyle={{ color: "green" }}
-            placeHolderTextStyle={{ color: "#d3d3d3" }}
-            onDateChange={this.setDate}
-            disabled={false}
+            style={{ width: 200 }}
+            date={"2016-05-15"}
+            mode="date"
+            placeholder="select date"
+            format="YYYY-MM-DD"
+            minDate="2016-05-01"
+            maxDate="2016-06-01"
+            confirmBtnText="Confirm"
+            cancelBtnText="Cancel"
+            customStyles={{
+                dateIcon: {
+                    position: 'absolute',
+                    left: 0,
+                    top: 4,
+                    marginLeft: 0
+                },
+                dateInput: {
+                    marginLeft: 36
+                }
+                // ... You can check the source to find the other keys.
+            }}
+            // onDateChange={(date) => { this.setState({ date: date }) }}
         />
   </StoryContainerComponent>
 ));
