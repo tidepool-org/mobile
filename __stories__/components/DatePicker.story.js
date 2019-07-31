@@ -9,7 +9,7 @@ import { DatePicker } from "native-base";
 storiesOf("DatePicker", module).add("default", () => (
   <StoryContainerComponent>
         <DatePicker
-            defaultDate={new Date(2018, 4, 4)}
+            defaultDate={new Date(2017, 4, 4)}
             minimumDate={new Date(2000, 1, 1)}
             maximumDate={new Date(2020, 12, 31)}
             locale={"en"}
