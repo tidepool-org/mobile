@@ -21,53 +21,80 @@ exports[`Storyshots DatePicker default 1`] = `
       }
     }
   >
-    <View
-      accessible={true}
-      isTVSelectable={true}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      style={
-        Object {
-          "opacity": 1,
-        }
-      }
-    >
-      <View
-        style={
-          Array [
-            Object {
-              "backgroundColor": "#627cff",
-              "borderRadius": 3,
-              "elevation": 4,
-              "overflow": "hidden",
-              "paddingLeft": 16,
-              "paddingRight": 16,
-            },
-            null,
-          ]
-        }
-      >
+    <View>
+      <View>
         <Text
-          allowFontScaling={false}
-          disabled={false}
+          onPress={[Function]}
           style={
             Array [
               Object {
-                "color": "white",
-                "fontWeight": "500",
-                "padding": 8,
-                "textAlign": "center",
+                "color": "#000",
+                "fontFamily": "System",
+                "fontSize": 16,
               },
-              null,
+              Object {
+                "color": "#000",
+                "padding": 10,
+              },
+              Object {
+                "color": "#d3d3d3",
+              },
             ]
           }
+          uppercase={false}
         >
-          Log in
+          Select date
         </Text>
+        <View>
+          <Modal
+            animationType="fade"
+            hardwareAccelerated={false}
+            onRequestClose={[Function]}
+            supportedOrientations={
+              Array [
+                "portrait",
+                "landscape",
+              ]
+            }
+            transparent={false}
+            visible={false}
+          >
+            <Text
+              onPress={[Function]}
+              style={
+                Array [
+                  Object {
+                    "color": "#000",
+                    "fontFamily": "System",
+                    "fontSize": 16,
+                  },
+                  Object {
+                    "backgroundColor": "transparent",
+                    "flex": 1,
+                  },
+                ]
+              }
+              uppercase={false}
+            />
+            <View>
+              <RCTDatePicker
+                date={1564610609289}
+                locale="en"
+                maximumDate={1612080000000}
+                minimumDate={949392000000}
+                mode="date"
+                onChange={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  Object {
+                    "height": 216,
+                  }
+                }
+              />
+            </View>
+          </Modal>
+        </View>
       </View>
     </View>
   </View>
