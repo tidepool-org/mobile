@@ -7,25 +7,22 @@ import {
   Container,
   Text,
   Button,
-  ListItem,
-  Body,
-  Switch,
- } from "native-base";
+} from "native-base";
 import getTheme from "../../native-base-theme/components";
 import commonColor from "../../native-base-theme/variables/commonColor";
 
 import TextSignUpMidTitle from "../components/TextSignUpMidTitle";
 import HrCustom from "../components/HrCustom";
 import DatePickerCustom from "../components/DatePickerCustom";
+import SwitchCustom from "../components/SwitchCustom";
 
 class SignUpDiabetesDetailsTwoScreen extends PureComponent {
-  state = { };
+  state = {};
 
   onPressContinue = () => {
     const { navigateSignUpActivateAccount } = this.props;
     navigateSignUpActivateAccount();
   };
-
 
   render() {
     return (
@@ -33,27 +30,38 @@ class SignUpDiabetesDetailsTwoScreen extends PureComponent {
         <StyleProvider style={getTheme(commonColor)}>
           <Container>
             <View style={{ flex: 1, margin: 16 }}>
-              <TextSignUpMidTitle title="Tell us a little about yourself." />
-
               <View>
-                <DatePickerCustom 
-                  placeholder="Birthday"
-                />
-                <DatePickerCustom
-                  placeholder="Diagnosis Date"
-                />
+                <TextSignUpMidTitle title="Tell us a little about yourself." />
+
+                <View>
+                  <DatePickerCustom placeholder="Birthday" />
+                  <DatePickerCustom placeholder="Diagnosis Date" />
+                </View>
+
+                <HrCustom />
+
+                <View>
+                  <TextSignUpMidTitle title="Donate Your Data." />
+                  <SwitchCustom />
+                </View>
+              </View>
+              <View>
+                <Text
+                  style={{
+                    color: "#7e98c3",
+                    fontSize: 16,
+                    lineHeight: 24,
+                    marginTop: 20,
+                  }}
+                >
+                  You own your data. Read all the details about Tidepool’s Big
+                  Data Donation project here.
+                </Text>
               </View>
 
-              <HrCustom />
+              
               <View>
-                <TextSignUpMidTitle title="Donate Your Data." />
-                <ListItem>
-                  <Switch value={false} />
-                  <Body>
-                    <Text>Donate my anonymized diabetes data</Text>
-                  </Body>
-                </ListItem>
-                <Text>You own your data. Read all the details about Tidepool’s Big Data Donation project here.</Text>
+                <Text>Data Donation Org Choice Dropdown Here</Text>
               </View>
 
               <View style={{ flex: 1, justifyContent: "flex-end" }}>

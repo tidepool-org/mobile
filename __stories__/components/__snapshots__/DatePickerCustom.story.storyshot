@@ -98,6 +98,25 @@ exports[`Storyshots DatePickerCustom default 1`] = `
             Select Date
           </Text>
         </View>
+        <Image
+          source={1}
+          style={
+            Array [
+              Object {
+                "height": 32,
+                "marginLeft": 5,
+                "marginRight": 5,
+                "width": 32,
+              },
+              Object {
+                "marginLeft": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 4,
+              },
+            ]
+          }
+        />
         <Modal
           animationType="none"
           hardwareAccelerated={false}
@@ -179,9 +198,9 @@ exports[`Storyshots DatePickerCustom default 1`] = `
                       }
                     >
                       <RCTDatePicker
-                        date={1564779573519}
-                        maximumDate={1622523600000}
-                        minimumDate={1462078800000}
+                        date={1564782384229}
+                        maximumDate={1622530800000}
+                        minimumDate={1462086000000}
                         mode="date"
                         onChange={[Function]}
                         onResponderTerminationRequest={[Function]}
@@ -393,6 +412,25 @@ exports[`Storyshots DatePickerCustom selected 1`] = `
             10-12-2017
           </Text>
         </View>
+        <Image
+          source={1}
+          style={
+            Array [
+              Object {
+                "height": 32,
+                "marginLeft": 5,
+                "marginRight": 5,
+                "width": 32,
+              },
+              Object {
+                "marginLeft": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 4,
+              },
+            ]
+          }
+        />
         <Modal
           animationType="none"
           hardwareAccelerated={false}
@@ -474,9 +512,9 @@ exports[`Storyshots DatePickerCustom selected 1`] = `
                       }
                     >
                       <RCTDatePicker
-                        date={1507784400000}
-                        maximumDate={1622523600000}
-                        minimumDate={1462078800000}
+                        date={1507791600000}
+                        maximumDate={1622530800000}
+                        minimumDate={1462086000000}
                         mode="date"
                         onChange={[Function]}
                         onResponderTerminationRequest={[Function]}

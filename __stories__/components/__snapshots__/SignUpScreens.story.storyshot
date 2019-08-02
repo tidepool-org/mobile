@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots SignUpScreen Diabetes Data 1`] = `
+<RCTSafeAreaView
+  style={
+    Object {
+      "flex": 1,
+      "paddingTop": 0,
+    }
+  }
+>
+  <Text>
+    Diabetes Data
+  </Text>
+</RCTSafeAreaView>
+`;
+
+exports[`Storyshots SignUpScreen Diabetes Data 2 1`] = `
+<RCTSafeAreaView
+  style={
+    Object {
+      "flex": 1,
+      "paddingTop": 0,
+    }
+  }
+>
+  <Text>
+    Diabetes Data 2
+  </Text>
+</RCTSafeAreaView>
+`;

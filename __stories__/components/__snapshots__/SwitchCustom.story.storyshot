@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots SwitchCustom default 1`] = `
+<RCTSafeAreaView
+  paddingTop={0}
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignSelf": "center",
+        "borderWidth": 1,
+        "margin": 5,
+        "padding": 5,
+      }
+    }
+  >
+    <RCTSwitch
+      onChange={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      onTintColor="#627cff"
+      style={
+        Object {
+          "height": 31,
+          "width": 51,
+        }
+      }
+      value={false}
+    />
+  </View>
+</RCTSafeAreaView>
+`;

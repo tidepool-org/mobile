@@ -14,7 +14,7 @@ storiesOf("DatePickerCustom", module).add("default", () => (
         marginTop: 10,
         marginBottom: 10,
       }}
-      date={""}
+      date=""
       mode="date"
       placeholder="Select Date"
       format="MM-DD-YYYY"
@@ -67,7 +67,7 @@ storiesOf("DatePickerCustom", module).add("selected", () => (
         marginTop: 10,
         marginBottom: 10,
       }}
-      date={"10-12-2017"}
+      date="10-12-2017"
       mode="date"
       placeholder="Select Date"
       format="MM-DD-YYYY"

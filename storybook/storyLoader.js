@@ -26,6 +26,8 @@ function loadStories() {
   require('../__stories__/components/SearchBar.story');
   require('../__stories__/components/SignInForm.story');
   require('../__stories__/components/SignInScreen.story');
+  require('../__stories__/components/SignUpScreens.story');
+  require('../__stories__/components/SwitchCustom.story');
   require('../__stories__/components/SwitchProfileScreen.story');
   require('../__stories__/components/VersionAndApiEnvironment.story');
   
@@ -53,6 +55,8 @@ const stories = [
   '../__stories__/components/SearchBar.story',
   '../__stories__/components/SignInForm.story',
   '../__stories__/components/SignInScreen.story',
+  '../__stories__/components/SignUpScreens.story',
+  '../__stories__/components/SwitchCustom.story',
   '../__stories__/components/SwitchProfileScreen.story',
   '../__stories__/components/VersionAndApiEnvironment.story',
   
