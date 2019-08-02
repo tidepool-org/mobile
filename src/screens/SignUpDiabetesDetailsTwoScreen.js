@@ -7,7 +7,6 @@ import {
   Container,
   Text,
   Button,
-  DatePicker,
   ListItem,
   Body,
   Switch,
@@ -17,26 +16,15 @@ import commonColor from "../../native-base-theme/variables/commonColor";
 
 import TextSignUpMidTitle from "../components/TextSignUpMidTitle";
 import HrCustom from "../components/HrCustom";
+import DatePickerCustom from "../components/DatePickerCustom";
 
 class SignUpDiabetesDetailsTwoScreen extends PureComponent {
-  state = {
-  };
-
-  constructor(props) {
-    super(props);
-    this.state = { chosenDate: new Date() };
-    this.setDate = this.setDate.bind(this);
-  }
-
-  setDate(newDate) {
-    this.setState({ chosenDate: newDate });
-  }
+  state = { };
 
   onPressContinue = () => {
     const { navigateSignUpActivateAccount } = this.props;
     navigateSignUpActivateAccount();
   };
-
 
 
   render() {
@@ -48,49 +36,14 @@ class SignUpDiabetesDetailsTwoScreen extends PureComponent {
               <TextSignUpMidTitle title="Tell us a little about yourself." />
 
               <View>
-                <DatePicker
-                  defaultDate={new Date(2018, 4, 4)}
-                  minimumDate={new Date(2018, 1, 1)}
-                  maximumDate={new Date(2018, 12, 31)}
-                  locale="en"
-                  timeZoneOffsetInMinutes={undefined}
-                  modalTransparent={false}
-                  animationType="fade"
-                  androidMode="default"
-                  placeHolderText="Birthday"
-                  textStyle={{ color: "green" }}
-                  placeHolderTextStyle={{ color: "#d3d3d3" }}
-                  onDateChange={this.setDate}
-                  disabled={false}
-                  returnKeyType="done"
+                <DatePickerCustom 
+                  placeholder="Birthday"
                 />
-                <Text>
-                  Date:
-                  {this.state.chosenDate.toString().substr(4, 12)}
-                </Text>
+                <DatePickerCustom
+                  placeholder="Diagnosis Date"
+                />
               </View>
 
-              <View>
-                <DatePicker
-                  defaultDate={new Date(2018, 4, 4)}
-                  minimumDate={new Date(2018, 1, 1)}
-                  maximumDate={new Date(2018, 12, 31)}
-                  locale="en"
-                  timeZoneOffsetInMinutes={undefined}
-                  modalTransparent={false}
-                  animationType="fade"
-                  androidMode="default"
-                  placeHolderText="Diagnosis Date"
-                  textStyle={{ color: "green" }}
-                  placeHolderTextStyle={{ color: "#d3d3d3" }}
-                  onDateChange={this.setDate}
-                  disabled={false}
-                />
-                <Text>
-                  Date:
-                  {this.state.chosenDate.toString().substr(4, 12)}
-                </Text>
-              </View>
               <HrCustom />
               <View>
                 <TextSignUpMidTitle title="Donate Your Data." />
