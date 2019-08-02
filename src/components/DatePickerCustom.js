@@ -16,7 +16,8 @@ class DatePickerCustom extends PureComponent {
     const { placeholder } = this.props;
 
     this.setState({
-      dateToday: `${new Date().getMonth() + 1}-${new Date().getDate()}-${new Date().getFullYear()}`,
+      dateToday: `${new Date().getMonth() +
+        1}-${new Date().getDate()}-${new Date().getFullYear()}`,
     });
 
     return (
@@ -35,7 +36,6 @@ class DatePickerCustom extends PureComponent {
           maxDate={this.state.dateToday}
           confirmBtnText="Confirm"
           cancelBtnText="Cancel"
-          showIcon={false}
           customStyles={{
             dateInput: {
               borderColor: "#ededed",
@@ -61,7 +61,14 @@ class DatePickerCustom extends PureComponent {
             btnTextConfirm: {
               color: "#627cff",
             },
+            dateIcon: {
+              position: "absolute",
+              right: 0,
+              top: 4,
+              marginLeft: 0,
+            },
           }}
+          iconSource={require("../../assets/images/arrow-drop-down-24-px-2x.png")}
           onDateChange={date => {
             this.setState({ date });
           }}
