@@ -33,7 +33,6 @@ matrix:
         - yarn run pre
         - npx eslint src/ --max-warnings 0
         - TZ=America/Chicago yarn test --forceExit --silent
-        - yarn test --forceExit
         - npx expo login -u tidepool -p $EXPO_PASSWORD
         - npx expo publish --release-channel travis-ios
       script:
@@ -90,7 +89,6 @@ matrix:
         - yarn run pre
         - npx eslint src/ --max-warnings 0
         - TZ=America/Chicago yarn test --forceExit --silent
-        - yarn test --forceExit
         - npx expo login -u tidepool -p $EXPO_PASSWORD
         - npx expo publish --release-channel travis-android
       script:
