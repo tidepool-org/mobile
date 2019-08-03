@@ -1,5 +1,4 @@
 import React, { PureComponent } from "react";
-import PropTypes from "prop-types";
 import { View, Text, Switch } from "react-native";
 
 
@@ -7,12 +6,10 @@ class SwitchCustom extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      date: "",
     };
   }
 
   render() {
-    const { placeholder } = this.props;
 
     return (
       <View style={{ display: "flex" }}>
@@ -28,12 +25,5 @@ class SwitchCustom extends PureComponent {
   }
 }
 
-SwitchCustom.propTypes = {
-  placeholder: PropTypes.string,
-};
-
-SwitchCustom.defaultProps = {
-  placeholder: "Select Date",
-};
 
 export default SwitchCustom;
