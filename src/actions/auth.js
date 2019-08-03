@@ -1,6 +1,8 @@
 import { AsyncStorage, NativeModules } from "react-native";
+
 import { currentProfileRestoreAsync } from "./currentProfile";
 import { navigateHome, navigateSignIn } from "./navigation";
+import ConnectionStatus from "../models/ConnectionStatus";
 import api from "../api";
 import Logger from "../models/Logger";
 import Metrics from "../models/Metrics";
@@ -40,8 +42,8 @@ function loggerSetUser({ userId, username, fullName }) {
   Logger.setUser({ userId, username, fullName });
 }
 
-const authSignInReset = () => {
-  loggerClearUser();
+// NOTE: authSignInReset may be called on every keystroke in SignInForm
+const authSignInReset = () => () => {
   return {
     type: AUTH_SIGN_IN_RESET,
   };
@@ -59,6 +61,8 @@ const authSignOutAsync = () => async dispatch => {
 
   Metrics.track({ metric: "Logged Out", shouldFlushBuffer: true });
 
+  loggerClearUser();
+  api().cacheControl.clear();
   dispatch(authSignInReset());
   dispatch(navigateSignIn());
 };
@@ -107,11 +111,18 @@ const authSignInAsync = ({ username, password }) => async dispatch => {
       dispatch(authSignInDidFail(fetchProfileErrorMessage));
     } else {
       const authUser = { sessionToken, userId, username, ...profile };
+      const { fullName } = profile;
       try {
         AsyncStorage.setItem(AUTH_USER_KEY, JSON.stringify(authUser));
         dispatch(authSignInDidSucceed({ authUser }));
-        Metrics.track({ metric: "Logged In" });
+        const { isOnline } = ConnectionStatus;
+        if (isOnline) {
+          Metrics.track({ metric: "Logged In" });
+        }
         await dispatch(currentProfileRestoreAsync({ authUser }));
+        if (isOnline) {
+          api().fetchViewableUserProfilesAsync({ userId, fullName }); // Fetch viewable user profiles to seed the offline cache
+        }
         dispatch(navigateHome());
       } catch (error) {
         dispatch(authSignInDidFail(error.errorMessage));
@@ -170,6 +181,8 @@ const authRefreshTokenOrSignInAsync = () => async dispatch => {
       // console.log(
       //   `authRefreshTokenOrSignInAsync: Navigate to sign in due to error`
       // ); // TODO: sign in - what about client side errors? Those should not result in reset / sign in
+      loggerClearUser();
+      api().cacheControl.clear();
       dispatch(authSignInReset());
       dispatch(navigateSignIn());
     } else {
@@ -193,16 +206,23 @@ const authRefreshTokenOrSignInAsync = () => async dispatch => {
         // console.log(
         //   `authRefreshTokenOrSignInAsync: Navigate to sign in due to error`
         // ); // TODO: sign in - what about client side errors? Those should not result in reset / sign in
+        loggerClearUser();
+        api().cacheControl.clear();
         dispatch(authSignInReset());
         dispatch(navigateSignIn());
       } else {
         authUser = { ...authUser, ...profile };
+        const { fullName } = profile;
         try {
           AsyncStorage.setItem(AUTH_USER_KEY, JSON.stringify(authUser));
           dispatch(authRefreshTokenDidSucceed({ authUser }));
           await dispatch(currentProfileRestoreAsync({ authUser }));
+          if (ConnectionStatus.isOnline) {
+            api().fetchViewableUserProfilesAsync({ userId, fullName }); // Fetch viewable user profiles to seed the offline cache
+          }
           dispatch(navigateHome());
         } catch (error) {
+          // console({ error });
           dispatch(authSignInDidFail(error.errorMessage));
         }
       }

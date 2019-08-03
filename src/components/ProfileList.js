@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import glamorous, { withTheme } from "glamorous-native";
 
 import ProfileListItem from "./ProfileListItem";
-import ErrorAlertManager from "../models/ErrorAlertManager";
+import AlertManager from "../models/AlertManager";
 import { UserPropType } from "../prop-types/user";
 import { ProfileListItemPropType } from "../prop-types/profile";
 
@@ -18,14 +18,14 @@ class ProfileList extends PureComponent {
   componentDidMount() {
     const { errorMessage } = this.props;
     if (errorMessage) {
-      ErrorAlertManager.show(errorMessage);
+      AlertManager.showErrorAlert(errorMessage);
     }
   }
 
   componentWillReceiveProps(nextProps) {
     const { errorMessage, fetching } = this.props;
     if (nextProps.errorMessage && !errorMessage) {
-      ErrorAlertManager.show(nextProps.errorMessage);
+      AlertManager.showErrorAlert(nextProps.errorMessage);
     }
 
     if (!nextProps.fetching && fetching) {

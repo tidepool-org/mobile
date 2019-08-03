@@ -13,53 +13,50 @@ class GraphNoData extends PureComponent {
     navigateHowToUpload();
   };
 
-  static renderGraphNoDataViews({
-    theme,
-    graphFixedLayoutInfo,
-    navigateHowToUpload,
-  }) {
-    return [
-      <glamorous.Text
-        key={1}
-        allowFontScaling={false}
-        position="absolute"
-        pointerEvents="none"
-        style={theme.graphNoDataLabelStyle}
-        top={graphFixedLayoutInfo.graphLayerHeight - 50}
-        left={graphFixedLayoutInfo.width - 120}
-      >
-        No data
-      </glamorous.Text>,
-      <glamorous.TouchableOpacity
-        key={2}
-        position="absolute"
-        top={graphFixedLayoutInfo.graphLayerHeight - 30}
-        left={graphFixedLayoutInfo.width - 120}
-        hitSlop={{ left: 10, right: 10, top: 10, bottom: 10 }}
-        onPress={navigateHowToUpload}
-      >
-        <glamorous.Text
-          allowFontScaling={false}
-          style={theme.graphHowToUploadLabelStyle}
-        >
-          How to upload
-        </glamorous.Text>
-      </glamorous.TouchableOpacity>,
-    ];
-  }
-
   render() {
     // console.log(`GraphNoData: render`);
 
-    const { theme, graphFixedLayoutInfo } = this.props;
+    const {
+      theme,
+      graphFixedLayoutInfo,
+      navigateHowToUpload,
+      isOffline,
+      isAvailableOffline,
+    } = this.props;
+
+    let noDataText = "No data";
+    if (isOffline && !isAvailableOffline) {
+      noDataText = "No offline data available";
+    }
 
     return (
       <glamorous.View>
-        {GraphNoData.renderGraphNoDataViews({
-          theme,
-          graphFixedLayoutInfo,
-          navigateHowToUpload: this.onPressHowToUpload,
-        })}
+        <glamorous.Text
+          key={1}
+          allowFontScaling={false}
+          position="absolute"
+          pointerEvents="none"
+          style={theme.graphNoDataLabelStyle}
+          top={graphFixedLayoutInfo.graphLayerHeight - 50}
+          left={graphFixedLayoutInfo.width - 160}
+        >
+          {noDataText}
+        </glamorous.Text>
+        <glamorous.TouchableOpacity
+          key={2}
+          position="absolute"
+          top={graphFixedLayoutInfo.graphLayerHeight - 30}
+          left={graphFixedLayoutInfo.width - 160}
+          hitSlop={{ left: 10, right: 10, top: 10, bottom: 10 }}
+          onPress={navigateHowToUpload}
+        >
+          <glamorous.Text
+            allowFontScaling={false}
+            style={theme.graphHowToUploadLabelStyle}
+          >
+            How to upload
+          </glamorous.Text>
+        </glamorous.TouchableOpacity>
       </glamorous.View>
     );
   }
@@ -69,6 +66,13 @@ GraphNoData.propTypes = {
   theme: ThemePropType.isRequired,
   graphFixedLayoutInfo: PropTypes.object.isRequired,
   navigateHowToUpload: PropTypes.func.isRequired,
+  isOffline: PropTypes.bool,
+  isAvailableOffline: PropTypes.bool,
+};
+
+GraphNoData.defaultProps = {
+  isOffline: false,
+  isAvailableOffline: false,
 };
 
 export { GraphNoData as GraphNoDataClass };

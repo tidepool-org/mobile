@@ -1,6 +1,6 @@
 import { NativeModules } from "react-native";
 
-import TidepoolApi from "./TidepoolApi";
+import { TidepoolApi } from "./TidepoolApi";
 import Logger from "../models/Logger";
 
 const API_ENVIRONMENT_PRODUCTION = "Production";

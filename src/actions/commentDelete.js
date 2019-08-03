@@ -29,6 +29,7 @@ const commentDeleteAsync = ({
   dispatch(commentDeleteDidStart({ comment }));
 
   const { errorMessage } = await api().deleteCommentAsync({
+    note,
     comment,
   });
 

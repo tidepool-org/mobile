@@ -11,7 +11,7 @@ import glamorous, { withTheme } from "glamorous-native";
 import Colors from "../constants/Colors";
 import NotesListItem from "./NotesListItem";
 import SearchBar from "./SearchBar";
-import ErrorAlertManager from "../models/ErrorAlertManager";
+import AlertManager from "../models/AlertManager";
 import Metrics from "../models/Metrics";
 import { ProfilePropType } from "../prop-types/profile";
 import { CommentPropType } from "../prop-types/comment";
@@ -32,14 +32,14 @@ class NotesList extends PureComponent {
   componentDidMount() {
     const { errorMessage } = this.props;
     if (errorMessage) {
-      ErrorAlertManager.show(errorMessage);
+      AlertManager.showErrorAlert(errorMessage);
     }
   }
 
   componentWillReceiveProps(nextProps) {
     const { errorMessage, fetching } = this.props;
     if (nextProps.errorMessage && !errorMessage) {
-      ErrorAlertManager.show(nextProps.errorMessage);
+      AlertManager.showErrorAlert(nextProps.errorMessage);
     }
 
     if (!nextProps.fetching && fetching) {
@@ -168,6 +168,7 @@ class NotesList extends PureComponent {
       onDeleteCommentPressed,
       graphRenderer,
       toggleExpandedNotesCount,
+      isOffline,
     } = this.props;
     return (
       <NotesListItem
@@ -187,6 +188,7 @@ class NotesList extends PureComponent {
         onGraphZoomEnd={this.onGraphZoomEnd}
         graphRenderer={graphRenderer}
         toggleExpandedNotesCount={toggleExpandedNotesCount}
+        isOffline={isOffline}
       />
     );
   };
@@ -264,6 +266,7 @@ NotesList.propTypes = {
   navigateAddComment: PropTypes.func.isRequired,
   navigateEditComment: PropTypes.func.isRequired,
   onDeleteCommentPressed: PropTypes.func.isRequired,
+  isOffline: PropTypes.bool,
 };
 
 NotesList.defaultProps = {
@@ -273,6 +276,7 @@ NotesList.defaultProps = {
   commentsFetchDataByMessageId: {},
   graphDataFetchDataByMessageId: {},
   toggleExpandedNotesCount: 0,
+  isOffline: false,
 };
 
 export default withTheme(NotesList);

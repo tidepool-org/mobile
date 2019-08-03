@@ -2,6 +2,7 @@ package host.exp.exponent;
 
 
 import com.facebook.react.ReactPackage;
+import com.facebook.react.modules.storage.ReactDatabaseSupplier;
 
 import java.util.Arrays;
 import java.util.List;
@@ -40,6 +41,10 @@ public class MainApplication extends ExpoApplication implements AppLoaderPackage
 
   // Needed for `react-native link`
   public List<ReactPackage> getPackages() {
+    // Increase the maximum size of AsyncStorage
+    long maximumDatabaseSize = 100L * 1024L * 1024L; // 100 MB in bytes
+    ReactDatabaseSupplier.getInstance(getApplicationContext()).setMaximumSize(maximumDatabaseSize );
+
     return Arrays.<ReactPackage>asList(
         // Add your own packages here!
         new NativeNotificationsPackage(),
