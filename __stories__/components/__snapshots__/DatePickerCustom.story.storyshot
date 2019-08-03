@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Storyshots DatePickerCustom default 1`] = `
+exports[`Storyshots DatePickerCustom default (NoSnapshotTest) 1`] = `
 <RCTSafeAreaView
   paddingTop={0}
   style={
@@ -198,7 +198,7 @@ exports[`Storyshots DatePickerCustom default 1`] = `
                       }
                     >
                       <RCTDatePicker
-                        date={1564791934843}
+                        date={1564854561311}
                         maximumDate={1622523600000}
                         minimumDate={1462078800000}
                         mode="date"

@@ -6,4 +6,5 @@ import initStoryshots, {
 
 initStoryshots({
   test: multiSnapshotWithOptions({}),
+  storyKindRegex: /^((?!.*?NoSnapshotTest).)*$/,
 });
