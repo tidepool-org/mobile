@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { SafeAreaView, View, Switch } from "react-native";
 
+import RNPickerSelect from "react-native-picker-select";
 import {
   StyleProvider,
   Container,
@@ -14,7 +15,6 @@ import commonColor from "../../native-base-theme/variables/commonColor";
 import TextSignUpMidTitle from "../components/TextSignUpMidTitle";
 import HrCustom from "../components/HrCustom";
 import DatePickerCustom from "../components/DatePickerCustom";
-import SwitchCustom from "../components/SwitchCustom";
 
 class SignUpDiabetesDetailsTwoScreen extends PureComponent {
   state = {
@@ -31,6 +31,28 @@ class SignUpDiabetesDetailsTwoScreen extends PureComponent {
   }
 
   render() {
+
+        const placeholder = {
+          label: "Select Data Donation Org...",
+          value: null,
+          color: "#9EA0A4",
+        };
+
+        const sports = [
+          {
+            label: "Football",
+            value: "football",
+          },
+          {
+            label: "Baseball",
+            value: "baseball",
+          },
+          {
+            label: "Hockey",
+            value: "hockey",
+          },
+        ];
+
     return (
       <SafeAreaView style={{ flex: 1 }}>
         <StyleProvider style={getTheme(commonColor)}>
@@ -87,9 +109,32 @@ class SignUpDiabetesDetailsTwoScreen extends PureComponent {
               </View>
 
               <View>
-                <Text>Data Donation Org Choice Dropdown Here Here Here</Text>
-              </View>
+                <RNPickerSelect
+                  placeholder={placeholder}
+                  items={sports}
+                  onValueChange={value => {
+                    this.setState({
+                      favSport4: value,
+                    });
+                  }}
+                  style={{
+                    iconContainer: {
+                      top: 10,
+                      right: 12,
+                    },
+                  }}
+                  onUpArrow={() => {
+                    this.inputRefs.firstTextInput.focus();
+                  }}
+                  onDownArrow={() => {
+                    this.inputRefs.favSport1.togglePicker();
+                  }}
+                  value={this.state.favSport4}
+                  useNativeAndroidPickerStyle={false}
 
+
+                />
+              </View>
 
               <View style={{ flex: 1, justifyContent: "flex-end" }}>
                 <Button block onPress={this.onPressContinue}>
