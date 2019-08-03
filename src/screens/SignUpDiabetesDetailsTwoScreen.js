@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { SafeAreaView, View } from "react-native";
+import { SafeAreaView, View, Switch } from "react-native";
 
 import {
   StyleProvider,
@@ -17,12 +17,18 @@ import DatePickerCustom from "../components/DatePickerCustom";
 import SwitchCustom from "../components/SwitchCustom";
 
 class SignUpDiabetesDetailsTwoScreen extends PureComponent {
-  state = {};
+  state = {
+    donateDataSwitch: false,
+  };
 
   onPressContinue = () => {
     const { navigateSignUpActivateAccount } = this.props;
     navigateSignUpActivateAccount();
   };
+
+  toggleSwitch = value => {
+    this.setState({ donateDataSwitch: value})
+  }
 
   render() {
     return (
@@ -42,9 +48,30 @@ class SignUpDiabetesDetailsTwoScreen extends PureComponent {
 
                 <View>
                   <TextSignUpMidTitle title="Donate Your Data." />
-                  <SwitchCustom />
+
+                  <View style={{ display: "flex" }}>
+                    <View
+                      style={{ flexDirection: "row", alignItems: "center" }}
+                    >
+                      <Switch
+                        trackColor={{ true: "#627cff" }}
+                        onValueChange={this.toggleSwitch}
+                        value={this.state.donateDataSwitch}
+                      />
+                      <Text
+                        style={{
+                          color: "#4f6a92",
+                          fontSize: 16,
+                          marginLeft: 10,
+                        }}
+                      >
+                        Donate my anonymized diabetes data
+                      </Text>
+                    </View>
+                  </View>
                 </View>
               </View>
+
               <View>
                 <Text
                   style={{
@@ -59,10 +86,10 @@ class SignUpDiabetesDetailsTwoScreen extends PureComponent {
                 </Text>
               </View>
 
-              
               <View>
                 <Text>Data Donation Org Choice Dropdown Here Here Here</Text>
               </View>
+
 
               <View style={{ flex: 1, justifyContent: "flex-end" }}>
                 <Button block onPress={this.onPressContinue}>
