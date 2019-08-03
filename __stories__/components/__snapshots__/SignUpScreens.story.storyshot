@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Storyshots SignUpScreen Diabetes Data 1`] = `
+exports[`Storyshots SignUpScreens Diabetes Data 1`] = `
 <RCTSafeAreaView
   style={
     Object {
@@ -9,13 +9,15 @@ exports[`Storyshots SignUpScreen Diabetes Data 1`] = `
     }
   }
 >
-  <Text>
-    Diabetes Data
-  </Text>
+  <View>
+    <Text>
+      Hello
+    </Text>
+  </View>
 </RCTSafeAreaView>
 `;
 
-exports[`Storyshots SignUpScreen Diabetes Data 2 1`] = `
+exports[`Storyshots SignUpScreens Diabetes Data 2 1`] = `
 <RCTSafeAreaView
   style={
     Object {
@@ -24,8 +26,10 @@ exports[`Storyshots SignUpScreen Diabetes Data 2 1`] = `
     }
   }
 >
-  <Text>
-    Diabetes Data 2
-  </Text>
+  <View>
+    <Text>
+      Hello
+    </Text>
+  </View>
 </RCTSafeAreaView>
 `;

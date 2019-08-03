@@ -1,32 +1,25 @@
-/* eslint import/no-extraneous-dependencies: 0 */
 import React from "react";
+
 import { storiesOf } from "@storybook/react-native";
-import { Text } from "react-native";
+
+import { View, Text } from "react-native";
 
 import StoryContainerScreen from "../utils/StoryContainerScreen";
-// import SignInScreen from "../../src/screens/SignInScreen";
-// import { API_ENVIRONMENT_STAGING } from "../../src/api";
+// import SignUpDiabetesDetailsScreen from "../../src/screens/SignUpDiabetesDetailsScreen";
+// import SignUpDiabetesDetailsTwoScreen from "../../src/screens/SignUpDiabetesDetailsTwoScreen";
 
-// const props = {
-//   navigateSignUp: () => {},
-//   navigateDebugSettings: () => {},
-//   navigateForgotPassword: () => {},
-//   authSignInReset: () => {},
-//   authSignInAsync: () => {},
-//   signingIn: false,
-//   version: "3.0.4",
-//   apiEnvironment: API_ENVIRONMENT_STAGING,
-//   errorMessage: "",
-// };
-
-storiesOf("SignUpScreen", module).add("Diabetes Data 2", () => (
+storiesOf("SignUpScreens", module).add("Diabetes Data", () => (
   <StoryContainerScreen>
-    <Text>Diabetes Data 2</Text>
+    <View>
+        <Text>Hello</Text>
+    </View>
   </StoryContainerScreen>
 ));
 
-storiesOf("SignUpScreen", module).add("Diabetes Data", () => (
+storiesOf("SignUpScreens", module).add("Diabetes Data 2", () => (
   <StoryContainerScreen>
-    <Text>Diabetes Data</Text>
+      <View>
+        <Text>Hello</Text>
+      </View>
   </StoryContainerScreen>
 ));
