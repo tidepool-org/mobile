@@ -4,14 +4,12 @@ import android.os.Bundle;
 
 import com.facebook.react.ReactPackage;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
+import org.unimodules.core.interfaces.Package;
+
 import java.util.List;
 
-import expo.core.interfaces.Package;
-import host.exp.exponent.generated.DetachBuildConstants;
 import host.exp.exponent.experience.DetachActivity;
+import host.exp.exponent.generated.DetachBuildConstants;
 
 public class MainActivity extends DetachActivity {
 

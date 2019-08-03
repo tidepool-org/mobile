@@ -1,4 +1,4 @@
-# Expo Client [![CircleCI](https://circleci.com/gh/expo/expo.svg?style=svg)](https://circleci.com/gh/expo/expo) [![Forums](https://img.shields.io/badge/expo-forum-blue.svg)](https://forums.expo.io)
+# Expo Client [![CircleCI](https://circleci.com/gh/expo/expo.svg?style=svg)](https://circleci.com/gh/expo/expo/tree/master) [![Forums](https://img.shields.io/badge/expo-forum-blue.svg)](https://forums.expo.io)
 
 Expo is a set of tools, libraries, and services that let you build native iOS and Android apps by writing JavaScript. This repository is where the Expo client software is developed, and includes the client apps, modules, apps, and more.
 
@@ -25,12 +25,13 @@ Note: We support building the clients only on macOS.
 - Install [nix](https://nixos.org/nix) (currently `curl https://nixos.org/nix/install | sh`)
 - Install [direnv](http://direnv.net/) (to do this with nix, run `nix-env -iA nixpkgs.direnv`)
 - Clone this repo; we recommend cloning it to a directory whose full path does not include any spaces (you should clone all the submodules with `git clone --recurse-submodules`)
-- Run `yarn` in the `tools-public` directory.
+- Run `yarn` in the root and `tools-public` directories.
+- Run `yarn build` in the `packages/expo` directory.
 
 #### iOS
 - Make sure you have latest non-beta Xcode installed.
 - Run `git lfs pull`.
-- Run `./generate-files-ios.js` in the `tools-public` directory.
+- Run `et ios-generate-dynamic-macros`.
 - Open and run `ios/Exponent.xcworkspace` in Xcode.
 
 #### Android

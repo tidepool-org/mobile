@@ -2350,7 +2350,7 @@ exports[`Storyshots HomeScreen default 1`] = `
                 "right": 0,
                 "top": 0,
               },
-              undefined,
+              0,
             ]
           }
         >
@@ -2370,6 +2370,8 @@ exports[`Storyshots HomeScreen default 1`] = `
             style={
               Object {
                 "backgroundColor": "transparent",
+                "left": 0,
+                "paddingBottom": 0,
                 "position": "absolute",
                 "shadowColor": "black",
                 "shadowOffset": Object {
@@ -2378,6 +2380,7 @@ exports[`Storyshots HomeScreen default 1`] = `
                 },
                 "shadowOpacity": 0.8,
                 "shadowRadius": 2,
+                "top": 0,
               }
             }
           >
@@ -2393,9 +2396,9 @@ exports[`Storyshots HomeScreen default 1`] = `
                   "borderTopColor": "#fff",
                   "borderTopWidth": 1,
                   "height": 2,
-                  "left": NaN,
+                  "left": -1,
                   "position": "absolute",
-                  "top": NaN,
+                  "top": -1,
                   "transform": Array [
                     Object {
                       "rotate": "0deg",
@@ -2580,12 +2583,12 @@ exports[`Storyshots HomeScreen default 1`] = `
             style={
               Object {
                 "alignItems": "center",
-                "height": undefined,
+                "height": 0,
                 "justifyContent": "center",
-                "left": undefined,
+                "left": 0,
                 "position": "absolute",
-                "top": undefined,
-                "width": undefined,
+                "top": 0,
+                "width": 0,
               }
             }
           >

@@ -95,7 +95,7 @@ matrix:
       script:
         - bash scripts/update-release-channel.sh travis-android
         - pushd android
-        - "./gradlew :app:assembleProdMinSdkProdKernelRelease"
+        - "./gradlew :app:assembleRelease"
 deploy:
   provider: releases
   draft: true

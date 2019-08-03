@@ -4,7 +4,7 @@ platform :ios, '10.0'
 target 'Tidepool' do
   pod 'ExpoKit',
     :git => "http://github.com/expo/expo.git",
-    :tag => "ios/2.11.2",
+    :tag => "ios/2.12.1",
     :subspecs => [
       "Core"
     ],
@@ -17,6 +17,43 @@ target 'Tidepool' do
     exclude: [
       'expo-face-detector',
       'expo-payments-stripe',
+      'expo-ads-admob',
+      'expo-ads-facebook',
+      'expo-analytics-amplitude',
+      'expo-analytics-segment',
+      'expo-app-auth',
+      'expo-av',
+      'expo-background-fetch',
+      'expo-barcode-scanner',
+      'expo-brightness',
+      'expo-calendar',
+      'expo-camera',
+      'expo-contacts',
+      'expo-crypto',
+      'expo-document-picker',
+      'expo-facebook',
+      'expo-google-sign-in',
+      'expo-haptics',
+      'expo-image-manipulator',
+      'expo-image-picker',
+      'expo-intent-launcher',
+      'expo-local-authentication',
+      'expo-localization',
+      # 'expo-location', # Need to keep this for now since there's a runtime dependency on it (even though we don't use it)
+      'expo-mail-composer',
+      'expo-media-library',
+      'expo-print',
+      'expo-random',
+      'expo-secure-store',
+      'expo-sensors',
+      'expo-sharing',
+      'expo-sms',
+      'expo-speech',
+      'expo-sqlite',
+      'expo-task-manager',
+      'expo-web-browers',
+      'expo-barcode-scanner-interface',
+      'expo-camera-interface'
     ],
   )
 
@@ -74,11 +111,11 @@ target 'Tidepool' do
       end
 
 
-      if ['Amplitude-iOS','Analytics','AppAuth','Branch','CocoaLumberjack','FBSDKCoreKit','FBSDKLoginKit','FBSDKShareKit','GPUImage','JKBigInteger2'].include? pod_name
+
       target_installation_result.native_target.build_configurations.each do |config|
         config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '10.0'
       end
-      end
+
 
       # Can't specify this in the React podspec because we need to use those podspecs for detached
       # projects which don't reference ExponentCPP.
