@@ -6,7 +6,7 @@ import DatePicker from "react-native-datepicker";
 
 import StoryContainerComponent from "../utils/StoryContainerComponent";
 
-storiesOf("DatePickerCustom", module).add("default (NoSnapshotTest)", () => (
+storiesOf("DatePickerCustom", module).add("default (NoSnapshot)", () => (
   <StoryContainerComponent>
     <DatePicker
       style={{
