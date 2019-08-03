@@ -25,7 +25,7 @@
     "expo-gl": "6.0.0",
     "expo-keep-awake": "6.0.0",
     "expo-linear-gradient": "6.0.0",
-    "expo-three": "3.0.2-alpha.1",
+    "expo-three": "4.0.3",
     "expokit": "34.0.1",
     "glamorous-native": "1.4.2",
     "prop-types": "15.7.2",
@@ -40,7 +40,7 @@
     "redux": "4.0.4",
     "redux-thunk": "2.3.0",
     "rollbar-react-native": "0.5.0",
-    "three": "0.106.2",
+    "three": "0.107.0",
     "three-bmfont-text": "2.3.0",
     "twitter-text": "3.0.0",
     "uuid": "3.3.2"

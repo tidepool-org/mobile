@@ -6616,7 +6616,7 @@ expo-asset-utils@^1.0.0:
   resolved "https://registry.yarnpkg.com/expo-asset-utils/-/expo-asset-utils-1.1.1.tgz#2dcbd0cce0364257c78c4dffc42fe863ffee6f9e"
   integrity sha512-9dOPkiQwHDwTsEdvTlta4UqYW91UHvv9rnUDgHgqB2MfJ5jsPSh7tls5k1eVhXpltn4RBfLA/0ii71BZ5MPPRA==
 
-expo-asset@6.0.0, expo-asset@~6.0.0:
+expo-asset@6.0.0, expo-asset@^6.0.0, expo-asset@~6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/expo-asset/-/expo-asset-6.0.0.tgz#caa3f45e7a27d978f8055fc58df6e33a4e661937"
   integrity sha512-M0sJphdCQ0mq+7kg6rQmq4rU5hbsL72AZCNrga565JchCLeevJhv6j72erh2viqDAPdvjZpGwc7pwI/dxu1+zg==
@@ -6688,7 +6688,7 @@ expo-constants@6.0.0, expo-constants@~6.0.0:
   dependencies:
     ua-parser-js "^0.7.19"
 
-expo-file-system@6.0.0, expo-file-system@~6.0.0:
+expo-file-system@6.0.0, expo-file-system@^6.0.0, expo-file-system@~6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/expo-file-system/-/expo-file-system-6.0.0.tgz#7fa5da4f5138f4efe488fd4d4d7b2f49863b25ea"
   integrity sha512-SIVytgYHUm77bTXeHjNnS804KIPih3dEEcr8BGUOFxr1asbyaaf6/pFaWonrbLDRf5odjI1+daG0ktiQt2jZuw==
@@ -6746,14 +6746,17 @@ expo-sqlite@~6.0.0:
     "@types/websql" "^0.0.27"
     lodash "^4.17.11"
 
-expo-three@3.0.2-alpha.1:
-  version "3.0.2-alpha.1"
-  resolved "https://registry.yarnpkg.com/expo-three/-/expo-three-3.0.2-alpha.1.tgz#6b1d185822aa8ce84cdc253ea8c163894703a69c"
-  integrity sha512-uisd3H0npk2D3qif1DpqULWMAz+M9i0o5FvZExyzO4/p4Whvz6yLmLfMnvyfXD3lDFWfVhhhhyzQffrtHZJ9IA==
+expo-three@4.0.3:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/expo-three/-/expo-three-4.0.3.tgz#0fe9c2c4487000d5d539f5b429e2e423d827d594"
+  integrity sha512-ZFO2mXv7fw7rODcNz7HFfioSxkDd0Haf48KyprCIZa4jmDKPm0ZnwmV3UQt8PpY2vxjgk/ypqwcuny1uZ92+lg==
   dependencies:
     "@expo/browser-polyfill" "^0.0.1-alpha.3"
     color-temperature "0.2.7"
+    expo "^34.0.3"
+    expo-asset "^6.0.0"
     expo-asset-utils "^1.0.0"
+    expo-file-system "^6.0.0"
     three "^0.102.1"
 
 expo-web-browser@~6.0.0:
@@ -6761,7 +6764,7 @@ expo-web-browser@~6.0.0:
   resolved "https://registry.yarnpkg.com/expo-web-browser/-/expo-web-browser-6.0.0.tgz#63a59d4c02cd7ba47faa6a2eb04decb1a1ab2a32"
   integrity sha512-7XkFPd4PRlVP6FscTnn78c0tY6+yLzb2Eai/ed+l+LB+hZWuhyY3ONzYM7/IKAiPmfhZr4Qs80vIa7iiavti8A==
 
-expo@34.0.3:
+expo@34.0.3, expo@^34.0.3:
   version "34.0.3"
   resolved "https://registry.yarnpkg.com/expo/-/expo-34.0.3.tgz#5e2ac4ff2ddbcb2a095106d82e920e6a02a3dbaa"
   integrity sha512-1WCg6ZpYuNQ1YdZ1vDjksB45mts2DnymHjRo7s1de5RB+Ym8SlhNelbQXOZTkdSicNg0dk9lENqcWPRAWwR2bA==
@@ -15568,10 +15571,10 @@ three-buffer-vertex-data@^1.0.0:
   dependencies:
     flatten-vertex-data "^1.0.0"
 
-three@0.106.2:
-  version "0.106.2"
-  resolved "https://registry.yarnpkg.com/three/-/three-0.106.2.tgz#6752d304c470e4df230944ecd45325e7bf79e1f8"
-  integrity sha512-4Tlx43uoxnIaZFW2Bzkd1rXsatvVHEWAZJy8LuE+s6Q8c66ogNnhfq1bHiBKPAnXP230LD11H/ScIZc2LZMviA==
+three@0.107.0:
+  version "0.107.0"
+  resolved "https://registry.yarnpkg.com/three/-/three-0.107.0.tgz#0c862c348d61bd3f22058e01f5e771c1294315a1"
+  integrity sha512-vqbKJRLBEviPVa7poEzXocobicwxzsctr5mnymA7n8fEzcVS49rYP0RrwqZ98JqujRoruK+/YzcchNpRP+kXsQ==
 
 three@^0.102.1:
   version "0.102.1"
