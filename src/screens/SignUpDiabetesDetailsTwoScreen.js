@@ -59,7 +59,7 @@ class SignUpDiabetesDetailsTwoScreen extends PureComponent {
           <Container>
             <View style={{ flex: 1, margin: 16 }}>
               <View>
-                <TextSignUpMidTitle title="Tell us a little about yourself." />
+                <TextSignUpMidTitle title="Tell us a little about yourself. Please." />
 
                 <View>
                   <DatePickerCustom placeholder="Birthday" />
