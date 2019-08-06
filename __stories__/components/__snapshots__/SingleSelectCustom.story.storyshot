@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Storyshots SwitchCustom default 1`] = `
+exports[`Storyshots SingleSelectCustom default 1`] = `
 <RCTSafeAreaView
   paddingTop={0}
   style={
@@ -21,9 +21,15 @@ exports[`Storyshots SwitchCustom default 1`] = `
       }
     }
   >
-    <View>
+    <View
+      style={
+        Object {
+          "width": 300,
+        }
+      }
+    >
       <Text>
-        Hello
+        Hello Picker
       </Text>
     </View>
   </View>

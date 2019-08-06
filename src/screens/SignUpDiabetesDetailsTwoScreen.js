@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { SafeAreaView, View, Switch } from "react-native";
+import { SafeAreaView, View, Switch, StyleSheet, Image } from "react-native";
 
 import RNPickerSelect from "react-native-picker-select";
 import {
@@ -15,6 +15,7 @@ import commonColor from "../../native-base-theme/variables/commonColor";
 import TextSignUpMidTitle from "../components/TextSignUpMidTitle";
 import HrCustom from "../components/HrCustom";
 import DatePickerCustom from "../components/DatePickerCustom";
+import SwitchCustom from "../components/SwitchCustom";
 
 class SignUpDiabetesDetailsTwoScreen extends PureComponent {
   state = {
@@ -59,7 +60,7 @@ class SignUpDiabetesDetailsTwoScreen extends PureComponent {
           <Container>
             <View style={{ flex: 1, margin: 16 }}>
               <View>
-                <TextSignUpMidTitle title="Tell us a little about yourself. Please." />
+                <TextSignUpMidTitle title="Tell us a little about yourself." />
 
                 <View>
                   <DatePickerCustom placeholder="Birthday" />
@@ -70,27 +71,7 @@ class SignUpDiabetesDetailsTwoScreen extends PureComponent {
 
                 <View>
                   <TextSignUpMidTitle title="Donate Your Data." />
-
-                  <View style={{ display: "flex" }}>
-                    <View
-                      style={{ flexDirection: "row", alignItems: "center" }}
-                    >
-                      <Switch
-                        trackColor={{ true: "#627cff" }}
-                        onValueChange={this.toggleSwitch}
-                        value={this.state.donateDataSwitch}
-                      />
-                      <Text
-                        style={{
-                          color: "#4f6a92",
-                          fontSize: 16,
-                          marginLeft: 10,
-                        }}
-                      >
-                        Donate my anonymized diabetes data
-                      </Text>
-                    </View>
-                  </View>
+                  <SwitchCustom switchText="Donate my anonymized diabetes data" />
                 </View>
               </View>
 
@@ -118,10 +99,20 @@ class SignUpDiabetesDetailsTwoScreen extends PureComponent {
                     });
                   }}
                   style={{
+                    ...pickerSelectStyles,
                     iconContainer: {
                       top: 10,
                       right: 12,
                     },
+                  }}
+                  Icon={() => {
+                    return (
+                      <View>
+                        <Image
+                          source={require("../../assets/images/arrow-drop-down-24-px-2x.png")}
+                        />
+                      </View>
+                    );
                   }}
                   onUpArrow={() => {
                     this.inputRefs.firstTextInput.focus();
@@ -131,8 +122,6 @@ class SignUpDiabetesDetailsTwoScreen extends PureComponent {
                   }}
                   value={this.state.favSport4}
                   useNativeAndroidPickerStyle={false}
-
-
                 />
               </View>
 
@@ -148,6 +137,19 @@ class SignUpDiabetesDetailsTwoScreen extends PureComponent {
     );
   }
 }
+
+const pickerSelectStyles = StyleSheet.create({
+  inputIOS: {
+    fontSize: 16,
+    paddingVertical: 12,
+    paddingHorizontal: 10,
+    borderWidth: 1,
+    borderColor: 'green',
+    borderRadius: 4,
+    color: 'black',
+    paddingRight: 30, // to ensure the text is never behind the icon
+  },
+});
 
 SignUpDiabetesDetailsTwoScreen.propTypes = {
   navigateSignUpActivateAccount: PropTypes.func.isRequired,

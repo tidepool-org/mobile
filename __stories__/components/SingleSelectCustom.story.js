@@ -1,16 +1,23 @@
 import React from "react";
 
 import { storiesOf } from "@storybook/react-native";
+
 import { View, Text } from "react-native";
-import { SwitchCustom } from "../../src/components/SwitchCustom";
-import MadePossibleBy from "../../src/components/MadePossibleBy";
+
+import RNPickerSelect from "react-native-picker-select";
 
 import StoryContainerComponent from "../utils/StoryContainerComponent";
 
-storiesOf("SwitchCustom", module).add("default", () => (
+storiesOf("SingleSelectCustom", module).add("default", () => (
   <StoryContainerComponent>
-    <View>
-      <Text>Hello</Text>
+    <View
+      style={{
+        width: 300,
+      }}
+    >
+      <Text>Hello Picker</Text>
     </View>
+
+    
   </StoryContainerComponent>
 ));

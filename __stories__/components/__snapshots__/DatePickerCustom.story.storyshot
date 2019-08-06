@@ -198,9 +198,9 @@ exports[`Storyshots DatePickerCustom selected 1`] = `
                       }
                     >
                       <RCTDatePicker
-                        date={1507784400000}
-                        maximumDate={1622523600000}
-                        minimumDate={1462078800000}
+                        date={1507791600000}
+                        maximumDate={1622530800000}
+                        minimumDate={1462086000000}
                         mode="date"
                         onChange={[Function]}
                         onResponderTerminationRequest={[Function]}
