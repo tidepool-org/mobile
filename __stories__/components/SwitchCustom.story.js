@@ -10,6 +10,7 @@ storiesOf("SwitchCustom", module).add("default", () => (
   <StoryContainerComponent>
     <View>
       <Text>Custom Switch Story</Text>
+      <SwitchCustom />
     </View>
   </StoryContainerComponent>
 ));
