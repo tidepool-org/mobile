@@ -23,7 +23,7 @@ exports[`Storyshots SwitchCustom default 1`] = `
   >
     <View>
       <Text>
-        Hello
+        Custom Switch Story
       </Text>
     </View>
   </View>
