@@ -1,15 +1,36 @@
 import React, { PureComponent } from "react";
-import PropTypes from "prop-types";
-import { Ionicons } from "@expo/vector-icons";
 
-import { StyleSheet, View, Image } from "react-native";
+import { StyleSheet, View } from "react-native";
 
 import RNPickerSelect from "react-native-picker-select";
+
+import { Ionicons } from "@expo/vector-icons";
+
+const pickerSelectStyles = StyleSheet.create({
+  inputIOS: {
+    fontSize: 18,
+
+    paddingLeft: 16,
+    borderWidth: 1,
+    borderColor: "#ededed",
+    borderRadius: 4,
+    height: 58,
+    paddingRight: 30, // to ensure the text is never behind the icon
+  },
+  inputAndroid: {
+    fontSize: 16,
+    paddingHorizontal: 10,
+    paddingVertical: 8,
+    borderWidth: 0.5,
+    borderRadius: 8,
+    color: "black",
+    paddingRight: 30, // to ensure the text is never behind the icon
+  },
+});
 
 class SingleSelectCustom extends PureComponent {
   render() {
              // const { placeholder } = this.props;
-             const { placeholderLabel } = this.props;
              const placeholder = {
                label: "Select Data Donation Org...",
                value: null,
@@ -64,27 +85,7 @@ class SingleSelectCustom extends PureComponent {
            }
 }
 
-const pickerSelectStyles = StyleSheet.create({
-  inputIOS: {
-    fontSize: 18,
 
-    paddingLeft: 16,
-    borderWidth: 1,
-    borderColor: "#ededed",
-    borderRadius: 4,
-    height: 58,
-    paddingRight: 30, // to ensure the text is never behind the icon
-  },
-  inputAndroid: {
-    fontSize: 16,
-    paddingHorizontal: 10,
-    paddingVertical: 8,
-    borderWidth: 0.5,
-    borderRadius: 8,
-    color: "black",
-    paddingRight: 30, // to ensure the text is never behind the icon
-  },
-});
 
 SingleSelectCustom.propTypes = {
     // placeholder: PropTypes.string,

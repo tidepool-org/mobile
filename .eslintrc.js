@@ -31,6 +31,9 @@ module.exports = {
       { devDependencies: ["**/__stories__/*"] },
     ],
 
+    // Disable this rule until best rule for @expo/vector-icons
+    "import/no-extraneous-dependencies": OFF,
+    
     // For React Native images
     "global-require": OFF,
 

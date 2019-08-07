@@ -1,8 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { SafeAreaView, View, StyleSheet, Image } from "react-native";
+import { SafeAreaView, View } from "react-native";
 
-import RNPickerSelect from "react-native-picker-select";
 import {
   StyleProvider,
   Container,

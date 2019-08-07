@@ -42,12 +42,10 @@ class SwitchCustom extends PureComponent {
 
 SwitchCustom.propTypes = {
   switchText: PropTypes.string,
-  switchValue: PropTypes.bool,
 };
 
 SwitchCustom.defaultProps = {
   switchText: "Flip this switch",
-  switchValue: false,
 };
 
 export default SwitchCustom;
