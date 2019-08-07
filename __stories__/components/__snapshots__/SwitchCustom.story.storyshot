@@ -21,10 +21,46 @@ exports[`Storyshots SwitchCustom default 1`] = `
       }
     }
   >
-    <View>
-      <Text>
-        Custom Switch Story
-      </Text>
+    <View
+      style={
+        Object {
+          "display": "flex",
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+          }
+        }
+      >
+        <RCTSwitch
+          onChange={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          onTintColor="#627cff"
+          style={
+            Object {
+              "height": 31,
+              "width": 51,
+            }
+          }
+          value={false}
+        />
+        <Text
+          style={
+            Object {
+              "color": "#4f6a92",
+              "fontSize": 16,
+              "marginLeft": 10,
+            }
+          }
+        >
+          Flip this switch
+        </Text>
+      </View>
     </View>
   </View>
 </RCTSafeAreaView>

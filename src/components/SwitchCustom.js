@@ -1,6 +1,5 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-
 import { View, Text, Switch } from "react-native";
 
 class SwitchCustom extends PureComponent {

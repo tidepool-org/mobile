@@ -1,9 +1,8 @@
 import React, { PureComponent } from "react";
-
 import { StyleSheet, View } from "react-native";
 
+import PropTypes from "prop-types";
 import RNPickerSelect from "react-native-picker-select";
-
 import { Ionicons } from "@expo/vector-icons";
 
 const pickerSelectStyles = StyleSheet.create({
@@ -30,69 +29,50 @@ const pickerSelectStyles = StyleSheet.create({
 
 class SingleSelectCustom extends PureComponent {
   render() {
-             // const { placeholder } = this.props;
-             const placeholder = {
-               label: "Select Data Donation Org...",
-               value: null,
-               color: "#9EA0A4",
-             };
-             const sports = [
-               {
-                 label: "Football",
-                 value: "football",
-               },
-               {
-                 label: "Baseball",
-                 value: "baseball",
-               },
-               {
-                 label: "Hockey",
-                 value: "hockey",
-               },
-             ];
+    const { placeholder } = this.props;
 
-             return (
-               <View style={{ paddingTop: 32 }}>
-                 <RNPickerSelect
-                   placeholder={placeholder}
-                   items={sports}
-                   style={{
-                     fontSize: 88,
-                     lineHeight: 18,
-                     paddingTop: 20,
-                     paddingBottom: 20,
-                     paddingLeft: 16,
+    return (
+      <View style={{ paddingTop: 32 }}>
+        <RNPickerSelect
+          placeholder={placeholder}
+          onValueChange={value => value}
+          items={[
+            { label: "Football", value: "football" },
+            { label: "Baseball", value: "baseball" },
+            { label: "Hockey", value: "hockey" },
+          ]}
+          style={{
+            fontSize: 88,
+            lineHeight: 18,
+            paddingTop: 20,
+            paddingBottom: 20,
+            paddingLeft: 16,
 
-                     ...pickerSelectStyles,
-                     iconContainer: {
-                       paddingTop: 20,
-                       paddingRight: 15,
-                     },
-                   }}
-
-                   Icon={() => {
-                     return (
-                       <Ionicons
-                         name="md-arrow-dropdown"
-                         size={24}
-                         color="gray"
-                       />
-                     );
-                   }}
-                 />
-               </View>
-             );
-           }
+            ...pickerSelectStyles,
+            iconContainer: {
+              paddingTop: 20,
+              paddingRight: 15,
+            },
+          }}
+          Icon={() => {
+            return <Ionicons name="md-arrow-dropdown" size={24} color="gray" />;
+          }}
+        />
+      </View>
+    );
+  }
 }
 
-
-
 SingleSelectCustom.propTypes = {
-    // placeholder: PropTypes.string,
+  placeholder: PropTypes.object,
 };
 
 SingleSelectCustom.defaultProps = {
-//   placeholder: "Select...",
+  placeholder: {
+    label: "Select...",
+    value: null,
+    color: "#9EA0A4",
+  },
 };
 
 export { SingleSelectCustom };

@@ -1,15 +1,17 @@
 import React from "react";
-
 import { storiesOf } from "@storybook/react-native";
-
-import { View } from "react-native";
+import StoryContainerComponent from "../utils/StoryContainerComponent";
 
 import { SingleSelectCustom } from "../../src/components/SingleSelectCustom";
 
-import StoryContainerComponent from "../utils/StoryContainerComponent";
-
 storiesOf("SingleSelectCustom", module).add("default", () => (
   <StoryContainerComponent>
-      <SingleSelectCustom />
+    <SingleSelectCustom 
+      placeholder={{
+        label: "Select a Story...",
+        value: null,
+        color: "#9EA0A4",
+      }}
+    />
   </StoryContainerComponent>
 ));

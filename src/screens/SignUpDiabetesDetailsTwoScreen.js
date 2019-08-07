@@ -13,9 +13,9 @@ import commonColor from "../../native-base-theme/variables/commonColor";
 
 import TextSignUpMidTitle from "../components/TextSignUpMidTitle";
 import HrCustom from "../components/HrCustom";
-import DatePickerCustom from "../components/DatePickerCustom";
-import SwitchCustom from "../components/SwitchCustom";
-import SingleSelectCustom from "../components/SingleSelectCustom";
+import { DatePickerCustom } from "../components/DatePickerCustom";
+import { SwitchCustom } from "../components/SwitchCustom";
+import { SingleSelectCustom } from "../components/SingleSelectCustom";
 
 class SignUpDiabetesDetailsTwoScreen extends PureComponent {
 

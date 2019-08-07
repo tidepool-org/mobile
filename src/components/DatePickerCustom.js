@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
-import PropTypes from "prop-types";
 import { View } from "react-native";
 
+import PropTypes from "prop-types";
 import DatePicker from "react-native-datepicker";
 
 class DatePickerCustom extends PureComponent {
@@ -12,13 +12,15 @@ class DatePickerCustom extends PureComponent {
     };
   }
 
-  render() {
-    const { placeholder } = this.props;
-
+  pickNewDate = () => {
     this.setState({
       dateToday: `${new Date().getMonth() +
         1}-${new Date().getDate()}-${new Date().getFullYear()}`,
     });
+  };
+  
+  render() {
+    const { placeholder } = this.props;
 
     return (
       <View>
@@ -68,7 +70,6 @@ class DatePickerCustom extends PureComponent {
               marginLeft: 0,
             },
           }}
-
           iconSource={require("../../assets/images/arrow-drop-down-24-px-2x.png")}
           onDateChange={date => {
             this.setState({ date });
@@ -87,4 +88,4 @@ DatePickerCustom.defaultProps = {
   placeholder: "Select Date",
 };
 
-export default DatePickerCustom;
+export { DatePickerCustom };
