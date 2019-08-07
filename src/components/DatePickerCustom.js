@@ -68,6 +68,7 @@ class DatePickerCustom extends PureComponent {
               marginLeft: 0,
             },
           }}
+
           iconSource={require("../../assets/images/arrow-drop-down-24-px-2x.png")}
           onDateChange={date => {
             this.setState({ date });
