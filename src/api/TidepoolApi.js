@@ -1,7 +1,9 @@
+import { Platform } from "react-native";
 import axios from "axios";
 import uuidv4 from "uuid/v4";
 import parse from "date-fns/parse";
 import DeviceInfo from "react-native-device-info";
+import Constants from "expo-constants";
 import ConnectionStatus from "../models/ConnectionStatus";
 import {
   MMOL_PER_L_TO_MG_PER_DL,
@@ -995,14 +997,14 @@ class TidepoolApi {
     const url = `/metrics/thisuser/tidepool-${metric}`;
     const baseURL = this.baseUrl;
     const headers = { "x-tidepool-session-token": this.sessionToken };
-    let sourceVersion = "3.0 (Expo)";
-    try {
+    let sourceVersion;
+    if (Constants.appOwnership === "expo") {
+      const systemName = Platform.OS === "ios" ? "iOS" : "Android";
+      sourceVersion = `${systemName} ${Constants.manifest.version} (Expo)`;
+    } else {
       sourceVersion = `${DeviceInfo.getSystemName()} ${DeviceInfo.getVersion()} (${DeviceInfo.getBuildNumber()})`;
-    } catch (error) {
-      // console.log(
-      //   `Failed to get DeviceInfo version, defaulting to ${version}, error: ${error}`
-      // );
     }
+
     const params = {
       source: "tidepool",
       sourceVersion,

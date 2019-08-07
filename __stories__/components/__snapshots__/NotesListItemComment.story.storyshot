@@ -2,6 +2,7 @@
 
 exports[`Storyshots NotesListItemComment default 1`] = `
 <RCTSafeAreaView
+  emulateUnlessSupported={true}
   paddingTop={0}
   style={
     Object {
@@ -236,6 +237,7 @@ exports[`Storyshots NotesListItemComment default 1`] = `
 
 exports[`Storyshots NotesListItemComment long user full name 1`] = `
 <RCTSafeAreaView
+  emulateUnlessSupported={true}
   paddingTop={0}
   style={
     Object {

@@ -2,6 +2,7 @@
 
 exports[`Storyshots Graph data 1, four y-axis labels, 1.0 scale 1`] = `
 <RCTSafeAreaView
+  emulateUnlessSupported={true}
   paddingTop={0}
   style={
     Object {
@@ -28,6 +29,7 @@ exports[`Storyshots Graph data 1, four y-axis labels, 1.0 scale 1`] = `
 
 exports[`Storyshots Graph data 1, four y-axis labels, default scale 1`] = `
 <RCTSafeAreaView
+  emulateUnlessSupported={true}
   paddingTop={0}
   style={
     Object {
@@ -54,6 +56,7 @@ exports[`Storyshots Graph data 1, four y-axis labels, default scale 1`] = `
 
 exports[`Storyshots Graph data 1, four y-axis labels, max scale 1`] = `
 <RCTSafeAreaView
+  emulateUnlessSupported={true}
   paddingTop={0}
   style={
     Object {
@@ -80,6 +83,7 @@ exports[`Storyshots Graph data 1, four y-axis labels, max scale 1`] = `
 
 exports[`Storyshots Graph data 1, three y-axis labels, default scale 1`] = `
 <RCTSafeAreaView
+  emulateUnlessSupported={true}
   paddingTop={0}
   style={
     Object {
@@ -106,6 +110,7 @@ exports[`Storyshots Graph data 1, three y-axis labels, default scale 1`] = `
 
 exports[`Storyshots Graph data 2, four y-axis labels, default scale 1`] = `
 <RCTSafeAreaView
+  emulateUnlessSupported={true}
   paddingTop={0}
   style={
     Object {
@@ -132,6 +137,7 @@ exports[`Storyshots Graph data 2, four y-axis labels, default scale 1`] = `
 
 exports[`Storyshots Graph isLoading, default scale 1`] = `
 <RCTSafeAreaView
+  emulateUnlessSupported={true}
   paddingTop={0}
   style={
     Object {
@@ -158,6 +164,7 @@ exports[`Storyshots Graph isLoading, default scale 1`] = `
 
 exports[`Storyshots Graph no data, four y-axis labels, 1.0 scale 1`] = `
 <RCTSafeAreaView
+  emulateUnlessSupported={true}
   paddingTop={0}
   style={
     Object {
@@ -184,6 +191,7 @@ exports[`Storyshots Graph no data, four y-axis labels, 1.0 scale 1`] = `
 
 exports[`Storyshots Graph no data, four y-axis labels, default scale 1`] = `
 <RCTSafeAreaView
+  emulateUnlessSupported={true}
   paddingTop={0}
   style={
     Object {
@@ -210,6 +218,7 @@ exports[`Storyshots Graph no data, four y-axis labels, default scale 1`] = `
 
 exports[`Storyshots Graph no data, four y-axis labels, max scale 1`] = `
 <RCTSafeAreaView
+  emulateUnlessSupported={true}
   paddingTop={0}
   style={
     Object {
@@ -236,6 +245,7 @@ exports[`Storyshots Graph no data, four y-axis labels, max scale 1`] = `
 
 exports[`Storyshots Graph no data, three y-axis labels, default scale 1`] = `
 <RCTSafeAreaView
+  emulateUnlessSupported={true}
   paddingTop={0}
   style={
     Object {
@@ -262,6 +272,7 @@ exports[`Storyshots Graph no data, three y-axis labels, default scale 1`] = `
 
 exports[`Storyshots Graph offline, available offline 1`] = `
 <RCTSafeAreaView
+  emulateUnlessSupported={true}
   paddingTop={0}
   style={
     Object {
@@ -288,6 +299,7 @@ exports[`Storyshots Graph offline, available offline 1`] = `
 
 exports[`Storyshots Graph offline, not available offline 1`] = `
 <RCTSafeAreaView
+  emulateUnlessSupported={true}
   paddingTop={0}
   style={
     Object {

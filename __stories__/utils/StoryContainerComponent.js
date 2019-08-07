@@ -46,9 +46,7 @@ class StoryContainerComponent extends PureComponent {
     return (
       <Provider store={store}>
         <SafeAreaView style={safeAreaViewStyle} paddingTop={paddingTop}>
-          <View style={containerStyle}>
-            {enhanced()}
-          </View>
+          <View style={containerStyle}>{enhanced()}</View>
         </SafeAreaView>
       </Provider>
     );

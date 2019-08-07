@@ -4,14 +4,14 @@ import PropTypes from "prop-types";
 import glamorous, { withTheme } from "glamorous-native";
 
 import { ThemePropType } from "../../prop-types/theme";
-import { GRAPH_RENDERER_SVG } from "./helpers";
+// import { GRAPH_RENDERER_SVG } from "./helpers";
 import {
   GraphFixedLayoutInfo,
   GraphLayoutConstants,
 } from "./GraphFixedLayoutInfo";
 import GraphScalableLayoutInfo from "./GraphScalableLayoutInfo";
-import GraphYAxisLabels from "./GraphYAxisLabels";
-import GraphYAxisBGBoundaryLinesSvg from "./svg/GraphYAxisBGBoundaryLinesSvg";
+// import GraphYAxisLabels from "./GraphYAxisLabels";
+// import GraphYAxisBGBoundaryLinesSvg from "./svg/GraphYAxisBGBoundaryLinesSvg";
 import GraphNoData from "./GraphNoData";
 import GraphScrollable from "./GraphScrollable";
 import GraphZoomable from "./GraphZoomable";
@@ -135,32 +135,32 @@ class Graph extends PureComponent {
     );
   }
 
-  renderFixedBackgroundSvg() {
-    // console.log(`renderFixedBackgroundSvg`);
+  // renderFixedBackgroundSvg() {
+  //   // console.log(`renderFixedBackgroundSvg`);
 
-    const { theme, yAxisLabelValues, yAxisBGBoundaryValues } = this.props;
-    const { graphFixedLayoutInfo } = this.state;
+  //   const { theme, yAxisLabelValues, yAxisBGBoundaryValues } = this.props;
+  //   const { graphFixedLayoutInfo } = this.state;
 
-    return (
-      <glamorous.View
-        position="absolute"
-        pointerEvents="none"
-        top={graphFixedLayoutInfo.headerHeight}
-        width={graphFixedLayoutInfo.width}
-        height={graphFixedLayoutInfo.graphLayerHeight}
-        backgroundColor={theme.graphBackgroundColor}
-      >
-        <GraphYAxisLabels
-          yAxisLabelValues={yAxisLabelValues}
-          graphFixedLayoutInfo={graphFixedLayoutInfo}
-        />
-        <GraphYAxisBGBoundaryLinesSvg
-          yAxisBGBoundaryValues={yAxisBGBoundaryValues}
-          graphFixedLayoutInfo={graphFixedLayoutInfo}
-        />
-      </glamorous.View>
-    );
-  }
+  //   return (
+  //     <glamorous.View
+  //       position="absolute"
+  //       pointerEvents="none"
+  //       top={graphFixedLayoutInfo.headerHeight}
+  //       width={graphFixedLayoutInfo.width}
+  //       height={graphFixedLayoutInfo.graphLayerHeight}
+  //       backgroundColor={theme.graphBackgroundColor}
+  //     >
+  //       <GraphYAxisLabels
+  //         yAxisLabelValues={yAxisLabelValues}
+  //         graphFixedLayoutInfo={graphFixedLayoutInfo}
+  //       />
+  //       {/* <GraphYAxisBGBoundaryLinesSvg
+  //         yAxisBGBoundaryValues={yAxisBGBoundaryValues}
+  //         graphFixedLayoutInfo={graphFixedLayoutInfo}
+  //       /> */}
+  //     </glamorous.View>
+  //   );
+  // }
 
   renderGraphZoomable() {
     const {
@@ -173,7 +173,7 @@ class Graph extends PureComponent {
       bolusData,
       wizardData,
       navigateHowToUpload,
-      graphRenderer,
+      // graphRenderer,
     } = this.props;
     const { graphScalableLayoutInfo, graphFixedLayoutInfo } = this.state;
     const shouldRenderLoadingIndicator = isLoading;
@@ -195,9 +195,9 @@ class Graph extends PureComponent {
           onZoomEnd={this.onZoomEnd}
           isZoomingEnabled={!isLoading}
         >
-          {graphRenderer === GRAPH_RENDERER_SVG
+          {/* {graphRenderer === GRAPH_RENDERER_SVG
             ? this.renderFixedBackgroundSvg()
-            : null}
+            : null} */}
           {this.renderGraphScrollable()}
           {shouldRenderNoData
             ? Graph.renderNoData({
@@ -259,7 +259,7 @@ Graph.propTypes = {
   scale: PropTypes.number,
   eventTime: PropTypes.instanceOf(Date),
   navigateHowToUpload: PropTypes.func.isRequired,
-  graphRenderer: PropTypes.string.isRequired,
+  // graphRenderer: PropTypes.string.isRequired,
   onZoomStart: PropTypes.func,
   onZoomEnd: PropTypes.func,
   isOffline: PropTypes.bool,
