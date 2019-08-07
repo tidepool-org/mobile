@@ -48,4 +48,4 @@ SwitchCustom.defaultProps = {
   switchText: "Flip this switch",
 };
 
-export default SwitchCustom;
+export { SwitchCustom };

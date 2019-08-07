@@ -95,4 +95,4 @@ SingleSelectCustom.defaultProps = {
 //   placeholder: "Select...",
 };
 
-export default SingleSelectCustom;
+export { SingleSelectCustom };
