@@ -30,7 +30,7 @@ class SignUpScreen extends PureComponent {
 
   render() {
     return (
-      <SafeAreaView style={{ flex: 1 }}>
+      <SafeAreaView style={{ flex: 1, backgroundColor: "#ffffff" }}>
         <StyleProvider style={getTheme(commonColor)}>
           <Container>
             <View style={{ flex: 1, margin: 16 }}>

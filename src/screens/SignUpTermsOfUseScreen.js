@@ -29,11 +29,10 @@ class SignUpTermsOfUseScreen extends PureComponent {
 
   render() {
     return (
-      <SafeAreaView style={{ flex: 1 }}>
+      <SafeAreaView style={{ flex: 1, backgroundColor: "#ffffff" }}>
         <StyleProvider style={getTheme(commonColor)}>
           <Container>
             <View style={{ flex: 1, margin: 16 }}>
-
               <View>
                 <TextSignUpMidTitle title="Select your age." />
                 <ListItem>
@@ -64,29 +63,28 @@ class SignUpTermsOfUseScreen extends PureComponent {
                 </ListItem>
               </View>
 
-
               <View>
                 <TextSignUpMidTitle title="Acknowledge terms of use." />
                 <ListItem>
                   <Switch value={false} />
                   <Body>
-                    <Text>I am 18 or older and accept the terms of the Tidepool App Terms of Use and Privacy Policy</Text>
+                    <Text>
+                      I am 18 or older and accept the terms of the Tidepool App
+                      Terms of Use and Privacy Policy
+                    </Text>
                   </Body>
                 </ListItem>
               </View>
-
 
               <View style={{ flex: 1, justifyContent: "flex-end" }}>
                 <Button block onPress={this.onPressContinue}>
                   <Text>Continue</Text>
                 </Button>
               </View>
-
             </View>
           </Container>
         </StyleProvider>
       </SafeAreaView>
-
     );
   }
 }
