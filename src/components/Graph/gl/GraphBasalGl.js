@@ -66,9 +66,9 @@ class GraphBasalGl extends GraphRenderLayerGl {
     if (this.suppressedLinePath) {
       const points = this.suppressedLinePath.getPoints();
       const geometry = new THREE.Geometry().setFromPoints(points);
-      geometry.computeLineDistances();
       const { contentOffsetX, pixelsPerSecond } = this;
       const line = new THREE.Line(geometry, this.suppressedLineMaterial);
+      line.computeLineDistances();
       this.updateSuppressedLineMaterial();
       this.addAutoScrollableObjectToScene(this.scene, line, {
         x: 0,

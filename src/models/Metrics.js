@@ -43,7 +43,7 @@ class Metrics {
       // console.log(`processNextMetric: ${metric}`);
 
       api()
-        .trackMetric({
+        .trackMetricPromise({
           metric,
         })
         .then(() => {

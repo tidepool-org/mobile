@@ -2,6 +2,7 @@
 
 exports[`Storyshots SignInForm Sign in error 1`] = `
 <RCTSafeAreaView
+  emulateUnlessSupported={true}
   paddingTop={0}
   style={
     Object {
@@ -247,6 +248,7 @@ exports[`Storyshots SignInForm Sign in error 1`] = `
 
 exports[`Storyshots SignInForm Signing in 1`] = `
 <RCTSafeAreaView
+  emulateUnlessSupported={true}
   paddingTop={0}
   style={
     Object {
@@ -505,6 +507,7 @@ exports[`Storyshots SignInForm Signing in 1`] = `
 
 exports[`Storyshots SignInForm default 1`] = `
 <RCTSafeAreaView
+  emulateUnlessSupported={true}
   paddingTop={0}
   style={
     Object {

@@ -1,0 +1,209 @@
+diff --git a/node_modules/react-native-walkthrough-tooltip/src/geom.js b/node_modules/react-native-walkthrough-tooltip/src/geom.js
+index cd55c67..a8046e6 100644
+--- a/node_modules/react-native-walkthrough-tooltip/src/geom.js
++++ b/node_modules/react-native-walkthrough-tooltip/src/geom.js
+@@ -26,20 +26,18 @@ const computeTopGeometry = ({
+   childRect,
+   contentSize,
+   arrowSize,
++  tooltipOriginOffset = { x: 0, y: 0 },
+ }) => {
+   const tooltipOrigin = new Point(
+     Math.min(
+       displayArea.x + displayArea.width - contentSize.width,
+-      Math.max(
+-        displayArea.x,
+-        childRect.x + (childRect.width - contentSize.width) / 2,
+-      ),
+-    ),
+-    childRect.y - contentSize.height - arrowSize.height,
++      Math.max(displayArea.x, childRect.x + (childRect.width - contentSize.width) / 2),
++    ) + tooltipOriginOffset.x,
++    childRect.y - contentSize.height - arrowSize.height + tooltipOriginOffset.y,
+   );
+   const anchorPoint = new Point(
+-    childRect.x + childRect.width / 2.0,
+-    childRect.y,
++    childRect.x + childRect.width / 2.0 + tooltipOriginOffset.x,
++    childRect.y + tooltipOriginOffset.y,
+   );
+ 
+   return {
+@@ -54,20 +52,18 @@ const computeBottomGeometry = ({
+   childRect,
+   contentSize,
+   arrowSize,
++  tooltipOriginOffset = { x: 0, y: 0 },
+ }) => {
+   const tooltipOrigin = new Point(
+     Math.min(
+       displayArea.x + displayArea.width - contentSize.width,
+-      Math.max(
+-        displayArea.x,
+-        childRect.x + (childRect.width - contentSize.width) / 2,
+-      ),
+-    ),
+-    childRect.y + childRect.height + arrowSize.height,
++      Math.max(displayArea.x, childRect.x + (childRect.width - contentSize.width) / 2),
++    ) + tooltipOriginOffset.x,
++    childRect.y + childRect.height + arrowSize.height + tooltipOriginOffset.y,
+   );
+   const anchorPoint = new Point(
+-    childRect.x + childRect.width / 2.0,
+-    childRect.y + childRect.height,
++    childRect.x + childRect.width / 2.0 + tooltipOriginOffset.x,
++    childRect.y + childRect.height + tooltipOriginOffset.y,
+   );
+ 
+   return {
+@@ -77,25 +73,17 @@ const computeBottomGeometry = ({
+   };
+ };
+ 
+-const computeLeftGeometry = ({
+-  displayArea,
+-  childRect,
+-  contentSize,
+-  arrowSize,
+-}) => {
++const computeLeftGeometry = ({ displayArea, childRect, contentSize, arrowSize }) => {
+   const tooltipOrigin = new Point(
+-    childRect.x - contentSize.width - arrowSize.width,
++    childRect.x - contentSize.width - arrowSize.width + tooltipOriginOffset.x,
+     Math.min(
+       displayArea.y + displayArea.height - contentSize.height,
+-      Math.max(
+-        displayArea.y,
+-        childRect.y + (childRect.height - contentSize.height) / 2,
+-      ),
+-    ),
++      Math.max(displayArea.y, childRect.y + (childRect.height - contentSize.height) / 2),
++    ) + tooltipOriginOffset.y,
+   );
+   const anchorPoint = new Point(
+-    childRect.x,
+-    childRect.y + childRect.height / 2.0,
++    childRect.x + tooltipOriginOffset.x,
++    childRect.y + childRect.height / 2.0 + tooltipOriginOffset.y,
+   );
+ 
+   return {
+@@ -105,25 +93,17 @@ const computeLeftGeometry = ({
+   };
+ };
+ 
+-const computeRightGeometry = ({
+-  displayArea,
+-  childRect,
+-  contentSize,
+-  arrowSize,
+-}) => {
++const computeRightGeometry = ({ displayArea, childRect, contentSize, arrowSize }) => {
+   const tooltipOrigin = new Point(
+-    childRect.x + childRect.width + arrowSize.width,
++    childRect.x + childRect.width + arrowSize.width + tooltipOriginOffset.x,
+     Math.min(
+       displayArea.y + displayArea.height - contentSize.height,
+-      Math.max(
+-        displayArea.y,
+-        childRect.y + (childRect.height - contentSize.height) / 2,
+-      ),
+-    ),
++      Math.max(displayArea.y, childRect.y + (childRect.height - contentSize.height) / 2),
++    ) + tooltipOriginOffset.y,
+   );
+   const anchorPoint = new Point(
+-    childRect.x + childRect.width,
+-    childRect.y + childRect.height / 2.0,
++    childRect.x + childRect.width + tooltipOriginOffset.x,
++    childRect.y + childRect.height / 2.0 + tooltipOriginOffset.y,
+   );
+ 
+   return {
+diff --git a/node_modules/react-native-walkthrough-tooltip/src/tooltip.js b/node_modules/react-native-walkthrough-tooltip/src/tooltip.js
+index bce3dd1..00508cb 100644
+--- a/node_modules/react-native-walkthrough-tooltip/src/tooltip.js
++++ b/node_modules/react-native-walkthrough-tooltip/src/tooltip.js
+@@ -27,7 +27,7 @@ const SCREEN_WIDTH = Dimensions.get('window').width;
+ const DEFAULT_ARROW_SIZE = new Size(16, 8);
+ const DEFAULT_PADDING = 24;
+ 
+-const invertPlacement = (placement) => {
++const invertPlacement = placement => {
+   switch (placement) {
+     case 'top':
+       return 'bottom';
+@@ -61,6 +61,7 @@ class Tooltip extends Component {
+     onChildPress: null,
+     onClose: null,
+     placement: 'auto',
++    tooltipOriginOffset: undefined,
+   };
+ 
+   constructor(props) {
+@@ -135,7 +136,7 @@ class Tooltip extends Component {
+     }
+   }
+ 
+-  getArrowSize = (placement) => {
++  getArrowSize = placement => {
+     const size = this.props.arrowSize;
+     switch (placement) {
+       case 'left':
+@@ -146,11 +147,11 @@ class Tooltip extends Component {
+     }
+   };
+ 
+-  getArrowColorStyle = (color) => {
++  getArrowColorStyle = color => {
+     return { borderTopColor: color };
+   };
+ 
+-  getArrowRotation = (placement) => {
++  getArrowRotation = placement => {
+     switch (placement) {
+       case 'bottom':
+         return '180deg';
+@@ -237,7 +238,7 @@ class Tooltip extends Component {
+     return new Point(anchorPoint.x - tooltipCenter.x, anchorPoint.y - tooltipCenter.y);
+   };
+ 
+-  waitAndMeasureChildRect = (clearWaitingForInteractions) => {
++  waitAndMeasureChildRect = clearWaitingForInteractions => {
+     setTimeout(() => {
+       this.measureChildRect();
+ 
+@@ -247,7 +248,7 @@ class Tooltip extends Component {
+     }, 1000);
+   };
+ 
+-  measureContent = (e) => {
++  measureContent = e => {
+     const { width, height } = e.nativeEvent.layout;
+     const contentSize = new Size(width, height);
+ 
+@@ -380,6 +381,7 @@ class Tooltip extends Component {
+       childRect: this.state.childRect,
+       arrowSize: this.getArrowSize(innerPlacement),
+       contentSize,
++      tooltipOriginOffset: this.props.tooltipOriginOffset,
+     };
+ 
+     switch (innerPlacement) {
+@@ -487,7 +489,7 @@ class Tooltip extends Component {
+ 
+     const animatedStyles = this.props.animated ? this._getDefaultAnimatedStyles() : null;
+ 
+-    [animatedStyles, this.props].forEach((source) => {
++    [animatedStyles, this.props].forEach(source => {
+       if (source) {
+         background.push(source.backgroundStyle);
+         tooltip.push(source.tooltipStyle);
+@@ -617,6 +619,7 @@ Tooltip.propTypes = {
+   onClose: PropTypes.func,
+   placement: PropTypes.string,
+   childlessPlacementPadding: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
++  tooltipOriginOffset: PropTypes.object,
+ };
+ 
+ export default Tooltip;

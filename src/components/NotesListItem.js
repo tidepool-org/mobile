@@ -7,7 +7,7 @@ import {
   Linking,
   ViewPropTypes,
 } from "react-native";
-import { LinearGradient } from "expo";
+import { LinearGradient } from "expo-linear-gradient";
 import glamorous, { withTheme } from "glamorous-native";
 import addHours from "date-fns/add_hours";
 import subHours from "date-fns/sub_hours";
@@ -62,7 +62,7 @@ class NotesListItem extends PureComponent {
     }).start();
 
     if (initiallyExpanded) {
-      setTimeout(() => {
+      this.toggleNoteTimeoutId = setTimeout(() => {
         this.toggleNote({ animationDuration: 350 });
       }, 100);
     }
@@ -131,6 +131,9 @@ class NotesListItem extends PureComponent {
   }
 
   componentWillUnmount() {
+    if (this.toggleNoteTimeoutId) {
+      clearTimeout(this.toggleNoteTimeoutId);
+    }
     SignificantTimeChangeNotification.unsubscribe(this.timeChanged);
   }
 
@@ -195,11 +198,13 @@ class NotesListItem extends PureComponent {
   };
 
   timeChanged = () => {
-    const { note } = this.props;
+    if (this.isComponentMounted) {
+      const { note } = this.props;
 
-    this.setState({
-      formattedTimestamp: formatDateForNoteList(note.timestamp),
-    });
+      this.setState({
+        formattedTimestamp: formatDateForNoteList(note.timestamp),
+      });
+    }
   };
 
   toggleNote = (
@@ -552,8 +557,12 @@ NotesListItem.propTypes = {
   currentProfile: ProfilePropType.isRequired,
   note: PropTypes.shape({
     id: PropTypes.string.isRequired,
+    userId: PropTypes.string.isRequired,
+    groupId: PropTypes.string.isRequired,
+    userFullName: PropTypes.string.isRequired,
     timestamp: PropTypes.instanceOf(Date),
     messageText: PropTypes.string.isRequired,
+    initiallyExpanded: PropTypes.bool,
   }).isRequired,
   commentsFetchAsync: PropTypes.func.isRequired,
   commentsFetchData: PropTypes.shape({

@@ -1,29 +1,25 @@
 package host.exp.exponent;
 
-
 import com.facebook.react.ReactPackage;
-import com.facebook.react.modules.storage.ReactDatabaseSupplier;
+
+import org.unimodules.core.interfaces.Package;
 
 import java.util.Arrays;
 import java.util.List;
 
-import expo.core.interfaces.Package;
 import expo.loaders.provider.interfaces.AppLoaderPackagesProviderInterface;
-import expo.modules.constants.ConstantsPackage;
-import expo.modules.filesystem.FileSystemPackage;
-import expo.modules.font.FontLoaderPackage;
-import expo.modules.gl.GLPackage;
-import expolib_v1.okhttp3.OkHttpClient;
-// Needed for `react-native link`
-// import com.facebook.react.ReactApplication;
-import com.rollbar.RollbarReactNative;
+import host.exp.exponent.generated.BasePackageList;
+import okhttp3.OkHttpClient;
+import android.os.Handler;
+import com.facebook.react.modules.storage.ReactDatabaseSupplier;
+import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.rollbar.notifier.config.Config;
 import com.rollbar.notifier.config.ConfigBuilder;
 import com.rollbar.notifier.config.ConfigProvider;
+import com.rollbar.RollbarReactNative;
 
-import android.os.Handler;
-import com.learnium.RNDeviceInfo.RNDeviceInfo;
-import host.exp.exponent.NativeNotificationsPackage;
+// Needed for `react-native link`
+// import com.facebook.react.ReactApplication;
 
 public class MainApplication extends ExpoApplication implements AppLoaderPackagesProviderInterface<ReactPackage> {
 
@@ -57,22 +53,12 @@ public class MainApplication extends ExpoApplication implements AppLoaderPackage
   }
 
   public List<Package> getExpoPackages() {
-    return Arrays.<Package>asList(
-        new ConstantsPackage(),
-        new FileSystemPackage(),
-        new FontLoaderPackage(),
-        new GLPackage()
-    );
+    return new BasePackageList().getPackageList();
   }
 
   @Override
   public String gcmSenderId() {
     return getString(R.string.gcm_defaultSenderId);
-  }
-
-  @Override
-  public boolean shouldUseInternetKernel() {
-    return BuildVariantConstants.USE_INTERNET_KERNEL;
   }
 
   public static OkHttpClient.Builder okHttpClientBuilder(OkHttpClient.Builder builder) {
@@ -123,10 +109,10 @@ public class MainApplication extends ExpoApplication implements AppLoaderPackage
   }
 
   public void testLogWarning(String message) {
-    RollbarReactNative.warning(message);
+     RollbarReactNative.warning(message);
   }
 
   public void testLogError(String message) {
-    RollbarReactNative.error(message);
-  }  
+     RollbarReactNative.error(message);
+  }
 }
