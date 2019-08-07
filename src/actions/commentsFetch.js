@@ -1,4 +1,5 @@
 import api from "../api";
+import ConnectionStatus from "../models/ConnectionStatus";
 
 const COMMENTS_FETCH_DID_START = "COMMENTS_FETCH_DID_START";
 const COMMENTS_FETCH_DID_SUCCEED = "COMMENTS_FETCH_DID_SUCCEED";
@@ -26,16 +27,35 @@ const commentsFetchDidFail = ({ messageId, errorMessage }) => ({
 });
 
 const commentsFetchAsync = ({ messageId }) => async dispatch => {
-  dispatch(commentsFetchDidStart({ messageId }));
-
-  const { comments, errorMessage } = await api().fetchCommentsAsync({
+  const fetchParams = {
     messageId,
-  });
+  };
+  const {
+    comments: offlineComments,
+    isAvailableOffline,
+  } = await api().fetchCommentsAsync(
+    fetchParams,
+    true // fetchOnlyFromCache
+  );
 
-  if (errorMessage) {
-    dispatch(commentsFetchDidFail({ messageId, errorMessage }));
-  } else {
-    dispatch(commentsFetchDidSucceed({ messageId, comments }));
+  if (isAvailableOffline) {
+    dispatch(commentsFetchDidSucceed({ messageId, comments: offlineComments }));
+  }
+
+  if (ConnectionStatus.isOnline) {
+    if (!isAvailableOffline) {
+      dispatch(commentsFetchDidStart({ messageId }));
+    }
+
+    const { comments, errorMessage } = await api().fetchCommentsAsync(
+      fetchParams
+    );
+
+    if (errorMessage) {
+      dispatch(commentsFetchDidFail({ messageId, errorMessage }));
+    } else {
+      dispatch(commentsFetchDidSucceed({ messageId, comments }));
+    }
   }
 };
 

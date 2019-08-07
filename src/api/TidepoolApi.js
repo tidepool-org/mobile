@@ -43,7 +43,7 @@ class TidepoolApi {
     this.tasksInProgress += 1;
 
     const { sessionToken: previousSessionToken } = authUser;
-    const { sessionToken, userId, errorMessage } = await this.refreshToken({
+    const { sessionToken, userId, errorMessage } = await this.refreshTokenPromise({
       sessionToken: previousSessionToken,
     })
       .then(response => ({
@@ -73,7 +73,7 @@ class TidepoolApi {
 
     this.tasksInProgress += 1;
 
-    const { sessionToken, userId, errorMessage } = await this.signIn({
+    const { sessionToken, userId, errorMessage } = await this.signInPromise({
       username,
       password,
     })
@@ -104,7 +104,7 @@ class TidepoolApi {
 
     this.tasksInProgress += 1;
 
-    const { errorMessage, ...rest } = await this.fetchProfile({
+    const { errorMessage, ...rest } = await this.fetchProfilePromise({
       userId,
     })
       .then(response => {
@@ -136,7 +136,7 @@ class TidepoolApi {
 
     this.tasksInProgress += 1;
 
-    const { settings, errorMessage } = await this.fetchProfileSettings({
+    const { errorMessage, ...rest } = await this.fetchProfileSettingsPromise({
       userId,
     })
       .then(response => {
@@ -160,7 +160,7 @@ class TidepoolApi {
       return this.cache.fetchProfileSettingsAsync({ userId });
     }
 
-    return { settings, errorMessage };
+    return {  ...rest, errorMessage };
   }
 
   async fetchNotesAsync({ userId }) {
@@ -170,7 +170,7 @@ class TidepoolApi {
 
     this.tasksInProgress += 1;
 
-    const { notes, errorMessage } = await this.fetchNotes({
+    const { errorMessage, ...rest } = await this.fetchNotesPromise({
       userId,
     })
       .then(response => {
@@ -210,17 +210,17 @@ class TidepoolApi {
       return this.cache.fetchNotesAsync({ userId });
     }
 
-    return { notes, errorMessage };
+    return { ...rest, errorMessage };
   }
 
-  async fetchCommentsAsync({ messageId }) {
-    if (ConnectionStatus.isOffline) {
+  async fetchCommentsAsync({ messageId }, fetchOnlyFromCache = false) {
+    if (fetchOnlyFromCache || ConnectionStatus.isOffline) {
       return this.cache.fetchCommentsAsync({ messageId });
     }
 
     this.tasksInProgress += 1;
 
-    const { comments, errorMessage } = await this.fetchComments({
+    const { errorMessage, ...rest } = await this.fetchCommentsPromise({
       messageId,
     })
       .then(response => {
@@ -243,10 +243,12 @@ class TidepoolApi {
           (comment1, comment2) => comment1.timestamp - comment2.timestamp
         );
 
-        this.cache.saveCommentsAsync({
-          messageId,
-          comments: sortedComments,
-        });
+        if (!fetchOnlyFromCache) {
+          this.cache.saveCommentsAsync({
+            messageId,
+            comments: sortedComments,
+          });
+        }
 
         return { comments: sortedComments, isAvailableOffline: true };
       })
@@ -261,7 +263,7 @@ class TidepoolApi {
       return this.cache.fetchCommentsAsync({ messageId });
     }
 
-    return { comments, errorMessage };
+    return { errorMessage, ...rest };
   }
 
   async fetchViewableUserProfilesAsync({ userId, fullName }) {
@@ -280,7 +282,7 @@ class TidepoolApi {
     const {
       userIds,
       errorMessage: fetchOtherViewableUserIdsErrorMessage,
-    } = await this.fetchOtherViewableUserIds({
+    } = await this.fetchOtherViewableUserIdsPromise({
       userId,
     })
       .then(response => {
@@ -297,7 +299,7 @@ class TidepoolApi {
     // Get profiles for other viewable user ids
     if (!errorMessage) {
       const fetchProfilePromises = userIds.map(fetchProfileUserId =>
-        this.fetchProfile({ userId: fetchProfileUserId })
+        this.fetchProfilePromise({ userId: fetchProfileUserId })
       );
 
       const {
@@ -345,7 +347,7 @@ class TidepoolApi {
   async addNoteAsync({ currentUser, currentProfile, messageText, timestamp }) {
     this.tasksInProgress += 1;
 
-    const { errorMessage, note } = await this.addNote({
+    const { errorMessage, note } = await this.addNotePromise({
       currentUser,
       currentProfile,
       messageText,
@@ -372,7 +374,7 @@ class TidepoolApi {
   async updateNoteAsync({ currentProfile, note }) {
     this.tasksInProgress += 1;
 
-    const { errorMessage } = await this.updateNote({
+    const { errorMessage } = await this.updateNotePromise({
       note,
     })
       .then(() => ({}))
@@ -395,7 +397,7 @@ class TidepoolApi {
     this.tasksInProgress += 1;
 
     const { id } = note;
-    const { errorMessage } = await this.deleteCommentOrNote({
+    const { errorMessage } = await this.deleteCommentOrNotePromise({
       id,
     })
       .then(() => ({}))
@@ -423,7 +425,7 @@ class TidepoolApi {
   }) {
     this.tasksInProgress += 1;
 
-    const { errorMessage, comment } = await this.addComment({
+    const { errorMessage, comment } = await this.addCommentPromise({
       currentUser,
       currentProfile,
       note,
@@ -450,7 +452,7 @@ class TidepoolApi {
   async updateCommentAsync({ note, comment }) {
     this.tasksInProgress += 1;
 
-    const { errorMessage } = await this.updateComment({
+    const { errorMessage } = await this.updateCommentPromise({
       comment,
     })
       .then(() => ({}))
@@ -472,7 +474,7 @@ class TidepoolApi {
     this.tasksInProgress += 1;
 
     const { id } = comment;
-    const { errorMessage } = await this.deleteCommentOrNote({
+    const { errorMessage } = await this.deleteCommentOrNotePromise({
       id,
     })
       .then(() => ({}))
@@ -490,19 +492,22 @@ class TidepoolApi {
     return { errorMessage };
   }
 
-  async fetchGraphDataAsync({
-    userId,
-    messageId,
-    noteDate,
-    startDate,
-    endDate,
-    objectTypes,
-    lowBGBoundary,
-    highBGBoundary,
-  }) {
+  async fetchGraphDataAsync(
+    {
+      userId,
+      messageId,
+      noteDate,
+      startDate,
+      endDate,
+      objectTypes,
+      lowBGBoundary,
+      highBGBoundary,
+    },
+    fetchOnlyFromCache = false
+  ) {
     let result;
 
-    if (ConnectionStatus.isOffline) {
+    if (fetchOnlyFromCache || ConnectionStatus.isOffline) {
       result = await this.cache.fetchGraphDataAsync({
         userId,
         messageId,
@@ -510,7 +515,7 @@ class TidepoolApi {
     } else {
       this.tasksInProgress += 1;
 
-      result = await this.fetchGraphData({
+      result = await this.fetchGraphDataPromise({
         userId,
         noteDate,
         startDate,
@@ -543,14 +548,14 @@ class TidepoolApi {
     }
 
     let graphData;
-    const { responseData, errorMessage, isAvailableOffline } = result;
+    const { responseData, errorMessage } = result;
+    let { isAvailableOffline } = result;
     if (responseData) {
       // console.log({ responseData });
       const noteTimeSeconds = noteDate.getTime() / 1000;
       const startDateSeconds = startDate.getTime() / 1000;
       const endDateSeconds = endDate.getTime() / 1000;
       graphData = new GraphData();
-      graphData.isAvailableOffline = isAvailableOffline;
       graphData.addResponseData(responseData);
       graphData.process({
         eventTimeSeconds: noteTimeSeconds,
@@ -559,25 +564,27 @@ class TidepoolApi {
         highBGBoundary,
       });
 
-      if (ConnectionStatus.isOnline) {
+      if (ConnectionStatus.isOnline && !fetchOnlyFromCache) {
         this.cache.saveGraphDataAsync({
           userId,
           messageId,
           responseData,
         });
-        graphData.isAvailableOffline = true;
+        isAvailableOffline = true;
       }
     } else {
       graphData = new GraphData();
     }
 
-    return { graphData, errorMessage };
+    graphData.isAvailableOffline = isAvailableOffline;
+
+    return { graphData, errorMessage, isAvailableOffline };
   }
 
   async trackMetricAsync({ metric }) {
     this.tasksInProgress += 1;
 
-    const { errorMessage } = await this.trackMetric({
+    const { errorMessage } = await this.trackMetricPromise({
       metric,
     })
       .then(() => ({}))
@@ -591,10 +598,10 @@ class TidepoolApi {
   }
 
   //
-  // Lower-level promise-based methods
+  // Lower-level Promise based methods
   //
 
-  refreshToken({ sessionToken: previousSessionToken }) {
+  refreshTokenPromise({ sessionToken: previousSessionToken }) {
     const method = "get";
     const url = "/auth/login";
     const baseURL = this.baseUrl;
@@ -621,7 +628,7 @@ class TidepoolApi {
           }
         })
         .catch(error => {
-          // console.log(`refreshToken error: ${error}`);
+          // console.log(`refreshTokenPromise error: ${error}`);
           if (
             error.response &&
             (error.response.status === 400 || error.response.status === 401)
@@ -634,7 +641,7 @@ class TidepoolApi {
     });
   }
 
-  signIn({ username, password }) {
+  signInPromise({ username, password }) {
     const method = "post";
     const url = "/auth/login";
     const baseURL = this.baseUrl;
@@ -674,7 +681,7 @@ class TidepoolApi {
     });
   }
 
-  fetchProfile({ userId }) {
+  fetchProfilePromise({ userId }) {
     const method = "get";
     const url = `/metadata/${userId}/profile`;
     const baseURL = this.baseUrl;
@@ -691,7 +698,7 @@ class TidepoolApi {
     });
   }
 
-  fetchProfileSettings({ userId }) {
+  fetchProfileSettingsPromise({ userId }) {
     const method = "get";
     const url = `/metadata/${userId}/settings`;
     const baseURL = this.baseUrl;
@@ -727,7 +734,7 @@ class TidepoolApi {
     });
   }
 
-  fetchNotes({ userId }) {
+  fetchNotesPromise({ userId }) {
     const method = "get";
     const url = `/message/notes/${userId}`;
     const baseURL = this.baseUrl;
@@ -742,7 +749,7 @@ class TidepoolApi {
         .catch(error => {
           if (error.response && error.response.status === 404) {
             // console.log(
-            //   `fetchNotes: No notes retrieved, status code: ${
+            //   `fetchNotesPromise: No notes retrieved, status code: ${
             //     error.response.status
             //   }, userid: ${userId}`
             // );
@@ -754,7 +761,7 @@ class TidepoolApi {
     });
   }
 
-  fetchComments({ messageId }) {
+  fetchCommentsPromise({ messageId }) {
     const method = "get";
     const url = `/message/thread/${messageId}`;
     const baseURL = this.baseUrl;
@@ -772,7 +779,7 @@ class TidepoolApi {
     });
   }
 
-  fetchOtherViewableUserIds({ userId }) {
+  fetchOtherViewableUserIdsPromise({ userId }) {
     const method = "get";
     const url = `/access/groups/${userId}`;
     const baseURL = this.baseUrl;
@@ -797,7 +804,7 @@ class TidepoolApi {
     });
   }
 
-  addNote({ currentUser, currentProfile, messageText, timestamp }) {
+  addNotePromise({ currentUser, currentProfile, messageText, timestamp }) {
     const method = "post";
     const groupId = currentProfile.userId;
     const url = `/message/send/${groupId}`;
@@ -834,7 +841,7 @@ class TidepoolApi {
     });
   }
 
-  updateNote({ note }) {
+  updateNotePromise({ note }) {
     const method = "put";
     const url = `/message/edit/${note.id}`;
     const baseURL = this.baseUrl;
@@ -857,7 +864,7 @@ class TidepoolApi {
     });
   }
 
-  addComment({ currentUser, currentProfile, note, messageText, timestamp }) {
+  addCommentPromise({ currentUser, currentProfile, note, messageText, timestamp }) {
     const method = "post";
     const groupId = currentProfile.userId;
     const url = `/message/reply/${note.id}`;
@@ -894,7 +901,7 @@ class TidepoolApi {
     });
   }
 
-  updateComment({ comment }) {
+  updateCommentPromise({ comment }) {
     const method = "put";
     const url = `/message/edit/${comment.id}`;
     const baseURL = this.baseUrl;
@@ -917,7 +924,7 @@ class TidepoolApi {
     });
   }
 
-  deleteCommentOrNote({ id }) {
+  deleteCommentOrNotePromise({ id }) {
     const method = "delete";
     const url = `/message/remove/${id}`;
     const baseURL = this.baseUrl;
@@ -934,7 +941,7 @@ class TidepoolApi {
     });
   }
 
-  fetchGraphData({ userId, startDate, endDate, objectTypes }) {
+  fetchGraphDataPromise({ userId, startDate, endDate, objectTypes }) {
     const method = "get";
     const url = `/data/${userId}`;
     const params = {
@@ -992,7 +999,7 @@ class TidepoolApi {
     });
   }
 
-  trackMetric({ metric }) {
+  trackMetricPromise({ metric }) {
     const method = "get";
     const url = `/metrics/thisuser/tidepool-${metric}`;
     const baseURL = this.baseUrl;
@@ -1013,11 +1020,11 @@ class TidepoolApi {
     return new Promise((resolve, reject) => {
       axios({ method, url, baseURL, headers, params, timeout })
         .then(() => {
-          // console.log(`trackMetric succeeded with metric: ${metric}`);
+          // console.log(`trackMetricPromise succeeded with metric: ${metric}`);
           resolve();
         })
         .catch(error => {
-          // console.log(`trackMetric error: ${error}, with metric: ${metric}`);
+          // console.log(`trackMetricPromise error: ${error}, with metric: ${metric}`);
           reject(error);
         });
     });
