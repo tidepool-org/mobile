@@ -21,616 +21,313 @@ exports[`Storyshots SingleSelectCustom default 1`] = `
       }
     }
   >
-    <View>
-      <View>
-        <View
-          style={
-            Array [
-              Object {
-                "alignSelf": "stretch",
-              },
-              undefined,
-            ]
-          }
-        >
-          <View
-            accessible={true}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
-            pointerEvents="box-only"
-            testID="ios_touchable_wrapper"
-          >
-            <TextInput
-              editable={false}
-              style={
-                Array [
-                  Object {
-                    "borderColor": "#ededed",
-                    "borderRadius": 4,
-                    "borderWidth": 1,
-                    "fontSize": 18,
-                    "height": 58,
-                    "paddingLeft": 16,
-                    "paddingRight": 30,
-                  },
-                  Object {
-                    "color": "#C7C7CD",
-                  },
-                ]
-              }
-              value="Select an item..."
-            />
-            <View
-              style={
-                Array [
-                  Object {
-                    "position": "absolute",
-                    "right": 0,
-                  },
-                  Object {
-                    "paddingRight": 15,
-                    "paddingTop": 20,
-                  },
-                ]
-              }
-              testID="icon_container"
-            >
-              <Text />
-            </View>
-          </View>
-          <Modal
-            hardwareAccelerated={false}
-            onDismiss={[Function]}
-            onOrientationChange={[Function]}
-            supportedOrientations={
-              Array [
-                "portrait",
-                "landscape",
-              ]
-            }
-            testID="ios_modal"
-            transparent={true}
-            visible={false}
-          >
-            <View
-              accessible={true}
-              isTVSelectable={true}
-              onResponderGrant={[Function]}
-              onResponderMove={[Function]}
-              onResponderRelease={[Function]}
-              onResponderTerminate={[Function]}
-              onResponderTerminationRequest={[Function]}
-              onStartShouldSetResponder={[Function]}
-              style={
-                Object {
-                  "flex": 1,
-                  "opacity": 1,
-                }
-              }
-              testID="ios_modal_top"
-            />
-            <View
-              style={
-                Array [
-                  Object {
-                    "alignItems": "center",
-                    "backgroundColor": "#EFF1F2",
-                    "borderTopColor": "#919498",
-                    "borderTopWidth": 0.5,
-                    "flexDirection": "row",
-                    "height": 44,
-                    "justifyContent": "space-between",
-                    "paddingHorizontal": 10,
-                  },
-                  undefined,
-                ]
-              }
-              testID="input_accessory_view"
-            >
-              <View
-                style={
-                  Array [
-                    Object {
-                      "flexDirection": "row",
-                    },
-                    undefined,
-                  ]
-                }
-              >
-                <View
-                  accessible={true}
-                  isTVSelectable={true}
-                  onResponderGrant={[Function]}
-                  onResponderMove={[Function]}
-                  onResponderRelease={[Function]}
-                  onResponderTerminate={[Function]}
-                  onResponderTerminationRequest={[Function]}
-                  onStartShouldSetResponder={[Function]}
-                  style={
-                    Object {
-                      "opacity": 1,
-                    }
-                  }
-                >
-                  <View
-                    style={
-                      Array [
-                        Object {
-                          "backgroundColor": "transparent",
-                          "borderColor": "#D0D4DB",
-                          "borderRightWidth": 1.5,
-                          "borderTopWidth": 1.5,
-                          "height": 15,
-                          "width": 15,
-                        },
-                        undefined,
-                        Object {
-                          "marginLeft": 11,
-                          "transform": Array [
-                            Object {
-                              "translateY": 4,
-                            },
-                            Object {
-                              "rotate": "-45deg",
-                            },
-                          ],
-                        },
-                        undefined,
-                        Object {},
-                      ]
-                    }
-                  />
-                </View>
-                <View
-                  accessible={true}
-                  isTVSelectable={true}
-                  onResponderGrant={[Function]}
-                  onResponderMove={[Function]}
-                  onResponderRelease={[Function]}
-                  onResponderTerminate={[Function]}
-                  onResponderTerminationRequest={[Function]}
-                  onStartShouldSetResponder={[Function]}
-                  style={
-                    Object {
-                      "opacity": 1,
-                    }
-                  }
-                >
-                  <View
-                    style={
-                      Array [
-                        Object {
-                          "backgroundColor": "transparent",
-                          "borderColor": "#D0D4DB",
-                          "borderRightWidth": 1.5,
-                          "borderTopWidth": 1.5,
-                          "height": 15,
-                          "width": 15,
-                        },
-                        undefined,
-                        Object {
-                          "marginLeft": 22,
-                          "transform": Array [
-                            Object {
-                              "translateY": -5,
-                            },
-                            Object {
-                              "rotate": "135deg",
-                            },
-                          ],
-                        },
-                        undefined,
-                        Object {},
-                      ]
-                    }
-                  />
-                </View>
-              </View>
-              <View
-                accessible={true}
-                hitSlop={
-                  Object {
-                    "bottom": 4,
-                    "left": 4,
-                    "right": 4,
-                    "top": 4,
-                  }
-                }
-                onResponderGrant={[Function]}
-                onResponderMove={[Function]}
-                onResponderRelease={[Function]}
-                onResponderTerminate={[Function]}
-                onResponderTerminationRequest={[Function]}
-                onStartShouldSetResponder={[Function]}
-                testID="done_button"
-              >
-                <Text
-                  style={
-                    Array [
-                      Object {
-                        "color": "#007AFE",
-                        "fontSize": 15,
-                        "fontWeight": "bold",
-                        "paddingRight": 2,
-                        "paddingTop": 1,
-                      },
-                      undefined,
-                    ]
-                  }
-                >
-                  Done
-                </Text>
-              </View>
-            </View>
-            <View
-              style={
-                Array [
-                  Object {
-                    "backgroundColor": "#D0D4DB",
-                    "justifyContent": "center",
-                  },
-                  Object {
-                    "height": 215,
-                  },
-                  undefined,
-                ]
-              }
-            >
-              <View>
-                <RCTPicker
-                  items={
-                    Array [
-                      Object {
-                        "label": "Select an item...",
-                        "textColor": 4288585892,
-                        "value": null,
-                      },
-                      Object {
-                        "label": "Football",
-                        "textColor": undefined,
-                        "value": "football",
-                      },
-                      Object {
-                        "label": "Baseball",
-                        "textColor": undefined,
-                        "value": "baseball",
-                      },
-                      Object {
-                        "label": "Hockey",
-                        "textColor": undefined,
-                        "value": "hockey",
-                      },
-                    ]
-                  }
-                  onChange={[Function]}
-                  onResponderTerminationRequest={[Function]}
-                  onStartShouldSetResponder={[Function]}
-                  selectedIndex={0}
-                  style={
-                    Array [
-                      Object {
-                        "height": 216,
-                      },
-                      undefined,
-                    ]
-                  }
-                />
-              </View>
-            </View>
-          </Modal>
-        </View>
-      </View>
+    <View
+      style={
+        Object {
+          "paddingTop": 32,
+        }
+      }
+    >
       <View
         style={
-          Object {
-            "paddingTop": 32,
-          }
+          Array [
+            Object {
+              "alignSelf": "stretch",
+            },
+            undefined,
+          ]
         }
       >
         <View
-          style={
+          accessible={true}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          pointerEvents="box-only"
+          testID="ios_touchable_wrapper"
+        >
+          <TextInput
+            editable={false}
+            style={
+              Array [
+                Object {
+                  "borderColor": "#ededed",
+                  "borderRadius": 4,
+                  "borderWidth": 1,
+                  "color": "#838383",
+                  "fontSize": 18,
+                  "height": 58,
+                  "paddingLeft": 16,
+                  "paddingRight": 30,
+                },
+                Object {
+                  "color": "#C7C7CD",
+                },
+              ]
+            }
+            value="Select..."
+          />
+          <View
+            style={
+              Array [
+                Object {
+                  "position": "absolute",
+                  "right": 0,
+                },
+                Object {
+                  "paddingRight": 15,
+                  "paddingTop": 20,
+                },
+              ]
+            }
+            testID="icon_container"
+          >
+            <Text />
+          </View>
+        </View>
+        <Modal
+          hardwareAccelerated={false}
+          onDismiss={[Function]}
+          onOrientationChange={[Function]}
+          supportedOrientations={
             Array [
-              Object {
-                "alignSelf": "stretch",
-              },
-              undefined,
+              "portrait",
+              "landscape",
             ]
           }
+          testID="ios_modal"
+          transparent={true}
+          visible={false}
         >
           <View
             accessible={true}
+            isTVSelectable={true}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
-            pointerEvents="box-only"
-            testID="ios_touchable_wrapper"
-          >
-            <TextInput
-              editable={false}
-              style={
-                Array [
-                  Object {
-                    "borderColor": "#ededed",
-                    "borderRadius": 4,
-                    "borderWidth": 1,
-                    "fontSize": 18,
-                    "height": 58,
-                    "paddingLeft": 16,
-                    "paddingRight": 30,
-                  },
-                  Object {
-                    "color": "#C7C7CD",
-                  },
-                ]
+            style={
+              Object {
+                "flex": 1,
+                "opacity": 1,
               }
-              value="Select Data Donation Org..."
-            />
-            <View
-              style={
-                Array [
-                  Object {
-                    "position": "absolute",
-                    "right": 0,
-                  },
-                  Object {
-                    "paddingRight": 15,
-                    "paddingTop": 20,
-                  },
-                ]
-              }
-              testID="icon_container"
-            >
-              <Text />
-            </View>
-          </View>
-          <Modal
-            hardwareAccelerated={false}
-            onDismiss={[Function]}
-            onOrientationChange={[Function]}
-            supportedOrientations={
+            }
+            testID="ios_modal_top"
+          />
+          <View
+            style={
               Array [
-                "portrait",
-                "landscape",
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#EFF1F2",
+                  "borderTopColor": "#919498",
+                  "borderTopWidth": 0.5,
+                  "flexDirection": "row",
+                  "height": 44,
+                  "justifyContent": "space-between",
+                  "paddingHorizontal": 10,
+                },
+                undefined,
               ]
             }
-            testID="ios_modal"
-            transparent={true}
-            visible={false}
+            testID="input_accessory_view"
           >
-            <View
-              accessible={true}
-              isTVSelectable={true}
-              onResponderGrant={[Function]}
-              onResponderMove={[Function]}
-              onResponderRelease={[Function]}
-              onResponderTerminate={[Function]}
-              onResponderTerminationRequest={[Function]}
-              onStartShouldSetResponder={[Function]}
-              style={
-                Object {
-                  "flex": 1,
-                  "opacity": 1,
-                }
-              }
-              testID="ios_modal_top"
-            />
             <View
               style={
                 Array [
                   Object {
-                    "alignItems": "center",
-                    "backgroundColor": "#EFF1F2",
-                    "borderTopColor": "#919498",
-                    "borderTopWidth": 0.5,
                     "flexDirection": "row",
-                    "height": 44,
-                    "justifyContent": "space-between",
-                    "paddingHorizontal": 10,
                   },
                   undefined,
                 ]
               }
-              testID="input_accessory_view"
             >
               <View
-                style={
-                  Array [
-                    Object {
-                      "flexDirection": "row",
-                    },
-                    undefined,
-                  ]
-                }
-              >
-                <View
-                  accessible={true}
-                  isTVSelectable={true}
-                  onResponderGrant={[Function]}
-                  onResponderMove={[Function]}
-                  onResponderRelease={[Function]}
-                  onResponderTerminate={[Function]}
-                  onResponderTerminationRequest={[Function]}
-                  onStartShouldSetResponder={[Function]}
-                  style={
-                    Object {
-                      "opacity": 1,
-                    }
-                  }
-                >
-                  <View
-                    style={
-                      Array [
-                        Object {
-                          "backgroundColor": "transparent",
-                          "borderColor": "#D0D4DB",
-                          "borderRightWidth": 1.5,
-                          "borderTopWidth": 1.5,
-                          "height": 15,
-                          "width": 15,
-                        },
-                        undefined,
-                        Object {
-                          "marginLeft": 11,
-                          "transform": Array [
-                            Object {
-                              "translateY": 4,
-                            },
-                            Object {
-                              "rotate": "-45deg",
-                            },
-                          ],
-                        },
-                        undefined,
-                        Object {},
-                      ]
-                    }
-                  />
-                </View>
-                <View
-                  accessible={true}
-                  isTVSelectable={true}
-                  onResponderGrant={[Function]}
-                  onResponderMove={[Function]}
-                  onResponderRelease={[Function]}
-                  onResponderTerminate={[Function]}
-                  onResponderTerminationRequest={[Function]}
-                  onStartShouldSetResponder={[Function]}
-                  style={
-                    Object {
-                      "opacity": 1,
-                    }
-                  }
-                >
-                  <View
-                    style={
-                      Array [
-                        Object {
-                          "backgroundColor": "transparent",
-                          "borderColor": "#D0D4DB",
-                          "borderRightWidth": 1.5,
-                          "borderTopWidth": 1.5,
-                          "height": 15,
-                          "width": 15,
-                        },
-                        undefined,
-                        Object {
-                          "marginLeft": 22,
-                          "transform": Array [
-                            Object {
-                              "translateY": -5,
-                            },
-                            Object {
-                              "rotate": "135deg",
-                            },
-                          ],
-                        },
-                        undefined,
-                        Object {},
-                      ]
-                    }
-                  />
-                </View>
-              </View>
-              <View
                 accessible={true}
-                hitSlop={
-                  Object {
-                    "bottom": 4,
-                    "left": 4,
-                    "right": 4,
-                    "top": 4,
-                  }
-                }
+                isTVSelectable={true}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
                 onResponderRelease={[Function]}
                 onResponderTerminate={[Function]}
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
-                testID="done_button"
+                style={
+                  Object {
+                    "opacity": 1,
+                  }
+                }
               >
-                <Text
+                <View
                   style={
                     Array [
                       Object {
-                        "color": "#007AFE",
-                        "fontSize": 15,
-                        "fontWeight": "bold",
-                        "paddingRight": 2,
-                        "paddingTop": 1,
+                        "backgroundColor": "transparent",
+                        "borderColor": "#D0D4DB",
+                        "borderRightWidth": 1.5,
+                        "borderTopWidth": 1.5,
+                        "height": 15,
+                        "width": 15,
                       },
                       undefined,
+                      Object {
+                        "marginLeft": 11,
+                        "transform": Array [
+                          Object {
+                            "translateY": 4,
+                          },
+                          Object {
+                            "rotate": "-45deg",
+                          },
+                        ],
+                      },
+                      undefined,
+                      Object {},
                     ]
                   }
-                >
-                  Done
-                </Text>
+                />
               </View>
-            </View>
-            <View
-              style={
-                Array [
+              <View
+                accessible={true}
+                isTVSelectable={true}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
                   Object {
-                    "backgroundColor": "#D0D4DB",
-                    "justifyContent": "center",
-                  },
-                  Object {
-                    "height": 215,
-                  },
-                  undefined,
-                ]
-              }
-            >
-              <View>
-                <RCTPicker
-                  items={
-                    Array [
-                      Object {
-                        "label": "Select Data Donation Org...",
-                        "textColor": 4288585892,
-                        "value": null,
-                      },
-                      Object {
-                        "label": "Football",
-                        "textColor": undefined,
-                        "value": "football",
-                      },
-                      Object {
-                        "label": "Baseball",
-                        "textColor": undefined,
-                        "value": "baseball",
-                      },
-                      Object {
-                        "label": "Hockey",
-                        "textColor": undefined,
-                        "value": "hockey",
-                      },
-                    ]
+                    "opacity": 1,
                   }
-                  onChange={[Function]}
-                  onResponderTerminationRequest={[Function]}
-                  onStartShouldSetResponder={[Function]}
-                  selectedIndex={0}
+                }
+              >
+                <View
                   style={
                     Array [
                       Object {
-                        "height": 216,
+                        "backgroundColor": "transparent",
+                        "borderColor": "#D0D4DB",
+                        "borderRightWidth": 1.5,
+                        "borderTopWidth": 1.5,
+                        "height": 15,
+                        "width": 15,
                       },
                       undefined,
+                      Object {
+                        "marginLeft": 22,
+                        "transform": Array [
+                          Object {
+                            "translateY": -5,
+                          },
+                          Object {
+                            "rotate": "135deg",
+                          },
+                        ],
+                      },
+                      undefined,
+                      Object {},
                     ]
                   }
                 />
               </View>
             </View>
-          </Modal>
-        </View>
+            <View
+              accessible={true}
+              hitSlop={
+                Object {
+                  "bottom": 4,
+                  "left": 4,
+                  "right": 4,
+                  "top": 4,
+                }
+              }
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              testID="done_button"
+            >
+              <Text
+                style={
+                  Array [
+                    Object {
+                      "color": "#007AFE",
+                      "fontSize": 15,
+                      "fontWeight": "bold",
+                      "paddingRight": 2,
+                      "paddingTop": 1,
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                Done
+              </Text>
+            </View>
+          </View>
+          <View
+            style={
+              Array [
+                Object {
+                  "backgroundColor": "#D0D4DB",
+                  "justifyContent": "center",
+                },
+                Object {
+                  "height": 215,
+                },
+                undefined,
+              ]
+            }
+          >
+            <View>
+              <RCTPicker
+                items={
+                  Array [
+                    Object {
+                      "label": "Select...",
+                      "textColor": 4286808963,
+                      "value": null,
+                    },
+                    Object {
+                      "label": "Football",
+                      "textColor": undefined,
+                      "value": "football",
+                    },
+                    Object {
+                      "label": "Baseball",
+                      "textColor": undefined,
+                      "value": "baseball",
+                    },
+                    Object {
+                      "label": "Hockey",
+                      "textColor": undefined,
+                      "value": "hockey",
+                    },
+                  ]
+                }
+                onChange={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                selectedIndex={0}
+                style={
+                  Array [
+                    Object {
+                      "height": 216,
+                    },
+                    undefined,
+                  ]
+                }
+              />
+            </View>
+          </View>
+        </Modal>
       </View>
     </View>
   </View>

@@ -10,8 +10,6 @@ import {
   ListItem,
   Left,
   Right,
-  Body,
-  Switch,
   Radio,
 } from "native-base";
 

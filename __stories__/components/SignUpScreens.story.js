@@ -33,8 +33,8 @@ storiesOf("SignUpScreens", module).add("Diabetes Details", () => (
   </StoryContainerScreen>
 ));
 
-storiesOf("SignUpScreens", module).add("Diabetes Details 2", () => (
-  <StoryContainerScreen>
-    <SignUpDiabetesDetailsTwoScreen />
-  </StoryContainerScreen>
-));
+// storiesOf("SignUpScreens", module).add("Diabetes Details 2", () => (
+//   <StoryContainerScreen>
+//     <SignUpDiabetesDetailsTwoScreen />
+//   </StoryContainerScreen>
+// ));
