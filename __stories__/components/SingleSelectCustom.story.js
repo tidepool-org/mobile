@@ -6,12 +6,6 @@ import { SingleSelectCustom } from "../../src/components/SingleSelectCustom";
 
 storiesOf("SingleSelectCustom", module).add("default", () => (
   <StoryContainerComponent>
-    <SingleSelectCustom 
-      placeholder={{
-        label: "Select a Story...",
-        value: null,
-        color: "#9EA0A4",
-      }}
-    />
+    <SingleSelectCustom />
   </StoryContainerComponent>
 ));

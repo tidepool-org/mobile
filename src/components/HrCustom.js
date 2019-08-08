@@ -18,4 +18,4 @@ class HrCustom extends PureComponent {
   }
 }
 
-export default HrCustom;
+export { HrCustom };

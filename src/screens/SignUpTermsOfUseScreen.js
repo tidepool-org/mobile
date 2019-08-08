@@ -13,14 +13,16 @@ import {
   Body,
   Switch,
   Radio,
- } from "native-base";
+} from "native-base";
+
 import getTheme from "../../native-base-theme/components";
 import commonColor from "../../native-base-theme/variables/commonColor";
 
 import TextSignUpMidTitle from "../components/TextSignUpMidTitle";
+import { SwitchCustom } from "../components/SwitchCustom";
 
 class SignUpTermsOfUseScreen extends PureComponent {
-  state = { };
+  state = {};
 
   onPressContinue = () => {
     const { navigateSignUpDiabetesDetails } = this.props;
@@ -62,18 +64,9 @@ class SignUpTermsOfUseScreen extends PureComponent {
                   </Right>
                 </ListItem>
               </View>
-
               <View>
                 <TextSignUpMidTitle title="Acknowledge terms of use." />
-                <ListItem>
-                  <Switch value={false} />
-                  <Body>
-                    <Text>
-                      I am 18 or older and accept the terms of the Tidepool App
-                      Terms of Use and Privacy Policy
-                    </Text>
-                  </Body>
-                </ListItem>
+                <SwitchCustom switchText="I am 18 or older and accept the terms of the Tidepool App Terms of Use and Privacy Policy" />
               </View>
 
               <View style={{ flex: 1, justifyContent: "flex-end" }}>

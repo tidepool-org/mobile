@@ -7,22 +7,23 @@ import { Ionicons } from "@expo/vector-icons";
 
 const pickerSelectStyles = StyleSheet.create({
   inputIOS: {
-    fontSize: 18,
-
-    paddingLeft: 16,
-    borderWidth: 1,
     borderColor: "#ededed",
     borderRadius: 4,
+    borderWidth: 1,
+    color: "#838383",
+    fontSize: 18,
     height: 58,
     paddingRight: 30, // to ensure the text is never behind the icon
+    paddingLeft: 16,
   },
   inputAndroid: {
+    borderColor: "#ededed",
+    borderRadius: 8,
+    borderWidth: 0.5,
+    color: "#838383",
     fontSize: 16,
     paddingHorizontal: 10,
     paddingVertical: 8,
-    borderWidth: 0.5,
-    borderRadius: 8,
-    color: "black",
     paddingRight: 30, // to ensure the text is never behind the icon
   },
 });
@@ -55,7 +56,9 @@ class SingleSelectCustom extends PureComponent {
             },
           }}
           Icon={() => {
-            return <Ionicons name="md-arrow-dropdown" size={24} color="gray" />;
+            return (
+              <Ionicons name="md-arrow-dropdown" size={24} color="#838383" />
+            );
           }}
         />
       </View>
@@ -71,7 +74,7 @@ SingleSelectCustom.defaultProps = {
   placeholder: {
     label: "Select...",
     value: null,
-    color: "#9EA0A4",
+    color: "#838383",
   },
 };
 

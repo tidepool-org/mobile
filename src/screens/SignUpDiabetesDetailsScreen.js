@@ -16,7 +16,7 @@ import commonColor from "../../native-base-theme/variables/commonColor";
 
 import TextSignUpMidTitle from "../components/TextSignUpMidTitle";
 import ButtonSelectType from "../components/ButtonSelectType";
-import HrCustom from "../components/HrCustom";
+import { HrCustom } from "../components/HrCustom";
 
 class SignUpDiabetesDetailsScreen extends PureComponent {
   state = {};
