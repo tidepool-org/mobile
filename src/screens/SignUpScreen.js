@@ -13,11 +13,6 @@ import { TextSignUpMidTitle } from "../components/TextSignUpMidTitle";
 class SignUpScreen extends PureComponent {
   state = {};
 
-  onPressCreateAccount = () => {
-    const { navigateSignUpCreateAccount } = this.props;
-    navigateSignUpCreateAccount();
-  };
-
   onPressCreateAccountClinician = () => {
     const { navigateSignUpCreateAccountClinician } = this.props;
     navigateSignUpCreateAccountClinician();
@@ -59,7 +54,6 @@ class SignUpScreen extends PureComponent {
 }
 
 SignUpScreen.propTypes = {
-  navigateSignUpCreateAccount: PropTypes.func.isRequired,
   navigateSignUpCreateAccountClinician: PropTypes.func.isRequired,
   navigateSignUpCreateAccountPersonal: PropTypes.func.isRequired,
 };

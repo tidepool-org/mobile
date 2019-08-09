@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 
 import SignUpScreen from "../screens/SignUpScreen";
 import {
-  navigateSignUpCreateAccount,
   navigateSignUpCreateAccountClinician,
   navigateSignUpCreateAccountPersonal,
 } from "../actions/navigation";
@@ -15,7 +14,6 @@ const mapStateToProps = (/* state */) => {
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      navigateSignUpCreateAccount,
       navigateSignUpCreateAccountClinician,
       navigateSignUpCreateAccountPersonal, 
     },

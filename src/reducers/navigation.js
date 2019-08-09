@@ -19,7 +19,6 @@ import {
   MAIN_DRAWER_ROUTE_NAME,
   SIGN_IN_ROUTE_NAME,
   SIGN_UP_ROUTE_NAME,
-  SIGN_UP_CREATE_ACCOUNT_ROUTE_NAME,
   SIGN_UP_CREATE_ACCOUNT_CLINICIAN_ROUTE_NAME,
   SIGN_UP_CREATE_ACCOUNT_PERSONAL_ROUTE_NAME,
   SIGN_UP_CLINICIAN_SETUP_ROUTE_NAME,
@@ -34,7 +33,6 @@ import {
   NAVIGATE_HOME,
   NAVIGATE_SIGN_IN,
   NAVIGATE_SIGN_UP,
-  NAVIGATE_SIGN_UP_CREATE_ACCOUNT,
   NAVIGATE_SIGN_UP_CREATE_ACCOUNT_CLINICIAN,
   NAVIGATE_SIGN_UP_CREATE_ACCOUNT_PERSONAL,
   NAVIGATE_SIGN_UP_CLINICIAN_SETUP,
@@ -140,14 +138,6 @@ function navigation(state = initialState, action) {
     case NAVIGATE_SIGN_UP:
       nextState = AppNavigator.router.getStateForAction(
         NavigationActions.navigate({ routeName: SIGN_UP_ROUTE_NAME }),
-        state
-      );
-      break;
-    case NAVIGATE_SIGN_UP_CREATE_ACCOUNT:
-      nextState = AppNavigator.router.getStateForAction(
-        NavigationActions.navigate({
-          routeName: SIGN_UP_CREATE_ACCOUNT_ROUTE_NAME,
-        }),
         state
       );
       break;

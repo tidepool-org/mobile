@@ -5,7 +5,6 @@ import glamorous from "glamorous-native";
 
 import SignInScreenContainer from "../containers/SignInScreenContainer";
 import SignUpScreenContainer from "../containers/SignUpScreenContainer";
-import SignUpCreateAccountScreenContainer from "../containers/SignUpCreateAccountScreenContainer";
 import SignUpTermsOfUseScreenContainer from "../containers/SignUpTermsOfUseScreenContainer";
 import SignUpDiabetesDetailsScreenContainer from "../containers/SignUpDiabetesDetailsScreenContainer";
 import SignUpActivateAccountScreenContainer from "../containers/SignUpActivateAccountScreenContainer";
@@ -19,7 +18,6 @@ import {
   SIGN_UP_ROUTE_NAME,
   SIGN_UP_TERMS_OF_USE_ROUTE_NAME,
   SIGN_UP_ACTIVATE_ACCOUNT_ROUTE_NAME,
-  SIGN_UP_CREATE_ACCOUNT_ROUTE_NAME,
   SIGN_UP_CREATE_ACCOUNT_CLINICIAN_ROUTE_NAME,
   SIGN_UP_CREATE_ACCOUNT_PERSONAL_ROUTE_NAME,
   SIGN_UP_CLINICIAN_SETUP_ROUTE_NAME,
@@ -74,12 +72,6 @@ const SignInNavigator = createStackNavigator(
       screen: props => <SignUpScreenContainer {...props} />,
       navigationOptions: createNavigationOptions({
         title: "Sign up for Tidepool",
-      }),
-    },
-    [SIGN_UP_CREATE_ACCOUNT_ROUTE_NAME]: {
-      screen: props => <SignUpCreateAccountScreenContainer {...props} />,
-      navigationOptions: createNavigationOptions({
-        title: "Create Account",
       }),
     },
     [SIGN_UP_CREATE_ACCOUNT_CLINICIAN_ROUTE_NAME]: {

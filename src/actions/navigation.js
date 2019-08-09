@@ -2,7 +2,6 @@ const NAVIGATE_LAUNCH = "NAVIGATE_LAUNCH";
 const NAVIGATE_HOME = "NAVIGATE_HOME";
 const NAVIGATE_SIGN_IN = "NAVIGATE_SIGN_IN";
 const NAVIGATE_SIGN_UP = "NAVIGATE_SIGN_UP";
-const NAVIGATE_SIGN_UP_CREATE_ACCOUNT = "NAVIGATE_SIGN_UP_CREATE_ACCOUNT";
 const NAVIGATE_SIGN_UP_CREATE_ACCOUNT_CLINICIAN = "NAVIGATE_SIGN_UP_CREATE_ACCOUNT_CLINICIAN";
 const NAVIGATE_SIGN_UP_CREATE_ACCOUNT_PERSONAL = "NAVIGATE_SIGN_UP_CREATE_ACCOUNT_PERSONAL";
 const NAVIGATE_SIGN_UP_CLINICIAN_SETUP = "NAVIGATE_SIGN_UP_CLINICIAN_SETUP";
@@ -38,10 +37,6 @@ function navigateSignIn() {
 
 function navigateSignUp() {
   return { type: NAVIGATE_SIGN_UP };
-}
-
-function navigateSignUpCreateAccount() {
-  return { type: NAVIGATE_SIGN_UP_CREATE_ACCOUNT };
 }
 
 function navigateSignUpCreateAccountClinician() {
@@ -132,7 +127,6 @@ export {
   navigateHome,
   navigateSignIn,
   navigateSignUp,
-  navigateSignUpCreateAccount,
   navigateSignUpCreateAccountClinician,
   navigateSignUpCreateAccountPersonal,
   navigateSignUpClinicianSetup,
@@ -157,7 +151,6 @@ export {
   NAVIGATE_HOME,
   NAVIGATE_SIGN_IN,
   NAVIGATE_SIGN_UP,
-  NAVIGATE_SIGN_UP_CREATE_ACCOUNT,
   NAVIGATE_SIGN_UP_CREATE_ACCOUNT_CLINICIAN,
   NAVIGATE_SIGN_UP_CREATE_ACCOUNT_PERSONAL,
   NAVIGATE_SIGN_UP_CLINICIAN_SETUP,
