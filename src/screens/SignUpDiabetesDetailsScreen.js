@@ -14,8 +14,8 @@ import {
 import getTheme from "../../native-base-theme/components";
 import commonColor from "../../native-base-theme/variables/commonColor";
 
-import TextSignUpMidTitle from "../components/TextSignUpMidTitle";
-import ButtonWithLongText from "../components/ButtonWithLongText";
+import { TextSignUpMidTitle } from "../components/TextSignUpMidTitle";
+import { ButtonWithLongText } from "../components/ButtonWithLongText";
 import { HrCustom } from "../components/HrCustom";
 
 class SignUpDiabetesDetailsScreen extends PureComponent {

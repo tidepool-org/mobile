@@ -107,4 +107,4 @@ ButtonWithLongText.defaultProps = {
   textStyle: null,
 };
 
-export default ButtonWithLongText;
+export { ButtonWithLongText };

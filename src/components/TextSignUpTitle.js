@@ -36,4 +36,4 @@ TextSignUpTitle.propTypes = {
   title: PropTypes.string.isRequired,
 };
 
-export default TextSignUpTitle;
+export { TextSignUpTitle };

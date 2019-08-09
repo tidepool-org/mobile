@@ -6,8 +6,8 @@ import { Container, Text, Button, StyleProvider } from "native-base";
 import getTheme from "../../native-base-theme/components";
 import commonColor from "../../native-base-theme/variables/commonColor";
 
-import ButtonWithHeaderAndLongText from "../components/ButtonWithHeaderAndLongText";
-import TextSignUpMidTitle from "../components/TextSignUpMidTitle";
+import { ButtonWithHeaderAndLongText } from "../components/ButtonWithHeaderAndLongText";
+import { TextSignUpMidTitle } from "../components/TextSignUpMidTitle";
 
 
 class SignUpScreen extends PureComponent {

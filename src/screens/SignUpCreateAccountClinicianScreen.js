@@ -15,7 +15,7 @@ import {
 import getTheme from "../../native-base-theme/components";
 import commonColor from "../../native-base-theme/variables/commonColor";
 
-import TextSignUpMidTitle from "../components/TextSignUpMidTitle";
+import { TextSignUpMidTitle } from "../components/TextSignUpMidTitle";
 
 class SignUpCreateAccountClinicianScreen extends PureComponent {
   state = {};

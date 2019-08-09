@@ -117,4 +117,4 @@ ButtonWithHeaderAndLongText.defaultProps = {
   bodyText: null,
 };
 
-export default ButtonWithHeaderAndLongText;
+export { ButtonWithHeaderAndLongText };
