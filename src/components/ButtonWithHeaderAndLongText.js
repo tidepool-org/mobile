@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
   },
 });
 
-class ButtonAccountType extends PureComponent {
+class ButtonWithHeaderAndLongText extends PureComponent {
   render() {
     const {
       color,
@@ -99,7 +99,7 @@ class ButtonAccountType extends PureComponent {
   }
 }
 
-ButtonAccountType.propTypes = {
+ButtonWithHeaderAndLongText.propTypes = {
   title: PropTypes.string.isRequired,
   color: PropTypes.string,
   disabled: PropTypes.bool,
@@ -109,7 +109,7 @@ ButtonAccountType.propTypes = {
   bodyText: PropTypes.string,
 };
 
-ButtonAccountType.defaultProps = {
+ButtonWithHeaderAndLongText.defaultProps = {
   color: null,
   disabled: false,
   containerStyle: null,
@@ -117,4 +117,4 @@ ButtonAccountType.defaultProps = {
   bodyText: null,
 };
 
-export default ButtonAccountType;
+export default ButtonWithHeaderAndLongText;

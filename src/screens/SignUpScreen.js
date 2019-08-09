@@ -6,7 +6,7 @@ import { Container, Text, Button, StyleProvider } from "native-base";
 import getTheme from "../../native-base-theme/components";
 import commonColor from "../../native-base-theme/variables/commonColor";
 
-import ButtonAccountType from "../components/ButtonAccountType";
+import ButtonWithHeaderAndLongText from "../components/ButtonWithHeaderAndLongText";
 import TextSignUpMidTitle from "../components/TextSignUpMidTitle";
 
 
@@ -35,12 +35,12 @@ class SignUpScreen extends PureComponent {
           <Container>
             <View style={{ flex: 1, margin: 16 }}>
               <TextSignUpMidTitle title="What kind of account do you need?" />
-              <ButtonAccountType
+              <ButtonWithHeaderAndLongText
                 title="Personal Account"
                 onPress={this.onPressCreateAccountPersonal}
                 bodyText="You want to manage your diabetes data. You are caring for or supporting someone with diabetes."
               />
-              <ButtonAccountType
+              <ButtonWithHeaderAndLongText
                 title="Clinic Account"
                 onPress={this.onPressCreateAccountClinician}
                 bodyText="You are a doctor, a clinic or other healthcare provider that wants to use Tidepool to help people in your care."

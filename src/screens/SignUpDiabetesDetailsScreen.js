@@ -15,7 +15,7 @@ import getTheme from "../../native-base-theme/components";
 import commonColor from "../../native-base-theme/variables/commonColor";
 
 import TextSignUpMidTitle from "../components/TextSignUpMidTitle";
-import ButtonSelectType from "../components/ButtonSelectType";
+import ButtonWithLongText from "../components/ButtonWithLongText";
 import { HrCustom } from "../components/HrCustom";
 
 class SignUpDiabetesDetailsScreen extends PureComponent {
@@ -37,11 +37,11 @@ class SignUpDiabetesDetailsScreen extends PureComponent {
           <Container>
             <View style={{ flex: 1, margin: 16 }}>
               <TextSignUpMidTitle title="Whose diabetes data will you be managing?" />
-              <ButtonSelectType
+              <ButtonWithLongText
                 title="This is for me, I have diabetes"
                 onPress={this.showAlert}
               />
-              <ButtonSelectType
+              <ButtonWithLongText
                 title="This is for someone I care for who has diabetes"
                 onPress={this.showAlert}
               />

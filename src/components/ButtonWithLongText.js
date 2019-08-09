@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   },
 });
 
-class ButtonSelectType extends PureComponent {
+class ButtonWithLongText extends PureComponent {
   render() {
     const {
       color,
@@ -91,7 +91,7 @@ class ButtonSelectType extends PureComponent {
   }
 }
 
-ButtonSelectType.propTypes = {
+ButtonWithLongText.propTypes = {
   title: PropTypes.string.isRequired,
   color: PropTypes.string,
   disabled: PropTypes.bool,
@@ -100,11 +100,11 @@ ButtonSelectType.propTypes = {
   textStyle: Text.propTypes.style,
 };
 
-ButtonSelectType.defaultProps = {
+ButtonWithLongText.defaultProps = {
   color: null,
   disabled: false,
   containerStyle: null,
   textStyle: null,
 };
 
-export default ButtonSelectType;
+export default ButtonWithLongText;
