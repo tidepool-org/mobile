@@ -107,7 +107,7 @@ const SignInNavigator = createStackNavigator(
     [SIGN_UP_DIABETES_DETAILS_TWO_ROUTE_NAME]: {
       screen: props => <SignUpDiabetesDetailsTwoScreenContainer {...props} />,
       navigationOptions: createNavigationOptions({
-        title: "Diabetes Details 2",
+        title: "Diabetes Details",
       }),
     },
     [SIGN_UP_ACTIVATE_ACCOUNT_ROUTE_NAME]: {

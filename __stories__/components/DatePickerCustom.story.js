@@ -7,7 +7,7 @@ import { DatePickerCustom } from "../../src/components/DatePickerCustom";
 storiesOf("DatePickerCustom", module).add("default", () => (
   <StoryContainerComponent>
     <View>
-      <Text>DatePickerCustom Here</Text>
+      <Text>DatePickerCustom</Text>
     </View>
   </StoryContainerComponent>
 ));

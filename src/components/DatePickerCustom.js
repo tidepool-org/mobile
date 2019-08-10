@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { View } from "react-native";
+import { View, Text } from "react-native";
 
 import PropTypes from "prop-types";
 import DatePicker from "react-native-datepicker";
@@ -20,14 +20,15 @@ class DatePickerCustom extends PureComponent {
   };
   
   render() {
-    const { placeholder } = this.props;
+    const { placeholder, title } = this.props;
 
     return (
       <View>
+        <Text style={{ color: "#7e98c3", marginTop: 15 }}>{title}</Text>
         <DatePicker
           style={{
             width: 340,
-            marginTop: 20,
+            marginTop: 10,
             marginBottom: 10,
           }}
           date={this.state.date}
@@ -58,7 +59,8 @@ class DatePickerCustom extends PureComponent {
               lineHeight: 18,
               paddingTop: 20,
               paddingBottom: 20,
-              paddingLeft: 16,
+              paddingLeft: 10,
+              paddingRight: 200,
             },
             btnTextConfirm: {
               color: "#627cff",
@@ -82,10 +84,12 @@ class DatePickerCustom extends PureComponent {
 
 DatePickerCustom.propTypes = {
   placeholder: PropTypes.string,
+  title: PropTypes.string,
 };
 
 DatePickerCustom.defaultProps = {
-  placeholder: "Select Date",
+  placeholder: "Select Date...",
+  title: "Field Title",
 };
 
 export { DatePickerCustom };

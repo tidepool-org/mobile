@@ -28,6 +28,16 @@ exports[`Storyshots SingleSelectCustom default 1`] = `
         }
       }
     >
+      <Text
+        style={
+          Object {
+            "color": "#7e98c3",
+            "marginTop": 15,
+          }
+        }
+      >
+        Field Title
+      </Text>
       <View
         style={
           Array [
@@ -64,7 +74,8 @@ exports[`Storyshots SingleSelectCustom default 1`] = `
                   "paddingRight": 30,
                 },
                 Object {
-                  "color": "#C7C7CD",
+                  "color": "#838383",
+                  "paddingLeft": 18,
                 },
               ]
             }

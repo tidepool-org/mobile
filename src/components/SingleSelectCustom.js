@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 
 import PropTypes from "prop-types";
 import RNPickerSelect from "react-native-picker-select";
@@ -30,10 +30,11 @@ const pickerSelectStyles = StyleSheet.create({
 
 class SingleSelectCustom extends PureComponent {
   render() {
-    const { placeholder } = this.props;
+    const { placeholder, title } = this.props;
 
     return (
       <View style={{ paddingTop: 32 }}>
+        <Text style={{ color: "#7e98c3", marginTop: 15 }}>{title}</Text>
         <RNPickerSelect
           placeholder={placeholder}
           onValueChange={value => value}
@@ -43,8 +44,6 @@ class SingleSelectCustom extends PureComponent {
             { label: "Hockey", value: "hockey" },
           ]}
           style={{
-            fontSize: 88,
-            lineHeight: 18,
             paddingTop: 20,
             paddingBottom: 20,
             paddingLeft: 16,
@@ -53,6 +52,10 @@ class SingleSelectCustom extends PureComponent {
             iconContainer: {
               paddingTop: 20,
               paddingRight: 15,
+            },
+            placeholder: {
+              color: "#838383",
+              paddingLeft: 18,
             },
           }}
           Icon={() => {
@@ -68,6 +71,7 @@ class SingleSelectCustom extends PureComponent {
 
 SingleSelectCustom.propTypes = {
   placeholder: PropTypes.object,
+  title: PropTypes.string,
 };
 
 SingleSelectCustom.defaultProps = {
@@ -76,6 +80,7 @@ SingleSelectCustom.defaultProps = {
     value: null,
     color: "#838383",
   },
+  title: "Field Title",
 };
 
 export { SingleSelectCustom };

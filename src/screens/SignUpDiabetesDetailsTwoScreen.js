@@ -33,8 +33,12 @@ class SignUpDiabetesDetailsTwoScreen extends PureComponent {
             <View style={{ flex: 1, margin: 16 }}>
               <TextSignUpMidTitle title="Tell us a little about yourself." />
 
-              <DatePickerCustom placeholder="Birthday" />
-              <DatePickerCustom placeholder="Diagnosis Date" />
+              <DatePickerCustom 
+                title="Birthday"  
+              />
+              <DatePickerCustom
+                title="Diagnosis Date"
+              />
               
               <HrCustom />
               
@@ -52,7 +56,9 @@ class SignUpDiabetesDetailsTwoScreen extends PureComponent {
                 Data Donation project here.
               </Text>
               
-              <SingleSelectCustom />
+              <SingleSelectCustom
+                title="Support a Diabetes Organization"
+              />
 
               <View style={{ flex: 1, justifyContent: "flex-end" }}>
                 <Button block onPress={this.onPressContinue}>
