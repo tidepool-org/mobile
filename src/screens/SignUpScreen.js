@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { SafeAreaView, View } from "react-native";
+import { SafeAreaView, View, StyleSheet } from "react-native";
 
 import { Container, Text, Button, StyleProvider } from "native-base";
 import getTheme from "../../native-base-theme/components";
@@ -9,6 +9,11 @@ import commonColor from "../../native-base-theme/variables/commonColor";
 import { ButtonWithHeaderAndLongText } from "../components/ButtonWithHeaderAndLongText";
 import { TextSignUpMidTitle } from "../components/TextSignUpMidTitle";
 
+  const styles = StyleSheet.create({
+    button: {
+      backgroundColor: "#DCE0F9",
+    },
+  });
 
 class SignUpScreen extends PureComponent {
   state = {};
@@ -34,17 +39,14 @@ class SignUpScreen extends PureComponent {
                 title="Personal Account"
                 onPress={this.onPressCreateAccountPersonal}
                 bodyText="You want to manage your diabetes data. You are caring for or supporting someone with diabetes."
+                containerStyle={styles.button}
               />
               <ButtonWithHeaderAndLongText
                 title="Clinic Account"
                 onPress={this.onPressCreateAccountClinician}
                 bodyText="You are a doctor, a clinic or other healthcare provider that wants to use Tidepool to help people in your care."
+                containerStyle={styles.button}
               />
-              <View style={{ flex: 1, justifyContent: "flex-end" }}>
-                <Button block onPress={this.onPressCreateAccount}>
-                  <Text>Continue</Text>
-                </Button>
-              </View>
             </View>
           </Container>
         </StyleProvider>

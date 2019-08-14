@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { SafeAreaView, View, Alert } from "react-native";
+import { SafeAreaView, View, Alert, StyleSheet } from "react-native";
 
 import {
   StyleProvider,
@@ -17,6 +17,13 @@ import commonColor from "../../native-base-theme/variables/commonColor";
 import { TextSignUpMidTitle } from "../components/TextSignUpMidTitle";
 import { ButtonWithLongText } from "../components/ButtonWithLongText";
 import { HrCustom } from "../components/HrCustom";
+
+
+  const styles = StyleSheet.create({
+    button: {
+      backgroundColor: "#DCE0F9",
+    },
+  });
 
 class SignUpDiabetesDetailsScreen extends PureComponent {
   state = {};
@@ -44,6 +51,7 @@ class SignUpDiabetesDetailsScreen extends PureComponent {
               <ButtonWithLongText
                 title="This is for someone I care for who has diabetes"
                 onPress={this.showAlert}
+                containerStyle={styles.button}
               />
 
               <HrCustom />
