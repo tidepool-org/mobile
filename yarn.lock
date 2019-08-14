@@ -1168,10 +1168,10 @@
   resolved "https://registry.yarnpkg.com/@emotion/weak-memoize/-/weak-memoize-0.2.2.tgz#63985d3d8b02530e0869962f4da09142ee8e200e"
   integrity sha512-n/VQ4mbfr81aqkx/XmVicOLjviMuy02eenSdJY33SVA7S2J42EU0P1H0mOogfYedb3wXA0d/LVtBrgTSm04WEA==
 
-"@expo/browser-polyfill@^0.0.1-alpha.3":
-  version "0.0.1-alpha.6"
-  resolved "https://registry.yarnpkg.com/@expo/browser-polyfill/-/browser-polyfill-0.0.1-alpha.6.tgz#9e550a6e240836d0ead1b7982613525c238dbc88"
-  integrity sha512-gB/tmuc80Dgtmmm4bOJoKD/Y1IdJJE4GmbtONp/irVumYMW6UTGfX2Qny+Fi4Su1NRYuF3/452KnkTftVR3rzQ==
+"@expo/browser-polyfill@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@expo/browser-polyfill/-/browser-polyfill-0.1.0.tgz#225dc667b22f8b247fa11aa961537f3a43c4fe48"
+  integrity sha512-L1Bc7R8F/Q+aiuA2z3s7QKqu5rxxY0ZlDVmB3pxAbB7CqTW3WX5e1e1Qg0Pxm1ZCjNhqgBQhTz9I0Tfaqc4d2g==
   dependencies:
     expo-2d-context "^0.0.2"
     fbemitter "^2.1.1"
@@ -1190,23 +1190,23 @@
     mv "~2"
     safe-json-stringify "~1"
 
-"@expo/config@^2.1.2":
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/@expo/config/-/config-2.1.2.tgz#f745a85e7c9c5f76c5da153e660f37a4db764d58"
-  integrity sha512-aNvkGFFsd5FYXC1t7Y3l7CQdceO4euhi/zreA00LguhWFKzy9grKUl8pH8RPCIwmOnpZncheGQsRxCEX4uua/w==
+"@expo/config@^2.1.3":
+  version "2.1.3"
+  resolved "https://registry.yarnpkg.com/@expo/config/-/config-2.1.3.tgz#510f1ded9f0fe04c0dcb50ad22592067bf78fdca"
+  integrity sha512-h+h+YIHK1UjT2FxCbVOBzQZWKzLqLWQTMDxcg9u36UiEhKGemZOUYelMZ3DLwL2ddu9b6GWWvtPmcc1kQu9F8g==
   dependencies:
-    "@expo/json-file" "^8.1.9"
+    "@expo/json-file" "^8.1.10"
     find-yarn-workspace-root "^1.2.1"
     fs-extra "^7.0.1"
     resolve-from "^5.0.0"
     slugify "^1.3.4"
 
-"@expo/dev-tools@^0.5.44":
-  version "0.5.44"
-  resolved "https://registry.yarnpkg.com/@expo/dev-tools/-/dev-tools-0.5.44.tgz#a17844cee2acc4aae4298b94add3380152cce69c"
-  integrity sha512-QFzt4XDDkaweRd+41ZEAKzkn3NFxXv9VmK/3SuDVDnnkTB7zj/QGX5uy069/hIwMyZDqJpE2YiMDfvSdjTBHlw==
+"@expo/dev-tools@^0.5.45":
+  version "0.5.45"
+  resolved "https://registry.yarnpkg.com/@expo/dev-tools/-/dev-tools-0.5.45.tgz#db77293f3d5efaffcf9f9c943a3a6514c76e562d"
+  integrity sha512-mY/Af7dKMcYU/8o4T7wvUREO9n3kZE4pq5rvSC/vFOWXbQc1gSYxKv5WojowO0T4FZHGEIfPf4OFIsfJapClcw==
   dependencies:
-    "@expo/config" "^2.1.2"
+    "@expo/config" "^2.1.3"
     express "4.16.4"
     freeport-async "1.1.1"
     graphql "0.13.2"
@@ -1215,20 +1215,20 @@
     lodash "^4.17.11"
     subscriptions-transport-ws "0.9.8"
 
-"@expo/image-utils@^0.2.4":
-  version "0.2.4"
-  resolved "https://registry.yarnpkg.com/@expo/image-utils/-/image-utils-0.2.4.tgz#20dbde2ea0bc1fba8edbbbebe56524db787ef7ea"
-  integrity sha512-tj2f1tbZzZHSOz9uPABdR4nztVxHP3HLwHiHZZKLkrP51j3paQzNXpL3KJ2QV29SwepX1KCkEUO9qleu6zeblA==
+"@expo/image-utils@^0.2.5":
+  version "0.2.5"
+  resolved "https://registry.yarnpkg.com/@expo/image-utils/-/image-utils-0.2.5.tgz#dc7a5696fdbda5968cec6c8a7dcec1ac8bf69352"
+  integrity sha512-gG/3gwwOH5ETtBbRBoKOZIiEUAxy0xpGb6cmodEZycvzmiPTB+SjDbS/LqCMMAdvjWbA+9HuJhPX30PDqnas6g==
   dependencies:
     "@expo/spawn-async" "1.5.0"
     semver "6.1.1"
   optionalDependencies:
     sharp-cli "1.10.0"
 
-"@expo/json-file@^8.1.9":
-  version "8.1.9"
-  resolved "https://registry.yarnpkg.com/@expo/json-file/-/json-file-8.1.9.tgz#cdd91ffacddbe108847ae14a73f2a5a8276fba7b"
-  integrity sha512-vl0EvL3fIajLzklPzafNLXEQXgYqi/Y4tqq5sPbUdkR1OyxfdixjVLdutt1bZ3un/obh6286MYa6OIm1LdYKOg==
+"@expo/json-file@^8.1.10":
+  version "8.1.10"
+  resolved "https://registry.yarnpkg.com/@expo/json-file/-/json-file-8.1.10.tgz#34d98afb86818e6d60567f8a0f3d0ab72344e14b"
+  integrity sha512-FIxGkM/wBq10DBLqPVDHjuonK5PryuoTnhgQ9c8CjXHaePuzlpgpMZxZFQdWAeJMbCaJi+/IWVyees8jNjZrxg==
   dependencies:
     "@babel/code-frame" "^7.0.0-beta.44"
     fs-extra "^8.0.1"
@@ -1321,10 +1321,10 @@
     request "^2.81.0"
     uuid "^3.0.0"
 
-"@expo/osascript@^2.0.4":
-  version "2.0.4"
-  resolved "https://registry.yarnpkg.com/@expo/osascript/-/osascript-2.0.4.tgz#e4169030c2913a64501997455be69d6d0e1d1155"
-  integrity sha512-2Kqh/SyXeOwW0Ky39ioiS8LPMU7zAg9S3WnkVu0VYiqW2V+w9IZSYsqVG6XkmfCJw7TVaFYHvyyS8cogOikgYQ==
+"@expo/osascript@^2.0.5":
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/@expo/osascript/-/osascript-2.0.5.tgz#e59a13c0933ab61433746a42ef664a7a388fb41b"
+  integrity sha512-qEt7MqiwowU7NxnLNAI5OoO7jmh9djqzL2/BgIwMj2o749VwIhz7KGWOPpPOriUrOFxaQ10l/5OfRQvpZRVWsA==
   dependencies:
     "@expo/spawn-async" "^1.5.0"
     exec-async "^2.2.0"
@@ -1372,16 +1372,16 @@
   dependencies:
     lodash "^4.17.4"
 
-"@expo/webpack-config@^0.7.2":
-  version "0.7.2"
-  resolved "https://registry.yarnpkg.com/@expo/webpack-config/-/webpack-config-0.7.2.tgz#060828d3a732af53b70e29160e897d5fab1bdbb8"
-  integrity sha512-NVvvygmiCBs6JRNkwTTTNgQ2c4pgxaR7ON5b1VE8VV4eUfhhLNtYdhueND2g9CoiG9Ko719XQ10Q/4l9CrNkYA==
+"@expo/webpack-config@^0.7.3":
+  version "0.7.3"
+  resolved "https://registry.yarnpkg.com/@expo/webpack-config/-/webpack-config-0.7.3.tgz#7216b3b439a0f51da11ef3e31a05427dfd8d1d41"
+  integrity sha512-zeUUHsp8uxp2bq3tEFdGTYuSjUjFh5G6r9GHrRoW1NeCLX+BhL+C/tyZKEKcQ8X0QrY6h5bditgMLuIlr2P7+Q==
   dependencies:
     "@babel/core" "^7.0.0"
     "@babel/polyfill" "^7.2.5"
     "@babel/runtime" "^7.3.4"
-    "@expo/config" "^2.1.2"
-    "@expo/webpack-pwa-manifest-plugin" "^1.2.2"
+    "@expo/config" "^2.1.3"
+    "@expo/webpack-pwa-manifest-plugin" "^1.2.3"
     babel-loader "^8.0.5"
     brotli-webpack-plugin "^1.1.0"
     case-sensitive-paths-webpack-plugin "^2.2.0"
@@ -1413,12 +1413,12 @@
     webpack-merge "^4.2.1"
     workbox-webpack-plugin "^3.6.3"
 
-"@expo/webpack-pwa-manifest-plugin@^1.2.2":
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/@expo/webpack-pwa-manifest-plugin/-/webpack-pwa-manifest-plugin-1.2.2.tgz#ffb49751b044abe4677697de5a90bc909e42f8fd"
-  integrity sha512-JYBkJeaankRtjq1pjkHdIrK6IrQ2wPSXFVE/iFCZ3Hf00pts12v108PadgcwkeVShXzJXgO9qMQjFz3jFhffmw==
+"@expo/webpack-pwa-manifest-plugin@^1.2.3":
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/@expo/webpack-pwa-manifest-plugin/-/webpack-pwa-manifest-plugin-1.2.3.tgz#5dafafdc0cdcec56a095790027b4caf0b403b7ad"
+  integrity sha512-yaRcqWnM69Or3EY5rqP5paPD6mYtxlICPOm6/0S/lERXo6zqfcMUNaJPtnxNcpAPg2CKuZhJACIm72loHvL96g==
   dependencies:
-    "@expo/image-utils" "^0.2.4"
+    "@expo/image-utils" "^0.2.5"
     css-color-names "^1.0.1"
     mime "^2.4.0"
     tempy "^0.3.0"
@@ -1434,20 +1434,20 @@
     pouchdb-collections "^1.0.1"
     tiny-queue "^0.2.1"
 
-"@expo/xdl@^56.1.5":
-  version "56.1.5"
-  resolved "https://registry.yarnpkg.com/@expo/xdl/-/xdl-56.1.5.tgz#4d1259ca302f4682371daed2ea12757e26b915c6"
-  integrity sha512-4hDgeikwZ04nyA01VD3RNd39/C6YaccmOcHvFHXhJ9KOOo38g43q4UQPmEbHzSvt73YYIPtLYfWQgHvxMMbMGA==
+"@expo/xdl@^56.2.0":
+  version "56.2.0"
+  resolved "https://registry.yarnpkg.com/@expo/xdl/-/xdl-56.2.0.tgz#9225cfe124649235e181afec621ced01b6299fc1"
+  integrity sha512-vmzj9ER+QvQ4PXcNvtH/jcRzjiIc9qT9qNHRTB0lfLdDIqY0Xup263QlQrnaOSXEnXE3DKtPR6gyVOOqRsFVdw==
   dependencies:
     "@expo/bunyan" "3.0.2"
-    "@expo/config" "^2.1.2"
-    "@expo/image-utils" "^0.2.4"
-    "@expo/json-file" "^8.1.9"
+    "@expo/config" "^2.1.3"
+    "@expo/image-utils" "^0.2.5"
+    "@expo/json-file" "^8.1.10"
     "@expo/ngrok" "2.4.3"
-    "@expo/osascript" "^2.0.4"
+    "@expo/osascript" "^2.0.5"
     "@expo/schemer" "^1.2.6"
     "@expo/spawn-async" "1.5.0"
-    "@expo/webpack-config" "^0.7.2"
+    "@expo/webpack-config" "^0.7.3"
     analytics-node "3.3.0"
     axios "0.19.0"
     chalk "2.4.1"
@@ -1755,16 +1755,16 @@
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-0.14.0.tgz#9fb3a3cf3132328151f353de4632e01e52102bea"
   integrity sha512-9NET910DNaIPngYnLLPeg+Ogzqsi9uM4mSboU5y6p8S5DzMTVEsJZrawi+BoDNUVBa2DhJqQYUFvMDfgU062LQ==
 
-"@storybook/addon-knobs@5.1.10":
-  version "5.1.10"
-  resolved "https://registry.yarnpkg.com/@storybook/addon-knobs/-/addon-knobs-5.1.10.tgz#f5d9f21090e28046169a0aa0418de59bd92c21fd"
-  integrity sha512-j5wXBIPGQxK+guFDAi8xNBdUnyQglhDplVoC9SswkSMarqtWq02TT+OLN2VSBgpvzHmhLUW3autjJGfmwP4ltQ==
+"@storybook/addon-knobs@5.1.11":
+  version "5.1.11"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-knobs/-/addon-knobs-5.1.11.tgz#a7e7d986b45e8addb25151b81008af1648ef1f2a"
+  integrity sha512-16GY8IPxVBcmq5TqPtP6254Qw5FvdefDZjIQd+ByJJliQjXZMQKxEl6JhRq98iUfSxEB+6JCPnpKPa666jmCMA==
   dependencies:
-    "@storybook/addons" "5.1.10"
-    "@storybook/client-api" "5.1.10"
-    "@storybook/components" "5.1.10"
-    "@storybook/core-events" "5.1.10"
-    "@storybook/theming" "5.1.10"
+    "@storybook/addons" "5.1.11"
+    "@storybook/client-api" "5.1.11"
+    "@storybook/components" "5.1.11"
+    "@storybook/core-events" "5.1.11"
+    "@storybook/theming" "5.1.11"
     copy-to-clipboard "^3.0.8"
     core-js "^3.0.1"
     escape-html "^1.0.3"
@@ -1777,13 +1777,13 @@
     react-lifecycles-compat "^3.0.4"
     react-select "^2.2.0"
 
-"@storybook/addon-ondevice-knobs@5.1.10":
-  version "5.1.10"
-  resolved "https://registry.yarnpkg.com/@storybook/addon-ondevice-knobs/-/addon-ondevice-knobs-5.1.10.tgz#f2088ce5a2257d5a874c7b1d6b98bb7e61ff979e"
-  integrity sha512-3BxS4KdQBEs/gzJMN3xlsSwCg7Pjn2srp8F49YD4SbfHOpHCNBvyE+NYU9pfJyL+t6LSTB/4HrUiSf6LJrBUXg==
+"@storybook/addon-ondevice-knobs@5.1.11":
+  version "5.1.11"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-ondevice-knobs/-/addon-ondevice-knobs-5.1.11.tgz#1a8f5bd514cc91604510061b3637320a662190f3"
+  integrity sha512-iS0hBZ4+bKAuM0TivmaRQpvRCyTC6zegAPDYv7EUSFzNEKNXJZfEICqrVrWZ8Z9+Tmj8P5uCl521PcTl4zNnJg==
   dependencies:
-    "@storybook/addons" "5.1.10"
-    "@storybook/core-events" "5.1.10"
+    "@storybook/addons" "5.1.11"
+    "@storybook/core-events" "5.1.11"
     core-js "^3.0.1"
     deep-equal "^1.0.1"
     prop-types "^15.7.2"
@@ -1792,12 +1792,12 @@
     react-native-modal-selector "^1.0.2"
     react-native-switch "^1.5.0"
 
-"@storybook/addon-storyshots@5.1.10":
-  version "5.1.10"
-  resolved "https://registry.yarnpkg.com/@storybook/addon-storyshots/-/addon-storyshots-5.1.10.tgz#e22193ece0d617e3babf975bd4c1e261a6368d69"
-  integrity sha512-cwCvkvuI/w1PCbagWvW1uq9TA/2OXr67w5Zg5UeKM24RutOVytmZUmoWD6pDqFAYa6804sZzhohta/5xph3sLg==
+"@storybook/addon-storyshots@5.1.11":
+  version "5.1.11"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-storyshots/-/addon-storyshots-5.1.11.tgz#3fb41ef3e966eede4e1abce06233e583a0442b13"
+  integrity sha512-EDor1sUCt0Tt7U0fR/ouNPNERvFu/8JG89a4Cr6vDH/+idtqRy+GuzBPhWQU2ewxZLtb8a/OYTcKk8na655+2w==
   dependencies:
-    "@storybook/addons" "5.1.10"
+    "@storybook/addons" "5.1.11"
     core-js "^3.0.1"
     glob "^7.1.3"
     global "^4.3.2"
@@ -1805,28 +1805,28 @@
     read-pkg-up "^6.0.0"
     regenerator-runtime "^0.12.1"
 
-"@storybook/addons@5.1.10":
-  version "5.1.10"
-  resolved "https://registry.yarnpkg.com/@storybook/addons/-/addons-5.1.10.tgz#2d8d8ca20b6d9b4652744f5fc00ead483f705435"
-  integrity sha512-M9b2PCp9RZxDC6wL7vVt2SCKCGXrrEAOsdpMvU569yB1zoUPEiiqElVDwb91O2eAGPnmd2yjImp90kOpKUW0EA==
+"@storybook/addons@5.1.11":
+  version "5.1.11"
+  resolved "https://registry.yarnpkg.com/@storybook/addons/-/addons-5.1.11.tgz#27f9cfed8d7f7c8a3fc341cdba3b0bdf608f02aa"
+  integrity sha512-714Xg6pX4rjDY1urL94w4oOxIiK6jCFSp4oKvqLj7dli5CG7d34Yt9joyTgOb2pkbrgmbMWAZJq0L0iOjHzpzw==
   dependencies:
-    "@storybook/api" "5.1.10"
-    "@storybook/channels" "5.1.10"
-    "@storybook/client-logger" "5.1.10"
+    "@storybook/api" "5.1.11"
+    "@storybook/channels" "5.1.11"
+    "@storybook/client-logger" "5.1.11"
     core-js "^3.0.1"
     global "^4.3.2"
     util-deprecate "^1.0.2"
 
-"@storybook/api@5.1.10":
-  version "5.1.10"
-  resolved "https://registry.yarnpkg.com/@storybook/api/-/api-5.1.10.tgz#5eeb5d9a7c268e5c89bd40c9a80293a7c72343b8"
-  integrity sha512-YeZe/71zLMmgT95IMAEZOc9AwL6Y23mWvkZMwFbkokxS9+bU/qmVlQ0B9c3JBzO3OSs7sXaRqyP1o3QkQgVsiw==
+"@storybook/api@5.1.11":
+  version "5.1.11"
+  resolved "https://registry.yarnpkg.com/@storybook/api/-/api-5.1.11.tgz#71ef00285cd8602aad24cdb26c60c5d3c76631e5"
+  integrity sha512-zzPZM6W67D4YKCbUN4RhC/w+/CtnH/hFbSh/QUBdwXFB1aLh2qA1UTyB8i6m6OA6JgVHBqEkl10KhmeILLv/eA==
   dependencies:
-    "@storybook/channels" "5.1.10"
-    "@storybook/client-logger" "5.1.10"
-    "@storybook/core-events" "5.1.10"
-    "@storybook/router" "5.1.10"
-    "@storybook/theming" "5.1.10"
+    "@storybook/channels" "5.1.11"
+    "@storybook/client-logger" "5.1.11"
+    "@storybook/core-events" "5.1.11"
+    "@storybook/router" "5.1.11"
+    "@storybook/theming" "5.1.11"
     core-js "^3.0.1"
     fast-deep-equal "^2.0.1"
     global "^4.3.2"
@@ -1840,32 +1840,32 @@
     telejson "^2.2.1"
     util-deprecate "^1.0.2"
 
-"@storybook/channel-websocket@5.1.10":
-  version "5.1.10"
-  resolved "https://registry.yarnpkg.com/@storybook/channel-websocket/-/channel-websocket-5.1.10.tgz#c44ca4c5ebfad622849c90ed8b14519621ed9b75"
-  integrity sha512-HakM8yZ0+pg3nNET5byQXwJEEY3K6FIAK4pvkUvLqfAuigW6uRDbld8Zc2yiWppixGxSyVpR+aRQ3jmbWkdcxQ==
+"@storybook/channel-websocket@5.1.11":
+  version "5.1.11"
+  resolved "https://registry.yarnpkg.com/@storybook/channel-websocket/-/channel-websocket-5.1.11.tgz#856863b7be1d275d6cffc4f7bc47225a5fa8e62c"
+  integrity sha512-/KFvLOEqj4GERzy9VgcCJ5dSwy7g2Bu4wt8zHCfJWz37PKH5lUq6mxBXPJEm++CPSVw0R67asPeCx7aqxrjNvw==
   dependencies:
-    "@storybook/channels" "5.1.10"
+    "@storybook/channels" "5.1.11"
     core-js "^3.0.1"
     global "^4.3.2"
     json-fn "^1.1.1"
 
-"@storybook/channels@5.1.10":
-  version "5.1.10"
-  resolved "https://registry.yarnpkg.com/@storybook/channels/-/channels-5.1.10.tgz#04fd35c05032c675f7816ea1ca873c1a0415c6d9"
-  integrity sha512-w7n/bV1BLu51KI1eLc75lN9H1ssBc3PZMXk88GkMiKyBVRzPlJA5ixnzH86qwYGReE0dhRpsgHXZ5XmoKaVmPA==
+"@storybook/channels@5.1.11":
+  version "5.1.11"
+  resolved "https://registry.yarnpkg.com/@storybook/channels/-/channels-5.1.11.tgz#77ddf9d777891f975ac10095772c840fed4c4620"
+  integrity sha512-MlrjVGNvYOnDvv2JDRhr4wikbnZ8HCFCpVsFqKPFxj7I3OYBR417RvFkydX3Rtx4kwB9rmZEgLhfAfsSytkALg==
   dependencies:
     core-js "^3.0.1"
 
-"@storybook/client-api@5.1.10":
-  version "5.1.10"
-  resolved "https://registry.yarnpkg.com/@storybook/client-api/-/client-api-5.1.10.tgz#a10f028f2d33d044e5c3b3daea5d8375323e6a66"
-  integrity sha512-v2PqiNUhwDlVDLYL94f6LFjdYMToTpuwWh9aeqzt/4PAJUnIcA+2P8+qXiYdJTqQy/u7P72HFMlc9Ru4tl3QFg==
+"@storybook/client-api@5.1.11":
+  version "5.1.11"
+  resolved "https://registry.yarnpkg.com/@storybook/client-api/-/client-api-5.1.11.tgz#30d82c09c6c40aa70d932e77b1d1e65526bddc0c"
+  integrity sha512-znzSxZ1ZCqtEKrFoW7xT8iBbdiAXaQ8RNxQFKHuYPqWX+RLol6S3duEOxu491X2SzUg0StUmrX5qL9Rnth8dRQ==
   dependencies:
-    "@storybook/addons" "5.1.10"
-    "@storybook/client-logger" "5.1.10"
-    "@storybook/core-events" "5.1.10"
-    "@storybook/router" "5.1.10"
+    "@storybook/addons" "5.1.11"
+    "@storybook/client-logger" "5.1.11"
+    "@storybook/core-events" "5.1.11"
+    "@storybook/router" "5.1.11"
     common-tags "^1.8.0"
     core-js "^3.0.1"
     eventemitter3 "^3.1.0"
@@ -1875,20 +1875,20 @@
     memoizerific "^1.11.3"
     qs "^6.6.0"
 
-"@storybook/client-logger@5.1.10":
-  version "5.1.10"
-  resolved "https://registry.yarnpkg.com/@storybook/client-logger/-/client-logger-5.1.10.tgz#f83a8717924dd222e0a6df82ae74701f27e0bb35"
-  integrity sha512-vB1NoFWRTgcERwodhbgoDwI00eqU8++nXI7GhMS1CY8haZaSp3gyKfHRWyfH+M+YjQuGBRUcvIk4gK6OtSrDOw==
+"@storybook/client-logger@5.1.11":
+  version "5.1.11"
+  resolved "https://registry.yarnpkg.com/@storybook/client-logger/-/client-logger-5.1.11.tgz#9509af3021b7a9977f9dba1f2ff038fd3c994437"
+  integrity sha512-je4To+9zD3SEJsKe9R4u15N4bdXFBR7pdBToaRIur+XSvvShLFehZGseQi+4uPAj8vyG34quGTCeUC/BKY0LwQ==
   dependencies:
     core-js "^3.0.1"
 
-"@storybook/components@5.1.10":
-  version "5.1.10"
-  resolved "https://registry.yarnpkg.com/@storybook/components/-/components-5.1.10.tgz#4b6436f0b5bb2483fb231bee263d173a9ed7d241"
-  integrity sha512-QUQeeQp1xNWiL4VlxFAea0kqn2zvBfmfPlUddOFO9lBhT6pVy0xYPjXjbTVWjVcYzZpyUNWw5GplqrR5jhlaCA==
+"@storybook/components@5.1.11":
+  version "5.1.11"
+  resolved "https://registry.yarnpkg.com/@storybook/components/-/components-5.1.11.tgz#da253af0a8cb1b063c5c2e8016c4540c983f717d"
+  integrity sha512-EQgD7HL2CWnnY968KrwUSU2dtKFGTGRJVc4vwphYEeZwAI0lX6qbTMuwEP22hDZ2OSRBxcvcXT8cvduDlZlFng==
   dependencies:
-    "@storybook/client-logger" "5.1.10"
-    "@storybook/theming" "5.1.10"
+    "@storybook/client-logger" "5.1.11"
+    "@storybook/theming" "5.1.11"
     core-js "^3.0.1"
     global "^4.3.2"
     markdown-to-jsx "^6.9.1"
@@ -1906,32 +1906,32 @@
     recompose "^0.30.0"
     simplebar-react "^1.0.0-alpha.6"
 
-"@storybook/core-events@5.1.10":
-  version "5.1.10"
-  resolved "https://registry.yarnpkg.com/@storybook/core-events/-/core-events-5.1.10.tgz#5aed88c572036b6bd6dfff28976ee96e6e175d7a"
-  integrity sha512-Lvu/rNcgS+XCkQKSGdNpUSWjpFF9AOSHPXsvkwHbRwJYdMDn3FznlXfDUiubOWtsziXHB6vl3wkKDlH+ckb32Q==
+"@storybook/core-events@5.1.11":
+  version "5.1.11"
+  resolved "https://registry.yarnpkg.com/@storybook/core-events/-/core-events-5.1.11.tgz#9d00503a936d30398f7a64336eb956303d053765"
+  integrity sha512-m+yIFRdB47+IPBFBGS2OUXrSLkoz5iAXvb3c0lGAePf5wSR+o/Ni/9VD5l6xBf+InxHLSc9gcDEJehrT0fJAaQ==
   dependencies:
     core-js "^3.0.1"
 
-"@storybook/react-native@5.1.10":
-  version "5.1.10"
-  resolved "https://registry.yarnpkg.com/@storybook/react-native/-/react-native-5.1.10.tgz#81476dfd732ec4fa2537fd80876a69d86a62d227"
-  integrity sha512-AinLLAA7FsFwiAZNLdAK6xdZ731hc4buWzd5cnPqsMHYKW6pZVb31ZO/ytThHDCm/awv3z/43hvvaG//u9ohkw==
+"@storybook/react-native@5.1.11":
+  version "5.1.11"
+  resolved "https://registry.yarnpkg.com/@storybook/react-native/-/react-native-5.1.11.tgz#0c7ebeb2271f4269cbafcec777346694f0f2fea3"
+  integrity sha512-ZiiQxQg7nv8bF6ekA+/CUGbesNRNGyN6aPtPZBJiSEAskTVY//3JTdzkqYUMGTKnAYupdKuSmYZep1N/AWPGTA==
   dependencies:
     "@emotion/native" "^10.0.10"
-    "@storybook/addons" "5.1.10"
-    "@storybook/channel-websocket" "5.1.10"
-    "@storybook/channels" "5.1.10"
-    "@storybook/client-api" "5.1.10"
-    "@storybook/core-events" "5.1.10"
+    "@storybook/addons" "5.1.11"
+    "@storybook/channel-websocket" "5.1.11"
+    "@storybook/channels" "5.1.11"
+    "@storybook/client-api" "5.1.11"
+    "@storybook/core-events" "5.1.11"
     core-js "^3.0.1"
     react-native-swipe-gestures "^1.0.3"
     rn-host-detect "^1.1.5"
 
-"@storybook/router@5.1.10":
-  version "5.1.10"
-  resolved "https://registry.yarnpkg.com/@storybook/router/-/router-5.1.10.tgz#d3cffd3f1105eb665882f389746ccabbb98c3c16"
-  integrity sha512-BdG6/essPZFHCP2ewCG0gYFQfmuuTSHXAB5fd/rwxLSYj1IzNznC5OxkvnSaTr4rgoxxaW/z1hbN1NuA0ivlFA==
+"@storybook/router@5.1.11":
+  version "5.1.11"
+  resolved "https://registry.yarnpkg.com/@storybook/router/-/router-5.1.11.tgz#75089e9e623482e52ed894c3f0cb0fc6a5372da9"
+  integrity sha512-Xt7R1IOWLlIxis6VKV9G8F+e/G4G8ng1zXCqoDq+/RlWzlQJ5ccO4bUm2/XGS1rEgY4agMzmzjum18HoATpLGA==
   dependencies:
     "@reach/router" "^1.2.1"
     core-js "^3.0.1"
@@ -1939,14 +1939,14 @@
     memoizerific "^1.11.3"
     qs "^6.6.0"
 
-"@storybook/theming@5.1.10":
-  version "5.1.10"
-  resolved "https://registry.yarnpkg.com/@storybook/theming/-/theming-5.1.10.tgz#f9bd519cdf9cccf730656e3f5fd56a339dd07c9f"
-  integrity sha512-5cN1lmdVUwAR8U3T49Lfb8JW5RBvxBSPGZpUmbLGz1zi0tWBJgYXoGtw4RbTBjV9kCQOXkHGH12AsdDxHh931w==
+"@storybook/theming@5.1.11":
+  version "5.1.11"
+  resolved "https://registry.yarnpkg.com/@storybook/theming/-/theming-5.1.11.tgz#0d1af46535f2e601293c999a314905069a93ec3b"
+  integrity sha512-PtRPfiAWx5pQbTm45yyPB+CuW/vyDmcmNOt+xnDzK52omeWaSD7XK2RfadN3u4QXCgha7zs35Ppx1htJio2NRA==
   dependencies:
     "@emotion/core" "^10.0.9"
     "@emotion/styled" "^10.0.7"
-    "@storybook/client-logger" "5.1.10"
+    "@storybook/client-logger" "5.1.11"
     common-tags "^1.8.0"
     core-js "^3.0.1"
     deep-object-diff "^1.1.0"
@@ -2154,14 +2154,14 @@
     lodash.unescape "4.0.1"
     semver "5.5.0"
 
-"@unimodules/core@3.0.2", "@unimodules/core@~3.0.0":
+"@unimodules/core@~3.0.0", "@unimodules/core@~3.0.2":
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/@unimodules/core/-/core-3.0.2.tgz#a2b143fb1e743809ba17c60ae1848f82b8637901"
   integrity sha512-EMZjVp+yrtoPKpDBPvj4+hyDWALl7gvpWeUsDz2Nb9MMBPLnhag1uNk3KC98StJdnjbSXKSdKrCMMidOXnyKcg==
   dependencies:
     compare-versions "^3.4.0"
 
-"@unimodules/react-native-adapter@3.0.0", "@unimodules/react-native-adapter@~3.0.0":
+"@unimodules/react-native-adapter@~3.0.0":
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@unimodules/react-native-adapter/-/react-native-adapter-3.0.0.tgz#303b76c131fe6b5ceb220235ddd1fa2a0193403d"
   integrity sha512-zkFFE0HQ2Flfx/aY3hBKDgMvQ1meUm3H6vMIacY1KywexCuKW8ivBobkOsHIet4jf7km0Eklt6WtB3LqQVw5yw==
@@ -4837,9 +4837,9 @@ configstore@^3.0.0:
     xdg-basedir "^3.0.0"
 
 confusing-browser-globals@^1.0.5:
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/confusing-browser-globals/-/confusing-browser-globals-1.0.7.tgz#5ae852bd541a910e7ffb2dbb864a2d21a36ad29b"
-  integrity sha512-cgHI1azax5ATrZ8rJ+ODDML9Fvu67PimB6aNxBrc/QwSaDaM9eTfIEUHx3bBLJJ82ioSb+/5zfsMCCEJax3ByQ==
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/confusing-browser-globals/-/confusing-browser-globals-1.0.8.tgz#93ffec1f82a6e2bf2bc36769cc3a92fa20e502f3"
+  integrity sha512-lI7asCibVJ6Qd3FGU7mu4sfG4try4LX3+GVS+Gv8UlrEf2AeW57piecapnog2UHZSbcX/P/1UDWVaTsblowlZg==
 
 connect-history-api-fallback@^1.3.0:
   version "1.6.0"
@@ -6606,7 +6606,7 @@ expo-2d-context@^0.0.2:
     string-format "0.5.0"
     tess2 "^1.0.0"
 
-expo-app-loader-provider@6.0.0, expo-app-loader-provider@~6.0.0:
+expo-app-loader-provider@~6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/expo-app-loader-provider/-/expo-app-loader-provider-6.0.0.tgz#c187a39942ac27cfaec3b394a5c9851d3f39678b"
   integrity sha512-GtpztJVxOz+vVwdLyHskpzVzFWMXZPIFC/zczHZPsTwjS+wXj6n8MVaLxX6GaTyhNEtYjp0VIQUw3b7eP+vO6w==
@@ -6625,18 +6625,18 @@ expo-asset@6.0.0, expo-asset@^6.0.0, expo-asset@~6.0.0:
     path-browserify "^1.0.0"
     url-parse "^1.4.4"
 
-expo-cli@3.0.8:
-  version "3.0.8"
-  resolved "https://registry.yarnpkg.com/expo-cli/-/expo-cli-3.0.8.tgz#963a00962c64fc5d6f4f7fbe82331fc5e42bf615"
-  integrity sha512-GvVZTPMw2+YGpgMa/Iy1sBwBfUa/85Pkg4nMkbwMqOczmQ+O6mBptEnafpIkKmLLYiZoF213IO1ouQ5hq5tBWQ==
+expo-cli@3.0.9:
+  version "3.0.9"
+  resolved "https://registry.yarnpkg.com/expo-cli/-/expo-cli-3.0.9.tgz#8226522f61958e31dec5eb9b066c8fee4a346515"
+  integrity sha512-Y6hasrTA3Ff0vxzK5YG7Fgdcwfd+AW6aYlI0QSDAmtHvVocP0lwmUAL6jJHm6Ek8Nf7k7f4gEqNuP5u5mEx6ew==
   dependencies:
     "@expo/bunyan" "3.0.2"
-    "@expo/config" "^2.1.2"
-    "@expo/dev-tools" "^0.5.44"
-    "@expo/json-file" "^8.1.9"
+    "@expo/config" "^2.1.3"
+    "@expo/dev-tools" "^0.5.45"
+    "@expo/json-file" "^8.1.10"
     "@expo/simple-spinner" "1.0.2"
     "@expo/spawn-async" "1.5.0"
-    "@expo/xdl" "^56.1.5"
+    "@expo/xdl" "^56.2.0"
     "@types/untildify" "^3.0.0"
     ansi-regex "^4.1.0"
     axios "0.19.0"
@@ -6688,7 +6688,14 @@ expo-constants@6.0.0, expo-constants@~6.0.0:
   dependencies:
     ua-parser-js "^0.7.19"
 
-expo-file-system@6.0.0, expo-file-system@^6.0.0, expo-file-system@~6.0.0:
+expo-file-system@6.0.2, expo-file-system@~6.0.1:
+  version "6.0.2"
+  resolved "https://registry.yarnpkg.com/expo-file-system/-/expo-file-system-6.0.2.tgz#e65f30eb6a7213e07933df9688116eaf4e25bbf8"
+  integrity sha512-s+6oQpLhcT7MQp7fcoj1E+zttMr0WX6c0FrddzqB4dUfhIggV+nb35nQMASIiTHAj8VPUanTFliY5rETHRMHRA==
+  dependencies:
+    uuid-js "^0.7.5"
+
+expo-file-system@^6.0.0, expo-file-system@~6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/expo-file-system/-/expo-file-system-6.0.0.tgz#7fa5da4f5138f4efe488fd4d4d7b2f49863b25ea"
   integrity sha512-SIVytgYHUm77bTXeHjNnS804KIPih3dEEcr8BGUOFxr1asbyaaf6/pFaWonrbLDRf5odjI1+daG0ktiQt2jZuw==
@@ -6732,7 +6739,7 @@ expo-location@~6.0.0:
   dependencies:
     invariant "^2.2.4"
 
-expo-permissions@6.0.0, expo-permissions@~6.0.0:
+expo-permissions@~6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/expo-permissions/-/expo-permissions-6.0.0.tgz#2943f1aa98de833b88cea73cf03d18d08957cb68"
   integrity sha512-O+RdyfGiq7i+5Vi9fE38DgKn436lNWiqhnS5/Z7CC00bmKahhjVMNDbZvNn/nrdRGyaPneJk1Co1s1sexSnv0A==
@@ -6746,12 +6753,12 @@ expo-sqlite@~6.0.0:
     "@types/websql" "^0.0.27"
     lodash "^4.17.11"
 
-expo-three@4.0.3:
-  version "4.0.3"
-  resolved "https://registry.yarnpkg.com/expo-three/-/expo-three-4.0.3.tgz#0fe9c2c4487000d5d539f5b429e2e423d827d594"
-  integrity sha512-ZFO2mXv7fw7rODcNz7HFfioSxkDd0Haf48KyprCIZa4jmDKPm0ZnwmV3UQt8PpY2vxjgk/ypqwcuny1uZ92+lg==
+expo-three@4.0.4:
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/expo-three/-/expo-three-4.0.4.tgz#61d2ac0901a9616744713c6635fea2cfddc33857"
+  integrity sha512-r8+vVsGjdxN+nLy6hqQmUNPSdwubj7XFITIQvh/LBi3Bg0c4qK0FOf6gXBz7p3OiAdqSq2NQIE9xHKDMa3eDZQ==
   dependencies:
-    "@expo/browser-polyfill" "^0.0.1-alpha.3"
+    "@expo/browser-polyfill" "^0.1.0"
     color-temperature "0.2.7"
     expo "^34.0.3"
     expo-asset "^6.0.0"
@@ -6764,7 +6771,57 @@ expo-web-browser@~6.0.0:
   resolved "https://registry.yarnpkg.com/expo-web-browser/-/expo-web-browser-6.0.0.tgz#63a59d4c02cd7ba47faa6a2eb04decb1a1ab2a32"
   integrity sha512-7XkFPd4PRlVP6FscTnn78c0tY6+yLzb2Eai/ed+l+LB+hZWuhyY3ONzYM7/IKAiPmfhZr4Qs80vIa7iiavti8A==
 
-expo@34.0.3, expo@^34.0.3:
+expo@34.0.4:
+  version "34.0.4"
+  resolved "https://registry.yarnpkg.com/expo/-/expo-34.0.4.tgz#af6ef0da40c98981b5f3323c86fd815dfa417fff"
+  integrity sha512-sZQQoZnN5ASrkSA4qSsk7HPBewHB6b3k9VPZvchT0FBZ1fP5vpmzfIbVOqOLRXHf2VdjNnQVme617TnpPlruJg==
+  dependencies:
+    "@babel/runtime" "^7.1.2"
+    "@expo/vector-icons" "^10.0.2"
+    "@types/fbemitter" "^2.0.32"
+    "@types/invariant" "^2.2.29"
+    "@types/lodash.zipobject" "^4.1.4"
+    "@types/qs" "^6.5.1"
+    "@types/uuid-js" "^0.7.1"
+    "@unimodules/core" "~3.0.0"
+    "@unimodules/react-native-adapter" "~3.0.0"
+    babel-preset-expo "^6.0.0"
+    cross-spawn "^6.0.5"
+    expo-app-loader-provider "~6.0.0"
+    expo-asset "~6.0.0"
+    expo-constants "~6.0.0"
+    expo-file-system "~6.0.0"
+    expo-font "~6.0.1"
+    expo-keep-awake "~6.0.0"
+    expo-linear-gradient "~6.0.0"
+    expo-location "~6.0.0"
+    expo-permissions "~6.0.0"
+    expo-sqlite "~6.0.0"
+    expo-web-browser "~6.0.0"
+    fbemitter "^2.1.1"
+    invariant "^2.2.2"
+    lodash "^4.6.0"
+    md5-file "^3.2.3"
+    nullthrows "^1.1.0"
+    pretty-format "^23.6.0"
+    prop-types "^15.6.0"
+    qs "^6.5.0"
+    react-native-branch "~3.0.1"
+    react-native-view-shot "2.6.0"
+    serialize-error "^2.1.0"
+    unimodules-barcode-scanner-interface "~3.0.0"
+    unimodules-camera-interface "~3.0.0"
+    unimodules-constants-interface "~3.0.0"
+    unimodules-face-detector-interface "~3.0.0"
+    unimodules-file-system-interface "~3.0.0"
+    unimodules-font-interface "~3.0.0"
+    unimodules-image-loader-interface "~3.0.0"
+    unimodules-permissions-interface "~3.0.0"
+    unimodules-sensors-interface "~3.0.0"
+    unimodules-task-manager-interface "~3.0.0"
+    uuid-js "^0.7.5"
+
+expo@^34.0.3:
   version "34.0.3"
   resolved "https://registry.yarnpkg.com/expo/-/expo-34.0.3.tgz#5e2ac4ff2ddbcb2a095106d82e920e6a02a3dbaa"
   integrity sha512-1WCg6ZpYuNQ1YdZ1vDjksB45mts2DnymHjRo7s1de5RB+Ym8SlhNelbQXOZTkdSicNg0dk9lENqcWPRAWwR2bA==
@@ -6814,10 +6871,10 @@ expo@34.0.3, expo@^34.0.3:
     unimodules-task-manager-interface "~3.0.0"
     uuid-js "^0.7.5"
 
-expokit@34.0.1:
-  version "34.0.1"
-  resolved "https://registry.yarnpkg.com/expokit/-/expokit-34.0.1.tgz#94baa2c5fe600a8672b510c8c3929807ab917591"
-  integrity sha512-TDXRBgWO3pKODO7QL2FC5ckdRsoaDN9pkpqMM/5S0RSt3pEdivChZjqLBGRtWaP35tpvgDOMfDU6YIFfT9/25A==
+expokit@34.0.2:
+  version "34.0.2"
+  resolved "https://registry.yarnpkg.com/expokit/-/expokit-34.0.2.tgz#54173bb138fd0cedcc6785dbab7eb05469e416e7"
+  integrity sha512-CZanrZiwWtI4plxgh37Rc9aqGMQ8swVBXA4hx7xDUn1x9Spyxq+ZUguyk8pzFA1++Ih1XdWuxgxvljM5fBQMNA==
   dependencies:
     jsc-android "^245459.0.0"
 
@@ -7279,10 +7336,10 @@ flatten-vertex-data@^1.0.0:
   dependencies:
     dtype "^2.0.0"
 
-flow-bin@0.104.0:
-  version "0.104.0"
-  resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.104.0.tgz#ef5b3600dfd36abe191a87d19f66e481bad2e235"
-  integrity sha512-EZXRRmf7m7ET5Lcnwm/I/T8G3d427Bq34vmO3qIlRcPIYloGuVoqRCwjaeezLRDntHkdciagAKbhJ+NTbDjnkw==
+flow-bin@0.105.2:
+  version "0.105.2"
+  resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.105.2.tgz#9d03d5ae3e1d011e311f309cb8786b3b3695fec2"
+  integrity sha512-VCHt0SCjFPviv/Ze/W7AgkcE0uH4TocypSFA8wR3ZH1P7BSjny4l3uhHyOjzU3Qo1i0jO4NyaU6q3Y5IaQ6xng==
 
 flush-write-stream@^1.0.0:
   version "1.1.1"
@@ -13373,29 +13430,29 @@ react-native-tab-view@~0.0.78:
   dependencies:
     prop-types "^15.6.0"
 
-react-native-unimodules@0.5.2:
-  version "0.5.2"
-  resolved "https://registry.yarnpkg.com/react-native-unimodules/-/react-native-unimodules-0.5.2.tgz#02ace4a3633906ebe43ff42164482795965d38a0"
-  integrity sha512-/wRMjdLsSgIOrnr7FRtXiv2Km0KH0IRXDky2uGp0K4i7NLEme7Fn4e3mEbqALfa7t3lIa2KLU15mVsp41TKlEg==
+react-native-unimodules@0.5.4:
+  version "0.5.4"
+  resolved "https://registry.yarnpkg.com/react-native-unimodules/-/react-native-unimodules-0.5.4.tgz#d4d779576a027f0455b14d396b0e002cb57963fe"
+  integrity sha512-47ZJzZriaVtvDJp24HLu6xcKBaDScDcx71yIDmahsKKJtbEHmXl7jPz1y/2FhAKSb174m9niu3F97Di5Bo+91g==
   dependencies:
-    "@unimodules/core" "3.0.2"
-    "@unimodules/react-native-adapter" "3.0.0"
+    "@unimodules/core" "~3.0.2"
+    "@unimodules/react-native-adapter" "~3.0.0"
     chalk "^2.4.2"
-    expo-app-loader-provider "6.0.0"
-    expo-asset "6.0.0"
-    expo-constants "6.0.0"
-    expo-file-system "6.0.0"
-    expo-permissions "6.0.0"
-    unimodules-barcode-scanner-interface "3.0.0"
-    unimodules-camera-interface "3.0.0"
-    unimodules-constants-interface "3.0.0"
-    unimodules-face-detector-interface "3.0.0"
-    unimodules-file-system-interface "3.0.0"
-    unimodules-font-interface "3.0.0"
-    unimodules-image-loader-interface "3.0.0"
-    unimodules-permissions-interface "3.0.0"
-    unimodules-sensors-interface "3.0.0"
-    unimodules-task-manager-interface "3.0.0"
+    expo-app-loader-provider "~6.0.0"
+    expo-asset "~6.0.0"
+    expo-constants "~6.0.0"
+    expo-file-system "~6.0.1"
+    expo-permissions "~6.0.0"
+    unimodules-barcode-scanner-interface "~3.0.0"
+    unimodules-camera-interface "~3.0.0"
+    unimodules-constants-interface "~3.0.0"
+    unimodules-face-detector-interface "~3.0.0"
+    unimodules-file-system-interface "~3.0.0"
+    unimodules-font-interface "~3.0.0"
+    unimodules-image-loader-interface "~3.0.0"
+    unimodules-permissions-interface "~3.0.0"
+    unimodules-sensors-interface "~3.0.0"
+    unimodules-task-manager-interface "~3.0.0"
 
 react-native-view-shot@2.6.0:
   version "2.6.0"
@@ -15974,52 +16031,52 @@ unicode-property-aliases-ecmascript@^1.0.4:
   resolved "https://registry.yarnpkg.com/unicode-property-aliases-ecmascript/-/unicode-property-aliases-ecmascript-1.0.5.tgz#a9cc6cc7ce63a0a3023fc99e341b94431d405a57"
   integrity sha512-L5RAqCfXqAwR3RriF8pM0lU0w4Ryf/GgzONwi6KnL1taJQa7x1TCxdJnILX59WIGOwR57IVxn7Nej0fz1Ny6fw==
 
-unimodules-barcode-scanner-interface@3.0.0, unimodules-barcode-scanner-interface@~3.0.0:
+unimodules-barcode-scanner-interface@~3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/unimodules-barcode-scanner-interface/-/unimodules-barcode-scanner-interface-3.0.0.tgz#2ec52201ee1f0e10af3b03ed49862d6b6937cf10"
   integrity sha512-EtJBfKU5VgZbyIfIZwyWfUo59pIgW6s7YGzlpj9jk4UWKyqqhYT/FoaZqudCJcPcfh2eYxkc9VxBGieRBpQrzg==
 
-unimodules-camera-interface@3.0.0, unimodules-camera-interface@~3.0.0:
+unimodules-camera-interface@~3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/unimodules-camera-interface/-/unimodules-camera-interface-3.0.0.tgz#2869f0868a9e2c65bd2346f0a67d93bc96509676"
   integrity sha512-STjf1FAdYlN27ilJSR4kIUYyHTPrkQSR/mEg4S4pZX6tazmcuG2KzLCXCoV+xMWsrwmsMBjgLzw6yzg87N5Ydw==
 
-unimodules-constants-interface@3.0.0, unimodules-constants-interface@~3.0.0:
+unimodules-constants-interface@~3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/unimodules-constants-interface/-/unimodules-constants-interface-3.0.0.tgz#991f823369da27362e8633a7dac680fb530e5569"
   integrity sha512-S4ap11UJH7D+Y4fXC7DyMNAkqIWD8B7rNCTS30wAF9beHXMZa1Od66rkJgSHqFRURy06h+Jr7qfJm9H5mtMz8Q==
 
-unimodules-face-detector-interface@3.0.0, unimodules-face-detector-interface@~3.0.0:
+unimodules-face-detector-interface@~3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/unimodules-face-detector-interface/-/unimodules-face-detector-interface-3.0.0.tgz#5752a00156a6de470944161040b845a1f1ae84b0"
   integrity sha512-fMQ3ZnhdOjbQ5ZXW62s/t1bbqBaenxzVIcgVEcwvLIFek0mx/EMHFkySgFkFjU11icUvaPEXW1yJtkK4QEpLhg==
 
-unimodules-file-system-interface@3.0.0, unimodules-file-system-interface@~3.0.0:
+unimodules-file-system-interface@~3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/unimodules-file-system-interface/-/unimodules-file-system-interface-3.0.0.tgz#0ada7a89e3046d2fa4dd1853b867fe8ae3994561"
   integrity sha512-LkLIKRE3CwsXLRFw8vx0++Cfjj+pAvvidVb7yhGWKFmNlVaWUW9Z8jkhFLBFXDsGFAOU69bUTrz25jmB2MRt0Q==
 
-unimodules-font-interface@3.0.0, unimodules-font-interface@~3.0.0:
+unimodules-font-interface@~3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/unimodules-font-interface/-/unimodules-font-interface-3.0.0.tgz#e38dfc0932e9a84c5b8091eeb6735170fa86d85e"
   integrity sha512-DOQI0uTn7CGvA9lNUuiTWfQYuKQEM8LZKn6gNS8G+HVHVb+TZl/37qdhuoMBi5jkAZ4VOD/GpgnPv8qr0pJi1Q==
 
-unimodules-image-loader-interface@3.0.0, unimodules-image-loader-interface@~3.0.0:
+unimodules-image-loader-interface@~3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/unimodules-image-loader-interface/-/unimodules-image-loader-interface-3.0.0.tgz#49e371fdf3fc4acf382f726cfac643d5c08b051f"
   integrity sha512-hC/VWdT33GkOZ4FLaqPoKGNKxhw+miFhM+7Re57snWIWYewSv0lRvCqqwc/hbGLocvd2qF3YYrBx9woqPI8NzA==
 
-unimodules-permissions-interface@3.0.0, unimodules-permissions-interface@~3.0.0:
+unimodules-permissions-interface@~3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/unimodules-permissions-interface/-/unimodules-permissions-interface-3.0.0.tgz#c8396a1b697b116801cfcb3b52466b87380a5b78"
   integrity sha512-rfyGDBMtO8IOlk9hJN44EKz7vk6nt/PXByAumsptRdgsd+knokMlaWGYatrxKW2g/08WUbEkgKspvMxjJ0M1Tg==
 
-unimodules-sensors-interface@3.0.0, unimodules-sensors-interface@~3.0.0:
+unimodules-sensors-interface@~3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/unimodules-sensors-interface/-/unimodules-sensors-interface-3.0.0.tgz#9591b7015fae5c2752652a4cdc294f7734489ea1"
   integrity sha512-1JJT/lqCfxHqUSJc3o6b0WUply/lFOJjcuzN0QcAfmdAW8d+lEXA7BJ7DV/Nn/OKpMlHriEyxkM+FoGoXKJJcg==
 
-unimodules-task-manager-interface@3.0.0, unimodules-task-manager-interface@~3.0.0:
+unimodules-task-manager-interface@~3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/unimodules-task-manager-interface/-/unimodules-task-manager-interface-3.0.0.tgz#26f31786eb54dfa5839ca71bf9a77b9c2b4cf4cb"
   integrity sha512-og4UiUOxc7PqT8uQQqXY+pOBvdS204xmgyUG2AjM2L3kVsw/6WH4pIW084WG8/e9M5SLsSXdrjecIUBQ/zLf8w==
