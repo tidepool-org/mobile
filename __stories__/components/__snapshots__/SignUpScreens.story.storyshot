@@ -437,7 +437,9 @@ exports[`Storyshots SignUpScreens Diabetes Details 1`] = `
                   "minHeight": 43,
                   "overflow": "hidden",
                 },
-                null,
+                Object {
+                  "backgroundColor": "#DCE0F9",
+                },
               ]
             }
           >
@@ -942,7 +944,9 @@ exports[`Storyshots SignUpScreens Sign Up 1`] = `
                   "marginVertical": 8,
                   "overflow": "hidden",
                 },
-                null,
+                Object {
+                  "backgroundColor": "#DCE0F9",
+                },
               ]
             }
           >
@@ -1012,7 +1016,9 @@ exports[`Storyshots SignUpScreens Sign Up 1`] = `
                   "marginVertical": 8,
                   "overflow": "hidden",
                 },
-                null,
+                Object {
+                  "backgroundColor": "#DCE0F9",
+                },
               ]
             }
           >
@@ -1051,68 +1057,6 @@ exports[`Storyshots SignUpScreens Sign Up 1`] = `
               }
             >
               You are a doctor, a clinic or other healthcare provider that wants to use Tidepool to help people in your care.
-            </Text>
-          </View>
-        </View>
-        <View
-          style={
-            Object {
-              "flex": 1,
-              "justifyContent": "flex-end",
-            }
-          }
-        >
-          <View
-            accessible={true}
-            isTVSelectable={true}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
-            style={
-              Object {
-                "alignItems": "center",
-                "alignSelf": "stretch",
-                "backgroundColor": "#627cff",
-                "borderBottomWidth": null,
-                "borderColor": "#627cff",
-                "borderLeftWidth": null,
-                "borderRadius": 5,
-                "borderRightWidth": null,
-                "borderTopWidth": null,
-                "borderWidth": undefined,
-                "elevation": 2,
-                "flexDirection": "row",
-                "height": 45,
-                "justifyContent": "center",
-                "opacity": 1,
-                "paddingBottom": 6,
-                "paddingTop": 6,
-                "shadowColor": undefined,
-                "shadowOffset": undefined,
-                "shadowOpacity": undefined,
-                "shadowRadius": undefined,
-              }
-            }
-          >
-            <Text
-              style={
-                Object {
-                  "backgroundColor": "transparent",
-                  "color": "#fff",
-                  "fontFamily": "System",
-                  "fontSize": 16.5,
-                  "marginLeft": 0,
-                  "marginRight": 0,
-                  "paddingLeft": 16,
-                  "paddingRight": 16,
-                }
-              }
-              uppercase={false}
-            >
-              Continue
             </Text>
           </View>
         </View>

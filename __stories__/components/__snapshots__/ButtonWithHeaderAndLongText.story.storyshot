@@ -1,0 +1,96 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots ButtonWithHeaderAndLongText default 1`] = `
+<RCTSafeAreaView
+  paddingTop={0}
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignSelf": "center",
+        "borderWidth": 1,
+        "margin": 5,
+        "padding": 5,
+      }
+    }
+  >
+    <View
+      accessible={true}
+      isTVSelectable={true}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "backgroundColor": "#f9f9f9",
+              "borderColor": "#ededed",
+              "borderRadius": 4,
+              "borderWidth": 1,
+              "elevation": 4,
+              "height": 144,
+              "marginVertical": 8,
+              "overflow": "hidden",
+            },
+            null,
+          ]
+        }
+      >
+        <Text
+          allowFontScaling={false}
+          disabled={false}
+          style={
+            Array [
+              Array [
+                undefined,
+                null,
+              ],
+              Object {
+                "color": "#4f6a92",
+                "fontSize": 16,
+                "fontWeight": "500",
+                "lineHeight": 28,
+                "marginLeft": 16,
+                "marginTop": 8,
+              },
+            ]
+          }
+        >
+          Personal Account
+        </Text>
+        <Text
+          style={
+            Object {
+              "color": "#7e98c3",
+              "fontSize": 12,
+              "fontWeight": "500",
+              "lineHeight": 20,
+              "marginHorizontal": 16,
+              "marginVertical": 8,
+            }
+          }
+        >
+          You want to manage your diabetes data. You are caring for or supporting someone with diabetes.
+        </Text>
+      </View>
+    </View>
+  </View>
+</RCTSafeAreaView>
+`;

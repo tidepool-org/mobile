@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { SafeAreaView, View, StyleSheet } from "react-native";
 
-import { Container, Text, Button, StyleProvider } from "native-base";
+import { Container, StyleProvider } from "native-base";
 import getTheme from "../../native-base-theme/components";
 import commonColor from "../../native-base-theme/variables/commonColor";
 
