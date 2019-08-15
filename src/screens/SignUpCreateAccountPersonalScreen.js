@@ -3,12 +3,11 @@ import PropTypes from "prop-types";
 // import { SafeAreaView, View } from "react-native";
 import {
   SafeAreaView,
-  StyleSheet,
   View,
   Text,
-  TextInput,
 } from "react-native";
-import { Formik } from "formik";
+// import { StyleSheet, TextInput } from "react-native";
+// import { Formik } from "formik";
 
 import {
   StyleProvider,
@@ -24,18 +23,18 @@ import commonColor from "../../native-base-theme/variables/commonColor";
 
 import { TextSignUpMidTitle } from "../components/TextSignUpMidTitle";
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  input: {
-    borderColor: "#DCE0F9",
-    borderWidth: 5,
-  },
-});
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     backgroundColor: "#fff",
+//     alignItems: "center",
+//     justifyContent: "center",
+//   },
+//   input: {
+//     borderColor: "#DCE0F9",
+//     borderWidth: 5,
+//   },
+// });
 
 class SignUpCreateAccountPersonalScreen extends PureComponent {
   state = {};
