@@ -18,6 +18,84 @@ import { convertHexColorStringToInt } from "../helpers";
 
 class GraphScrollableGl extends PureComponent {
   componentDidMount() {
+    this.contentOffsetX = 0;
+    this.createScene();
+  }
+
+  componentWillUpdate(nextProps) {
+    // Determine whether this update is for a subsequent render with new data. If
+    // so, re-create the scene. This handles the scenario where an initial
+    // render, with data, occurred, and we're now refreshing the graph with new
+    // data
+    const { cbgData, smbgData, basalData, bolusData, wizardData } = this.props;
+
+    const shouldCreateScene =
+      cbgData.length !== nextProps.cbgData.length ||
+      smbgData.length !== nextProps.smbgData.length ||
+      basalData.length !== nextProps.basalData.length ||
+      bolusData.length !== nextProps.bolusData.length ||
+      wizardData.length !== nextProps.wizardData.length;
+
+    if (shouldCreateScene) {
+      this.createScene();
+    }
+  }
+
+  onContentOffsetX(contentOffsetX) {
+    const { isZooming } = this.props;
+    const isScrolling = !isZooming;
+    this.contentOffsetX = contentOffsetX;
+    if (isScrolling) {
+      this.renderScene();
+    }
+  }
+
+  onContextCreate = async gl => {
+    const {
+      theme,
+      graphScalableLayoutInfo: {
+        graphFixedLayoutInfo: { height },
+      },
+    } = this.props;
+
+    // Save the gl context
+    this.gl = gl;
+
+    // Create renderer
+    this.renderer = new ExpoTHREE.Renderer({ gl });
+    this.renderer.sortObjects = false;
+    this.renderer.setSize(gl.drawingBufferWidth, gl.drawingBufferHeight);
+    this.renderer.setClearColor(
+      convertHexColorStringToInt(theme.graphBackgroundColor),
+      1
+    );
+
+    // Create camera
+    const { drawingBufferWidth, drawingBufferHeight } = gl;
+    this.camera = new THREE.OrthographicCamera(
+      drawingBufferWidth / -2,
+      drawingBufferWidth / 2,
+      drawingBufferHeight / 2,
+      drawingBufferHeight / -2,
+      0,
+      1000
+    );
+    const pixelRatio = PixelRatio.get();
+    this.camera.position.x = drawingBufferWidth / 2;
+    this.camera.position.y = -(height / 2) * pixelRatio;
+    this.camera.position.z = 1000;
+
+    // Do initial render of the scene
+    // console.log(
+    //   `GraphScrollableGl: onContextCreate: about to do initial render: width: ${drawingBufferWidth /
+    //     pixelRatio}`
+    // );
+    this.renderScene();
+  };
+
+  createScene() {
+    this.scene = new THREE.Scene();
+
     const {
       theme,
       graphScalableLayoutInfo: { graphStartTimeSeconds, graphFixedLayoutInfo },
@@ -78,70 +156,20 @@ class GraphScrollableGl extends PureComponent {
       graphBolusGl,
       graphWizardGl,
     ];
-
-    this.contentOffsetX = 0;
   }
-
-  onContentOffsetX(contentOffsetX) {
-    const { isZooming } = this.props;
-    const isScrolling = !isZooming;
-    this.contentOffsetX = contentOffsetX;
-    if (isScrolling) {
-      this.renderScene();
-    }
-  }
-
-  onContextCreate = async gl => {
-    const {
-      theme,
-      graphScalableLayoutInfo: {
-        graphFixedLayoutInfo: { height },
-      },
-    } = this.props;
-
-    // Save the gl context
-    this.gl = gl;
-
-    // Create renderer
-    this.renderer = new ExpoTHREE.Renderer({ gl });
-    this.renderer.sortObjects = false;
-    this.renderer.setSize(gl.drawingBufferWidth, gl.drawingBufferHeight);
-    this.renderer.setClearColor(
-      convertHexColorStringToInt(theme.graphBackgroundColor),
-      1
-    );
-
-    // Create camera
-    const { drawingBufferWidth, drawingBufferHeight } = gl;
-    this.camera = new THREE.OrthographicCamera(
-      drawingBufferWidth / -2,
-      drawingBufferWidth / 2,
-      drawingBufferHeight / 2,
-      drawingBufferHeight / -2,
-      0,
-      1000
-    );
-    const pixelRatio = PixelRatio.get();
-    this.camera.position.x = drawingBufferWidth / 2;
-    this.camera.position.y = -(height / 2) * pixelRatio;
-    this.camera.position.z = 1000;
-
-    // Create scene
-    this.scene = new THREE.Scene();
-
-    // // Create camera helper
-    // const cameraHelper = new THREE.CameraHelper(this.camera);
-    // this.scene.add(cameraHelper);
-
-    // Do initial render of the scene
-    // console.log(
-    //   `GraphScrollableGl: onContextCreate: about to do initial render: width: ${drawingBufferWidth /
-    //     pixelRatio}`
-    // );
-    this.renderScene();
-  };
 
   renderScene() {
+    if (!this.renderer) {
+      // console.log(
+      //   `GraphScrollableGl: renderScene: No renderer
+      // );
+      return;
+    }
+
+    if (!this.scene) {
+      this.createScene();
+    }
+
     if (this.scene) {
       // console.log(`GraphScrollableGl: renderScene`);
 
@@ -156,7 +184,7 @@ class GraphScrollableGl extends PureComponent {
       this.gl.endFrameEXP();
     } else {
       // console.log(
-      //   `GraphScrollableGl: renderScene: No scene, skipped render`
+      //   `GraphScrollableGl: renderScene: No scene
       // );
     }
   }
@@ -170,9 +198,7 @@ class GraphScrollableGl extends PureComponent {
       },
     } = this.props;
 
-    if (this.scene) {
-      this.renderScene();
-    }
+    this.renderScene();
 
     return (
       <GraphGlView
@@ -188,6 +214,11 @@ GraphScrollableGl.propTypes = {
   theme: ThemePropType.isRequired,
   isZooming: PropTypes.bool,
   graphScalableLayoutInfo: PropTypes.object.isRequired,
+  cbgData: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+  smbgData: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+  basalData: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+  bolusData: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+  wizardData: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
 };
 
 GraphScrollableGl.defaultProps = {
