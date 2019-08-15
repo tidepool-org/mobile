@@ -83,7 +83,7 @@ exports[`Storyshots SignUpScreens Create Account Personal 1`] = `
           >
             <TextInput
               editable={true}
-              placeholder="Full Name"
+              placeholder="FullName"
               placeholderTextColor="#575757"
               style={
                 Object {
@@ -275,21 +275,7 @@ exports[`Storyshots SignUpScreens Create Account Personal 1`] = `
               }
             }
           >
-            <Text
-              style={
-                Object {
-                  "backgroundColor": "transparent",
-                  "color": "#fff",
-                  "fontFamily": "System",
-                  "fontSize": 16.5,
-                  "marginLeft": 0,
-                  "marginRight": 0,
-                  "paddingLeft": 16,
-                  "paddingRight": 16,
-                }
-              }
-              uppercase={false}
-            >
+            <Text>
               Continue
             </Text>
           </View>

@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots CreateAccountFormPersonal default 1`] = `
+<RCTSafeAreaView
+  paddingTop={0}
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignSelf": "center",
+        "borderWidth": 1,
+        "margin": 5,
+        "padding": 5,
+      }
+    }
+  >
+    <TextInput
+      onChangeText={[Function]}
+      style={
+        Object {
+          "borderColor": "#DCE0F9",
+          "borderWidth": 5,
+        }
+      }
+    />
+    <View
+      accessibilityRole="button"
+      accessibilityStates={Array []}
+      accessible={true}
+      isTVSelectable={true}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {},
+          ]
+        }
+      >
+        <Text
+          style={
+            Array [
+              Object {
+                "color": "#007AFF",
+                "fontSize": 18,
+                "padding": 8,
+                "textAlign": "center",
+              },
+            ]
+          }
+        >
+          Submit
+        </Text>
+      </View>
+    </View>
+  </View>
+</RCTSafeAreaView>
+`;

@@ -19,6 +19,7 @@
     "expo": "32.0.6",
     "expo-three": "3.0.0-alpha.8",
     "expokit": "32.1.2",
+    "formik": "^1.5.8",
     "glamorous-native": "1.4.2",
     "native-base": "^2.12.1",
     "prop-types": "15.7.2",

@@ -1,14 +1,21 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { SafeAreaView, View } from "react-native";
+// import { SafeAreaView, View } from "react-native";
+import {
+  SafeAreaView,
+  StyleSheet,
+  View,
+  Text,
+  TextInput,
+} from "react-native";
+import { Formik } from "formik";
 
 import {
   StyleProvider,
   Container,
-  Text,
-  Button,
   Form,
   Item,
+  Button,
   Input,
    } from "native-base";
 
@@ -16,6 +23,19 @@ import getTheme from "../../native-base-theme/components";
 import commonColor from "../../native-base-theme/variables/commonColor";
 
 import { TextSignUpMidTitle } from "../components/TextSignUpMidTitle";
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  input: {
+    borderColor: "#DCE0F9",
+    borderWidth: 5,
+  },
+});
 
 class SignUpCreateAccountPersonalScreen extends PureComponent {
   state = {};
@@ -34,7 +54,7 @@ class SignUpCreateAccountPersonalScreen extends PureComponent {
               <TextSignUpMidTitle title="See all your diabetes data in one place." />
               <Form>
                 <Item>
-                  <Input placeholder="Full Name" />
+                  <Input placeholder="FullName" />
                 </Item>
                 <Item>
                   <Input placeholder="Email" />
