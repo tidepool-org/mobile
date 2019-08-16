@@ -105,7 +105,7 @@ class AddOrEditCommentScreen extends PureComponent {
     }
 
     if (commentsFetchData.errorMessage || graphDataFetchData.errorMessage) {
-      AlertManager.showErrorAlert(
+      AlertManager.showError(
         commentsFetchData.errorMessage || graphDataFetchData.errorMessage
       );
     }
@@ -129,7 +129,7 @@ class AddOrEditCommentScreen extends PureComponent {
       nextProps.graphDataFetchData.errorMessage &&
       !graphDataFetchData.errorMessage;
     if (shouldShowCommentsFetchError || shouldShowGraphDataFetchError) {
-      AlertManager.showErrorAlert(
+      AlertManager.showError(
         nextProps.commentsFetchData.errorMessage ||
           nextProps.graphDataFetchData.errorMessage
       );

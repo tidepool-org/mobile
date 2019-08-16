@@ -18,14 +18,14 @@ class ProfileList extends PureComponent {
   componentDidMount() {
     const { errorMessage } = this.props;
     if (errorMessage) {
-      AlertManager.showErrorAlert(errorMessage);
+      AlertManager.showError(errorMessage);
     }
   }
 
   componentWillReceiveProps(nextProps) {
     const { errorMessage, fetching } = this.props;
     if (nextProps.errorMessage && !errorMessage) {
-      AlertManager.showErrorAlert(nextProps.errorMessage);
+      AlertManager.showError(nextProps.errorMessage);
     }
 
     if (!nextProps.fetching && fetching) {

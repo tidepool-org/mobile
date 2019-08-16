@@ -68,11 +68,11 @@ class NotesListItem extends PureComponent {
     }
 
     if (commentsFetchErrorMessage) {
-      AlertManager.showErrorAlert(commentsFetchErrorMessage);
+      AlertManager.showError(commentsFetchErrorMessage);
     }
 
     if (graphDataFetchErrorMessage) {
-      AlertManager.showErrorAlert(graphDataFetchErrorMessage);
+      AlertManager.showError(graphDataFetchErrorMessage);
     }
 
     SignificantTimeChangeNotification.subscribe(this.timeChanged);
@@ -100,7 +100,7 @@ class NotesListItem extends PureComponent {
       shouldShowCommentsFetchErrorMessage ||
       shouldShowGraphDataFetchErrorMessage
     ) {
-      AlertManager.showErrorAlert(
+      AlertManager.showError(
         nextProps.commentsFetchData.errorMessage ||
           nextProps.graphDataFetchData.errorMessage
       );
