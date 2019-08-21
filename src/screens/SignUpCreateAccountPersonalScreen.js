@@ -1,12 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import {
-  SafeAreaView,
-  View,
-  StyleSheet,
-  TextInput,
-} from "react-native";
-// import { StyleSheet, TextInput } from "react-native";
+import { SafeAreaView, View, StyleSheet, TextInput } from "react-native";
 import { Formik } from "formik";
 
 import {
@@ -22,12 +16,6 @@ import commonColor from "../../native-base-theme/variables/commonColor";
 import { TextSignUpMidTitle } from "../components/TextSignUpMidTitle";
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
   input: {
     borderColor: "#ededed",
     borderWidth: 1,

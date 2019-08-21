@@ -1,21 +1,32 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { SafeAreaView, View } from "react-native";
+import { SafeAreaView, View, StyleSheet, TextInput } from "react-native";
+import { Formik } from "formik";
 
 import {
   StyleProvider,
   Container,
-  Text,
   Button,
-  Form,
-  Item,
-  Input,
+  Text,
    } from "native-base";
 
 import getTheme from "../../native-base-theme/components";
 import commonColor from "../../native-base-theme/variables/commonColor";
 
 import { TextSignUpMidTitle } from "../components/TextSignUpMidTitle";
+import { SwitchCustom } from "../components/SwitchCustom";
+
+const styles = StyleSheet.create({
+  input: {
+    borderColor: "#ededed",
+    borderWidth: 1,
+    height: 50,
+    borderRadius: 4,
+    paddingLeft: 14,
+    color: "#6582ff",
+    marginVertical: 5,
+  },
+});
 
 class SignUpCreateAccountClinicianScreen extends PureComponent {
   state = {};
@@ -32,25 +43,51 @@ class SignUpCreateAccountClinicianScreen extends PureComponent {
           <Container>
             <View style={{ flex: 1, justifyContent: "flex-end", margin: 16 }}>
               <TextSignUpMidTitle title="See all your patients and all their device data in one place." />
-              <Form>
-                <Item>
-                  <Input placeholder="Email" />
-                </Item>
-                <Item>
-                  <Input placeholder="Password" />
-                </Item>
-                <Item>
-                  <Input placeholder="Confirm Password" />
-                </Item>
-                <Item>
-                  <Input placeholder="TOU Checkbox" />
-                </Item>
-              </Form>
-              <View style={{ flex: 1, justifyContent: "flex-end" }}>
-                <Button block onPress={this.onPressClinicianSetup}>
-                  <Text>Continue</Text>
-                </Button>
-              </View>
+
+              <Formik
+                initialValues={{ name: "" }}
+                onSubmit={this.onPressContinue}
+              >
+                {formikProps => (
+                  <React.Fragment>
+                    <TextInput
+                      style={styles.input}
+                      onChangeText={formikProps.handleChange("name")}
+                      placeholder="Email"
+                    />
+                    <TextInput
+                      style={styles.input}
+                      onChangeText={formikProps.handleChange("name")}
+                      placeholder="Password"
+                      secureTextEntry
+                    />
+                    <TextInput
+                      style={styles.input}
+                      onChangeText={formikProps.handleChange("name")}
+                      placeholder="Confirm Password"
+                      secureTextEntry
+                    />
+
+                    <SwitchCustom 
+                      switchText="I accept the terms of the Tidepool Applications Terms of Use and Privacy Policy"
+                      style={{ paddingTop: 10 }}  
+                    />
+
+                    <View style={{ flex: 1, justifyContent: "flex-end" }}>
+                      <Button block info onPress={formikProps.handleSubmit}>
+                        <Text>Submit</Text>
+                      </Button>
+                      <Button
+                        style={{ marginTop: 10 }}
+                        block
+                        onPress={this.onPressClinicianSetup}
+                      >
+                        <Text>Continue</Text>
+                      </Button>
+                    </View>
+                  </React.Fragment>
+                )}
+              </Formik>
             </View>
           </Container>
         </StyleProvider>
