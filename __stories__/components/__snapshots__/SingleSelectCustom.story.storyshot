@@ -21,17 +21,12 @@ exports[`Storyshots SingleSelectCustom default 1`] = `
       }
     }
   >
-    <View
-      style={
-        Object {
-          "paddingTop": 32,
-        }
-      }
-    >
+    <View>
       <Text
         style={
           Object {
             "color": "#7e98c3",
+            "fontSize": 16,
             "marginTop": 15,
           }
         }

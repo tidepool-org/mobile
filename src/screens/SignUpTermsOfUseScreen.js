@@ -7,10 +7,6 @@ import {
   Container,
   Text,
   Button,
-  ListItem,
-  Left,
-  Right,
-  Radio,
 } from "native-base";
 
 import getTheme from "../../native-base-theme/components";
