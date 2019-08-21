@@ -24,7 +24,7 @@ class DatePickerCustom extends PureComponent {
 
     return (
       <View>
-        <Text style={{ color: "#7e98c3", marginTop: 15 }}>{title}</Text>
+        <Text style={{ color: "#7e98c3", marginTop: 15, fontSize: 16 }}>{title}</Text>
         <DatePicker
           style={{
             width: 340,

@@ -33,8 +33,10 @@ class SingleSelectCustom extends PureComponent {
     const { placeholder, title } = this.props;
 
     return (
-      <View style={{ paddingTop: 32 }}>
-        <Text style={{ color: "#7e98c3", marginTop: 15 }}>{title}</Text>
+      <View>
+        <Text style={{ color: "#7e98c3", marginTop: 15, fontSize: 16 }}>
+          {title}
+        </Text>
         <RNPickerSelect
           placeholder={placeholder}
           onValueChange={value => value}

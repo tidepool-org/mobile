@@ -53,7 +53,7 @@ class SignUpCreateAccountPersonalScreen extends PureComponent {
               <TextSignUpMidTitle title="See all your diabetes data in one place." />
               <Form>
                 <Item>
-                  <Input placeholder="FullName" />
+                  <Input placeholder="Full Name" />
                 </Item>
                 <Item>
                   <Input placeholder="Email" />

@@ -11,11 +11,11 @@ import {
 import getTheme from "../../native-base-theme/components";
 import commonColor from "../../native-base-theme/variables/commonColor";
 
-import { TextSignUpMidTitle } from "../components/TextSignUpMidTitle";
-import { HrCustom } from "../components/HrCustom";
 import { DatePickerCustom } from "../components/DatePickerCustom";
-import { SwitchCustom } from "../components/SwitchCustom";
+import { HrCustom } from "../components/HrCustom";
 import { SingleSelectCustom } from "../components/SingleSelectCustom";
+import { SwitchCustom } from "../components/SwitchCustom";
+import { TextSignUpMidTitle } from "../components/TextSignUpMidTitle";
 
 class SignUpDiabetesDetailsTwoScreen extends PureComponent {
 
