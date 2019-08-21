@@ -1,30 +1,19 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { SafeAreaView, View, Alert, StyleSheet } from "react-native";
+import { SafeAreaView, View, Alert } from "react-native";
 
 import {
   StyleProvider,
   Container,
   Text,
   Button,
-  Form,
-  Item,
-  Picker,
 } from "native-base";
 import getTheme from "../../native-base-theme/components";
 import commonColor from "../../native-base-theme/variables/commonColor";
 
-import { ButtonWithLongText } from "../components/ButtonWithLongText";
 import { DatePickerCustom } from "../components/DatePickerCustom";
-import { HrCustom } from "../components/HrCustom";
 import { SingleSelectCustom } from "../components/SingleSelectCustom";
 import { TextSignUpMidTitle } from "../components/TextSignUpMidTitle";
-
-  const styles = StyleSheet.create({
-    button: {
-      backgroundColor: "#DCE0F9",
-    },
-  });
 
 class SignUpDiabetesDetailsScreen extends PureComponent {
   state = {};

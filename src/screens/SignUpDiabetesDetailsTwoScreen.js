@@ -11,9 +11,6 @@ import {
 import getTheme from "../../native-base-theme/components";
 import commonColor from "../../native-base-theme/variables/commonColor";
 
-import { DatePickerCustom } from "../components/DatePickerCustom";
-import { HrCustom } from "../components/HrCustom";
-import { SingleSelectCustom } from "../components/SingleSelectCustom";
 import { SwitchCustom } from "../components/SwitchCustom";
 import { TextSignUpMidTitle } from "../components/TextSignUpMidTitle";
 
@@ -31,34 +28,22 @@ class SignUpDiabetesDetailsTwoScreen extends PureComponent {
         <StyleProvider style={getTheme(commonColor)}>
           <Container>
             <View style={{ flex: 1, margin: 16 }}>
-              <TextSignUpMidTitle title="Tell us a little about yourself." />
-
-              <DatePickerCustom 
-                title="Birthday"  
-              />
-              <DatePickerCustom
-                title="Diagnosis Date"
-              />
+              <TextSignUpMidTitle title="Would you like to donate your data?" />
               
-              <HrCustom />
-              
-              <SwitchCustom switchText="Donate my anonymized diabetes data" />
-
               <Text
                 style={{
                   color: "#7e98c3",
                   fontSize: 16,
                   lineHeight: 24,
                   marginTop: 20,
+                  paddingBottom: 20,
                 }}
               >
                 You own your data. Read all the details about Tidepool’s Big
                 Data Donation project here.
               </Text>
               
-              <SingleSelectCustom
-                title="Support a Diabetes Organization"
-              />
+              <SwitchCustom switchText="Donate my anonymized diabetes data" />
 
               <View style={{ flex: 1, justifyContent: "flex-end" }}>
                 <Button block onPress={this.onPressContinue}>

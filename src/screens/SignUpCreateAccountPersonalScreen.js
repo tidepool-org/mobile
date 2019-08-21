@@ -1,10 +1,8 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-// import { SafeAreaView, View } from "react-native";
 import {
   SafeAreaView,
   View,
-  Text,
 } from "react-native";
 // import { StyleSheet, TextInput } from "react-native";
 // import { Formik } from "formik";
@@ -15,6 +13,7 @@ import {
   Form,
   Item,
   Button,
+  Text,
   Input,
    } from "native-base";
 
@@ -67,7 +66,7 @@ class SignUpCreateAccountPersonalScreen extends PureComponent {
               </Form>
               <View style={{ flex: 1, justifyContent: "flex-end" }}>
                 <Button block onPress={this.onPressContinue}>
-                  <Text>Continue</Text>
+                  <Text style={{ color: 'white' }}>Continue</Text>
                 </Button>
               </View>
             </View>

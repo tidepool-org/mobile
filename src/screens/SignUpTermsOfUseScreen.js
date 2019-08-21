@@ -16,8 +16,9 @@ import {
 import getTheme from "../../native-base-theme/components";
 import commonColor from "../../native-base-theme/variables/commonColor";
 
-import { TextSignUpMidTitle } from "../components/TextSignUpMidTitle";
+import { SingleSelectCustom } from "../components/SingleSelectCustom";
 import { SwitchCustom } from "../components/SwitchCustom";
+import { TextSignUpMidTitle } from "../components/TextSignUpMidTitle";
 
 class SignUpTermsOfUseScreen extends PureComponent {
   state = {};
@@ -34,36 +35,12 @@ class SignUpTermsOfUseScreen extends PureComponent {
           <Container>
             <View style={{ flex: 1, margin: 16 }}>
               <View>
-                <TextSignUpMidTitle title="Select your age." />
-                <ListItem>
-                  <Left>
-                    <Text>I am 18 years or older</Text>
-                  </Left>
-                  <Right>
-                    <Radio true />
-                  </Right>
-                </ListItem>
+                <TextSignUpMidTitle title="Some serious questions for you." />
 
-                <ListItem>
-                  <Left>
-                    <Text>I am between 13 and 17 years old</Text>
-                  </Left>
-                  <Right>
-                    <Radio selected={false} />
-                  </Right>
-                </ListItem>
+                <SingleSelectCustom title="Select your age." />
 
-                <ListItem>
-                  <Left>
-                    <Text>I am 12 years old or younger</Text>
-                  </Left>
-                  <Right>
-                    <Radio selected={false} />
-                  </Right>
-                </ListItem>
               </View>
-              <View>
-                <TextSignUpMidTitle title="Acknowledge terms of use." />
+              <View style={{ paddingTop: 30 }}>
                 <SwitchCustom switchText="I am 18 or older and accept the terms of the Tidepool App Terms of Use and Privacy Policy" />
               </View>
 
