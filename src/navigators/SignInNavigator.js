@@ -11,7 +11,7 @@ import SignUpActivateAccountScreenContainer from "../containers/SignUpActivateAc
 import SignUpCreateAccountClinicianScreenContainer from "../containers/SignUpCreateAccountClinicianScreenContainer";
 import SignUpCreateAccountPersonalScreenContainer from "../containers/SignUpCreateAccountPersonalScreenContainer";
 import SignUpClinicianSetupScreenContainer from "../containers/SignUpClinicianSetupScreenContainer";
-import SignUpDiabetesDetailsTwoScreenContainer from "../containers/SignUpDiabetesDetailsTwoScreenContainer";
+import SignUpDonateDataScreenContainer from "../containers/SignUpDonateDataScreenContainer";
 
 import {
   SIGN_IN_ROUTE_NAME,
@@ -22,7 +22,7 @@ import {
   SIGN_UP_CREATE_ACCOUNT_PERSONAL_ROUTE_NAME,
   SIGN_UP_CLINICIAN_SETUP_ROUTE_NAME,
   SIGN_UP_DIABETES_DETAILS_ROUTE_NAME,
-  SIGN_UP_DIABETES_DETAILS_TWO_ROUTE_NAME,
+  SIGN_UP_DONATE_DATA_ROUTE_NAME,
 } from "./routeNames";
 
 import Colors from "../constants/Colors";
@@ -104,8 +104,8 @@ const SignInNavigator = createStackNavigator(
         title: "Diabetes Details",
       }),
     },
-    [SIGN_UP_DIABETES_DETAILS_TWO_ROUTE_NAME]: {
-      screen: props => <SignUpDiabetesDetailsTwoScreenContainer {...props} />,
+    [SIGN_UP_DONATE_DATA_ROUTE_NAME]: {
+      screen: props => <SignUpDonateDataScreenContainer {...props} />,
       navigationOptions: createNavigationOptions({
         title: "Diabetes Details",
       }),

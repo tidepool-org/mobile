@@ -2,7 +2,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
 import { navigateSignUpActivateAccount } from "../actions/navigation";
-import SignUpDiabetesDetailsTwoScreen from "../screens/SignUpDiabetesDetailsTwoScreen";
+import SignUpDonateData from "../screens/SignUpDonateData";
 
 const mapStateToProps = (/* state */) => {
   return {};
@@ -14,4 +14,4 @@ const mapDispatchToProps = dispatch =>
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(SignUpDiabetesDetailsTwoScreen);
+)(SignUpDonateData);

@@ -1,7 +1,7 @@
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
-import { navigateSignUpActivateAccount, navigateSignUpDiabetesDetailsTwo } from "../actions/navigation";
+import { navigateSignUpActivateAccount, navigateSignUpDonateData } from "../actions/navigation";
 import SignUpDiabetesDetailsScreen from "../screens/SignUpDiabetesDetailsScreen";
 
 const mapStateToProps = (/* state */) => {
@@ -9,7 +9,7 @@ const mapStateToProps = (/* state */) => {
 };
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ navigateSignUpActivateAccount, navigateSignUpDiabetesDetailsTwo }, dispatch);
+  bindActionCreators({ navigateSignUpActivateAccount, navigateSignUpDonateData }, dispatch);
 
 export default connect(
   mapStateToProps,

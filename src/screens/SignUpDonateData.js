@@ -14,7 +14,7 @@ import commonColor from "../../native-base-theme/variables/commonColor";
 import { SwitchCustom } from "../components/SwitchCustom";
 import { TextSignUpMidTitle } from "../components/TextSignUpMidTitle";
 
-class SignUpDiabetesDetailsTwoScreen extends PureComponent {
+class SignUpDonateDataScreen extends PureComponent {
 
   onPressContinue = () => {
     const { navigateSignUpActivateAccount } = this.props;
@@ -58,8 +58,8 @@ class SignUpDiabetesDetailsTwoScreen extends PureComponent {
   }
 }
 
-SignUpDiabetesDetailsTwoScreen.propTypes = {
+SignUpDonateDataScreen.propTypes = {
   navigateSignUpActivateAccount: PropTypes.func.isRequired,
 };
 
-export default SignUpDiabetesDetailsTwoScreen;
+export default SignUpDonateDataScreen;

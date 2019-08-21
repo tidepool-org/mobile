@@ -18,9 +18,9 @@ import { TextSignUpMidTitle } from "../components/TextSignUpMidTitle";
 class SignUpDiabetesDetailsScreen extends PureComponent {
   state = {};
 
-  onPressDiabetesDetailsTwo = () => {
-    const { navigateSignUpDiabetesDetailsTwo } = this.props;
-    navigateSignUpDiabetesDetailsTwo();
+  onPressDonateData = () => {
+    const { navigateSignUpDonateData } = this.props;
+    navigateSignUpDonateData();
   };
 
   showAlert = () => {
@@ -44,7 +44,7 @@ class SignUpDiabetesDetailsScreen extends PureComponent {
               <DatePickerCustom title="Diagnosis date" />
 
               <View style={{ flex: 1, justifyContent: "flex-end" }}>
-                <Button block onPress={this.onPressDiabetesDetailsTwo}>
+                <Button block onPress={this.onPressDonateData}>
                   <Text>Continue</Text>
                 </Button>
               </View>
@@ -57,7 +57,7 @@ class SignUpDiabetesDetailsScreen extends PureComponent {
 }
 
 SignUpDiabetesDetailsScreen.propTypes = {
-  navigateSignUpDiabetesDetailsTwo: PropTypes.func.isRequired,
+  navigateSignUpDonateData: PropTypes.func.isRequired,
 };
 
 export default SignUpDiabetesDetailsScreen;
