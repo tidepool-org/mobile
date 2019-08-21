@@ -52,186 +52,68 @@ exports[`Storyshots SignUpScreens Create Account Personal 1`] = `
             See all your diabetes data in one place.
           </Text>
         </View>
-        <View
-          style={Object {}}
-        >
-          <View
-            accessible={true}
-            isTVSelectable={true}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
-            style={
-              Object {
-                "alignItems": "center",
-                "backgroundColor": "transparent",
-                "borderBottomWidth": 1,
-                "borderColor": "#D9D5DC",
-                "borderLeftWidth": 0,
-                "borderRadius": undefined,
-                "borderRightWidth": 0,
-                "borderTopWidth": 0,
-                "borderWidth": undefined,
-                "flexDirection": "row",
-                "marginLeft": 15,
-                "opacity": 1,
-              }
+        <TextInput
+          onChangeText={[Function]}
+          placeholder="Full Name"
+          style={
+            Object {
+              "borderColor": "#ededed",
+              "borderRadius": 4,
+              "borderWidth": 1,
+              "color": "#6582ff",
+              "height": 50,
+              "marginVertical": 5,
+              "paddingLeft": 14,
             }
-          >
-            <TextInput
-              editable={true}
-              placeholder="Full Name"
-              placeholderTextColor="#575757"
-              style={
-                Object {
-                  "color": "#000",
-                  "flex": 1,
-                  "fontSize": 17,
-                  "height": 50,
-                  "paddingLeft": 5,
-                  "paddingRight": 5,
-                  "top": 1.5,
-                }
-              }
-              underlineColorAndroid="rgba(0,0,0,0)"
-            />
-          </View>
-          <View
-            accessible={true}
-            isTVSelectable={true}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
-            style={
-              Object {
-                "alignItems": "center",
-                "backgroundColor": "transparent",
-                "borderBottomWidth": 1,
-                "borderColor": "#D9D5DC",
-                "borderLeftWidth": 0,
-                "borderRadius": undefined,
-                "borderRightWidth": 0,
-                "borderTopWidth": 0,
-                "borderWidth": undefined,
-                "flexDirection": "row",
-                "marginLeft": 15,
-                "opacity": 1,
-              }
+          }
+        />
+        <TextInput
+          onChangeText={[Function]}
+          placeholder="Email"
+          style={
+            Object {
+              "borderColor": "#ededed",
+              "borderRadius": 4,
+              "borderWidth": 1,
+              "color": "#6582ff",
+              "height": 50,
+              "marginVertical": 5,
+              "paddingLeft": 14,
             }
-          >
-            <TextInput
-              editable={true}
-              placeholder="Email"
-              placeholderTextColor="#575757"
-              style={
-                Object {
-                  "color": "#000",
-                  "flex": 1,
-                  "fontSize": 17,
-                  "height": 50,
-                  "paddingLeft": 5,
-                  "paddingRight": 5,
-                  "top": 1.5,
-                }
-              }
-              underlineColorAndroid="rgba(0,0,0,0)"
-            />
-          </View>
-          <View
-            accessible={true}
-            isTVSelectable={true}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
-            style={
-              Object {
-                "alignItems": "center",
-                "backgroundColor": "transparent",
-                "borderBottomWidth": 1,
-                "borderColor": "#D9D5DC",
-                "borderLeftWidth": 0,
-                "borderRadius": undefined,
-                "borderRightWidth": 0,
-                "borderTopWidth": 0,
-                "borderWidth": undefined,
-                "flexDirection": "row",
-                "marginLeft": 15,
-                "opacity": 1,
-              }
+          }
+        />
+        <TextInput
+          onChangeText={[Function]}
+          placeholder="Password"
+          secureTextEntry={true}
+          style={
+            Object {
+              "borderColor": "#ededed",
+              "borderRadius": 4,
+              "borderWidth": 1,
+              "color": "#6582ff",
+              "height": 50,
+              "marginVertical": 5,
+              "paddingLeft": 14,
             }
-          >
-            <TextInput
-              editable={true}
-              placeholder="Password"
-              placeholderTextColor="#575757"
-              style={
-                Object {
-                  "color": "#000",
-                  "flex": 1,
-                  "fontSize": 17,
-                  "height": 50,
-                  "paddingLeft": 5,
-                  "paddingRight": 5,
-                  "top": 1.5,
-                }
-              }
-              underlineColorAndroid="rgba(0,0,0,0)"
-            />
-          </View>
-          <View
-            accessible={true}
-            isTVSelectable={true}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
-            style={
-              Object {
-                "alignItems": "center",
-                "backgroundColor": "transparent",
-                "borderBottomWidth": 1,
-                "borderColor": "#D9D5DC",
-                "borderLeftWidth": 0,
-                "borderRadius": undefined,
-                "borderRightWidth": 0,
-                "borderTopWidth": 0,
-                "borderWidth": undefined,
-                "flexDirection": "row",
-                "marginLeft": 15,
-                "opacity": 1,
-              }
+          }
+        />
+        <TextInput
+          onChangeText={[Function]}
+          placeholder="Confirm Password"
+          secureTextEntry={true}
+          style={
+            Object {
+              "borderColor": "#ededed",
+              "borderRadius": 4,
+              "borderWidth": 1,
+              "color": "#6582ff",
+              "height": 50,
+              "marginVertical": 5,
+              "paddingLeft": 14,
             }
-          >
-            <TextInput
-              editable={true}
-              placeholder="Confirm Password"
-              placeholderTextColor="#575757"
-              style={
-                Object {
-                  "color": "#000",
-                  "flex": 1,
-                  "fontSize": 17,
-                  "height": 50,
-                  "paddingLeft": 5,
-                  "paddingRight": 5,
-                  "top": 1.5,
-                }
-              }
-              underlineColorAndroid="rgba(0,0,0,0)"
-            />
-          </View>
-        </View>
+          }
+        />
         <View
           style={
             Object {
@@ -240,6 +122,59 @@ exports[`Storyshots SignUpScreens Create Account Personal 1`] = `
             }
           }
         >
+          <View
+            accessible={true}
+            isTVSelectable={true}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "alignItems": "center",
+                "alignSelf": "stretch",
+                "backgroundColor": "#62B1F6",
+                "borderBottomWidth": null,
+                "borderColor": "#627cff",
+                "borderLeftWidth": null,
+                "borderRadius": 5,
+                "borderRightWidth": null,
+                "borderTopWidth": null,
+                "borderWidth": undefined,
+                "elevation": 2,
+                "flexDirection": "row",
+                "height": 45,
+                "justifyContent": "center",
+                "opacity": 1,
+                "paddingBottom": 6,
+                "paddingTop": 6,
+                "shadowColor": undefined,
+                "shadowOffset": undefined,
+                "shadowOpacity": undefined,
+                "shadowRadius": undefined,
+              }
+            }
+          >
+            <Text
+              style={
+                Object {
+                  "backgroundColor": "transparent",
+                  "color": "#fff",
+                  "fontFamily": "System",
+                  "fontSize": 16.5,
+                  "marginLeft": 0,
+                  "marginRight": 0,
+                  "paddingLeft": 16,
+                  "paddingRight": 16,
+                }
+              }
+              uppercase={false}
+            >
+              Submit
+            </Text>
+          </View>
           <View
             accessible={true}
             isTVSelectable={true}
@@ -265,6 +200,7 @@ exports[`Storyshots SignUpScreens Create Account Personal 1`] = `
                 "flexDirection": "row",
                 "height": 45,
                 "justifyContent": "center",
+                "marginTop": 10,
                 "opacity": 1,
                 "paddingBottom": 6,
                 "paddingTop": 6,
@@ -277,21 +213,16 @@ exports[`Storyshots SignUpScreens Create Account Personal 1`] = `
           >
             <Text
               style={
-                Array [
-                  Object {
-                    "backgroundColor": "transparent",
-                    "color": "#fff",
-                    "fontFamily": "System",
-                    "fontSize": 16.5,
-                    "marginLeft": 0,
-                    "marginRight": 0,
-                    "paddingLeft": 16,
-                    "paddingRight": 16,
-                  },
-                  Object {
-                    "color": "white",
-                  },
-                ]
+                Object {
+                  "backgroundColor": "transparent",
+                  "color": "#fff",
+                  "fontFamily": "System",
+                  "fontSize": 16.5,
+                  "marginLeft": 0,
+                  "marginRight": 0,
+                  "paddingLeft": 16,
+                  "paddingRight": 16,
+                }
               }
               uppercase={false}
             >
