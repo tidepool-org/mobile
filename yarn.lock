@@ -1054,7 +1054,7 @@
     mv "~2"
     safe-json-stringify "~1"
 
-"@expo/config@^2.1.3", "@expo/config@^2.1.4":
+"@expo/config@^2.1.4":
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/@expo/config/-/config-2.1.4.tgz#95264e4c7ed5ef2d238c0c4e4f6f5c40c7369acb"
   integrity sha512-AnE2QFKr3ku6xLtDrDs7zzHkMz7DvJ+Oi4wC9Yx7dcuZhwhaMFX/llnQ4M2uil7rHrHfgCXSweRhMQMA1IO0LA==
@@ -1065,7 +1065,7 @@
     resolve-from "^5.0.0"
     slugify "^1.3.4"
 
-"@expo/dev-tools@^0.5.45":
+"@expo/dev-tools@^0.5.46":
   version "0.5.46"
   resolved "https://registry.yarnpkg.com/@expo/dev-tools/-/dev-tools-0.5.46.tgz#58c3c1864820ad385ddb478804c89a5ffbdbb98e"
   integrity sha512-jv56GYR4SLTGHTNIMz2+g+rvwzHDCKbibS9WRxEnzx03K8a1fQzVt5OXjMEfe2LKzZh/gwGGh7xJMKmVTM39+Q==
@@ -1089,7 +1089,7 @@
   optionalDependencies:
     sharp-cli "1.10.0"
 
-"@expo/json-file@^8.1.10", "@expo/json-file@^8.1.11":
+"@expo/json-file@^8.1.11":
   version "8.1.11"
   resolved "https://registry.yarnpkg.com/@expo/json-file/-/json-file-8.1.11.tgz#3749484d4b5f3653d55f70e70af4223817ab3f25"
   integrity sha512-l92eSoTY8WoWnhMcJGvA0vekDoiFnS1HLL7HfyI39pfushpTiAfzebyxWj9tPYS+fsJcHzpyv5r3wg4U6vWU8g==
@@ -1300,7 +1300,7 @@
     pouchdb-collections "^1.0.1"
     tiny-queue "^0.2.1"
 
-"@expo/xdl@^56.2.0":
+"@expo/xdl@^56.2.1":
   version "56.2.1"
   resolved "https://registry.yarnpkg.com/@expo/xdl/-/xdl-56.2.1.tgz#3d759375f64cfda919124942de815f7ccf8110cb"
   integrity sha512-r7BqpBT6YxRiFgihkcwESNsQZ4dHyz6L8dC50euESH4FpPcSrX64GSzBp0vY3cLwYvfWTi0vxfGLpA3k9CUYQw==
@@ -6458,18 +6458,18 @@ expo-asset@6.0.0, expo-asset@^6.0.0, expo-asset@~6.0.0:
     path-browserify "^1.0.0"
     url-parse "^1.4.4"
 
-expo-cli@3.0.9:
-  version "3.0.9"
-  resolved "https://registry.yarnpkg.com/expo-cli/-/expo-cli-3.0.9.tgz#8226522f61958e31dec5eb9b066c8fee4a346515"
-  integrity sha512-Y6hasrTA3Ff0vxzK5YG7Fgdcwfd+AW6aYlI0QSDAmtHvVocP0lwmUAL6jJHm6Ek8Nf7k7f4gEqNuP5u5mEx6ew==
+expo-cli@3.0.10:
+  version "3.0.10"
+  resolved "https://registry.yarnpkg.com/expo-cli/-/expo-cli-3.0.10.tgz#121c290f666d232b51d7b78540c3b4e59889d973"
+  integrity sha512-4lp5ibCXA8h+gAImb+IDYv2ON5xqcFra6FEVe6LLiRUM/SW9L2J/4uOTHJMsGjKYK4P8gY6YsKYmwTEYnvxaAA==
   dependencies:
     "@expo/bunyan" "3.0.2"
-    "@expo/config" "^2.1.3"
-    "@expo/dev-tools" "^0.5.45"
-    "@expo/json-file" "^8.1.10"
+    "@expo/config" "^2.1.4"
+    "@expo/dev-tools" "^0.5.46"
+    "@expo/json-file" "^8.1.11"
     "@expo/simple-spinner" "1.0.2"
     "@expo/spawn-async" "1.5.0"
-    "@expo/xdl" "^56.2.0"
+    "@expo/xdl" "^56.2.1"
     "@types/untildify" "^3.0.0"
     ansi-regex "^4.1.0"
     axios "0.19.0"
