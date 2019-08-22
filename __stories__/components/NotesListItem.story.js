@@ -30,7 +30,7 @@ const currentProfile = {
   lowBGBoundary: DEFAULT_LOW_BG_BOUNDARY_VALUE,
   highBGBoundary: DEFAULT_HIGH_BG_BOUNDARY_VALUE,
 };
-const timestamp = new Date("01/01/2018 9:41 AM");
+const timestamp = new Date("Mon Jul 27 2015 22:29:00 GMT-0500 (CDT)");
 const timestampEarlyToday = setMinutes(setHours(startOfToday(), 9), 41);
 const timestampEarlyYesterday = setMinutes(setHours(startOfYesterday(), 9), 41);
 const note = {

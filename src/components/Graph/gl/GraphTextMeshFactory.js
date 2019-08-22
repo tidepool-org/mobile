@@ -1,8 +1,6 @@
-// Use require instead of import (for three-bmfont-text) and set global THREE due to: https://github.com/Jam3/three-bmfont-text/issues/13
-const THREE = require("three");
-const { PixelRatio } = require("react-native");
-const ExpoTHREE = require("expo-three");
-const createGeometry = require("three-bmfont-text");
+import ExpoTHREE, { THREE } from "expo-three";
+import { PixelRatio } from "react-native";
+import { createTextGeometryClass, createTextGeometry } from "three-bmfont-text";
 
 // Creating bmfont json and sprite sheet
 // Create .fnt and .png from .ttf
@@ -20,6 +18,8 @@ const createGeometry = require("three-bmfont-text");
 // assets from bundling (see assetBundlePatterns in app.json) and just serve from CDN. We should
 // revisit this, though, and try to root cause / fix, or confirm whether a future ExpoKit release
 // (or other dependencies like expo-three, etc), have fixed.
+
+createTextGeometryClass(THREE);
 
 class GraphTextMeshFactory {
   constructor() {
@@ -85,7 +85,7 @@ class GraphTextMeshFactory {
     const key = `${text}-${fontName}-${width}-${align}`;
     let geometry = this.geometryPool.get(key);
     if (!geometry) {
-      geometry = createGeometry({
+      geometry = createTextGeometry({
         text,
         font: this.bmFonts.get(fontName),
         width: width

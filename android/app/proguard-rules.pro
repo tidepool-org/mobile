@@ -23,8 +23,7 @@
 
 -dontnote **
 
-# Keep all of exp
--keep class **.exp.** { *; }
+-keep class host.exp.exponent.generated.AppConstants { *; }
 
 ##### Crashlytics #####
 -keepattributes SourceFile,LineNumberTable
@@ -32,10 +31,10 @@
 ##### Expo Universal Modules #####
 
 -keepclassmembers class * {
-  @expo.core.interfaces.ExpoProp *;
+  @org.unimodules.core.interfaces.ExpoProp *;
 }
 -keepclassmembers class * {
-  @expo.core.interfaces.ExpoMethod *;
+  @org.unimodules.core.interfaces.ExpoMethod *;
 }
 
 -keepclassmembers class * {
@@ -43,6 +42,11 @@
 }
 -keepclassmembers class * {
   @**.expo.core.interfaces.ExpoMethod *;
+}
+
+-keep @**.expo.core.interfaces.DoNotStrip class *
+-keepclassmembers class * {
+  @**.expo.core.interfaces.DoNotStrip *;
 }
 
 ##### React Native #####
@@ -153,6 +157,3 @@
 -keep class org.spongycastle.**
 -dontwarn org.spongycastle.jce.provider.X509LDAPCertStoreSpi
 -dontwarn org.spongycastle.x509.util.LDAPStoreHelper
-
-# Temporary work-around for exception: "Method must be overridden in [proguard.classfile.editor.AttributeAdder] if ever called"
--optimizations !class/merging/*

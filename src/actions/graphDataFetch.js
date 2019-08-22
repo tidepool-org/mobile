@@ -1,4 +1,5 @@
 import api from "../api";
+import ConnectionStatus from "../models/ConnectionStatus";
 
 const GRAPH_DATA_FETCH_DID_START = "GRAPH_DATA_FETCH_DID_START";
 const GRAPH_DATA_FETCH_DID_SUCCEED = "GRAPH_DATA_FETCH_DID_SUCCEED";
@@ -32,22 +33,41 @@ const graphDataFetchAsync = ({
   lowBGBoundary,
   highBGBoundary,
 }) => async dispatch => {
-  dispatch(graphDataFetchDidStart({ messageId }));
-
-  const { graphData, errorMessage } = await api().fetchGraphDataAsync({
+  const fetchParams = {
     userId,
+    messageId,
     noteDate,
     startDate,
     endDate,
     objectTypes,
     lowBGBoundary,
     highBGBoundary,
-  });
+  };
+  const { graphData: offlineGraphData, isAvailableOffline } = await api().fetchGraphDataAsync(
+    fetchParams,
+    true // fetchOnlyFromCache
+  );
 
-  if (errorMessage) {
-    dispatch(graphDataFetchDidFail({ messageId, errorMessage }));
-  } else {
-    dispatch(graphDataFetchDidSucceed({ messageId, graphData }));
+  if (isAvailableOffline) {
+    dispatch(
+      graphDataFetchDidSucceed({ messageId, graphData: offlineGraphData })
+    );
+  }
+
+  if (ConnectionStatus.isOnline) {
+    if (!isAvailableOffline) {
+      dispatch(graphDataFetchDidStart({ messageId }));
+    }
+
+    const { graphData, errorMessage } = await api().fetchGraphDataAsync(
+      fetchParams
+    );
+
+    if (errorMessage) {
+      dispatch(graphDataFetchDidFail({ messageId, errorMessage }));
+    } else {
+      dispatch(graphDataFetchDidSucceed({ messageId, graphData }));
+    }
   }
 };
 

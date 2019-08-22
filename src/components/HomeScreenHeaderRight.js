@@ -6,7 +6,7 @@ import FirstTimeTips from "../models/FirstTimeTips";
 import Tooltip from "./Tooltip";
 import SimpleTextTooltipContent from "./Tooltips/SimpleTextTooltipContent";
 import ConnectionStatus from "../models/ConnectionStatus";
-import ErrorAlertManager from "../models/ErrorAlertManager";
+import AlertManager from "../models/AlertManager";
 import Metrics from "../models/Metrics";
 
 class HomeScreenHeaderRight extends PureComponent {
@@ -28,8 +28,10 @@ class HomeScreenHeaderRight extends PureComponent {
   onPress = () => {
     const { navigateAddNote } = this.props;
     this.hideTipIfNeeded();
-    if (ConnectionStatus.isOffline()) {
-      ErrorAlertManager.showOfflineNetworkError();
+    if (ConnectionStatus.isOffline) {
+      AlertManager.showOfflineMessage(
+        "It seems you’re offline, so you can't add notes."
+      );
     } else {
       Metrics.track({ metric: "Clicked add a note (Home screen)" });
       navigateAddNote();

@@ -5,11 +5,11 @@ import glamorous, { withTheme } from "glamorous-native";
 
 import { ThemePropType } from "../../prop-types/theme";
 import GraphScrollableGl from "./gl/GraphScrollableGl";
-import GraphScrollableSvg from "./svg/GraphScrollableSvg";
+// import GraphScrollableSvg from "./svg/GraphScrollableSvg";
 import {
   calculateRelativeCenterTimeSeconds,
   calculateScrollXAndRelativeCenterTimeSeconds,
-  GRAPH_RENDERER_SVG,
+  // GRAPH_RENDERER_SVG,
   GRAPH_RENDERER_THREE_JS,
 } from "./helpers";
 
@@ -110,9 +110,9 @@ class GraphScrollable extends PureComponent {
     });
   }
 
-  renderGraphScrollableSvg() {
-    return <GraphScrollableSvg {...this.getPropsForGraphScrollable()} />;
-  }
+  // renderGraphScrollableSvg() {
+  //   return <GraphScrollableSvg {...this.getPropsForGraphScrollable()} />;
+  // }
 
   renderGraphScrollableGlPlaceholder() {
     const {
@@ -181,9 +181,10 @@ class GraphScrollable extends PureComponent {
           scrollEventThrottle={16}
           scrollEnabled={!isLoading && !isZooming}
         >
-          {graphRenderer === GRAPH_RENDERER_SVG
+          {/* {graphRenderer === GRAPH_RENDERER_SVG
             ? this.renderGraphScrollableSvg()
-            : this.renderGraphScrollableGlPlaceholder()}
+            : this.renderGraphScrollableGlPlaceholder()} */}
+          {this.renderGraphScrollableGlPlaceholder()}
         </glamorous.ScrollView>
         {graphRenderer === GRAPH_RENDERER_THREE_JS
           ? this.renderGraphScrollableGl()

@@ -6,6 +6,7 @@ import {
   AUTH_SIGN_IN_DID_SUCCEED,
   AUTH_SIGN_IN_DID_FAIL,
   AUTH_REFRESH_SESSION_TOKEN_DID_SUCCEED,
+  AUTH_REFRESH_SESSION_TOKEN_DID_FAIL,
 } from "../actions/auth";
 
 const initialState = {
@@ -35,6 +36,15 @@ function auth(state = initialState, action) {
       };
       break;
     }
+    case AUTH_SIGN_IN_DID_FAIL: {
+      nextState = {
+        ...state,
+        signingIn: false,
+        sessionToken: "",
+        errorMessage: action.payload,
+      };
+      break;
+    }
     case AUTH_REFRESH_SESSION_TOKEN_DID_SUCCEED: {
       nextState = {
         ...action.payload,
@@ -43,11 +53,12 @@ function auth(state = initialState, action) {
       };
       break;
     }
-    case AUTH_SIGN_IN_DID_FAIL: {
+    case AUTH_REFRESH_SESSION_TOKEN_DID_FAIL: {
       nextState = {
         ...state,
         signingIn: false,
-        errorMessage: action.payload,
+        sessionToken: "",
+        errorMessage: "",
       };
       break;
     }

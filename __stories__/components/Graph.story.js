@@ -80,6 +80,28 @@ const selectGraphRenderer = () => {
   return graphRenderer;
 };
 
+stories.add("offline, not available offline", () => (
+  <StoryContainerComponent behaviors={[]}>
+    <Graph
+      {...props}
+      isOffline
+      isAvailableOffline={false}
+      graphRenderer={selectGraphRenderer()}
+    />
+  </StoryContainerComponent>
+));
+
+stories.add("offline, available offline", () => (
+  <StoryContainerComponent behaviors={[]}>
+    <Graph
+      {...props}
+      isOffline
+      isAvailableOffline
+      graphRenderer={selectGraphRenderer()}
+    />
+  </StoryContainerComponent>
+));
+
 stories.add("isLoading, default scale", () => (
   <StoryContainerComponent behaviors={[]}>
     <Graph {...props} isLoading graphRenderer={selectGraphRenderer()} />

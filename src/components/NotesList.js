@@ -11,7 +11,7 @@ import glamorous, { withTheme } from "glamorous-native";
 import Colors from "../constants/Colors";
 import NotesListItem from "./NotesListItem";
 import SearchBar from "./SearchBar";
-import ErrorAlertManager from "../models/ErrorAlertManager";
+import AlertManager from "../models/AlertManager";
 import Metrics from "../models/Metrics";
 import { ProfilePropType } from "../prop-types/profile";
 import { CommentPropType } from "../prop-types/comment";
@@ -32,14 +32,14 @@ class NotesList extends PureComponent {
   componentDidMount() {
     const { errorMessage } = this.props;
     if (errorMessage) {
-      ErrorAlertManager.show(errorMessage);
+      AlertManager.showError(errorMessage);
     }
   }
 
   componentWillReceiveProps(nextProps) {
     const { errorMessage, fetching } = this.props;
     if (nextProps.errorMessage && !errorMessage) {
-      ErrorAlertManager.show(nextProps.errorMessage);
+      AlertManager.showError(nextProps.errorMessage);
     }
 
     if (!nextProps.fetching && fetching) {
@@ -168,6 +168,7 @@ class NotesList extends PureComponent {
       onDeleteCommentPressed,
       graphRenderer,
       toggleExpandedNotesCount,
+      isOffline,
     } = this.props;
     return (
       <NotesListItem
@@ -187,6 +188,7 @@ class NotesList extends PureComponent {
         onGraphZoomEnd={this.onGraphZoomEnd}
         graphRenderer={graphRenderer}
         toggleExpandedNotesCount={toggleExpandedNotesCount}
+        isOffline={isOffline}
       />
     );
   };
@@ -209,6 +211,7 @@ class NotesList extends PureComponent {
           style={{
             backgroundColor: Colors.veryLightGrey, // TODO: use theme rather than color directly
           }}
+          removeClippedSubviews={false} // Make sure that clipped views aren't removed, else a note that is toggled open and then scrolled out view will lose its GL context!
           data={notes}
           extraData={this.state}
           keyExtractor={this.keyExtractor}
@@ -264,6 +267,7 @@ NotesList.propTypes = {
   navigateAddComment: PropTypes.func.isRequired,
   navigateEditComment: PropTypes.func.isRequired,
   onDeleteCommentPressed: PropTypes.func.isRequired,
+  isOffline: PropTypes.bool,
 };
 
 NotesList.defaultProps = {
@@ -273,6 +277,7 @@ NotesList.defaultProps = {
   commentsFetchDataByMessageId: {},
   graphDataFetchDataByMessageId: {},
   toggleExpandedNotesCount: 0,
+  isOffline: false,
 };
 
 export default withTheme(NotesList);

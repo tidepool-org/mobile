@@ -2,6 +2,7 @@
 
 exports[`Storyshots SignInScreen Sign in error 1`] = `
 <RCTSafeAreaView
+  emulateUnlessSupported={true}
   style={
     Object {
       "flex": 1,
@@ -22,6 +23,7 @@ exports[`Storyshots SignInScreen Sign in error 1`] = `
     }
   >
     <RCTSafeAreaView
+      emulateUnlessSupported={true}
       flex={1}
       justifyContent="space-between"
       marginLeft={20}
@@ -428,7 +430,7 @@ exports[`Storyshots SignInScreen Sign in error 1`] = `
                 }
               >
                 v
-                3.0.4
+                3.1.1
                  on Staging
               </Text>
             </View>
@@ -442,6 +444,7 @@ exports[`Storyshots SignInScreen Sign in error 1`] = `
 
 exports[`Storyshots SignInScreen Signing in 1`] = `
 <RCTSafeAreaView
+  emulateUnlessSupported={true}
   style={
     Object {
       "flex": 1,
@@ -462,6 +465,7 @@ exports[`Storyshots SignInScreen Signing in 1`] = `
     }
   >
     <RCTSafeAreaView
+      emulateUnlessSupported={true}
       flex={1}
       justifyContent="space-between"
       marginLeft={20}
@@ -881,7 +885,7 @@ exports[`Storyshots SignInScreen Signing in 1`] = `
                 }
               >
                 v
-                3.0.4
+                3.1.1
                  on Staging
               </Text>
             </View>
@@ -895,6 +899,7 @@ exports[`Storyshots SignInScreen Signing in 1`] = `
 
 exports[`Storyshots SignInScreen default 1`] = `
 <RCTSafeAreaView
+  emulateUnlessSupported={true}
   style={
     Object {
       "flex": 1,
@@ -915,6 +920,7 @@ exports[`Storyshots SignInScreen default 1`] = `
     }
   >
     <RCTSafeAreaView
+      emulateUnlessSupported={true}
       flex={1}
       justifyContent="space-between"
       marginLeft={20}
@@ -1321,7 +1327,7 @@ exports[`Storyshots SignInScreen default 1`] = `
                 }
               >
                 v
-                3.0.4
+                3.1.1
                  on Staging
               </Text>
             </View>

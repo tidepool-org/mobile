@@ -13,7 +13,7 @@ const props = {
   authSignInReset: () => {},
   authSignInAsync: () => {},
   signingIn: false,
-  version: "3.0.4",
+  version: "3.1.1",
   apiEnvironment: API_ENVIRONMENT_STAGING,
   errorMessage: "",
 };

@@ -20,10 +20,10 @@ const currentProfile = {
   lowBGBoundary: DEFAULT_LOW_BG_BOUNDARY_VALUE,
   highBGBoundary: DEFAULT_HIGH_BG_BOUNDARY_VALUE,
 };
-const timestampAddNote = new Date("01/01/2018 9:41 AM");
+const timestampAddNote = new Date("Mon Jul 27 2015 22:29:00 GMT-0500 (CDT)");
 const note = {
   id: "1",
-  timestamp: new Date("01/01/2018 9:41 AM"),
+  timestamp: new Date("Mon Jul 27 2015 22:29:00 GMT-0500 (CDT)"),
   messageText: `#hashtag1 This should not show up in comments. ${faker.fake(
     "{{lorem.paragraph}}"
   )}`,

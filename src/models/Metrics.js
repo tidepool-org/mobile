@@ -24,7 +24,7 @@ class Metrics {
   shouldProcessNextMetric({ shouldFlushBuffer }) {
     let shouldProcess = true;
 
-    if (ConnectionStatus.isOffline() || !api().sessionToken) {
+    if (ConnectionStatus.isOffline || !api().sessionToken) {
       shouldProcess = false;
     } else if (this.isSendInProgress && !shouldFlushBuffer) {
       // console.log(
@@ -43,7 +43,7 @@ class Metrics {
       // console.log(`processNextMetric: ${metric}`);
 
       api()
-        .trackMetric({
+        .trackMetricPromise({
           metric,
         })
         .then(() => {

@@ -7,7 +7,7 @@ import {
   Linking,
   ViewPropTypes,
 } from "react-native";
-import { LinearGradient } from "expo";
+import { LinearGradient } from "expo-linear-gradient";
 import glamorous, { withTheme } from "glamorous-native";
 import addHours from "date-fns/add_hours";
 import subHours from "date-fns/sub_hours";
@@ -22,8 +22,7 @@ import HashtagText from "./HashtagText";
 import AddCommentButton from "./AddCommentButton";
 import NotesListItemComment from "./NotesListItemComment";
 import SignificantTimeChangeNotification from "../models/SignificantTimeChangeNotification";
-import ConnectionStatus from "../models/ConnectionStatus";
-import ErrorAlertManager from "../models/ErrorAlertManager";
+import AlertManager from "../models/AlertManager";
 import Metrics from "../models/Metrics";
 import { formatDateForNoteList } from "../utils/formatDate";
 import { ThemePropType } from "../prop-types/theme";
@@ -63,17 +62,17 @@ class NotesListItem extends PureComponent {
     }).start();
 
     if (initiallyExpanded) {
-      setTimeout(() => {
+      this.toggleNoteTimeoutId = setTimeout(() => {
         this.toggleNote({ animationDuration: 350 });
       }, 100);
     }
 
     if (commentsFetchErrorMessage) {
-      ErrorAlertManager.show(commentsFetchErrorMessage);
+      AlertManager.showError(commentsFetchErrorMessage);
     }
 
     if (graphDataFetchErrorMessage) {
-      ErrorAlertManager.show(graphDataFetchErrorMessage);
+      AlertManager.showError(graphDataFetchErrorMessage);
     }
 
     SignificantTimeChangeNotification.subscribe(this.timeChanged);
@@ -101,7 +100,7 @@ class NotesListItem extends PureComponent {
       shouldShowCommentsFetchErrorMessage ||
       shouldShowGraphDataFetchErrorMessage
     ) {
-      ErrorAlertManager.show(
+      AlertManager.showError(
         nextProps.commentsFetchData.errorMessage ||
           nextProps.graphDataFetchData.errorMessage
       );
@@ -132,6 +131,9 @@ class NotesListItem extends PureComponent {
   }
 
   componentWillUnmount() {
+    if (this.toggleNoteTimeoutId) {
+      clearTimeout(this.toggleNoteTimeoutId);
+    }
     SignificantTimeChangeNotification.unsubscribe(this.timeChanged);
   }
 
@@ -151,9 +153,11 @@ class NotesListItem extends PureComponent {
   };
 
   onPressEditNote = () => {
-    const { note, navigateEditNote } = this.props;
-    if (ConnectionStatus.isOffline()) {
-      ErrorAlertManager.showOfflineNetworkError();
+    const { note, navigateEditNote, isOffline } = this.props;
+    if (isOffline) {
+      AlertManager.showOfflineMessage(
+        "It seems you’re offline, so you can't edit notes."
+      );
     } else {
       Metrics.track({ metric: "Clicked edit a note (Home screen)" });
       navigateEditNote({ note });
@@ -162,9 +166,11 @@ class NotesListItem extends PureComponent {
 
   onPressAddComment = () => {
     // TODO: If comments are still loading and user taps Add Comment, then the existing comments won't be shown on the Add Comment screen, even once commentsFetch has completed. We should probably fix that so that the while commentsFetch is in fetching state, and completes, while Add Comment screen is current, that it loads those comments? Should probably also have a comments loading indicator both in notes list and in Add Comment screen?
-    const { note, navigateAddComment } = this.props;
-    if (ConnectionStatus.isOffline()) {
-      ErrorAlertManager.showOfflineNetworkError();
+    const { note, navigateAddComment, isOffline } = this.props;
+    if (isOffline) {
+      AlertManager.showOfflineMessage(
+        "It seems you’re offline, so you can't add comments."
+      );
     } else {
       Metrics.track({ metric: "Clicked add comment" });
       navigateAddComment({ note });
@@ -177,9 +183,11 @@ class NotesListItem extends PureComponent {
   };
 
   onPressEditComment = ({ comment }) => {
-    const { note, navigateEditComment } = this.props;
-    if (ConnectionStatus.isOffline()) {
-      ErrorAlertManager.showOfflineNetworkError();
+    const { note, navigateEditComment, isOffline } = this.props;
+    if (isOffline) {
+      AlertManager.showOfflineMessage(
+        "It seems you’re offline, so you can't edit comments."
+      );
     } else {
       Metrics.track({ metric: "Clicked edit comment" });
       navigateEditComment({
@@ -190,11 +198,13 @@ class NotesListItem extends PureComponent {
   };
 
   timeChanged = () => {
-    const { note } = this.props;
+    if (this.isComponentMounted) {
+      const { note } = this.props;
 
-    this.setState({
-      formattedTimestamp: formatDateForNoteList(note.timestamp),
-    });
+      this.setState({
+        formattedTimestamp: formatDateForNoteList(note.timestamp),
+      });
+    }
   };
 
   toggleNote = (
@@ -418,10 +428,12 @@ class NotesListItem extends PureComponent {
             maxBolusValue,
             minBolusScaleValue,
             wizardData,
+            isAvailableOffline,
           },
         },
         currentProfile: { lowBGBoundary, highBGBoundary, units },
         note: { timestamp: eventTime },
+        isOffline,
       } = this.props;
 
       const isLoading = fetching;
@@ -441,6 +453,8 @@ class NotesListItem extends PureComponent {
       return (
         <Graph
           isLoading={isLoading}
+          isOffline={isOffline}
+          isAvailableOffline={isAvailableOffline}
           yAxisLabelValues={yAxisLabelValues}
           yAxisBGBoundaryValues={yAxisBGBoundaryValues}
           units={units}
@@ -536,14 +550,19 @@ NotesListItem.propTypes = {
   theme: ThemePropType.isRequired,
   style: ViewPropTypes.style,
   allowEditing: PropTypes.bool,
+  isOffline: PropTypes.bool,
   allowExpansionToggle: PropTypes.bool,
   toggleExpandedNotesCount: PropTypes.number,
   currentUser: UserPropType.isRequired,
   currentProfile: ProfilePropType.isRequired,
   note: PropTypes.shape({
     id: PropTypes.string.isRequired,
+    userId: PropTypes.string.isRequired,
+    groupId: PropTypes.string.isRequired,
+    userFullName: PropTypes.string.isRequired,
     timestamp: PropTypes.instanceOf(Date),
     messageText: PropTypes.string.isRequired,
+    initiallyExpanded: PropTypes.bool,
   }).isRequired,
   commentsFetchAsync: PropTypes.func.isRequired,
   commentsFetchData: PropTypes.shape({
@@ -572,6 +591,7 @@ NotesListItem.propTypes = {
 NotesListItem.defaultProps = {
   style: null,
   allowEditing: true,
+  isOffline: false,
   allowExpansionToggle: true,
   toggleExpandedNotesCount: 0,
   commentsFetchData: {

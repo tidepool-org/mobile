@@ -29,7 +29,7 @@ const commentUpdateAsync = ({
 }) => async dispatch => {
   dispatch(commentUpdateDidStart({ comment }));
 
-  const { errorMessage } = await api().updateCommentAsync({ comment });
+  const { errorMessage } = await api().updateCommentAsync({ note, comment });
 
   if (errorMessage) {
     dispatch(commentUpdateDidFail({ comment, errorMessage }));
