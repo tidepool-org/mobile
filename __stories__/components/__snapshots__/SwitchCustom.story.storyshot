@@ -2,6 +2,7 @@
 
 exports[`Storyshots SwitchCustom default 1`] = `
 <RCTSafeAreaView
+  emulateUnlessSupported={true}
   paddingTop={0}
   style={
     Object {
@@ -37,6 +38,7 @@ exports[`Storyshots SwitchCustom default 1`] = `
         }
       >
         <RCTSwitch
+          accessibilityRole="button"
           onChange={[Function]}
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}

@@ -2,6 +2,7 @@
 
 exports[`Storyshots SingleSelectCustom default 1`] = `
 <RCTSafeAreaView
+  emulateUnlessSupported={true}
   paddingTop={0}
   style={
     Object {
@@ -137,6 +138,7 @@ exports[`Storyshots SingleSelectCustom default 1`] = `
                   "height": 44,
                   "justifyContent": "space-between",
                   "paddingHorizontal": 10,
+                  "zIndex": 2,
                 },
                 undefined,
               ]
@@ -330,6 +332,7 @@ exports[`Storyshots SingleSelectCustom default 1`] = `
                     undefined,
                   ]
                 }
+                testID="ios_picker"
               />
             </View>
           </View>

@@ -2,6 +2,7 @@
 
 exports[`Storyshots ButtonWithLongText default 1`] = `
 <RCTSafeAreaView
+  emulateUnlessSupported={true}
   paddingTop={0}
   style={
     Object {

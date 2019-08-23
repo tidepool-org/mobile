@@ -2,6 +2,7 @@
 
 exports[`Storyshots SignUpScreens Create Account Personal 1`] = `
 <RCTSafeAreaView
+  emulateUnlessSupported={true}
   style={
     Object {
       "flex": 1,
@@ -10,6 +11,7 @@ exports[`Storyshots SignUpScreens Create Account Personal 1`] = `
   }
 >
   <RCTSafeAreaView
+    emulateUnlessSupported={true}
     style={
       Object {
         "backgroundColor": "#ffffff",
@@ -238,6 +240,7 @@ exports[`Storyshots SignUpScreens Create Account Personal 1`] = `
 
 exports[`Storyshots SignUpScreens Sign Up 1`] = `
 <RCTSafeAreaView
+  emulateUnlessSupported={true}
   style={
     Object {
       "flex": 1,
@@ -246,6 +249,7 @@ exports[`Storyshots SignUpScreens Sign Up 1`] = `
   }
 >
   <RCTSafeAreaView
+    emulateUnlessSupported={true}
     style={
       Object {
         "backgroundColor": "#ffffff",
@@ -439,6 +443,7 @@ exports[`Storyshots SignUpScreens Sign Up 1`] = `
 
 exports[`Storyshots SignUpScreens Terms of Use 1`] = `
 <RCTSafeAreaView
+  emulateUnlessSupported={true}
   style={
     Object {
       "flex": 1,
@@ -447,6 +452,7 @@ exports[`Storyshots SignUpScreens Terms of Use 1`] = `
   }
 >
   <RCTSafeAreaView
+    emulateUnlessSupported={true}
     style={
       Object {
         "backgroundColor": "#ffffff",
@@ -605,6 +611,7 @@ exports[`Storyshots SignUpScreens Terms of Use 1`] = `
                         "height": 44,
                         "justifyContent": "space-between",
                         "paddingHorizontal": 10,
+                        "zIndex": 2,
                       },
                       undefined,
                     ]
@@ -798,6 +805,7 @@ exports[`Storyshots SignUpScreens Terms of Use 1`] = `
                           undefined,
                         ]
                       }
+                      testID="ios_picker"
                     />
                   </View>
                 </View>
@@ -828,6 +836,7 @@ exports[`Storyshots SignUpScreens Terms of Use 1`] = `
               }
             >
               <RCTSwitch
+                accessibilityRole="button"
                 onChange={[Function]}
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
