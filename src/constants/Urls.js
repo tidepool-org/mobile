@@ -1,5 +1,6 @@
 const Urls = {
-  support: "http://support.tidepool.org/category/31-blip-notes",
+  support:
+    "https://support.tidepool.org/hc/en-us/sections/360002777132-Tidepool-Mobile",
   privacyAndTerms: "http://tidepool.org/legal/",
   forgotPassword: "https://app.tidepool.org/request-password-reset",
   signUp: "http://tidepool.org/signup",
