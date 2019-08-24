@@ -25,6 +25,7 @@
     "expo-gl": "6.0.0",
     "expo-keep-awake": "6.0.0",
     "expo-linear-gradient": "6.0.0",
+    "expo-mail-composer": "~6.0.0",
     "expo-three": "4.0.4",
     "expokit": "34.0.2",
     "glamorous-native": "1.4.2",
@@ -100,6 +101,5 @@
     "setupFilesAfterEnv": [
       "./jest-setupTestFramework.js"
     ]
-  },
-  "private": true
+  }
 }
