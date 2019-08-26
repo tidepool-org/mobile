@@ -25,7 +25,7 @@ PODS:
   - EXConstants (6.0.0):
     - UMConstantsInterface
     - UMCore
-  - EXFileSystem (6.0.0):
+  - EXFileSystem (6.0.2):
     - UMCore
     - UMFileSystemInterface
   - EXFont (6.0.1):
@@ -188,6 +188,7 @@ PODS:
   - RollbarReactNative (0.5.0):
     - React
     - Rollbar (~> 1.5.0)
+  - TPHealthKitUploader (0.9.0)
   - UMBarCodeScannerInterface (3.0.0)
   - UMCameraInterface (3.0.0)
   - UMConstantsInterface (3.0.0)
@@ -236,6 +237,7 @@ DEPENDENCIES:
   - React/RCTWebSocket (from `../node_modules/react-native`)
   - RNDeviceInfo (from `../node_modules/react-native-device-info`)
   - RollbarReactNative (from `../node_modules/rollbar-react-native`)
+  - TPHealthKitUploader (from `https://github.com/tidepool-org/healthkit-uploader`, tag `0.9.1`)
   - UMBarCodeScannerInterface (from `../node_modules/unimodules-barcode-scanner-interface/ios`)
   - UMCameraInterface (from `../node_modules/unimodules-camera-interface/ios`)
   - UMConstantsInterface (from `../node_modules/unimodules-constants-interface/ios`)
@@ -323,6 +325,9 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-device-info"
   RollbarReactNative:
     :path: "../node_modules/rollbar-react-native"
+  TPHealthKitUploader:
+    :git: https://github.com/tidepool-org/healthkit-uploader
+    :tag: 0.9.1
   UMBarCodeScannerInterface:
     :path: !ruby/object:Pathname
     path: "../node_modules/unimodules-barcode-scanner-interface/ios"
@@ -366,6 +371,9 @@ CHECKOUT OPTIONS:
   ExpoKit:
     :git: http://github.com/expo/expo.git
     :tag: ios/2.12.1
+  TPHealthKitUploader:
+    :git: https://github.com/tidepool-org/healthkit-uploader
+    :tag: 0.9.1
 
 SPEC CHECKSUMS:
   Amplitude-iOS: 4a3c8807b2ea5369dc11e87e23825bff01e5a922
@@ -379,7 +387,7 @@ SPEC CHECKSUMS:
   DoubleConversion: bb338842f62ab1d708ceb63ec3d999f0f3d98ecd
   EXAppLoaderProvider: 7a8185228d8ba9e689a0e2d6d957fe9bdd49c8a0
   EXConstants: 5d81e84ca71b9a552529889cc798b4a04e9e22b3
-  EXFileSystem: a5a7b8409e7d11f3948804e674ea91720fa84cd5
+  EXFileSystem: 091907902fcec9f9182b656fdead41a82f30986a
   EXFont: c862449210fc86aa11d24a202cb22c71a0d39609
   EXGL: dc4ae6520b142a74e28e6f4472d27a26fc211f37
   EXGL-CPP: 06949fa99656c36b488ff51155ca865c871f3d3d
@@ -407,6 +415,7 @@ SPEC CHECKSUMS:
   RNDeviceInfo: 74ee98a0b3ef57604ea9953f03eca549a9335160
   Rollbar: 5060e3fc9fa28ae75e70c61e95b1b31b2b22710c
   RollbarReactNative: 90812f66d5ecbfd7cdccbb2f0b666c0888b7ee47
+  TPHealthKitUploader: 0efb9f8f810868c9df07f18a06bb1f6c5457ba9f
   UMBarCodeScannerInterface: 84ea2d6b58ff0dc27ef9b68bab71286be18ee020
   UMCameraInterface: 26b26005d1756a0d5f4f04f1e168e39ea9154535
   UMConstantsInterface: 038bacb19de12b6fd328c589122c8dc977cccf61
@@ -421,6 +430,6 @@ SPEC CHECKSUMS:
   UMTaskManagerInterface: 8664abd37a00715727e60df9ecd65e42ba47b548
   yoga: 92b2102c3d373d1a790db4ab761d2b0ffc634f64
 
-PODFILE CHECKSUM: fd478c3b3971d9055151106cd17dff209736f870
+PODFILE CHECKSUM: 9e22428b8d9bfe59e2ad845d87ecf4905c5b2a76
 
 COCOAPODS: 1.7.5

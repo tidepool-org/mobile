@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4D8027D021E4176B003C8B10 /* NativeNotifications.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D8027CF21E4176B003C8B10 /* NativeNotifications.m */; };
+		4D08D6872313472A00CBB2F7 /* NativeNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D08D68323133B0F00CBB2F7 /* NativeNotifications.swift */; };
+		4D08D68923134E8800CBB2F7 /* NativeNotificationsBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D08D68823134E8800CBB2F7 /* NativeNotificationsBridge.m */; };
 		4D8027D321E417D2003C8B10 /* LaunchScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D8027D221E417D2003C8B10 /* LaunchScreen.m */; };
 		4D8027D621E41806003C8B10 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D8027D421E41806003C8B10 /* LaunchScreen.storyboard */; };
 		B501732B1DC01252003445D9 /* EXShell.plist in Resources */ = {isa = PBXBuildFile; fileRef = B501732A1DC01252003445D9 /* EXShell.plist */; };
@@ -23,8 +24,9 @@
 
 /* Begin PBXFileReference section */
 		2C1548D9E4CB1AEFA5CCAE6D /* Pods-Tidepool.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tidepool.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tidepool/Pods-Tidepool.debug.xcconfig"; sourceTree = "<group>"; };
-		4D8027CE21E4176A003C8B10 /* NativeNotifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NativeNotifications.h; sourceTree = "<group>"; };
-		4D8027CF21E4176B003C8B10 /* NativeNotifications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NativeNotifications.m; sourceTree = "<group>"; };
+		4D08D68023133AB200CBB2F7 /* Tidepool-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tidepool-Bridging-Header.h"; sourceTree = "<group>"; };
+		4D08D68323133B0F00CBB2F7 /* NativeNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeNotifications.swift; sourceTree = "<group>"; };
+		4D08D68823134E8800CBB2F7 /* NativeNotificationsBridge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NativeNotificationsBridge.m; sourceTree = "<group>"; };
 		4D8027D121E417D2003C8B10 /* LaunchScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchScreen.h; sourceTree = "<group>"; };
 		4D8027D221E417D2003C8B10 /* LaunchScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchScreen.m; sourceTree = "<group>"; };
 		4D8027D521E41806003C8B10 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -95,10 +97,11 @@
 			children = (
 				B56386471DB9693800A0598C /* AppDelegate.h */,
 				B56386481DB9693800A0598C /* AppDelegate.m */,
-				4D8027CE21E4176A003C8B10 /* NativeNotifications.h */,
-				4D8027CF21E4176B003C8B10 /* NativeNotifications.m */,
+				4D08D68323133B0F00CBB2F7 /* NativeNotifications.swift */,
+				4D08D68823134E8800CBB2F7 /* NativeNotificationsBridge.m */,
 				B56386501DB9693800A0598C /* Assets.xcassets */,
 				B563865B1DB96A5E00A0598C /* Supporting */,
+				4D08D68023133AB200CBB2F7 /* Tidepool-Bridging-Header.h */,
 			);
 			path = Tidepool;
 			sourceTree = "<group>";
@@ -157,6 +160,7 @@
 					B56386401DB9693800A0598C = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = 75U4X84TEG;
+						LastSwiftMigration = 1030;
 						ProvisioningStyle = Manual;
 					};
 				};
@@ -300,9 +304,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				4D8027D321E417D2003C8B10 /* LaunchScreen.m in Sources */,
+				4D08D6872313472A00CBB2F7 /* NativeNotifications.swift in Sources */,
 				B56386611DB96A5E00A0598C /* main.m in Sources */,
+				4D08D68923134E8800CBB2F7 /* NativeNotificationsBridge.m in Sources */,
 				B56386491DB9693800A0598C /* AppDelegate.m in Sources */,
-				4D8027D021E4176B003C8B10 /* NativeNotifications.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,6 +432,7 @@
 			baseConfigurationReference = 2C1548D9E4CB1AEFA5CCAE6D /* Pods-Tidepool.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 75U4X84TEG;
@@ -434,7 +440,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "$(SRCROOT)/Tidepool/Supporting/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_CFLAGS = "$(inherited)";
@@ -442,6 +448,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.tidepool.blipnotesRN;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "org.tidepool.blipnotesRN AppStore";
+				SWIFT_OBJC_BRIDGING_HEADER = "Tidepool/Tidepool-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -451,6 +460,7 @@
 			baseConfigurationReference = A47FE4D7F70906B7DC8CE39B /* Pods-Tidepool.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 75U4X84TEG;
@@ -458,7 +468,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "$(SRCROOT)/Tidepool/Supporting/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_CFLAGS = "$(inherited)";
@@ -466,6 +476,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.tidepool.blipnotesRN;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "org.tidepool.blipnotesRN AppStore";
+				SWIFT_OBJC_BRIDGING_HEADER = "Tidepool/Tidepool-Bridging-Header.h";
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

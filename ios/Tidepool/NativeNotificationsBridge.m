@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018, Tidepool Project
+ * Copyright (c) 2019, Tidepool Project
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the associated License, which is identical to the BSD 2-Clause
@@ -13,8 +13,16 @@
  * not, you can obtain one from Tidepool Project at tidepool.org.
  */
 
+#import <Foundation/Foundation.h>
 #import <React/RCTBridgeModule.h>
 
-@interface NativeNotifications : NSObject <RCTBridgeModule>
+@interface RCT_EXTERN_MODULE(NativeNotifications, NSObject)
+
+RCT_EXTERN_METHOD(setUser:(NSString *)userId username:(NSString *)username userFullName:(NSString *)userFullName)
+RCT_EXTERN_METHOD(clearUser)
+RCT_EXTERN_METHOD(setEnvironment:(NSString *)environment)
+RCT_EXTERN_METHOD(testNativeCrash)
+RCT_EXTERN_METHOD(testLogWarning:(NSString *)message)
+RCT_EXTERN_METHOD(testLogError:(NSString *)message)
 
 @end

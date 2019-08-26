@@ -1,12 +1,8 @@
 // Copyright 2015-present 650 Industries. All rights reserved.
 
 #import "AppDelegate.h"
-#import "ExpoKit.h"
-#import "EXViewController.h"
-#import "NativeNotifications.h"
 
-#import "EXKernel.h"
-#import <React/RCTBridge.h>
+#import <ExpoKit/EXViewController.h>
 #import <RollbarReactNative/RollbarReactNative.h>
 
 @interface AppDelegate ()
