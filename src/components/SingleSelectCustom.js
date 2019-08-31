@@ -34,7 +34,7 @@ class SingleSelectCustom extends PureComponent {
 
     return (
       <View>
-        <Text style={{ color: "#7e98c3", marginTop: 15, fontSize: 16 }}>
+        <Text style={{ color: "#7e98c3", marginTop: 15, fontSize: 16, marginBottom: 2 }}>
           {title}
         </Text>
         <RNPickerSelect
@@ -46,9 +46,7 @@ class SingleSelectCustom extends PureComponent {
             { label: "Hockey", value: "hockey" },
           ]}
           style={{
-            paddingTop: 20,
-            paddingBottom: 20,
-            paddingLeft: 16,
+
 
             ...pickerSelectStyles,
             iconContainer: {

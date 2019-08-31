@@ -57,13 +57,15 @@ exports[`Storyshots SignUpScreens Create Account Personal 1`] = `
         <TextInput
           onChangeText={[Function]}
           placeholder="Full Name"
+          placeholderTextColor="#838383"
           style={
             Object {
               "borderColor": "#ededed",
               "borderRadius": 4,
               "borderWidth": 1,
               "color": "#6582ff",
-              "height": 50,
+              "fontSize": 16,
+              "height": 58,
               "marginVertical": 5,
               "paddingLeft": 14,
             }
@@ -72,13 +74,15 @@ exports[`Storyshots SignUpScreens Create Account Personal 1`] = `
         <TextInput
           onChangeText={[Function]}
           placeholder="Email"
+          placeholderTextColor="#838383"
           style={
             Object {
               "borderColor": "#ededed",
               "borderRadius": 4,
               "borderWidth": 1,
               "color": "#6582ff",
-              "height": 50,
+              "fontSize": 16,
+              "height": 58,
               "marginVertical": 5,
               "paddingLeft": 14,
             }
@@ -87,6 +91,7 @@ exports[`Storyshots SignUpScreens Create Account Personal 1`] = `
         <TextInput
           onChangeText={[Function]}
           placeholder="Password"
+          placeholderTextColor="#838383"
           secureTextEntry={true}
           style={
             Object {
@@ -94,7 +99,8 @@ exports[`Storyshots SignUpScreens Create Account Personal 1`] = `
               "borderRadius": 4,
               "borderWidth": 1,
               "color": "#6582ff",
-              "height": 50,
+              "fontSize": 16,
+              "height": 58,
               "marginVertical": 5,
               "paddingLeft": 14,
             }
@@ -103,6 +109,7 @@ exports[`Storyshots SignUpScreens Create Account Personal 1`] = `
         <TextInput
           onChangeText={[Function]}
           placeholder="Confirm Password"
+          placeholderTextColor="#838383"
           secureTextEntry={true}
           style={
             Object {
@@ -110,7 +117,8 @@ exports[`Storyshots SignUpScreens Create Account Personal 1`] = `
               "borderRadius": 4,
               "borderWidth": 1,
               "color": "#6582ff",
-              "height": 50,
+              "fontSize": 16,
+              "height": 58,
               "marginVertical": 5,
               "paddingLeft": 14,
             }
@@ -124,59 +132,6 @@ exports[`Storyshots SignUpScreens Create Account Personal 1`] = `
             }
           }
         >
-          <View
-            accessible={true}
-            isTVSelectable={true}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
-            style={
-              Object {
-                "alignItems": "center",
-                "alignSelf": "stretch",
-                "backgroundColor": "#62B1F6",
-                "borderBottomWidth": null,
-                "borderColor": "#627cff",
-                "borderLeftWidth": null,
-                "borderRadius": 5,
-                "borderRightWidth": null,
-                "borderTopWidth": null,
-                "borderWidth": undefined,
-                "elevation": 2,
-                "flexDirection": "row",
-                "height": 45,
-                "justifyContent": "center",
-                "opacity": 1,
-                "paddingBottom": 6,
-                "paddingTop": 6,
-                "shadowColor": undefined,
-                "shadowOffset": undefined,
-                "shadowOpacity": undefined,
-                "shadowRadius": undefined,
-              }
-            }
-          >
-            <Text
-              style={
-                Object {
-                  "backgroundColor": "transparent",
-                  "color": "#fff",
-                  "fontFamily": "System",
-                  "fontSize": 16.5,
-                  "marginLeft": 0,
-                  "marginRight": 0,
-                  "paddingLeft": 16,
-                  "paddingRight": 16,
-                }
-              }
-              uppercase={false}
-            >
-              Submit
-            </Text>
-          </View>
           <View
             accessible={true}
             isTVSelectable={true}
@@ -501,6 +456,7 @@ exports[`Storyshots SignUpScreens Terms of Use 1`] = `
                 Object {
                   "color": "#7e98c3",
                   "fontSize": 16,
+                  "marginBottom": 2,
                   "marginTop": 15,
                 }
               }
@@ -855,6 +811,7 @@ exports[`Storyshots SignUpScreens Terms of Use 1`] = `
                     "color": "#4f6a92",
                     "fontSize": 16,
                     "marginLeft": 10,
+                    "width": 280,
                   }
                 }
               >

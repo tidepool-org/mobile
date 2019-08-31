@@ -13111,6 +13111,11 @@ react-native-easy-grid@0.2.2:
   dependencies:
     lodash "^4.17.15"
 
+react-native-email-link@1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/react-native-email-link/-/react-native-email-link-1.4.0.tgz#cee0a03b0f6bccf1446bbf1fe5a90e0704f1da45"
+  integrity sha512-kCckvSrtZqkIaxZFel2W7ecT/yOVDIdnQfukV+/CpUZNorRu1Hf1Oe4w2h30lhZoMS1G/QOii6hocEgkSADagw==
+
 react-native-gesture-handler@1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-1.3.0.tgz#d0386f565928ccc1849537f03f2e37fd5f6ad43f"

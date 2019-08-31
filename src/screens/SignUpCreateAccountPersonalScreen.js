@@ -19,11 +19,12 @@ const styles = StyleSheet.create({
   input: {
     borderColor: "#ededed",
     borderWidth: 1,
-    height: 50,
+    height: 58,
     borderRadius: 4,
     paddingLeft: 14,
     color: "#6582ff",
     marginVertical: 5,
+    fontSize: 16,
   },
 });
 
@@ -32,6 +33,8 @@ class SignUpCreateAccountPersonalScreen extends PureComponent {
 
   onPressContinue = () => {
     const { navigateSignUpTermsOfUse } = this.props;
+    // {formikProps.handleSubmit}
+
     navigateSignUpTermsOfUse();
   };
 
@@ -53,31 +56,32 @@ class SignUpCreateAccountPersonalScreen extends PureComponent {
                       style={styles.input}
                       onChangeText={formikProps.handleChange("name")}
                       placeholder="Full Name"
+                      placeholderTextColor="#838383"
                     />
                     <TextInput
                       style={styles.input}
                       onChangeText={formikProps.handleChange("name")}
                       placeholder="Email"
+                      placeholderTextColor="#838383"
                     />
                     <TextInput
                       style={styles.input}
                       onChangeText={formikProps.handleChange("name")}
                       placeholder="Password"
+                      placeholderTextColor="#838383"
                       secureTextEntry
                     />
                     <TextInput
                       style={styles.input}
                       onChangeText={formikProps.handleChange("name")}
                       placeholder="Confirm Password"
+                      placeholderTextColor="#838383"
                       secureTextEntry
                     />
                     <View style={{ flex: 1, justifyContent: "flex-end" }}>
-                      <Button block info onPress={formikProps.handleSubmit}>
-                        <Text>Submit</Text>
-                      </Button>
                       <Button
-                        style={{ marginTop: 10 }}
                         block
+                        style={{ marginTop: 10 }}
                         onPress={this.onPressContinue}
                       >
                         <Text>Continue</Text>

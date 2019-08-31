@@ -29,6 +29,7 @@ class SwitchCustom extends PureComponent {
               color: "#4f6a92",
               fontSize: 16,
               marginLeft: 10,
+              width: 280,
             }}
           >
             {switchText}
