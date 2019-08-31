@@ -20,11 +20,12 @@ const styles = StyleSheet.create({
   input: {
     borderColor: "#ededed",
     borderWidth: 1,
-    height: 50,
+    height: 58,
     borderRadius: 4,
     paddingLeft: 14,
     color: "#6582ff",
     marginVertical: 5,
+    fontSize: 18,
   },
 });
 
@@ -54,27 +55,25 @@ class SignUpClinicianSetupScreen extends PureComponent {
                       style={styles.input}
                       onChangeText={formikProps.handleChange("name")}
                       placeholder="Full Name"
+                      placeholderTextColor="#838383"
                     />
-                    <SingleSelectCustom title="Role" />
+                    <View style={{ paddingBottom: 15 }}>
+                      <SingleSelectCustom title="Role" />
+                    </View>
                     <TextInput
                       style={styles.input}
                       onChangeText={formikProps.handleChange("name")}
                       placeholder="Clinic Name"
+                      placeholderTextColor="#838383"
                     />
                     <TextInput
                       style={styles.input}
                       onChangeText={formikProps.handleChange("name")}
                       placeholder="Clinic Phone Number (Optional)"
+                      placeholderTextColor="#838383"
                     />
                     <View style={{ flex: 1, justifyContent: "flex-end" }}>
-                      <Button block info onPress={formikProps.handleSubmit}>
-                        <Text>Submit</Text>
-                      </Button>
-                      <Button
-                        style={{ marginTop: 10 }}
-                        block
-                        onPress={this.onPressActivateAccount}
-                      >
+                      <Button block onPress={this.onPressActivateAccount}>
                         <Text>Continue</Text>
                       </Button>
                     </View>

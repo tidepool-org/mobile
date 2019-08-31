@@ -20,11 +20,12 @@ const styles = StyleSheet.create({
   input: {
     borderColor: "#ededed",
     borderWidth: 1,
-    height: 50,
+    height: 58,
     borderRadius: 4,
     paddingLeft: 14,
     color: "#6582ff",
     marginVertical: 5,
+    fontSize: 18,
   },
 });
 
@@ -54,31 +55,31 @@ class SignUpCreateAccountClinicianScreen extends PureComponent {
                       style={styles.input}
                       onChangeText={formikProps.handleChange("name")}
                       placeholder="Email"
+                      placeholderTextColor="#838383"
                     />
                     <TextInput
                       style={styles.input}
                       onChangeText={formikProps.handleChange("name")}
                       placeholder="Password"
+                      placeholderTextColor="#838383"
                       secureTextEntry
                     />
                     <TextInput
                       style={styles.input}
                       onChangeText={formikProps.handleChange("name")}
                       placeholder="Confirm Password"
+                      placeholderTextColor="#838383"
                       secureTextEntry
                     />
-
-                    <SwitchCustom 
-                      switchText="I accept the terms of the Tidepool Applications Terms of Use and Privacy Policy"
-                      style={{ paddingTop: 10 }}  
-                    />
+                    <View style={{ paddingTop: 30 }}>
+                      <SwitchCustom
+                        switchText="I accept the terms of the Tidepool Applications Terms of Use and Privacy Policy"
+                        style={{ paddingTop: 10 }}
+                      />
+                    </View>
 
                     <View style={{ flex: 1, justifyContent: "flex-end" }}>
-                      <Button block info onPress={formikProps.handleSubmit}>
-                        <Text>Submit</Text>
-                      </Button>
                       <Button
-                        style={{ marginTop: 10 }}
                         block
                         onPress={this.onPressClinicianSetup}
                       >

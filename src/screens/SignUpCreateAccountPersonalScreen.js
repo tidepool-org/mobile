@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     paddingLeft: 14,
     color: "#6582ff",
     marginVertical: 5,
-    fontSize: 16,
+    fontSize: 18,
   },
 });
 
