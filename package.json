@@ -33,7 +33,6 @@
     "react": "16.8.3",
     "react-native": "https://github.com/expo/react-native/archive/sdk-34.0.1.tar.gz",
     "react-native-device-info": "2.3.1",
-    "react-native-email": "^1.0.2",
     "react-native-local-mongodb": "2.2.9",
     "react-native-walkthrough-tooltip": "0.5.3",
     "react-navigation": "2.0.4",

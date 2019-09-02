@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { Alert, StatusBar } from "react-native";
 import glamorous, { ThemeProvider } from "glamorous-native";
 import * as MailComposer from 'expo-mail-composer';
-import email from "react-native-email";
 
 import PrimaryTheme from "../themes/PrimaryTheme";
 import Colors from "../constants/Colors";
@@ -85,8 +84,7 @@ class HomeScreen extends PureComponent {
 
   onPressTooltipEmailLink = () => {
     Metrics.track({ metric: "Clicked email a link" });
-    // this.composeEmailWithDesktopUploaderLink();
-    this.composeUploaderEmail();
+    this.composeEmailWithDesktopUploaderLink();
     this.hideTipIfNeeded();
   };
 
@@ -115,26 +113,6 @@ class HomeScreen extends PureComponent {
       );
     }
   }
-
-  async composeUploaderEmail() {
-    const { currentUser } = this.props;
-    const currentUserEmail = currentUser.username;
-    try {
-      email(currentUserEmail, {
-          subject: "How to set up the Tidepool Uploader",
-          body: "Please go to the following link on your computer to learn about setting up the Tidepool Uploader: https://support.tidepool.org/hc/en-us/articles/360019872871-How-to-use-the-Tidepool-Uploader",
-      });
-  
-      } catch (error) {
-        Alert.alert(
-          "Error",
-          "Unable to send email. You may need to configure email settings on your device.",
-          [{ text: "OK" }]
-        );
-      }
-    }
-  
-  
 
   showTipIfNeeded(params) {
     if (
@@ -213,12 +191,12 @@ class HomeScreen extends PureComponent {
           <Tooltip
             isVisible={toolTipVisible}
             placement="top"
-            content={
+            content={(
               <TidepoolUploaderTooltipContent
                 onPressEmailLink={this.onPressTooltipEmailLink}
                 onPressOk={this.onPressTooltipOk}
               />
-            }
+)}
             arrowSize={{ width: 0, height: 0 }}
             tooltipOriginOffset={{
               x: 0,
