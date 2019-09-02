@@ -213,12 +213,12 @@ class HomeScreen extends PureComponent {
           <Tooltip
             isVisible={toolTipVisible}
             placement="top"
-            content={(
+            content={
               <TidepoolUploaderTooltipContent
                 onPressEmailLink={this.onPressTooltipEmailLink}
                 onPressOk={this.onPressTooltipOk}
               />
-            )}
+            }
             arrowSize={{ width: 0, height: 0 }}
             tooltipOriginOffset={{
               x: 0,
