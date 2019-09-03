@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Alert, StatusBar } from "react-native";
 import glamorous, { ThemeProvider } from "glamorous-native";
-import * as MailComposer from 'expo-mail-composer';
+import * as MailComposer from "expo-mail-composer";
 
 import PrimaryTheme from "../themes/PrimaryTheme";
 import Colors from "../constants/Colors";
@@ -82,9 +82,9 @@ class HomeScreen extends PureComponent {
     }
   };
 
-  onPressTooltipEmailLink = () => {
+  onPressTooltipEmailLink = async () => {
     Metrics.track({ metric: "Clicked email a link" });
-    this.composeEmailWithDesktopUploaderLink();
+    await this.composeEmailWithDesktopUploaderLink();
     this.hideTipIfNeeded();
   };
 
