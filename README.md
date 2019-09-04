@@ -1,6 +1,6 @@
 Tidepool is a mobile app (iOS and Android) for type 1 diabetes (T1D) built on top of the [Tidepool](http://tidepool.org/) platform. It allows patients and their "care team" (family, doctors) to visualize their diabetes device data (from insulin pumps, BGMs, and/or CGMs) and message each other.
 
-This README is focused on just the details of getting the Tidepool mobile app building and running locally.
+This README is focused on the details of getting the Tidepool mobile app building and running locally.
 
 ---
 
