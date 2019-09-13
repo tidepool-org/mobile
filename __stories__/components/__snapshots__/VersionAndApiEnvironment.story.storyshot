@@ -2,6 +2,7 @@
 
 exports[`Storyshots VersionAndApiEnvironment Production 1`] = `
 <RCTSafeAreaView
+  emulateUnlessSupported={true}
   paddingTop={0}
   style={
     Object {
@@ -45,7 +46,7 @@ exports[`Storyshots VersionAndApiEnvironment Production 1`] = `
         }
       >
         v
-        3.1.0
+        3.1.1
         
       </Text>
     </View>
@@ -55,6 +56,7 @@ exports[`Storyshots VersionAndApiEnvironment Production 1`] = `
 
 exports[`Storyshots VersionAndApiEnvironment Staging 1`] = `
 <RCTSafeAreaView
+  emulateUnlessSupported={true}
   paddingTop={0}
   style={
     Object {
@@ -98,7 +100,7 @@ exports[`Storyshots VersionAndApiEnvironment Staging 1`] = `
         }
       >
         v
-        3.1.0
+        3.1.1
          on Staging
       </Text>
     </View>

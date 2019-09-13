@@ -12,7 +12,7 @@ import {
 storiesOf("VersionAndApiEnvironment", module).add("Staging", () => (
   <StoryContainerComponent>
     <VersionAndApiEnvironment
-      version="3.1.0"
+      version="3.1.1"
       apiEnvironment={API_ENVIRONMENT_STAGING}
     />
   </StoryContainerComponent>
@@ -21,7 +21,7 @@ storiesOf("VersionAndApiEnvironment", module).add("Staging", () => (
 storiesOf("VersionAndApiEnvironment", module).add("Production", () => (
   <StoryContainerComponent>
     <VersionAndApiEnvironment
-      version="3.1.0"
+      version="3.1.1"
       apiEnvironment={API_ENVIRONMENT_PRODUCTION}
     />
   </StoryContainerComponent>

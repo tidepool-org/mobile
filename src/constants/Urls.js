@@ -1,10 +1,11 @@
 const Urls = {
-  support: "http://support.tidepool.org/category/31-blip-notes",
+  support:
+    "https://support.tidepool.org/hc/en-us/sections/360002777132-Tidepool-Mobile",
   privacyAndTerms: "http://tidepool.org/legal/",
   forgotPassword: "https://app.tidepool.org/request-password-reset",
   signUp: "http://tidepool.org/signup",
   howToUpload:
-    "http://support.tidepool.org/article/11-how-to-use-the-tidepool-uploader",
+    "https://support.tidepool.org/hc/en-us/articles/360019872871-How-to-use-the-Tidepool-Uploader",
 };
 
 export default Urls;

@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { Font } from "expo";
+import * as Font from "expo-font";
 
 function withExpoFontPreload(WrappedComponent, fonts) {
   return class extends PureComponent {

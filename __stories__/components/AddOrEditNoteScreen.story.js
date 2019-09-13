@@ -20,10 +20,10 @@ const currentProfile = {
   lowBGBoundary: DEFAULT_LOW_BG_BOUNDARY_VALUE,
   highBGBoundary: DEFAULT_HIGH_BG_BOUNDARY_VALUE,
 };
-const timestampAddNote = new Date("01/01/2018 9:41 AM");
+const timestampAddNote = new Date("Mon Jul 27 2015 22:29:00 GMT-0500 (CDT)");
 const note = {
   id: "1",
-  timestamp: new Date("01/01/2018 9:41 AM"),
+  timestamp: new Date("Mon Jul 27 2015 22:29:00 GMT-0500 (CDT)"),
   messageText: `#hashtag1 This should not show up in comments. ${faker.fake(
     "{{lorem.paragraph}}"
   )}`,
@@ -34,7 +34,7 @@ const navigateGoBack = () => {};
 const noteUpdateAsync = () => {};
 const noteAddAsync = () => {};
 
-// TODO: stories - There are leyboard issues with on device UI for storybook
+// TODO: stories - There are keyboard issues with on device UI for storybook
 // with this screen. The timer that shows the keyboard after screen is shown
 // doesn't play nicely with the component rendering and navigator for storybook.
 // Temporarily disabling these for now. They could be re-enabled (and the

@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { GLView } from "expo";
+import { GLView } from "expo-gl";
 import { THREE } from "expo-three";
 
 class GraphGlView extends PureComponent {

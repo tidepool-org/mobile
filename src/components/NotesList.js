@@ -32,14 +32,14 @@ class NotesList extends PureComponent {
   componentDidMount() {
     const { errorMessage } = this.props;
     if (errorMessage) {
-      AlertManager.showErrorAlert(errorMessage);
+      AlertManager.showError(errorMessage);
     }
   }
 
   componentWillReceiveProps(nextProps) {
     const { errorMessage, fetching } = this.props;
     if (nextProps.errorMessage && !errorMessage) {
-      AlertManager.showErrorAlert(nextProps.errorMessage);
+      AlertManager.showError(nextProps.errorMessage);
     }
 
     if (!nextProps.fetching && fetching) {
@@ -211,6 +211,7 @@ class NotesList extends PureComponent {
           style={{
             backgroundColor: Colors.veryLightGrey, // TODO: use theme rather than color directly
           }}
+          removeClippedSubviews={false} // Make sure that clipped views aren't removed, else a note that is toggled open and then scrolled out view will lose its GL context!
           data={notes}
           extraData={this.state}
           keyExtractor={this.keyExtractor}
