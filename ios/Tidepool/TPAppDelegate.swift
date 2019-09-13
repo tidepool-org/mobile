@@ -13,11 +13,17 @@
  * not, you can obtain one from Tidepool Project at tidepool.org.
  */
 
-#import <Foundation/Foundation.h>
-#import <React/RCTBridgeModule.h>
+import UIKit
 
-@interface RCT_EXTERN_MODULE(NativeNotifications, NSObject)
+@UIApplicationMain
+class TPAppDelegate: EXStandaloneAppDelegate {
+    override func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool
+    {
+        let result = super.application(application, didFinishLaunchingWithOptions: launchOptions)
 
-RCT_EXTERN_METHOD(addEvent:(NSString *)name location:(NSString *)location date:(nonnull NSNumber *)date)
-
-@end
+        RollbarReactNative.initWithAccessToken("00788919100a467e8fb08144b427890e")
+        TPSettings.sharedInstance.loadSettings()
+        
+        return result
+    }
+}

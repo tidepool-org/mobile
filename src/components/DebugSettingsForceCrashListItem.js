@@ -15,8 +15,8 @@ class DebugSettingsForceCrashListItem extends PureComponent {
     setTimeout(() => {
       navigateGoBack();
       try {
-        const { NativeNotifications } = NativeModules;
-        NativeNotifications.testNativeCrash();
+        const { TPNative } = NativeModules;
+        TPNative.testNativeCrash();
       } catch (error) {
         // console.log(`error: ${error}`);
       }

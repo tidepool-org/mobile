@@ -16,13 +16,13 @@ class DebugSettingsForceLogListItem extends PureComponent {
     setTimeout(() => {
       navigateGoBack();
       try {
-        const { NativeNotifications } = NativeModules;
+        const { TPNative } = NativeModules;
         if (logLevel === Logger.LOG_LEVEL_WARNING) {
           Logger.logWarning(`test`);
-          NativeNotifications.testLogWarning(`test`);
+          TPNative.testLogWarning(`test`);
         } else if (logLevel === Logger.LOG_LEVEL_ERROR) {
           Logger.logError(`test`);
-          NativeNotifications.testLogError(`test`);
+          TPNative.testLogError(`test`);
         }
       } catch (error) {
         // console.log(`error: ${error}`);

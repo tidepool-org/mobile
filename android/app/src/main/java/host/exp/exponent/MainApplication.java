@@ -43,7 +43,7 @@ public class MainApplication extends ExpoApplication implements AppLoaderPackage
 
     return Arrays.<ReactPackage>asList(
         // Add your own packages here!
-        new NativeNotificationsPackage(),
+        new TPNativePackage(),
 
         // Needed for `react-native link`
         // new MainReactPackage(),
@@ -82,7 +82,7 @@ public class MainApplication extends ExpoApplication implements AppLoaderPackage
     });
   }
 
-  public void setUser(String userId, String username, String userFullName) {
+  public void setUser(String userId, String username, String userFullName, boolean isDSAUser) {
     this.userId = userId;
     this.username = username;
     this.userFullName = userFullName;

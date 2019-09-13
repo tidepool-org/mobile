@@ -6,15 +6,15 @@ import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 
-public class NativeNotificationsModule extends ReactContextBaseJavaModule {
+public class TPNativeModule extends ReactContextBaseJavaModule {
 
-  public NativeNotificationsModule(ReactApplicationContext reactContext) {
+  public TPNativeModule(ReactApplicationContext reactContext) {
     super(reactContext);
   }
 
   @Override
   public String getName() {
-    return "NativeNotifications";
+    return "TPNative";
   }
 
   @ReactMethod
@@ -24,9 +24,9 @@ public class NativeNotificationsModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void setUser(String userId, String username, String userFullName) {
+  public void setUser(String userId, String username, String userFullName, boolean isDSAUser) {
     MainApplication application = (MainApplication) (this.getReactApplicationContext().getApplicationContext());
-    application.setUser(userId, username, userFullName);
+    application.setUser(userId, username, userFullName, isDSAUser);
   }
 
   @ReactMethod

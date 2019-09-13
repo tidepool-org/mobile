@@ -22,8 +22,8 @@ const AUTH_USER_KEY = "AUTH_USER_KEY";
 
 function loggerClearUser() {
   try {
-    const { NativeNotifications } = NativeModules;
-    NativeNotifications.clearUser();
+    const { TPNative } = NativeModules;
+    TPNative.clearUser();
   } catch (error) {
     // console.log(`error: ${error}`);
   }
@@ -31,10 +31,10 @@ function loggerClearUser() {
   Logger.clearUser();
 }
 
-function loggerSetUser({ userId, username, fullName }) {
+function loggerSetUser({ userId, username, fullName, patient }) {
   try {
-    const { NativeNotifications } = NativeModules;
-    NativeNotifications.setUser(userId, username, fullName);
+    const { TPNative } = NativeModules;
+    TPNative.setUser(userId, username, fullName, !!patient);
   } catch (error) {
     // console.log(`error: ${error}`);
   }

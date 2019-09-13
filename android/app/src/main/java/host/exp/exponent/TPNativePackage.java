@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class NativeNotificationsPackage implements ReactPackage {
+public class TPNativePackage implements ReactPackage {
 
   @Override
   public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
@@ -20,7 +20,7 @@ public class NativeNotificationsPackage implements ReactPackage {
   public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
     List<NativeModule> modules = new ArrayList<>();
 
-    modules.add(new NativeNotificationsModule(reactContext));
+    modules.add(new TPNativeModule(reactContext));
 
     return modules;
   }
