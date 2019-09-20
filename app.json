@@ -17,7 +17,7 @@
       "iosExpoViewUrl": "https://s3.amazonaws.com/exp-exponent-view-code/ios-v2.12.1-sdk34.0.0-9686ec09-2f6b-4b44-871d-c55a277381dd.tar.gz",
       "androidExpoViewUrl": "https://s3.amazonaws.com/exp-exponent-view-code/android-v2.12.0-sdk34.0.0-997916d4-13c2-4ac7-a0cd-6df1b280bc3c.tar.gz"
     },
-    "scheme": "exp0815d1104db745568824ac69a998de27",
+    "scheme": "exp",
     "ios": {
       "bundleIdentifier": "org.tidepool.blipnotesRN",
       "icon": "./assets/images/Icon-App-512x512@2x.png",

@@ -2,6 +2,13 @@ const NAVIGATE_LAUNCH = "NAVIGATE_LAUNCH";
 const NAVIGATE_HOME = "NAVIGATE_HOME";
 const NAVIGATE_SIGN_IN = "NAVIGATE_SIGN_IN";
 const NAVIGATE_SIGN_UP = "NAVIGATE_SIGN_UP";
+const NAVIGATE_SIGN_UP_CREATE_ACCOUNT_CLINICIAN = "NAVIGATE_SIGN_UP_CREATE_ACCOUNT_CLINICIAN";
+const NAVIGATE_SIGN_UP_CREATE_ACCOUNT_PERSONAL = "NAVIGATE_SIGN_UP_CREATE_ACCOUNT_PERSONAL";
+const NAVIGATE_SIGN_UP_CLINICIAN_SETUP = "NAVIGATE_SIGN_UP_CLINICIAN_SETUP";
+const NAVIGATE_SIGN_UP_TERMS_OF_USE = "NAVIGATE_SIGN_UP_TERMS_OF_USE";
+const NAVIGATE_SIGN_UP_DIABETES_DETAILS = "NAVIGATE_SIGN_UP_DIABETES_DETAILS";
+const NAVIGATE_SIGN_UP_DONATE_DATA = "NAVIGATE_SIGN_UP_DONATE_DATA";
+const NAVIGATE_SIGN_UP_ACTIVATE_ACCOUNT = "NAVIGATE_SIGN_UP_ACTIVATE_ACCOUNT";
 const NAVIGATE_FORGOT_PASSWORD = "NAVIGATE_FORGOT_PASSWORD";
 const NAVIGATE_HOW_TO_UPLOAD = "NAVIGATE_HOW_TO_UPLOAD";
 const NAVIGATE_SWITCH_PROFILE = "NAVIGATE_SWITCH_PROFILE";
@@ -30,6 +37,34 @@ function navigateSignIn() {
 
 function navigateSignUp() {
   return { type: NAVIGATE_SIGN_UP };
+}
+
+function navigateSignUpCreateAccountClinician() {
+  return { type: NAVIGATE_SIGN_UP_CREATE_ACCOUNT_CLINICIAN };
+}
+
+function navigateSignUpCreateAccountPersonal() {
+  return { type: NAVIGATE_SIGN_UP_CREATE_ACCOUNT_PERSONAL };
+}
+
+function navigateSignUpClinicianSetup() {
+  return { type: NAVIGATE_SIGN_UP_CLINICIAN_SETUP };
+}
+
+function navigateSignUpTermsOfUse() {
+  return { type: NAVIGATE_SIGN_UP_TERMS_OF_USE };
+}
+
+function navigateSignUpDiabetesDetails() {
+  return { type: NAVIGATE_SIGN_UP_DIABETES_DETAILS };
+}
+
+function navigateSignUpDonateData() {
+  return { type: NAVIGATE_SIGN_UP_DONATE_DATA };
+}
+
+function navigateSignUpActivateAccount() {
+  return { type: NAVIGATE_SIGN_UP_ACTIVATE_ACCOUNT };
 }
 
 function navigateForgotPassword() {
@@ -92,6 +127,13 @@ export {
   navigateHome,
   navigateSignIn,
   navigateSignUp,
+  navigateSignUpCreateAccountClinician,
+  navigateSignUpCreateAccountPersonal,
+  navigateSignUpClinicianSetup,
+  navigateSignUpTermsOfUse,
+  navigateSignUpDiabetesDetails,
+  navigateSignUpDonateData,
+  navigateSignUpActivateAccount,
   navigateForgotPassword,
   navigateHowToUpload,
   navigateSwitchProfile,
@@ -109,6 +151,13 @@ export {
   NAVIGATE_HOME,
   NAVIGATE_SIGN_IN,
   NAVIGATE_SIGN_UP,
+  NAVIGATE_SIGN_UP_CREATE_ACCOUNT_CLINICIAN,
+  NAVIGATE_SIGN_UP_CREATE_ACCOUNT_PERSONAL,
+  NAVIGATE_SIGN_UP_CLINICIAN_SETUP,
+  NAVIGATE_SIGN_UP_TERMS_OF_USE,
+  NAVIGATE_SIGN_UP_DIABETES_DETAILS,
+  NAVIGATE_SIGN_UP_DONATE_DATA,
+  NAVIGATE_SIGN_UP_ACTIVATE_ACCOUNT,
   NAVIGATE_FORGOT_PASSWORD,
   NAVIGATE_HOW_TO_UPLOAD,
   NAVIGATE_SWITCH_PROFILE,

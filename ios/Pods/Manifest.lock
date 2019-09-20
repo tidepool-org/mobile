@@ -50,6 +50,9 @@ PODS:
     - UMCore
     - UMPermissionsInterface
     - UMTaskManagerInterface
+  - EXMailComposer (6.0.0):
+    - UMCore
+    - UMFileSystemInterface
   - EXPermissions (6.0.0):
     - UMCore
     - UMPermissionsInterface
@@ -223,6 +226,7 @@ DEPENDENCIES:
   - EXKeepAwake (from `../node_modules/expo-keep-awake/ios`)
   - EXLinearGradient (from `../node_modules/expo-linear-gradient/ios`)
   - EXLocation (from `../node_modules/expo-location/ios`)
+  - EXMailComposer (from `../node_modules/expo-mail-composer/ios`)
   - EXPermissions (from `../node_modules/expo-permissions/ios`)
   - ExpoKit/Core (from `http://github.com/expo/expo.git`, tag `ios/2.12.1`)
   - EXWebBrowser (from `../node_modules/expo-web-browser/ios`)
@@ -315,6 +319,9 @@ EXTERNAL SOURCES:
   EXLocation:
     :path: !ruby/object:Pathname
     path: "../node_modules/expo-location/ios"
+  EXMailComposer:
+    :path: !ruby/object:Pathname
+    path: "../node_modules/expo-mail-composer/ios"
   EXPermissions:
     :path: !ruby/object:Pathname
     path: "../node_modules/expo-permissions/ios"
@@ -404,6 +411,7 @@ SPEC CHECKSUMS:
   EXKeepAwake: e7cb6516675052b12a7d23291e33078b4239653a
   EXLinearGradient: 40781b77e58f844c8dc4ad310dc9755b4d3792a7
   EXLocation: 4eb76115832f08b1e78003b335c210e18fa60424
+  EXMailComposer: 801ebd0bfd0c6e743a69102168b35b00efa67277
   EXPermissions: 99e52dc3e5f8e55153f1958004f6df2a30a1f2f5
   ExpoKit: 2ea6908bcbf5e705ca6c37370718c07c9677ef15
   EXWebBrowser: def838b95aa9d396f9ce71ace4e614ee16e7ee30
@@ -441,6 +449,6 @@ SPEC CHECKSUMS:
   UMTaskManagerInterface: 8664abd37a00715727e60df9ecd65e42ba47b548
   yoga: 92b2102c3d373d1a790db4ab761d2b0ffc634f64
 
-PODFILE CHECKSUM: 387baebfac2091087ee426dcd685042274544cfb
+PODFILE CHECKSUM: 38ac69557f3b9ca68d6e267abc9dd64844278fa2
 
 COCOAPODS: 1.7.5

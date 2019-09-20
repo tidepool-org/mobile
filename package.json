@@ -25,14 +25,22 @@
     "expo-gl": "6.0.0",
     "expo-keep-awake": "6.0.0",
     "expo-linear-gradient": "6.0.0",
+    "expo-mail-composer": "6.0.0",
     "expo-three": "4.0.4",
     "expokit": "34.0.2",
+    "formik": "^1.5.8",
     "glamorous-native": "1.4.2",
+    "native-base": "^2.12.1",
     "prop-types": "15.7.2",
     "react": "16.8.3",
     "react-native": "https://github.com/expo/react-native/archive/sdk-34.0.1.tar.gz",
+    "react-native-datepicker": "^1.7.2",
     "react-native-device-info": "2.3.1",
+    "react-native-email-link": "1.4.0",
+    "react-native-hr-component": "^2.0.2",
     "react-native-local-mongodb": "2.2.9",
+    "react-native-picker-select": "^6.3.0",
+    "react-native-switch": "^1.5.0",
     "react-native-walkthrough-tooltip": "0.5.3",
     "react-navigation": "2.0.4",
     "react-navigation-redux-helpers": "1.1.2",
@@ -64,7 +72,7 @@
     "eslint-plugin-prettier": "3.1.0",
     "eslint-plugin-react": "7.14.3",
     "eslint-plugin-react-native": "3.7.0",
-    "expo-cli": "3.0.9",
+    "expo-cli": "3.0.10",
     "faker": "4.1.0",
     "flow-bin": "0.105.2",
     "jest-expo": "34.0.0",
@@ -100,6 +108,5 @@
     "setupFilesAfterEnv": [
       "./jest-setupTestFramework.js"
     ]
-  },
-  "private": true
+  }
 }

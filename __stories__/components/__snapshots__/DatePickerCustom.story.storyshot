@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots DatePickerCustom default 1`] = `
+<RCTSafeAreaView
+  emulateUnlessSupported={true}
+  paddingTop={0}
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignSelf": "center",
+        "borderWidth": 1,
+        "margin": 5,
+        "padding": 5,
+      }
+    }
+  >
+    <View>
+      <Text>
+        DatePickerCustom
+      </Text>
+    </View>
+  </View>
+</RCTSafeAreaView>
+`;
