@@ -55,6 +55,8 @@ import {
   NAVIGATE_GO_BACK,
 } from "../actions/navigation";
 
+const useInAppSignUp = false;
+
 const shouldIgnoreNextNavigate = ({ nextState, state }) => {
   // Prevent double navigation for some routes (e.g. when tapping UI elements that cause navigation quickly)
   // TODO: Revisit this. It's kind of hacky / fragile
@@ -136,10 +138,14 @@ function navigation(state = initialState, action) {
       );
       break;
     case NAVIGATE_SIGN_UP:
-      nextState = AppNavigator.router.getStateForAction(
-        NavigationActions.navigate({ routeName: SIGN_UP_ROUTE_NAME }),
-        state
-      );
+      if (useInAppSignUp) {
+        nextState = AppNavigator.router.getStateForAction(
+          NavigationActions.navigate({ routeName: SIGN_UP_ROUTE_NAME }),
+          state
+        );
+      } else {
+        Linking.openURL(Urls.signUp);
+      }
       break;
     case NAVIGATE_SIGN_UP_CREATE_ACCOUNT_CLINICIAN:
       nextState = AppNavigator.router.getStateForAction(
