@@ -264,7 +264,6 @@ dependencies {
         'expo-local-authentication',
         'expo-localization',
         // 'expo-location', // Need to keep this for now since there's a runtime dependency on it (even though we don't use it)
-        'expo-mail-composer',
         'expo-media-library',
         'expo-print',
         'expo-random',

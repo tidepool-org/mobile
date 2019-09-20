@@ -12,7 +12,7 @@
     - [Bugs and Hotfixes](#bugs-and-hotfixes)
     - [Using Storybook](#using-storybook)
     - [Testing](#testing)
-    - [Get in ouch with Us](#get-in-touch-with-us)
+    - [Get in Touch with Us](#get-in-touch-with-us)
 - [Available npm scripts](#available-npm-scripts)
   - [yarn run prestorybook](#yarn-run-prestorybook)
   - [yarn run pre](#yarn-run-pre)
@@ -58,7 +58,7 @@ Clone this repo, then from inside the repo directory, execute `yarn install` to 
 For feature development we use [git-flow](https://nvie.com/posts/a-successful-git-branching-model/). If you are not familiar with git-flow, please take a few minutes to read that document. This is not to be confused with GitHub flow which is significantly different. If you are interested in knowing more about the differences, check out [this article](https://githubflow.github.io) written by Github.
 
 
-When developing a new feature using git-flow the process will look something like this: 
+When developing a new feature using git-flow the process will look something like this:
 - branch off from the `develop` branch
 - write, lint, and test feature
 - submit a pull request
@@ -73,9 +73,9 @@ When developing a new feature using git-flow the process will look something lik
 
 ### Using Storybook
 
-[storybook.js](https://storybook.js.org) is an open source tool for developing UI components in isolation. In short it allows you to look at an individual component in a story without having to render the entire application. For example, if you are working on a UI feature that only appears on a screen that you have to click through the application to get to, rather than having to navigate to that screen each time, you can write a story for the UI and do most of your work only refreshing the story enabling you to work much faster. 
+[storybook.js](https://storybook.js.org) is an open source tool for developing UI components in isolation. In short it allows you to look at an individual component in a story without having to render the entire application. For example, if you are working on a UI feature that only appears on a screen that you have to click through the application to get to, rather than having to navigate to that screen each time, you can write a story for the UI and do most of your work only refreshing the story enabling you to work much faster.
 
-Refer to existing stories to see the software pattern we use for creating stories and be sure to run `yarn run prestorybook` after creating a new story, otherwise the application doesn't know to look for it and you won't be able to see it rendered. 
+Refer to existing stories to see the software pattern we use for creating stories and be sure to run `yarn run prestorybook` after creating a new story, otherwise the application doesn't know to look for it and you won't be able to see it rendered.
 
 To switch back-and-forth between Storybook and non-storybook while developing a feature, we have built scripts to swap the entry point quickly by executing `yarn run prestorybook` (to switch to Storybook) or `yarn run pre` (to switch to non-Storybook). This just switches the entry point for the app and should auto-reload (via Live Reload) in each connected Expo app.
 
@@ -84,11 +84,11 @@ To switch back-and-forth between Storybook and non-storybook while developing a 
 
 Linting locally: `npx eslint src/ --max-warnings 0`
 
-Testing with specified timezones (and updating storybook stories and storyshots): 
+Testing with specified timezones (and updating storybook stories and storyshots):
 `TZ=America/Chicago yarn run prestorybook`
 `TZ=America/Chicago yarn test`
 `TZ=America/Chicago yarn test -u`
-`TZ=America/Chicago yarn test --forceExit --silent` 
+`TZ=America/Chicago yarn test --forceExit --silent`
 
 There is specific logic around running the tests with the Chicago timezone distinction, but for the moment I'm not going to break it down here, just please trust me in that this will make it easiest for us to review and merge feature branches.
 

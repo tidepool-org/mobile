@@ -101,7 +101,7 @@ const props = {
   graphRenderer,
 };
 
-// TODO: stories - There are leyboard issues with on device UI for storybook
+// TODO: stories - There are keyboard issues with on device UI for storybook
 // with this screen. The timer that shows the keyboard after screen is shown
 // doesn't play nicely with the component rendering and navigator for storybook.
 // Temporarily disabling these for now. They could be re-enabled (and the

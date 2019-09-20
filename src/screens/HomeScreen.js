@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Alert, StatusBar } from "react-native";
 import glamorous, { ThemeProvider } from "glamorous-native";
-import { MailComposer } from "expo";
+import * as MailComposer from "expo-mail-composer";
 
 import PrimaryTheme from "../themes/PrimaryTheme";
 import Colors from "../constants/Colors";
@@ -82,9 +82,9 @@ class HomeScreen extends PureComponent {
     }
   };
 
-  onPressTooltipEmailLink = () => {
+  onPressTooltipEmailLink = async () => {
     Metrics.track({ metric: "Clicked email a link" });
-    this.composeEmailWithDesktopUploaderLink();
+    await this.composeEmailWithDesktopUploaderLink();
     this.hideTipIfNeeded();
   };
 
@@ -101,7 +101,8 @@ class HomeScreen extends PureComponent {
       await MailComposer.composeAsync({
         subject: "How to set up the Tidepool Uploader",
         body:
-          "Please go to the following link on your computer to learn about setting up the Tidepool Uploader: http://support.tidepool.org/article/6-how-to-install-or-update-the-tidepool-uploader-gen",
+          "Please go to the following link on your computer to learn about setting up the Tidepool Uploader: https://support.tidepool.org/hc/en-us/articles/360019872871-How-to-use-the-Tidepool-Uploader",
+
         recipients: [currentUserEmail],
       });
     } catch (error) {
