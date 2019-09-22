@@ -101,5 +101,7 @@
 	<string>Give Tidepool permission to access your photos</string>
 	<key>NSRemindersUsageDescription</key>
 	<string>Allow Tidepool to access your reminders</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 </dict>
 </plist>
