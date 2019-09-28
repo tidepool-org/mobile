@@ -7,13 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4D8027D021E4176B003C8B10 /* NativeNotifications.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D8027CF21E4176B003C8B10 /* NativeNotifications.m */; };
+		4D08D6872313472A00CBB2F7 /* TPNative.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D08D68323133B0F00CBB2F7 /* TPNative.swift */; };
+		4D08D68923134E8800CBB2F7 /* TPNativeBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D08D68823134E8800CBB2F7 /* TPNativeBridge.m */; };
+		4D0DF5FA23247D41004F6ED6 /* TPSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0DF5F923247D41004F6ED6 /* TPSettings.swift */; };
+		4D0DF5FC2328BB8E004F6ED6 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D0DF5FB2328BB8E004F6ED6 /* HealthKit.framework */; };
 		4D8027D321E417D2003C8B10 /* LaunchScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D8027D221E417D2003C8B10 /* LaunchScreen.m */; };
 		4D8027D621E41806003C8B10 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D8027D421E41806003C8B10 /* LaunchScreen.storyboard */; };
+		4DFFF0712314B8F70007E093 /* TPUploaderAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFFF0702314B8F70007E093 /* TPUploaderAPI.swift */; };
+		4DFFF0762314BB110007E093 /* TPApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFFF0742314BB110007E093 /* TPApi.swift */; };
+		4DFFF0772314BB110007E093 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFFF0752314BB110007E093 /* Reachability.swift */; };
+		4DFFF0792314C9BA0007E093 /* TPDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFFF0722314B9950007E093 /* TPDataController.swift */; };
+		4DFFF07E231D887C0007E093 /* TPAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFFF07A231D6C640007E093 /* TPAppDelegate.swift */; };
 		B501732B1DC01252003445D9 /* EXShell.plist in Resources */ = {isa = PBXBuildFile; fileRef = B501732A1DC01252003445D9 /* EXShell.plist */; };
-		B56386491DB9693800A0598C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B56386481DB9693800A0598C /* AppDelegate.m */; };
 		B56386511DB9693800A0598C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B56386501DB9693800A0598C /* Assets.xcassets */; };
-		B56386611DB96A5E00A0598C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B563865E1DB96A5E00A0598C /* main.m */; };
 		B56386671DB9994300A0598C /* EXSDKVersions.plist in Resources */ = {isa = PBXBuildFile; fileRef = B56386661DB9994300A0598C /* EXSDKVersions.plist */; };
 		B5CFBF4F1EDE419400B4BE24 /* EXBuildConstants.plist in Resources */ = {isa = PBXBuildFile; fileRef = B5CFBF4E1EDE419400B4BE24 /* EXBuildConstants.plist */; };
 		B5DB04801F3A684600E91581 /* shell-app-manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = B5DB047E1F3A684600E91581 /* shell-app-manifest.json */; };
@@ -23,19 +29,25 @@
 
 /* Begin PBXFileReference section */
 		2C1548D9E4CB1AEFA5CCAE6D /* Pods-Tidepool.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tidepool.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tidepool/Pods-Tidepool.debug.xcconfig"; sourceTree = "<group>"; };
-		4D8027CE21E4176A003C8B10 /* NativeNotifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NativeNotifications.h; sourceTree = "<group>"; };
-		4D8027CF21E4176B003C8B10 /* NativeNotifications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NativeNotifications.m; sourceTree = "<group>"; };
+		4D08D68023133AB200CBB2F7 /* Tidepool-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tidepool-Bridging-Header.h"; sourceTree = "<group>"; };
+		4D08D68323133B0F00CBB2F7 /* TPNative.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TPNative.swift; sourceTree = "<group>"; };
+		4D08D68823134E8800CBB2F7 /* TPNativeBridge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TPNativeBridge.m; sourceTree = "<group>"; };
+		4D0DF5F923247D41004F6ED6 /* TPSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TPSettings.swift; sourceTree = "<group>"; };
+		4D0DF5FB2328BB8E004F6ED6 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
+		4D0DF5FD2328BB8E004F6ED6 /* Tidepool.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Tidepool.entitlements; sourceTree = "<group>"; };
 		4D8027D121E417D2003C8B10 /* LaunchScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchScreen.h; sourceTree = "<group>"; };
 		4D8027D221E417D2003C8B10 /* LaunchScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchScreen.m; sourceTree = "<group>"; };
 		4D8027D521E41806003C8B10 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		4DFFF0702314B8F70007E093 /* TPUploaderAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TPUploaderAPI.swift; sourceTree = "<group>"; };
+		4DFFF0722314B9950007E093 /* TPDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TPDataController.swift; sourceTree = "<group>"; };
+		4DFFF0742314BB110007E093 /* TPApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TPApi.swift; sourceTree = "<group>"; };
+		4DFFF0752314BB110007E093 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		4DFFF07A231D6C640007E093 /* TPAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TPAppDelegate.swift; sourceTree = "<group>"; };
 		A47FE4D7F70906B7DC8CE39B /* Pods-Tidepool.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tidepool.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tidepool/Pods-Tidepool.release.xcconfig"; sourceTree = "<group>"; };
 		B501732A1DC01252003445D9 /* EXShell.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = EXShell.plist; sourceTree = "<group>"; };
 		B56386411DB9693800A0598C /* Tidepool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tidepool.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		B56386471DB9693800A0598C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		B56386481DB9693800A0598C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		B56386501DB9693800A0598C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B563865C1DB96A5E00A0598C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B563865E1DB96A5E00A0598C /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B56386661DB9994300A0598C /* EXSDKVersions.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = EXSDKVersions.plist; sourceTree = "<group>"; };
 		B5CFBF4E1EDE419400B4BE24 /* EXBuildConstants.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = EXBuildConstants.plist; sourceTree = "<group>"; };
 		B5DB047E1F3A684600E91581 /* shell-app-manifest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "shell-app-manifest.json"; sourceTree = "<group>"; };
@@ -49,6 +61,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EBB8117C1BFA0514F79CAF74 /* libPods-Tidepool.a in Frameworks */,
+				4D0DF5FC2328BB8E004F6ED6 /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,6 +71,7 @@
 		1A42804E64B7E9E0AB8B6799 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4D0DF5FB2328BB8E004F6ED6 /* HealthKit.framework */,
 				C4A88D15726AD99E8A257BC7 /* libPods-Tidepool.a */,
 			);
 			name = Frameworks;
@@ -93,12 +107,17 @@
 		B56386431DB9693800A0598C /* Tidepool */ = {
 			isa = PBXGroup;
 			children = (
-				B56386471DB9693800A0598C /* AppDelegate.h */,
-				B56386481DB9693800A0598C /* AppDelegate.m */,
-				4D8027CE21E4176A003C8B10 /* NativeNotifications.h */,
-				4D8027CF21E4176B003C8B10 /* NativeNotifications.m */,
+				4D0DF5FD2328BB8E004F6ED6 /* Tidepool.entitlements */,
+				4DFFF07A231D6C640007E093 /* TPAppDelegate.swift */,
+				4DFFF0742314BB110007E093 /* TPApi.swift */,
+				4DFFF0722314B9950007E093 /* TPDataController.swift */,
+				4D08D68323133B0F00CBB2F7 /* TPNative.swift */,
+				4D08D68823134E8800CBB2F7 /* TPNativeBridge.m */,
+				4D0DF5F923247D41004F6ED6 /* TPSettings.swift */,
+				4DFFF0702314B8F70007E093 /* TPUploaderAPI.swift */,
 				B56386501DB9693800A0598C /* Assets.xcassets */,
 				B563865B1DB96A5E00A0598C /* Supporting */,
+				4D08D68023133AB200CBB2F7 /* Tidepool-Bridging-Header.h */,
 			);
 			path = Tidepool;
 			sourceTree = "<group>";
@@ -106,11 +125,11 @@
 		B563865B1DB96A5E00A0598C /* Supporting */ = {
 			isa = PBXGroup;
 			children = (
-				B563865E1DB96A5E00A0598C /* main.m */,
 				B563865C1DB96A5E00A0598C /* Info.plist */,
 				4D8027D121E417D2003C8B10 /* LaunchScreen.h */,
 				4D8027D221E417D2003C8B10 /* LaunchScreen.m */,
 				4D8027D421E41806003C8B10 /* LaunchScreen.storyboard */,
+				4DFFF0752314BB110007E093 /* Reachability.swift */,
 				B5DB047E1F3A684600E91581 /* shell-app-manifest.json */,
 				B5DB047F1F3A684600E91581 /* shell-app.bundle */,
 				B5CFBF4E1EDE419400B4BE24 /* EXBuildConstants.plist */,
@@ -157,7 +176,13 @@
 					B56386401DB9693800A0598C = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = 75U4X84TEG;
+						LastSwiftMigration = 1030;
 						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.HealthKit = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -300,9 +325,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				4D8027D321E417D2003C8B10 /* LaunchScreen.m in Sources */,
-				B56386611DB96A5E00A0598C /* main.m in Sources */,
-				B56386491DB9693800A0598C /* AppDelegate.m in Sources */,
-				4D8027D021E4176B003C8B10 /* NativeNotifications.m in Sources */,
+				4D08D6872313472A00CBB2F7 /* TPNative.swift in Sources */,
+				4D08D68923134E8800CBB2F7 /* TPNativeBridge.m in Sources */,
+				4D0DF5FA23247D41004F6ED6 /* TPSettings.swift in Sources */,
+				4DFFF07E231D887C0007E093 /* TPAppDelegate.swift in Sources */,
+				4DFFF0772314BB110007E093 /* Reachability.swift in Sources */,
+				4DFFF0712314B8F70007E093 /* TPUploaderAPI.swift in Sources */,
+				4DFFF0792314C9BA0007E093 /* TPDataController.swift in Sources */,
+				4DFFF0762314BB110007E093 /* TPApi.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,6 +457,8 @@
 			baseConfigurationReference = 2C1548D9E4CB1AEFA5CCAE6D /* Pods-Tidepool.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Tidepool/Tidepool.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 75U4X84TEG;
@@ -434,7 +466,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "$(SRCROOT)/Tidepool/Supporting/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_CFLAGS = "$(inherited)";
@@ -442,6 +474,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.tidepool.blipnotesRN;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "org.tidepool.blipnotesRN AppStore";
+				SWIFT_OBJC_BRIDGING_HEADER = "Tidepool/Tidepool-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -451,6 +486,8 @@
 			baseConfigurationReference = A47FE4D7F70906B7DC8CE39B /* Pods-Tidepool.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Tidepool/Tidepool.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 75U4X84TEG;
@@ -458,7 +495,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "$(SRCROOT)/Tidepool/Supporting/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_CFLAGS = "$(inherited)";
@@ -466,6 +503,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.tidepool.blipnotesRN;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "org.tidepool.blipnotesRN AppStore";
+				SWIFT_OBJC_BRIDGING_HEADER = "Tidepool/Tidepool-Bridging-Header.h";
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

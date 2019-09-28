@@ -79,6 +79,10 @@
 	<false/>
 	<key>EXAnalyticsDisabled</key>
 	<true/>
+	<key>NSHealthShareUsageDescription</key>
+	<string>Tidepool reads diabetes data (blood glucose, nutrition, insulin, etc) from Health so you can view that data in Tidepool.</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>Tidepool writes diabetes data to HealthKit so you can view data you‘ve uploaded to Tidepool using other apps on your iPhone.</string>
 	<key>NSCalendarsUsageDescription</key>
 	<string>Allow Tidepool to access your calendar</string>
 	<key>NSCameraUsageDescription</key>
@@ -90,12 +94,14 @@
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Allow Tidepool to access your microphone</string>
 	<key>NSMotionUsageDescription</key>
-	<string>Allow Tidepool to access your device's accelerometer</string>
+	<string>Allow Tidepool to access your device&apos;s accelerometer</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Give Tidepool permission to save photos</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Give Tidepool permission to access your photos</string>
 	<key>NSRemindersUsageDescription</key>
 	<string>Allow Tidepool to access your reminders</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 </dict>
 </plist>

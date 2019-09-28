@@ -3,8 +3,8 @@ import { Animated, Easing } from "react-native";
 import { createStackNavigator } from "react-navigation";
 
 import LaunchScreen from "../screens/LaunchScreen";
-import SignInScreenContainer from "../containers/SignInScreenContainer";
-import MainDrawerNavigator from "./MainDrawerNavigator";
+import { MainDrawerNavigator } from "./MainDrawerNavigator";
+import { SignInNavigator } from "./SignInNavigator";
 import DebugSettingsScreenContainer from "../containers/DebugSettingsScreenContainer";
 import {
   LAUNCH_ROUTE_NAME,
@@ -13,7 +13,7 @@ import {
   MAIN_DRAWER_ROUTE_NAME,
 } from "./routeNames";
 
-const noTransitionConfig = () => ({
+const transitionConfig = () => ({
   transitionSpec: {
     duration: 0,
     timing: Animated.timing,
@@ -27,7 +27,7 @@ const AppNavigator = createStackNavigator(
       screen: LaunchScreen,
     },
     [SIGN_IN_ROUTE_NAME]: {
-      screen: props => <SignInScreenContainer {...props} />,
+      screen: SignInNavigator,
     },
     [DEBUG_SETTINGS_ROUTE_NAME]: {
       screen: () => <DebugSettingsScreenContainer />,
@@ -38,7 +38,7 @@ const AppNavigator = createStackNavigator(
   },
   {
     headerMode: "none",
-    transitionConfig: noTransitionConfig,
+    transitionConfig,
   }
 );
 

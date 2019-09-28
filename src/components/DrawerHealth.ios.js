@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
-import PropTypes from "prop-types";
-import { ViewPropTypes, Switch } from "react-native";
+import { ViewPropTypes, Switch, NativeModules } from "react-native";
 import glamorous, { withTheme } from "glamorous-native";
+import Constants from "expo-constants";
 
 import Colors from "../constants/Colors";
 import Metrics from "../models/Metrics";
@@ -12,25 +12,55 @@ class DrawerHealth extends PureComponent {
     super(props);
     this.state = {
       connectToHealth: false,
+      shouldShowHealthKitUI: false,
     };
+  }
+
+  componentDidMount() {
+    if (Constants.appOwnership === "expo") {
+      this.setState({ shouldShowHealthKitUI: true });
+    } else {
+      try {
+        const { TPNative } = NativeModules;
+        const shouldShowHealthKitUI = TPNative.shouldShowHealthKitUI();
+        this.setState({ shouldShowHealthKitUI });
+      } catch (error) {
+        // console.log(`error: ${error}`);
+      }
+    }
   }
 
   onConnectToHealthValueChange = value => {
     if (value) {
+      try {
+        const { TPNative } = NativeModules;
+        TPNative.enableHealthKitInterface();
+      } catch (error) {
+        // console.log(`error: ${error}`);
+      }
+
       Metrics.track({ metric: "Connect to health on" });
     } else {
+      try {
+        const { TPNative } = NativeModules;
+        TPNative.disableHealthKitInterface();
+      } catch (error) {
+        // console.log(`error: ${error}`);
+      }
+
       Metrics.track({ metric: "Connect to health off" });
     }
     this.setState({ connectToHealth: value });
   };
 
   render() {
-    const { theme, style, currentUser } = this.props;
-    const { connectToHealth } = this.state;
+    const { connectToHealth, shouldShowHealthKitUI } = this.state;
 
-    if (!currentUser.patient) {
+    if (!shouldShowHealthKitUI) {
       return null;
     }
+
+    const { theme, style } = this.props;
 
     return (
       <glamorous.View style={style} height={80}>
@@ -57,7 +87,6 @@ class DrawerHealth extends PureComponent {
 DrawerHealth.propTypes = {
   theme: ThemePropType.isRequired,
   style: ViewPropTypes.style,
-  currentUser: PropTypes.object.isRequired,
 };
 
 DrawerHealth.defaultProps = {

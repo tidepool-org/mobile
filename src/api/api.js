@@ -43,8 +43,8 @@ const switchApiEnvironment = apiEnvironment => {
   Logger.updateRollbarWithConfig({ environment: apiEnvironment });
 
   try {
-    const { NativeNotifications } = NativeModules;
-    NativeNotifications.setEnvironment(apiEnvironment);
+    const { TPNative } = NativeModules;
+    TPNative.setEnvironment(apiEnvironment);
   } catch (error) {
     // console.log(`error: ${error}`);
   }

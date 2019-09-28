@@ -18,6 +18,14 @@ import {
   LAUNCH_ROUTE_NAME,
   MAIN_DRAWER_ROUTE_NAME,
   SIGN_IN_ROUTE_NAME,
+  SIGN_UP_ROUTE_NAME,
+  SIGN_UP_CREATE_ACCOUNT_CLINICIAN_ROUTE_NAME,
+  SIGN_UP_CREATE_ACCOUNT_PERSONAL_ROUTE_NAME,
+  SIGN_UP_CLINICIAN_SETUP_ROUTE_NAME,
+  SIGN_UP_TERMS_OF_USE_ROUTE_NAME,
+  SIGN_UP_DIABETES_DETAILS_ROUTE_NAME,
+  SIGN_UP_DONATE_DATA_ROUTE_NAME,
+  SIGN_UP_ACTIVATE_ACCOUNT_ROUTE_NAME,
   SWITCH_PROFILE_ROUTE_NAME,
 } from "../navigators/routeNames";
 import {
@@ -25,6 +33,13 @@ import {
   NAVIGATE_HOME,
   NAVIGATE_SIGN_IN,
   NAVIGATE_SIGN_UP,
+  NAVIGATE_SIGN_UP_CREATE_ACCOUNT_CLINICIAN,
+  NAVIGATE_SIGN_UP_CREATE_ACCOUNT_PERSONAL,
+  NAVIGATE_SIGN_UP_CLINICIAN_SETUP,
+  NAVIGATE_SIGN_UP_TERMS_OF_USE,
+  NAVIGATE_SIGN_UP_DIABETES_DETAILS,
+  NAVIGATE_SIGN_UP_DONATE_DATA,
+  NAVIGATE_SIGN_UP_ACTIVATE_ACCOUNT,
   NAVIGATE_FORGOT_PASSWORD,
   NAVIGATE_HOW_TO_UPLOAD,
   NAVIGATE_SWITCH_PROFILE,
@@ -39,6 +54,8 @@ import {
   NAVIGATE_DEBUG_SETTINGS,
   NAVIGATE_GO_BACK,
 } from "../actions/navigation";
+
+const useInAppSignUp = false;
 
 const shouldIgnoreNextNavigate = ({ nextState, state }) => {
   // Prevent double navigation for some routes (e.g. when tapping UI elements that cause navigation quickly)
@@ -120,6 +137,73 @@ function navigation(state = initialState, action) {
         state
       );
       break;
+    case NAVIGATE_SIGN_UP:
+      if (useInAppSignUp) {
+        nextState = AppNavigator.router.getStateForAction(
+          NavigationActions.navigate({ routeName: SIGN_UP_ROUTE_NAME }),
+          state
+        );
+      } else {
+        Linking.openURL(Urls.signUp);
+      }
+      break;
+    case NAVIGATE_SIGN_UP_CREATE_ACCOUNT_CLINICIAN:
+      nextState = AppNavigator.router.getStateForAction(
+        NavigationActions.navigate({
+          routeName: SIGN_UP_CREATE_ACCOUNT_CLINICIAN_ROUTE_NAME,
+        }),
+        state
+      );
+      break;
+
+    case NAVIGATE_SIGN_UP_CREATE_ACCOUNT_PERSONAL:
+      nextState = AppNavigator.router.getStateForAction(
+        NavigationActions.navigate({
+          routeName: SIGN_UP_CREATE_ACCOUNT_PERSONAL_ROUTE_NAME,
+        }),
+        state
+      );
+      break;
+    case NAVIGATE_SIGN_UP_CLINICIAN_SETUP:
+      nextState = AppNavigator.router.getStateForAction(
+        NavigationActions.navigate({
+          routeName: SIGN_UP_CLINICIAN_SETUP_ROUTE_NAME,
+        }),
+        state
+      );
+      break;
+    case NAVIGATE_SIGN_UP_TERMS_OF_USE:
+      nextState = AppNavigator.router.getStateForAction(
+        NavigationActions.navigate({
+          routeName: SIGN_UP_TERMS_OF_USE_ROUTE_NAME,
+        }),
+        state
+      );
+      break;
+    case NAVIGATE_SIGN_UP_DIABETES_DETAILS:
+      nextState = AppNavigator.router.getStateForAction(
+        NavigationActions.navigate({
+          routeName: SIGN_UP_DIABETES_DETAILS_ROUTE_NAME,
+        }),
+        state
+      );
+      break;
+    case NAVIGATE_SIGN_UP_DONATE_DATA:
+      nextState = AppNavigator.router.getStateForAction(
+        NavigationActions.navigate({
+          routeName: SIGN_UP_DONATE_DATA_ROUTE_NAME,
+        }),
+        state
+      );
+      break;
+    case NAVIGATE_SIGN_UP_ACTIVATE_ACCOUNT:
+      nextState = AppNavigator.router.getStateForAction(
+        NavigationActions.navigate({
+          routeName: SIGN_UP_ACTIVATE_ACCOUNT_ROUTE_NAME,
+        }),
+        state
+      );
+      break;
     case NAVIGATE_SWITCH_PROFILE:
       nextState = AppNavigator.router.getStateForAction(
         NavigationActions.navigate({ routeName: SWITCH_PROFILE_ROUTE_NAME }),
@@ -178,9 +262,6 @@ function navigation(state = initialState, action) {
       break;
     case NAVIGATE_FORGOT_PASSWORD:
       Linking.openURL(Urls.forgotPassword);
-      break;
-    case NAVIGATE_SIGN_UP:
-      Linking.openURL(Urls.signUp);
       break;
     case NAVIGATE_HOW_TO_UPLOAD:
       Linking.openURL(Urls.howToUpload);

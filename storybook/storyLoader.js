@@ -9,6 +9,9 @@ function loadStories() {
   require('../__stories__/components/AddOrEditCommentScreen.story');
   require('../__stories__/components/AddOrEditNoteScreen.story');
   require('../__stories__/components/Button.story');
+  require('../__stories__/components/ButtonWithHeaderAndLongText.story');
+  require('../__stories__/components/ButtonWithLongText.story');
+  require('../__stories__/components/DatePickerCustom.story');
   require('../__stories__/components/DebugSettings.story');
   require('../__stories__/components/Drawer.story');
   require('../__stories__/components/Graph.story');
@@ -25,6 +28,9 @@ function loadStories() {
   require('../__stories__/components/SearchBar.story');
   require('../__stories__/components/SignInForm.story');
   require('../__stories__/components/SignInScreen.story');
+  require('../__stories__/components/SignUpScreens.story');
+  require('../__stories__/components/SingleSelectCustom.story');
+  require('../__stories__/components/SwitchCustom.story');
   require('../__stories__/components/SwitchProfileScreen.story');
   require('../__stories__/components/VersionAndApiEnvironment.story');
   
@@ -35,6 +41,9 @@ const stories = [
   '../__stories__/components/AddOrEditCommentScreen.story',
   '../__stories__/components/AddOrEditNoteScreen.story',
   '../__stories__/components/Button.story',
+  '../__stories__/components/ButtonWithHeaderAndLongText.story',
+  '../__stories__/components/ButtonWithLongText.story',
+  '../__stories__/components/DatePickerCustom.story',
   '../__stories__/components/DebugSettings.story',
   '../__stories__/components/Drawer.story',
   '../__stories__/components/Graph.story',
@@ -51,6 +60,9 @@ const stories = [
   '../__stories__/components/SearchBar.story',
   '../__stories__/components/SignInForm.story',
   '../__stories__/components/SignInScreen.story',
+  '../__stories__/components/SignUpScreens.story',
+  '../__stories__/components/SingleSelectCustom.story',
+  '../__stories__/components/SwitchCustom.story',
   '../__stories__/components/SwitchProfileScreen.story',
   '../__stories__/components/VersionAndApiEnvironment.story',
   

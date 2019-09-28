@@ -43,7 +43,11 @@ class TidepoolApi {
     this.tasksInProgress += 1;
 
     const { sessionToken: previousSessionToken } = authUser;
-    const { sessionToken, userId, errorMessage } = await this.refreshTokenPromise({
+    const {
+      sessionToken,
+      userId,
+      errorMessage,
+    } = await this.refreshTokenPromise({
       sessionToken: previousSessionToken,
     })
       .then(response => ({
@@ -160,7 +164,7 @@ class TidepoolApi {
       return this.cache.fetchProfileSettingsAsync({ userId });
     }
 
-    return {  ...rest, errorMessage };
+    return { ...rest, errorMessage };
   }
 
   async fetchNotesAsync({ userId }) {
@@ -864,7 +868,13 @@ class TidepoolApi {
     });
   }
 
-  addCommentPromise({ currentUser, currentProfile, note, messageText, timestamp }) {
+  addCommentPromise({
+    currentUser,
+    currentProfile,
+    note,
+    messageText,
+    timestamp,
+  }) {
     const method = "post";
     const groupId = currentProfile.userId;
     const url = `/message/reply/${note.id}`;

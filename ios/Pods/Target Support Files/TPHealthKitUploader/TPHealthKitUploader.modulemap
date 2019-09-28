@@ -1,0 +1,6 @@
+module TPHealthKitUploader {
+  umbrella header "TPHealthKitUploader-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots ButtonWithLongText default 1`] = `
+<RCTSafeAreaView
+  emulateUnlessSupported={true}
+  paddingTop={0}
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignSelf": "center",
+        "borderWidth": 1,
+        "margin": 5,
+        "padding": 5,
+      }
+    }
+  >
+    <View
+      accessible={true}
+      isTVSelectable={true}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "backgroundColor": "#f9f9f9",
+              "borderColor": "#ededed",
+              "borderRadius": 4,
+              "borderWidth": 1,
+              "elevation": 4,
+              "marginVertical": 8,
+              "minHeight": 43,
+              "overflow": "hidden",
+            },
+            null,
+          ]
+        }
+      >
+        <Text
+          allowFontScaling={false}
+          disabled={false}
+          style={
+            Array [
+              Array [
+                undefined,
+                null,
+              ],
+              Object {
+                "color": "#4f6a92",
+                "flexWrap": "wrap",
+                "fontSize": 16,
+                "fontWeight": "500",
+                "marginBottom": 11,
+                "marginLeft": 16,
+                "marginRight": 52,
+                "marginTop": 11,
+              },
+            ]
+          }
+        >
+          This is for me, I have diabetes
+        </Text>
+      </View>
+    </View>
+  </View>
+</RCTSafeAreaView>
+`;

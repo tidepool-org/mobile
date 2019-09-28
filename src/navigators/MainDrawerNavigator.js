@@ -18,4 +18,4 @@ const MainDrawerNavigator = createDrawerNavigator(
   }
 );
 
-export default MainDrawerNavigator;
+export { MainDrawerNavigator };
