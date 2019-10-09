@@ -8,7 +8,7 @@ import {
   DEFAULT_LOW_BG_BOUNDARY_VALUE,
   DEFAULT_HIGH_BG_BOUNDARY_VALUE,
 } from "../components/Graph/helpers";
-import Logger from "../models/Logger";
+import { Logger } from "../models/Logger";
 
 const defaultProfileSettings = {
   lowBGBoundary: DEFAULT_LOW_BG_BOUNDARY_VALUE,

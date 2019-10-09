@@ -6,7 +6,7 @@ import glamorous, { withTheme } from "glamorous-native";
 // TODO: When touching anywhere outside the SearchBar, should dismiss keyboard
 // TODO: Add the auto show/hide of SearchBar, similar to Tidepool Mobile app
 
-import Metrics from "../models/Metrics";
+import { Metrics } from "../models/Metrics";
 import { ThemePropType } from "../prop-types/theme";
 
 class SearchBar extends PureComponent {

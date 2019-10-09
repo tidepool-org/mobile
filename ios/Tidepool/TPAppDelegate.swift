@@ -14,11 +14,15 @@
  */
 
 import UIKit
+import CocoaLumberjack
 
-@UIApplicationMain
+var fileLogger: DDFileLogger!
+
 class TPAppDelegate: EXStandaloneAppDelegate {
     override func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool
     {
+        DDLogVerbose("trace")
+
         let result = super.application(application, didFinishLaunchingWithOptions: launchOptions)
 
         RollbarReactNative.initWithAccessToken("00788919100a467e8fb08144b427890e")

@@ -1,5 +1,5 @@
 import getRouteName from "./getRouteName";
-// import Logger from "../models/Logger";
+// import { Logger } from "../models/Logger";
 
 const isCurrentRoute = (targetRouteName, { navigation }) => {
   let result = false;

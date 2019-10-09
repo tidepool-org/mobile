@@ -2,7 +2,7 @@ import { THREE } from "expo-three";
 
 import GraphRenderLayerGl from "./GraphRenderLayerGl";
 import { convertHexColorStringToInt } from "../helpers";
-// import Logger from "../../../models/Logger";
+// import { Logger } from "../../../models/Logger";
 
 class GraphBasalGl extends GraphRenderLayerGl {
   constructor(props) {

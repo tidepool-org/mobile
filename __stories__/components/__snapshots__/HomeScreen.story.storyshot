@@ -108,603 +108,803 @@ exports[`Storyshots HomeScreen default 1`] = `
         data={
           Array [
             Object {
+              "groupId": "groupId",
               "id": "0",
               "messageText": "Quis molestiae tempora eligendi omnis quisquam quisquam quos. Dolor voluptatibus velit nobis culpa deleniti. Reprehenderit in nisi et. Quia odio et inventore eligendi in deserunt id. Sit odio quia vitae provident quo provident molestiae. #exercise #meal",
               "timestamp": 2015-07-28T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "1",
               "messageText": "Pariatur quos est quod laborum. Quisquam esse quia expedita commodi. Tempora ut exercitationem doloribus harum. Sunt omnis et accusantium et quia quos sequi molestiae. Enim necessitatibus molestiae. #exercise #meal",
               "timestamp": 2015-07-27T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "2",
               "messageText": "Eligendi rerum excepturi et laudantium fuga similique fugit corporis voluptatem. Esse nobis et sint magnam aut. Dolores maiores incidunt occaecati iusto laborum. Quia deleniti dolorem quibusdam id veniam perspiciatis et nisi. Corporis laboriosam esse. Soluta accusamus officiis ut excepturi blanditiis libero ut. #exercise #meal",
               "timestamp": 2015-07-26T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "3",
               "messageText": "Fuga enim tempore non voluptas quia vitae ipsam voluptas. Et dolor adipisci dolores sunt non explicabo occaecati rerum nesciunt. Sint est asperiores sit voluptatum mollitia enim iste. Nesciunt minima sequi voluptas optio aut voluptatem. Eligendi voluptates iste eius iure commodi molestiae. #exercise #meal",
               "timestamp": 2015-07-25T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "4",
               "messageText": "Quo ex reprehenderit ipsa incidunt corporis vel in unde. Iste asperiores consequatur ex quidem omnis inventore deserunt. Eligendi officiis voluptatem. In omnis labore consequatur nisi. Excepturi doloremque nam omnis odit labore magni rerum quia. Distinctio adipisci nulla exercitationem omnis illum. #exercise #meal",
               "timestamp": 2015-07-24T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "5",
               "messageText": "Eum cum ipsam consequatur ex accusamus ipsum. Eum inventore laboriosam deleniti omnis occaecati. Culpa occaecati nemo alias et doloribus expedita. Ut quia ut nostrum ducimus occaecati veniam ut exercitationem voluptatibus. Quaerat porro error sint aut aliquid qui. Minus officiis neque dolorem animi maiores et aliquid. #exercise #meal",
               "timestamp": 2015-07-23T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "6",
               "messageText": "Beatae et molestiae consequatur sed rerum qui voluptates unde. Explicabo accusantium exercitationem illum. Et similique illo blanditiis et facere rem quod molestias ab. Impedit aliquam quo vel dolorem consequatur. Consequatur quis nobis nemo asperiores nam ea aut consectetur. Corrupti necessitatibus quas optio ea odio sit odio. #exercise #meal",
               "timestamp": 2015-07-22T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "7",
               "messageText": "Id error ut dicta aut qui qui vel voluptatum. Ipsum molestiae inventore placeat nesciunt. Laboriosam facere odio beatae nobis vero quia. #exercise #meal",
               "timestamp": 2015-07-21T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "8",
               "messageText": "Voluptates molestiae magni beatae vitae atque eos. In vitae nihil accusamus natus et quia dolores. Dolores vel quis totam. Consequatur voluptas consequatur expedita omnis laudantium recusandae error culpa nihil. Quis porro voluptatem vel. Libero fugiat doloremque deserunt quidem totam aperiam tempore. #exercise #meal",
               "timestamp": 2015-07-20T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "9",
               "messageText": "Rem cumque quia delectus perspiciatis sunt. Inventore et officia. Facere assumenda excepturi sunt et aut corporis cumque quos distinctio. Ab quia autem consectetur occaecati nemo molestiae nisi temporibus soluta. Illo deleniti aut sit id quia. #exercise #meal",
               "timestamp": 2015-07-19T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "10",
               "messageText": "Placeat amet sed esse aut doloribus dolores ut ipsum. Nobis sint non sunt fuga laudantium ipsam quas quos ipsam. Quae dolores et quia explicabo ducimus labore ipsa consequatur. Saepe voluptate ipsa quis corporis. Voluptatibus vel ut non fuga. #exercise #meal",
               "timestamp": 2015-07-18T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "11",
               "messageText": "Sed atque repellendus. Iusto autem beatae aspernatur sit laudantium occaecati sapiente deleniti nisi. Quibusdam aspernatur quibusdam mollitia quia. Dignissimos id porro corporis. Eveniet consectetur culpa delectus quo et. #exercise #meal",
               "timestamp": 2015-07-17T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "12",
               "messageText": "Rerum accusantium repudiandae ut ab quas vel et error. Dolores ut in autem quia numquam voluptatibus odit in incidunt. Ullam in harum maxime veniam in commodi voluptas. Voluptatibus consequatur dolorem. Voluptatum neque unde mollitia iusto nostrum exercitationem. #exercise #meal",
               "timestamp": 2015-07-16T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "13",
               "messageText": "Accusantium quo necessitatibus et sit tenetur. Voluptatum omnis debitis quae. Quo ut ut omnis officiis qui impedit aliquid a. Et cum officiis cumque ex praesentium non quasi voluptatem repellat. Quidem fugiat et nulla ratione quia quo mollitia minima sit. #exercise #meal",
               "timestamp": 2015-07-15T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "14",
               "messageText": "Vitae consequatur similique dicta commodi tempora voluptatem officiis. Commodi ex ut porro similique et tempora delectus. Veniam distinctio dolore ullam beatae quam saepe. Aperiam recusandae quos officia alias hic. Iste laboriosam et harum alias sit deleniti necessitatibus molestiae qui. #exercise #meal",
               "timestamp": 2015-07-14T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "15",
               "messageText": "Ab nihil voluptate. Quis ut vero aut accusantium rem et eaque soluta excepturi. Occaecati est culpa vel quo suscipit aliquid aliquid voluptates reprehenderit. #exercise #meal",
               "timestamp": 2015-07-13T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "16",
               "messageText": "Reprehenderit consequatur ea et aut itaque totam voluptates est. Ullam quidem saepe ad deleniti. Veniam suscipit quam voluptas. Aut est qui id impedit rem. #exercise #meal",
               "timestamp": 2015-07-12T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "17",
               "messageText": "Nihil quo dolore quisquam sed excepturi ullam. Ratione suscipit sunt ut id culpa commodi architecto. Soluta consectetur quisquam cum omnis numquam quas. Vitae quod culpa natus et. Officia perspiciatis quisquam eligendi dicta. Voluptatibus culpa quia incidunt aut maxime quas omnis dignissimos velit. #exercise #meal",
               "timestamp": 2015-07-11T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "18",
               "messageText": "Quam laudantium accusamus dolor possimus labore dolores sit dolor. Omnis expedita error est et est ea sed occaecati rem. Consequatur doloremque cum illo consequatur sed. #exercise #meal",
               "timestamp": 2015-07-10T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "19",
               "messageText": "Ut molestiae rerum magni quos quis enim est. Quod non et quam impedit. Voluptatem nulla voluptatibus blanditiis. #exercise #meal",
               "timestamp": 2015-07-09T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "20",
               "messageText": "Sed recusandae atque ipsam voluptatum. Et ipsa cupiditate impedit dolorem atque nihil dignissimos culpa eaque. Ipsa qui sit laudantium rerum temporibus et aut consequatur. #exercise #meal",
               "timestamp": 2015-07-08T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "21",
               "messageText": "Assumenda quia totam dolorem molestiae commodi sit. Corporis molestias atque exercitationem molestiae hic ratione illum soluta. Aut aut et maiores sunt. #exercise #meal",
               "timestamp": 2015-07-07T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "22",
               "messageText": "Expedita laborum voluptate et quaerat inventore vitae iure. Minus enim dolores in similique. Voluptatem tenetur sit aut. Fuga nulla odio rerum nihil ullam. #exercise #meal",
               "timestamp": 2015-07-06T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "23",
               "messageText": "Accusamus officia minima aspernatur voluptatem explicabo sint error et possimus. Eos cupiditate quis aut doloribus. Ut quo aliquid. Corrupti distinctio id earum consequatur dolore. #exercise #meal",
               "timestamp": 2015-07-05T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "24",
               "messageText": "Expedita accusantium nesciunt. Voluptates molestiae qui totam totam autem est perspiciatis. Vero deleniti et dolore ut ea est sed dolores. #exercise #meal",
               "timestamp": 2015-07-04T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "25",
               "messageText": "Sed laborum maiores labore. Nihil qui aliquid rerum minima. Repellat et ipsa a facilis omnis eaque. Omnis dolorum incidunt sit sunt. Est illo minus. Cum sed ab quia exercitationem similique qui a quis dolore. #exercise #meal",
               "timestamp": 2015-07-03T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "26",
               "messageText": "Magni occaecati laborum illo doloribus molestias ut. Modi amet alias. Voluptatibus suscipit aut veniam sint iure esse similique maxime. Non amet reprehenderit odit at quod consequuntur. Saepe vel dolores maiores molestiae est nemo dolor sint. Sint eos aut velit vero corporis et voluptatibus corporis voluptas. #exercise #meal",
               "timestamp": 2015-07-02T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "27",
               "messageText": "Mollitia cum odio est recusandae enim qui maxime voluptatum. Et natus ea labore. Possimus aspernatur dolorem eius odit quia et ratione ducimus veniam. Dolor omnis cupiditate ut aperiam eveniet voluptatibus et et at. #exercise #meal",
               "timestamp": 2015-07-01T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "28",
               "messageText": "Distinctio autem vel minima dolores est error perferendis qui doloremque. Illo dolore fugit cupiditate placeat sed saepe porro. Ea a quibusdam deleniti et et eaque sed unde est. #exercise #meal",
               "timestamp": 2015-06-30T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "29",
               "messageText": "Similique similique quia nemo. At possimus in aut nemo illum eveniet. Ea provident commodi iure. Dolore sed est non eaque rerum omnis ex non. Debitis consequuntur occaecati eum aperiam. Qui dolor quibusdam ad quos. #exercise #meal",
               "timestamp": 2015-06-29T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "30",
               "messageText": "Et voluptatem officiis veniam eveniet delectus. Et accusamus rerum deserunt est. Vero suscipit at dolores a et optio eius aut. Minus blanditiis id nulla porro voluptatem porro eaque ipsa. Sint quod autem. #exercise #meal",
               "timestamp": 2015-06-28T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "31",
               "messageText": "Nam laudantium non iusto. Ea qui quia mollitia cupiditate et ducimus impedit nam. Unde atque accusantium odio doloremque omnis cumque alias. Aut sapiente unde debitis deleniti totam consequuntur fuga. Blanditiis est modi aliquid autem omnis aut expedita nam natus. #exercise #meal",
               "timestamp": 2015-06-27T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "32",
               "messageText": "Voluptatum quia delectus voluptas doloremque et voluptatem. Ullam facere earum reiciendis. Maiores neque temporibus voluptatibus et placeat quia ut et non. #exercise #meal",
               "timestamp": 2015-06-26T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "33",
               "messageText": "Aut reprehenderit iste expedita omnis est vel voluptas doloremque dolor. Totam neque voluptatem occaecati ex omnis tenetur est. Minima nobis nihil suscipit natus asperiores. #exercise #meal",
               "timestamp": 2015-06-25T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "34",
               "messageText": "Commodi adipisci nesciunt aspernatur modi earum ex rerum. Dolorum saepe sit. Tempora facere et laudantium officiis dolore. Nihil consequatur et ad repellat sed. #exercise #meal",
               "timestamp": 2015-06-24T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "35",
               "messageText": "Facilis tenetur et. Et dolorem in quia minima expedita porro voluptas facilis. Dolores neque eum maiores debitis tempora impedit officia veniam. Et delectus dignissimos expedita doloribus qui est. Vero voluptas praesentium odit sed alias modi. #exercise #meal",
               "timestamp": 2015-06-23T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "36",
               "messageText": "Et autem voluptas similique consequatur aliquid aut iste eum. Assumenda impedit odio consectetur. Nemo architecto laboriosam deleniti consequatur totam nihil voluptatem eum. Quia et iure dignissimos quibusdam aspernatur provident quia et enim. Atque at laboriosam architecto est qui. Maxime accusamus fuga asperiores dicta eius. #exercise #meal",
               "timestamp": 2015-06-22T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "37",
               "messageText": "Non pariatur deserunt rerum error nostrum saepe. Magnam perferendis quia debitis libero veritatis autem minus. Asperiores quis et cum. Et mollitia nam fuga. Libero earum ipsum eos. #exercise #meal",
               "timestamp": 2015-06-21T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "38",
               "messageText": "Dolorum qui ipsa sed nobis error adipisci ut. Omnis omnis quo. Quisquam eos dolores aut autem nam voluptatem impedit suscipit. Et ut delectus minima illo. Praesentium occaecati ut. Ut et facere laboriosam molestiae error voluptatem rerum. #exercise #meal",
               "timestamp": 2015-06-20T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "39",
               "messageText": "Ipsum non natus magnam qui cupiditate voluptas assumenda. Dolorum ipsa et perferendis mollitia dignissimos possimus nisi sed cum. Harum rerum quo repudiandae adipisci facere suscipit dolore sint eum. Minima enim expedita aliquid. Et facere incidunt fugit laborum. Voluptas qui accusamus quo qui et beatae fuga doloribus. #exercise #meal",
               "timestamp": 2015-06-19T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "40",
               "messageText": "Aut facilis possimus vel perspiciatis occaecati quia autem. Eaque quia non est accusantium itaque dignissimos modi asperiores tempora. At dolorem eum sequi aliquid. Ut similique consequuntur voluptatem maiores dolorem quo aut eveniet quibusdam. Inventore fugit nemo illo error sit possimus. #exercise #meal",
               "timestamp": 2015-06-18T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "41",
               "messageText": "Rerum consequatur voluptas itaque nesciunt sed quam sapiente. Vitae quia non nobis. Corrupti mollitia quia ex aspernatur ducimus perspiciatis tenetur. Id reprehenderit provident enim pariatur. Optio iste non perferendis qui pariatur. Et tempora omnis magnam ut aliquid doloribus repellendus eum. #exercise #meal",
               "timestamp": 2015-06-17T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "42",
               "messageText": "Eaque est voluptatem iusto voluptates velit reprehenderit delectus. Veritatis et atque sunt eius consequatur exercitationem sed eum. Consequatur iusto vitae reprehenderit adipisci et eos ex reiciendis. #exercise #meal",
               "timestamp": 2015-06-16T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "43",
               "messageText": "Quod cum et vitae sapiente. Voluptatem esse aut sint quia enim et earum. Quas veniam ut culpa est doloremque. Maiores incidunt perferendis adipisci. #exercise #meal",
               "timestamp": 2015-06-15T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "44",
               "messageText": "Error quos dolorum facere facilis voluptatum ea officia reprehenderit qui. Reiciendis rerum libero dolore labore porro perferendis veniam eius earum. Ducimus reprehenderit maxime vel ut repellendus. Sunt iure tenetur sed non vero mollitia et ea. Est est accusamus et tempore veniam ut. #exercise #meal",
               "timestamp": 2015-06-14T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "45",
               "messageText": "In qui exercitationem quae est tempore dolor expedita. Aut quibusdam voluptas illum laborum. Aspernatur necessitatibus mollitia quae deleniti sed ut et. Deserunt consequatur repudiandae. #exercise #meal",
               "timestamp": 2015-06-13T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "46",
               "messageText": "Voluptas quia nemo vel facere. Possimus animi porro ea aut asperiores sint. Iste debitis maxime. Ut eos consequatur qui molestiae suscipit. Voluptatibus distinctio id iste dolorum aliquid necessitatibus adipisci. #exercise #meal",
               "timestamp": 2015-06-12T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "47",
               "messageText": "Eos vitae rerum vitae. Nulla et eum est veritatis consectetur eveniet. Modi quibusdam ut vero adipisci consequuntur delectus explicabo fugit tempore. #exercise #meal",
               "timestamp": 2015-06-11T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "48",
               "messageText": "Recusandae iure libero nesciunt vero quos et. Tempore quia cumque accusamus. Occaecati accusamus voluptatem eligendi quisquam saepe. Facere sit occaecati dolore et sit qui amet voluptatem placeat. Accusamus nihil iusto nesciunt aliquid sed reprehenderit. #exercise #meal",
               "timestamp": 2015-06-10T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "49",
               "messageText": "Eaque commodi maiores quia. Enim eum est ab eveniet molestiae. Perferendis qui doloremque explicabo laboriosam. Qui molestiae praesentium et perferendis qui neque illum. #exercise #meal",
               "timestamp": 2015-06-09T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "50",
               "messageText": "Id repellat facere modi aliquid cum aliquid praesentium. Quo in quam qui occaecati culpa earum commodi ducimus. Laboriosam fugit adipisci. Voluptas qui sed asperiores quo commodi et magnam debitis aliquid. Nisi dignissimos quidem. #exercise #meal",
               "timestamp": 2015-06-08T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "51",
               "messageText": "Vero voluptas ut. Ut et non deleniti labore ducimus. Dolores illum ut rerum qui. Ea et occaecati nesciunt fuga quas. #exercise #meal",
               "timestamp": 2015-06-07T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "52",
               "messageText": "Molestias rerum mollitia perferendis sit minima occaecati ipsa. Consequatur ea autem dolorem. Voluptas officia atque quidem accusantium et nemo. #exercise #meal",
               "timestamp": 2015-06-06T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "53",
               "messageText": "Libero ipsam suscipit quia impedit nostrum maiores tenetur. Dicta consequatur laudantium minima inventore omnis ut ipsam ratione dolorem. Sint voluptatem nihil eligendi quod ut velit consequatur. Exercitationem nulla vitae. #exercise #meal",
               "timestamp": 2015-06-05T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "54",
               "messageText": "Dolorum quis expedita rerum error et. Aperiam modi voluptatem. Corrupti odio sunt nihil. Aut est et. Nihil sit voluptatum aut in. #exercise #meal",
               "timestamp": 2015-06-04T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "55",
               "messageText": "Non minima nihil. Voluptatum sed aut laborum reprehenderit rerum. Consequatur vero similique et qui in corrupti ducimus. #exercise #meal",
               "timestamp": 2015-06-03T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "56",
               "messageText": "Facilis aliquid quibusdam et pariatur dignissimos eum repellat qui. Repellendus adipisci qui quae in ipsum. Quia beatae sunt nihil nam rerum ipsa quisquam itaque ducimus. Ad voluptatem alias provident. #exercise #meal",
               "timestamp": 2015-06-02T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "57",
               "messageText": "Voluptatem nemo enim libero voluptate exercitationem ipsam ut. Aut nobis quasi quos voluptatem unde optio et. Placeat qui dolore. Magnam maxime dolores quae qui. Voluptatem quasi suscipit dolor. #exercise #meal",
               "timestamp": 2015-06-01T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "58",
               "messageText": "Reprehenderit quos ut sint repellat et. Nihil excepturi vitae. Quis iure doloribus qui natus quae. #exercise #meal",
               "timestamp": 2015-05-31T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "59",
               "messageText": "Aperiam temporibus vitae odio aut tempore perferendis ullam et iusto. Pariatur repellat in id molestias. Eos doloribus qui accusamus quae. Velit amet debitis soluta. Beatae quo qui doloribus et modi modi. Hic soluta et velit sunt nostrum enim fugiat odio adipisci. #exercise #meal",
               "timestamp": 2015-05-30T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "60",
               "messageText": "Sint esse illo et ab fuga soluta qui illo. Occaecati ea ut harum amet officia sunt voluptas exercitationem. Blanditiis iusto eos rerum. #exercise #meal",
               "timestamp": 2015-05-29T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "61",
               "messageText": "Odit id quasi nihil omnis quis possimus nihil. Voluptas a molestiae dolorem repellat dolores et rem quod. Rerum assumenda dolorem iste quas nesciunt optio reprehenderit beatae. #exercise #meal",
               "timestamp": 2015-05-28T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "62",
               "messageText": "Quis dolor eaque ipsam qui tempore quisquam qui quo. Dolorem enim suscipit possimus voluptate et quam aut. Explicabo eum quia. Aut impedit sit similique aut ea vel. Non mollitia totam aut nobis et accusamus tempore aut eveniet. #exercise #meal",
               "timestamp": 2015-05-27T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "63",
               "messageText": "Et eius itaque eligendi voluptatem sint quia sit rerum et. Sunt consequatur sint reprehenderit laborum atque neque qui. Voluptatem eum quod. #exercise #meal",
               "timestamp": 2015-05-26T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "64",
               "messageText": "Itaque natus sunt nemo quo quia. Nobis officiis rem assumenda provident at. Rem aliquam quo temporibus. #exercise #meal",
               "timestamp": 2015-05-25T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "65",
               "messageText": "Quae eum incidunt et alias. Commodi exercitationem quos. Sit quia consequatur labore nobis molestias aut. Architecto quasi dolores sunt porro officiis reiciendis. #exercise #meal",
               "timestamp": 2015-05-24T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "66",
               "messageText": "Atque sed totam quasi mollitia. Incidunt aspernatur maxime alias. Veniam ad neque pariatur sit. #exercise #meal",
               "timestamp": 2015-05-23T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "67",
               "messageText": "Explicabo dolorem ducimus corporis distinctio. Quis qui doloribus accusantium quos sapiente laboriosam eos. Porro repellendus vel deleniti accusamus dicta asperiores nobis adipisci ducimus. Magnam quas quia delectus doloribus expedita inventore deserunt quia. #exercise #meal",
               "timestamp": 2015-05-22T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "68",
               "messageText": "Porro maxime quis a nulla odio reiciendis voluptatibus. Ut tenetur voluptas. Consequuntur corrupti ab molestiae consequuntur. #exercise #meal",
               "timestamp": 2015-05-21T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "69",
               "messageText": "Et facere aspernatur. Voluptas voluptatem placeat distinctio vero incidunt eum iste. Nesciunt laudantium est ipsam sunt suscipit. Porro quibusdam facere et et reprehenderit nulla recusandae facere natus. Facilis impedit labore aut non. Cum ut esse eaque veritatis laborum id numquam voluptates dolore. #exercise #meal",
               "timestamp": 2015-05-20T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "70",
               "messageText": "Eum placeat dolorem voluptas harum occaecati eos amet numquam. Animi ut esse. Et non deleniti illo quam quam laudantium vel. Ipsum sed sequi et quia atque mollitia. #exercise #meal",
               "timestamp": 2015-05-19T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "71",
               "messageText": "Sunt labore dolore. Sed eius sunt voluptas ut mollitia suscipit velit enim mollitia. Dolores fugiat atque et. Quia molestiae voluptatem et et molestiae modi laborum unde qui. Perspiciatis explicabo aut suscipit possimus accusamus reiciendis aliquid. #exercise #meal",
               "timestamp": 2015-05-18T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "72",
               "messageText": "Consequatur omnis at voluptatibus repellat minima quis. Ducimus nostrum perspiciatis. Voluptatem voluptates deleniti voluptatem ad quia. Culpa ut iste vitae omnis aut perferendis eos maxime. Voluptate recusandae vel architecto laborum qui consequatur molestiae dolore. #exercise #meal",
               "timestamp": 2015-05-17T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "73",
               "messageText": "Voluptatem dolores corporis eligendi minus ipsam dolor. Quidem earum quod modi. Dolor modi laudantium cumque. Autem iure tenetur nulla nemo. Unde neque ratione quos iusto distinctio voluptatem sit ut id. Quam aut facilis nihil harum quia architecto veniam voluptas. #exercise #meal",
               "timestamp": 2015-05-16T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "74",
               "messageText": "Qui at dolorum impedit. Voluptas sint repudiandae. Corporis inventore aut fugit aspernatur consequatur fugit rerum. Dolore autem voluptatem rerum consequatur necessitatibus. Eligendi sed voluptas saepe porro dolor id ad natus. A qui ullam. #exercise #meal",
               "timestamp": 2015-05-15T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "75",
               "messageText": "Id tempora beatae in eligendi inventore cum voluptatem. Quae eum quasi repudiandae. Reprehenderit ut nemo incidunt in ipsam. Earum est est temporibus assumenda assumenda eum a expedita illum. Ut odio incidunt nobis et enim numquam dolores. Totam recusandae rerum hic. #exercise #meal",
               "timestamp": 2015-05-14T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "76",
               "messageText": "Aut veritatis et. Dignissimos error consequatur non est praesentium sit architecto cumque. Expedita eos incidunt aut eos a aliquam quo consequuntur sunt. Officia dolorum magni eaque et est tempore. Earum ut ratione voluptatem qui facere perspiciatis cupiditate odit. Cum ipsa similique nostrum ut. #exercise #meal",
               "timestamp": 2015-05-13T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "77",
               "messageText": "Rerum quibusdam quis ex asperiores aut. Sint in beatae sit at placeat tempore omnis illo velit. Nostrum fugiat dolorem fugiat est repudiandae dolores et dolor eius. Itaque voluptas quae quasi aut quam blanditiis odit eum est. #exercise #meal",
               "timestamp": 2015-05-12T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "78",
               "messageText": "Facere consequatur aut dicta vitae quia repudiandae quis. In mollitia facere impedit facilis ut quo rem voluptas. Voluptas et quia dolor. Natus est dolores aliquid eum laborum id. #exercise #meal",
               "timestamp": 2015-05-11T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "79",
               "messageText": "Et aut unde. Voluptatibus excepturi debitis vel voluptas vitae eaque eum delectus. Nihil nisi molestiae. #exercise #meal",
               "timestamp": 2015-05-10T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "80",
               "messageText": "Repudiandae harum ducimus laboriosam necessitatibus est sunt cupiditate nulla. Laborum et sed doloremque nemo sit quos. Ad sed blanditiis unde assumenda. Fuga non soluta ut. #exercise #meal",
               "timestamp": 2015-05-09T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "81",
               "messageText": "Illo ut velit molestias est quia. Sed est fuga eveniet dolorum id. Recusandae laudantium voluptatem maiores possimus sit cumque eaque. Consequatur ipsa voluptatum. Sed non velit. Consequatur ea inventore alias exercitationem quia nulla hic voluptas. #exercise #meal",
               "timestamp": 2015-05-08T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "82",
               "messageText": "At ullam quis atque occaecati non corrupti beatae. Aliquam consequatur illo repellat. Error nesciunt laudantium suscipit. #exercise #meal",
               "timestamp": 2015-05-07T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "83",
               "messageText": "Voluptatem nostrum similique in qui nam odit sunt. Doloremque non vel maxime odit. Tempora nihil libero harum id doloremque labore magni minima eum. Nam ea rerum ratione. Nulla dolores amet itaque. #exercise #meal",
               "timestamp": 2015-05-06T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "84",
               "messageText": "Ut praesentium consequatur explicabo vel. Repudiandae libero iste molestias quibusdam et optio ab illo numquam. Vero et dolorum quidem adipisci nesciunt consectetur asperiores. #exercise #meal",
               "timestamp": 2015-05-05T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "85",
               "messageText": "Et quam perspiciatis temporibus non non accusamus quod eos. Nulla possimus cumque voluptatem reprehenderit aut enim maiores. Quod quae dolorem et magni nulla voluptatem enim doloribus reiciendis. Rerum optio velit. #exercise #meal",
               "timestamp": 2015-05-04T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "86",
               "messageText": "Autem eveniet et aut corrupti. Facere est quasi ratione. Sunt perferendis in debitis mollitia. #exercise #meal",
               "timestamp": 2015-05-03T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "87",
               "messageText": "Magni qui odio ut quia. Culpa et eveniet nostrum ut. Totam repellendus eum eos assumenda. Perferendis iure ipsum. Modi beatae sunt officia. #exercise #meal",
               "timestamp": 2015-05-02T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "88",
               "messageText": "Laboriosam ullam molestiae qui. Explicabo excepturi asperiores dolores nemo corrupti perspiciatis excepturi autem enim. Mollitia laboriosam nemo quia. Vel officiis minus voluptate quo. #exercise #meal",
               "timestamp": 2015-05-01T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "89",
               "messageText": "Et voluptatum et est. Id voluptas quidem veniam adipisci autem accusamus. Quis necessitatibus quis itaque natus et vero. Est aut cumque praesentium numquam voluptates. Sit eos unde id nostrum. #exercise #meal",
               "timestamp": 2015-04-30T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "90",
               "messageText": "Minus iusto consequuntur repellat. Ut et et sunt modi repellat minus est. Dolorum illo officiis rerum voluptas. Libero hic totam quo quia non ut. Harum maxime rem officiis consequuntur assumenda architecto cum. Tempora quo ipsa molestiae ut iure enim itaque. #exercise #meal",
               "timestamp": 2015-04-29T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "91",
               "messageText": "Et nihil corporis voluptate et suscipit incidunt quasi eum. Eos dolore voluptas. Aspernatur qui autem nesciunt voluptas. Non qui quidem praesentium eos sed ab quisquam. #exercise #meal",
               "timestamp": 2015-04-28T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "92",
               "messageText": "Voluptatem consequatur vel possimus illo quod nobis illo earum illo. Cum et eum neque et. Qui perspiciatis qui veniam. Iste modi ea id ut. #exercise #meal",
               "timestamp": 2015-04-27T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "93",
               "messageText": "Iusto iure nulla est. Nesciunt non unde eum. Magni cupiditate mollitia ut quo dignissimos voluptas magnam. Enim aperiam aut eligendi fugiat sed quisquam iste dolores est. #exercise #meal",
               "timestamp": 2015-04-26T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "94",
               "messageText": "Assumenda nihil aspernatur voluptas voluptatum rerum. Perspiciatis consequuntur ipsam quos reprehenderit neque et eos labore ipsum. Veritatis inventore sed ut sed sed aut aut aut ut. Natus a voluptatibus aut hic voluptates quibusdam maiores et tenetur. #exercise #meal",
               "timestamp": 2015-04-25T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "95",
               "messageText": "Dolores deserunt totam odit molestiae nobis. Numquam aut ratione. Nostrum id esse. Laboriosam quos officia aliquam et ut. Consequuntur ea neque sunt illum. #exercise #meal",
               "timestamp": 2015-04-24T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "96",
               "messageText": "Qui sint dignissimos. Illum recusandae adipisci veritatis eveniet. Nisi deserunt repudiandae itaque qui. Et consequatur ipsa. #exercise #meal",
               "timestamp": 2015-04-23T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "97",
               "messageText": "Rerum ut asperiores ab voluptatem et ea voluptatem sed cum. Voluptates enim et nihil numquam vitae odit adipisci. Perferendis tempore placeat quia hic maiores assumenda nesciunt. Consectetur veniam dignissimos tempore. Enim nulla voluptate itaque aliquam sit sed. #exercise #meal",
               "timestamp": 2015-04-22T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "98",
               "messageText": "Suscipit labore aut non voluptas nam saepe consequatur suscipit. Suscipit similique laborum dolorem tempore. Cupiditate eveniet maiores dolorem. Qui aut vel est pariatur ratione veniam sunt fugit ut. Beatae aut aut. Quae tempore dolor reprehenderit quam dolor. #exercise #meal",
               "timestamp": 2015-04-21T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
             Object {
+              "groupId": "groupId",
               "id": "99",
               "messageText": "Nihil saepe eos rerum quia saepe nam et aut. Veritatis officia officiis voluptatem non. Ipsum eveniet sunt atque cumque dolorem laborum sit. Et rerum rerum quam ipsam exercitationem impedit reprehenderit illum quaerat. Molestiae esse ex. Corrupti maxime et voluptate. #exercise #meal",
               "timestamp": 2015-04-20T03:29:00.000Z,
+              "userFullName": "Jill Jellyfish",
               "userId": "1",
             },
           ]
@@ -781,6 +981,39 @@ exports[`Storyshots HomeScreen default 1`] = `
                   }
                 }
               >
+                <View
+                  style={
+                    Array [
+                      Object {
+                        "flexDirection": "row",
+                        "justifyContent": "space-between",
+                        "zIndex": 1,
+                      },
+                    ]
+                  }
+                >
+                  <Text
+                    allowFontScaling={false}
+                    numberOfLines={1}
+                    style={
+                      Array [
+                        Object {
+                          "color": "#4d4e4c",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                        Object {
+                          "flexShrink": 1,
+                          "marginLeft": 12,
+                          "marginRight": 12,
+                          "marginTop": 7,
+                        },
+                      ]
+                    }
+                  >
+                    Jill Jellyfish to Jill Jellyfish
+                  </Text>
+                </View>
                 <View
                   style={
                     Array [
@@ -942,6 +1175,39 @@ exports[`Storyshots HomeScreen default 1`] = `
                     Array [
                       Object {
                         "flexDirection": "row",
+                        "justifyContent": "space-between",
+                        "zIndex": 1,
+                      },
+                    ]
+                  }
+                >
+                  <Text
+                    allowFontScaling={false}
+                    numberOfLines={1}
+                    style={
+                      Array [
+                        Object {
+                          "color": "#4d4e4c",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                        Object {
+                          "flexShrink": 1,
+                          "marginLeft": 12,
+                          "marginRight": 12,
+                          "marginTop": 7,
+                        },
+                      ]
+                    }
+                  >
+                    Jill Jellyfish to Jill Jellyfish
+                  </Text>
+                </View>
+                <View
+                  style={
+                    Array [
+                      Object {
+                        "flexDirection": "row",
                         "justifyContent": "flex-start",
                         "zIndex": 1,
                       },
@@ -1093,6 +1359,39 @@ exports[`Storyshots HomeScreen default 1`] = `
                   }
                 }
               >
+                <View
+                  style={
+                    Array [
+                      Object {
+                        "flexDirection": "row",
+                        "justifyContent": "space-between",
+                        "zIndex": 1,
+                      },
+                    ]
+                  }
+                >
+                  <Text
+                    allowFontScaling={false}
+                    numberOfLines={1}
+                    style={
+                      Array [
+                        Object {
+                          "color": "#4d4e4c",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                        Object {
+                          "flexShrink": 1,
+                          "marginLeft": 12,
+                          "marginRight": 12,
+                          "marginTop": 7,
+                        },
+                      ]
+                    }
+                  >
+                    Jill Jellyfish to Jill Jellyfish
+                  </Text>
+                </View>
                 <View
                   style={
                     Array [
@@ -1254,6 +1553,39 @@ exports[`Storyshots HomeScreen default 1`] = `
                     Array [
                       Object {
                         "flexDirection": "row",
+                        "justifyContent": "space-between",
+                        "zIndex": 1,
+                      },
+                    ]
+                  }
+                >
+                  <Text
+                    allowFontScaling={false}
+                    numberOfLines={1}
+                    style={
+                      Array [
+                        Object {
+                          "color": "#4d4e4c",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                        Object {
+                          "flexShrink": 1,
+                          "marginLeft": 12,
+                          "marginRight": 12,
+                          "marginTop": 7,
+                        },
+                      ]
+                    }
+                  >
+                    Jill Jellyfish to Jill Jellyfish
+                  </Text>
+                </View>
+                <View
+                  style={
+                    Array [
+                      Object {
+                        "flexDirection": "row",
                         "justifyContent": "flex-start",
                         "zIndex": 1,
                       },
@@ -1405,6 +1737,39 @@ exports[`Storyshots HomeScreen default 1`] = `
                   }
                 }
               >
+                <View
+                  style={
+                    Array [
+                      Object {
+                        "flexDirection": "row",
+                        "justifyContent": "space-between",
+                        "zIndex": 1,
+                      },
+                    ]
+                  }
+                >
+                  <Text
+                    allowFontScaling={false}
+                    numberOfLines={1}
+                    style={
+                      Array [
+                        Object {
+                          "color": "#4d4e4c",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                        Object {
+                          "flexShrink": 1,
+                          "marginLeft": 12,
+                          "marginRight": 12,
+                          "marginTop": 7,
+                        },
+                      ]
+                    }
+                  >
+                    Jill Jellyfish to Jill Jellyfish
+                  </Text>
+                </View>
                 <View
                   style={
                     Array [
@@ -1566,6 +1931,39 @@ exports[`Storyshots HomeScreen default 1`] = `
                     Array [
                       Object {
                         "flexDirection": "row",
+                        "justifyContent": "space-between",
+                        "zIndex": 1,
+                      },
+                    ]
+                  }
+                >
+                  <Text
+                    allowFontScaling={false}
+                    numberOfLines={1}
+                    style={
+                      Array [
+                        Object {
+                          "color": "#4d4e4c",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                        Object {
+                          "flexShrink": 1,
+                          "marginLeft": 12,
+                          "marginRight": 12,
+                          "marginTop": 7,
+                        },
+                      ]
+                    }
+                  >
+                    Jill Jellyfish to Jill Jellyfish
+                  </Text>
+                </View>
+                <View
+                  style={
+                    Array [
+                      Object {
+                        "flexDirection": "row",
                         "justifyContent": "flex-start",
                         "zIndex": 1,
                       },
@@ -1717,6 +2115,39 @@ exports[`Storyshots HomeScreen default 1`] = `
                   }
                 }
               >
+                <View
+                  style={
+                    Array [
+                      Object {
+                        "flexDirection": "row",
+                        "justifyContent": "space-between",
+                        "zIndex": 1,
+                      },
+                    ]
+                  }
+                >
+                  <Text
+                    allowFontScaling={false}
+                    numberOfLines={1}
+                    style={
+                      Array [
+                        Object {
+                          "color": "#4d4e4c",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                        Object {
+                          "flexShrink": 1,
+                          "marginLeft": 12,
+                          "marginRight": 12,
+                          "marginTop": 7,
+                        },
+                      ]
+                    }
+                  >
+                    Jill Jellyfish to Jill Jellyfish
+                  </Text>
+                </View>
                 <View
                   style={
                     Array [
@@ -1878,6 +2309,39 @@ exports[`Storyshots HomeScreen default 1`] = `
                     Array [
                       Object {
                         "flexDirection": "row",
+                        "justifyContent": "space-between",
+                        "zIndex": 1,
+                      },
+                    ]
+                  }
+                >
+                  <Text
+                    allowFontScaling={false}
+                    numberOfLines={1}
+                    style={
+                      Array [
+                        Object {
+                          "color": "#4d4e4c",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                        Object {
+                          "flexShrink": 1,
+                          "marginLeft": 12,
+                          "marginRight": 12,
+                          "marginTop": 7,
+                        },
+                      ]
+                    }
+                  >
+                    Jill Jellyfish to Jill Jellyfish
+                  </Text>
+                </View>
+                <View
+                  style={
+                    Array [
+                      Object {
+                        "flexDirection": "row",
                         "justifyContent": "flex-start",
                         "zIndex": 1,
                       },
@@ -2034,6 +2498,39 @@ exports[`Storyshots HomeScreen default 1`] = `
                     Array [
                       Object {
                         "flexDirection": "row",
+                        "justifyContent": "space-between",
+                        "zIndex": 1,
+                      },
+                    ]
+                  }
+                >
+                  <Text
+                    allowFontScaling={false}
+                    numberOfLines={1}
+                    style={
+                      Array [
+                        Object {
+                          "color": "#4d4e4c",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                        Object {
+                          "flexShrink": 1,
+                          "marginLeft": 12,
+                          "marginRight": 12,
+                          "marginTop": 7,
+                        },
+                      ]
+                    }
+                  >
+                    Jill Jellyfish to Jill Jellyfish
+                  </Text>
+                </View>
+                <View
+                  style={
+                    Array [
+                      Object {
+                        "flexDirection": "row",
                         "justifyContent": "flex-start",
                         "zIndex": 1,
                       },
@@ -2185,6 +2682,39 @@ exports[`Storyshots HomeScreen default 1`] = `
                   }
                 }
               >
+                <View
+                  style={
+                    Array [
+                      Object {
+                        "flexDirection": "row",
+                        "justifyContent": "space-between",
+                        "zIndex": 1,
+                      },
+                    ]
+                  }
+                >
+                  <Text
+                    allowFontScaling={false}
+                    numberOfLines={1}
+                    style={
+                      Array [
+                        Object {
+                          "color": "#4d4e4c",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                        Object {
+                          "flexShrink": 1,
+                          "marginLeft": 12,
+                          "marginRight": 12,
+                          "marginTop": 7,
+                        },
+                      ]
+                    }
+                  >
+                    Jill Jellyfish to Jill Jellyfish
+                  </Text>
+                </View>
                 <View
                   style={
                     Array [

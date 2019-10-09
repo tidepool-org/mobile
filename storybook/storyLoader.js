@@ -12,6 +12,7 @@ function loadStories() {
   require('../__stories__/components/ButtonWithHeaderAndLongText.story');
   require('../__stories__/components/ButtonWithLongText.story');
   require('../__stories__/components/DatePickerCustom.story');
+  require('../__stories__/components/DebugHealthScreen.story');
   require('../__stories__/components/DebugSettings.story');
   require('../__stories__/components/Drawer.story');
   require('../__stories__/components/Graph.story');
@@ -44,6 +45,7 @@ const stories = [
   '../__stories__/components/ButtonWithHeaderAndLongText.story',
   '../__stories__/components/ButtonWithLongText.story',
   '../__stories__/components/DatePickerCustom.story',
+  '../__stories__/components/DebugHealthScreen.story',
   '../__stories__/components/DebugSettings.story',
   '../__stories__/components/Drawer.story',
   '../__stories__/components/Graph.story',

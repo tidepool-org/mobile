@@ -30,6 +30,8 @@ for (let i = 0; i < 100; i += 1) {
     timestamp: subDays(new Date("Mon Jul 27 2015 22:29:00 GMT-0500 (CDT)"), i),
     messageText: faker.fake("{{lorem.paragraph}} #exercise #meal"),
     userId: "1",
+    groupId: "groupId",
+    userFullName: "Jill Jellyfish",
   });
 }
 const currentUser = {

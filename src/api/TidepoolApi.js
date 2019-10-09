@@ -4,7 +4,7 @@ import uuidv4 from "uuid/v4";
 import parse from "date-fns/parse";
 import DeviceInfo from "react-native-device-info";
 import Constants from "expo-constants";
-import ConnectionStatus from "../models/ConnectionStatus";
+import { ConnectionStatus } from "../models/ConnectionStatus";
 import {
   MMOL_PER_L_TO_MG_PER_DL,
   UNITS_MMOL_PER_L,

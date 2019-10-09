@@ -4,7 +4,7 @@ import glamorous, { withTheme } from "glamorous-native";
 
 import { ThemePropType } from "../prop-types/theme";
 import Colors from "../constants/Colors";
-import Metrics from "../models/Metrics";
+import { Metrics } from "../models/Metrics";
 
 class HashtagButton extends PureComponent {
   onPressHashtagButton = () => {

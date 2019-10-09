@@ -30,10 +30,4 @@ RCT_EXTERN_METHOD(testNativeCrash)
 RCT_EXTERN_METHOD(testLogWarning:(NSString *)message)
 RCT_EXTERN_METHOD(testLogError:(NSString *)message)
 
-#pragma mark - HealthKit
-
-RCT_EXTERN__BLOCKING_SYNCHRONOUS_METHOD(shouldShowHealthKitUI)
-RCT_EXTERN_METHOD(enableHealthKitInterface)
-RCT_EXTERN_METHOD(disableHealthKitInterface)
-
 @end

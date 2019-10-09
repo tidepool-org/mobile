@@ -12,7 +12,7 @@ import Colors from "../constants/Colors";
 import NotesListItem from "./NotesListItem";
 import SearchBar from "./SearchBar";
 import AlertManager from "../models/AlertManager";
-import Metrics from "../models/Metrics";
+import { Metrics } from "../models/Metrics";
 import { ProfilePropType } from "../prop-types/profile";
 import { CommentPropType } from "../prop-types/comment";
 import { UserPropType } from "../prop-types/user";

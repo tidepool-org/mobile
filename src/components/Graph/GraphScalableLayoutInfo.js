@@ -1,6 +1,6 @@
 import subSeconds from "date-fns/sub_seconds";
 
-// import Logger from "../../models/Logger";
+// import { Logger } from "../../models/Logger";
 
 // TODO: graph - perf - Only load/render data that is visible based on scroll position? Consider tiling views like Tidepool Mobile 2.x did?
 // TODO: graph - perf - Consider skipping rendering of CBG data points that intersect at certain scales?

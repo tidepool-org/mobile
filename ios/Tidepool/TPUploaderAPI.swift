@@ -17,9 +17,8 @@ import CocoaLumberjack
 import Foundation
 import TPHealthKitUploader
 
-/// The singleton of this class, accessed and initialized via TidepoolMobileUploaderAPI.connector(), initializes the uploader interface and provides it with the necessary callback functions.
+/// The singleton of this class, accessed and initialized via TPUploaderAPI.connector(), initializes the uploader interface and provides it with the necessary callback functions.
 class TPUploaderAPI: TPUploaderConfigInfo {
-    
     static var _connector: TPUploaderAPI?
     /// Supports a singleton for the application.
     class func connector() -> TPUploaderAPI {
@@ -67,7 +66,15 @@ class TPUploaderAPI: TPUploaderConfigInfo {
         DDLogInfo("\(#function) - TPUploaderConfigInfo protocol, returning: \(result ?? "nil")")
         return result
     }
-    
+
+    // token expired? Log out to force token refresh, but should probably just do a refresh!
+    func authorizationErrorReceived() {
+// TODO: health - log out or refresh token?
+//        service.logout()
+//        let notification = Notification(name: Notification.Name(rawValue: "serviceLoggedOut"), object: nil)
+//        NotificationCenter.default.post(notification)
+    }
+
     func baseUrlString() -> String? {
         let result = api.baseUrlString
         DDLogInfo("\(#function) - TPUploaderConfigInfo protocol, returning: \(result ?? "nil")")
@@ -104,20 +111,33 @@ class TPUploaderAPI: TPUploaderConfigInfo {
         }
     }
     
-    let uploadFrameWork: StaticString = "uploader"
+    var nativeHealthBridge: TPNativeHealth?
+    var isInterfaceOn: Bool = false
+
+    func onTurnOnInterface() {
+        isInterfaceOn = true
+        nativeHealthBridge?.onTurnOnInterface()
+    }
+    
+    func onTurnOffInterface() {
+        isInterfaceOn = false
+        nativeHealthBridge?.onTurnOffInterface()
+    }
+
+    let uploadFramework: StaticString = "uploader"
     func logVerbose(_ str: String) {
-        DDLogVerbose(str, file: uploadFrameWork, function: uploadFrameWork)
+        DDLogVerbose(str, file: uploadFramework, function: uploadFramework)
     }
     
     func logError(_ str: String) {
-        DDLogError(str, file: uploadFrameWork, function: uploadFrameWork)
+        DDLogError(str, file: uploadFramework, function: uploadFramework)
     }
     
     func logInfo(_ str: String) {
-        DDLogInfo(str, file: uploadFrameWork, function: uploadFrameWork)
+        DDLogInfo(str, file: uploadFramework, function: uploadFramework)
     }
     
     func logDebug(_ str: String) {
-        DDLogDebug(str, file: uploadFrameWork, function: uploadFrameWork)
+        DDLogDebug(str, file: uploadFramework, function: uploadFramework)
     }
 }

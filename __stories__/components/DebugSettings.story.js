@@ -7,7 +7,7 @@ import DebugSettingsScreen from "../../src/screens/DebugSettingsScreen";
 import { API_ENVIRONMENT_STAGING } from "../../src/api";
 import { API_CACHE_EXPIRATION_180_DAYS } from "../../src/api/TidepoolApiCacheControl";
 import { GRAPH_RENDERER_THREE_JS } from "../../src/components/Graph/helpers";
-import Logger from "../../src/models/Logger";
+import { Logger } from "../../src/models/Logger";
 
 const props = {
   navigateGoBack: () => {},
@@ -15,6 +15,7 @@ const props = {
   apiCacheExpirationSetAndSaveAsync: () => {},
   graphRendererSetAndSaveAsync: () => {},
   firstTimeTipsResetTips: () => {},
+  navigateDebugHealthScreen: () => {},
   logLevelSetAndSaveAsync: () => {},
 
   selectedApiEnvironment: API_ENVIRONMENT_STAGING,

@@ -1,7 +1,6 @@
-import { NativeModules } from "react-native";
-
 import { TidepoolApi } from "./TidepoolApi";
-import Logger from "../models/Logger";
+import { Logger } from "../models/Logger";
+import { TPNative } from "../models/TPNative";
 
 const API_ENVIRONMENT_PRODUCTION = "Production";
 const API_ENVIRONMENT_INTEGRATION = "Integration";
@@ -40,20 +39,14 @@ const switchApiEnvironment = apiEnvironment => {
 
   tidepoolApi = new TidepoolApi({ baseUrl });
 
+  TPNative.setEnvironment(apiEnvironment);
   Logger.updateRollbarWithConfig({ environment: apiEnvironment });
-
-  try {
-    const { TPNative } = NativeModules;
-    TPNative.setEnvironment(apiEnvironment);
-  } catch (error) {
-    // console.log(`error: ${error}`);
-  }
 };
 
 const api = () => tidepoolApi;
 
 export {
-  api as default,
+  api,
   API_ENVIRONMENT_PRODUCTION,
   API_ENVIRONMENT_INTEGRATION,
   API_ENVIRONMENT_STAGING,

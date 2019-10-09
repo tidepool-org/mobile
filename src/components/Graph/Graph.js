@@ -15,7 +15,7 @@ import GraphScalableLayoutInfo from "./GraphScalableLayoutInfo";
 import GraphNoData from "./GraphNoData";
 import GraphScrollable from "./GraphScrollable";
 import GraphZoomable from "./GraphZoomable";
-// import Logger from "../../models/Logger";
+// import { Logger } from "../../models/Logger";
 
 class Graph extends PureComponent {
   constructor(props) {

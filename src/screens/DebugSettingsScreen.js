@@ -85,6 +85,7 @@ class DebugSettingsScreen extends PureComponent {
   render() {
     const {
       navigateGoBack,
+      navigateDebugHealthScreen,
       firstTimeTipsResetTips,
       selectedApiEnvironment,
       selectedApiCacheExpiration,
@@ -94,13 +95,7 @@ class DebugSettingsScreen extends PureComponent {
 
     return (
       <ThemeProvider theme={this.theme}>
-        <Modal
-          visible
-          animationType="slide"
-          onRequestClose={() => {
-            navigateGoBack();
-          }}
-        >
+        <Modal visible animationType="slide" onRequestClose={navigateGoBack}>
           <StatusBar barStyle="dark-content" />
           <SafeAreaView
             style={{
@@ -165,6 +160,7 @@ class DebugSettingsScreen extends PureComponent {
               <DebugSettingsOtherList
                 navigateGoBack={navigateGoBack}
                 firstTimeTipsResetTips={firstTimeTipsResetTips}
+                navigateDebugHealthScreen={navigateDebugHealthScreen}
               />
             </glamorous.ScrollView>
           </SafeAreaView>
@@ -181,6 +177,7 @@ DebugSettingsScreen.propTypes = {
   apiCacheExpirationSetAndSaveAsync: PropTypes.func.isRequired,
   selectedApiCacheExpiration: PropTypes.string,
   firstTimeTipsResetTips: PropTypes.func.isRequired,
+  navigateDebugHealthScreen: PropTypes.func.isRequired,
   // graphRendererSetAndSaveAsync: PropTypes.func.isRequired,
   // selectedGraphRenderer: PropTypes.string,
   // logLevelSetAndSaveAsync: PropTypes.func.isRequired,

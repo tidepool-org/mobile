@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 
-import Metrics from "../models/Metrics";
+import { Metrics } from "../models/Metrics";
 import DrawerButton from "./DrawerButton";
 
 class DrawerSwitchProfileButton extends PureComponent {

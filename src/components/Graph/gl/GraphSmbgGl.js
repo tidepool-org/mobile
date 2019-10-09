@@ -8,7 +8,7 @@ import {
   convertHexColorStringToInt,
   formatBloodGlucoseValueText,
 } from "../helpers";
-// import Logger from "../../../models/Logger";
+// import { Logger } from "../../../models/Logger";
 
 // Support rendering using circle geometry or sprites
 const useSprites = false;

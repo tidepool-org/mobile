@@ -1,6 +1,6 @@
 import { AsyncStorage } from "react-native";
 
-import Logger from "../models/Logger";
+import { Logger } from "../models/Logger";
 
 const LOG_LEVEL_SET = "LOG_LEVEL_SET";
 const LOG_LEVEL_KEY = "LOG_LEVEL_KEY";

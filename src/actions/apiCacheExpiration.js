@@ -1,10 +1,10 @@
 import { AsyncStorage } from "react-native";
-import api from "../api";
+import { api } from "../api";
 import {
   API_CACHE_EXPIRATION_180_DAYS,
   getApiCacheExpirationSecondsFromName,
 } from "../api/TidepoolApiCacheControl";
-import Logger from "../models/Logger";
+import { Logger } from "../models/Logger";
 
 const API_CACHE_EXPIRATION_SET = "API_CACHE_EXPIRATION_SET";
 

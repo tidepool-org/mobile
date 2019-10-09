@@ -2,6 +2,7 @@ import { combineReducers } from "redux";
 
 import appInit from "./appInit";
 import offline from "./offline";
+import health from "./health";
 import appVersion from "./appVersion";
 import auth from "./auth";
 import apiCacheExpiration from "./apiCacheExpiration";
@@ -31,6 +32,7 @@ const reducers = combineReducers({
   navigation,
   notesFetch,
   offline,
+  health,
   profilesFetch,
 });
 

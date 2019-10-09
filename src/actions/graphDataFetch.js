@@ -1,5 +1,5 @@
-import api from "../api";
-import ConnectionStatus from "../models/ConnectionStatus";
+import { api } from "../api";
+import { ConnectionStatus } from "../models/ConnectionStatus";
 
 const GRAPH_DATA_FETCH_DID_START = "GRAPH_DATA_FETCH_DID_START";
 const GRAPH_DATA_FETCH_DID_SUCCEED = "GRAPH_DATA_FETCH_DID_SUCCEED";

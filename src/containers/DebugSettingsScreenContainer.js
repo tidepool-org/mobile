@@ -2,7 +2,11 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
 import DebugSettingsScreen from "../screens/DebugSettingsScreen";
-import { navigateGoBack } from "../actions/navigation";
+import {
+  navigateGoBack,
+  navigateDebugHealthScreen,
+  navigateDrawerClose,
+} from "../actions/navigation";
 import { apiEnvironmentSetAndSaveAsync } from "../actions/apiEnvironment";
 import { apiCacheExpirationSetAndSaveAsync } from "../actions/apiCacheExpiration";
 import { graphRendererSetAndSaveAsync } from "../actions/graphRenderer";
@@ -19,7 +23,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
+      navigateDrawerClose,
       navigateGoBack,
+      navigateDebugHealthScreen,
       apiEnvironmentSetAndSaveAsync,
       apiCacheExpirationSetAndSaveAsync,
       firstTimeTipsResetTips,

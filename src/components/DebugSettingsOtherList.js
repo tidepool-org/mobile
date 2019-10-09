@@ -1,16 +1,18 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { StyleSheet } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 import glamorous, { withTheme } from "glamorous-native";
 
 import { ThemePropType } from "../prop-types/theme";
 import Colors from "../constants/Colors";
 import DebugSettingsResetFirstTimeSettingsListItem from "./DebugSettingsResetFirstTimeSettingsListItem";
+import DebugSettingsHealthScreenListItem from "./DebugSettingsHealthScreenListItem";
 import DebugSettingsForceCrashListItem from "./DebugSettingsForceCrashListItem";
 import DebugSettingsForceLogListItem from "./DebugSettingsForceLogListItem";
-import Logger from "../models/Logger";
+import { Logger } from "../models/Logger";
 
 const ITEM_RESET_FIRST_TIME_TIPS = "ITEM_RESET_FIRST_TIME_TIPS";
+const ITEM_DEBUG_HEALTH_SCREEN = "ITEM_DEBUG_HEALTH_SCREEN";
 const ITEM_FORCE_CRASH = "ITEM_FORCE_CRASH";
 const ITEM_FORCE_LOG_WARNING = "ITEM_FORCE_LOG_WARNING";
 const ITEM_FORCE_LOG_ERROR = "ITEM_FORCE_LOG_ERROR";
@@ -18,6 +20,7 @@ const ITEM_FORCE_LOG_ERROR = "ITEM_FORCE_LOG_ERROR";
 class DebugSettingsOtherList extends PureComponent {
   data = [
     ITEM_RESET_FIRST_TIME_TIPS,
+    Platform.OS === "ios" ? ITEM_DEBUG_HEALTH_SCREEN : null,
     ITEM_FORCE_CRASH,
     ITEM_FORCE_LOG_WARNING,
     ITEM_FORCE_LOG_ERROR,
@@ -31,7 +34,11 @@ class DebugSettingsOtherList extends PureComponent {
   );
 
   renderItem = ({ item }) => {
-    const { navigateGoBack, firstTimeTipsResetTips } = this.props;
+    const {
+      navigateGoBack,
+      firstTimeTipsResetTips,
+      navigateDebugHealthScreen,
+    } = this.props;
 
     switch (item) {
       case ITEM_RESET_FIRST_TIME_TIPS:
@@ -40,6 +47,14 @@ class DebugSettingsOtherList extends PureComponent {
             key={item}
             navigateGoBack={navigateGoBack}
             firstTimeTipsResetTips={firstTimeTipsResetTips}
+          />
+        );
+      case ITEM_DEBUG_HEALTH_SCREEN:
+        return (
+          <DebugSettingsHealthScreenListItem
+            key={item}
+            navigateGoBack={navigateGoBack}
+            navigateDebugHealthScreen={navigateDebugHealthScreen}
           />
         );
       case ITEM_FORCE_CRASH:
@@ -104,6 +119,7 @@ DebugSettingsOtherList.propTypes = {
   theme: ThemePropType.isRequired,
   navigateGoBack: PropTypes.func.isRequired,
   firstTimeTipsResetTips: PropTypes.func.isRequired,
+  navigateDebugHealthScreen: PropTypes.func.isRequired,
 };
 
 export default withTheme(DebugSettingsOtherList);

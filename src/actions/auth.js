@@ -1,11 +1,12 @@
-import { AsyncStorage, NativeModules } from "react-native";
+import { AsyncStorage } from "react-native";
 
 import { currentProfileRestoreAsync } from "./currentProfile";
 import { navigateHome, navigateSignIn } from "./navigation";
-import ConnectionStatus from "../models/ConnectionStatus";
-import api from "../api";
-import Logger from "../models/Logger";
-import Metrics from "../models/Metrics";
+import { ConnectionStatus } from "../models/ConnectionStatus";
+import { api } from "../api";
+import { Logger } from "../models/Logger";
+import { TPNative } from "../models/TPNative";
+import { Metrics } from "../models/Metrics";
 
 const AUTH_SIGN_IN_RESET = "AUTH_SIGN_IN_RESET";
 const AUTH_SIGN_IN_DID_START = "AUTH_SIGN_IN_DID_START";
@@ -21,24 +22,12 @@ const AUTH_REFRESH_SESSION_TOKEN_DID_FAIL =
 const AUTH_USER_KEY = "AUTH_USER_KEY";
 
 function loggerClearUser() {
-  try {
-    const { TPNative } = NativeModules;
-    TPNative.clearUser();
-  } catch (error) {
-    // console.log(`error: ${error}`);
-  }
-
+  TPNative.clearUser();
   Logger.clearUser();
 }
 
 function loggerSetUser({ userId, username, fullName, patient }) {
-  try {
-    const { TPNative } = NativeModules;
-    TPNative.setUser(userId, username, fullName, !!patient);
-  } catch (error) {
-    // console.log(`error: ${error}`);
-  }
-
+  TPNative.setUser({ userId, username, fullName, isDSAUser: !!patient });
   Logger.setUser({ userId, username, fullName });
 }
 

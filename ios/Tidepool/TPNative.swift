@@ -72,18 +72,4 @@ class TPNative: NSObject {
     @objc func testLogError(_ message: String) -> Void {
         RollbarReactNative.error(withMessage: message)
     }
-
-    // MARK: - HealthKit
-
-    @objc func enableHealthKitInterface() -> Void {
-        TPUploaderAPI.connector().uploader().enableHealthKitInterface()
-    }
-
-    @objc func disableHealthKitInterface() -> Void {
-        TPUploaderAPI.connector().uploader().disableHealthKitInterface()
-    }
-
-    @objc func shouldShowHealthKitUI() -> NSNumber {
-        return NSNumber(value: TPUploaderAPI.connector().uploader().shouldShowHealthKitUI())
-    }
 }

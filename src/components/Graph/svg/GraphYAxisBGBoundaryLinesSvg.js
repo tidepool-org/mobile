@@ -4,7 +4,7 @@
 // import { Svg } from "expo";
 
 // import { ThemePropType } from "../../../prop-types/theme";
-// // import Logger from "../../../models/Logger";
+// // import { Logger } from "../../../models/Logger";
 
 // const { Path } = Svg;
 

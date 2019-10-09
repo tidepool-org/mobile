@@ -29,12 +29,12 @@ import ModalScreenHeaderTitle from "../components/ModalScreenHeaderTitle";
 import ModalScreenHeaderRight from "../components/ModalScreenHeaderRight";
 import ModalScreenHeaderLeft from "../components/ModalScreenHeaderLeft";
 import HashtagText from "../components/HashtagText";
-import Metrics from "../models/Metrics";
+import { Metrics } from "../models/Metrics";
 import { formatDateAndTimeForAddOrEditNote } from "../utils/formatDate";
 import { ProfilePropType } from "../prop-types/profile";
 import { UserPropType } from "../prop-types/user";
 import HashtagPicker from "../components/HashtagPicker";
-import ConnectionStatus from "../models/ConnectionStatus";
+import { ConnectionStatus } from "../models/ConnectionStatus";
 import AlertManager from "../models/AlertManager";
 
 // TODO: refactor - Refactor this screen. It's too complex and responsible for too much, it seems

@@ -3,7 +3,7 @@ import { THREE } from "expo-three";
 import GraphRenderLayerGl from "./GraphRenderLayerGl";
 import GraphTextMeshFactory from "./GraphTextMeshFactory";
 import { calculateTimeMarkers, convertHexColorStringToInt } from "../helpers";
-// import Logger from "../../../models/Logger";
+// import { Logger } from "../../../models/Logger";
 
 class GraphXAxisGl extends GraphRenderLayerGl {
   constructor(props) {

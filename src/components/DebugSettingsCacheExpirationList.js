@@ -12,7 +12,7 @@ import {
   API_CACHE_EXPIRATION_5_MINUTES,
   API_CACHE_EXPIRATION_180_DAYS,
 } from "../api/TidepoolApiCacheControl";
-import api from "../api";
+import { api } from "../api";
 import { formatBytes } from "../utils/formatBytes";
 
 const items = [

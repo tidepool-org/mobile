@@ -6,10 +6,12 @@ import LaunchScreen from "../screens/LaunchScreen";
 import { MainDrawerNavigator } from "./MainDrawerNavigator";
 import { SignInNavigator } from "./SignInNavigator";
 import DebugSettingsScreenContainer from "../containers/DebugSettingsScreenContainer";
+import DebugHealthScreenContainer from "../containers/DebugHealthScreenContainer";
 import {
   LAUNCH_ROUTE_NAME,
   SIGN_IN_ROUTE_NAME,
   DEBUG_SETTINGS_ROUTE_NAME,
+  DEBUG_HEALTH_ROUTE_NAME,
   MAIN_DRAWER_ROUTE_NAME,
 } from "./routeNames";
 
@@ -31,6 +33,9 @@ const AppNavigator = createStackNavigator(
     },
     [DEBUG_SETTINGS_ROUTE_NAME]: {
       screen: () => <DebugSettingsScreenContainer />,
+    },
+    [DEBUG_HEALTH_ROUTE_NAME]: {
+      screen: () => <DebugHealthScreenContainer />,
     },
     [MAIN_DRAWER_ROUTE_NAME]: {
       screen: MainDrawerNavigator,

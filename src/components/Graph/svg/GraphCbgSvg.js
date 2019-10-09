@@ -2,7 +2,7 @@
 // import { Svg } from "expo";
 
 // import { MAX_BG_VALUE } from "../helpers";
-// // import Logger from "../../../models/Logger";
+// // import { Logger } from "../../../models/Logger";
 
 // const { Circle, Symbol, Use } = Svg;
 

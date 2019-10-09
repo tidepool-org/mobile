@@ -1,6 +1,6 @@
 import { AsyncStorage } from "react-native";
 
-import Logger from "../models/Logger";
+import { Logger } from "../models/Logger";
 import {
   GRAPH_RENDERER_SVG,
   GRAPH_RENDERER_THREE_JS,

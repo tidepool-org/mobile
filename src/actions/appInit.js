@@ -11,7 +11,7 @@ import GraphCbgGl from "../components/Graph/gl/GraphCbgGl";
 import GraphSmbgGl from "../components/Graph/gl/GraphSmbgGl";
 import { firstTimeTipsLoadSettingsAsync } from "./firstTimeTips";
 import { offlineSet } from "./offline";
-import ConnectionStatus from "../models/ConnectionStatus";
+import { ConnectionStatus } from "../models/ConnectionStatus";
 
 const APP_INIT_DID_FINISH = "APP_INIT_DID_FINISH";
 

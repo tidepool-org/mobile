@@ -6,7 +6,7 @@ const POST_CLIENT_ITEM_ACCESS_TOKEN = "00788919100a467e8fb08144b427890e";
 
 /* eslint-disable no-console */
 
-class Logger {
+class LoggerSingletonClass {
   LOG_LEVEL_DEBUG = "debug";
   LOG_LEVEL_INFO = "info";
   LOG_LEVEL_WARNING = "warning";
@@ -164,4 +164,6 @@ class Logger {
   }
 }
 
-export default new Logger();
+const Logger = new LoggerSingletonClass();
+
+export { Logger };

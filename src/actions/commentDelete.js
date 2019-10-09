@@ -1,4 +1,4 @@
-import api from "../api";
+import { api } from "../api";
 import { commentsFetchDeleteComment } from "./commentsFetch";
 
 const COMMENT_DELETE_DID_START = "COMMENT_DELETE_DID_START";

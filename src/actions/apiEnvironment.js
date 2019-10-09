@@ -1,7 +1,7 @@
 import { AsyncStorage } from "react-native";
 import { authSignOutAsync } from "./auth";
 import { switchApiEnvironment, API_ENVIRONMENT_PRODUCTION } from "../api";
-import Logger from "../models/Logger";
+import { Logger } from "../models/Logger";
 
 const API_ENVIRONMENT_SET = "API_ENVIRONMENT_SET";
 
