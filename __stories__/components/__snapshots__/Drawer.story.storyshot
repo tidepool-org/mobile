@@ -372,7 +372,74 @@ exports[`Storyshots Drawer default 1`] = `
           <View
             onLayout={[Function]}
             style={null}
-          />
+          >
+            <View
+              style={
+                Array [
+                  Object {
+                    "height": 80,
+                  },
+                ]
+              }
+            >
+              <View
+                style={
+                  Array [
+                    Object {
+                      "alignItems": "center",
+                      "flexDirection": "row",
+                      "marginLeft": 16,
+                    },
+                  ]
+                }
+              >
+                <Text
+                  allowFontScaling={false}
+                  style={
+                    Array [
+                      Object {
+                        "color": "#281946",
+                        "fontFamily": "OpenSans-Regular",
+                        "fontSize": 15,
+                      },
+                      Object {
+                        "marginRight": 8,
+                      },
+                    ]
+                  }
+                >
+                  Connect to Health
+                </Text>
+                <RCTSwitch
+                  accessibilityRole="button"
+                  onChange={[Function]}
+                  onResponderTerminationRequest={[Function]}
+                  onStartShouldSetResponder={[Function]}
+                  onTintColor="#627cff"
+                  style={
+                    Array [
+                      Object {
+                        "height": 31,
+                        "width": 51,
+                      },
+                      Object {
+                        "transform": Array [
+                          Object {
+                            "scaleX": 0.75,
+                          },
+                          Object {
+                            "scaleY": 0.75,
+                          },
+                        ],
+                      },
+                    ]
+                  }
+                  tintColor={null}
+                  value={true}
+                />
+              </View>
+            </View>
+          </View>
           <View
             onLayout={[Function]}
             style={null}
@@ -857,7 +924,74 @@ exports[`Storyshots Drawer long user full name 1`] = `
           <View
             onLayout={[Function]}
             style={null}
-          />
+          >
+            <View
+              style={
+                Array [
+                  Object {
+                    "height": 80,
+                  },
+                ]
+              }
+            >
+              <View
+                style={
+                  Array [
+                    Object {
+                      "alignItems": "center",
+                      "flexDirection": "row",
+                      "marginLeft": 16,
+                    },
+                  ]
+                }
+              >
+                <Text
+                  allowFontScaling={false}
+                  style={
+                    Array [
+                      Object {
+                        "color": "#281946",
+                        "fontFamily": "OpenSans-Regular",
+                        "fontSize": 15,
+                      },
+                      Object {
+                        "marginRight": 8,
+                      },
+                    ]
+                  }
+                >
+                  Connect to Health
+                </Text>
+                <RCTSwitch
+                  accessibilityRole="button"
+                  onChange={[Function]}
+                  onResponderTerminationRequest={[Function]}
+                  onStartShouldSetResponder={[Function]}
+                  onTintColor="#627cff"
+                  style={
+                    Array [
+                      Object {
+                        "height": 31,
+                        "width": 51,
+                      },
+                      Object {
+                        "transform": Array [
+                          Object {
+                            "scaleX": 0.75,
+                          },
+                          Object {
+                            "scaleY": 0.75,
+                          },
+                        ],
+                      },
+                    ]
+                  }
+                  tintColor={null}
+                  value={true}
+                />
+              </View>
+            </View>
+          </View>
           <View
             onLayout={[Function]}
             style={null}

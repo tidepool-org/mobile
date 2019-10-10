@@ -21,6 +21,11 @@ const props = {
   },
   version: "3.1.2",
   apiEnvironment: API_ENVIRONMENT_STAGING,
+  health: {
+    shouldShowHealthKitUI: true,
+    healthKitInterfaceEnabledForCurrentUser: true,
+    healthKitInterfaceConfiguredForOtherUser: false,
+  },
 };
 
 storiesOf("Drawer", module).add("default", () => (

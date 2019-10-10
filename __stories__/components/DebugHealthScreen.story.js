@@ -11,7 +11,11 @@ const props = {
     userId: "1",
     username: "email@gmail.com",
     fullName: "Current User",
+  },
+  health: {
     shouldShowHealthKitUI: true,
+    healthKitInterfaceEnabledForCurrentUser: true,
+    healthKitInterfaceConfiguredForOtherUser: false,
   },
   navigateGoBack: () => {},
 };
