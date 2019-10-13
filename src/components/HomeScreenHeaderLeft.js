@@ -5,7 +5,7 @@ import { Image, TouchableOpacity } from "react-native";
 import FirstTimeTips from "../models/FirstTimeTips";
 import Tooltip from "./Tooltip";
 import ConnectHealthTooltipContent from "./Tooltips/ConnectHealthTooltipContent";
-import Metrics from "../models/Metrics";
+import { Metrics } from "../models/Metrics";
 
 class HomeScreenHeaderLeft extends PureComponent {
   state = {

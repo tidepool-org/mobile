@@ -1,4 +1,4 @@
-import api from "../api";
+import { api } from "../api";
 import { notesFetchDeleteNote } from "./notesFetch";
 
 const NOTE_DELETE_DID_START = "NOTE_DELETE_DID_START";

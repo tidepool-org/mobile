@@ -7,7 +7,7 @@ import {
   formatBloodGlucoseValueText,
 } from "../helpers";
 
-// import Logger from "../../../models/Logger";
+// import { Logger } from "../../../models/Logger";
 
 class GraphYAxisGl extends GraphRenderLayerGl {
   constructor(props) {

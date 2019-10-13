@@ -1,7 +1,7 @@
 import { AsyncStorage } from "react-native";
 
-import api from "../api";
-import Logger from "../models/Logger";
+import { api } from "../api";
+import { Logger } from "../models/Logger";
 
 const CURRENT_PROFILE_SET = "CURRENT_PROFILE_SET";
 const CURRENT_PROFILE_SETTINGS_FETCH_DID_SUCCEED =

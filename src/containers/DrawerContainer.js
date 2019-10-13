@@ -21,6 +21,7 @@ class DrawerContainer extends PureComponent {
     const {
       currentUser,
       version,
+      health,
       apiEnvironment,
       notesSwitchProfileAndFetchAsync,
       navigateDrawerClose,
@@ -41,6 +42,7 @@ class DrawerContainer extends PureComponent {
           flex: 1,
           marginTop,
         }}
+        health={health}
         notesSwitchProfileAndFetchAsync={notesSwitchProfileAndFetchAsync}
         navigateDrawerClose={navigateDrawerClose}
         navigateSwitchProfile={navigateSwitchProfile}
@@ -68,6 +70,7 @@ DrawerContainer.propTypes = {
   currentUser: PropTypes.shape({
     username: PropTypes.string.isRequired,
   }).isRequired,
+  health: PropTypes.object.isRequired,
   version: PropTypes.string.isRequired,
   apiEnvironment: PropTypes.string.isRequired,
 };
@@ -75,6 +78,7 @@ DrawerContainer.propTypes = {
 const mapStateToProps = state => ({
   currentUser: state.auth,
   version: state.appVersion,
+  health: state.health,
   apiEnvironment: state.apiEnvironment,
 });
 

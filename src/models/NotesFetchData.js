@@ -1,5 +1,5 @@
 import HashtagCollection from "./HashtagCollection";
-import Logger from "./Logger";
+import { Logger } from "./Logger";
 
 class NotesFetchData {
   userId = "";

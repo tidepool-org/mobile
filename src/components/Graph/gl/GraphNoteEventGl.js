@@ -1,7 +1,7 @@
 import { THREE } from "expo-three";
 
 import GraphRenderLayerGl from "./GraphRenderLayerGl";
-// import Logger from "../../../models/Logger";
+// import { Logger } from "../../../models/Logger";
 
 class GraphNoteEventGl extends GraphRenderLayerGl {
   constructor(props) {

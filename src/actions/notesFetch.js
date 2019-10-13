@@ -1,4 +1,4 @@
-import api from "../api";
+import { api } from "../api";
 import { currentProfileSaveAsync } from "./currentProfile";
 
 const NOTES_FETCH_SET_SEARCH_FILTER = "NOTES_FETCH_SET_SEARCH_FILTER";

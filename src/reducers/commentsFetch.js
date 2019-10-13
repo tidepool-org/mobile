@@ -8,7 +8,7 @@ import {
 } from "../actions/commentsFetch";
 import { AUTH_SIGN_IN_RESET } from "../actions/auth";
 import { NOTES_FETCH_DID_START } from "../actions/notesFetch";
-import Logger from "../models/Logger";
+import { Logger } from "../models/Logger";
 
 const initialState = {};
 

@@ -5,7 +5,7 @@ import glamorous, { withTheme } from "glamorous-native";
 
 import { ThemePropType } from "../prop-types/theme";
 import Colors from "../constants/Colors";
-import Logger from "../models/Logger";
+import { Logger } from "../models/Logger";
 import DebugSettingsLoggingListItem from "./DebugSettingsLoggingListItem";
 
 const logLevels = [

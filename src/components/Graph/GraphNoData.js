@@ -2,9 +2,9 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import glamorous, { withTheme } from "glamorous-native";
 
-import Metrics from "../../models/Metrics";
+import { Metrics } from "../../models/Metrics";
 import { ThemePropType } from "../../prop-types/theme";
-// import Logger from "../../models/Logger";
+// import { Logger } from "../../models/Logger";
 
 class GraphNoData extends PureComponent {
   onPressHowToUpload = () => {

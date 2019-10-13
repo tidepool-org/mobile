@@ -195,7 +195,7 @@ PODS:
     - React
     - Rollbar (~> 1.5.0)
   - SwiftyJSON (4.2.0)
-  - TPHealthKitUploader (0.9.0)
+  - TPHealthKitUploader (0.9.2)
   - UMBarCodeScannerInterface (3.0.0)
   - UMCameraInterface (3.0.0)
   - UMConstantsInterface (3.0.0)
@@ -248,7 +248,7 @@ DEPENDENCIES:
   - RNDeviceInfo (from `../node_modules/react-native-device-info`)
   - RollbarReactNative (from `../node_modules/rollbar-react-native`)
   - SwiftyJSON (= 4.2)
-  - TPHealthKitUploader (from `https://github.com/tidepool-org/healthkit-uploader`, tag `0.9.1`)
+  - TPHealthKitUploader (from `https://github.com/tidepool-org/healthkit-uploader`, tag `0.9.4`)
   - UMBarCodeScannerInterface (from `../node_modules/unimodules-barcode-scanner-interface/ios`)
   - UMCameraInterface (from `../node_modules/unimodules-camera-interface/ios`)
   - UMConstantsInterface (from `../node_modules/unimodules-constants-interface/ios`)
@@ -343,7 +343,7 @@ EXTERNAL SOURCES:
     :path: "../node_modules/rollbar-react-native"
   TPHealthKitUploader:
     :git: https://github.com/tidepool-org/healthkit-uploader
-    :tag: 0.9.1
+    :tag: 0.9.4
   UMBarCodeScannerInterface:
     :path: !ruby/object:Pathname
     path: "../node_modules/unimodules-barcode-scanner-interface/ios"
@@ -389,7 +389,7 @@ CHECKOUT OPTIONS:
     :tag: ios/2.12.1
   TPHealthKitUploader:
     :git: https://github.com/tidepool-org/healthkit-uploader
-    :tag: 0.9.1
+    :tag: 0.9.4
 
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
@@ -434,7 +434,7 @@ SPEC CHECKSUMS:
   Rollbar: 5060e3fc9fa28ae75e70c61e95b1b31b2b22710c
   RollbarReactNative: 90812f66d5ecbfd7cdccbb2f0b666c0888b7ee47
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
-  TPHealthKitUploader: 0efb9f8f810868c9df07f18a06bb1f6c5457ba9f
+  TPHealthKitUploader: bb9227c9ef991342b74cc750aaa133d4a5e89d12
   UMBarCodeScannerInterface: 84ea2d6b58ff0dc27ef9b68bab71286be18ee020
   UMCameraInterface: 26b26005d1756a0d5f4f04f1e168e39ea9154535
   UMConstantsInterface: 038bacb19de12b6fd328c589122c8dc977cccf61
@@ -449,6 +449,6 @@ SPEC CHECKSUMS:
   UMTaskManagerInterface: 8664abd37a00715727e60df9ecd65e42ba47b548
   yoga: 92b2102c3d373d1a790db4ab761d2b0ffc634f64
 
-PODFILE CHECKSUM: 38ac69557f3b9ca68d6e267abc9dd64844278fa2
+PODFILE CHECKSUM: 0c969834b31408c884b138f7b62bc6f00d6ff586
 
 COCOAPODS: 1.7.5

@@ -1,4 +1,4 @@
-import api from "../api";
+import { api } from "../api";
 
 const PROFILES_FETCH_DID_START = "PROFILES_FETCH_DID_START";
 const PROFILES_FETCH_DID_SUCCEED = "PROFILES_FETCH_DID_SUCCEED";

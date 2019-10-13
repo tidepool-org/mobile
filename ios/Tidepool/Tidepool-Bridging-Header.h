@@ -5,4 +5,5 @@
 #import <ExpoKit/EXStandaloneAppDelegate.h>
 #import <React/RCTAsyncLocalStorage.h>
 #import <React/RCTBridgeModule.h>
+#import <React/RCTEventEmitter.h>
 #import <RollbarReactNative/RollbarReactNative.h>

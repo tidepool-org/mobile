@@ -2,7 +2,7 @@ import ExpoTHREE, { THREE } from "expo-three";
 
 import GraphRenderLayerGl from "./GraphRenderLayerGl";
 import { MAX_BG_VALUE, convertHexColorStringToInt } from "../helpers";
-// import Logger from "../../../models/Logger";
+// import { Logger } from "../../../models/Logger";
 
 // Support rendering using circle geometry or sprites
 const useSprites = false;

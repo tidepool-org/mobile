@@ -1,4 +1,4 @@
-import ConnectionStatus from "../models/ConnectionStatus";
+import { ConnectionStatus } from "../models/ConnectionStatus";
 
 import { OFFLINE_SET } from "../actions/offline";
 

@@ -27,6 +27,7 @@ import {
   SIGN_UP_DONATE_DATA_ROUTE_NAME,
   SIGN_UP_ACTIVATE_ACCOUNT_ROUTE_NAME,
   SWITCH_PROFILE_ROUTE_NAME,
+  DEBUG_HEALTH_ROUTE_NAME,
 } from "../navigators/routeNames";
 import {
   NAVIGATE_LAUNCH,
@@ -53,6 +54,7 @@ import {
   NAVIGATE_DRAWER_CLOSE,
   NAVIGATE_DEBUG_SETTINGS,
   NAVIGATE_GO_BACK,
+  NAVIGATE_DEBUG_HEALTH_SCREEN,
 } from "../actions/navigation";
 
 const useInAppSignUp = false;
@@ -281,6 +283,12 @@ function navigation(state = initialState, action) {
     case NAVIGATE_DEBUG_SETTINGS:
       nextState = AppNavigator.router.getStateForAction(
         NavigationActions.navigate({ routeName: DEBUG_SETTINGS_ROUTE_NAME }),
+        state
+      );
+      break;
+    case NAVIGATE_DEBUG_HEALTH_SCREEN:
+      nextState = AppNavigator.router.getStateForAction(
+        NavigationActions.navigate({ routeName: DEBUG_HEALTH_ROUTE_NAME }),
         state
       );
       break;

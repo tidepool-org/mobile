@@ -1,7 +1,7 @@
-import ConnectionStatus from "./ConnectionStatus";
-import api from "../api";
+import { ConnectionStatus } from "./ConnectionStatus";
+import { api } from "../api";
 
-class Metrics {
+class MetricsSingletonClass {
   constructor() {
     this.queue = [];
     this.isSendInProgress = false;
@@ -58,4 +58,6 @@ class Metrics {
   }
 }
 
-export default new Metrics();
+const Metrics = new MetricsSingletonClass();
+
+export { Metrics };

@@ -17,7 +17,7 @@ import AlertManager from "../models/AlertManager";
 import { ProfilePropType } from "../prop-types/profile";
 import { CommentPropType } from "../prop-types/comment";
 import { UserPropType } from "../prop-types/user";
-import Metrics from "../models/Metrics";
+import { Metrics } from "../models/Metrics";
 
 class HomeScreen extends PureComponent {
   constructor(props) {

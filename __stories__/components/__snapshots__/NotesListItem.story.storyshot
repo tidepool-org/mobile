@@ -54,6 +54,39 @@ exports[`Storyshots NotesListItem default 1`] = `
                 Array [
                   Object {
                     "flexDirection": "row",
+                    "justifyContent": "space-between",
+                    "zIndex": 1,
+                  },
+                ]
+              }
+            >
+              <Text
+                allowFontScaling={false}
+                numberOfLines={1}
+                style={
+                  Array [
+                    Object {
+                      "color": "#4d4e4c",
+                      "fontFamily": "OpenSans-Regular",
+                      "fontSize": 12.5,
+                    },
+                    Object {
+                      "flexShrink": 1,
+                      "marginLeft": 12,
+                      "marginRight": 12,
+                      "marginTop": 7,
+                    },
+                  ]
+                }
+              >
+                Jill Jellyfish to Jill Jellyfish
+              </Text>
+            </View>
+            <View
+              style={
+                Array [
+                  Object {
+                    "flexDirection": "row",
                     "justifyContent": "flex-start",
                     "zIndex": 1,
                   },
@@ -204,6 +237,39 @@ exports[`Storyshots NotesListItem initially expanded 1`] = `
               }
             }
           >
+            <View
+              style={
+                Array [
+                  Object {
+                    "flexDirection": "row",
+                    "justifyContent": "space-between",
+                    "zIndex": 1,
+                  },
+                ]
+              }
+            >
+              <Text
+                allowFontScaling={false}
+                numberOfLines={1}
+                style={
+                  Array [
+                    Object {
+                      "color": "#4d4e4c",
+                      "fontFamily": "OpenSans-Regular",
+                      "fontSize": 12.5,
+                    },
+                    Object {
+                      "flexShrink": 1,
+                      "marginLeft": 12,
+                      "marginRight": 12,
+                      "marginTop": 7,
+                    },
+                  ]
+                }
+              >
+                Jill Jellyfish to Jill Jellyfish
+              </Text>
+            </View>
             <View
               style={
                 Array [
@@ -364,6 +430,39 @@ exports[`Storyshots NotesListItem today 1`] = `
                 Array [
                   Object {
                     "flexDirection": "row",
+                    "justifyContent": "space-between",
+                    "zIndex": 1,
+                  },
+                ]
+              }
+            >
+              <Text
+                allowFontScaling={false}
+                numberOfLines={1}
+                style={
+                  Array [
+                    Object {
+                      "color": "#4d4e4c",
+                      "fontFamily": "OpenSans-Regular",
+                      "fontSize": 12.5,
+                    },
+                    Object {
+                      "flexShrink": 1,
+                      "marginLeft": 12,
+                      "marginRight": 12,
+                      "marginTop": 7,
+                    },
+                  ]
+                }
+              >
+                Jill Jellyfish to Jill Jellyfish
+              </Text>
+            </View>
+            <View
+              style={
+                Array [
+                  Object {
+                    "flexDirection": "row",
                     "justifyContent": "flex-start",
                     "zIndex": 1,
                   },
@@ -514,6 +613,39 @@ exports[`Storyshots NotesListItem yesterday 1`] = `
               }
             }
           >
+            <View
+              style={
+                Array [
+                  Object {
+                    "flexDirection": "row",
+                    "justifyContent": "space-between",
+                    "zIndex": 1,
+                  },
+                ]
+              }
+            >
+              <Text
+                allowFontScaling={false}
+                numberOfLines={1}
+                style={
+                  Array [
+                    Object {
+                      "color": "#4d4e4c",
+                      "fontFamily": "OpenSans-Regular",
+                      "fontSize": 12.5,
+                    },
+                    Object {
+                      "flexShrink": 1,
+                      "marginLeft": 12,
+                      "marginRight": 12,
+                      "marginTop": 7,
+                    },
+                  ]
+                }
+              >
+                Jill Jellyfish to Jill Jellyfish
+              </Text>
+            </View>
             <View
               style={
                 Array [

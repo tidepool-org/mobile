@@ -4,7 +4,7 @@ import GraphShapeGeometryFactory from "./GraphShapeGeometryFactory";
 import GraphTextMeshFactory from "./GraphTextMeshFactory";
 import GraphRenderLayerGl from "./GraphRenderLayerGl";
 import { convertHexColorStringToInt } from "../helpers";
-import Logger from "../../../models/Logger";
+import { Logger } from "../../../models/Logger";
 
 const EXTENSION_INTERRUPT_BAR_WIDTH = 6.0;
 const EXTENSION_END_SHAPE_WIDTH = 7.0;

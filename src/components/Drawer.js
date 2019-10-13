@@ -25,6 +25,7 @@ class Drawer extends PureComponent {
       version,
       apiEnvironment,
       currentUser,
+      health,
       navigateDebugSettings,
       navigateDrawerClose,
       notesSwitchProfileAndFetchAsync,
@@ -67,7 +68,10 @@ class Drawer extends PureComponent {
                   },
                 ],
                 renderItem: ({ item }) => (
-                  <DrawerHealth currentUser={item.currentUser} />
+                  <DrawerHealth
+                    currentUser={item.currentUser}
+                    health={health}
+                  />
                 ),
               },
               {
@@ -155,6 +159,7 @@ class Drawer extends PureComponent {
 
 Drawer.propTypes = {
   style: ViewPropTypes.style,
+  health: PropTypes.object.isRequired,
   notesSwitchProfileAndFetchAsync: PropTypes.func.isRequired,
   navigateDrawerClose: PropTypes.func.isRequired,
   navigateSwitchProfile: PropTypes.func.isRequired,

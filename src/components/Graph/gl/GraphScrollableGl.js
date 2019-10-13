@@ -14,7 +14,7 @@ import GraphBasalGl from "./GraphBasalGl";
 import GraphBolusGl from "./GraphBolusGl";
 import GraphWizardGl from "./GraphWizardGl";
 import { convertHexColorStringToInt } from "../helpers";
-// import Logger from "../../../models/Logger";
+// import { Logger } from "../../../models/Logger";
 
 class GraphScrollableGl extends PureComponent {
   componentDidMount() {

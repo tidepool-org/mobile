@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 
 import DrawerButton from "./DrawerButton";
-import Metrics from "../models/Metrics";
+import { Metrics } from "../models/Metrics";
 
 class DrawerSignOutButton extends PureComponent {
   onPress = () => {

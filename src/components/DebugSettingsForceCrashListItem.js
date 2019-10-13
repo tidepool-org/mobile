@@ -1,9 +1,9 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import glamorous, { withTheme } from "glamorous-native";
-import { NativeModules } from "react-native";
 
 import { ThemePropType } from "../prop-types/theme";
+import { TPNative } from "../models/TPNative";
 
 class DebugSettingsForceCrashListItem extends PureComponent {
   state = {
@@ -14,12 +14,7 @@ class DebugSettingsForceCrashListItem extends PureComponent {
     const { navigateGoBack } = this.props;
     setTimeout(() => {
       navigateGoBack();
-      try {
-        const { TPNative } = NativeModules;
-        TPNative.testNativeCrash();
-      } catch (error) {
-        // console.log(`error: ${error}`);
-      }
+      TPNative.testNativeCrash();
     }, 50);
   };
 

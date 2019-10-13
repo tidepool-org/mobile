@@ -4,7 +4,7 @@ import GraphTextMeshFactory from "./GraphTextMeshFactory";
 import GraphRenderLayerGl from "./GraphRenderLayerGl";
 import { convertHexColorStringToInt } from "../helpers";
 import { GraphLayoutConstants } from "../GraphFixedLayoutInfo";
-// import Logger from "../../../models/Logger";
+// import { Logger } from "../../../models/Logger";
 
 class GraphWizardGl extends GraphRenderLayerGl {
   constructor(props) {

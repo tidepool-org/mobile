@@ -5,9 +5,9 @@ import { Image, Platform, TouchableOpacity } from "react-native";
 import FirstTimeTips from "../models/FirstTimeTips";
 import Tooltip from "./Tooltip";
 import SimpleTextTooltipContent from "./Tooltips/SimpleTextTooltipContent";
-import ConnectionStatus from "../models/ConnectionStatus";
+import { ConnectionStatus } from "../models/ConnectionStatus";
 import AlertManager from "../models/AlertManager";
-import Metrics from "../models/Metrics";
+import { Metrics } from "../models/Metrics";
 
 class HomeScreenHeaderRight extends PureComponent {
   state = {

@@ -1,10 +1,10 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import glamorous, { withTheme } from "glamorous-native";
-import { NativeModules } from "react-native";
 
 import { ThemePropType } from "../prop-types/theme";
-import Logger from "../models/Logger";
+import { Logger } from "../models/Logger";
+import { TPNative } from "../models/TPNative";
 
 class DebugSettingsForceLogListItem extends PureComponent {
   state = {
@@ -15,17 +15,12 @@ class DebugSettingsForceLogListItem extends PureComponent {
     const { navigateGoBack, logLevel } = this.props;
     setTimeout(() => {
       navigateGoBack();
-      try {
-        const { TPNative } = NativeModules;
-        if (logLevel === Logger.LOG_LEVEL_WARNING) {
-          Logger.logWarning(`test`);
-          TPNative.testLogWarning(`test`);
-        } else if (logLevel === Logger.LOG_LEVEL_ERROR) {
-          Logger.logError(`test`);
-          TPNative.testLogError(`test`);
-        }
-      } catch (error) {
-        // console.log(`error: ${error}`);
+      if (logLevel === Logger.LOG_LEVEL_WARNING) {
+        TPNative.testLogWarning(`test`);
+        Logger.logWarning(`test`);
+      } else if (logLevel === Logger.LOG_LEVEL_ERROR) {
+        TPNative.testLogError(`test`);
+        Logger.logError(`test`);
       }
     }, 50);
   };

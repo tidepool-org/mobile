@@ -23,7 +23,7 @@ import AddCommentButton from "./AddCommentButton";
 import NotesListItemComment from "./NotesListItemComment";
 import SignificantTimeChangeNotification from "../models/SignificantTimeChangeNotification";
 import AlertManager from "../models/AlertManager";
-import Metrics from "../models/Metrics";
+import { Metrics } from "../models/Metrics";
 import { formatDateForNoteList } from "../utils/formatDate";
 import { ThemePropType } from "../prop-types/theme";
 import { CommentPropType } from "../prop-types/comment";

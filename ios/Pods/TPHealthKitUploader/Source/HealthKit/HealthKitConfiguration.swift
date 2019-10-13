@@ -80,13 +80,15 @@ class HealthKitConfiguration
     /// Turn on HK interface: start/resume uploading if possible...
     private func turnOnInterface() {
         DDLogVerbose("HealthKitConfiguration")
-        
+
         let hkManager = HealthKitUploadManager.sharedInstance
         guard !hkManager.isUploadInProgressForMode(.Current) else {
             DDLogVerbose("uploader already on, ignoring call!")
             return
         }
         
+        config.onTurnOnInterface();
+
         if let currentUserId = config.currentUserId() {
             // Always start uploading TPUploader.Mode.Current samples when interface is turned on
             hkManager.startUploading(mode: TPUploader.Mode.Current, currentUserId: currentUserId)
@@ -104,6 +106,8 @@ class HealthKitConfiguration
 
     private func turnOffInterface() {
         DDLogVerbose("\(#function)")
+
+        config.onTurnOffInterface();
 
         HealthKitUploadManager.sharedInstance.stopUploading(reason: TPUploader.StoppedReason.interfaceTurnedOff)
     }
@@ -191,7 +195,7 @@ class HealthKitConfiguration
                     return true
                 }
             } else {
-                DDLogError("No logged in user at healthKitInterfaceEnabledForOtherUser!")
+                DDLogError("No logged in user at healthKitInterfaceConfiguredForOtherUser!")
                 return true
             }
         }

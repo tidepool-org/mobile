@@ -1,6 +1,6 @@
 import { NetInfo } from "react-native";
 
-class ConnectionStatus {
+class ConnectionStatusSingletonClass {
   constructor() {
     this.connectionInfo = "unknown";
     NetInfo.addEventListener("connectionChange", this.onConnectionChange);
@@ -57,7 +57,7 @@ class ConnectionStatus {
   };
 }
 
-const connectionStatus = new ConnectionStatus();
-connectionStatus.initAsync();
+const ConnectionStatus = new ConnectionStatusSingletonClass();
+ConnectionStatus.initAsync();
 
-export default connectionStatus;
+export { ConnectionStatus };

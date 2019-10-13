@@ -1,5 +1,5 @@
 import { LOG_LEVEL_SET } from "../actions/logLevel";
-import Logger from "../models/Logger";
+import { Logger } from "../models/Logger";
 
 const initialState = Logger.LOG_LEVEL_DEFAULT;
 

@@ -40,6 +40,8 @@ const note = {
     "{{lorem.paragraph}}"
   )}`,
   userId: "1",
+  groupId: "groupId",
+  userFullName: "Jill Jellyfish",
 };
 const noteToday = {
   id: "1",
@@ -48,6 +50,8 @@ const noteToday = {
     "{{lorem.paragraph}}"
   )}`,
   userId: "1",
+  groupId: "groupId",
+  userFullName: "Jill Jellyfish",
 };
 const noteYesterday = {
   id: "1",
@@ -56,6 +60,8 @@ const noteYesterday = {
     "{{lorem.paragraph}}"
   )}`,
   userId: "1",
+  groupId: "groupId",
+  userFullName: "Jill Jellyfish",
 };
 const graphDataFetchData = {
   graphData: {},

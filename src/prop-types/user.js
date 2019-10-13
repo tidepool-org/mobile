@@ -16,9 +16,9 @@ const AuthUserDefaultProps = {
 };
 
 const UserPropType = PropTypes.shape({
-  userId: PropTypes.string.isRequired,
-  username: PropTypes.string.isRequired,
-  fullName: PropTypes.string.isRequired,
+  userId: PropTypes.string,
+  username: PropTypes.string,
+  fullName: PropTypes.string,
 });
 
 export { AuthUserPropType, AuthUserDefaultProps, UserPropType };

@@ -8,7 +8,7 @@
 // import GraphXAxisHeaderSvg from "./GraphXAxisHeaderSvg";
 // import GraphCbgSvg from "./GraphCbgSvg";
 // import GraphSmbgSvg from "./GraphSmbgSvg";
-// // import Logger from "../../../models/Logger";
+// // import { Logger } from "../../../models/Logger";
 
 // class GraphScrollableSvg extends PureComponent {
 //   render() {

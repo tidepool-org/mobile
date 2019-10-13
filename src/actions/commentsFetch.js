@@ -1,5 +1,5 @@
-import api from "../api";
-import ConnectionStatus from "../models/ConnectionStatus";
+import { api } from "../api";
+import { ConnectionStatus } from "../models/ConnectionStatus";
 
 const COMMENTS_FETCH_DID_START = "COMMENTS_FETCH_DID_START";
 const COMMENTS_FETCH_DID_SUCCEED = "COMMENTS_FETCH_DID_SUCCEED";
