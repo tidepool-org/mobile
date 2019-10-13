@@ -25,8 +25,10 @@ class TPNative: NSObject {
 
     // MARK: - User and environment
 
-    @objc func setUser(_ userId: String, username: String, userFullName: String, isDSAUser: Bool) -> Void {
+    @objc func setUser(_ userId: String, username: String, userFullName: String, isDSAUser: Bool, sessionToken: String) -> Void {
         Rollbar.currentConfiguration()?.setPersonId(userId, username: userFullName, email: username)
+
+        TPApi.sharedInstance.sessionToken = sessionToken
 
         let dataController = TPDataController.sharedInstance
         dataController.currentUserId = userId
@@ -38,6 +40,8 @@ class TPNative: NSObject {
     @objc(clearUser)
     func clearUser() -> Void {
         Rollbar.currentConfiguration()?.setPersonId(nil, username: nil, email: nil)
+
+        TPApi.sharedInstance.sessionToken = nil
 
         let dataController = TPDataController.sharedInstance
         dataController.currentUserId = nil

@@ -1,7 +1,5 @@
 import {
-  SHOULD_SHOW_HEALTH_KIT_UI_SET,
-  HEALTH_KIT_INTERFACE_ENABLED_FOR_CURRENT_USER_SET,
-  HEALTH_KIT_INTERFACE_CONFIGURED_FOR_OTHER_USER_SET,
+  HEALTH_KIT_INTERFACE_SET,
   IS_UPLOADING_HISTORICAL_SET,
 } from "../actions/health";
 
@@ -19,21 +17,7 @@ function health(state = initialState, action) {
   let nextState = state;
 
   switch (action.type) {
-    case SHOULD_SHOW_HEALTH_KIT_UI_SET:
-      nextState = { ...state, shouldShowHealthKitUI: action.payload };
-      break;
-    case HEALTH_KIT_INTERFACE_ENABLED_FOR_CURRENT_USER_SET:
-      nextState = {
-        ...state,
-        healthKitInterfaceEnabledForCurrentUser: action.payload,
-      };
-      break;
-    case HEALTH_KIT_INTERFACE_CONFIGURED_FOR_OTHER_USER_SET:
-      nextState = {
-        ...state,
-        healthKitInterfaceConfiguredForOtherUser: action.payload,
-      };
-      break;
+    case HEALTH_KIT_INTERFACE_SET:
     case IS_UPLOADING_HISTORICAL_SET:
       nextState = { ...state, ...action.payload };
       break;

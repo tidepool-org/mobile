@@ -20,7 +20,7 @@
 
 #pragma mark - Logged in user and environment
 
-RCT_EXTERN_METHOD(setUser:(NSString *)userId username:(NSString *)username userFullName:(NSString *)userFullName isDSAUser:(BOOL)isDSAUser)
+RCT_EXTERN_METHOD(setUser:(NSString *)userId username:(NSString *)username userFullName:(NSString *)userFullName isDSAUser:(BOOL)isDSAUser sessionToken:(NSString *)sessionToken)
 RCT_EXTERN_METHOD(clearUser)
 RCT_EXTERN_METHOD(setEnvironment:(NSString *)environment)
 

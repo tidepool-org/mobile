@@ -43,6 +43,7 @@ class TPNativeHealth: RCTEventEmitter {
     }
 
     @objc func disableHealthKitInterface() -> NSNumber {
+        _ = stopUploadingHistoricalAndReset();
         uploader.disableHealthKitInterface()
         return NSNumber(value: true)
     }
@@ -104,6 +105,7 @@ class TPNativeHealth: RCTEventEmitter {
 
         DispatchQueue.main.async {
             let body = [
+                "shouldShowHealthKitUI": self.uploader.shouldShowHealthKitUI(),
                 "healthKitInterfaceEnabledForCurrentUser": self.connector.isInterfaceOn,
                 "healthKitInterfaceConfiguredForOtherUser": self.uploader.healthKitInterfaceConfiguredForOtherUser()
             ]
@@ -121,6 +123,7 @@ class TPNativeHealth: RCTEventEmitter {
 
         DispatchQueue.main.async {
             let body = [
+                "shouldShowHealthKitUI": self.uploader.shouldShowHealthKitUI(),
                 "healthKitInterfaceEnabledForCurrentUser": self.connector.isInterfaceOn,
                 "healthKitInterfaceConfiguredForOtherUser": self.uploader.healthKitInterfaceConfiguredForOtherUser()
             ]

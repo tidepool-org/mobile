@@ -13,9 +13,9 @@ class TPNativeSingletonClass {
     }
   }
 
-  setUser({ userId, username, fullName, isDSAUser }) {
+  setUser({ userId, username, fullName, isDSAUser, sessionToken }) {
     try {
-      this.TPNativeModule.setUser(userId, username, fullName, isDSAUser);
+      this.TPNativeModule.setUser(userId, username, fullName, isDSAUser, sessionToken);
     } catch (error) {
       // console.log(`error: ${error}`);
     }

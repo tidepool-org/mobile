@@ -369,6 +369,11 @@ private class HealthKitUploadHelper: HealthKitSampleUploaderDelegate, HealthKitU
             }
         }
         
+        guard self.isUploading else {
+          DDLogInfo("Stopped uploading, don't post TPUploaderNotifications.TurnOnUploader.")
+          return
+        }
+
         postNotifications([TPUploaderNotifications.Updated, TPUploaderNotifications.TurnOnUploader], mode: mode)
     }
     

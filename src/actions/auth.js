@@ -21,22 +21,31 @@ const AUTH_REFRESH_SESSION_TOKEN_DID_FAIL =
 
 const AUTH_USER_KEY = "AUTH_USER_KEY";
 
-function loggerClearUser() {
-  TPNative.clearUser();
-  Logger.clearUser();
-}
-
-function loggerSetUser({ userId, username, fullName, patient }) {
-  TPNative.setUser({ userId, username, fullName, isDSAUser: !!patient });
-  Logger.setUser({ userId, username, fullName });
-}
-
 // NOTE: authSignInReset may be called on every keystroke in SignInForm
 const authSignInReset = () => () => {
   return {
     type: AUTH_SIGN_IN_RESET,
   };
 };
+
+function clearUser(dispatch) {
+  TPNative.clearUser();
+  Logger.clearUser();
+  api().cacheControl.clear();
+  dispatch(authSignInReset());
+  dispatch(navigateSignIn());
+}
+
+function setUser({ userId, username, fullName, patient, sessionToken }) {
+  TPNative.setUser({
+    userId,
+    username,
+    fullName,
+    isDSAUser: !!patient,
+    sessionToken,
+  });
+  Logger.setUser({ userId, username, fullName });
+}
 
 const authSignOutAsync = () => async dispatch => {
   try {
@@ -50,10 +59,7 @@ const authSignOutAsync = () => async dispatch => {
 
   Metrics.track({ metric: "Logged Out", shouldFlushBuffer: true });
 
-  loggerClearUser();
-  api().cacheControl.clear();
-  dispatch(authSignInReset());
-  dispatch(navigateSignIn());
+  clearUser(dispatch);
 };
 
 const authSignInDidStart = () => ({
@@ -61,7 +67,7 @@ const authSignInDidStart = () => ({
 });
 
 const authSignInDidSucceed = ({ authUser }) => {
-  loggerSetUser(authUser);
+  setUser(authUser);
   return {
     type: AUTH_SIGN_IN_DID_SUCCEED,
     payload: authUser,
@@ -125,7 +131,7 @@ const authRefreshTokenDidStart = () => ({
 });
 
 const authRefreshTokenDidSucceed = ({ authUser }) => {
-  loggerSetUser(authUser);
+  setUser(authUser);
   return {
     type: AUTH_REFRESH_SESSION_TOKEN_DID_SUCCEED,
     payload: authUser,
@@ -170,10 +176,7 @@ const authRefreshTokenOrSignInAsync = () => async dispatch => {
       // console.log(
       //   `authRefreshTokenOrSignInAsync: Navigate to sign in due to error`
       // ); // TODO: sign in - what about client side errors? Those should not result in reset / sign in
-      loggerClearUser();
-      api().cacheControl.clear();
-      dispatch(authSignInReset());
-      dispatch(navigateSignIn());
+      clearUser(dispatch);
     } else {
       // console.log(`authRefreshTokenOrSignInAsync: Success!`);
       authUser.sessionToken = sessionToken;
@@ -195,10 +198,7 @@ const authRefreshTokenOrSignInAsync = () => async dispatch => {
         // console.log(
         //   `authRefreshTokenOrSignInAsync: Navigate to sign in due to error`
         // ); // TODO: sign in - what about client side errors? Those should not result in reset / sign in
-        loggerClearUser();
-        api().cacheControl.clear();
-        dispatch(authSignInReset());
-        dispatch(navigateSignIn());
+        clearUser(dispatch);
       } else {
         authUser = { ...authUser, ...profile };
         const { fullName } = profile;

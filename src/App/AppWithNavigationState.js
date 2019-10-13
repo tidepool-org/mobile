@@ -9,9 +9,7 @@ import { HOME_ROUTE_NAME, SIGN_IN_ROUTE_NAME } from "../navigators/routeNames";
 import getRouteName from "../navigators/getRouteName";
 import { TPNativeHealth } from "../models/TPNativeHealth";
 import {
-  shouldShowHealthKitUISet,
-  healthKitInterfaceEnabledForCurrentUserSet,
-  healthKitInterfaceConfiguredForOtherUserSet,
+  healthKitInterfaceSet,
   isUploadingHistoricalSet,
 } from "../actions/health";
 // import { Logger } from "../models/Logger";
@@ -28,16 +26,14 @@ class AppWithNavigationState extends PureComponent {
     TPNativeHealth.addListener(this.onHealthEvent);
 
     // Do initial dispatch of health state when mounting. Further updates are by way of TPNativeHealth events
-    dispatch(shouldShowHealthKitUISet(TPNativeHealth.shouldShowHealthKitUI));
     dispatch(
-      healthKitInterfaceEnabledForCurrentUserSet(
-        TPNativeHealth.healthKitInterfaceEnabledForCurrentUser
-      )
-    );
-    dispatch(
-      healthKitInterfaceConfiguredForOtherUserSet(
-        TPNativeHealth.healthKitInterfaceConfiguredForOtherUser
-      )
+      healthKitInterfaceSet({
+        shouldShowHealthKitUI: TPNativeHealth.shouldShowHealthKitUI,
+        healthKitInterfaceEnabledForCurrentUser:
+          TPNativeHealth.healthKitInterfaceEnabledForCurrentUser,
+        healthKitInterfaceConfiguredForOtherUser:
+          TPNativeHealth.healthKitInterfaceConfiguredForOtherUser,
+      })
     );
     dispatch(
       isUploadingHistoricalSet({
@@ -64,14 +60,23 @@ class AppWithNavigationState extends PureComponent {
       eventName === "onTurnOffInterface"
     ) {
       dispatch(
-        healthKitInterfaceEnabledForCurrentUserSet(
-          TPNativeHealth.healthKitInterfaceEnabledForCurrentUser
-        )
+        healthKitInterfaceSet({
+          shouldShowHealthKitUI: TPNativeHealth.shouldShowHealthKitUI,
+          healthKitInterfaceEnabledForCurrentUser:
+            TPNativeHealth.healthKitInterfaceEnabledForCurrentUser,
+          healthKitInterfaceConfiguredForOtherUser:
+            TPNativeHealth.healthKitInterfaceConfiguredForOtherUser,
+        })
       );
       dispatch(
-        healthKitInterfaceConfiguredForOtherUserSet(
-          TPNativeHealth.healthKitInterfaceConfiguredForOtherUser
-        )
+        isUploadingHistoricalSet({
+          turnOffUploaderReason: TPNativeHealth.turnOffUploaderReason,
+          turnOffUploaderError: TPNativeHealth.turnOffUploaderError,
+          isUploadingHistorical: TPNativeHealth.isUploadingHistorical,
+          historicalUploadCurrentDay: TPNativeHealth.historicalUploadCurrentDay,
+          historicalTotalDays: TPNativeHealth.historicalTotalDays,
+          historicalTotalUploadCount: TPNativeHealth.historicalTotalUploadCount,
+        })
       );
     } else if (
       eventName === "onTurnOnHistoricalUpload" ||

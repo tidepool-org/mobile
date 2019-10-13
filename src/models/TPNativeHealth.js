@@ -70,20 +70,20 @@ class TPNativeHealthSingletonClass {
   }
 
   onTurnOnInterface = params => {
+    this.shouldShowHealthKitUI = params.shouldShowHealthKitUI;
     this.healthKitInterfaceEnabledForCurrentUser =
       params.healthKitInterfaceEnabledForCurrentUser;
     this.healthKitInterfaceConfiguredForOtherUser =
       params.healthKitInterfaceConfiguredForOtherUser;
-
     this.notify("onTurnOnInterface", params);
   };
 
   onTurnOffInterface = params => {
+    this.shouldShowHealthKitUI = params.shouldShowHealthKitUI;
     this.healthKitInterfaceEnabledForCurrentUser =
       params.healthKitInterfaceEnabledForCurrentUser;
     this.healthKitInterfaceConfiguredForOtherUser =
       params.healthKitInterfaceConfiguredForOtherUser;
-
     this.notify("onTurnOffInterface", params);
   };
 
@@ -107,8 +107,8 @@ class TPNativeHealthSingletonClass {
       this.historicalUploadCurrentDay = params.currentDay;
       this.historicalTotalDays = params.totalDays;
       this.historicalTotalUploadCount = params.totalUploadCount;
+      this.notify("onUploadStatsUpdated", params);
     }
-    this.notify("onUploadStatsUpdated", params);
   };
 
   addListener(listener) {

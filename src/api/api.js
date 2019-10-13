@@ -9,8 +9,8 @@ const API_ENVIRONMENT_DEVELOPMENT = "Development";
 
 const BASE_URL_PRODUCTION = "https://api.tidepool.org";
 const BASE_URL_INTEGRATION = "https://int-api.tidepool.org";
-const BASE_URL_STAGING = "https://stg-api.tidepool.org";
-const BASE_URL_DEVELOPMENT = "https://dev-api.tidepool.org";
+const BASE_URL_STAGING = "https://qa2.development.tidepool.org";
+const BASE_URL_DEVELOPMENT = "https://qa1.development.tidepool.org";
 
 let tidepoolApi = {};
 

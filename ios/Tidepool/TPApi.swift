@@ -205,8 +205,8 @@ class TPApi {
     private let kSessionTokenHeaderId = "X-Tidepool-Session-Token"
     private let kSessionTokenResponseId = "x-tidepool-session-token"
     private let kServers = [
-        "Development" :  "https://dev-api.tidepool.org",
-        "Staging" :      "https://stg-api.tidepool.org",
+        "Development" :  "https://qa1.development.tidepool.org",
+        "Staging" :      "https://qa2.development.tidepool.org",
         "Integration" :  "https://int-api.tidepool.org",
         "Production" :   "https://api.tidepool.org"
     ]

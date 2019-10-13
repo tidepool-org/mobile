@@ -78,15 +78,11 @@ class DebugHealthScreen extends PureComponent {
   };
 
   onPressUploadButton = () => {
-    const {
-      health: { isUploadingHistorical },
-    } = this.props;
+    TPNativeHealth.startUploadingHistorical();
+  };
 
-    if (isUploadingHistorical) {
-      TPNativeHealth.stopUploadingHistorical();
-    } else {
-      TPNativeHealth.startUploadingHistorical();
-    }
+  onPressResetButton = () => {
+    TPNativeHealth.stopUploadingHistorical();
   };
 
   renderGlobalConnectToHealthSwitch() {
@@ -301,16 +297,23 @@ class DebugHealthScreen extends PureComponent {
                 <Button
                   transparent
                   disabled={
-                    !healthKitInterfaceEnabledForCurrentUser &&
-                    !healthKitInterfaceConfiguredForOtherUser
+                    isUploadingHistorical ||
+                    (!healthKitInterfaceEnabledForCurrentUser &&
+                      !healthKitInterfaceConfiguredForOtherUser)
                   }
                   onPress={this.onPressUploadButton}
                 >
-                  <Text>
-                    {isUploadingHistorical
-                      ? "Stop uploading "
-                      : "Start uploading"}
-                  </Text>
+                  <Text>Start upload</Text>
+                </Button>
+                <Button
+                  transparent
+                  disabled={
+                    !healthKitInterfaceEnabledForCurrentUser &&
+                    !healthKitInterfaceConfiguredForOtherUser
+                  }
+                  onPress={this.onPressResetButton}
+                >
+                  <Text>Reset</Text>
                 </Button>
               </Row>
             </Grid>

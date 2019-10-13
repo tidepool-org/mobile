@@ -1,23 +1,9 @@
-const SHOULD_SHOW_HEALTH_KIT_UI_SET = "SHOULD_SHOW_HEALTH_KIT_UI_SET";
-const HEALTH_KIT_INTERFACE_ENABLED_FOR_CURRENT_USER_SET =
-  "HEALTH_KIT_INTERFACE_ENABLED_FOR_CURRENT_USER_SET";
-const HEALTH_KIT_INTERFACE_CONFIGURED_FOR_OTHER_USER_SET =
-  "HEALTH_KIT_INTERFACE_CONFIGURED_FOR_OTHER_USER_SET";
+const HEALTH_KIT_INTERFACE_SET = "HEALTH_KIT_INTERFACE_SET";
 const IS_UPLOADING_HISTORICAL_SET = "IS_UPLOADING_HISTORICAL_SET";
 
-const shouldShowHealthKitUISet = shouldShowHealthKitUI => ({
-  type: SHOULD_SHOW_HEALTH_KIT_UI_SET,
-  payload: shouldShowHealthKitUI,
-});
-
-const healthKitInterfaceEnabledForCurrentUserSet = healthKitInterfaceEnabledForCurrentUser => ({
-  type: HEALTH_KIT_INTERFACE_ENABLED_FOR_CURRENT_USER_SET,
-  payload: healthKitInterfaceEnabledForCurrentUser,
-});
-
-const healthKitInterfaceConfiguredForOtherUserSet = healthKitInterfaceConfiguredForOtherUser => ({
-  type: HEALTH_KIT_INTERFACE_CONFIGURED_FOR_OTHER_USER_SET,
-  payload: healthKitInterfaceConfiguredForOtherUser,
+const healthKitInterfaceSet = payload => ({
+  type: HEALTH_KIT_INTERFACE_SET,
+  payload,
 });
 
 const isUploadingHistoricalSet = params => ({
@@ -26,12 +12,8 @@ const isUploadingHistoricalSet = params => ({
 });
 
 export {
-  shouldShowHealthKitUISet,
-  healthKitInterfaceEnabledForCurrentUserSet,
-  healthKitInterfaceConfiguredForOtherUserSet,
+  healthKitInterfaceSet,
   isUploadingHistoricalSet,
-  SHOULD_SHOW_HEALTH_KIT_UI_SET,
-  HEALTH_KIT_INTERFACE_ENABLED_FOR_CURRENT_USER_SET,
-  HEALTH_KIT_INTERFACE_CONFIGURED_FOR_OTHER_USER_SET,
+  HEALTH_KIT_INTERFACE_SET,
   IS_UPLOADING_HISTORICAL_SET,
 };
