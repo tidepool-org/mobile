@@ -24,7 +24,8 @@ public class TPNativeModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void setUser(String userId, String username, String userFullName, boolean isDSAUser) {
+  public void setUser(String userId, String username, String userFullName, boolean isDSAUser, String sessionToken) {
+    // NOTE: sessionToken is not currently needed on Android native side of bridge. iOS does need it, though, for Health data uploading
     MainApplication application = (MainApplication) (this.getReactApplicationContext().getApplicationContext());
     application.setUser(userId, username, userFullName, isDSAUser);
   }
