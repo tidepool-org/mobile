@@ -74,8 +74,8 @@ class TPApi {
         reachability?.stopNotifier()
     }
     
-    // TODO: uploader - need to be able to do this when app is launched in background as well?
-    // TODO: uploader - test this
+    // TODO: health - need to be able to do this when app is launched in background as well?
+    // TODO: health - test this
     func refreshToken(_ completion: @escaping (_ succeeded: Bool, _ responseStatusCode: Int) -> (Void)) {
         
         let endpoint = "/auth/login"
@@ -92,7 +92,7 @@ class TPApi {
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
             if ( response.result.isSuccess ) {
                 DDLogInfo("Session token updated")
-                self.sessionToken = response.response!.allHeaderFields[self.kSessionTokenResponseId] as! String? // TODO: uploader - need to store in AsyncStorage so JavaScript gets it too!
+                self.sessionToken = response.response!.allHeaderFields[self.kSessionTokenResponseId] as! String? // TODO: health - need to store in AsyncStorage so JavaScript gets it too!
                 completion(true, response.response?.statusCode ?? 0)
             } else {
                 if let error = response.result.error {

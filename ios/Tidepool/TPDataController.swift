@@ -23,7 +23,7 @@ class TPDataController: NSObject
     var currentUserId: String?
     var currentUserIsDSAUser: Bool
     var currentUserFullName: String?
-    var bioSex: String? // biological sex is gleaned from HealthKit, and uploaded when missing in the service. // TODO: uploader - use this
+    var bioSex: String? // biological sex is gleaned from HealthKit, and uploaded when missing in the service. // TODO: health - use this
     
     override private init() {
         currentUserIsDSAUser = false

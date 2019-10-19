@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import {
+  Alert,
   Modal,
   SafeAreaView,
   StatusBar,
@@ -68,9 +69,17 @@ class DebugHealthScreen extends PureComponent {
     }
   }
 
+  onPressCancelChangeToOtherUser = () => {
+    this.setState({ connectToHealthUserSetting: false });
+  };
+
+  onPressChangeToOtherUser = () => {
+    TPNativeHealth.enableHealthKitInterface();
+  };
+
   onConnectToHealthValueChange = value => {
     if (value) {
-      TPNativeHealth.enableHealthKitInterface();
+      this.enableHealthKitInterfaceForCurrentUser();
     } else {
       TPNativeHealth.disableHealthKitInterface();
     }
@@ -84,6 +93,33 @@ class DebugHealthScreen extends PureComponent {
   onPressResetButton = () => {
     TPNativeHealth.stopUploadingHistorical();
   };
+
+  enableHealthKitInterfaceForCurrentUser() {
+    const {
+      health: {
+        healthKitInterfaceConfiguredForOtherUser,
+        currentHealthKitUsername,
+      },
+    } = this.props;
+
+    if (healthKitInterfaceConfiguredForOtherUser) {
+      const username = currentHealthKitUsername || "Unknown";
+      const message = `A different account (${username}) is currently associated with Health Data on this device`;
+      Alert.alert("Are you sure?", message, [
+        {
+          text: "Cancel",
+          style: "cancel",
+          onPress: this.onPressCancelChangeToOtherUser,
+        },
+        {
+          text: "Change",
+          onPress: this.onPressChangeToOtherUser,
+        },
+      ]);
+    } else {
+      TPNativeHealth.enableHealthKitInterface();
+    }
+  }
 
   renderGlobalConnectToHealthSwitch() {
     const { connectToHealthUserSetting } = this.state;

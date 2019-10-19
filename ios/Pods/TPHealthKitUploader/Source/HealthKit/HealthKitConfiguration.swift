@@ -94,7 +94,7 @@ class HealthKitConfiguration
             hkManager.startUploading(mode: TPUploader.Mode.Current, currentUserId: currentUserId)
 
             // Resume uploading other samples too, if resumable
-            // TODO: uploader UI - Revisit this. Do we want even the non-current mode readers/uploads to resume automatically? Or should that be behind some explicit UI
+            // TODO: health - Revisit this. Do we want even the non-current mode readers/uploads to resume automatically? Or should that be behind some explicit UI
             hkManager.resumeUploadingIfResumable(currentUserId: currentUserId)
             
             // Really just a one-time check to upload biological sex if Tidepool does not have it, but we can get it from HealthKit.

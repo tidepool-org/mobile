@@ -5,6 +5,7 @@ class TPNativeHealthSingletonClass {
     this.shouldShowHealthKitUI = false;
     this.healthKitInterfaceEnabledForCurrentUser = false;
     this.healthKitInterfaceConfiguredForOtherUser = false;
+    this.currentHealthKitUsername = "";
     this.isUploadingHistorical = false;
     this.historicalUploadCurrentDay = 0;
     this.historicalTotalDays = 0;
@@ -19,6 +20,7 @@ class TPNativeHealthSingletonClass {
       this.shouldShowHealthKitUI = this.nativeModule.shouldShowHealthKitUI();
       this.healthKitInterfaceEnabledForCurrentUser = this.nativeModule.healthKitInterfaceEnabledForCurrentUser();
       this.healthKitInterfaceConfiguredForOtherUser = this.nativeModule.healthKitInterfaceConfiguredForOtherUser();
+      this.nativeModule.currentHealthKitUsername();
 
       const events = new NativeEventEmitter(NativeModules.TPNativeHealth);
       events.addListener("onTurnOnInterface", this.onTurnOnInterface);
@@ -75,6 +77,7 @@ class TPNativeHealthSingletonClass {
       params.healthKitInterfaceEnabledForCurrentUser;
     this.healthKitInterfaceConfiguredForOtherUser =
       params.healthKitInterfaceConfiguredForOtherUser;
+    this.currentHealthKitUsername = params.currentHealthKitUsername;
     this.notify("onTurnOnInterface", params);
   };
 
@@ -84,6 +87,7 @@ class TPNativeHealthSingletonClass {
       params.healthKitInterfaceEnabledForCurrentUser;
     this.healthKitInterfaceConfiguredForOtherUser =
       params.healthKitInterfaceConfiguredForOtherUser;
+    this.currentHealthKitUsername = params.currentHealthKitUsername;
     this.notify("onTurnOffInterface", params);
   };
 

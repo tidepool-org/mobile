@@ -59,6 +59,13 @@ class TPNativeHealth: RCTEventEmitter {
     @objc func healthKitInterfaceConfiguredForOtherUser() -> NSNumber {
         return NSNumber(value: uploader.healthKitInterfaceConfiguredForOtherUser())
     }
+    
+    @objc func currentHealthKitUsername() -> NSString {
+        if let currentHealthKitUsername = uploader.curHKUserName() {
+            return currentHealthKitUsername as NSString
+        }
+        return ""
+    }
 
     @objc func startUploadingHistorical() -> NSNumber {
         let dataCtl = TPDataController.sharedInstance
@@ -75,8 +82,6 @@ class TPNativeHealth: RCTEventEmitter {
         uploader.resetPersistentStateForMode(.HistoricalAll)
         return NSNumber(value: true)
     }
-    
-    // MARK: - events
     
     override func supportedEvents() -> [String]! {
       return ["onTurnOnInterface", "onTurnOffInterface", "onTurnOnHistoricalUpload", "onTurnOffHistoricalUpload", "onUploadStatsUpdated"]
@@ -107,9 +112,9 @@ class TPNativeHealth: RCTEventEmitter {
             let body = [
                 "shouldShowHealthKitUI": self.uploader.shouldShowHealthKitUI(),
                 "healthKitInterfaceEnabledForCurrentUser": self.connector.isInterfaceOn,
-                "healthKitInterfaceConfiguredForOtherUser": self.uploader.healthKitInterfaceConfiguredForOtherUser()
-            ]
-            self.sendEvent(withName: "onTurnOffInterface", body: body)
+                "healthKitInterfaceConfiguredForOtherUser": self.uploader.healthKitInterfaceConfiguredForOtherUser(),
+                "currentHealthKitUsername": self.currentHealthKitUsername()
+                ] as [String : Any]
             self.sendEvent(withName: "onTurnOnInterface", body: body)
         }
     }
@@ -125,8 +130,9 @@ class TPNativeHealth: RCTEventEmitter {
             let body = [
                 "shouldShowHealthKitUI": self.uploader.shouldShowHealthKitUI(),
                 "healthKitInterfaceEnabledForCurrentUser": self.connector.isInterfaceOn,
-                "healthKitInterfaceConfiguredForOtherUser": self.uploader.healthKitInterfaceConfiguredForOtherUser()
-            ]
+                "healthKitInterfaceConfiguredForOtherUser": self.uploader.healthKitInterfaceConfiguredForOtherUser(),
+                "currentHealthKitUsername": self.currentHealthKitUsername()
+                ] as [String : Any]
             self.sendEvent(withName: "onTurnOffInterface", body: body)
         }
     }
