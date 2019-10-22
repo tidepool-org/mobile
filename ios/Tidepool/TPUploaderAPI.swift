@@ -89,6 +89,7 @@ class TPUploaderAPI: TPUploaderConfigInfo {
     
     var currentUserName: String? {
         get {
+            // TODO: health - it looks like 2.x might have used username (email) rather than full name, but, the new uploaderFramework branch in mobile-ios uas full name. Revisit this
             let result = dataController.currentUserFullName
             DDLogInfo("\(#function) - TPUploaderConfigInfo protocol, returning: \(result ?? "nil")")
             return result
@@ -107,7 +108,7 @@ class TPUploaderAPI: TPUploaderConfigInfo {
             return dataController.bioSex
         }
         set {
-            dataController.bioSex = newValue // TODO: uploader - also reflect this to AsyncStorage?
+            dataController.bioSex = newValue // TODO: health - also reflect this to AsyncStorage?
         }
     }
     

@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { ViewPropTypes, Switch } from "react-native";
+import { Alert, Switch, ViewPropTypes } from "react-native";
 import glamorous, { withTheme } from "glamorous-native";
 
 import Colors from "../constants/Colors";
@@ -28,9 +28,17 @@ class DrawerHealth extends PureComponent {
     }
   }
 
+  onPressCancelChangeToOtherUser = () => {
+    this.setState({ connectToHealthUserSetting: false });
+  };
+
+  onPressChangeToOtherUser = () => {
+    TPNativeHealth.enableHealthKitInterface();
+  };
+
   onConnectToHealthValueChange = value => {
     if (value) {
-      TPNativeHealth.enableHealthKitInterface();
+      this.enableHealthKitInterfaceForCurrentUser();
       Metrics.track({ metric: "Connect to health on" });
     } else {
       TPNativeHealth.disableHealthKitInterface();
@@ -38,6 +46,33 @@ class DrawerHealth extends PureComponent {
     }
     this.setState({ connectToHealthUserSetting: value });
   };
+
+  enableHealthKitInterfaceForCurrentUser() {
+    const {
+      health: {
+        healthKitInterfaceConfiguredForOtherUser,
+        currentHealthKitUsername,
+      },
+    } = this.props;
+
+    if (healthKitInterfaceConfiguredForOtherUser) {
+      const username = currentHealthKitUsername || "Unknown";
+      const message = `A different account (${username}) is currently associated with Health Data on this device`;
+      Alert.alert("Are you sure?", message, [
+        {
+          text: "Cancel",
+          style: "cancel",
+          onPress: this.onPressCancelChangeToOtherUser,
+        },
+        {
+          text: "Change",
+          onPress: this.onPressChangeToOtherUser,
+        },
+      ]);
+    } else {
+      TPNativeHealth.enableHealthKitInterface();
+    }
+  }
 
   render() {
     const { connectToHealthUserSetting } = this.state;

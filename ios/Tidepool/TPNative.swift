@@ -23,8 +23,6 @@ class TPNative: NSObject {
         return true
     }
 
-    // MARK: - User and environment
-
     @objc func setUser(_ userId: String, username: String, userFullName: String, isDSAUser: Bool, sessionToken: String) -> Void {
         Rollbar.currentConfiguration()?.setPersonId(userId, username: userFullName, email: username)
 
@@ -60,8 +58,6 @@ class TPNative: NSObject {
         let dataController = TPDataController.sharedInstance
         dataController.configureHealthKitInterface()
     }
-
-    // MARK: - Logging test support
 
     @objc func testNativeCrash() -> Void {
         DispatchQueue.main.async(execute: {

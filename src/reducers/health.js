@@ -7,6 +7,7 @@ const initialState = {
   shouldShowHealthKitUI: false,
   healthKitInterfaceEnabledForCurrentUser: false,
   healthKitInterfaceConfiguredForOtherUser: false,
+  currentHealthKitUsername: "",
   isUploadingHistorical: false,
   historicalUploadCurrentDay: 0,
   historicalTotalDays: 0,

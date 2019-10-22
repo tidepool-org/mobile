@@ -33,6 +33,7 @@ class AppWithNavigationState extends PureComponent {
           TPNativeHealth.healthKitInterfaceEnabledForCurrentUser,
         healthKitInterfaceConfiguredForOtherUser:
           TPNativeHealth.healthKitInterfaceConfiguredForOtherUser,
+        currentHealthKitUsername: TPNativeHealth.currentHealthKitUsername,
       })
     );
     dispatch(
@@ -66,6 +67,7 @@ class AppWithNavigationState extends PureComponent {
             TPNativeHealth.healthKitInterfaceEnabledForCurrentUser,
           healthKitInterfaceConfiguredForOtherUser:
             TPNativeHealth.healthKitInterfaceConfiguredForOtherUser,
+          currentHealthKitUsername: TPNativeHealth.currentHealthKitUsername,
         })
       );
       dispatch(
