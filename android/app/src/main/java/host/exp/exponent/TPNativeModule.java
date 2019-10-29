@@ -53,4 +53,20 @@ public class TPNativeModule extends ReactContextBaseJavaModule {
     MainApplication application = (MainApplication) (this.getReactApplicationContext().getApplicationContext());
     application.testLogError(message);
   }
+
+  @ReactMethod
+  public boolean isUploaderLoggingEnabled() {
+    // Not implemented for Android
+    return false;
+  }
+
+  @ReactMethod
+  public void enableUploaderLogging(boolean enable) {
+    // Not implemented for Android
+  }
+
+  @ReactMethod
+  public void emailUploaderLogs() {
+    // Not implemented for Android
+  }
 }

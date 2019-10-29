@@ -3,19 +3,23 @@ import PropTypes from "prop-types";
 import glamorous, { withTheme } from "glamorous-native";
 
 import { ThemePropType } from "../prop-types/theme";
+import { TPNative } from "../models/TPNative";
 
-class DebugSettingsLoggingListItem extends PureComponent {
+class DebugSettingsLoggingListItemEnable extends PureComponent {
   state = {
     isUnderlayVisible: false,
   };
 
   onPress = () => {
-    const { logLevel, onPress } = this.props;
-    onPress(logLevel);
+    const { navigateGoBack } = this.props;
+    setTimeout(() => {
+      navigateGoBack();
+      TPNative.enableUploaderLogging(!TPNative.isUploaderLoggingEnabled());
+    }, 50);
   };
 
   renderName() {
-    const { theme, logLevelLabelName } = this.props;
+    const { theme } = this.props;
     const { isUnderlayVisible } = this.state;
     const titleColor = isUnderlayVisible
       ? theme.titleColorActive
@@ -29,39 +33,11 @@ class DebugSettingsLoggingListItem extends PureComponent {
         numberOfLines={1}
         color={titleColor}
       >
-        {logLevelLabelName}
+        {TPNative.isUploaderLoggingEnabled()
+          ? "Disable uploader logging"
+          : "Enable uploader logging"}
       </glamorous.Text>
     );
-  }
-
-  renderSelectedCheckMark() {
-    const { theme, selected } = this.props;
-    const { isUnderlayVisible } = this.state;
-    const borderColor = isUnderlayVisible
-      ? theme.titleColorActive
-      : theme.underlayColor;
-
-    if (selected) {
-      return (
-        <glamorous.View
-          width={13}
-          height={6}
-          marginLeft={12}
-          alignSelf="center"
-          backgroundColor="transparent"
-          borderBottomWidth={2}
-          borderLeftWidth={2}
-          borderColor={borderColor}
-          transform={[
-            {
-              rotate: "-45deg",
-            },
-          ]}
-        />
-      );
-    }
-
-    return null;
   }
 
   render() {
@@ -85,23 +61,15 @@ class DebugSettingsLoggingListItem extends PureComponent {
           justifyContent="space-between"
         >
           {this.renderName()}
-          {this.renderSelectedCheckMark()}
         </glamorous.View>
       </glamorous.TouchableHighlight>
     );
   }
 }
 
-DebugSettingsLoggingListItem.propTypes = {
+DebugSettingsLoggingListItemEnable.propTypes = {
   theme: ThemePropType.isRequired,
-  logLevel: PropTypes.string.isRequired,
-  logLevelLabelName: PropTypes.string.isRequired,
-  selected: PropTypes.bool,
-  onPress: PropTypes.func.isRequired,
+  navigateGoBack: PropTypes.func.isRequired,
 };
 
-DebugSettingsLoggingListItem.defaultProps = {
-  selected: false,
-};
-
-export default withTheme(DebugSettingsLoggingListItem);
+export default withTheme(DebugSettingsLoggingListItemEnable);
