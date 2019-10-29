@@ -21,8 +21,13 @@
 RCT_EXTERN_METHOD(setUser:(NSString *)userId username:(NSString *)username userFullName:(NSString *)userFullName isDSAUser:(BOOL)isDSAUser sessionToken:(NSString *)sessionToken)
 RCT_EXTERN_METHOD(clearUser)
 RCT_EXTERN_METHOD(setEnvironment:(NSString *)environment)
+
 RCT_EXTERN_METHOD(testNativeCrash)
 RCT_EXTERN_METHOD(testLogWarning:(NSString *)message)
 RCT_EXTERN_METHOD(testLogError:(NSString *)message)
+
+RCT_EXTERN__BLOCKING_SYNCHRONOUS_METHOD(isUploaderLoggingEnabled)
+RCT_EXTERN_METHOD(enableUploaderLogging:(BOOL)enable)
+RCT_EXTERN_METHOD(emailUploaderLogs)
 
 @end

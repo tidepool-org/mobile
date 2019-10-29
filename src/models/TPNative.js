@@ -15,7 +15,13 @@ class TPNativeSingletonClass {
 
   setUser({ userId, username, fullName, isDSAUser, sessionToken }) {
     try {
-      this.TPNativeModule.setUser(userId, username, fullName, isDSAUser, sessionToken);
+      this.TPNativeModule.setUser(
+        userId,
+        username,
+        fullName,
+        isDSAUser,
+        sessionToken
+      );
     } catch (error) {
       // console.log(`error: ${error}`);
     }
@@ -48,6 +54,31 @@ class TPNativeSingletonClass {
   testLogError(message) {
     try {
       this.TPNativeModule.testLogError(message);
+    } catch (error) {
+      // console.log(`error: ${error}`);
+    }
+  }
+
+  isUploaderLoggingEnabled() {
+    try {
+      return this.TPNativeModule.isUploaderLoggingEnabled();
+    } catch (error) {
+      // console.log(`error: ${error}`);
+    }
+    return false;
+  }
+
+  enableUploaderLogging(enable) {
+    try {
+      this.TPNativeModule.enableUploaderLogging(enable);
+    } catch (error) {
+      // console.log(`error: ${error}`);
+    }
+  }
+
+  emailUploaderLogs() {
+    try {
+      this.TPNativeModule.emailUploaderLogs();
     } catch (error) {
       // console.log(`error: ${error}`);
     }

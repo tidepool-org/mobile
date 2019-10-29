@@ -15,6 +15,7 @@
 
 import UIKit
 import CocoaLumberjack
+import MessageUI
 
 var fileLogger: DDFileLogger!
 

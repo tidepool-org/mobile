@@ -3,12 +3,13 @@ import PropTypes from "prop-types";
 import { StatusBar, SafeAreaView, Modal } from "react-native";
 import glamorous, { ThemeProvider } from "glamorous-native";
 
+import { Platform } from "@unimodules/core";
 import PrimaryTheme from "../themes/PrimaryTheme";
 import Colors from "../constants/Colors";
 import DebugSettingsApiEnvironmentList from "../components/DebugSettingsApiEnvironmentList";
 import DebugSettingsCacheExpirationList from "../components/DebugSettingsCacheExpirationList";
 // import DebugSettingsGraphRendererList from "../components/DebugSettingsGraphRendererList";
-// import DebugSettingsLoggingList from "../components/DebugSettingsLoggingList";
+import DebugSettingsLoggingList from "../components/DebugSettingsLoggingList";
 import DebugSettingsOtherList from "../components/DebugSettingsOtherList";
 
 class DebugSettingsScreen extends PureComponent {
@@ -121,6 +122,16 @@ class DebugSettingsScreen extends PureComponent {
               <glamorous.View width={32} height={32} />
             </glamorous.View>
             <glamorous.ScrollView>
+              {Platform.OS === "ios" ? (
+                <>
+                  <DebugSettingsLoggingList navigateGoBack={navigateGoBack} />
+                  <glamorous.View
+                    flexDirection="row"
+                    justifyContent="space-between"
+                    padding={8}
+                  />
+                </>
+              ) : null}
               <DebugSettingsApiEnvironmentList
                 onApiEnvironmentSelected={this.onApiEnvironmentSelected}
                 selectedApiEnvironment={selectedApiEnvironment}
@@ -148,19 +159,15 @@ class DebugSettingsScreen extends PureComponent {
                 justifyContent="space-between"
                 padding={8}
               /> */}
-              {/* <DebugSettingsLoggingList
-                onLogLevelSelected={this.onLogLevelSelected}
-                selectedLogLevel={selectedLogLevel}
-              />
-              <glamorous.View
-                flexDirection="row"
-                justifyContent="space-between"
-                padding={8}
-              /> */}
               <DebugSettingsOtherList
                 navigateGoBack={navigateGoBack}
                 firstTimeTipsResetTips={firstTimeTipsResetTips}
                 navigateDebugHealthScreen={navigateDebugHealthScreen}
+              />
+              <glamorous.View
+                flexDirection="row"
+                justifyContent="space-between"
+                padding={24}
               />
             </glamorous.ScrollView>
           </SafeAreaView>

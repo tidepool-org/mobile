@@ -5,33 +5,14 @@ import glamorous, { withTheme } from "glamorous-native";
 
 import { ThemePropType } from "../prop-types/theme";
 import Colors from "../constants/Colors";
-import { Logger } from "../models/Logger";
-import DebugSettingsLoggingListItem from "./DebugSettingsLoggingListItem";
+import DebugSettingsLoggingListItemEnable from "./DebugSettingsLoggingListItemEnable";
+import DebugSettingsLoggingListItemEmailLogs from "./DebugSettingsLoggingListItemEmailLogs";
 
-const logLevels = [
-  {
-    name: Logger.LOG_LEVEL_DEBUG,
-    labelName: "Debug",
-  },
-  {
-    name: Logger.LOG_LEVEL_INFO,
-    labelName: "Info",
-  },
-  {
-    name: Logger.LOG_LEVEL_WARNING,
-    labelName: "Warning",
-  },
-  {
-    name: Logger.LOG_LEVEL_ERROR,
-    labelName: "Error (Default)",
-  },
-];
+const ITEM_ENABLE_HEALTH_LOGGING = "ITEM_ENABLE_HEALTH_LOGGING";
+const ITEM_EMAIL_HEALTH_LOGS = "ITEM_EMAIL_HEALTH_LOGS";
 
 class DebugSettingsLoggingList extends PureComponent {
-  onPress = graphRenderer => {
-    const { onLogLevelSelected } = this.props;
-    onLogLevelSelected(graphRenderer);
-  };
+  data = [ITEM_ENABLE_HEALTH_LOGGING, ITEM_EMAIL_HEALTH_LOGS];
 
   renderSeparator = () => (
     <glamorous.View
@@ -41,16 +22,30 @@ class DebugSettingsLoggingList extends PureComponent {
   );
 
   renderItem = ({ item }) => {
-    const { selectedLogLevel } = this.props;
-    return (
-      <DebugSettingsLoggingListItem
-        key={item.name}
-        logLevel={item.name}
-        logLevelLabelName={item.labelName}
-        onPress={this.onPress}
-        selected={item.name === selectedLogLevel}
-      />
-    );
+    const {
+      navigateGoBack,
+      // firstTimeTipsResetTips,
+      // navigateDebugHealthScreen,
+    } = this.props;
+
+    switch (item) {
+      case ITEM_ENABLE_HEALTH_LOGGING:
+        return (
+          <DebugSettingsLoggingListItemEnable
+            key={item}
+            navigateGoBack={navigateGoBack}
+          />
+        );
+      case ITEM_EMAIL_HEALTH_LOGS:
+        return (
+          <DebugSettingsLoggingListItemEmailLogs
+            key={item}
+            navigateGoBack={navigateGoBack}
+          />
+        );
+      default:
+        return null;
+    }
   };
 
   render() {
@@ -64,7 +59,7 @@ class DebugSettingsLoggingList extends PureComponent {
           marginLeft={15}
           marginBottom={8}
         >
-          {"Logging".toLocaleUpperCase()}
+          {"Uploader Logging".toLocaleUpperCase()}
         </glamorous.Text>
         <glamorous.FlatList
           borderTopWidth={1}
@@ -72,9 +67,9 @@ class DebugSettingsLoggingList extends PureComponent {
           borderColor={Colors.warmGrey}
           backgroundColor="white"
           scrollEnabled={false}
-          data={logLevels}
+          data={this.data}
           extraData={this.state}
-          keyExtractor={item => item.name}
+          keyExtractor={item => item}
           renderItem={this.renderItem}
           ItemSeparatorComponent={this.renderSeparator}
         />
@@ -85,12 +80,7 @@ class DebugSettingsLoggingList extends PureComponent {
 
 DebugSettingsLoggingList.propTypes = {
   theme: ThemePropType.isRequired,
-  onLogLevelSelected: PropTypes.func.isRequired,
-  selectedLogLevel: PropTypes.string,
-};
-
-DebugSettingsLoggingList.defaultProps = {
-  selectedLogLevel: Logger.LOG_LEVEL_DEFAULT,
+  navigateGoBack: PropTypes.func.isRequired,
 };
 
 export default withTheme(DebugSettingsLoggingList);
