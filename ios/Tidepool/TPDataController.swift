@@ -31,6 +31,8 @@ class TPDataController: NSObject
     
     /// Call this at login/logout, token refresh(?), and upon enabling or disabling the HealthKit interface.
     func configureHealthKitInterface() {
+        DDLogInfo("Configure user id: \(String(describing: self.currentUserId)), full name: \(String(describing: self.currentUserFullName)), is DSA user: \(String(describing: self.currentUserIsDSAUser))")
+
         TPUploaderAPI.connector().uploader().configure()
     }
     

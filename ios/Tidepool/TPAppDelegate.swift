@@ -16,6 +16,7 @@
 import UIKit
 import CocoaLumberjack
 import MessageUI
+import TPHealthKitUploader
 
 var fileLogger: DDFileLogger!
 
@@ -24,11 +25,67 @@ class TPAppDelegate: EXStandaloneAppDelegate {
     {
         DDLogVerbose("trace")
 
-        let result = super.application(application, didFinishLaunchingWithOptions: launchOptions)
-
         RollbarReactNative.initWithAccessToken("00788919100a467e8fb08144b427890e")
         TPSettings.sharedInstance.loadSettings()
         
+        // Occasionally log full date to help with deciphering logs!
+        let dateString = DateFormatter().isoStringFromDate(Date())
+        DDLogVerbose("Log Date: \(dateString)")
+        
+        let result = super.application(application, didFinishLaunchingWithOptions: launchOptions)
+
+        DDLogInfo("did finish launching")
+        
         return result
+    }
+        
+    fileprivate var deviceIsLocked = false
+    override func applicationProtectedDataDidBecomeAvailable(_ application: UIApplication) {
+        DDLogInfo("Device unlocked!")
+        deviceIsLocked = false
+        // super.applicationProtectedDataDidBecomeAvailable(application) // super doesn't implement!
+    }
+    
+    override func applicationProtectedDataWillBecomeUnavailable(_ application: UIApplication) {
+        DDLogInfo("Device locked!")
+        deviceIsLocked = true
+        // super.applicationProtectedDataWillBecomeUnavailable(application) // super doesn't implement!
+    }
+    
+    override func applicationWillResignActive(_ application: UIApplication) {
+        DDLogVerbose("trace")
+        // super.applicationWillResignActive(application) // super doesn't implement!
+    }
+
+    override func applicationDidEnterBackground(_ application: UIApplication) {
+        DDLogVerbose("trace")
+
+        // Re-enable idle timer (screen locking) when the app enters background. (May have been disabled during sync/upload.)
+        UIApplication.shared.isIdleTimerDisabled = false
+        // TODO: health - need to disable idle timer while Initial or Manual Sync is going on (and also sync via Debug Health)
+
+        // super.applicationDidEnterBackground(application) // super doesn't implement!
+    }
+
+    override func applicationWillEnterForeground(_ application: UIApplication) {
+        DDLogInfo("applicationWillEnterForeground")
+        super.applicationWillEnterForeground(application)
+    }
+
+    override func applicationDidBecomeActive(_ application: UIApplication) {
+        // Occasionally log full date to help with deciphering logs!
+        let dateString = DateFormatter().isoStringFromDate(Date())
+        DDLogVerbose("Log Date: \(dateString)")
+        
+        // TODO: health - refresh token like 2.x did?
+
+        TPDataController.sharedInstance.configureHealthKitInterface()
+
+        // super.applicationDidBecomeActive(application) // super doesn't implement!
+    }
+    
+    override func applicationWillTerminate(_ application: UIApplication) {
+        DDLogVerbose("trace")
+        // super.applicationWillTerminate(application) // super doesn't implement!
     }
 }
