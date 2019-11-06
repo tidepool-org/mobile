@@ -103,5 +103,7 @@
 	<string>Allow Tidepool to access your reminders</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
 </dict>
 </plist>
