@@ -207,8 +207,7 @@ class TPApi {
     private let kServers = [
         "Development" :  "https://qa1.development.tidepool.org",
         "Staging" :      "https://qa2.development.tidepool.org",
-        "Integration" :  "https://int-api.tidepool.org",
-        "Production" :   "https://api.tidepool.org"
+        "Production" :   "https://production.development.tidepool.org"
     ]
     private var baseUrl: URL?
  }
