@@ -94,7 +94,7 @@ class HealthKitConfiguration
             hkManager.startUploading(mode: TPUploader.Mode.Current, currentUserId: currentUserId)
 
             // Resume uploading other samples too, if resumable
-            // TODO: health - Revisit this. Do we want even the non-current mode readers/uploads to resume automatically? Or should that be behind some explicit UI
+            // TODO: uploader UI - Revisit this. Do we want even the non-current mode readers/uploads to resume automatically? Or should that be behind some explicit UI
             hkManager.resumeUploadingIfResumable(currentUserId: currentUserId)
             
             // Really just a one-time check to upload biological sex if Tidepool does not have it, but we can get it from HealthKit.
@@ -123,7 +123,6 @@ class HealthKitConfiguration
         
         DDLogVerbose("\(#function)")
         
-        let needsUploaderReads = true
         let username = self.config.currentUserName
         
         guard self.config.currentUserId() != nil else {
@@ -134,7 +133,6 @@ class HealthKitConfiguration
         func configureCurrentHealthKitUser() {
             DDLogVerbose("\(#function)")
             
-            settings.interfaceEnabled.value = true
             if !self.healthKitInterfaceEnabledForCurrentUser() {
                 if self.healthKitInterfaceConfiguredForOtherUser() {
                     // Switching healthkit users, reset HealthKitUploadManager
@@ -147,6 +145,8 @@ class HealthKitConfiguration
                 settings.interfaceUserId.value = config.currentUserId()!
                 settings.interfaceUserName.value = username
             }
+            // Note: set this at the end because above will clear this value if switching current HK user!
+            settings.interfaceEnabled.value = true
         }
         
         HealthKitManager.sharedInstance.authorize() {

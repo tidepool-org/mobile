@@ -8,7 +8,6 @@ import Colors from "../constants/Colors";
 import DebugSettingsApiEnvironmentListItem from "./DebugSettingsApiEnvironmentListItem";
 import {
   API_ENVIRONMENT_PRODUCTION,
-  API_ENVIRONMENT_INTEGRATION,
   API_ENVIRONMENT_STAGING,
   API_ENVIRONMENT_DEVELOPMENT,
 } from "../api";
@@ -16,7 +15,6 @@ import {
 const apiEnvironments = [
   { name: API_ENVIRONMENT_DEVELOPMENT },
   { name: API_ENVIRONMENT_STAGING },
-  { name: API_ENVIRONMENT_INTEGRATION },
   { name: API_ENVIRONMENT_PRODUCTION },
 ];
 
