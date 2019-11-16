@@ -27,13 +27,13 @@ import SwiftyJSON
 /// - Provides online/offline status.
 class TPApi {
     static let sharedInstance = TPApi()
-    
+
     var sessionToken: String?
     var environment: String?
     private(set) var baseUrlString: String?
 
     // Reachability object, valid during lifetime of this TPApi, and convenience function that uses this
-    // Register for ReachabilityChangedNotification to monitor reachability changes             
+    // Register for ReachabilityChangedNotification to monitor reachability changes
     var reachability: Reachability?
     func isConnectedToNetwork() -> Bool {
         if let reachability = reachability {
@@ -52,7 +52,7 @@ class TPApi {
     }
 
     // MARK: Initialization
-    
+
     /// Creator of TPApi must call this function after init!
     func configure() -> Void {
         self.baseUrlString = kServers[self.environment!]!
@@ -62,30 +62,30 @@ class TPApi {
             reachability.stopNotifier()
         }
         self.reachability = Reachability()
-        
+
         do {
            try reachability?.startNotifier()
         } catch {
             DDLogError("Unable to start notifier!")
         }
     }
-    
+
     deinit {
         reachability?.stopNotifier()
     }
-    
+
     // TODO: health - need to be able to do this when app is launched in background as well?
     // TODO: health - test this
     func refreshToken(_ completion: @escaping (_ succeeded: Bool, _ responseStatusCode: Int) -> (Void)) {
-        
+
         let endpoint = "/auth/login"
-        
+
         if self.sessionToken == nil || TPDataController.sharedInstance.currentUserId == nil {
             // We don't have a session token to refresh.
             completion(false, 0)
             return
         }
-        
+
         // Post the request.
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         self.sendRequest(.get, endpoint:endpoint).responseJSON { response in
@@ -104,7 +104,7 @@ class TPApi {
             }
         }
     }
-    
+
     // MARK: - Internal
 
     // User-agent string, based on that from Alamofire, but common regardless of whether Alamofire library is used
@@ -116,11 +116,11 @@ class TPApi {
                     let bundle = info[kCFBundleIdentifierKey as String] as? String ?? "Unknown"
                     let appVersion = info["CFBundleShortVersionString"] as? String ?? "Unknown"
                     let appBuild = info[kCFBundleVersionKey as String] as? String ?? "Unknown"
-                    
+
                     let osNameVersion: String = {
                         let version = ProcessInfo.processInfo.operatingSystemVersion
                         let versionString = "\(version.majorVersion).\(version.minorVersion).\(version.patchVersion)"
-                        
+
                         let osName: String = {
                             #if os(iOS)
                             return "iOS"
@@ -136,20 +136,20 @@ class TPApi {
                             return "Unknown"
                             #endif
                         }()
-                        
+
                         return "\(osName) \(versionString)"
                     }()
-                    
+
                     return "\(executable)/\(appVersion) (\(bundle); build:\(appBuild); \(osNameVersion))"
                 }
-                
+
                 return "TidepoolMobile"
             }()
         }
         return _userAgentString!
     }
     private var _userAgentString: String?
-    
+
     private func sessionManager() -> SessionManager {
         if _sessionManager == nil {
             // get the default headers
@@ -166,7 +166,7 @@ class TPApi {
         return _sessionManager!
     }
     private var _sessionManager: SessionManager?
-    
+
     // Sends a request to the specified endpoint
     private func sendRequest(_ requestType: HTTPMethod? = .get,
         endpoint: (String),
@@ -174,7 +174,7 @@ class TPApi {
         headers: [String: String]? = nil) -> (DataRequest)
     {
         let url = baseUrl!.appendingPathComponent(endpoint)
-        
+
         // Get our API headers (the session token) and add any headers supplied by the caller
         var apiHeaders = getApiHeaders()
         if ( apiHeaders != nil ) {
@@ -187,27 +187,27 @@ class TPApi {
             // We have no headers of our own to use- just use the caller's directly
             apiHeaders = headers
         }
-        
+
         // Fire off the network request
         DDLogInfo("sendRequest url: \(url), params: \(parameters ?? [:]), headers: \(apiHeaders ?? [:])")
         return self.sessionManager().request(url, method: requestType!, parameters: parameters, headers: apiHeaders).validate()
         //debugPrint(result)
         //return result
     }
-    
+
     func getApiHeaders() -> [String: String]? {
         if ( sessionToken != nil ) {
             return [kSessionTokenHeaderId : sessionToken!]
         }
         return nil
     }
-    
+
     private let kSessionTokenHeaderId = "X-Tidepool-Session-Token"
     private let kSessionTokenResponseId = "x-tidepool-session-token"
     private let kServers = [
         "Development" :  "https://qa1.development.tidepool.org",
         "Staging" :      "https://qa2.development.tidepool.org",
-        "Production" :   "https://production.development.tidepool.org"
+        "Production" :   "https://api.tidepool.org"
     ]
     private var baseUrl: URL?
  }

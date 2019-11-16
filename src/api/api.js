@@ -6,7 +6,7 @@ const API_ENVIRONMENT_PRODUCTION = "Production";
 const API_ENVIRONMENT_STAGING = "Staging";
 const API_ENVIRONMENT_DEVELOPMENT = "Development";
 
-const BASE_URL_PRODUCTION = "https://production.development.tidepool.org";
+const BASE_URL_PRODUCTION = "https://api.tidepool.org";
 const BASE_URL_STAGING = "https://qa2.development.tidepool.org";
 const BASE_URL_DEVELOPMENT = "https://qa1.development.tidepool.org";
 
