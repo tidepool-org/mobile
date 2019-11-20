@@ -33,7 +33,7 @@ import commonColor from "../../native-base-theme/variables/commonColor";
 const styles = StyleSheet.create({
   uploadButton: { marginRight: 0, paddingLeft: 0 },
   headerStyle: { color: Colors.blackish },
-  statsText: { color: Colors.altDarkGreyColor },
+  statsText: { color: Colors.blackish },
   left: {
     marginLeft: -10,
     marginRight: 0,
@@ -54,6 +54,12 @@ class DebugHealthScreen extends PureComponent {
     this.commonColorTheme = getTheme(commonColor);
   }
 
+  componentDidMount() {
+    this.refreshUploadStatsInterval = setInterval(() => {
+      TPNativeHealth.refreshUploadStats();
+    }, 1000 * 30); // 30 seconds
+  }
+
   componentWillReceiveProps(nextProps) {
     const {
       health: { healthKitInterfaceEnabledForCurrentUser },
@@ -67,6 +73,10 @@ class DebugHealthScreen extends PureComponent {
           nextProps.health.healthKitInterfaceEnabledForCurrentUser,
       });
     }
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.refreshUploadStatsInterval);
   }
 
   onPressCancelChangeToOtherUser = () => {
@@ -92,6 +102,10 @@ class DebugHealthScreen extends PureComponent {
 
   onPressResetButton = () => {
     TPNativeHealth.stopUploadingHistorical();
+  };
+
+  timeChanged = () => {
+    TPNativeHealth.refreshUploadStats();
   };
 
   enableHealthKitInterfaceForCurrentUser() {
@@ -239,15 +253,14 @@ class DebugHealthScreen extends PureComponent {
         turnOffUploaderReason,
         isUploadingHistorical,
         historicalUploadCurrentDay,
-        historicalTotalDays,
-        historicalTotalUploadCount,
+        historicalUploadTotalDays,
       },
     } = this.props;
 
     // TODO: health -  Revisit this temporary work around for an issue where
     // upload stats show 1 of 1 days before determining true total number of
     // days!
-    if (historicalTotalDays <= 1 && historicalTotalUploadCount <= 1) {
+    if (historicalUploadTotalDays <= 1) {
       return null;
     }
 
@@ -255,13 +268,8 @@ class DebugHealthScreen extends PureComponent {
       return (
         <Grid>
           <Row>
-            <Text>
-              {`Uploaded ${historicalUploadCurrentDay} of ${historicalTotalDays} days`}
-            </Text>
-          </Row>
-          <Row>
-            <Text>
-              {`Total samples uploaded: ${historicalTotalUploadCount}`}
+            <Text style={styles.statsText}>
+              {`Uploaded ${historicalUploadCurrentDay} of ${historicalUploadTotalDays} days`}
             </Text>
           </Row>
         </Grid>
@@ -285,19 +293,19 @@ class DebugHealthScreen extends PureComponent {
         <Grid>
           <Row>
             <Left style={styles.left}>
-              <Text>Stopped reason:</Text>
+              <Text style={styles.statsText}>Stopped reason:</Text>
             </Left>
             <Right style={styles.right}>
-              <Text>{turnOffUploaderReason}</Text>
+              <Text style={styles.statsText}>{turnOffUploaderReason}</Text>
             </Right>
           </Row>
           {turnOffUploaderError ? (
             <Grid>
               <Row>
-                <Text>Stopped error:</Text>
+                <Text style={styles.statsText}>Stopped error:</Text>
               </Row>
               <Row>
-                <Text>{turnOffUploaderError}</Text>
+                <Text style={styles.statsText}>{turnOffUploaderError}</Text>
               </Row>
             </Grid>
           ) : null}
@@ -310,18 +318,14 @@ class DebugHealthScreen extends PureComponent {
 
   renderHistoricalHealthCard() {
     const {
-      health: { isUploadingHistorical },
-    } = this.props;
-
-    const {
       health: {
         shouldShowHealthKitUI,
         healthKitInterfaceEnabledForCurrentUser,
-        healthKitInterfaceConfiguredForOtherUser,
+        isUploadingHistorical,
       },
     } = this.props;
 
-    if (shouldShowHealthKitUI) {
+    if (shouldShowHealthKitUI && healthKitInterfaceEnabledForCurrentUser) {
       return (
         <Card>
           <CardItem header bordered style={{ paddingBottom: 0 }}>
@@ -332,23 +336,12 @@ class DebugHealthScreen extends PureComponent {
               <Row>
                 <Button
                   transparent
-                  disabled={
-                    isUploadingHistorical ||
-                    (!healthKitInterfaceEnabledForCurrentUser &&
-                      !healthKitInterfaceConfiguredForOtherUser)
-                  }
+                  disabled={isUploadingHistorical}
                   onPress={this.onPressUploadButton}
                 >
                   <Text>Start upload</Text>
                 </Button>
-                <Button
-                  transparent
-                  disabled={
-                    !healthKitInterfaceEnabledForCurrentUser &&
-                    !healthKitInterfaceConfiguredForOtherUser
-                  }
-                  onPress={this.onPressResetButton}
-                >
+                <Button transparent onPress={this.onPressResetButton}>
                   <Text>Reset</Text>
                 </Button>
               </Row>
@@ -358,6 +351,50 @@ class DebugHealthScreen extends PureComponent {
             <Grid>
               <Row>{this.renderHistoricalUploadStoppedReason()}</Row>
               <Row>{this.renderHistoricalUploadStats()}</Row>
+            </Grid>
+          </CardItem>
+        </Card>
+      );
+    }
+
+    return null;
+  }
+
+  renderCurrentUploadStats() {
+    const {
+      health: { lastCurrentUploadUiDescription },
+    } = this.props;
+
+    return (
+      <Grid>
+        <Row>
+          <Text style={styles.statsText}>{lastCurrentUploadUiDescription}</Text>
+        </Row>
+      </Grid>
+    );
+  }
+
+  renderCurrentHealthCard() {
+    const {
+      health: {
+        shouldShowHealthKitUI,
+        healthKitInterfaceEnabledForCurrentUser,
+      },
+    } = this.props;
+
+    if (shouldShowHealthKitUI && healthKitInterfaceEnabledForCurrentUser) {
+      return (
+        <Card>
+          <CardItem header bordered>
+            <Grid>
+              <Row>
+                <Text style={styles.headerStyle}>Current</Text>
+              </Row>
+            </Grid>
+          </CardItem>
+          <CardItem bordered>
+            <Grid>
+              <Row>{this.renderCurrentUploadStats()}</Row>
             </Grid>
           </CardItem>
         </Card>
@@ -402,6 +439,7 @@ class DebugHealthScreen extends PureComponent {
                 <Content padder>
                   {this.renderGlobalHealthCard()}
                   {this.renderHistoricalHealthCard()}
+                  {this.renderCurrentHealthCard()}
                 </Content>
               </StyleProvider>
             </glamorous.ScrollView>

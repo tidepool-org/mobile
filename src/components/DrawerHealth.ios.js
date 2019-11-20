@@ -4,6 +4,7 @@ import { Alert, Switch, ViewPropTypes } from "react-native";
 import glamorous, { withTheme } from "glamorous-native";
 
 import Colors from "../constants/Colors";
+import DrawerHealthStatus from "./DrawerHealthStatus";
 import { Metrics } from "../models/Metrics";
 import { TPNativeHealth } from "../models/TPNativeHealth";
 import { ThemePropType } from "../prop-types/theme";
@@ -77,6 +78,7 @@ class DrawerHealth extends PureComponent {
   render() {
     const { connectToHealthUserSetting } = this.state;
     const {
+      health,
       health: {
         shouldShowHealthKitUI,
         healthKitInterfaceEnabledForCurrentUser,
@@ -110,6 +112,7 @@ class DrawerHealth extends PureComponent {
             }
           />
         </glamorous.View>
+        <DrawerHealthStatus health={health} style={style} />
       </glamorous.View>
     );
   }

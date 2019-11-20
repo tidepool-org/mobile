@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4D0406202383A8CC00F4A422 /* NSDateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D04061F2383A8CC00F4A422 /* NSDateExtension.swift */; };
 		4D08D6872313472A00CBB2F7 /* TPNative.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D08D68323133B0F00CBB2F7 /* TPNative.swift */; };
 		4D08D68923134E8800CBB2F7 /* TPNativeBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D08D68823134E8800CBB2F7 /* TPNativeBridge.m */; };
 		4D0DF5FA23247D41004F6ED6 /* TPSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0DF5F923247D41004F6ED6 /* TPSettings.swift */; };
@@ -33,6 +34,7 @@
 
 /* Begin PBXFileReference section */
 		2C1548D9E4CB1AEFA5CCAE6D /* Pods-Tidepool.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tidepool.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tidepool/Pods-Tidepool.debug.xcconfig"; sourceTree = "<group>"; };
+		4D04061F2383A8CC00F4A422 /* NSDateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDateExtension.swift; sourceTree = "<group>"; };
 		4D08D68023133AB200CBB2F7 /* Tidepool-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tidepool-Bridging-Header.h"; sourceTree = "<group>"; };
 		4D08D68323133B0F00CBB2F7 /* TPNative.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TPNative.swift; sourceTree = "<group>"; };
 		4D08D68823134E8800CBB2F7 /* TPNativeBridge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TPNativeBridge.m; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 				4D8027D121E417D2003C8B10 /* LaunchScreen.h */,
 				4D8027D221E417D2003C8B10 /* LaunchScreen.m */,
 				4D8027D421E41806003C8B10 /* LaunchScreen.storyboard */,
+				4D04061F2383A8CC00F4A422 /* NSDateExtension.swift */,
 				4DFFF0752314BB110007E093 /* Reachability.swift */,
 				B5DB047E1F3A684600E91581 /* shell-app-manifest.json */,
 				B5DB047F1F3A684600E91581 /* shell-app.bundle */,
@@ -338,6 +341,7 @@
 			files = (
 				4DB2757F2367E62E00AE891B /* TPNativeHealth.swift in Sources */,
 				4D8027D321E417D2003C8B10 /* LaunchScreen.m in Sources */,
+				4D0406202383A8CC00F4A422 /* NSDateExtension.swift in Sources */,
 				4DB275802367E62E00AE891B /* TPNativeHealthBridge.m in Sources */,
 				4D466CB02348FFC30026406B /* main.swift in Sources */,
 				4D08D6872313472A00CBB2F7 /* TPNative.swift in Sources */,

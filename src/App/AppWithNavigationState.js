@@ -8,10 +8,7 @@ import { AppNavigator } from "../navigators/AppNavigator";
 import { HOME_ROUTE_NAME, SIGN_IN_ROUTE_NAME } from "../navigators/routeNames";
 import getRouteName from "../navigators/getRouteName";
 import { TPNativeHealth } from "../models/TPNativeHealth";
-import {
-  healthKitInterfaceSet,
-  isUploadingHistoricalSet,
-} from "../actions/health";
+import { healthKitInterfaceSet, uploaderStateSet } from "../actions/health";
 // import { Logger } from "../models/Logger";
 
 class AppWithNavigationState extends PureComponent {
@@ -37,13 +34,14 @@ class AppWithNavigationState extends PureComponent {
       })
     );
     dispatch(
-      isUploadingHistoricalSet({
+      uploaderStateSet({
         turnOffUploaderReason: TPNativeHealth.turnOffUploaderReason,
         turnOffUploaderError: TPNativeHealth.turnOffUploaderError,
         isUploadingHistorical: TPNativeHealth.isUploadingHistorical,
         historicalUploadCurrentDay: TPNativeHealth.historicalUploadCurrentDay,
-        historicalTotalDays: TPNativeHealth.historicalTotalDays,
-        historicalTotalUploadCount: TPNativeHealth.historicalTotalUploadCount,
+        historicalUploadTotalDays: TPNativeHealth.historicalUploadTotalDays,
+        lastCurrentUploadUiDescription:
+          TPNativeHealth.lastCurrentUploadUiDescription,
       })
     );
   }
@@ -71,13 +69,12 @@ class AppWithNavigationState extends PureComponent {
         })
       );
       dispatch(
-        isUploadingHistoricalSet({
+        uploaderStateSet({
           turnOffUploaderReason: TPNativeHealth.turnOffUploaderReason,
           turnOffUploaderError: TPNativeHealth.turnOffUploaderError,
           isUploadingHistorical: TPNativeHealth.isUploadingHistorical,
           historicalUploadCurrentDay: TPNativeHealth.historicalUploadCurrentDay,
-          historicalTotalDays: TPNativeHealth.historicalTotalDays,
-          historicalTotalUploadCount: TPNativeHealth.historicalTotalUploadCount,
+          historicalUploadTotalDays: TPNativeHealth.historicalUploadTotalDays,
         })
       );
     } else if (
@@ -85,32 +82,37 @@ class AppWithNavigationState extends PureComponent {
       eventName === "onTurnOffHistoricalUpload"
     ) {
       dispatch(
-        isUploadingHistoricalSet({
+        uploaderStateSet({
           turnOffUploaderReason: TPNativeHealth.turnOffUploaderReason,
           turnOffUploaderError: TPNativeHealth.turnOffUploaderError,
           isUploadingHistorical: TPNativeHealth.isUploadingHistorical,
           historicalUploadCurrentDay: TPNativeHealth.historicalUploadCurrentDay,
-          historicalTotalDays: TPNativeHealth.historicalTotalDays,
-          historicalTotalUploadCount: TPNativeHealth.historicalTotalUploadCount,
+          historicalUploadTotalDays: TPNativeHealth.historicalUploadTotalDays,
         })
       );
     } else if (eventName === "onUploadStatsUpdated") {
       if (eventParams.type === "historical") {
-        // If we get an stats updated event for historical upload, we might have
+        // If we get a stats updated event for historical upload, we might have
         // missed onTurnOnHistoricalUpload if it were sent before RN
-        // initialized, so, dispatch isUploadingHistoricalSet as well
+        // initialized, so, dispatch uploaderStateSet as well
         if (TPNativeHealth.isUploadingHistorical) {
           dispatch(
-            isUploadingHistoricalSet({
+            uploaderStateSet({
               isUploadingHistorical: TPNativeHealth.isUploadingHistorical,
               historicalUploadCurrentDay:
                 TPNativeHealth.historicalUploadCurrentDay,
-              historicalTotalDays: TPNativeHealth.historicalTotalDays,
-              historicalTotalUploadCount:
-                TPNativeHealth.historicalTotalUploadCount,
+              historicalUploadTotalDays:
+                TPNativeHealth.historicalUploadTotalDays,
             })
           );
         }
+      } else if (eventParams.type === "current") {
+        dispatch(
+          uploaderStateSet({
+            lastCurrentUploadUiDescription:
+              TPNativeHealth.lastCurrentUploadUiDescription,
+          })
+        );
       }
     }
   };

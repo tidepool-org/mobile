@@ -23,7 +23,7 @@ const props = {
   apiEnvironment: API_ENVIRONMENT_STAGING,
   health: {
     shouldShowHealthKitUI: true,
-    healthKitInterfaceEnabledForCurrentUser: true,
+    healthKitInterfaceEnabledForCurrentUser: false,
     healthKitInterfaceConfiguredForOtherUser: false,
   },
 };

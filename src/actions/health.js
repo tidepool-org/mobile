@@ -1,19 +1,19 @@
 const HEALTH_KIT_INTERFACE_SET = "HEALTH_KIT_INTERFACE_SET";
-const IS_UPLOADING_HISTORICAL_SET = "IS_UPLOADING_HISTORICAL_SET";
+const UPLOADER_STATE_SET = "UPLOADER_STATE_SET";
 
 const healthKitInterfaceSet = payload => ({
   type: HEALTH_KIT_INTERFACE_SET,
   payload,
 });
 
-const isUploadingHistoricalSet = params => ({
-  type: IS_UPLOADING_HISTORICAL_SET,
+const uploaderStateSet = params => ({
+  type: UPLOADER_STATE_SET,
   payload: params,
 });
 
 export {
   healthKitInterfaceSet,
-  isUploadingHistoricalSet,
+  uploaderStateSet,
   HEALTH_KIT_INTERFACE_SET,
-  IS_UPLOADING_HISTORICAL_SET,
+  UPLOADER_STATE_SET,
 };
