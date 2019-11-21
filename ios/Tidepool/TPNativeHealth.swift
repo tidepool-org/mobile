@@ -67,6 +67,18 @@ class TPNativeHealth: RCTEventEmitter {
         return ""
     }
 
+    @objc func uploaderProgress() -> NSDictionary {
+        let isUploadingHistorical = self.uploader.isUploadInProgressForMode(TPUploader.Mode.HistoricalAll)
+        let progress = self.uploader.uploaderProgress()
+        let lastSuccessfulCurrentUploadTime = progress.lastSuccessfulCurrentUploadTime
+        return [
+            "isUploadingHistorical": isUploadingHistorical,
+            "historicalUploadCurrentDay": progress.currentDayHistorical,
+            "historicalUploadTotalDays": progress.totalDaysHistorical,
+            "lastCurrentUploadUiDescription": lastCurrentUploadUiDescription()
+        ]
+    }
+
     @objc func startUploadingHistorical() -> NSNumber {
         let dataCtl = TPDataController.sharedInstance
         guard let _ = dataCtl.currentUserId else {
@@ -202,6 +214,7 @@ class TPNativeHealth: RCTEventEmitter {
             DDLogInfo("Type: \(type), Mode: \(mode)")
 
             var body: Any? = nil
+            
             if mode == TPUploader.Mode.HistoricalAll {
                 body = self.createBodyForHistoricalStats()
             } else {
@@ -213,32 +226,57 @@ class TPNativeHealth: RCTEventEmitter {
     }
     
     func createBodyForHistoricalStats() -> Any? {
-        var totalUploadCount = 0
-        let isInProgress = self.uploader.isUploadInProgressForMode(TPUploader.Mode.HistoricalAll)
-        let historicalStats = self.uploader.historicalUploadStats()
-        for stat in historicalStats {
-            if stat.hasSuccessfullyUploaded {
-                DDLogInfo("Mode: \(stat.mode.rawValue)")
-                DDLogInfo("Type: \(stat.typeName)")
-                DDLogInfo("Current day: \(stat.currentDayHistorical)")
-                DDLogInfo("Total days: \(stat.totalDaysHistorical)")
-                DDLogInfo("")
-                totalUploadCount += stat.totalUploadCount
-            }
-        }
+        let isUploadingHistorical = self.uploader.isUploadInProgressForMode(TPUploader.Mode.HistoricalAll)
         let progress = self.uploader.uploaderProgress()
         return [
             "type": "historical",
-            "currentDay": progress.currentDayHistorical,
-            "totalDays": progress.totalDaysHistorical,
-            "totalUploadCount": totalUploadCount,
-            "isInProgress": isInProgress
+            "isUploadingHistorical": isUploadingHistorical,
+            "historicalUploadCurrentDay": progress.currentDayHistorical,
+            "historicalUploadTotalDays": progress.totalDaysHistorical,
         ]
     }
 
     func createBodyForCurrentStats() -> Any? {
+        let progress = self.uploader.uploaderProgress()
+        let lastSuccessfulCurrentUploadTime = progress.lastSuccessfulCurrentUploadTime
         return [
             "type": "current",
+            "lastCurrentUploadUiDescription": lastCurrentUploadUiDescription()
         ]
+    }
+    
+    private func lastCurrentUploadUiDescription() -> String {
+        var description = "No data available to upload"
+        let progress = self.uploader.uploaderProgress()
+        if let lastSuccessfulUpload = progress.lastSuccessfulCurrentUploadTime/*, let lastType = self.lastCurrentUploadType()*/
+        {
+            let lastUploadTimeAgoInWords = lastSuccessfulUpload.timeAgoInWords(Date())
+            description = String(format: "Last reading %@", lastUploadTimeAgoInWords)
+        }
+        return description
+    }
+    
+    private func lastCurrentUploadType() -> String? {
+        var lastType: String?
+        var lastUploadTime: Date?
+        let currentStats = self.uploader.currentUploadStats()
+        for stat in currentStats {
+            if stat.hasSuccessfullyUploaded {
+                if lastType == nil || lastUploadTime == nil {
+                    lastUploadTime = stat.lastSuccessfulUploadTime
+                    lastType = stat.typeName
+                } else {
+                    if stat.lastSuccessfulUploadTime != nil, stat.lastSuccessfulUploadTime!.compare(lastUploadTime!) == .orderedDescending {
+                        lastUploadTime = stat.lastSuccessfulUploadTime
+                        lastType = stat.typeName
+                    }
+                }
+                DDLogInfo("Mode: \(stat.mode.rawValue)")
+                DDLogInfo("Type: \(stat.typeName)")
+                DDLogInfo("Last successful upload time: \(String(describing: stat.lastSuccessfulUploadTime))")
+                DDLogInfo("")
+            }
+        }
+        return lastType
     }
 }

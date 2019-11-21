@@ -435,8 +435,40 @@ exports[`Storyshots Drawer default 1`] = `
                     ]
                   }
                   tintColor={null}
-                  value={true}
+                  value={false}
                 />
+              </View>
+              <View
+                style={null}
+              >
+                <View
+                  style={
+                    Array [
+                      Object {
+                        "flexDirection": "row",
+                        "marginLeft": 16,
+                      },
+                    ]
+                  }
+                >
+                  <Text
+                    allowFontScaling={false}
+                    style={
+                      Array [
+                        Object {
+                          "color": "#7e7e7e",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                        Object {
+                          "marginRight": 8,
+                        },
+                      ]
+                    }
+                  >
+                    Allow Tidepool Mobile to read diabetes-related data from Apple Health
+                  </Text>
+                </View>
               </View>
             </View>
           </View>
@@ -987,8 +1019,40 @@ exports[`Storyshots Drawer long user full name 1`] = `
                     ]
                   }
                   tintColor={null}
-                  value={true}
+                  value={false}
                 />
+              </View>
+              <View
+                style={null}
+              >
+                <View
+                  style={
+                    Array [
+                      Object {
+                        "flexDirection": "row",
+                        "marginLeft": 16,
+                      },
+                    ]
+                  }
+                >
+                  <Text
+                    allowFontScaling={false}
+                    style={
+                      Array [
+                        Object {
+                          "color": "#7e7e7e",
+                          "fontFamily": "OpenSans-Regular",
+                          "fontSize": 12.5,
+                        },
+                        Object {
+                          "marginRight": 8,
+                        },
+                      ]
+                    }
+                  >
+                    Allow Tidepool Mobile to read diabetes-related data from Apple Health
+                  </Text>
+                </View>
               </View>
             </View>
           </View>

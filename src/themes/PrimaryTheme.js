@@ -182,6 +182,14 @@ const PrimaryTheme = {
   bolusOverrideIconColor: "#0c6999",
   graphWizardCircleColor: Colors.gold,
   graphWizardLabelColor: Colors.alt2DarkGreyColor,
+  healthMainStatus: {
+    color: Colors.mediumLightGrey,
+    ...FontStyles.smallSemiboldFont,
+  },
+  healthMinorStatus: {
+    color: Colors.mediumLightGrey,
+    ...FontStyles.smallRegularFont,
+  },
   toolTipContentTextStyle: {
     color: Colors.blackish,
     ...FontStyles.mediumSmallSemiboldFont,

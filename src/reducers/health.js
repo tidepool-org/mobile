@@ -1,6 +1,6 @@
 import {
   HEALTH_KIT_INTERFACE_SET,
-  IS_UPLOADING_HISTORICAL_SET,
+  UPLOADER_STATE_SET,
 } from "../actions/health";
 
 const initialState = {
@@ -10,8 +10,8 @@ const initialState = {
   currentHealthKitUsername: "",
   isUploadingHistorical: false,
   historicalUploadCurrentDay: 0,
-  historicalTotalDays: 0,
-  historicalTotalUploadCount: 0,
+  historicalUploadTotalDays: 0,
+  lastCurrentUploadUiDescription: "",
 };
 
 function health(state = initialState, action) {
@@ -19,7 +19,7 @@ function health(state = initialState, action) {
 
   switch (action.type) {
     case HEALTH_KIT_INTERFACE_SET:
-    case IS_UPLOADING_HISTORICAL_SET:
+    case UPLOADER_STATE_SET:
       nextState = { ...state, ...action.payload };
       break;
     default:

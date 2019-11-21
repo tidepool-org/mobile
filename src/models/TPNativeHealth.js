@@ -8,10 +8,11 @@ class TPNativeHealthSingletonClass {
     this.currentHealthKitUsername = "";
     this.isUploadingHistorical = false;
     this.historicalUploadCurrentDay = 0;
-    this.historicalTotalDays = 0;
-    this.historicalTotalUploadCount = 0;
+    this.historicalUploadTotalDays = 0;
+    this.lastCurrentUploadUiDescription = "";
     this.turnOffUploaderReason = "";
     this.turnOffUploaderError = "";
+
     this.listeners = [];
 
     try {
@@ -20,7 +21,16 @@ class TPNativeHealthSingletonClass {
       this.shouldShowHealthKitUI = this.nativeModule.shouldShowHealthKitUI();
       this.healthKitInterfaceEnabledForCurrentUser = this.nativeModule.healthKitInterfaceEnabledForCurrentUser();
       this.healthKitInterfaceConfiguredForOtherUser = this.nativeModule.healthKitInterfaceConfiguredForOtherUser();
-      this.nativeModule.currentHealthKitUsername();
+      this.currentHealthKitUsername = this.nativeModule.currentHealthKitUsername();
+
+      const uploaderProgress = this.nativeModule.uploaderProgress();
+      this.isUploadingHistorical = uploaderProgress.isUploadingHistorical;
+      this.historicalUploadCurrentDay =
+        uploaderProgress.historicalUploadCurrentDay;
+      this.historicalUploadTotalDays =
+        uploaderProgress.historicalUploadTotalDays;
+      this.lastCurrentUploadUiDescription =
+        uploaderProgress.lastCurrentUploadUiDescription;
 
       const events = new NativeEventEmitter(NativeModules.TPNativeHealth);
       events.addListener("onTurnOnInterface", this.onTurnOnInterface);
@@ -107,13 +117,45 @@ class TPNativeHealthSingletonClass {
 
   onUploadStatsUpdated = params => {
     if (params.type === "historical") {
-      this.isUploadingHistorical = params.isInProgress;
-      this.historicalUploadCurrentDay = params.currentDay;
-      this.historicalTotalDays = params.totalDays;
-      this.historicalTotalUploadCount = params.totalUploadCount;
+      this.isUploadingHistorical = params.isUploadingHistorical;
+      this.historicalUploadCurrentDay = params.historicalUploadCurrentDay;
+      this.historicalUploadTotalDays = params.historicalUploadTotalDays;
+      this.notify("onUploadStatsUpdated", params);
+    } else if (params.type === "current") {
+      this.lastCurrentUploadUiDescription =
+        params.lastCurrentUploadUiDescription;
       this.notify("onUploadStatsUpdated", params);
     }
   };
+
+  refreshUploadStats() {
+    try {
+      const uploaderProgress = this.nativeModule.uploaderProgress();
+      this.isUploadingHistorical = uploaderProgress.isUploadingHistorical;
+      this.historicalUploadCurrentDay =
+        uploaderProgress.historicalUploadCurrentDay;
+      this.historicalUploadTotalDays =
+        uploaderProgress.historicalUploadTotalDays;
+      this.lastCurrentUploadUiDescription =
+        uploaderProgress.lastCurrentUploadUiDescription;
+
+      let params = {
+        type: "historical",
+        isUploadingHistorical: this.isUploadingHistorical,
+        historicalUploadCurrentDay: this.historicalUploadCurrentDay,
+        historicalUploadTotalDays: this.historicalUploadTotalDays,
+      };
+      this.notify("onUploadStatsUpdated", params);
+
+      params = {
+        type: "current",
+        lastCurrentUploadUiDescription: this.lastCurrentUploadUiDescription,
+      };
+      this.notify("onUploadStatsUpdated", params);
+    } catch (error) {
+      // console.log(`error: ${error}`);
+    }
+  }
 
   addListener(listener) {
     this.listeners.push(listener);
