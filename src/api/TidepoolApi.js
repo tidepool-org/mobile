@@ -638,6 +638,8 @@ class TidepoolApi {
             (error.response.status === 400 || error.response.status === 401)
           ) {
             reject(new Error("Unable to refresh token."));
+          } else if (error.code === "ECONNABORTED") {
+            reject(new Error("Request timed out!"));
           } else {
             reject(new Error("Check your Internet connection!"));
           }
@@ -678,6 +680,8 @@ class TidepoolApi {
             (error.response.status === 400 || error.response.status === 401)
           ) {
             reject(new Error("Wrong email or password!"));
+          } else if (error.code === "ECONNABORTED") {
+            reject(new Error("Request timed out!"));
           } else {
             reject(new Error("Check your Internet connection!"));
           }
@@ -697,7 +701,11 @@ class TidepoolApi {
           resolve({ userId, ...response.data });
         })
         .catch(error => {
-          reject(error);
+          if (error.code === "ECONNABORTED") {
+            reject(new Error("Request timed out!"));
+          } else {
+            reject(error);
+          }
         });
     });
   }
@@ -733,7 +741,11 @@ class TidepoolApi {
           }
         })
         .catch(error => {
-          reject(error);
+          if (error.code === "ECONNABORTED") {
+            reject(new Error("Request timed out!"));
+          } else {
+            reject(error);
+          }
         });
     });
   }
@@ -758,6 +770,8 @@ class TidepoolApi {
             //   }, userid: ${userId}`
             // );
             resolve({ notes: [] });
+          } else if (error.code === "ECONNABORTED") {
+            reject(new Error("Request timed out!"));
           } else {
             reject(error);
           }
@@ -778,7 +792,11 @@ class TidepoolApi {
           resolve({ comments });
         })
         .catch(error => {
-          reject(error);
+          if (error.code === "ECONNABORTED") {
+            reject(new Error("Request timed out!"));
+          } else {
+            reject(error);
+          }
         });
     });
   }
@@ -803,7 +821,11 @@ class TidepoolApi {
           resolve({ userIds });
         })
         .catch(error => {
-          reject(error);
+          if (error.code === "ECONNABORTED") {
+            reject(new Error("Request timed out!"));
+          } else {
+            reject(error);
+          }
         });
     });
   }
@@ -840,7 +862,11 @@ class TidepoolApi {
           resolve({ note });
         })
         .catch(error => {
-          reject(error);
+          if (error.code === "ECONNABORTED") {
+            reject(new Error("Request timed out!"));
+          } else {
+            reject(error);
+          }
         });
     });
   }
@@ -863,7 +889,11 @@ class TidepoolApi {
           resolve({});
         })
         .catch(error => {
-          reject(error);
+          if (error.code === "ECONNABORTED") {
+            reject(new Error("Request timed out!"));
+          } else {
+            reject(error);
+          }
         });
     });
   }
@@ -906,7 +936,11 @@ class TidepoolApi {
           resolve({ comment });
         })
         .catch(error => {
-          reject(error);
+          if (error.code === "ECONNABORTED") {
+            reject(new Error("Request timed out!"));
+          } else {
+            reject(error);
+          }
         });
     });
   }
@@ -929,7 +963,11 @@ class TidepoolApi {
           resolve({});
         })
         .catch(error => {
-          reject(error);
+          if (error.code === "ECONNABORTED") {
+            reject(new Error("Request timed out!"));
+          } else {
+            reject(error);
+          }
         });
     });
   }
@@ -946,7 +984,11 @@ class TidepoolApi {
           resolve({});
         })
         .catch(error => {
-          reject(error);
+          if (error.code === "ECONNABORTED") {
+            reject(new Error("Request timed out!"));
+          } else {
+            reject(error);
+          }
         });
     });
   }

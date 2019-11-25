@@ -22,17 +22,18 @@ const AUTH_REFRESH_SESSION_TOKEN_DID_FAIL =
 const AUTH_USER_KEY = "AUTH_USER_KEY";
 
 // NOTE: authSignInReset may be called on every keystroke in SignInForm
-const authSignInReset = () => () => {
+const authSignInReset = (errorMessage = "") => {
   return {
     type: AUTH_SIGN_IN_RESET,
+    payload: errorMessage,
   };
 };
 
-function clearUser(dispatch) {
+function clearUser(dispatch, errorMessage = "") {
   TPNative.clearUser();
   Logger.clearUser();
   api().cacheControl.clear();
-  dispatch(authSignInReset());
+  dispatch(authSignInReset(errorMessage));
   dispatch(navigateSignIn());
 }
 
@@ -143,6 +144,66 @@ const authRefreshTokenDidFail = errorMessage => ({
   payload: errorMessage,
 });
 
+const authRefreshToken = () => async dispatch => {
+  dispatch(authRefreshTokenDidStart());
+
+  let authUser = {};
+  try {
+    authUser = JSON.parse(await AsyncStorage.getItem(AUTH_USER_KEY)) || {};
+  } catch (error) {
+    // console.log(`authRefreshToken`, error);
+  }
+
+  if (authUser.sessionToken) {
+    // console.log(
+    //   `authRefreshToken: We have a cached session token, try to refresh it`
+    // );
+
+    const {
+      sessionToken,
+      userId,
+      errorMessage,
+    } = await api().refreshTokenAsync(authUser);
+    if (errorMessage) {
+      // console.log(`authRefreshToken error`, errorMessage);
+      dispatch(authRefreshTokenDidFail(errorMessage));
+    } else {
+      // console.log(`authRefreshToken: Success!`);
+      authUser.sessionToken = sessionToken;
+      authUser.userId = userId;
+
+      const {
+        errorMessage: fetchProfileErrorMessage,
+        profile,
+      } = await api().fetchProfileAsync({
+        userId,
+      });
+
+      if (fetchProfileErrorMessage) {
+        // console.log(
+        //   `authRefreshTokenOrSignInAsync fetchProfileAsync error`,
+        //   fetchProfileErrorMessage
+        // );
+        dispatch(authRefreshTokenDidFail(fetchProfileErrorMessage));
+      } else {
+        authUser = { ...authUser, ...profile };
+        const { fullName } = profile;
+        try {
+          AsyncStorage.setItem(AUTH_USER_KEY, JSON.stringify(authUser));
+          dispatch(authRefreshTokenDidSucceed({ authUser }));
+          await dispatch(currentProfileRestoreAsync({ authUser }));
+          if (ConnectionStatus.isOnline) {
+            api().fetchViewableUserProfilesAsync({ userId, fullName }); // Fetch viewable user profiles to seed the offline cache
+          }
+        } catch (error) {
+          // console({ error });
+          dispatch(authRefreshTokenDidFail(error.errorMessage));
+        }
+      }
+    }
+  }
+};
+
 const authRefreshTokenOrSignInAsync = () => async dispatch => {
   dispatch(authRefreshTokenDidStart());
 
@@ -176,7 +237,7 @@ const authRefreshTokenOrSignInAsync = () => async dispatch => {
       // console.log(
       //   `authRefreshTokenOrSignInAsync: Navigate to sign in due to error`
       // ); // TODO: sign in - what about client side errors? Those should not result in reset / sign in
-      clearUser(dispatch);
+      clearUser(dispatch, errorMessage); // Propagate the error message so we show it on Sign In screen
     } else {
       // console.log(`authRefreshTokenOrSignInAsync: Success!`);
       authUser.sessionToken = sessionToken;
@@ -198,7 +259,7 @@ const authRefreshTokenOrSignInAsync = () => async dispatch => {
         // console.log(
         //   `authRefreshTokenOrSignInAsync: Navigate to sign in due to error`
         // ); // TODO: sign in - what about client side errors? Those should not result in reset / sign in
-        clearUser(dispatch);
+        clearUser(dispatch, fetchProfileErrorMessage); // Propagate the error message so we show it on Sign In screen
       } else {
         authUser = { ...authUser, ...profile };
         const { fullName } = profile;
@@ -213,6 +274,7 @@ const authRefreshTokenOrSignInAsync = () => async dispatch => {
         } catch (error) {
           // console({ error });
           dispatch(authSignInDidFail(error.errorMessage));
+          clearUser(dispatch, error.errorMessage); // Propagate the error message so we show it on Sign In screen
         }
       }
     }
@@ -229,6 +291,7 @@ export {
   authRefreshTokenDidStart,
   authRefreshTokenDidSucceed,
   authRefreshTokenDidFail,
+  authRefreshToken,
   authRefreshTokenOrSignInAsync,
   AUTH_SIGN_IN_RESET,
   AUTH_SIGN_IN_DID_START,

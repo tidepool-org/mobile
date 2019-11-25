@@ -76,10 +76,6 @@ class TPAppDelegate: EXStandaloneAppDelegate {
         // Occasionally log full date to help with deciphering logs!
         let dateString = DateFormatter().isoStringFromDate(Date())
         DDLogVerbose("Log Date: \(dateString)")
-        
-        // TODO: health - refresh token like 2.x did?
-
-        TPDataController.sharedInstance.configureHealthKitInterface()
 
         // super.applicationDidBecomeActive(application) // super doesn't implement!
     }
