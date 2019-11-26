@@ -48,8 +48,6 @@ class TPSettings {
     }
 
     func loadSettings() {
-        // TODO: health - deal with refresh token in native vs JS. native starts first using cached session token, but, if it's invalid / needs refreshed, requests will fail. we should restart those automatically when we get a refreshed token from JS via setUser, though, right? Confirm that
-
         // migrateLegacySettings(); // TODO: health - upgrade - we should consider enabling this so that upgrade from 2.x will preserve session token and other settings
 
         getValuesForAyncStorageKeys(keys: [kAsyncStorageApiEnvironmentKey, kAsyncStorageAuthUserKey]) { (values: [String?]) in
@@ -82,33 +80,10 @@ class TPSettings {
             dataController.currentUserId = self.currentUserId
             dataController.currentUserFullName = self.currentUserFullName
             dataController.currentUserIsDSAUser = self.currentUserIsDSAUser
-            dataController.configureHealthKitInterface()
         }
     }
-
-    private func migrateLegacySettings() {
-        let lastMigrationVersion = userDefaults.integer(forKey: kUserDefaultsLastLegacySettingsMigrationVersionKey)
-        if lastMigrationVersion == 0 {
-            migrateLegacySettingsToVersion(1)
-        }
-    }
-
-    private func migrateLegacySettingsToVersion(_ version: Int) {
-        if version == 1 {
-            var currentEnvironment = UserDefaults.standard.string(forKey: kUserDefaultsCurrentEnvironmentKey)
-            if currentEnvironment?.isEmpty ?? true {
-                currentEnvironment = "Production"
-            }
-            setValuesForAyncStorageKeys(keyValuePairs: [
-                [kAsyncStorageApiEnvironmentKey, currentEnvironment!],
-            ])
-
-             userDefaults.set(version, forKey: kUserDefaultsLastLegacySettingsMigrationVersionKey)
-             userDefaults.synchronize()
-        }
-    }
-
-    private func getValuesForAyncStorageKeys(keys: [String], values: @escaping ([String?]) -> Void) -> Void {
+    
+    func getValuesForAyncStorageKeys(keys: [String], values: @escaping ([String?]) -> Void) -> Void {
         asyncStorage .multiGet(keys) { (multiGetResponsePair: [Any]?) -> Void in
             var valuesArray: [String?] = []
             if let responsePairs = multiGetResponsePair![1] as? [Any] {
@@ -126,7 +101,29 @@ class TPSettings {
         }
     }
 
-    private func setValuesForAyncStorageKeys(keyValuePairs: [[String]]) {
+    func setValuesForAyncStorageKeys(keyValuePairs: [[String]]) {
         asyncStorage.multiSet(keyValuePairs)  { (_: [Any]?) -> Void in }
+    }
+    
+    private func migrateLegacySettings() {
+        let lastMigrationVersion = userDefaults.integer(forKey: kUserDefaultsLastLegacySettingsMigrationVersionKey)
+        if lastMigrationVersion == 0 {
+            migrateLegacySettingsToVersion(1)
+        }
+    }
+
+    private func migrateLegacySettingsToVersion(_ version: Int) {
+        if version == 1 {
+            var currentEnvironment = UserDefaults.standard.string(forKey: kUserDefaultsCurrentEnvironmentKey)
+            if currentEnvironment?.isEmpty ?? true {
+                currentEnvironment = "Production"
+            }
+            setValuesForAyncStorageKeys(keyValuePairs: [
+                [kAsyncStorageApiEnvironmentKey, currentEnvironment!],
+            ])
+
+            userDefaults.set(version, forKey: kUserDefaultsLastLegacySettingsMigrationVersionKey)
+            userDefaults.synchronize()
+        }
     }
 }
