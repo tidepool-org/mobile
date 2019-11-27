@@ -16,6 +16,7 @@
 import UIKit
 import CocoaLumberjack
 import MessageUI
+import SwiftyJSON
 import TPHealthKitUploader
 
 var fileLogger: DDFileLogger!
@@ -27,31 +28,39 @@ class TPAppDelegate: EXStandaloneAppDelegate {
 
         RollbarReactNative.initWithAccessToken("00788919100a467e8fb08144b427890e")
         TPSettings.sharedInstance.loadSettings()
-        
+
         // Occasionally log full date to help with deciphering logs!
         let dateString = DateFormatter().isoStringFromDate(Date())
         DDLogVerbose("Log Date: \(dateString)")
-        
+
         let result = super.application(application, didFinishLaunchingWithOptions: launchOptions)
+        
+        let state = UIApplication.shared.applicationState
+        if state == .background {
+            DDLogInfo("launched in background")
+            refreshTokenAndConfigureHealthKitInterface()
+        } else {
+            TPDataController.sharedInstance.configureHealthKitInterface()
+        }
 
         DDLogInfo("did finish launching")
-        
+
         return result
     }
-        
+
     fileprivate var deviceIsLocked = false
     override func applicationProtectedDataDidBecomeAvailable(_ application: UIApplication) {
         DDLogInfo("Device unlocked!")
         deviceIsLocked = false
         // super.applicationProtectedDataDidBecomeAvailable(application) // super doesn't implement!
     }
-    
+
     override func applicationProtectedDataWillBecomeUnavailable(_ application: UIApplication) {
         DDLogInfo("Device locked!")
         deviceIsLocked = true
         // super.applicationProtectedDataWillBecomeUnavailable(application) // super doesn't implement!
     }
-    
+
     override func applicationWillResignActive(_ application: UIApplication) {
         DDLogVerbose("trace")
         // super.applicationWillResignActive(application) // super doesn't implement!
@@ -62,7 +71,7 @@ class TPAppDelegate: EXStandaloneAppDelegate {
 
         // Re-enable idle timer (screen locking) when the app enters background. (May have been disabled during sync/upload.)
         UIApplication.shared.isIdleTimerDisabled = false
-        // TODO: health - need to disable idle timer while Initial or Manual Sync is going on (and also sync via Debug Health)
+        // TODO: health - idle timer - need to disable idle timer while Initial or Manual Sync is going on (and also sync via Debug Health)
 
         // super.applicationDidEnterBackground(application) // super doesn't implement!
     }
@@ -76,16 +85,39 @@ class TPAppDelegate: EXStandaloneAppDelegate {
         // Occasionally log full date to help with deciphering logs!
         let dateString = DateFormatter().isoStringFromDate(Date())
         DDLogVerbose("Log Date: \(dateString)")
-        
-        // TODO: health - refresh token like 2.x did?
-
-        TPDataController.sharedInstance.configureHealthKitInterface()
 
         // super.applicationDidBecomeActive(application) // super doesn't implement!
     }
-    
+
     override func applicationWillTerminate(_ application: UIApplication) {
         DDLogVerbose("trace")
         // super.applicationWillTerminate(application) // super doesn't implement!
+    }
+    
+    fileprivate func refreshTokenAndConfigureHealthKitInterface() {
+        let api = TPApi.sharedInstance
+        if api.sessionToken != nil {
+            api.refreshToken() { (succeeded, statusCode) in
+                if succeeded {
+                    DDLogInfo("Refresh token succeeded, statusCode: \(statusCode)")
+                    
+                    // Get auth user from AsyncStorage and update the sessionToken
+                    let settings = TPSettings.sharedInstance
+                    settings.getValuesForAyncStorageKeys(keys: [kAsyncStorageAuthUserKey]) { (values: [String?]) in
+                        let authUserValue = values[0]!
+                        var json = JSON.init(parseJSON: authUserValue)
+                        json["sessionToken"].string = api.sessionToken
+                        settings.setValuesForAyncStorageKeys(keyValuePairs: [
+                            [kAsyncStorageAuthUserKey, json.rawString()!],
+                        ])
+                    }
+                                        
+                    // Configure HealthKit Interface (uses new auth user, etc)
+                    TPDataController.sharedInstance.configureHealthKitInterface()
+                } else {
+                    DDLogInfo("Refresh token failed, statusCode: \(statusCode)")
+                }
+            }
+        }
     }
 }

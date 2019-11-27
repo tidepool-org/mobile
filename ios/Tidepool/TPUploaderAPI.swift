@@ -69,7 +69,6 @@ class TPUploaderAPI: TPUploaderConfigInfo {
 
     // token expired? Log out to force token refresh, but should probably just do a refresh!
     func authorizationErrorReceived() {
-// TODO: health - log out or refresh token?
 //        service.logout()
 //        let notification = Notification(name: Notification.Name(rawValue: "serviceLoggedOut"), object: nil)
 //        NotificationCenter.default.post(notification)
@@ -89,7 +88,6 @@ class TPUploaderAPI: TPUploaderConfigInfo {
     
     var currentUserName: String? {
         get {
-            // TODO: health - it looks like 2.x might have used username (email) rather than full name, but, the new uploaderFramework branch in mobile-ios uas full name. Revisit this
             let result = dataController.currentUserFullName
             DDLogInfo("\(#function) - TPUploaderConfigInfo protocol, returning: \(result ?? "nil")")
             return result

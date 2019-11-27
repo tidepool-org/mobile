@@ -23,7 +23,7 @@ function auth(state = initialState, action) {
 
   switch (action.type) {
     case AUTH_SIGN_IN_RESET:
-      nextState = initialState;
+      nextState = { ...initialState, errorMessage: action.payload };
       break;
     case AUTH_SIGN_IN_DID_START:
       nextState = { ...state, signingIn: true };
@@ -58,7 +58,7 @@ function auth(state = initialState, action) {
         ...state,
         signingIn: false,
         sessionToken: "",
-        errorMessage: "",
+        errorMessage: action.payload,
       };
       break;
     }

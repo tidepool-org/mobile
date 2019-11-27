@@ -39,7 +39,7 @@ class DrawerHealthStatus extends PureComponent {
         isUploadingHistorical,
         historicalUploadCurrentDay,
         historicalUploadTotalDays,
-        lastCurrentUploadUiDescription, // TODO: my - 0 - since this uses time ago, we probably need to update this state as well when the component mounts?
+        lastCurrentUploadUiDescription,
       },
     } = this.props;
 

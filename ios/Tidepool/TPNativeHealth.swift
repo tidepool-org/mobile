@@ -90,7 +90,6 @@ class TPNativeHealth: RCTEventEmitter {
 
     @objc func stopUploadingHistoricalAndReset() -> NSNumber {
         uploader.stopUploading(mode: .HistoricalAll, reason: .interfaceTurnedOff)
-        // TODO: health - is this really resetting persistent state? It seems that it still resumes when starting upload after this
         uploader.resetPersistentStateForMode(.HistoricalAll)
         return NSNumber(value: true)
     }
@@ -237,8 +236,6 @@ class TPNativeHealth: RCTEventEmitter {
     }
 
     func createBodyForCurrentStats() -> Any? {
-        let progress = self.uploader.uploaderProgress()
-        let lastSuccessfulCurrentUploadTime = progress.lastSuccessfulCurrentUploadTime
         return [
             "type": "current",
             "lastCurrentUploadUiDescription": lastCurrentUploadUiDescription()

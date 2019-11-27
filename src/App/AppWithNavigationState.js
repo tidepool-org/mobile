@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { BackHandler, UIManager } from "react-native";
+import { AppState, BackHandler, UIManager } from "react-native";
 import { NavigationActions } from "react-navigation";
 import { connect } from "react-redux";
 
@@ -9,9 +9,14 @@ import { HOME_ROUTE_NAME, SIGN_IN_ROUTE_NAME } from "../navigators/routeNames";
 import getRouteName from "../navigators/getRouteName";
 import { TPNativeHealth } from "../models/TPNativeHealth";
 import { healthKitInterfaceSet, uploaderStateSet } from "../actions/health";
+import { authRefreshToken } from "../actions/auth";
 // import { Logger } from "../models/Logger";
 
 class AppWithNavigationState extends PureComponent {
+  state = {
+    appState: AppState.currentState,
+  };
+
   componentDidMount() {
     const { dispatch } = this.props;
 
@@ -19,6 +24,7 @@ class AppWithNavigationState extends PureComponent {
       UIManager.setLayoutAnimationEnabledExperimental(true);
     }
 
+    AppState.addEventListener("change", this.onAppStateChange);
     BackHandler.addEventListener("hardwareBackPress", this.onBackPress);
     TPNativeHealth.addListener(this.onHealthEvent);
 
@@ -47,6 +53,7 @@ class AppWithNavigationState extends PureComponent {
   }
 
   componentWillUnmount() {
+    AppState.removeEventListener("change", this.onAppStateChange);
     BackHandler.removeEventListener("hardwareBackPress", this.onBackPress);
     TPNativeHealth.removeListener(this.onHealthEvent);
   }
@@ -125,6 +132,18 @@ class AppWithNavigationState extends PureComponent {
     }
     dispatch(NavigationActions.back());
     return true;
+  };
+
+  onAppStateChange = nextAppState => {
+    const { dispatch } = this.props;
+
+    if (
+      this.state.appState.match(/inactive|background/) &&
+      nextAppState === "active"
+    ) {
+      dispatch(authRefreshToken);
+    }
+    this.setState({ appState: nextAppState });
   };
 
   render() {
