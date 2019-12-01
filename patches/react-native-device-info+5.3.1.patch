@@ -1,39 +1,29 @@
-diff --git a/node_modules/react-native-device-info/deviceinfo.js b/node_modules/react-native-device-info/deviceinfo.js
-index 380fe6f..f0538e5 100644
---- a/node_modules/react-native-device-info/deviceinfo.js
-+++ b/node_modules/react-native-device-info/deviceinfo.js
-@@ -9,19 +9,21 @@ if (Platform.OS === 'web' || Platform.OS === 'dom') {
-   RNDeviceInfo = require('./web');
+diff --git a/node_modules/react-native-device-info/src/internal/nativeInterface.ts b/node_modules/react-native-device-info/src/internal/nativeInterface.ts
+index 24bb546..e5dcabc 100644
+--- a/node_modules/react-native-device-info/src/internal/nativeInterface.ts
++++ b/node_modules/react-native-device-info/src/internal/nativeInterface.ts
+@@ -11,15 +11,17 @@ if (OS === 'web' || OS === 'dom') {
  }
+ 
  if (!RNDeviceInfo) {
--  // Produce an error if we don't have the native module
--  if (
--    Platform.OS === 'android' ||
--    Platform.OS === 'ios' ||
--    Platform.OS === 'web' ||
--    Platform.OS === 'dom'
--  ) {
++  // Don't do this, we want to be able to use a deafult RNDeviceInfo in Expo
++
+   // Produce an error if we don't have the native module
+   // @ts-ignore
+-  if (OS === 'android' || OS === 'ios' || OS === 'web' || OS === 'dom') {
 -    throw new Error(`@react-native-community/react-native-device-info: NativeModule.RNDeviceInfo is null. To fix this issue try these steps:
--  • Run \`react-native link react-native-device-info\` in the project root.
+-  • For react-native <= 0.59: Run \`react-native link react-native-device-info\` in the project root.
 -  • Rebuild and re-run the app.
 -  • If you are using CocoaPods on iOS, run \`pod install\` in the \`ios\` directory and then rebuild and re-run the app. You may also need to re-open Xcode to get the new pods.
 -  If none of these fix the issue, please open an issue on the Github repository: https://github.com/react-native-community/react-native-device-info`);
 -  }
-+  // Don't do this, we want to be able to use a deafult RNDeviceInfo in Expo
-+
-+  // // Produce an error if we don't have the native module
-+  // if (
-+  //   Platform.OS === 'android' ||
-+  //   Platform.OS === 'ios' ||
-+  //   Platform.OS === 'web' ||
-+  //   Platform.OS === 'dom'
-+  // ) {
++  // if (OS === 'android' || OS === 'ios' || OS === 'web' || OS === 'dom') {
 +  //   throw new Error(`@react-native-community/react-native-device-info: NativeModule.RNDeviceInfo is null. To fix this issue try these steps:
-+  // • Run \`react-native link react-native-device-info\` in the project root.
++  // • For react-native <= 0.59: Run \`react-native link react-native-device-info\` in the project root.
 +  // • Rebuild and re-run the app.
 +  // • If you are using CocoaPods on iOS, run \`pod install\` in the \`ios\` directory and then rebuild and re-run the app. You may also need to re-open Xcode to get the new pods.
 +  // If none of these fix the issue, please open an issue on the Github repository: https://github.com/react-native-community/react-native-device-info`);
 +  // }
- 
-   RNDeviceInfo = require('./default');
  }
+ 
+ export default RNDeviceInfo as DeviceInfoNativeModule;

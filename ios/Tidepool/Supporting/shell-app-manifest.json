@@ -94,8 +94,8 @@
   ],
   "description": "",
   "detach": {
-    "androidExpoViewUrl": "https://s3.amazonaws.com/exp-exponent-view-code/android-v2.12.0-sdk34.0.0-997916d4-13c2-4ac7-a0cd-6df1b280bc3c.tar.gz",
-    "iosExpoViewUrl": "https://s3.amazonaws.com/exp-exponent-view-code/ios-v2.12.1-sdk34.0.0-9686ec09-2f6b-4b44-871d-c55a277381dd.tar.gz"
+    "androidExpoViewUrl": "https://s3.amazonaws.com/exp-exponent-view-code/android-v2.12.0-sdk35.0.0-997916d4-13c2-4ac7-a0cd-6df1b280bc3c.tar.gz",
+    "iosExpoViewUrl": "https://s3.amazonaws.com/exp-exponent-view-code/ios-v2.12.1-sdk35.0.0-9686ec09-2f6b-4b44-871d-c55a277381dd.tar.gz"
   },
   "icon": "./assets/images/Icon-App-512x512@2x.png",
   "iconUrl": "https://d1wp6m56sqw74a.cloudfront.net/~assets/290ce2a620475d9e52dec53e2d95de38",
@@ -113,7 +113,7 @@
   "platforms": ["ios", "android"],
   "privacy": "public",
   "scheme": "exp0815d1104db745568824ac69a998de27",
-  "sdkVersion": "34.0.0",
+  "sdkVersion": "35.0.0",
   "slug": "Tidepool",
   "updates": { "enabled": false },
   "version": "3.1.1",
@@ -121,7 +121,7 @@
   "revisionId": "3.1.0-r.mPKoy1402B",
   "publishedTime": "2019-08-03T21:46:43.480Z",
   "commitTime": "2019-08-03T21:46:43.514Z",
-  "bundleUrl": "https://d1wp6m56sqw74a.cloudfront.net/%40tidepool%2FTidepool%2F3.1.0%2F27b531035ae988660c0ee0bfe37b717f-34.0.0-ios.js",
+  "bundleUrl": "https://d1wp6m56sqw74a.cloudfront.net/%40tidepool%2FTidepool%2F3.1.0%2F27b531035ae988660c0ee0bfe37b717f-35.0.0-ios.js",
   "releaseChannel": "default",
   "hostUri": "exp.host/@tidepool/Tidepool"
 }

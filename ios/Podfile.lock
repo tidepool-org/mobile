@@ -56,7 +56,7 @@ PODS:
   - EXPermissions (6.0.0):
     - UMCore
     - UMPermissionsInterface
-  - ExpoKit/Core (34.0.0):
+  - ExpoKit/Core (35.0.0):
     - Amplitude-iOS (~> 3.8)
     - Analytics (~> 3.5)
     - AppAuth (~> 0.4)
