@@ -1,6 +1,6 @@
 {
   "name": "RollbarReactNative",
-  "version": "0.5.0",
+  "version": "0.7.0",
   "summary": "RollbarReactNative",
   "description": "RollbarReactNative is a library for interacting with the Rollbar\nerror monitoring system in React Native apps.",
   "homepage": "https://rollbar.com",

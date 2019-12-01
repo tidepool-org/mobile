@@ -93,7 +93,7 @@ target 'Tidepool' do
 
   pod 'TPHealthKitUploader', :git => 'https://github.com/tidepool-org/healthkit-uploader', :tag => '0.9.5'
   pod 'SwiftyJSON', '4.2'
-  pod 'CocoaLumberjack/Swift', '3.2.1'
+  pod 'CocoaLumberjack/Swift', '3.5.3'
   pod 'Alamofire', '4.7.3'
 
   post_install do |installer|

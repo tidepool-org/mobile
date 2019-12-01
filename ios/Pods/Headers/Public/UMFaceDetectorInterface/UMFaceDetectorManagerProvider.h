@@ -1,1 +1,1 @@
-../../../../../node_modules/unimodules-face-detector-interface/ios/UMFaceDetectorInterface/UMFaceDetectorManagerProvider.h
+../../../../../node_modules/expo-three/node_modules/expo/node_modules/unimodules-face-detector-interface/ios/UMFaceDetectorInterface/UMFaceDetectorManagerProvider.h
