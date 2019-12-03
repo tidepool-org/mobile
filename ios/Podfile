@@ -2,10 +2,10 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '11.0'
 
 target 'Tidepool' do
-  
+
   pod 'ExpoKit',
     :git => "http://github.com/expo/expo.git",
-    :tag => "ios/2.12.1",
+    :tag => "ios/2.13.0",
     :subspecs => [
       "Core"
     ],
@@ -90,10 +90,10 @@ target 'Tidepool' do
 
   pod 'RollbarReactNative', :path => '../node_modules/rollbar-react-native'
   pod 'RNDeviceInfo', :path => '../node_modules/react-native-device-info'
-  
+
   pod 'TPHealthKitUploader', :git => 'https://github.com/tidepool-org/healthkit-uploader', :tag => '0.9.5'
   pod 'SwiftyJSON', '4.2'
-  pod 'CocoaLumberjack/Swift', '3.2.1'
+  pod 'CocoaLumberjack/Swift', '3.5.3'
   pod 'Alamofire', '4.7.3'
 
   post_install do |installer|

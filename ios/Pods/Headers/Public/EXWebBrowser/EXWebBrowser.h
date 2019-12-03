@@ -1,1 +1,1 @@
-../../../../../node_modules/expo-web-browser/ios/EXWebBrowser/EXWebBrowser.h
+../../../../../node_modules/expo-three/node_modules/expo/node_modules/expo-web-browser/ios/EXWebBrowser/EXWebBrowser.h

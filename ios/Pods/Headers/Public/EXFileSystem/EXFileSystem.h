@@ -1,1 +1,1 @@
-../../../../../node_modules/expo-file-system/ios/EXFileSystem/EXFileSystem.h
+../../../../../node_modules/expo-three/node_modules/expo/node_modules/expo-file-system/ios/EXFileSystem/EXFileSystem.h

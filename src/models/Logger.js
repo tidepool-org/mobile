@@ -1,6 +1,7 @@
 import { Alert, Platform } from "react-native";
 import DeviceInfo from "react-native-device-info";
 import { Client, Configuration } from "rollbar-react-native";
+import Constants from "expo-constants";
 
 const POST_CLIENT_ITEM_ACCESS_TOKEN = "00788919100a467e8fb08144b427890e";
 
@@ -20,20 +21,20 @@ class LoggerSingletonClass {
 
   /* eslint-disable no-undef */
   constructor() {
-    if (__DEV__) {
+    if (__DEV__ || Constants.appOwnership === "expo") {
       this.useRollbar = false;
       this.verbose = true;
     } else {
       this.useRollbar = true;
       this.client = {};
       try {
-        const deviceId = DeviceInfo.getDeviceId();
-        const model = DeviceInfo.getModel();
-        const appName = DeviceInfo.getApplicationName();
-        const buildNumber = DeviceInfo.getBuildNumber();
-        const bundleId = DeviceInfo.getBundleId();
-        const version = DeviceInfo.getVersion();
-        const systemVersion = DeviceInfo.getSystemVersion();
+        const deviceId = DeviceInfo.getDeviceIdSync();
+        const model = DeviceInfo.getModelSync();
+        const appName = DeviceInfo.getApplicationNameSync();
+        const buildNumber = DeviceInfo.getBuildNumberSync();
+        const bundleId = DeviceInfo.getBundleIdSync();
+        const version = DeviceInfo.getVersionSync();
+        const systemVersion = DeviceInfo.getSystemVersionSync();
 
         if (Platform.OS === "ios") {
           this.client = {

@@ -133,15 +133,14 @@ class TPNative: NSObject, MFMailComposeViewControllerDelegate {
     fileprivate func clearLogFiles() {
         // Clear log files
         let logFileInfos = fileLogger.logFileManager.unsortedLogFileInfos
-        for logFileInfo in logFileInfos! {
-            if let logFilePath = logFileInfo.filePath {
-                do {
-                    try FileManager.default.removeItem(atPath: logFilePath)
-                    logFileInfo.reset()
-                    DDLogInfo("Removed log file: \(logFilePath)")
-                } catch let error as NSError {
-                    DDLogError("Failed to remove log file at path: \(logFilePath) error: \(error), \(error.userInfo)")
-                }
+        for logFileInfo in logFileInfos {
+            let logFilePath = logFileInfo.filePath
+            do {
+                try FileManager.default.removeItem(atPath: logFilePath)
+                logFileInfo.reset()
+                DDLogInfo("Removed log file: \(logFilePath)")
+            } catch let error as NSError {
+                DDLogError("Failed to remove log file at path: \(logFilePath) error: \(error), \(error.userInfo)")
             }
         }
     }

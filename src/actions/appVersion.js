@@ -8,7 +8,7 @@ const appVersionLoad = () => {
   if (Constants.appOwnership === "expo") {
     version = `${Constants.manifest.version} (Expo)`;
   } else {
-    version = `${DeviceInfo.getVersion()} (${DeviceInfo.getBuildNumber()})`;
+    version = `${DeviceInfo.getVersionSync()} (${DeviceInfo.getBuildNumberSync()})`;
   }
 
   return {
