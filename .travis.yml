@@ -18,7 +18,7 @@ matrix:
       before_install:
         - brew update
         - brew install yarn
-        - brew install python
+        - brew upgrade python
         - brew link --overwrite python
         - brew install watchman
         - gem install xcpretty-travis-formatter
