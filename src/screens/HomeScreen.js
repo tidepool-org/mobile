@@ -14,6 +14,8 @@ import Tooltip from "../components/Tooltip";
 import TidepoolUploaderTooltipContent from "../components/Tooltips/TidepoolUploaderTooltipContent";
 import FirstTimeTips from "../models/FirstTimeTips";
 import AlertManager from "../models/AlertManager";
+import isCurrentRoute from "../navigators/isCurrentRoute";
+import { HOME_ROUTE_NAME } from "../navigators/routeNames";
 import { ProfilePropType } from "../prop-types/profile";
 import { CommentPropType } from "../prop-types/comment";
 import { UserPropType } from "../prop-types/user";
@@ -38,8 +40,26 @@ class HomeScreen extends PureComponent {
   }
 
   componentDidUpdate() {
-    const { navigation, notesFetch, currentUser } = this.props;
-    this.showTipIfNeeded({ navigation, notesFetch, currentUser });
+    const {
+      navigation,
+      notesFetch,
+      currentUser,
+      navigateDrawerClose,
+      health: { hasPresentedSyncUI, healthKitInterfaceEnabledForCurrentUser },
+      navigateHealthSync,
+    } = this.props;
+
+    const shouldNavigateToInitialHealthSync =
+      isCurrentRoute(HOME_ROUTE_NAME, { navigation }) &&
+      !hasPresentedSyncUI &&
+      healthKitInterfaceEnabledForCurrentUser;
+    if (shouldNavigateToInitialHealthSync) {
+      navigateDrawerClose();
+      navigateHealthSync({ isInitialSync: true });
+    } else {
+      this.showTipIfNeeded({ navigation, notesFetch, currentUser });
+    }
+    this.hideTipIfNeeded({ navigation });
   }
 
   componentWillUnmount() {
@@ -85,12 +105,12 @@ class HomeScreen extends PureComponent {
   onPressTooltipEmailLink = async () => {
     Metrics.track({ metric: "Clicked email a link" });
     await this.composeEmailWithDesktopUploaderLink();
-    this.hideTipIfNeeded();
+    this.hideTipIfNeeded({ didUserDismiss: true });
   };
 
   onPressTooltipOk = () => {
     Metrics.track({ metric: "Clicked first time need uploader" });
-    this.hideTipIfNeeded();
+    this.hideTipIfNeeded({ didUserDismiss: true });
   };
 
   async composeEmailWithDesktopUploaderLink() {
@@ -123,16 +143,28 @@ class HomeScreen extends PureComponent {
     ) {
       const { firstTimeTipsShowTip } = this.props;
       this.showTipTimeoutId = setTimeout(() => {
-        firstTimeTipsShowTip(FirstTimeTips.TIP_GET_DESKTOP_UPLOADER, true);
+        firstTimeTipsShowTip({
+          tip: FirstTimeTips.TIP_GET_DESKTOP_UPLOADER,
+          show: true,
+        });
         this.setState({ toolTipVisible: true });
       }, 50);
     }
   }
 
-  hideTipIfNeeded() {
-    if (FirstTimeTips.currentTip === FirstTimeTips.TIP_GET_DESKTOP_UPLOADER) {
+  hideTipIfNeeded({ navigation, didUserDismiss }) {
+    if (
+      FirstTimeTips.shouldHideTip(FirstTimeTips.TIP_GET_DESKTOP_UPLOADER, {
+        navigation,
+        didUserDismiss,
+      })
+    ) {
       const { firstTimeTipsShowTip } = this.props;
-      firstTimeTipsShowTip(FirstTimeTips.TIP_GET_DESKTOP_UPLOADER, false);
+      firstTimeTipsShowTip({
+        tip: FirstTimeTips.TIP_GET_DESKTOP_UPLOADER,
+        show: false,
+        didUserDismiss,
+      });
       this.setState({ toolTipVisible: false });
     }
   }
@@ -156,9 +188,9 @@ class HomeScreen extends PureComponent {
       },
       notesFetchAsync,
       notesFetchSetSearchFilter,
-      navigateEditNote,
       navigateAddComment,
       navigateEditComment,
+      navigateEditNote,
     } = this.props;
     const { toolTipVisible } = this.state;
 
@@ -180,10 +212,10 @@ class HomeScreen extends PureComponent {
             commentsFetchDataByMessageId={commentsFetchDataByMessageId}
             graphDataFetchAsync={graphDataFetchAsync}
             graphDataFetchDataByMessageId={graphDataFetchDataByMessageId}
-            navigateEditNote={navigateEditNote}
-            onDeleteNotePressed={this.onDeleteNotePressed}
             navigateAddComment={navigateAddComment}
+            navigateEditNote={navigateEditNote}
             navigateEditComment={navigateEditComment}
+            onDeleteNotePressed={this.onDeleteNotePressed}
             onDeleteCommentPressed={this.onDeleteCommentPressed}
             graphRenderer={graphRenderer}
             isOffline={isOffline}
@@ -227,6 +259,7 @@ class HomeScreen extends PureComponent {
 HomeScreen.propTypes = {
   currentUser: UserPropType.isRequired,
   notesFetch: PropTypes.object.isRequired,
+  health: PropTypes.object.isRequired,
   currentProfile: ProfilePropType.isRequired,
   notesFetchAsync: PropTypes.func.isRequired,
   notesFetchSetSearchFilter: PropTypes.func.isRequired,
@@ -249,9 +282,11 @@ HomeScreen.propTypes = {
     })
   ),
   graphRenderer: PropTypes.string.isRequired,
-  navigateEditNote: PropTypes.func.isRequired,
   navigateAddComment: PropTypes.func.isRequired,
+  navigateDrawerClose: PropTypes.func.isRequired,
+  navigateEditNote: PropTypes.func.isRequired,
   navigateEditComment: PropTypes.func.isRequired,
+  navigateHealthSync: PropTypes.func.isRequired,
   noteDeleteAsync: PropTypes.func.isRequired,
   commentDeleteAsync: PropTypes.func.isRequired,
   navigation: PropTypes.object.isRequired,

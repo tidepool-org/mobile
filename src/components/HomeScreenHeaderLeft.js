@@ -15,6 +15,7 @@ class HomeScreenHeaderLeft extends PureComponent {
   componentDidUpdate() {
     const { navigation, notesFetch, currentUser } = this.props;
     this.showTipIfNeeded({ navigation, notesFetch, currentUser });
+    this.hideTipIfNeeded({ navigation });
   }
 
   componentWillUnmount() {
@@ -28,7 +29,7 @@ class HomeScreenHeaderLeft extends PureComponent {
     navigateDrawerOpen();
     Metrics.track({ metric: "Clicked Hamburger (Home Screen)" });
     // TODO: metrics - we also need "Viewed Hamburger Menu (Hamburger)" (for when menu is opened, even via gesture)
-    this.hideTipIfNeeded();
+    this.hideTipIfNeeded({ didUserDismiss: true });
   };
 
   showTipIfNeeded(params) {
@@ -37,16 +38,28 @@ class HomeScreenHeaderLeft extends PureComponent {
     ) {
       const { firstTimeTipsShowTip } = this.props;
       this.showTipTimeoutId = setTimeout(() => {
-        firstTimeTipsShowTip(FirstTimeTips.TIP_CONNECT_TO_HEALTH, true);
+        firstTimeTipsShowTip({
+          tip: FirstTimeTips.TIP_CONNECT_TO_HEALTH,
+          show: true,
+        });
         this.setState({ toolTipVisible: true });
       }, 50);
     }
   }
 
-  hideTipIfNeeded() {
-    if (FirstTimeTips.currentTip === FirstTimeTips.TIP_CONNECT_TO_HEALTH) {
+  hideTipIfNeeded({ navigation, didUserDismiss }) {
+    if (
+      FirstTimeTips.shouldHideTip(FirstTimeTips.TIP_CONNECT_TO_HEALTH, {
+        navigation,
+        didUserDismiss,
+      })
+    ) {
       const { firstTimeTipsShowTip } = this.props;
-      firstTimeTipsShowTip(FirstTimeTips.TIP_CONNECT_TO_HEALTH, false);
+      firstTimeTipsShowTip({
+        tip: FirstTimeTips.TIP_CONNECT_TO_HEALTH,
+        show: false,
+        didUserDismiss,
+      });
       this.setState({ toolTipVisible: false });
     }
   }

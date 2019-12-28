@@ -22,6 +22,8 @@ const navigateEditNote = () => {};
 const onDeleteNotePressed = () => {};
 const navigateAddComment = () => {};
 const navigateEditComment = () => {};
+const navigateHealthSync = () => {};
+const navigateDrawerClose = () => {};
 const onDeleteCommentPressed = () => {};
 const notes = [];
 for (let i = 0; i < 100; i += 1) {
@@ -34,6 +36,7 @@ for (let i = 0; i < 100; i += 1) {
     userFullName: "Jill Jellyfish",
   });
 }
+const health = {};
 const currentUser = {
   userId: "1",
   username: "email@gmail.com",
@@ -47,6 +50,7 @@ const props = {
   currentUser,
   currentProfile: currentUser,
   notes,
+  health,
   notesFetchAsync,
   notesFetchSetSearchFilter,
   commentsFetchAsync,
@@ -55,6 +59,8 @@ const props = {
   onDeleteNotePressed,
   navigateAddComment,
   navigateEditComment,
+  navigateHealthSync,
+  navigateDrawerClose,
   onDeleteCommentPressed,
   graphRenderer,
 };

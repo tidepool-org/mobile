@@ -13,6 +13,7 @@ const NAVIGATE_SIGN_UP_DONATE_DATA = "NAVIGATE_SIGN_UP_DONATE_DATA";
 const NAVIGATE_SIGN_UP_ACTIVATE_ACCOUNT = "NAVIGATE_SIGN_UP_ACTIVATE_ACCOUNT";
 const NAVIGATE_FORGOT_PASSWORD = "NAVIGATE_FORGOT_PASSWORD";
 const NAVIGATE_HOW_TO_UPLOAD = "NAVIGATE_HOW_TO_UPLOAD";
+const NAVIGATE_HEALTH_SYNC = "NAVIGATE_HEALTH_SYNC";
 const NAVIGATE_SWITCH_PROFILE = "NAVIGATE_SWITCH_PROFILE";
 const NAVIGATE_ADD_NOTE = "NAVIGATE_ADD_NOTE";
 const NAVIGATE_EDIT_NOTE = "NAVIGATE_EDIT_NOTE";
@@ -76,6 +77,10 @@ function navigateForgotPassword() {
 
 function navigateHowToUpload() {
   return { type: NAVIGATE_HOW_TO_UPLOAD };
+}
+
+function navigateHealthSync({ isInitialSync = false }) {
+  return { type: NAVIGATE_HEALTH_SYNC, payload: { isInitialSync } };
 }
 
 function navigateSwitchProfile() {
@@ -143,6 +148,7 @@ export {
   navigateSignUpActivateAccount,
   navigateForgotPassword,
   navigateHowToUpload,
+  navigateHealthSync,
   navigateSwitchProfile,
   navigateAddNote,
   navigateEditNote,
@@ -168,6 +174,7 @@ export {
   NAVIGATE_SIGN_UP_ACTIVATE_ACCOUNT,
   NAVIGATE_FORGOT_PASSWORD,
   NAVIGATE_HOW_TO_UPLOAD,
+  NAVIGATE_HEALTH_SYNC,
   NAVIGATE_SWITCH_PROFILE,
   NAVIGATE_ADD_NOTE,
   NAVIGATE_EDIT_NOTE,

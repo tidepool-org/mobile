@@ -68,6 +68,27 @@ exports[`Storyshots Drawer default 1`] = `
             Object {
               "data": Array [
                 Object {
+                  "key": "healthSyncButtonDivider",
+                },
+              ],
+              "renderItem": [Function],
+            },
+            Object {
+              "data": Array [
+                Object {
+                  "currentUser": Object {
+                    "fullName": "Current User",
+                    "userId": "1",
+                    "username": "email@gmail.com",
+                  },
+                  "key": "health-sync",
+                },
+              ],
+              "renderItem": [Function],
+            },
+            Object {
+              "data": Array [
+                Object {
                   "key": "switchProfileButtonDivider",
                 },
               ],
@@ -185,6 +206,27 @@ exports[`Storyshots Drawer default 1`] = `
                     "username": "email@gmail.com",
                   },
                   "key": "health",
+                },
+              ],
+              "renderItem": [Function],
+            },
+            Object {
+              "data": Array [
+                Object {
+                  "key": "healthSyncButtonDivider",
+                },
+              ],
+              "renderItem": [Function],
+            },
+            Object {
+              "data": Array [
+                Object {
+                  "currentUser": Object {
+                    "fullName": "Current User",
+                    "userId": "1",
+                    "username": "email@gmail.com",
+                  },
+                  "key": "health-sync",
                 },
               ],
               "renderItem": [Function],
@@ -483,20 +525,7 @@ exports[`Storyshots Drawer default 1`] = `
           <View
             onLayout={[Function]}
             style={null}
-          >
-            <View
-              style={
-                Array [
-                  Object {
-                    "borderBottomColor": "#caccd0",
-                    "borderBottomWidth": 1,
-                    "flex": 1,
-                    "height": 1,
-                  },
-                ]
-              }
-            />
-          </View>
+          />
           <View
             onLayout={[Function]}
             style={null}
@@ -652,6 +681,27 @@ exports[`Storyshots Drawer long user full name 1`] = `
             Object {
               "data": Array [
                 Object {
+                  "key": "healthSyncButtonDivider",
+                },
+              ],
+              "renderItem": [Function],
+            },
+            Object {
+              "data": Array [
+                Object {
+                  "currentUser": Object {
+                    "fullName": "This is a really long full name for a user",
+                    "userId": "1",
+                    "username": "email@gmail.com",
+                  },
+                  "key": "health-sync",
+                },
+              ],
+              "renderItem": [Function],
+            },
+            Object {
+              "data": Array [
+                Object {
                   "key": "switchProfileButtonDivider",
                 },
               ],
@@ -769,6 +819,27 @@ exports[`Storyshots Drawer long user full name 1`] = `
                     "username": "email@gmail.com",
                   },
                   "key": "health",
+                },
+              ],
+              "renderItem": [Function],
+            },
+            Object {
+              "data": Array [
+                Object {
+                  "key": "healthSyncButtonDivider",
+                },
+              ],
+              "renderItem": [Function],
+            },
+            Object {
+              "data": Array [
+                Object {
+                  "currentUser": Object {
+                    "fullName": "This is a really long full name for a user",
+                    "userId": "1",
+                    "username": "email@gmail.com",
+                  },
+                  "key": "health-sync",
                 },
               ],
               "renderItem": [Function],
@@ -1067,20 +1138,7 @@ exports[`Storyshots Drawer long user full name 1`] = `
           <View
             onLayout={[Function]}
             style={null}
-          >
-            <View
-              style={
-                Array [
-                  Object {
-                    "borderBottomColor": "#caccd0",
-                    "borderBottomWidth": 1,
-                    "flex": 1,
-                    "height": 1,
-                  },
-                ]
-              }
-            />
-          </View>
+          />
           <View
             onLayout={[Function]}
             style={null}

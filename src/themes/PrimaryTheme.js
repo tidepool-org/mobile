@@ -8,6 +8,8 @@ const PrimaryTheme = {
     lightBackground: Colors.veryLightGrey,
     whiteBackground: Colors.white,
     activityIndicator: Platform.OS === "android" ? Colors.brightBlue : "grey",
+    progressTintColor: "#627cff",
+    trackTintColor: Colors.mediumLightGrey,
   },
   screenHeaderTitleStyle: {
     color: "white",
@@ -85,6 +87,14 @@ const PrimaryTheme = {
         backgroundColor: "white",
       },
     }),
+  },
+  healthSyncTextPrimary: {
+    ...FontStyles.largeRegularFont,
+    color: Colors.blackish,
+  },
+  healthSyncTextSecondary: {
+    ...FontStyles.mediumRegularFont,
+    color: Colors.mediumLightGrey,
   },
   signInEditFieldExtra: {
     keyboardAppearance: "dark",

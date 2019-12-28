@@ -8,6 +8,7 @@ import Colors from "../constants/Colors";
 import DrawerHealth from "./DrawerHealth";
 import DrawerCurrentUser from "./DrawerCurrentUser";
 import DrawerSwitchProfileButton from "./DrawerSwitchProfileButton";
+import DrawerHealthSyncButton from "./DrawerHealthSyncButton";
 import DrawerSupportButton from "./DrawerSupportButton";
 import DrawerPrivacyAndTermsButton from "./DrawerPrivacyAndTermsButton";
 import DrawerSignOutButton from "./DrawerSignOutButton";
@@ -28,6 +29,7 @@ class Drawer extends PureComponent {
       health,
       navigateDebugSettings,
       navigateDrawerClose,
+      navigateHealthSync,
       notesSwitchProfileAndFetchAsync,
       navigateSwitchProfile,
       navigateSupport,
@@ -73,6 +75,28 @@ class Drawer extends PureComponent {
                     health={health}
                   />
                 ),
+              },
+              {
+                data: [{ key: "healthSyncButtonDivider" }],
+                renderItem: () =>
+                  health.healthKitInterfaceEnabledForCurrentUser ? (
+                    <Divider />
+                  ) : null,
+              },
+              {
+                data: [
+                  {
+                    currentUser,
+                    key: "health-sync",
+                  },
+                ],
+                renderItem: () =>
+                  health.healthKitInterfaceEnabledForCurrentUser ? (
+                    <DrawerHealthSyncButton
+                      navigateHealthSync={navigateHealthSync}
+                      navigateDrawerClose={navigateDrawerClose}
+                    />
+                  ) : null,
               },
               {
                 data: [{ key: "switchProfileButtonDivider" }],
@@ -160,8 +184,9 @@ class Drawer extends PureComponent {
 Drawer.propTypes = {
   style: ViewPropTypes.style,
   health: PropTypes.object.isRequired,
-  notesSwitchProfileAndFetchAsync: PropTypes.func.isRequired,
   navigateDrawerClose: PropTypes.func.isRequired,
+  navigateHealthSync: PropTypes.func.isRequired,
+  notesSwitchProfileAndFetchAsync: PropTypes.func.isRequired,
   navigateSwitchProfile: PropTypes.func.isRequired,
   navigateSupport: PropTypes.func.isRequired,
   navigatePrivacyAndTerms: PropTypes.func.isRequired,

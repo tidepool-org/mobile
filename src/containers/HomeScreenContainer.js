@@ -11,9 +11,11 @@ import { noteDeleteAsync } from "../actions/noteDelete";
 import { commentDeleteAsync } from "../actions/commentDelete";
 import { graphDataFetchAsync } from "../actions/graphDataFetch";
 import {
-  navigateEditNote,
   navigateAddComment,
+  navigateDrawerClose,
   navigateEditComment,
+  navigateEditNote,
+  navigateHealthSync,
 } from "../actions/navigation";
 import { firstTimeTipsShowTip } from "../actions/firstTimeTips";
 
@@ -31,6 +33,7 @@ const mapStateToProps = state => ({
   currentProfile: state.currentProfile,
   graphRenderer: state.graphRenderer,
   firstTimeTips: state.firstTimeTips,
+  health: state.health,
 });
 
 const mapDispatchToProps = dispatch =>
@@ -42,9 +45,11 @@ const mapDispatchToProps = dispatch =>
       commentsFetchAsync,
       commentDeleteAsync,
       graphDataFetchAsync,
+      navigateDrawerClose,
       navigateEditNote,
       navigateAddComment,
       navigateEditComment,
+      navigateHealthSync,
       firstTimeTipsShowTip,
     },
     dispatch

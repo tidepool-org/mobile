@@ -90,6 +90,10 @@ class DrawerHealth extends PureComponent {
     }
 
     const { theme, style } = this.props;
+    const connectToHealthSwitchValue =
+      connectToHealthUserSetting !== null
+        ? connectToHealthUserSetting
+        : healthKitInterfaceEnabledForCurrentUser;
 
     return (
       <glamorous.View style={style} height={80}>
@@ -105,14 +109,14 @@ class DrawerHealth extends PureComponent {
             style={{ transform: [{ scaleX: 0.75 }, { scaleY: 0.75 }] }}
             trackColor={{ true: Colors.brightBlue, false: null }}
             onValueChange={this.onConnectToHealthValueChange}
-            value={
-              connectToHealthUserSetting !== null
-                ? connectToHealthUserSetting
-                : healthKitInterfaceEnabledForCurrentUser
-            }
+            value={connectToHealthSwitchValue}
           />
         </glamorous.View>
-        <DrawerHealthStatus health={health} style={style} />
+        <DrawerHealthStatus
+          health={health}
+          style={style}
+          connectToHealthUserSetting={connectToHealthSwitchValue}
+        />
       </glamorous.View>
     );
   }

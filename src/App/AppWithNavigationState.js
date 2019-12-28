@@ -9,6 +9,7 @@ import { HOME_ROUTE_NAME, SIGN_IN_ROUTE_NAME } from "../navigators/routeNames";
 import getRouteName from "../navigators/getRouteName";
 import { TPNativeHealth } from "../models/TPNativeHealth";
 import { healthKitInterfaceSet, uploaderStateSet } from "../actions/health";
+
 import { authRefreshToken } from "../actions/auth";
 // import { Logger } from "../models/Logger";
 
@@ -37,6 +38,7 @@ class AppWithNavigationState extends PureComponent {
         healthKitInterfaceConfiguredForOtherUser:
           TPNativeHealth.healthKitInterfaceConfiguredForOtherUser,
         currentHealthKitUsername: TPNativeHealth.currentHealthKitUsername,
+        hasPresentedSyncUI: TPNativeHealth.hasPresentedSyncUI,
       })
     );
     dispatch(
@@ -58,7 +60,7 @@ class AppWithNavigationState extends PureComponent {
     TPNativeHealth.removeListener(this.onHealthEvent);
   }
 
-  onHealthEvent = (eventName, eventParams) => {
+  onHealthEvent = (eventName, uploaderType) => {
     const { dispatch } = this.props;
 
     if (
@@ -73,6 +75,7 @@ class AppWithNavigationState extends PureComponent {
           healthKitInterfaceConfiguredForOtherUser:
             TPNativeHealth.healthKitInterfaceConfiguredForOtherUser,
           currentHealthKitUsername: TPNativeHealth.currentHealthKitUsername,
+          hasPresentedSyncUI: TPNativeHealth.hasPresentedSyncUI,
         })
       );
       dispatch(
@@ -98,22 +101,21 @@ class AppWithNavigationState extends PureComponent {
         })
       );
     } else if (eventName === "onUploadStatsUpdated") {
-      if (eventParams.type === "historical") {
+      if (uploaderType === "historical") {
         // If we get a stats updated event for historical upload, we might have
         // missed onTurnOnHistoricalUpload if it were sent before RN
         // initialized, so, dispatch uploaderStateSet as well
-        if (TPNativeHealth.isUploadingHistorical) {
-          dispatch(
-            uploaderStateSet({
-              isUploadingHistorical: TPNativeHealth.isUploadingHistorical,
-              historicalUploadCurrentDay:
-                TPNativeHealth.historicalUploadCurrentDay,
-              historicalUploadTotalDays:
-                TPNativeHealth.historicalUploadTotalDays,
-            })
-          );
-        }
-      } else if (eventParams.type === "current") {
+        dispatch(
+          uploaderStateSet({
+            turnOffUploaderReason: TPNativeHealth.turnOffUploaderReason,
+            turnOffUploaderError: TPNativeHealth.turnOffUploaderError,
+            isUploadingHistorical: TPNativeHealth.isUploadingHistorical,
+            historicalUploadCurrentDay:
+              TPNativeHealth.historicalUploadCurrentDay,
+            historicalUploadTotalDays: TPNativeHealth.historicalUploadTotalDays,
+          })
+        );
+      } else if (uploaderType === "current") {
         dispatch(
           uploaderStateSet({
             lastCurrentUploadUiDescription:

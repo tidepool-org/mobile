@@ -42,7 +42,25 @@ class FirstTimeTips {
     return shouldShowTip;
   }
 
-  showTip(tip, show) {
+  shouldHideTip(tip, { navigation, didUserDismiss }) {
+    let shouldHideTip = false;
+
+    if (
+      this.areSettingsLoaded &&
+      this.currentTip === tip &&
+      (didUserDismiss ||
+        isDrawerOpen({ navigation }) ||
+        !isCurrentRoute(HOME_ROUTE_NAME, { navigation }))
+    ) {
+      shouldHideTip = true;
+    }
+
+    // console.log(`shouldShowTip: ${tip}, result: ${shouldShowTip}`);
+
+    return shouldHideTip;
+  }
+
+  showTip({ tip, show, didUserDismiss }) {
     const hide = !show;
     if (show && tip !== this.currentTip) {
       this.currentTip = tip;
@@ -51,6 +69,9 @@ class FirstTimeTips {
       // console.log(`showTip: ${tip} was shown`);
     } else if (hide && tip === this.currentTip) {
       this.currentTip = null;
+      if (!didUserDismiss) {
+        this.settings[tip] = false;
+      }
       this.saveSettings();
       // console.log(`showTip: ${tip} was hidden`);
     }

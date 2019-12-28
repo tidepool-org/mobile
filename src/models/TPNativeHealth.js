@@ -3,9 +3,12 @@ import { NativeModules, NativeEventEmitter } from "react-native";
 class TPNativeHealthSingletonClass {
   constructor() {
     this.shouldShowHealthKitUI = false;
+
     this.healthKitInterfaceEnabledForCurrentUser = false;
     this.healthKitInterfaceConfiguredForOtherUser = false;
     this.currentHealthKitUsername = "";
+    this.hasPresentedSyncUI = false;
+
     this.isUploadingHistorical = false;
     this.historicalUploadCurrentDay = 0;
     this.historicalUploadTotalDays = 0;
@@ -19,6 +22,7 @@ class TPNativeHealthSingletonClass {
       this.nativeModule = NativeModules.TPNativeHealth;
 
       this.shouldShowHealthKitUI = this.nativeModule.shouldShowHealthKitUI();
+      this.hasPresentedSyncUI = this.nativeModule.hasPresentedSyncUI();
       this.healthKitInterfaceEnabledForCurrentUser = this.nativeModule.healthKitInterfaceEnabledForCurrentUser();
       this.healthKitInterfaceConfiguredForOtherUser = this.nativeModule.healthKitInterfaceConfiguredForOtherUser();
       this.currentHealthKitUsername = this.nativeModule.currentHealthKitUsername();
@@ -65,8 +69,23 @@ class TPNativeHealthSingletonClass {
     }
   }
 
+  setHasPresentedSyncUI() {
+    try {
+      this.nativeModule.setHasPresentedSyncUI();
+      this.hasPresentedSyncUI = true;
+    } catch (error) {
+      // console.log(`error: ${error}`);
+    }
+  }
+
   startUploadingHistorical() {
     try {
+      this.historicalUploadCurrentDay = 0;
+      this.historicalUploadTotalDays = 0;
+      this.turnOffUploaderReason = "";
+      this.turnOffUploaderError = "";
+      this.notify("onUploadStatsUpdated", "historical");
+
       this.nativeModule.startUploadingHistorical();
     } catch (error) {
       // console.log(`error: ${error}`);
@@ -88,7 +107,7 @@ class TPNativeHealthSingletonClass {
     this.healthKitInterfaceConfiguredForOtherUser =
       params.healthKitInterfaceConfiguredForOtherUser;
     this.currentHealthKitUsername = params.currentHealthKitUsername;
-    this.notify("onTurnOnInterface", params);
+    this.notify("onTurnOnInterface");
   };
 
   onTurnOffInterface = params => {
@@ -98,21 +117,21 @@ class TPNativeHealthSingletonClass {
     this.healthKitInterfaceConfiguredForOtherUser =
       params.healthKitInterfaceConfiguredForOtherUser;
     this.currentHealthKitUsername = params.currentHealthKitUsername;
-    this.notify("onTurnOffInterface", params);
+    this.notify("onTurnOffInterface");
   };
 
-  onTurnOnHistoricalUpload = params => {
+  onTurnOnHistoricalUpload = () => {
     this.isUploadingHistorical = true;
     this.turnOffUploaderReason = "";
     this.turnOffUploaderError = "";
-    this.notify("onTurnOnHistoricalUpload", params);
+    this.notify("onTurnOnHistoricalUpload");
   };
 
   onTurnOffHistoricalUpload = params => {
     this.isUploadingHistorical = false;
     this.turnOffUploaderReason = params.turnOffUploaderReason;
     this.turnOffUploaderError = params.turnOffUploaderError;
-    this.notify("onTurnOffHistoricalUpload", params);
+    this.notify("onTurnOffHistoricalUpload");
   };
 
   onUploadStatsUpdated = params => {
@@ -120,12 +139,11 @@ class TPNativeHealthSingletonClass {
       this.isUploadingHistorical = params.isUploadingHistorical;
       this.historicalUploadCurrentDay = params.historicalUploadCurrentDay;
       this.historicalUploadTotalDays = params.historicalUploadTotalDays;
-      this.notify("onUploadStatsUpdated", params);
     } else if (params.type === "current") {
       this.lastCurrentUploadUiDescription =
         params.lastCurrentUploadUiDescription;
-      this.notify("onUploadStatsUpdated", params);
     }
+    this.notify("onUploadStatsUpdated", params.type);
   };
 
   refreshUploadStats() {
@@ -138,20 +156,8 @@ class TPNativeHealthSingletonClass {
         uploaderProgress.historicalUploadTotalDays;
       this.lastCurrentUploadUiDescription =
         uploaderProgress.lastCurrentUploadUiDescription;
-
-      let params = {
-        type: "historical",
-        isUploadingHistorical: this.isUploadingHistorical,
-        historicalUploadCurrentDay: this.historicalUploadCurrentDay,
-        historicalUploadTotalDays: this.historicalUploadTotalDays,
-      };
-      this.notify("onUploadStatsUpdated", params);
-
-      params = {
-        type: "current",
-        lastCurrentUploadUiDescription: this.lastCurrentUploadUiDescription,
-      };
-      this.notify("onUploadStatsUpdated", params);
+      this.notify("onUploadStatsUpdated", "historical");
+      this.notify("onUploadStatsUpdated", "current");
     } catch (error) {
       // console.log(`error: ${error}`);
     }

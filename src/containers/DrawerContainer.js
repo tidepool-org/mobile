@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import Drawer from "../components/Drawer";
 import {
   navigateDrawerClose,
+  navigateHealthSync,
   navigateSwitchProfile,
   navigateSupport,
   navigatePrivacyAndTerms,
@@ -23,8 +24,9 @@ class DrawerContainer extends PureComponent {
       version,
       health,
       apiEnvironment,
-      notesSwitchProfileAndFetchAsync,
       navigateDrawerClose,
+      navigateHealthSync,
+      notesSwitchProfileAndFetchAsync,
       navigateSwitchProfile,
       navigateSupport,
       navigatePrivacyAndTerms,
@@ -43,8 +45,9 @@ class DrawerContainer extends PureComponent {
           marginTop,
         }}
         health={health}
-        notesSwitchProfileAndFetchAsync={notesSwitchProfileAndFetchAsync}
         navigateDrawerClose={navigateDrawerClose}
+        navigateHealthSync={navigateHealthSync}
+        notesSwitchProfileAndFetchAsync={notesSwitchProfileAndFetchAsync}
         navigateSwitchProfile={navigateSwitchProfile}
         navigateSupport={navigateSupport}
         navigatePrivacyAndTerms={navigatePrivacyAndTerms}
@@ -60,8 +63,9 @@ class DrawerContainer extends PureComponent {
 }
 
 DrawerContainer.propTypes = {
-  notesSwitchProfileAndFetchAsync: PropTypes.func.isRequired,
   navigateDrawerClose: PropTypes.func.isRequired,
+  navigateHealthSync: PropTypes.func.isRequired,
+  notesSwitchProfileAndFetchAsync: PropTypes.func.isRequired,
   navigateSwitchProfile: PropTypes.func.isRequired,
   navigateSupport: PropTypes.func.isRequired,
   navigatePrivacyAndTerms: PropTypes.func.isRequired,
@@ -85,8 +89,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      notesSwitchProfileAndFetchAsync,
       navigateDrawerClose,
+      navigateHealthSync,
+      notesSwitchProfileAndFetchAsync,
       navigateSwitchProfile,
       navigateSupport,
       navigatePrivacyAndTerms,
