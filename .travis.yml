@@ -18,6 +18,8 @@ matrix:
       before_install:
         - brew update
         - brew install yarn
+        - brew install python
+        - brew link --overwrite python
         - brew install watchman
         - gem install xcpretty-travis-formatter
         - openssl aes-256-cbc -K $encrypted_4beaf9ef68f9_key -iv $encrypted_4beaf9ef68f9_iv
