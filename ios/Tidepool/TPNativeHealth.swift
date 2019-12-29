@@ -159,18 +159,19 @@ class TPNativeHealth: RCTEventEmitter {
 
     @objc func handleTurnOnUploader(_ note: Notification) {
         DDLogVerbose("trace")
-
-        guard isObserving else {
-            return
-        }
-
-        DispatchQueue.main.async {
-            let userInfo = note.userInfo!
-            let mode = userInfo["mode"] as! TPUploader.Mode
-            if mode == TPUploader.Mode.HistoricalAll {
-                self.sendEvent(withName: "onTurnOnHistoricalUpload", body:[
-                    "hasPresentedSyncUI": self.uploader.hasPresentedSyncUI
-                ])
+        
+        let userInfo = note.userInfo!
+        let mode = userInfo["mode"] as! TPUploader.Mode
+        if mode == TPUploader.Mode.HistoricalAll {
+            DispatchQueue.main.async {
+                DDLogVerbose("handleTurnOnUploader disable idle timer")
+                UIApplication.shared.isIdleTimerDisabled = true
+           
+                if self.isObserving {
+                    self.sendEvent(withName: "onTurnOnHistoricalUpload", body:[
+                        "hasPresentedSyncUI": self.uploader.hasPresentedSyncUI
+                    ])
+                }
             }
         }
     }
@@ -178,34 +179,36 @@ class TPNativeHealth: RCTEventEmitter {
     @objc func handleTurnOffUploader(_ note: Notification) {
         DDLogVerbose("trace")
 
-        guard isObserving else {
-            return
-        }
+        let userInfo = note.userInfo!
+        let mode = userInfo["mode"] as! TPUploader.Mode
+        if mode == TPUploader.Mode.HistoricalAll {
+            DispatchQueue.main.async {
+                DDLogVerbose("handleTurnOffUploader disable idle timer")
+                UIApplication.shared.isIdleTimerDisabled = false
+                
+                if self.isObserving {
+                    let type = userInfo["type"] as! String
+                    let reason = userInfo["reason"] as! TPUploader.StoppedReason
+                    DDLogInfo("Type: \(type), Mode: \(mode), Reason: \(reason)")
 
-        DispatchQueue.main.async {
-            let userInfo = note.userInfo!
-            let mode = userInfo["mode"] as! TPUploader.Mode
-            let type = userInfo["type"] as! String
-            let reason = userInfo["reason"] as! TPUploader.StoppedReason
-            DDLogInfo("Type: \(type), Mode: \(mode), Reason: \(reason)")
+                    var body: Any? = nil
+                    // Update status
+                    switch reason {
+                    case .interfaceTurnedOff:
+                        body = ["turnOffUploaderReason": "turned off", "turnOffUploaderError": ""]
+                        break
+                    case .uploadingComplete:
+                        body = ["turnOffUploaderReason": "complete", "turnOffUploaderError": ""]
+                        break
+                    case .error(let error):
+                        body = ["turnOffUploaderReason": "error", "turnOffUploaderError": String("\(type) upload error: \(error.localizedDescription.prefix(50))")]
+                        break
+                    default:
+                        break
+                    }
+                    self.sendEvent(withName: "onTurnOffHistoricalUpload", body: body)
 
-            var body: Any? = nil
-            if mode == TPUploader.Mode.HistoricalAll {
-                // Update status
-                switch reason {
-                case .interfaceTurnedOff:
-                    body = ["turnOffUploaderReason": "turned off", "turnOffUploaderError": ""]
-                    break
-                case .uploadingComplete:
-                    body = ["turnOffUploaderReason": "complete", "turnOffUploaderError": ""]
-                    break
-                case .error(let error):
-                    body = ["turnOffUploaderReason": "error", "turnOffUploaderError": String("\(type) upload error: \(error.localizedDescription.prefix(50))")]
-                    break
-                default:
-                    break
                 }
-                self.sendEvent(withName: "onTurnOffHistoricalUpload", body: body)
             }
         }
     }

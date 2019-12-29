@@ -34,7 +34,7 @@ class TPAppDelegate: EXStandaloneAppDelegate {
         DDLogVerbose("Log Date: \(dateString)")
 
         let result = super.application(application, didFinishLaunchingWithOptions: launchOptions)
-        
+
         let state = UIApplication.shared.applicationState
         if state == .background {
             DDLogInfo("launched in background")
@@ -57,6 +57,7 @@ class TPAppDelegate: EXStandaloneAppDelegate {
 
     override func applicationProtectedDataWillBecomeUnavailable(_ application: UIApplication) {
         DDLogInfo("Device locked!")
+
         deviceIsLocked = true
         // super.applicationProtectedDataWillBecomeUnavailable(application) // super doesn't implement!
     }
@@ -69,15 +70,22 @@ class TPAppDelegate: EXStandaloneAppDelegate {
     override func applicationDidEnterBackground(_ application: UIApplication) {
         DDLogVerbose("trace")
 
-        // Re-enable idle timer (screen locking) when the app enters background. (May have been disabled during sync/upload.)
+        // Re-enable idle timer when the app enters background. (May have been disabled during historical sync/upload.)
+        DDLogVerbose("applicationDidEnterBackground enable idle timer")
         UIApplication.shared.isIdleTimerDisabled = false
-        // TODO: health - idle timer - need to disable idle timer while Initial or Manual Sync is going on (and also sync via Debug Health)
 
         // super.applicationDidEnterBackground(application) // super doesn't implement!
     }
 
     override func applicationWillEnterForeground(_ application: UIApplication) {
         DDLogInfo("applicationWillEnterForeground")
+        
+        // Disable idle timer if there is a historical sync in progress
+        if TPUploaderAPI.connector().uploader().isUploadInProgressForMode(TPUploader.Mode.HistoricalAll) {
+            DDLogVerbose("applicationWillEnterForeground disable idle timer")
+            UIApplication.shared.isIdleTimerDisabled = true
+        }
+    
         super.applicationWillEnterForeground(application)
     }
 
@@ -93,14 +101,14 @@ class TPAppDelegate: EXStandaloneAppDelegate {
         DDLogVerbose("trace")
         // super.applicationWillTerminate(application) // super doesn't implement!
     }
-    
+
     fileprivate func refreshTokenAndConfigureHealthKitInterface() {
         let api = TPApi.sharedInstance
         if api.sessionToken != nil {
             api.refreshToken() { (succeeded, statusCode) in
                 if succeeded {
                     DDLogInfo("Refresh token succeeded, statusCode: \(statusCode)")
-                    
+
                     // Get auth user from AsyncStorage and update the sessionToken
                     let settings = TPSettings.sharedInstance
                     settings.getValuesForAyncStorageKeys(keys: [kAsyncStorageAuthUserKey]) { (values: [String?]) in
@@ -111,7 +119,7 @@ class TPAppDelegate: EXStandaloneAppDelegate {
                             [kAsyncStorageAuthUserKey, json.rawString()!],
                         ])
                     }
-                                        
+
                     // Configure HealthKit Interface (uses new auth user, etc)
                     TPDataController.sharedInstance.configureHealthKitInterface()
                 } else {
