@@ -201,7 +201,12 @@ class TPNativeHealth: RCTEventEmitter {
                         body = ["turnOffUploaderReason": "complete", "turnOffUploaderError": ""]
                         break
                     case .error(let error):
-                        body = ["turnOffUploaderReason": "error", "turnOffUploaderError": String("\(type) upload error: \(error.localizedDescription.prefix(50))")]
+                        if !self.connector.isConnectedToNetwork() {
+                            let message = "Unable to upload, not connected to network."
+                            body = ["turnOffUploaderReason": "error", "turnOffUploaderError": String("\(type) upload error: \(message)")]
+                        } else {
+                            body = ["turnOffUploaderReason": "error", "turnOffUploaderError": String("\(type) upload error: \(error.localizedDescription.prefix(50))")]
+                        }
                         break
                     default:
                         break

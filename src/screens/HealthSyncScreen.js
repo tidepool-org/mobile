@@ -141,19 +141,18 @@ class HealthSyncScreen extends PureComponent {
         {
           text: "OK",
           onPress: () => {
-            TPNativeHealth.stopUploadingHistorical();
+            TPNativeHealth.stopUploadingHistoricalAndReset();
             navigateGoBack();
           },
         },
       ]);
     } else {
-      TPNativeHealth.stopUploadingHistorical();
       navigateGoBack();
     }
   };
 
   onPressSync = () => {
-    TPNativeHealth.stopUploadingHistorical(); // Reset uploader state so historical upload starts from beginning
+    TPNativeHealth.stopUploadingHistoricalAndReset(); // Reset uploader state so historical upload starts from beginning
     TPNativeHealth.startUploadingHistorical();
 
     // Schedule this for next tick so it coalesces with other dispatched state

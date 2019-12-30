@@ -101,7 +101,7 @@ class DebugHealthScreen extends PureComponent {
   };
 
   onPressResetButton = () => {
-    TPNativeHealth.stopUploadingHistorical();
+    TPNativeHealth.stopUploadingHistoricalAndReset();
   };
 
   timeChanged = () => {

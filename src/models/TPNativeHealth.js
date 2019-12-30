@@ -33,6 +33,7 @@ class TPNativeHealthSingletonClass {
         uploaderProgress.historicalUploadCurrentDay;
       this.historicalUploadTotalDays =
         uploaderProgress.historicalUploadTotalDays;
+      this.updateHistoricalUploadCurrentDayIfComplete();
       this.lastCurrentUploadUiDescription =
         uploaderProgress.lastCurrentUploadUiDescription;
 
@@ -85,14 +86,13 @@ class TPNativeHealthSingletonClass {
       this.turnOffUploaderReason = "";
       this.turnOffUploaderError = "";
       this.notify("onUploadStatsUpdated", "historical");
-
       this.nativeModule.startUploadingHistorical();
     } catch (error) {
       // console.log(`error: ${error}`);
     }
   }
 
-  stopUploadingHistorical() {
+  stopUploadingHistoricalAndReset() {
     try {
       this.nativeModule.stopUploadingHistoricalAndReset();
     } catch (error) {
@@ -130,7 +130,15 @@ class TPNativeHealthSingletonClass {
   onTurnOffHistoricalUpload = params => {
     this.isUploadingHistorical = false;
     this.turnOffUploaderReason = params.turnOffUploaderReason;
-    this.turnOffUploaderError = params.turnOffUploaderError;
+
+    let error = params.turnOffUploaderError;
+    const errorPrefix = "error: ";
+    const errorPrefixIndex = error.indexOf(errorPrefix);
+    if (errorPrefixIndex !== -1) {
+      error = error.slice(errorPrefixIndex + errorPrefix.length);
+    }
+    this.turnOffUploaderError = error;
+    this.updateHistoricalUploadCurrentDayIfComplete();
     this.notify("onTurnOffHistoricalUpload");
   };
 
@@ -139,6 +147,7 @@ class TPNativeHealthSingletonClass {
       this.isUploadingHistorical = params.isUploadingHistorical;
       this.historicalUploadCurrentDay = params.historicalUploadCurrentDay;
       this.historicalUploadTotalDays = params.historicalUploadTotalDays;
+      this.updateHistoricalUploadCurrentDayIfComplete();
     } else if (params.type === "current") {
       this.lastCurrentUploadUiDescription =
         params.lastCurrentUploadUiDescription;
@@ -154,12 +163,19 @@ class TPNativeHealthSingletonClass {
         uploaderProgress.historicalUploadCurrentDay;
       this.historicalUploadTotalDays =
         uploaderProgress.historicalUploadTotalDays;
+      this.updateHistoricalUploadCurrentDayIfComplete();
       this.lastCurrentUploadUiDescription =
         uploaderProgress.lastCurrentUploadUiDescription;
       this.notify("onUploadStatsUpdated", "historical");
       this.notify("onUploadStatsUpdated", "current");
     } catch (error) {
       // console.log(`error: ${error}`);
+    }
+  }
+
+  updateHistoricalUploadCurrentDayIfComplete() {
+    if (this.turnOffUploaderReason === "complete") {
+      this.historicalUploadCurrentDay = this.historicalUploadTotalDays;
     }
   }
 
