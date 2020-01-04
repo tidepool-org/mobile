@@ -121,7 +121,7 @@ index cd55c67..a8046e6 100644
  
    return {
 diff --git a/node_modules/react-native-walkthrough-tooltip/src/tooltip.js b/node_modules/react-native-walkthrough-tooltip/src/tooltip.js
-index bce3dd1..00508cb 100644
+index bce3dd1..6ec9b96 100644
 --- a/node_modules/react-native-walkthrough-tooltip/src/tooltip.js
 +++ b/node_modules/react-native-walkthrough-tooltip/src/tooltip.js
 @@ -27,7 +27,7 @@ const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -141,6 +141,15 @@ index bce3dd1..00508cb 100644
    };
  
    constructor(props) {
+@@ -99,7 +100,7 @@ class Tooltip extends Component {
+     }
+   }
+ 
+-  componentWillReceiveProps(nextProps) {
++  UNSAFE_componentWillReceiveProps(nextProps) {
+     const willBeVisible = nextProps.isVisible;
+     const nextContent = nextProps.content;
+     const { isVisible, content } = this.props;
 @@ -135,7 +136,7 @@ class Tooltip extends Component {
      }
    }
