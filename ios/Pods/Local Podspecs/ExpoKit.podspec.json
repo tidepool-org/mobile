@@ -1,6 +1,6 @@
 {
   "name": "ExpoKit",
-  "version": "35.0.0",
+  "version": "36.0.0",
   "summary": "ExpoKit",
   "description": "ExpoKit allows native projects to integrate with the Expo SDK.",
   "homepage": "http://docs.expo.io",
@@ -28,34 +28,13 @@
       ],
       "dependencies": {
         "Amplitude-iOS": [
-          "~> 4.6"
-        ],
-        "Analytics": [
-          "~> 3.7"
-        ],
-        "AppAuth": [
-          "~> 1.2"
+          "~> 4.7.1"
         ],
         "CocoaLumberjack": [
           "~> 3.5.3"
         ],
         "Crashlytics": [
           "~> 3.13.4"
-        ],
-        "FBAudienceNetwork": [
-          "5.5.0"
-        ],
-        "FBSDKCoreKit": [
-          "~> 5.6.0"
-        ],
-        "FBSDKLoginKit": [
-          "~> 5.6.0"
-        ],
-        "Fabric": [
-          "~> 1.10.2"
-        ],
-        "GoogleSignIn": [
-          "~> 5.0"
         ],
         "GoogleMaps": [
           "~> 3.3"
@@ -68,9 +47,6 @@
         ],
         "JKBigInteger2": [
           "0.0.5"
-        ],
-        "Branch": [
-          "~> 0.28"
         ],
         "React": [
 

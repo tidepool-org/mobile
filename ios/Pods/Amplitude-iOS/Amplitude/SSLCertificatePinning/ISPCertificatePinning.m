@@ -7,31 +7,6 @@
 //  Copyright (c) 2014 iSEC Partners. All rights reserved.
 //
 
-#ifndef AMPLITUDE_DEBUG
-#define AMPLITUDE_DEBUG 0
-#endif
-
-#ifndef AMPLITUDE_LOG
-#if AMPLITUDE_DEBUG
-#   define AMPLITUDE_LOG(fmt, ...) NSLog(fmt, ##__VA_ARGS__)
-#else
-#   define AMPLITUDE_LOG(...)
-#endif
-#endif
-
-#ifndef AMPLITUDE_LOG_ERRORS
-#define AMPLITUDE_LOG_ERRORS 1
-#endif
-
-#ifndef AMPLITUDE_ERROR
-#if AMPLITUDE_LOG_ERRORS
-#   define AMPLITUDE_ERROR(fmt, ...) NSLog(fmt, ##__VA_ARGS__)
-#else
-#   define AMPLITUDE_ERROR(...)
-#endif
-#endif
-
-
 #import "ISPCertificatePinning.h"
 
 
@@ -55,7 +30,7 @@
                                                                   options:0
                                                                     error:&error];
     if (plistData == nil) {
-        AMPLITUDE_ERROR(@"Error serializing plist: %@", error);
+        NSLog(@"Error serializing plist: %@", error);
         return NO;
     }
 
@@ -64,7 +39,7 @@
     if ([plistData writeToFile:[@PINNED_KEYS_FILE_PATH stringByExpandingTildeInPath]
                        options:NSDataWritingAtomic
                          error:&writeError] == NO) {
-        AMPLITUDE_ERROR(@"Error saving plist to the filesystem: %@", writeError);
+        NSLog(@"Error saving plist to the filesystem: %@", writeError);
         return NO;
     }
 
@@ -80,7 +55,7 @@
     // Deserialize the plist that contains our SSL pins
     NSDictionary *SSLPinsDict = [NSDictionary dictionaryWithContentsOfFile:[@PINNED_KEYS_FILE_PATH stringByExpandingTildeInPath]];
     if (SSLPinsDict == nil) {
-        AMPLITUDE_ERROR(@"Error accessing the SSL Pins plist at %@", @PINNED_KEYS_FILE_PATH);
+        NSLog(@"Error accessing the SSL Pins plist at %@", @PINNED_KEYS_FILE_PATH);
         return NO;
     }
 

@@ -1,1 +1,1 @@
-../../../../../node_modules/expo-three/node_modules/expo/node_modules/unimodules-sensors-interface/ios/UMSensorsInterface/UMMagnetometerInterface.h
+../../../../../node_modules/unimodules-sensors-interface/ios/UMSensorsInterface/UMMagnetometerInterface.h

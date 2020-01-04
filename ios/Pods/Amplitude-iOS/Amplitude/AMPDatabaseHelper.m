@@ -156,7 +156,7 @@ static NSString *const GET_VALUE = @"SELECT %@, %@ FROM %@ WHERE %@ = ?;";
 
     dispatch_sync(_queue, ^() {
         if (sqlite3_open([self->_databasePath UTF8String], &self->_database) != SQLITE_OK) {
-            AMPLITUDE_LOG(@"Failed to open database");
+            NSLog(@"Failed to open database");
             sqlite3_close(self->_database);
             success = NO;
             return;
@@ -187,7 +187,7 @@ static NSString *const GET_VALUE = @"SELECT %@, %@ FROM %@ WHERE %@ = ?;";
 
     dispatch_sync(_queue, ^() {
         if (sqlite3_open([self->_databasePath UTF8String], &self->_database) != SQLITE_OK) {
-            AMPLITUDE_LOG(@"Failed to open database");
+            NSLog(@"Failed to open database");
             sqlite3_close(self->_database);
             success = NO;
             return;
@@ -270,7 +270,7 @@ static NSString *const GET_VALUE = @"SELECT %@, %@ FROM %@ WHERE %@ = ?;";
     }];
 
     if (!success) {
-        AMPLITUDE_LOG(@"upgrade with unknown oldVersion %d", oldVersion);
+        NSLog(@"upgrade with unknown oldVersion %d", oldVersion);
         return [self resetDB:NO];
     }
     return success;

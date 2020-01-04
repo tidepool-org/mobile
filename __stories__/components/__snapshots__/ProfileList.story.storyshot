@@ -153,7 +153,9 @@ exports[`Storyshots ProfileList default 1`] = `
             >
               <View
                 accessible={true}
+                focusable={true}
                 isTVSelectable={true}
+                onClick={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
                 onResponderRelease={[Function]}
@@ -234,7 +236,9 @@ exports[`Storyshots ProfileList default 1`] = `
             >
               <View
                 accessible={true}
+                focusable={true}
                 isTVSelectable={true}
+                onClick={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
                 onResponderRelease={[Function]}
@@ -302,7 +306,9 @@ exports[`Storyshots ProfileList default 1`] = `
             >
               <View
                 accessible={true}
+                focusable={true}
                 isTVSelectable={true}
+                onClick={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
                 onResponderRelease={[Function]}
@@ -391,7 +397,9 @@ exports[`Storyshots ProfileList default 1`] = `
             >
               <View
                 accessible={true}
+                focusable={true}
                 isTVSelectable={true}
+                onClick={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
                 onResponderRelease={[Function]}
@@ -459,7 +467,9 @@ exports[`Storyshots ProfileList default 1`] = `
             >
               <View
                 accessible={true}
+                focusable={true}
                 isTVSelectable={true}
+                onClick={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
                 onResponderRelease={[Function]}
@@ -527,7 +537,9 @@ exports[`Storyshots ProfileList default 1`] = `
             >
               <View
                 accessible={true}
+                focusable={true}
                 isTVSelectable={true}
+                onClick={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
                 onResponderRelease={[Function]}
@@ -595,7 +607,9 @@ exports[`Storyshots ProfileList default 1`] = `
             >
               <View
                 accessible={true}
+                focusable={true}
                 isTVSelectable={true}
+                onClick={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
                 onResponderRelease={[Function]}
@@ -663,7 +677,9 @@ exports[`Storyshots ProfileList default 1`] = `
             >
               <View
                 accessible={true}
+                focusable={true}
                 isTVSelectable={true}
+                onClick={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
                 onResponderRelease={[Function]}
@@ -731,7 +747,9 @@ exports[`Storyshots ProfileList default 1`] = `
             >
               <View
                 accessible={true}
+                focusable={true}
                 isTVSelectable={true}
+                onClick={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
                 onResponderRelease={[Function]}
@@ -799,7 +817,9 @@ exports[`Storyshots ProfileList default 1`] = `
             >
               <View
                 accessible={true}
+                focusable={true}
                 isTVSelectable={true}
+                onClick={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
                 onResponderRelease={[Function]}

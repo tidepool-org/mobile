@@ -1,1 +1,1 @@
-../../../../../node_modules/expo-three/node_modules/expo/node_modules/unimodules-font-interface/ios/UMFontInterface/UMFontScalerInterface.h
+../../../../../node_modules/unimodules-font-interface/ios/UMFontInterface/UMFontScalerInterface.h

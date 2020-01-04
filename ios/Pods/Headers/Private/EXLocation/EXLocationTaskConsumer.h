@@ -1,1 +1,1 @@
-../../../../../node_modules/expo-three/node_modules/expo/node_modules/expo-location/ios/EXLocation/TaskConsumers/EXLocationTaskConsumer.h
+../../../../../node_modules/expo-location/ios/EXLocation/TaskConsumers/EXLocationTaskConsumer.h

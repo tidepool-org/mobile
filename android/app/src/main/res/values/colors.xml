@@ -7,7 +7,7 @@
   <color name="colorText">#FFFFFF</color>
   <color name="white">#FFFFFF</color>
   <color name="errorMessage">#FF0000</color>
-  <color name="errorLogButton">#66FFFFFF</color>
+  <color name="errorLogButton">#66FFFF</color>
   <color name="colorLight">#F6F6F7</color>
   <color name="splashBackground">#ffffff</color>
   <color name="iconBackground">#FFFFFF</color>

@@ -61,7 +61,9 @@ exports[`Storyshots HashtagPicker default 1`] = `
           >
             <View
               accessible={true}
+              focusable={true}
               isTVSelectable={true}
+              onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -112,7 +114,9 @@ exports[`Storyshots HashtagPicker default 1`] = `
           >
             <View
               accessible={true}
+              focusable={true}
               isTVSelectable={true}
+              onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -163,7 +167,9 @@ exports[`Storyshots HashtagPicker default 1`] = `
           >
             <View
               accessible={true}
+              focusable={true}
               isTVSelectable={true}
+              onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -214,7 +220,9 @@ exports[`Storyshots HashtagPicker default 1`] = `
           >
             <View
               accessible={true}
+              focusable={true}
               isTVSelectable={true}
+              onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -265,7 +273,9 @@ exports[`Storyshots HashtagPicker default 1`] = `
           >
             <View
               accessible={true}
+              focusable={true}
               isTVSelectable={true}
+              onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -316,7 +326,9 @@ exports[`Storyshots HashtagPicker default 1`] = `
           >
             <View
               accessible={true}
+              focusable={true}
               isTVSelectable={true}
+              onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -424,7 +436,9 @@ exports[`Storyshots HashtagPicker lots of hashtags 1`] = `
           >
             <View
               accessible={true}
+              focusable={true}
               isTVSelectable={true}
+              onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -475,7 +489,9 @@ exports[`Storyshots HashtagPicker lots of hashtags 1`] = `
           >
             <View
               accessible={true}
+              focusable={true}
               isTVSelectable={true}
+              onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -526,7 +542,9 @@ exports[`Storyshots HashtagPicker lots of hashtags 1`] = `
           >
             <View
               accessible={true}
+              focusable={true}
               isTVSelectable={true}
+              onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -577,7 +595,9 @@ exports[`Storyshots HashtagPicker lots of hashtags 1`] = `
           >
             <View
               accessible={true}
+              focusable={true}
               isTVSelectable={true}
+              onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -628,7 +648,9 @@ exports[`Storyshots HashtagPicker lots of hashtags 1`] = `
           >
             <View
               accessible={true}
+              focusable={true}
               isTVSelectable={true}
+              onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -679,7 +701,9 @@ exports[`Storyshots HashtagPicker lots of hashtags 1`] = `
           >
             <View
               accessible={true}
+              focusable={true}
               isTVSelectable={true}
+              onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -730,7 +754,9 @@ exports[`Storyshots HashtagPicker lots of hashtags 1`] = `
           >
             <View
               accessible={true}
+              focusable={true}
               isTVSelectable={true}
+              onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -781,7 +807,9 @@ exports[`Storyshots HashtagPicker lots of hashtags 1`] = `
           >
             <View
               accessible={true}
+              focusable={true}
               isTVSelectable={true}
+              onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -832,7 +860,9 @@ exports[`Storyshots HashtagPicker lots of hashtags 1`] = `
           >
             <View
               accessible={true}
+              focusable={true}
               isTVSelectable={true}
+              onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -883,7 +913,9 @@ exports[`Storyshots HashtagPicker lots of hashtags 1`] = `
           >
             <View
               accessible={true}
+              focusable={true}
               isTVSelectable={true}
+              onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -934,7 +966,9 @@ exports[`Storyshots HashtagPicker lots of hashtags 1`] = `
           >
             <View
               accessible={true}
+              focusable={true}
               isTVSelectable={true}
+              onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -985,7 +1019,9 @@ exports[`Storyshots HashtagPicker lots of hashtags 1`] = `
           >
             <View
               accessible={true}
+              focusable={true}
               isTVSelectable={true}
+              onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -1036,7 +1072,9 @@ exports[`Storyshots HashtagPicker lots of hashtags 1`] = `
           >
             <View
               accessible={true}
+              focusable={true}
               isTVSelectable={true}
+              onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -1087,7 +1125,9 @@ exports[`Storyshots HashtagPicker lots of hashtags 1`] = `
           >
             <View
               accessible={true}
+              focusable={true}
               isTVSelectable={true}
+              onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -1138,7 +1178,9 @@ exports[`Storyshots HashtagPicker lots of hashtags 1`] = `
           >
             <View
               accessible={true}
+              focusable={true}
               isTVSelectable={true}
+              onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -1189,7 +1231,9 @@ exports[`Storyshots HashtagPicker lots of hashtags 1`] = `
           >
             <View
               accessible={true}
+              focusable={true}
               isTVSelectable={true}
+              onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -1240,7 +1284,9 @@ exports[`Storyshots HashtagPicker lots of hashtags 1`] = `
           >
             <View
               accessible={true}
+              focusable={true}
               isTVSelectable={true}
+              onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -1291,7 +1337,9 @@ exports[`Storyshots HashtagPicker lots of hashtags 1`] = `
           >
             <View
               accessible={true}
+              focusable={true}
               isTVSelectable={true}
+              onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -1342,7 +1390,9 @@ exports[`Storyshots HashtagPicker lots of hashtags 1`] = `
           >
             <View
               accessible={true}
+              focusable={true}
               isTVSelectable={true}
+              onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -1393,7 +1443,9 @@ exports[`Storyshots HashtagPicker lots of hashtags 1`] = `
           >
             <View
               accessible={true}
+              focusable={true}
               isTVSelectable={true}
+              onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -1501,7 +1553,9 @@ exports[`Storyshots HashtagPicker one hashtag 1`] = `
           >
             <View
               accessible={true}
+              focusable={true}
               isTVSelectable={true}
+              onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -1609,7 +1663,9 @@ exports[`Storyshots HashtagPicker short and long hashtags 1`] = `
           >
             <View
               accessible={true}
+              focusable={true}
               isTVSelectable={true}
+              onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -1660,7 +1716,9 @@ exports[`Storyshots HashtagPicker short and long hashtags 1`] = `
           >
             <View
               accessible={true}
+              focusable={true}
               isTVSelectable={true}
+              onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -1768,7 +1826,9 @@ exports[`Storyshots HashtagPicker two hashtags 1`] = `
           >
             <View
               accessible={true}
+              focusable={true}
               isTVSelectable={true}
+              onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -1819,7 +1879,9 @@ exports[`Storyshots HashtagPicker two hashtags 1`] = `
           >
             <View
               accessible={true}
+              focusable={true}
               isTVSelectable={true}
+              onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}

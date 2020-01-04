@@ -55,9 +55,11 @@ exports[`Storyshots SignUpScreens Create Account Personal 1`] = `
           </Text>
         </View>
         <TextInput
+          allowFontScaling={true}
           onChangeText={[Function]}
           placeholder="Full Name"
           placeholderTextColor="#838383"
+          rejectResponderTermination={true}
           style={
             Object {
               "borderColor": "#ededed",
@@ -70,11 +72,14 @@ exports[`Storyshots SignUpScreens Create Account Personal 1`] = `
               "paddingLeft": 14,
             }
           }
+          underlineColorAndroid="transparent"
         />
         <TextInput
+          allowFontScaling={true}
           onChangeText={[Function]}
           placeholder="Email"
           placeholderTextColor="#838383"
+          rejectResponderTermination={true}
           style={
             Object {
               "borderColor": "#ededed",
@@ -87,11 +92,14 @@ exports[`Storyshots SignUpScreens Create Account Personal 1`] = `
               "paddingLeft": 14,
             }
           }
+          underlineColorAndroid="transparent"
         />
         <TextInput
+          allowFontScaling={true}
           onChangeText={[Function]}
           placeholder="Password"
           placeholderTextColor="#838383"
+          rejectResponderTermination={true}
           secureTextEntry={true}
           style={
             Object {
@@ -105,11 +113,14 @@ exports[`Storyshots SignUpScreens Create Account Personal 1`] = `
               "paddingLeft": 14,
             }
           }
+          underlineColorAndroid="transparent"
         />
         <TextInput
+          allowFontScaling={true}
           onChangeText={[Function]}
           placeholder="Confirm Password"
           placeholderTextColor="#838383"
+          rejectResponderTermination={true}
           secureTextEntry={true}
           style={
             Object {
@@ -123,6 +134,7 @@ exports[`Storyshots SignUpScreens Create Account Personal 1`] = `
               "paddingLeft": 14,
             }
           }
+          underlineColorAndroid="transparent"
         />
         <View
           style={
@@ -134,7 +146,9 @@ exports[`Storyshots SignUpScreens Create Account Personal 1`] = `
         >
           <View
             accessible={true}
+            focusable={true}
             isTVSelectable={true}
+            onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
@@ -248,7 +262,9 @@ exports[`Storyshots SignUpScreens Sign Up 1`] = `
         </View>
         <View
           accessible={true}
+          focusable={true}
           isTVSelectable={true}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -320,7 +336,9 @@ exports[`Storyshots SignUpScreens Sign Up 1`] = `
         </View>
         <View
           accessible={true}
+          focusable={true}
           isTVSelectable={true}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -475,6 +493,8 @@ exports[`Storyshots SignUpScreens Terms of Use 1`] = `
             >
               <View
                 accessible={true}
+                focusable={true}
+                onClick={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
                 onResponderRelease={[Function]}
@@ -485,7 +505,9 @@ exports[`Storyshots SignUpScreens Terms of Use 1`] = `
                 testID="ios_touchable_wrapper"
               >
                 <TextInput
+                  allowFontScaling={true}
                   editable={false}
+                  rejectResponderTermination={true}
                   style={
                     Array [
                       Object {
@@ -504,6 +526,7 @@ exports[`Storyshots SignUpScreens Terms of Use 1`] = `
                       },
                     ]
                   }
+                  underlineColorAndroid="transparent"
                   value="Select..."
                 />
                 <View
@@ -540,7 +563,9 @@ exports[`Storyshots SignUpScreens Terms of Use 1`] = `
               >
                 <View
                   accessible={true}
+                  focusable={true}
                   isTVSelectable={true}
+                  onClick={[Function]}
                   onResponderGrant={[Function]}
                   onResponderMove={[Function]}
                   onResponderRelease={[Function]}
@@ -567,7 +592,6 @@ exports[`Storyshots SignUpScreens Terms of Use 1`] = `
                         "height": 44,
                         "justifyContent": "space-between",
                         "paddingHorizontal": 10,
-                        "zIndex": 2,
                       },
                       undefined,
                     ]
@@ -586,7 +610,9 @@ exports[`Storyshots SignUpScreens Terms of Use 1`] = `
                   >
                     <View
                       accessible={true}
+                      focusable={true}
                       isTVSelectable={true}
+                      onClick={[Function]}
                       onResponderGrant={[Function]}
                       onResponderMove={[Function]}
                       onResponderRelease={[Function]}
@@ -630,7 +656,9 @@ exports[`Storyshots SignUpScreens Terms of Use 1`] = `
                     </View>
                     <View
                       accessible={true}
+                      focusable={true}
                       isTVSelectable={true}
+                      onClick={[Function]}
                       onResponderGrant={[Function]}
                       onResponderMove={[Function]}
                       onResponderRelease={[Function]}
@@ -675,6 +703,7 @@ exports[`Storyshots SignUpScreens Terms of Use 1`] = `
                   </View>
                   <View
                     accessible={true}
+                    focusable={true}
                     hitSlop={
                       Object {
                         "bottom": 4,
@@ -683,6 +712,7 @@ exports[`Storyshots SignUpScreens Terms of Use 1`] = `
                         "top": 4,
                       }
                     }
+                    onClick={[Function]}
                     onResponderGrant={[Function]}
                     onResponderMove={[Function]}
                     onResponderRelease={[Function]}
@@ -830,7 +860,9 @@ exports[`Storyshots SignUpScreens Terms of Use 1`] = `
         >
           <View
             accessible={true}
+            focusable={true}
             isTVSelectable={true}
+            onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}

@@ -1,1 +1,1 @@
-../../../../../node_modules/expo-three/node_modules/expo/node_modules/unimodules-constants-interface/ios/UMConstantsInterface/UMConstantsInterface.h
+../../../../../node_modules/unimodules-constants-interface/ios/UMConstantsInterface/UMConstantsInterface.h
