@@ -10,8 +10,6 @@ import Button from "./Button";
 // TODO: polish - the error message doesn't seem to scroll in sync with the rest of the form with KeyboardAvoidingView? But, only on iOS, it seems
 
 class SignInForm extends PureComponent {
-  static ACTIVITY_INDICATOR_VIEW_HEIGHT = 62;
-
   constructor(props) {
     super(props);
 
@@ -45,6 +43,8 @@ class SignInForm extends PureComponent {
     const { navigateForgotPassword } = this.props;
     navigateForgotPassword();
   };
+
+  static ACTIVITY_INDICATOR_VIEW_HEIGHT = 62;
 
   renderErrorMessage() {
     const { theme, errorMessage } = this.props;

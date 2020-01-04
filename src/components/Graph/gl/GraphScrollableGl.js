@@ -22,6 +22,8 @@ class GraphScrollableGl extends PureComponent {
     this.createScene();
   }
 
+  // TODO: Revisit this after we upgrade eslint-config-airbnb
+  /* eslint-disable react/sort-comp */
   UNSAFE_componentWillUpdate(nextProps) {
     // Determine whether this update is for a subsequent render with new data. If
     // so, re-create the scene. This handles the scenario where an initial
@@ -40,6 +42,7 @@ class GraphScrollableGl extends PureComponent {
       this.createScene();
     }
   }
+  /* eslint-enable react/sort-comp */
 
   onContentOffsetX(contentOffsetX) {
     const { isZooming } = this.props;

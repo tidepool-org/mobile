@@ -19,7 +19,25 @@ module.exports = {
     ],
     "no-else-return": ["error", { allowElseIf: true }],
     "import/prefer-default-export": OFF,
-    "comma-dangle": ["error", "always-multiline"],
+    "comma-dangle": [
+      "error",
+      {
+        arrays: "always-multiline",
+        objects: "always-multiline",
+        imports: "always-multiline",
+        exports: "always-multiline",
+        functions: "ignore",
+      },
+    ],
+
+    // Allow UNSAFE_ (e.g. for deprecated React lifecycle methods) not being camel case
+    camelcase: [
+      "error",
+      {
+        ignoreDestructuring: true,
+        allow: ["^UNSAFE_"],
+      },
+    ],
 
     // Disable for now, latest version of eslint-plugin-react is confused. Revisit this.
     "react/no-typos": OFF,
@@ -33,7 +51,7 @@ module.exports = {
 
     // Disable this rule until best rule for @expo/vector-icons
     "import/no-extraneous-dependencies": OFF,
-    
+
     // For React Native images
     "global-require": OFF,
 

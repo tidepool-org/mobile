@@ -20,6 +20,7 @@ class LoggerSingletonClass {
   LOG_LEVEL_ERROR_VALUE = 4;
 
   /* eslint-disable no-undef */
+  /* eslint-disable camelcase */
   constructor() {
     if (__DEV__ || Constants.appOwnership === "expo") {
       this.useRollbar = false;
@@ -71,6 +72,7 @@ class LoggerSingletonClass {
     }
   }
   /* eslint-enable no-undef */
+  /* eslint-enable camelcase */
 
   updateRollbarWithConfig({ environment, reportLevel }) {
     this.environment = environment || this.environment;
