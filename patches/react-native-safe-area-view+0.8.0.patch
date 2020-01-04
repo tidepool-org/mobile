@@ -1,0 +1,13 @@
+diff --git a/node_modules/react-native-safe-area-view/index.js b/node_modules/react-native-safe-area-view/index.js
+index 1c32552..ead48ce 100644
+--- a/node_modules/react-native-safe-area-view/index.js
++++ b/node_modules/react-native-safe-area-view/index.js
+@@ -115,7 +115,7 @@ class SafeView extends Component {
+     });
+   }
+ 
+-  componentWillReceiveProps() {
++  UNSAFE_componentWillReceiveProps() {
+     this._onLayout();
+   }
+ 
