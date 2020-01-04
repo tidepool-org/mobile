@@ -22,7 +22,7 @@ class ProfileList extends PureComponent {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const { errorMessage, fetching } = this.props;
     if (nextProps.errorMessage && !errorMessage) {
       AlertManager.showError(nextProps.errorMessage);

@@ -78,7 +78,7 @@ class NotesListItem extends PureComponent {
     SignificantTimeChangeNotification.subscribe(this.timeChanged);
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const {
       commentsFetchData: { comments, errorMessage: commentsFetchErrorMessage },
       graphDataFetchData: { errorMessage: graphDataFetchErrorMessage },

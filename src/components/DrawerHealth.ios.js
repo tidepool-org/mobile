@@ -14,7 +14,7 @@ class DrawerHealth extends PureComponent {
     connectToHealthUserSetting: null,
   };
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const {
       health: { healthKitInterfaceEnabledForCurrentUser },
     } = this.props;

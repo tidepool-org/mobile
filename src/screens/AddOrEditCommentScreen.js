@@ -120,7 +120,7 @@ class AddOrEditCommentScreen extends PureComponent {
     );
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const { commentsFetchData, graphDataFetchData } = this.props;
     const shouldShowCommentsFetchError =
       nextProps.commentsFetchData.errorMessage &&

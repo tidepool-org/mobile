@@ -60,7 +60,7 @@ class DebugHealthScreen extends PureComponent {
     }, 1000 * 30); // 30 seconds
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const {
       health: { healthKitInterfaceEnabledForCurrentUser },
     } = this.props;

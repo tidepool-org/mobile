@@ -22,7 +22,7 @@ class GraphScrollableGl extends PureComponent {
     this.createScene();
   }
 
-  componentWillUpdate(nextProps) {
+  UNSAFE_componentWillUpdate(nextProps) {
     // Determine whether this update is for a subsequent render with new data. If
     // so, re-create the scene. This handles the scenario where an initial
     // render, with data, occurred, and we're now refreshing the graph with new
