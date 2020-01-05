@@ -1,1 +1,0 @@
-../../../ExpoKit/ios/Exponent/Versioned/Core/Api/Components/ViewPager/RCTConvert+UIPageViewControllerTransitionStyle.h

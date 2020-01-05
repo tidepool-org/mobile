@@ -1,1 +1,0 @@
-../../../Rollbar/KSCrash/Source/KSCrash/Recording/Tools/KSLogger.h

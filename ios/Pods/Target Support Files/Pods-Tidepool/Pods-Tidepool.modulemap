@@ -1,6 +1,0 @@
-module Pods_Tidepool {
-  umbrella header "Pods-Tidepool-umbrella.h"
-
-  export *
-  module * { export * }
-}
