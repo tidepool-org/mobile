@@ -78,7 +78,9 @@ class NotesListItem extends PureComponent {
     SignificantTimeChangeNotification.subscribe(this.timeChanged);
   }
 
-  componentWillReceiveProps(nextProps) {
+  // TODO: Revisit this after we upgrade eslint-config-airbnb
+  /* eslint-disable react/sort-comp */
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const {
       commentsFetchData: { comments, errorMessage: commentsFetchErrorMessage },
       graphDataFetchData: { errorMessage: graphDataFetchErrorMessage },
@@ -91,6 +93,7 @@ class NotesListItem extends PureComponent {
         formattedTimestamp: formatDateForNoteList(nextNote.timestamp),
       });
     }
+    /* eslint-enable react/sort-comp */
 
     const shouldShowCommentsFetchErrorMessage =
       nextProps.commentsFetchData.errorMessage && !commentsFetchErrorMessage;
@@ -335,9 +338,7 @@ class NotesListItem extends PureComponent {
     const { theme, currentProfile, note } = this.props;
 
     if (this.shouldRenderUserLabelSection()) {
-      const userLabelText = `${note.userFullName} to ${
-        currentProfile.fullName
-      }`;
+      const userLabelText = `${note.userFullName} to ${currentProfile.fullName}`;
 
       return (
         <glamorous.View

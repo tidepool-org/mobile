@@ -47,6 +47,8 @@ exports[`Storyshots SingleSelectCustom default 1`] = `
       >
         <View
           accessible={true}
+          focusable={true}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -57,7 +59,9 @@ exports[`Storyshots SingleSelectCustom default 1`] = `
           testID="ios_touchable_wrapper"
         >
           <TextInput
+            allowFontScaling={true}
             editable={false}
+            rejectResponderTermination={true}
             style={
               Array [
                 Object {
@@ -76,6 +80,7 @@ exports[`Storyshots SingleSelectCustom default 1`] = `
                 },
               ]
             }
+            underlineColorAndroid="transparent"
             value="Select..."
           />
           <View
@@ -112,7 +117,9 @@ exports[`Storyshots SingleSelectCustom default 1`] = `
         >
           <View
             accessible={true}
+            focusable={true}
             isTVSelectable={true}
+            onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
@@ -139,7 +146,6 @@ exports[`Storyshots SingleSelectCustom default 1`] = `
                   "height": 44,
                   "justifyContent": "space-between",
                   "paddingHorizontal": 10,
-                  "zIndex": 2,
                 },
                 undefined,
               ]
@@ -158,7 +164,9 @@ exports[`Storyshots SingleSelectCustom default 1`] = `
             >
               <View
                 accessible={true}
+                focusable={true}
                 isTVSelectable={true}
+                onClick={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
                 onResponderRelease={[Function]}
@@ -202,7 +210,9 @@ exports[`Storyshots SingleSelectCustom default 1`] = `
               </View>
               <View
                 accessible={true}
+                focusable={true}
                 isTVSelectable={true}
+                onClick={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
                 onResponderRelease={[Function]}
@@ -247,6 +257,7 @@ exports[`Storyshots SingleSelectCustom default 1`] = `
             </View>
             <View
               accessible={true}
+              focusable={true}
               hitSlop={
                 Object {
                   "bottom": 4,
@@ -255,6 +266,7 @@ exports[`Storyshots SingleSelectCustom default 1`] = `
                   "top": 4,
                 }
               }
+              onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}

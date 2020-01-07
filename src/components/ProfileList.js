@@ -22,7 +22,9 @@ class ProfileList extends PureComponent {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+  // TODO: Revisit this after we upgrade eslint-config-airbnb
+  /* eslint-disable react/sort-comp */
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const { errorMessage, fetching } = this.props;
     if (nextProps.errorMessage && !errorMessage) {
       AlertManager.showError(nextProps.errorMessage);
@@ -32,6 +34,7 @@ class ProfileList extends PureComponent {
       this.setState({ refreshing: false });
     }
   }
+  /* eslint-enable react/sort-comp */
 
   onPress = profile => {
     const { onPress } = this.props;

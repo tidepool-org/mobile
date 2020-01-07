@@ -16,7 +16,6 @@
 #   public *;
 #}
 
-
 # THIS IS VERY VERY BAD. REMOVE AS SOON AS VERSIONING IS FIXED
 -dontwarn **
 
@@ -29,13 +28,6 @@
 -keepattributes SourceFile,LineNumberTable
 
 ##### Expo Universal Modules #####
-
--keepclassmembers class * {
-  @org.unimodules.core.interfaces.ExpoProp *;
-}
--keepclassmembers class * {
-  @org.unimodules.core.interfaces.ExpoMethod *;
-}
 
 -keepclassmembers class * {
   @**.expo.core.interfaces.ExpoProp *;

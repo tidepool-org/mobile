@@ -14,7 +14,9 @@ class DrawerHealth extends PureComponent {
     connectToHealthUserSetting: null,
   };
 
-  componentWillReceiveProps(nextProps) {
+  // TODO: Revisit this after we upgrade eslint-config-airbnb
+  /* eslint-disable react/sort-comp */
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const {
       health: { healthKitInterfaceEnabledForCurrentUser },
     } = this.props;
@@ -28,6 +30,7 @@ class DrawerHealth extends PureComponent {
       });
     }
   }
+  /* eslint-enable react/sort-comp */
 
   onPressCancelChangeToOtherUser = () => {
     this.setState({ connectToHealthUserSetting: false });

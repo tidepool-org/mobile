@@ -120,7 +120,9 @@ class AddOrEditCommentScreen extends PureComponent {
     );
   }
 
-  componentWillReceiveProps(nextProps) {
+  // TODO: Revisit this after we upgrade eslint-config-airbnb
+  /* eslint-disable react/sort-comp */
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const { commentsFetchData, graphDataFetchData } = this.props;
     const shouldShowCommentsFetchError =
       nextProps.commentsFetchData.errorMessage &&
@@ -135,6 +137,7 @@ class AddOrEditCommentScreen extends PureComponent {
       );
     }
   }
+  /* eslint-enable react/sort-comp */
 
   componentWillUnmount() {
     this.keyboardDidShowListener.remove();

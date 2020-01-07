@@ -1,1 +1,0 @@
-../../../../../node_modules/rollbar-react-native/ios/RollbarReactNative.h

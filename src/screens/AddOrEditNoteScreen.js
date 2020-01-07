@@ -479,7 +479,7 @@ class AddOrEditNoteScreen extends PureComponent {
           paddingRight={16}
           style={this.theme.editButtonTextStyle}
         >
-          {"Edit"}
+          Edit
         </glamorous.Text>
       </glamorous.TouchableOpacity>
     );

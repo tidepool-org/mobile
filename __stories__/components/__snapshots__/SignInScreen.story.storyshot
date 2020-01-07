@@ -41,6 +41,7 @@ exports[`Storyshots SignInScreen Sign in error 1`] = `
       >
         <View
           accessible={true}
+          focusable={true}
           hitSlop={
             Object {
               "bottom": 10,
@@ -50,6 +51,7 @@ exports[`Storyshots SignInScreen Sign in error 1`] = `
             }
           }
           isTVSelectable={true}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -147,6 +149,7 @@ exports[`Storyshots SignInScreen Sign in error 1`] = `
             onChangeText={[Function]}
             onSubmitEditing={[Function]}
             placeholder="Email"
+            rejectResponderTermination={true}
             returnKeyType="next"
             selectionColor="#657ef6"
             style={
@@ -175,6 +178,7 @@ exports[`Storyshots SignInScreen Sign in error 1`] = `
             onChangeText={[Function]}
             onSubmitEditing={[Function]}
             placeholder="Password"
+            rejectResponderTermination={true}
             returnKeyType="go"
             secureTextEntry={true}
             selectionColor="#657ef6"
@@ -209,7 +213,9 @@ exports[`Storyshots SignInScreen Sign in error 1`] = `
           >
             <View
               accessible={true}
+              focusable={true}
               isTVSelectable={true}
+              onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -256,7 +262,9 @@ exports[`Storyshots SignInScreen Sign in error 1`] = `
           >
             <View
               accessible={true}
+              focusable={true}
               isTVSelectable={true}
+              onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -333,6 +341,7 @@ exports[`Storyshots SignInScreen Sign in error 1`] = `
       >
         <View
           accessible={true}
+          focusable={true}
           hitSlop={
             Object {
               "bottom": 10,
@@ -342,6 +351,7 @@ exports[`Storyshots SignInScreen Sign in error 1`] = `
             }
           }
           isTVSelectable={true}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -483,6 +493,7 @@ exports[`Storyshots SignInScreen Signing in 1`] = `
       >
         <View
           accessible={true}
+          focusable={true}
           hitSlop={
             Object {
               "bottom": 10,
@@ -492,6 +503,7 @@ exports[`Storyshots SignInScreen Signing in 1`] = `
             }
           }
           isTVSelectable={true}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -589,6 +601,7 @@ exports[`Storyshots SignInScreen Signing in 1`] = `
             onChangeText={[Function]}
             onSubmitEditing={[Function]}
             placeholder="Email"
+            rejectResponderTermination={true}
             returnKeyType="next"
             selectionColor="#657ef6"
             style={
@@ -617,6 +630,7 @@ exports[`Storyshots SignInScreen Signing in 1`] = `
             onChangeText={[Function]}
             onSubmitEditing={[Function]}
             placeholder="Password"
+            rejectResponderTermination={true}
             returnKeyType="go"
             secureTextEntry={true}
             selectionColor="#657ef6"
@@ -651,7 +665,9 @@ exports[`Storyshots SignInScreen Signing in 1`] = `
           >
             <View
               accessible={true}
+              focusable={true}
               isTVSelectable={true}
+              onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -698,7 +714,9 @@ exports[`Storyshots SignInScreen Signing in 1`] = `
           >
             <View
               accessible={true}
+              focusable={true}
               isTVSelectable={true}
+              onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -788,6 +806,7 @@ exports[`Storyshots SignInScreen Signing in 1`] = `
       >
         <View
           accessible={true}
+          focusable={true}
           hitSlop={
             Object {
               "bottom": 10,
@@ -797,6 +816,7 @@ exports[`Storyshots SignInScreen Signing in 1`] = `
             }
           }
           isTVSelectable={true}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -938,6 +958,7 @@ exports[`Storyshots SignInScreen default 1`] = `
       >
         <View
           accessible={true}
+          focusable={true}
           hitSlop={
             Object {
               "bottom": 10,
@@ -947,6 +968,7 @@ exports[`Storyshots SignInScreen default 1`] = `
             }
           }
           isTVSelectable={true}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -1044,6 +1066,7 @@ exports[`Storyshots SignInScreen default 1`] = `
             onChangeText={[Function]}
             onSubmitEditing={[Function]}
             placeholder="Email"
+            rejectResponderTermination={true}
             returnKeyType="next"
             selectionColor="#657ef6"
             style={
@@ -1072,6 +1095,7 @@ exports[`Storyshots SignInScreen default 1`] = `
             onChangeText={[Function]}
             onSubmitEditing={[Function]}
             placeholder="Password"
+            rejectResponderTermination={true}
             returnKeyType="go"
             secureTextEntry={true}
             selectionColor="#657ef6"
@@ -1106,7 +1130,9 @@ exports[`Storyshots SignInScreen default 1`] = `
           >
             <View
               accessible={true}
+              focusable={true}
               isTVSelectable={true}
+              onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -1153,7 +1179,9 @@ exports[`Storyshots SignInScreen default 1`] = `
           >
             <View
               accessible={true}
+              focusable={true}
               isTVSelectable={true}
+              onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -1230,6 +1258,7 @@ exports[`Storyshots SignInScreen default 1`] = `
       >
         <View
           accessible={true}
+          focusable={true}
           hitSlop={
             Object {
               "bottom": 10,
@@ -1239,6 +1268,7 @@ exports[`Storyshots SignInScreen default 1`] = `
             }
           }
           isTVSelectable={true}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
