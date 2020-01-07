@@ -334,7 +334,9 @@ exports[`Storyshots Drawer default 1`] = `
           >
             <View
               accessible={true}
+              focusable={true}
               isTVSelectable={true}
+              onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -557,6 +559,7 @@ exports[`Storyshots Drawer default 1`] = `
       >
         <View
           accessible={true}
+          focusable={true}
           hitSlop={
             Object {
               "bottom": 10,
@@ -566,6 +569,7 @@ exports[`Storyshots Drawer default 1`] = `
             }
           }
           isTVSelectable={true}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -947,7 +951,9 @@ exports[`Storyshots Drawer long user full name 1`] = `
           >
             <View
               accessible={true}
+              focusable={true}
               isTVSelectable={true}
+              onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -1170,6 +1176,7 @@ exports[`Storyshots Drawer long user full name 1`] = `
       >
         <View
           accessible={true}
+          focusable={true}
           hitSlop={
             Object {
               "bottom": 10,
@@ -1179,6 +1186,7 @@ exports[`Storyshots Drawer long user full name 1`] = `
             }
           }
           isTVSelectable={true}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}

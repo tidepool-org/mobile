@@ -14,7 +14,7 @@ git:
 matrix:
   include:
     - language: objective-c
-      osx_image: xcode11
+      osx_image: xcode11.3
       before_install:
         - brew update
         - brew install yarn
@@ -38,6 +38,7 @@ matrix:
       script:
         - bash scripts/update-release-channel.sh travis-ios
         - pushd ios
+        - pod install
         - security create-keychain -p travis ios-build.keychain
         - security default-keychain -s ios-build.keychain
         - security unlock-keychain -p travis ios-build.keychain

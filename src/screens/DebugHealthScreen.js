@@ -60,7 +60,9 @@ class DebugHealthScreen extends PureComponent {
     }, 1000 * 30); // 30 seconds
   }
 
-  componentWillReceiveProps(nextProps) {
+  // TODO: Revisit this after we upgrade eslint-config-airbnb
+  /* eslint-disable react/sort-comp */
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const {
       health: { healthKitInterfaceEnabledForCurrentUser },
     } = this.props;
@@ -74,6 +76,7 @@ class DebugHealthScreen extends PureComponent {
       });
     }
   }
+  /* eslint-enable react/sort-comp */
 
   componentWillUnmount() {
     clearInterval(this.refreshUploadStatsInterval);

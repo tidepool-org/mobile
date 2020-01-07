@@ -8,12 +8,12 @@ public class BasePackageList {
   public List<Package> getPackageList() {
     return Arrays.<Package>asList(
         new expo.modules.constants.ConstantsPackage(),
+        new expo.modules.errorrecovery.ErrorRecoveryPackage(),
         new expo.modules.filesystem.FileSystemPackage(),
         new expo.modules.font.FontLoaderPackage(),
         new expo.modules.gl.GLPackage(),
         new expo.modules.keepawake.KeepAwakePackage(),
         new expo.modules.lineargradient.LinearGradientPackage(),
-        new expo.modules.location.LocationPackage(),
         new expo.modules.mailcomposer.MailComposerPackage(),
         new expo.modules.permissions.PermissionsPackage(),
         new expo.modules.webbrowser.WebBrowserPackage()

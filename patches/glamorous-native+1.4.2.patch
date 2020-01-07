@@ -293,6 +293,137 @@ index 94ec180..e8faf3e 100644
    expect(shallow(<glamorous.ScrollView />).find(ScrollView)).toBeDefined()
    expect(shallow(<glamorous.SectionList />).find(SectionList)).toBeDefined()
    expect(shallow(<glamorous.Text />).find(Text)).toBeDefined()
+diff --git a/node_modules/glamorous-native/src/__tests__/index.test.js b/node_modules/glamorous-native/src/__tests__/index.test.js
+index 8368a91..7d8f484 100644
+--- a/node_modules/glamorous-native/src/__tests__/index.test.js
++++ b/node_modules/glamorous-native/src/__tests__/index.test.js
+@@ -315,7 +315,7 @@ test('cleans up theme subscription when unmounts', () => {
+   const context = getMockedContext(unsubscribe)
+   const Comp = glamorous.view()
+   const wrapper = shallow(<Comp />, {context})
+-  wrapper.instance().componentWillMount()
++  wrapper.instance().UNSAFE_componentWillMount()
+   wrapper.instance().componentDidMount()
+   wrapper.unmount()
+   expect(unsubscribe).toHaveBeenCalled()
+@@ -326,7 +326,7 @@ test('ignores context if a theme props is passed', () => {
+   const context = getMockedContext(unsubscribe)
+   const Comp = glamorous.view()
+   const wrapper = shallow(<Comp theme={{}} />, {context})
+-  wrapper.instance().componentWillMount()
++  wrapper.instance().UNSAFE_componentWillMount()
+   wrapper.instance().componentDidMount()
+   wrapper.unmount()
+   expect(unsubscribe).toHaveBeenCalledTimes(0)
+diff --git a/node_modules/glamorous-native/src/__tests__/theme-provider.test.js b/node_modules/glamorous-native/src/__tests__/theme-provider.test.js
+index 3d41f99..87207f9 100644
+--- a/node_modules/glamorous-native/src/__tests__/theme-provider.test.js
++++ b/node_modules/glamorous-native/src/__tests__/theme-provider.test.js
+@@ -19,13 +19,13 @@ test('renders a component with theme', () => {
+     </ThemeProvider>,
+   )
+ 
+-  wrapper.instance().componentWillMount()
++  wrapper.instance().UNSAFE_componentWillMount()
+ 
+   const compWrapper = wrapper
+     .find(Comp)
+     .shallow({context: wrapper.instance().getChildContext()})
+ 
+-  compWrapper.instance().componentWillMount()
++  compWrapper.instance().UNSAFE_componentWillMount()
+ 
+   expect(compWrapper.props()).toMatchObject({
+     style: [{backgroundColor: 'red'}, {padding: 10}],
+@@ -46,13 +46,13 @@ test('renders a component with theme from props', () => {
+     </ThemeProvider>,
+   )
+ 
+-  wrapper.instance().componentWillMount()
++  wrapper.instance().UNSAFE_componentWillMount()
+ 
+   const compWrapper = wrapper
+     .find(Comp)
+     .shallow({context: wrapper.instance().getChildContext()})
+ 
+-  compWrapper.instance().componentWillMount()
++  compWrapper.instance().UNSAFE_componentWillMount()
+ 
+   expect(compWrapper.props()).toMatchObject({
+     style: [{backgroundColor: 'red'}, {padding: 10}],
+@@ -85,13 +85,13 @@ test('theme properties updates get propagated down the tree', () => {
+ 
+   const themeWrapper = wrapper.find(ThemeProvider).shallow()
+ 
+-  themeWrapper.instance().componentWillMount()
++  themeWrapper.instance().UNSAFE_componentWillMount()
+ 
+   const compWrapper = wrapper
+     .find(Child)
+     .shallow({context: themeWrapper.instance().getChildContext()})
+ 
+-  compWrapper.instance().componentWillMount()
++  compWrapper.instance().UNSAFE_componentWillMount()
+ 
+   expect(compWrapper.props()).toMatchObject({
+     style: [{backgroundColor: 'red'}, {padding: 10}],
+@@ -120,21 +120,21 @@ test('merges nested themes', () => {
+     </ThemeProvider>,
+   )
+ 
+-  wrapper.instance().componentWillMount()
++  wrapper.instance().UNSAFE_componentWillMount()
+   const oneWrapper = wrapper
+     .find(One)
+     .shallow({context: wrapper.instance().getChildContext()})
+-  oneWrapper.instance().componentWillMount()
++  oneWrapper.instance().UNSAFE_componentWillMount()
+ 
+   const innerThemeWrapper = wrapper
+     .find(ThemeProvider)
+     .shallow({context: wrapper.instance().getChildContext()})
+-  innerThemeWrapper.instance().componentWillMount()
++  innerThemeWrapper.instance().UNSAFE_componentWillMount()
+ 
+   const twoWrapper = innerThemeWrapper
+     .find(Two)
+     .shallow({context: innerThemeWrapper.instance().getChildContext()})
+-  twoWrapper.instance().componentWillMount()
++  twoWrapper.instance().UNSAFE_componentWillMount()
+ 
+   expect(oneWrapper.props()).toMatchObject({
+     style: [{padding: 1, margin: 1}],
+diff --git a/node_modules/glamorous-native/src/create-glamorous.js b/node_modules/glamorous-native/src/create-glamorous.js
+index 0b10bbf..7e4640c 100644
+--- a/node_modules/glamorous-native/src/create-glamorous.js
++++ b/node_modules/glamorous-native/src/create-glamorous.js
+@@ -40,7 +40,7 @@ export default function createGlamorous(splitProps) {
+           this.onRef = this.onRef.bind(this)
+         }
+ 
+-        componentWillMount() {
++        UNSAFE_componentWillMount() {
+           const {theme} = this.props
+ 
+           if (this.context[CHANNEL]) {
+@@ -50,7 +50,7 @@ export default function createGlamorous(splitProps) {
+           }
+         }
+ 
+-        componentWillReceiveProps(nextProps) {
++        UNSAFE_componentWillReceiveProps(nextProps) {
+           if (this.props.theme !== nextProps.theme) {
+             this.setTheme(nextProps.theme)
+           }
+@@ -163,7 +163,7 @@ export default function createGlamorous(splitProps) {
+ 
+       return GlamorousComponent
+     }
+-  }
++  };
+ }
+ 
+ function getGlamorousComponentMetadata({
 diff --git a/node_modules/glamorous-native/src/index.js b/node_modules/glamorous-native/src/index.js
 index 58089e0..19f0d9e 100644
 --- a/node_modules/glamorous-native/src/index.js
@@ -345,6 +476,40 @@ index 8c62e10..b3872c8 100644
    ScrollView,
    Text,
    TextInput,
+diff --git a/node_modules/glamorous-native/src/theme-provider.js b/node_modules/glamorous-native/src/theme-provider.js
+index cfff00d..9bdbb9f 100644
+--- a/node_modules/glamorous-native/src/theme-provider.js
++++ b/node_modules/glamorous-native/src/theme-provider.js
+@@ -40,14 +40,14 @@ export default class ThemeProvider extends React.Component {
+     }
+   }
+ 
+-  componentWillMount() {
++  UNSAFE_componentWillMount() {
+     if (this.context[CHANNEL]) {
+       this.setOuterTheme(this.context[CHANNEL].getState())
+       this.broadcast.setState(this.getTheme())
+     }
+   }
+ 
+-  componentWillReceiveProps(nextProps) {
++  UNSAFE_componentWillReceiveProps(nextProps) {
+     if (this.props.theme !== nextProps.theme) {
+       this.broadcast.setState(this.getTheme(nextProps.theme))
+     }
+diff --git a/node_modules/glamorous-native/src/with-theme.js b/node_modules/glamorous-native/src/with-theme.js
+index 7b9f91e..637ec3c 100644
+--- a/node_modules/glamorous-native/src/with-theme.js
++++ b/node_modules/glamorous-native/src/with-theme.js
+@@ -12,7 +12,7 @@ export default function withTheme(ComponentToTheme) {
+     state = {theme: {}}
+     setTheme = theme => this.setState({theme})
+ 
+-    componentWillMount() {
++    UNSAFE_componentWillMount() {
+       if (!this.context[CHANNEL]) {
+         if (__DEV__) {
+           // eslint-disable-next-line no-console
 diff --git a/node_modules/glamorous-native/typings/built-in-component-factories.d.ts b/node_modules/glamorous-native/typings/built-in-component-factories.d.ts
 index 791b3e1..d32b6bb 100644
 --- a/node_modules/glamorous-native/typings/built-in-component-factories.d.ts

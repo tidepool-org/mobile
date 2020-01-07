@@ -78,6 +78,7 @@ exports[`Storyshots NotesList default 1`] = `
               onChangeText={[Function]}
               placeholder="Search"
               placeholderTextColor="#9b9b9b"
+              rejectResponderTermination={true}
               returnKeyType="default"
               selectionColor="#657ef6"
               style={
@@ -971,7 +972,9 @@ exports[`Storyshots NotesList default 1`] = `
             >
               <View
                 accessible={true}
+                focusable={true}
                 isTVSelectable={true}
+                onClick={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
                 onResponderRelease={[Function]}
@@ -1160,7 +1163,9 @@ exports[`Storyshots NotesList default 1`] = `
             >
               <View
                 accessible={true}
+                focusable={true}
                 isTVSelectable={true}
+                onClick={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
                 onResponderRelease={[Function]}
@@ -1349,7 +1354,9 @@ exports[`Storyshots NotesList default 1`] = `
             >
               <View
                 accessible={true}
+                focusable={true}
                 isTVSelectable={true}
+                onClick={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
                 onResponderRelease={[Function]}
@@ -1538,7 +1545,9 @@ exports[`Storyshots NotesList default 1`] = `
             >
               <View
                 accessible={true}
+                focusable={true}
                 isTVSelectable={true}
+                onClick={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
                 onResponderRelease={[Function]}
@@ -1727,7 +1736,9 @@ exports[`Storyshots NotesList default 1`] = `
             >
               <View
                 accessible={true}
+                focusable={true}
                 isTVSelectable={true}
+                onClick={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
                 onResponderRelease={[Function]}
@@ -1916,7 +1927,9 @@ exports[`Storyshots NotesList default 1`] = `
             >
               <View
                 accessible={true}
+                focusable={true}
                 isTVSelectable={true}
+                onClick={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
                 onResponderRelease={[Function]}
@@ -2105,7 +2118,9 @@ exports[`Storyshots NotesList default 1`] = `
             >
               <View
                 accessible={true}
+                focusable={true}
                 isTVSelectable={true}
+                onClick={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
                 onResponderRelease={[Function]}
@@ -2294,7 +2309,9 @@ exports[`Storyshots NotesList default 1`] = `
             >
               <View
                 accessible={true}
+                focusable={true}
                 isTVSelectable={true}
+                onClick={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
                 onResponderRelease={[Function]}
@@ -2483,7 +2500,9 @@ exports[`Storyshots NotesList default 1`] = `
             >
               <View
                 accessible={true}
+                focusable={true}
                 isTVSelectable={true}
+                onClick={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
                 onResponderRelease={[Function]}
@@ -2672,7 +2691,9 @@ exports[`Storyshots NotesList default 1`] = `
             >
               <View
                 accessible={true}
+                focusable={true}
                 isTVSelectable={true}
+                onClick={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
                 onResponderRelease={[Function]}

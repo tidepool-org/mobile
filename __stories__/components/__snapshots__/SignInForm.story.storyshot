@@ -68,6 +68,7 @@ exports[`Storyshots SignInForm Sign in error 1`] = `
         onChangeText={[Function]}
         onSubmitEditing={[Function]}
         placeholder="Email"
+        rejectResponderTermination={true}
         returnKeyType="next"
         selectionColor="#657ef6"
         style={
@@ -96,6 +97,7 @@ exports[`Storyshots SignInForm Sign in error 1`] = `
         onChangeText={[Function]}
         onSubmitEditing={[Function]}
         placeholder="Password"
+        rejectResponderTermination={true}
         returnKeyType="go"
         secureTextEntry={true}
         selectionColor="#657ef6"
@@ -130,7 +132,9 @@ exports[`Storyshots SignInForm Sign in error 1`] = `
       >
         <View
           accessible={true}
+          focusable={true}
           isTVSelectable={true}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -177,7 +181,9 @@ exports[`Storyshots SignInForm Sign in error 1`] = `
       >
         <View
           accessible={true}
+          focusable={true}
           isTVSelectable={true}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -314,6 +320,7 @@ exports[`Storyshots SignInForm Signing in 1`] = `
         onChangeText={[Function]}
         onSubmitEditing={[Function]}
         placeholder="Email"
+        rejectResponderTermination={true}
         returnKeyType="next"
         selectionColor="#657ef6"
         style={
@@ -342,6 +349,7 @@ exports[`Storyshots SignInForm Signing in 1`] = `
         onChangeText={[Function]}
         onSubmitEditing={[Function]}
         placeholder="Password"
+        rejectResponderTermination={true}
         returnKeyType="go"
         secureTextEntry={true}
         selectionColor="#657ef6"
@@ -376,7 +384,9 @@ exports[`Storyshots SignInForm Signing in 1`] = `
       >
         <View
           accessible={true}
+          focusable={true}
           isTVSelectable={true}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -423,7 +433,9 @@ exports[`Storyshots SignInForm Signing in 1`] = `
       >
         <View
           accessible={true}
+          focusable={true}
           isTVSelectable={true}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -573,6 +585,7 @@ exports[`Storyshots SignInForm default 1`] = `
         onChangeText={[Function]}
         onSubmitEditing={[Function]}
         placeholder="Email"
+        rejectResponderTermination={true}
         returnKeyType="next"
         selectionColor="#657ef6"
         style={
@@ -601,6 +614,7 @@ exports[`Storyshots SignInForm default 1`] = `
         onChangeText={[Function]}
         onSubmitEditing={[Function]}
         placeholder="Password"
+        rejectResponderTermination={true}
         returnKeyType="go"
         secureTextEntry={true}
         selectionColor="#657ef6"
@@ -635,7 +649,9 @@ exports[`Storyshots SignInForm default 1`] = `
       >
         <View
           accessible={true}
+          focusable={true}
           isTVSelectable={true}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -682,7 +698,9 @@ exports[`Storyshots SignInForm default 1`] = `
       >
         <View
           accessible={true}
+          focusable={true}
           isTVSelectable={true}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}

@@ -1,0 +1,13 @@
+diff --git a/node_modules/react-navigation/src/views/Transitioner.js b/node_modules/react-navigation/src/views/Transitioner.js
+index 4d50aff..619487b 100644
+--- a/node_modules/react-navigation/src/views/Transitioner.js
++++ b/node_modules/react-navigation/src/views/Transitioner.js
+@@ -52,7 +52,7 @@ class Transitioner extends React.Component {
+     this._isMounted = false;
+   }
+ 
+-  componentWillReceiveProps(nextProps) {
++  UNSAFE_componentWillReceiveProps(nextProps) {
+     let nextScenes = NavigationScenesReducer(
+       this.state.scenes,
+       nextProps.navigation.state,

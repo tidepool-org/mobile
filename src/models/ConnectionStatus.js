@@ -1,9 +1,9 @@
-import { NetInfo } from "react-native";
+import NetInfo from "@react-native-community/netinfo";
 
 class ConnectionStatusSingletonClass {
   constructor() {
     this.connectionInfo = "unknown";
-    NetInfo.addEventListener("connectionChange", this.onConnectionChange);
+    NetInfo.addEventListener(this.onConnectionChange);
 
     this.isOnline = false;
     this.isOffline = false;
