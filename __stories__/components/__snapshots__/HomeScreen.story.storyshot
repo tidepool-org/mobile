@@ -2974,11 +2974,7 @@ exports[`Storyshots HomeScreen default 1`] = `
                     ]
                   }
                 >
-                  Woohoo!
-                  
-
-
-                  Last step: to get pump data, you need the Tidepool Uploader on your computer.
+                  To get other diabetes data into Tidepool, you can install the Tidepool Uploader on your computer.
                 </Text>
                 <View
                   style={

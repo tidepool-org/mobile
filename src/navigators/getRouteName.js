@@ -18,6 +18,8 @@ const getRouteName = ({ navigation: rootNavigationState }) => {
     }
   }
 
+  result.params = navigationState.params;
+
   return result;
 };
 

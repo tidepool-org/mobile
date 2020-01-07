@@ -22,7 +22,7 @@ protocol HealthKitSampleUploaderDelegate: class {
 class HealthKitUploader: NSObject, URLSessionDelegate, URLSessionTaskDelegate, URLSessionDataDelegate {
     init(_ mode: TPUploader.Mode) {
         DDLogVerbose("mode: \(mode.rawValue)")
-        
+
         self.mode = mode
         super.init()
 
@@ -37,7 +37,7 @@ class HealthKitUploader: NSObject, URLSessionDelegate, URLSessionTaskDelegate, U
         let setting = mode == .Current ? settings.hasPendingCurrentUploads : settings.hasPendingHistoricalUploads
         return setting.value
     }
-    
+
     private var lastUploadSamplePostBody: Data?
     private var lastDeleteSamplePostBody: Data?
 
@@ -45,13 +45,13 @@ class HealthKitUploader: NSObject, URLSessionDelegate, URLSessionTaskDelegate, U
     // NOTE: This is called from a query results handler, not on main thread
     func startUploadSessionTasks(with samples: [[String: AnyObject]], deletes: [[String: AnyObject]]) throws {
         DDLogVerbose("mode: \(mode.rawValue)")
-        
+
         // Prepare POST files for upload. Fine to do this on background thread (Upload tasks from NSData are not supported in background sessions, so this has to come from a file, at least if we are in the background).
         // May be nil if no samples to upload
         //DDLogVerbose("samples to upload: \(samples)")
         let (batchSamplesPostBodyURL, samplePostBody) = try createBodyFileForBatchSamplesUpload(samples)
         lastUploadSamplePostBody = samplePostBody
-        
+
         // May be nil if no samples to delete
         let (batchSamplesDeleteBodyURL, deletePostBody) = try createBodyFileForBatchSamplesDelete(deletes)
         lastDeleteSamplePostBody = deletePostBody
@@ -64,7 +64,7 @@ class HealthKitUploader: NSObject, URLSessionDelegate, URLSessionTaskDelegate, U
                 self.delegate?.sampleUploader(uploader: self, didCompleteUploadWithError: nil, rejectedSamples: nil)
                 return
             }
-            
+
             guard let uploadSession = self.uploadSession else {
                 let message = "Unable to start upload tasks, session does not exist, it was probably invalidated. This is unexpected"
                 let error = NSError(domain: "HealthKitUploader", code: -1, userInfo: [NSLocalizedDescriptionKey: message])
@@ -95,7 +95,7 @@ class HealthKitUploader: NSObject, URLSessionDelegate, URLSessionTaskDelegate, U
                 // delete task started successfully, just return...
                 return
             }
-            
+
             self.setPendingUploadsState(uploadTaskIsPending: false)
             if message != nil {
                 let settingsError = NSError(domain: "HealthKitUploader", code: -3, userInfo: [NSLocalizedDescriptionKey: message!])
@@ -107,7 +107,7 @@ class HealthKitUploader: NSObject, URLSessionDelegate, URLSessionTaskDelegate, U
             }
         }
     }
-    
+
     func startDeleteTaskInSession(_ session: URLSession) -> Bool {
         if let deleteSamplesPostBodyURL = UserDefaults.standard.url(forKey: self.prefixedLocalId(self.deleteSamplesDataUrlKey))
         {
@@ -126,10 +126,10 @@ class HealthKitUploader: NSObject, URLSessionDelegate, URLSessionTaskDelegate, U
         }
         return false
     }
-    
+
     func cancelTasks() {
         DDLogVerbose("mode: \(mode.rawValue)")
-        
+
         if self.uploadSession == nil {
             self.setPendingUploadsState(uploadTaskIsPending: false)
         } else {
@@ -146,7 +146,7 @@ class HealthKitUploader: NSObject, URLSessionDelegate, URLSessionTaskDelegate, U
             }
         }
     }
-    
+
     // MARK: URLSessionTaskDelegate
     func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
         DDLogVerbose("mode: \(mode.rawValue)")
@@ -155,7 +155,7 @@ class HealthKitUploader: NSObject, URLSessionDelegate, URLSessionTaskDelegate, U
         let lastDeletePost = lastDeleteSamplePostBody
         lastUploadSamplePostBody = nil
         lastDeleteSamplePostBody = nil
-        
+
         var message = ""
         let taskDescr = task.taskDescription ?? ""
         if let error = error {
@@ -208,22 +208,22 @@ class HealthKitUploader: NSObject, URLSessionDelegate, URLSessionTaskDelegate, U
                 httpError = NSError(domain: "HealthKitUploader", code: -2, userInfo: [NSLocalizedDescriptionKey: message])
             }
         }
-        
+
         if let error = error {
             self.setPendingUploadsState(uploadTaskIsPending: false)
             self.delegate?.sampleUploader(uploader: self, didCompleteUploadWithError: error, rejectedSamples: nil)
             return
         }
-        
+
         if httpError != nil {
             self.setPendingUploadsState(uploadTaskIsPending: false)
             self.delegate?.sampleUploader(uploader: self, didCompleteUploadWithError: httpError, rejectedSamples: rejectedSamples)
             return
         }
-        
+
         // Clear upload post body copy since uploads completed successfully...
         self.lastUploadSamplePostBody = nil
-        
+
         // See if there are any deletes to do, and resume task to do them if so
         if task.taskDescription == prefixedLocalId(self.uploadSamplesTaskDescription) {
             if self.startDeleteTaskInSession(session) == true {
@@ -235,7 +235,7 @@ class HealthKitUploader: NSObject, URLSessionDelegate, URLSessionTaskDelegate, U
         self.setPendingUploadsState(uploadTaskIsPending: false)
         self.delegate?.sampleUploader(uploader: self, didCompleteUploadWithError: nil, rejectedSamples: nil)
     }
-    
+
     private func parseErrResponse(_ response: [String: Any]) -> [Int]? {
         var messageParseError = false
         var rejectedSamples: [Int] = []
@@ -280,7 +280,7 @@ class HealthKitUploader: NSObject, URLSessionDelegate, URLSessionTaskDelegate, U
                 parseErrorDict(source)
             }
         }
-        
+
         if !messageParseError && rejectedSamples.count > 0 {
             return rejectedSamples
         } else {
@@ -294,7 +294,7 @@ class HealthKitUploader: NSObject, URLSessionDelegate, URLSessionTaskDelegate, U
         lastData = data
     }
     var lastData: Data?
-    
+
     func urlSession(_ session: URLSession, didBecomeInvalidWithError error: Error?) {
         DDLogVerbose("mode: \(mode.rawValue)")
 
@@ -304,17 +304,17 @@ class HealthKitUploader: NSObject, URLSessionDelegate, URLSessionTaskDelegate, U
             self.ensureUploadSession()
         }
     }
-    
+
     // MARK: Private
-    
+
     private func ensureUploadSession() {
         DDLogVerbose("mode: \(mode.rawValue)")
-        
+
         guard self.uploadSession == nil else {
             return
         }
-        
-        let configuration = URLSessionConfiguration.background(withIdentifier: prefixedLocalId(self.backgroundUploadSessionIdentifier))
+
+        let configuration = URLSessionConfiguration.background(withIdentifier: "\(prefixedLocalId(self.backgroundUploadSessionIdentifier))-\(uniqueSessionId())")
         configuration.timeoutIntervalForResource = 60 // 60 seconds
         let newUploadSession = URLSession(configuration: configuration, delegate: self, delegateQueue: nil)
         newUploadSession.delegateQueue.maxConcurrentOperationCount = 1 // So we can serialize the metadata and samples upload POSTs
@@ -325,7 +325,7 @@ class HealthKitUploader: NSObject, URLSessionDelegate, URLSessionTaskDelegate, U
 
     private func createBodyFileForBatchSamplesDelete(_ samplesToDeleteDictArray: [[String: AnyObject]]) throws -> (URL?, Data?) {
         DDLogVerbose("mode: \(mode.rawValue)")
-        
+
         // Prepare upload delete body
         var validatedSamples = [[String: AnyObject]]()
         // Prevent serialization exceptions!
@@ -354,43 +354,55 @@ class HealthKitUploader: NSObject, URLSessionDelegate, URLSessionTaskDelegate, U
 
     private func createBodyFileForBatchSamplesUpload(_ samplesToUploadDictArray: [[String: AnyObject]]) throws -> (URL?, Data?) {
         DDLogVerbose("mode: \(mode.rawValue)")
-        
+
         // Note: exceptions during serialization are NSException type, and won't get caught by a Swift do/catch, so pre-validate!
         return try self.savePostBodyForUpload(samples: samplesToUploadDictArray, identifier: prefixedKey(prefix: self.mode.rawValue, type: "All", key: "uploadBatchSamples.data"))
     }
 
     private func savePostBodyForUpload(samples: [[String: AnyObject]], identifier: String) throws -> (URL?, Data?) {
         DDLogVerbose("identifier: \(identifier)")
- 
+
         let postBody = try JSONSerialization.data(withJSONObject: samples)
         //print("Post body for upload: \(postBody)")
         let postBodyURL = getUploadURLForIdentifier(with: identifier)
         try postBody.write(to: postBodyURL, options: .atomic)
         return (postBodyURL, postBody)
     }
-    
+
     private func getUploadURLForIdentifier(with identifier: String) -> URL {
         let cachesDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!
         let postBodyURL = cachesDirectory.appendingPathComponent(identifier)
         return postBodyURL
     }
-    
+
     private func setPendingUploadsState(uploadTaskIsPending: Bool) {
         let setting = mode == .Current ? settings.hasPendingCurrentUploads : settings.hasPendingHistoricalUploads
         setting.value = uploadTaskIsPending
     }
 
     private var uploadSession: URLSession?
-    
+
     // use the following with prefixedLocalId to create ids unique to mode...
     private let backgroundUploadSessionIdentifier = "UploadSessionId"
     private let uploadSamplesTaskDescription = "Upload samples"
     private let deleteSamplesTaskDescription = "Delete samples"
     // nil if no deletes for this type, otherwise the file url for the delete body...
     private let deleteSamplesDataUrlKey = "DeleteSamplesDataUrl"
- 
+
     private func prefixedLocalId(_ key: String) -> String {
         return "\(self.mode.rawValue)-\(key)"
     }
 
+    private func uniqueSessionId() -> String {
+        // Get a persistent unique sequence number to use for session identifiers so we don't reuse identifiers
+        // across invocations of the app, which could cause us to reattach to a session that the system cancelled
+        // due to user force quitting the app or other reaosns. This would cause an immediate upload failure right
+        // after starting an upload. (Although upload attempts with the same identifier _should_ succeed.)
+        var uniqueSessionId: String = UserDefaults.standard.string(forKey: "UniqueUploadSessionId") ?? "0"
+        let uniqueSesssionIdUInt64: UInt64 = (UInt64(uniqueSessionId) ?? 0) + 1
+        uniqueSessionId = String(uniqueSesssionIdUInt64)
+        UserDefaults.standard.set(uniqueSessionId, forKey: "UniqueUploadSessionId")
+        DDLogVerbose("Created unique upload session id: " + uniqueSessionId);
+        return uniqueSessionId
+    }
 }

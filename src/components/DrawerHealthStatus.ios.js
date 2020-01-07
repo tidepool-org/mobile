@@ -18,7 +18,13 @@ class DrawerHealthStatus extends PureComponent {
   }
 
   renderHealthExplanation() {
-    const { theme } = this.props;
+    const { theme, connectToHealthUserSetting } = this.props;
+    let explanation =
+      "Allow Tidepool Mobile to read diabetes-related data from Apple Health";
+    if (connectToHealthUserSetting) {
+      explanation = "Connecting to Health";
+    }
+
     return (
       <glamorous.View flexDirection="row" marginLeft={16}>
         <glamorous.Text
@@ -26,7 +32,7 @@ class DrawerHealthStatus extends PureComponent {
           style={theme.healthMinorStatus}
           marginRight={8}
         >
-          Allow Tidepool Mobile to read diabetes-related data from Apple Health
+          {explanation}
         </glamorous.Text>
       </glamorous.View>
     );
@@ -96,6 +102,7 @@ DrawerHealthStatus.propTypes = {
   theme: ThemePropType.isRequired,
   style: ViewPropTypes.style,
   health: PropTypes.object.isRequired,
+  connectToHealthUserSetting: PropTypes.bool.isRequired,
 };
 
 DrawerHealthStatus.defaultProps = {

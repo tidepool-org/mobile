@@ -12,8 +12,8 @@ const firstTimeTipsLoadSettingsAsync = () => async dispatch => {
   });
 };
 
-const firstTimeTipsShowTip = (tip, show) => {
-  FirstTimeTips.showTip(tip, show);
+const firstTimeTipsShowTip = ({ tip, show, didUserDismiss }) => {
+  FirstTimeTips.showTip({ tip, show, didUserDismiss });
   return {
     type: FIRST_TIME_TIPS_SHOW_TIP,
     payload: FirstTimeTips,

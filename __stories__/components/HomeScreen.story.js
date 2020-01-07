@@ -35,10 +35,13 @@ const graphDataFetchAsync = () => {};
 const navigateEditNote = () => {};
 const navigateAddComment = () => {};
 const navigateEditComment = () => {};
+const navigateHealthSync = () => {};
+const navigateDrawerClose = () => {};
 const noteDeleteAsync = () => {};
 const commentDeleteAsync = () => {};
 const firstTimeTipsShowTip = () => {};
 
+const health = {};
 const notes = [];
 for (let i = 0; i < 100; i += 1) {
   notes.push({
@@ -56,6 +59,7 @@ notesFetch.didSucceed({ notes, profile: currentProfile });
 
 const props = {
   currentUser,
+  health,
   notesFetch,
   notesFetchAsync,
   notesFetchSetSearchFilter,
@@ -66,6 +70,8 @@ const props = {
   navigateEditNote,
   navigateAddComment,
   navigateEditComment,
+  navigateHealthSync,
+  navigateDrawerClose,
   noteDeleteAsync,
   commentDeleteAsync,
   firstTimeTipsShowTip,

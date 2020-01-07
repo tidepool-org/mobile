@@ -17,6 +17,7 @@ class HomeScreenHeaderRight extends PureComponent {
   componentDidUpdate() {
     const { navigation, notesFetch, currentUser } = this.props;
     this.showTipIfNeeded({ navigation, notesFetch, currentUser });
+    this.hideTipIfNeeded({ navigation });
   }
 
   componentWillUnmount() {
@@ -27,7 +28,7 @@ class HomeScreenHeaderRight extends PureComponent {
 
   onPress = () => {
     const { navigateAddNote } = this.props;
-    this.hideTipIfNeeded();
+    this.hideTipIfNeeded({ didUserDismiss: true });
     if (ConnectionStatus.isOffline) {
       AlertManager.showOfflineMessage(
         "It seems you’re offline, so you can't add notes."
@@ -42,16 +43,25 @@ class HomeScreenHeaderRight extends PureComponent {
     if (FirstTimeTips.shouldShowTip(FirstTimeTips.TIP_ADD_NOTE, params)) {
       const { firstTimeTipsShowTip } = this.props;
       this.showTipTimeoutId = setTimeout(() => {
-        firstTimeTipsShowTip(FirstTimeTips.TIP_ADD_NOTE, true);
+        firstTimeTipsShowTip({ tip: FirstTimeTips.TIP_ADD_NOTE, show: true });
         this.setState({ toolTipVisible: true });
       }, 50);
     }
   }
 
-  hideTipIfNeeded() {
-    if (FirstTimeTips.currentTip === FirstTimeTips.TIP_ADD_NOTE) {
+  hideTipIfNeeded({ navigation, didUserDismiss }) {
+    if (
+      FirstTimeTips.shouldHideTip(FirstTimeTips.TIP_ADD_NOTE, {
+        navigation,
+        didUserDismiss,
+      })
+    ) {
       const { firstTimeTipsShowTip } = this.props;
-      firstTimeTipsShowTip(FirstTimeTips.TIP_ADD_NOTE, false);
+      firstTimeTipsShowTip({
+        tip: FirstTimeTips.TIP_ADD_NOTE,
+        show: false,
+        didUserDismiss,
+      });
       this.setState({ toolTipVisible: false });
     }
   }

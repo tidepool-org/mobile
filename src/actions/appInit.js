@@ -6,6 +6,8 @@ import { apiEnvironmentLoadAndSetAsync } from "./apiEnvironment";
 import { apiCacheExpirationLoadAndSetAsync } from "./apiCacheExpiration";
 import { graphRendererLoadAndSetAsync } from "./graphRenderer";
 import { navigateLaunch } from "./navigation";
+import getRouteName from "../navigators/getRouteName";
+import { HEALTH_SYNC_ROUTE_NAME } from "../navigators/routeNames";
 import GraphTextMeshFactory from "../components/Graph/gl/GraphTextMeshFactory";
 import GraphCbgGl from "../components/Graph/gl/GraphCbgGl";
 import GraphSmbgGl from "../components/Graph/gl/GraphSmbgGl";
@@ -20,7 +22,7 @@ const appInitDidFinish = () => ({
   payload: true,
 });
 
-const appInitAsync = () => async dispatch => {
+const appInitAsync = () => async (dispatch, getState) => {
   // TODO: launch screen - activity indicator - revisit this now that we're using ExpoKit
   // if (!runTimeEnvironment.useExpo) {
   //   NativeModules.LaunchScreen.showActivityIndicator();
@@ -46,7 +48,13 @@ const appInitAsync = () => async dispatch => {
   }) => {
     dispatch(offlineSet(isOffline));
     if (wasOffline && isOnline) {
-      await dispatch(authRefreshTokenOrSignInAsync()); // This will navigateHome if refresh succeeds
+      const { navigation } = getState();
+      if (navigation) {
+        const { routeName } = getRouteName({ navigation });
+        if (routeName !== HEALTH_SYNC_ROUTE_NAME) {
+          await dispatch(authRefreshTokenOrSignInAsync()); // This will navigateHome if refresh succeeds
+        }
+      }
     }
   };
   ConnectionStatus.addListener(connectionStatusListener);

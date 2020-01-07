@@ -19,10 +19,8 @@ class TidepoolUploaderTooltipContent extends PureComponent {
           paddingBottom={16}
           style={this.theme.toolTipContentTextStyle}
         >
-          Woohoo!
-          {"\n\n"}
-          Last step: to get pump data, you need the Tidepool Uploader on your
-          computer.
+          To get other diabetes data into Tidepool, you can install the Tidepool
+          Uploader on your computer.
         </glamorous.Text>
         <glamorous.View flexDirection="row" justifyContent="space-between">
           <Button

@@ -26,6 +26,7 @@ import {
   SIGN_UP_DIABETES_DETAILS_ROUTE_NAME,
   SIGN_UP_DONATE_DATA_ROUTE_NAME,
   SIGN_UP_ACTIVATE_ACCOUNT_ROUTE_NAME,
+  HEALTH_SYNC_ROUTE_NAME,
   SWITCH_PROFILE_ROUTE_NAME,
   DEBUG_HEALTH_ROUTE_NAME,
 } from "../navigators/routeNames";
@@ -43,6 +44,7 @@ import {
   NAVIGATE_SIGN_UP_ACTIVATE_ACCOUNT,
   NAVIGATE_FORGOT_PASSWORD,
   NAVIGATE_HOW_TO_UPLOAD,
+  NAVIGATE_HEALTH_SYNC,
   NAVIGATE_SWITCH_PROFILE,
   NAVIGATE_ADD_NOTE,
   NAVIGATE_EDIT_NOTE,
@@ -69,6 +71,7 @@ const shouldIgnoreNextNavigate = ({ nextState, state }) => {
     const nextRouteName = routeName;
 
     const routeNames = [
+      HEALTH_SYNC_ROUTE_NAME,
       SWITCH_PROFILE_ROUTE_NAME,
       ADD_NOTE_ROUTE_NAME,
       EDIT_NOTE_ROUTE_NAME,
@@ -202,6 +205,15 @@ function navigation(state = initialState, action) {
       nextState = AppNavigator.router.getStateForAction(
         NavigationActions.navigate({
           routeName: SIGN_UP_ACTIVATE_ACCOUNT_ROUTE_NAME,
+        }),
+        state
+      );
+      break;
+    case NAVIGATE_HEALTH_SYNC:
+      nextState = AppNavigator.router.getStateForAction(
+        NavigationActions.navigate({
+          routeName: HEALTH_SYNC_ROUTE_NAME,
+          params: { isInitialSync: action.payload.isInitialSync },
         }),
         state
       );

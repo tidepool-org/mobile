@@ -91,7 +91,7 @@ target 'Tidepool' do
   pod 'RollbarReactNative', :path => '../node_modules/rollbar-react-native'
   pod 'RNDeviceInfo', :path => '../node_modules/react-native-device-info'
 
-  pod 'TPHealthKitUploader', :git => 'https://github.com/tidepool-org/healthkit-uploader', :tag => '0.9.5'
+  pod 'TPHealthKitUploader', :git => 'https://github.com/tidepool-org/healthkit-uploader', :tag => '0.9.7'
   pod 'SwiftyJSON', '4.2'
   pod 'CocoaLumberjack/Swift', '3.5.3'
   pod 'Alamofire', '4.7.3'

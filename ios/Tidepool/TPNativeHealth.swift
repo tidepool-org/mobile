@@ -22,12 +22,12 @@ import UIKit
 class TPNativeHealth: RCTEventEmitter {
     private let connector = TPUploaderAPI.connector()
     private let uploader = TPUploaderAPI.connector().uploader()
-    
+
     public override init() {
         super.init()
 
         connector.nativeHealthBridge = self
-        
+
         NotificationCenter.default.addObserver(self, selector: #selector(TPNativeHealth.handleTurnOnUploader(_:)), name: Notification.Name(rawValue: TPUploaderNotifications.TurnOnUploader), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(TPNativeHealth.handleTurnOffUploader(_:)), name: Notification.Name(rawValue: TPUploaderNotifications.TurnOffUploader), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(TPNativeHealth.handleStatsUpdated(_:)), name: Notification.Name(rawValue: TPUploaderNotifications.Updated), object: nil)
@@ -59,7 +59,7 @@ class TPNativeHealth: RCTEventEmitter {
     @objc func healthKitInterfaceConfiguredForOtherUser() -> NSNumber {
         return NSNumber(value: uploader.healthKitInterfaceConfiguredForOtherUser())
     }
-    
+
     @objc func currentHealthKitUsername() -> NSString {
         if let currentHealthKitUsername = uploader.curHKUserName() {
             return currentHealthKitUsername as NSString
@@ -93,13 +93,22 @@ class TPNativeHealth: RCTEventEmitter {
         uploader.resetPersistentStateForMode(.HistoricalAll)
         return NSNumber(value: true)
     }
-    
+
+    @objc func hasPresentedSyncUI() -> NSNumber {
+        return NSNumber(value: uploader.hasPresentedSyncUI)
+    }
+
+    @objc func setHasPresentedSyncUI() -> NSNumber {
+        uploader.hasPresentedSyncUI = true
+        return true
+    }
+
     override func supportedEvents() -> [String]! {
       return ["onTurnOnInterface", "onTurnOffInterface", "onTurnOnHistoricalUpload", "onTurnOffHistoricalUpload", "onUploadStatsUpdated"]
     }
-    
+
     var isObserving: Bool = false
-    
+
     override func startObserving() -> Void {
         DDLogVerbose("trace")
 
@@ -124,7 +133,7 @@ class TPNativeHealth: RCTEventEmitter {
                 "shouldShowHealthKitUI": self.uploader.shouldShowHealthKitUI(),
                 "healthKitInterfaceEnabledForCurrentUser": self.connector.isInterfaceOn,
                 "healthKitInterfaceConfiguredForOtherUser": self.uploader.healthKitInterfaceConfiguredForOtherUser(),
-                "currentHealthKitUsername": self.currentHealthKitUsername()
+                "currentHealthKitUsername": self.currentHealthKitUsername(),
                 ] as [String : Any]
             self.sendEvent(withName: "onTurnOnInterface", body: body)
         }
@@ -147,54 +156,64 @@ class TPNativeHealth: RCTEventEmitter {
             self.sendEvent(withName: "onTurnOffInterface", body: body)
         }
     }
-    
+
     @objc func handleTurnOnUploader(_ note: Notification) {
         DDLogVerbose("trace")
-
-        guard isObserving else {
-            return
-        }
-
-        DispatchQueue.main.async {
-            let userInfo = note.userInfo!
-            let mode = userInfo["mode"] as! TPUploader.Mode
-            if mode == TPUploader.Mode.HistoricalAll {
-                self.sendEvent(withName: "onTurnOnHistoricalUpload", body:nil)
+        
+        let userInfo = note.userInfo!
+        let mode = userInfo["mode"] as! TPUploader.Mode
+        if mode == TPUploader.Mode.HistoricalAll {
+            DispatchQueue.main.async {
+                DDLogVerbose("handleTurnOnUploader disable idle timer")
+                UIApplication.shared.isIdleTimerDisabled = true
+           
+                if self.isObserving {
+                    self.sendEvent(withName: "onTurnOnHistoricalUpload", body:[
+                        "hasPresentedSyncUI": self.uploader.hasPresentedSyncUI
+                    ])
+                }
             }
         }
     }
-    
+
     @objc func handleTurnOffUploader(_ note: Notification) {
         DDLogVerbose("trace")
 
-        guard isObserving else {
-            return
-        }
+        let userInfo = note.userInfo!
+        let mode = userInfo["mode"] as! TPUploader.Mode
+        if mode == TPUploader.Mode.HistoricalAll {
+            DispatchQueue.main.async {
+                DDLogVerbose("handleTurnOffUploader disable idle timer")
+                UIApplication.shared.isIdleTimerDisabled = false
+                
+                if self.isObserving {
+                    let type = userInfo["type"] as! String
+                    let reason = userInfo["reason"] as! TPUploader.StoppedReason
+                    DDLogInfo("Type: \(type), Mode: \(mode), Reason: \(reason)")
 
-        DispatchQueue.main.async {
-            let userInfo = note.userInfo!
-            let mode = userInfo["mode"] as! TPUploader.Mode
-            let type = userInfo["type"] as! String
-            let reason = userInfo["reason"] as! TPUploader.StoppedReason
-            DDLogInfo("Type: \(type), Mode: \(mode), Reason: \(reason)")
-            
-            var body: Any? = nil
-            if mode == TPUploader.Mode.HistoricalAll {
-                // Update status
-                switch reason {
-                case .interfaceTurnedOff:
-                    body = ["turnOffUploaderReason": "turned off", "turnOffUploaderError": ""]
-                    break
-                case .uploadingComplete:
-                    body = ["turnOffUploaderReason": "complete", "turnOffUploaderError": ""]
-                    break
-                case .error(let error):
-                    body = ["turnOffUploaderReason": "error", "turnOffUploaderError": String("\(type) upload error: \(error.localizedDescription.prefix(50))")]
-                    break
-                default:
-                    break
+                    var body: Any? = nil
+                    // Update status
+                    switch reason {
+                    case .interfaceTurnedOff:
+                        body = ["turnOffUploaderReason": "turned off", "turnOffUploaderError": ""]
+                        break
+                    case .uploadingComplete:
+                        body = ["turnOffUploaderReason": "complete", "turnOffUploaderError": ""]
+                        break
+                    case .error(let error):
+                        if !self.connector.isConnectedToNetwork() {
+                            let message = "Unable to upload, not connected to network."
+                            body = ["turnOffUploaderReason": "error", "turnOffUploaderError": String("\(type) upload error: \(message)")]
+                        } else {
+                            body = ["turnOffUploaderReason": "error", "turnOffUploaderError": String("\(type) upload error: \(error.localizedDescription.prefix(50))")]
+                        }
+                        break
+                    default:
+                        break
+                    }
+                    self.sendEvent(withName: "onTurnOffHistoricalUpload", body: body)
+
                 }
-                self.sendEvent(withName: "onTurnOffHistoricalUpload", body: body)
             }
         }
     }
@@ -213,7 +232,7 @@ class TPNativeHealth: RCTEventEmitter {
             DDLogInfo("Type: \(type), Mode: \(mode)")
 
             var body: Any? = nil
-            
+
             if mode == TPUploader.Mode.HistoricalAll {
                 body = self.createBodyForHistoricalStats()
             } else {
@@ -223,7 +242,7 @@ class TPNativeHealth: RCTEventEmitter {
             self.sendEvent(withName: "onUploadStatsUpdated", body: body)
         }
     }
-    
+
     func createBodyForHistoricalStats() -> Any? {
         let isUploadingHistorical = self.uploader.isUploadInProgressForMode(TPUploader.Mode.HistoricalAll)
         let progress = self.uploader.uploaderProgress()
@@ -241,7 +260,7 @@ class TPNativeHealth: RCTEventEmitter {
             "lastCurrentUploadUiDescription": lastCurrentUploadUiDescription()
         ]
     }
-    
+
     private func lastCurrentUploadUiDescription() -> String {
         var description = "No data available to upload"
         let progress = self.uploader.uploaderProgress()
@@ -252,7 +271,7 @@ class TPNativeHealth: RCTEventEmitter {
         }
         return description
     }
-    
+
     private func lastCurrentUploadType() -> String? {
         var lastType: String?
         var lastUploadTime: Date?

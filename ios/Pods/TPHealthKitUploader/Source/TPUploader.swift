@@ -163,6 +163,14 @@ public class TPUploader {
         hkUploadMgr.stopUploading(mode: mode, reason: reason)
     }
     
+    public func resumeUploadingIfResumable() {
+        if let currentId = config.currentUserId() {
+            hkUploadMgr.resumeUploadingIfResumable(currentUserId: currentId)
+        } else {
+            DDLogVerbose("ERR: resumeUploadingIfResumable ignored, no current user!")
+        }
+    }
+
     /**
      Resets persistent state for an upload mode (current or historical).
      

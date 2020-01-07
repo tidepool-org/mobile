@@ -1,8 +1,9 @@
-import { AsyncStorage, Platform } from "react-native";
+import { AsyncStorage } from "react-native";
 
 import { HOME_ROUTE_NAME } from "../navigators/routeNames";
 import isDrawerOpen from "../navigators/isDrawerOpen";
 import isCurrentRoute from "../navigators/isCurrentRoute";
+import { TPNativeHealth } from "./TPNativeHealth";
 import { Logger } from "./Logger";
 
 const FIRST_TIME_TIPS_SETTINGS_KEY = "FIRST_TIME_TIPS_SETTINGS_KEY";
@@ -12,9 +13,9 @@ const FIRST_TIME_TIPS_SETTINGS_KEY = "FIRST_TIME_TIPS_SETTINGS_KEY";
 // to use another module to read the settings from UserDefaults.
 
 class FirstTimeTips {
-  TIP_CONNECT_TO_HEALTH = "connectToHealth";
-  TIP_ADD_NOTE = "addNote";
-  TIP_GET_DESKTOP_UPLOADER = "getDesktopUploader";
+  TIP_CONNECT_TO_HEALTH = "TIP_CONNECT_TO_HEALTH";
+  TIP_ADD_NOTE = "TIP_ADD_NOTE";
+  TIP_GET_DESKTOP_UPLOADER = "TIP_GET_DESKTOP_UPLOADER";
 
   constructor() {
     // console.log(`FirstTimeTips ctor`);
@@ -30,7 +31,7 @@ class FirstTimeTips {
       this.areSettingsLoaded &&
       !this.currentTip &&
       !notesFetch.fetching &&
-      tip === this.getNextTip({ notesFetch, currentUser }) &&
+      tip === this.getNextTip({ currentUser }) &&
       !isDrawerOpen({ navigation }) &&
       isCurrentRoute(HOME_ROUTE_NAME, { navigation })
     ) {
@@ -42,7 +43,25 @@ class FirstTimeTips {
     return shouldShowTip;
   }
 
-  showTip(tip, show) {
+  shouldHideTip(tip, { navigation, didUserDismiss }) {
+    let shouldHideTip = false;
+
+    if (
+      this.areSettingsLoaded &&
+      this.currentTip === tip &&
+      (didUserDismiss ||
+        isDrawerOpen({ navigation }) ||
+        !isCurrentRoute(HOME_ROUTE_NAME, { navigation }))
+    ) {
+      shouldHideTip = true;
+    }
+
+    // console.log(`shouldShowTip: ${tip}, result: ${shouldShowTip}`);
+
+    return shouldHideTip;
+  }
+
+  showTip({ tip, show, didUserDismiss }) {
     const hide = !show;
     if (show && tip !== this.currentTip) {
       this.currentTip = tip;
@@ -51,24 +70,54 @@ class FirstTimeTips {
       // console.log(`showTip: ${tip} was shown`);
     } else if (hide && tip === this.currentTip) {
       this.currentTip = null;
+      if (!didUserDismiss) {
+        this.settings[tip] = false;
+      }
       this.saveSettings();
       // console.log(`showTip: ${tip} was hidden`);
     }
   }
 
-  getNextTip({ /* notesFetch, */ currentUser }) {
+  getNextTip({ currentUser }) {
     let nextTip = null;
 
-    if (
-      Platform.OS === "ios" &&
-      currentUser.patient &&
-      !this.settings[this.TIP_CONNECT_TO_HEALTH]
-    ) {
-      nextTip = this.TIP_CONNECT_TO_HEALTH;
-    } else if (!this.settings[this.TIP_ADD_NOTE]) {
-      nextTip = this.TIP_ADD_NOTE;
-    } else if (!this.settings[this.TIP_GET_DESKTOP_UPLOADER]) {
-      nextTip = this.TIP_GET_DESKTOP_UPLOADER;
+    if (!nextTip) {
+      if (
+        !this.settings[this.TIP_CONNECT_TO_HEALTH] &&
+        TPNativeHealth.shouldShowHealthKitUI
+      ) {
+        nextTip = this.TIP_CONNECT_TO_HEALTH;
+      }
+    }
+
+    if (!nextTip) {
+      if (!this.settings[this.TIP_ADD_NOTE]) {
+        nextTip = this.TIP_ADD_NOTE;
+      }
+    }
+
+    if (!nextTip) {
+      if (currentUser.patient) {
+        const {
+          healthKitInterfaceEnabledForCurrentUser,
+          healthKitInterfaceConfiguredForOtherUser,
+        } = TPNativeHealth;
+        if (
+          healthKitInterfaceEnabledForCurrentUser ||
+          healthKitInterfaceConfiguredForOtherUser
+        ) {
+          // Reset the TIP_GET_DESKTOP_UPLOADER tip since mobile uploader is
+          // enabled already for a user. Then, when it's no longer enabled for a
+          // user (because user toggled on and then off again), we will show tip
+          // again
+          if (this.settings[this.TIP_GET_DESKTOP_UPLOADER]) {
+            this.settings[this.TIP_GET_DESKTOP_UPLOADER] = false;
+            this.saveSettings();
+          }
+        } else if (!this.settings[this.TIP_GET_DESKTOP_UPLOADER]) {
+          nextTip = this.TIP_GET_DESKTOP_UPLOADER;
+        }
+      }
     }
 
     // console.log(`getNextTip: result: ${nextTip}`);

@@ -22,6 +22,7 @@ import TPHealthKitUploader
 var fileLogger: DDFileLogger!
 
 class TPAppDelegate: EXStandaloneAppDelegate {
+    fileprivate var registeredForReachability = false
     override func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool
     {
         DDLogVerbose("trace")
@@ -34,13 +35,17 @@ class TPAppDelegate: EXStandaloneAppDelegate {
         DDLogVerbose("Log Date: \(dateString)")
 
         let result = super.application(application, didFinishLaunchingWithOptions: launchOptions)
-        
+
         let state = UIApplication.shared.applicationState
         if state == .background {
             DDLogInfo("launched in background")
             refreshTokenAndConfigureHealthKitInterface()
         } else {
             TPDataController.sharedInstance.configureHealthKitInterface()
+            if !registeredForReachability {
+                registeredForReachability = true
+                NotificationCenter.default.addObserver(self, selector: #selector(TPAppDelegate.reachabilityChanged(_:)), name: ReachabilityChangedNotification, object: nil)
+            }
         }
 
         DDLogInfo("did finish launching")
@@ -57,7 +62,14 @@ class TPAppDelegate: EXStandaloneAppDelegate {
 
     override func applicationProtectedDataWillBecomeUnavailable(_ application: UIApplication) {
         DDLogInfo("Device locked!")
+
         deviceIsLocked = true
+
+        // Stop historical upload since Health data will become unavailable. (Will resume again when available.)
+        let message = "Sync stopped after device was locked."
+        let error = NSError(domain: "Tidepool", code: -1, userInfo: [NSLocalizedDescriptionKey: message])
+        TPUploaderAPI.connector().uploader().stopUploading(mode: .HistoricalAll, reason: .error(error: error))
+
         // super.applicationProtectedDataWillBecomeUnavailable(application) // super doesn't implement!
     }
 
@@ -69,15 +81,27 @@ class TPAppDelegate: EXStandaloneAppDelegate {
     override func applicationDidEnterBackground(_ application: UIApplication) {
         DDLogVerbose("trace")
 
-        // Re-enable idle timer (screen locking) when the app enters background. (May have been disabled during sync/upload.)
+        // Re-enable idle timer when the app enters background. (May have been disabled during historical sync/upload.)
+        DDLogVerbose("applicationDidEnterBackground enable idle timer")
         UIApplication.shared.isIdleTimerDisabled = false
-        // TODO: health - idle timer - need to disable idle timer while Initial or Manual Sync is going on (and also sync via Debug Health)
 
         // super.applicationDidEnterBackground(application) // super doesn't implement!
     }
 
     override func applicationWillEnterForeground(_ application: UIApplication) {
         DDLogInfo("applicationWillEnterForeground")
+
+        // Disable idle timer if there is a historical sync in progress
+        if TPUploaderAPI.connector().uploader().isUploadInProgressForMode(TPUploader.Mode.HistoricalAll) {
+            DDLogVerbose("applicationWillEnterForeground disable idle timer")
+            UIApplication.shared.isIdleTimerDisabled = true
+        }
+
+        let connector = TPUploaderAPI.connector()
+        if connector.isConnectedToNetwork() {
+            connector.uploader().resumeUploadingIfResumable()
+        }
+
         super.applicationWillEnterForeground(application)
     }
 
@@ -93,14 +117,32 @@ class TPAppDelegate: EXStandaloneAppDelegate {
         DDLogVerbose("trace")
         // super.applicationWillTerminate(application) // super doesn't implement!
     }
-    
+
+    @objc func reachabilityChanged(_ note: Notification) {
+        DispatchQueue.main.async {
+            let connector = TPUploaderAPI.connector()
+            if connector.isConnectedToNetwork() {
+                DDLogInfo("Network is reachable, resume upload (if possible)")
+                connector.uploader().resumeUploadingIfResumable()
+            } else {
+                let uploader = connector.uploader()
+                if uploader.isUploadInProgressForMode(TPUploader.Mode.HistoricalAll) {
+                    let message = "Unable to upload, not connected to network."
+                    let error = NSError(domain: "Tidepool", code: -2, userInfo: [NSLocalizedDescriptionKey: message])
+                    DDLogInfo(message)
+                    TPUploaderAPI.connector().uploader().stopUploading(mode: .HistoricalAll, reason: .error(error: error))
+                }
+            }
+        }
+    }
+
     fileprivate func refreshTokenAndConfigureHealthKitInterface() {
         let api = TPApi.sharedInstance
         if api.sessionToken != nil {
             api.refreshToken() { (succeeded, statusCode) in
                 if succeeded {
                     DDLogInfo("Refresh token succeeded, statusCode: \(statusCode)")
-                    
+
                     // Get auth user from AsyncStorage and update the sessionToken
                     let settings = TPSettings.sharedInstance
                     settings.getValuesForAyncStorageKeys(keys: [kAsyncStorageAuthUserKey]) { (values: [String?]) in
@@ -111,7 +153,7 @@ class TPAppDelegate: EXStandaloneAppDelegate {
                             [kAsyncStorageAuthUserKey, json.rawString()!],
                         ])
                     }
-                                        
+
                     // Configure HealthKit Interface (uses new auth user, etc)
                     TPDataController.sharedInstance.configureHealthKitInterface()
                 } else {
