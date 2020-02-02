@@ -66,8 +66,9 @@ class TPAppDelegate: EXStandaloneAppDelegate {
         deviceIsLocked = true
 
         // Stop historical upload since Health data will become unavailable. (Will resume again when available.)
+        // TODO: uploader - test this .. confirm that when unlocked, historical upload resumes
         let message = "Sync stopped after device was locked."
-        let error = NSError(domain: "Tidepool", code: -1, userInfo: [NSLocalizedDescriptionKey: message])
+        let error = NSError(domain: TPUploader.ErrorDomain, code: TPUploader.ErrorCodes.noProtectedHealthKitData.rawValue, userInfo: [NSLocalizedDescriptionKey: message])
         TPUploaderAPI.connector().uploader().stopUploading(mode: .HistoricalAll, reason: .error(error: error))
 
         // super.applicationProtectedDataWillBecomeUnavailable(application) // super doesn't implement!
@@ -99,7 +100,7 @@ class TPAppDelegate: EXStandaloneAppDelegate {
 
         let connector = TPUploaderAPI.connector()
         if connector.isConnectedToNetwork() {
-            connector.uploader().resumeUploadingIfResumable()
+            TPDataController.sharedInstance.configureHealthKitInterface()
         }
 
         super.applicationWillEnterForeground(application)
@@ -122,13 +123,12 @@ class TPAppDelegate: EXStandaloneAppDelegate {
         DispatchQueue.main.async {
             let connector = TPUploaderAPI.connector()
             if connector.isConnectedToNetwork() {
-                DDLogInfo("Network is reachable, resume upload (if possible)")
-                connector.uploader().resumeUploadingIfResumable()
+                TPDataController.sharedInstance.configureHealthKitInterface()
             } else {
                 let uploader = connector.uploader()
                 if uploader.isUploadInProgressForMode(TPUploader.Mode.HistoricalAll) {
-                    let message = "Unable to upload, not connected to network."
-                    let error = NSError(domain: "Tidepool", code: -2, userInfo: [NSLocalizedDescriptionKey: message])
+                    let message = "Unable to upload. The Internet connection appears to be offline."
+                    let error = NSError(domain: TPUploader.ErrorDomain, code: TPUploader.ErrorCodes.noNetwork.rawValue, userInfo: [NSLocalizedDescriptionKey: message])
                     DDLogInfo(message)
                     TPUploaderAPI.connector().uploader().stopUploading(mode: .HistoricalAll, reason: .error(error: error))
                 }

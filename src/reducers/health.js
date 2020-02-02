@@ -1,13 +1,16 @@
-import {
-  HEALTH_KIT_INTERFACE_SET,
-  UPLOADER_STATE_SET,
-} from "../actions/health";
+import { HEALTH_STATE_SET } from "../actions/health";
 
 const initialState = {
   shouldShowHealthKitUI: false,
-  healthKitInterfaceEnabledForCurrentUser: false,
-  healthKitInterfaceConfiguredForOtherUser: false,
+  isHealthKitAuthorized: false,
+  isHealthKitInterfaceEnabledForCurrentUser: false,
+  isHealthKitInterfaceConfiguredForOtherUser: false,
   currentHealthKitUsername: "",
+  hasPresentedSyncUI: false,
+  interfaceTurnedOffError: "",
+  isTurningInterfaceOn: false,
+  isInterfaceOn: false,
+  isPendingUploadHistorical: false,
   isUploadingHistorical: false,
   historicalUploadCurrentDay: 0,
   historicalUploadTotalDays: 0,
@@ -18,8 +21,7 @@ function health(state = initialState, action) {
   let nextState = state;
 
   switch (action.type) {
-    case HEALTH_KIT_INTERFACE_SET:
-    case UPLOADER_STATE_SET:
+    case HEALTH_STATE_SET:
       nextState = { ...state, ...action.payload };
       break;
     default:

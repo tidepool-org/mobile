@@ -81,11 +81,14 @@ class FirstTimeTips {
   getNextTip({ currentUser }) {
     let nextTip = null;
 
+    const {
+      shouldShowHealthKitUI,
+      isHealthKitInterfaceEnabledForCurrentUser,
+      isHealthKitInterfaceConfiguredForOtherUser,
+    } = TPNativeHealth.healthKitInterfaceConfiguration;
+
     if (!nextTip) {
-      if (
-        !this.settings[this.TIP_CONNECT_TO_HEALTH] &&
-        TPNativeHealth.shouldShowHealthKitUI
-      ) {
+      if (!this.settings[this.TIP_CONNECT_TO_HEALTH] && shouldShowHealthKitUI) {
         nextTip = this.TIP_CONNECT_TO_HEALTH;
       }
     }
@@ -98,13 +101,9 @@ class FirstTimeTips {
 
     if (!nextTip) {
       if (currentUser.patient) {
-        const {
-          healthKitInterfaceEnabledForCurrentUser,
-          healthKitInterfaceConfiguredForOtherUser,
-        } = TPNativeHealth;
         if (
-          healthKitInterfaceEnabledForCurrentUser ||
-          healthKitInterfaceConfiguredForOtherUser
+          isHealthKitInterfaceEnabledForCurrentUser ||
+          isHealthKitInterfaceConfiguredForOtherUser
         ) {
           // Reset the TIP_GET_DESKTOP_UPLOADER tip since mobile uploader is
           // enabled already for a user. Then, when it's no longer enabled for a

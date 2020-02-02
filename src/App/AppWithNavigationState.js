@@ -8,7 +8,7 @@ import { AppNavigator } from "../navigators/AppNavigator";
 import { HOME_ROUTE_NAME, SIGN_IN_ROUTE_NAME } from "../navigators/routeNames";
 import getRouteName from "../navigators/getRouteName";
 import { TPNativeHealth } from "../models/TPNativeHealth";
-import { healthKitInterfaceSet, uploaderStateSet } from "../actions/health";
+import { healthStateSet } from "../actions/health";
 
 import { authRefreshToken } from "../actions/auth";
 // import { Logger } from "../models/Logger";
@@ -31,20 +31,12 @@ class AppWithNavigationState extends PureComponent {
 
     // Do initial dispatch of health state when mounting. Further updates are by way of TPNativeHealth events
     dispatch(
-      healthKitInterfaceSet({
-        shouldShowHealthKitUI: TPNativeHealth.shouldShowHealthKitUI,
-        healthKitInterfaceEnabledForCurrentUser:
-          TPNativeHealth.healthKitInterfaceEnabledForCurrentUser,
-        healthKitInterfaceConfiguredForOtherUser:
-          TPNativeHealth.healthKitInterfaceConfiguredForOtherUser,
-        currentHealthKitUsername: TPNativeHealth.currentHealthKitUsername,
-        hasPresentedSyncUI: TPNativeHealth.hasPresentedSyncUI,
-      })
-    );
-    dispatch(
-      uploaderStateSet({
+      healthStateSet({
+        ...TPNativeHealth.healthKitInterfaceConfiguration,
         turnOffUploaderReason: TPNativeHealth.turnOffUploaderReason,
         turnOffUploaderError: TPNativeHealth.turnOffUploaderError,
+        isPendingUploadHistorical:
+          TPNativeHealth.isPendingUploadHistorical,
         isUploadingHistorical: TPNativeHealth.isUploadingHistorical,
         historicalUploadCurrentDay: TPNativeHealth.historicalUploadCurrentDay,
         historicalUploadTotalDays: TPNativeHealth.historicalUploadTotalDays,
@@ -63,28 +55,19 @@ class AppWithNavigationState extends PureComponent {
   onHealthEvent = (eventName, uploaderType) => {
     const { dispatch } = this.props;
 
-    if (
-      eventName === "onTurnOnInterface" ||
-      eventName === "onTurnOffInterface"
-    ) {
+    if (eventName === "onHealthKitInterfaceConfiguration") {
       dispatch(
-        healthKitInterfaceSet({
-          shouldShowHealthKitUI: TPNativeHealth.shouldShowHealthKitUI,
-          healthKitInterfaceEnabledForCurrentUser:
-            TPNativeHealth.healthKitInterfaceEnabledForCurrentUser,
-          healthKitInterfaceConfiguredForOtherUser:
-            TPNativeHealth.healthKitInterfaceConfiguredForOtherUser,
-          currentHealthKitUsername: TPNativeHealth.currentHealthKitUsername,
-          hasPresentedSyncUI: TPNativeHealth.hasPresentedSyncUI,
-        })
-      );
-      dispatch(
-        uploaderStateSet({
+        healthStateSet({
+          ...TPNativeHealth.healthKitInterfaceConfiguration,
           turnOffUploaderReason: TPNativeHealth.turnOffUploaderReason,
           turnOffUploaderError: TPNativeHealth.turnOffUploaderError,
+          isPendingUploadHistorical:
+            TPNativeHealth.isPendingUploadHistorical,
           isUploadingHistorical: TPNativeHealth.isUploadingHistorical,
           historicalUploadCurrentDay: TPNativeHealth.historicalUploadCurrentDay,
           historicalUploadTotalDays: TPNativeHealth.historicalUploadTotalDays,
+          lastCurrentUploadUiDescription:
+            TPNativeHealth.lastCurrentUploadUiDescription,
         })
       );
     } else if (
@@ -92,9 +75,11 @@ class AppWithNavigationState extends PureComponent {
       eventName === "onTurnOffHistoricalUpload"
     ) {
       dispatch(
-        uploaderStateSet({
+        healthStateSet({
           turnOffUploaderReason: TPNativeHealth.turnOffUploaderReason,
           turnOffUploaderError: TPNativeHealth.turnOffUploaderError,
+          isPendingUploadHistorical:
+            TPNativeHealth.isPendingUploadHistorical,
           isUploadingHistorical: TPNativeHealth.isUploadingHistorical,
           historicalUploadCurrentDay: TPNativeHealth.historicalUploadCurrentDay,
           historicalUploadTotalDays: TPNativeHealth.historicalUploadTotalDays,
@@ -106,9 +91,11 @@ class AppWithNavigationState extends PureComponent {
         // missed onTurnOnHistoricalUpload if it were sent before RN
         // initialized, so, dispatch uploaderStateSet as well
         dispatch(
-          uploaderStateSet({
+          healthStateSet({
             turnOffUploaderReason: TPNativeHealth.turnOffUploaderReason,
             turnOffUploaderError: TPNativeHealth.turnOffUploaderError,
+            isPendingUploadHistorical:
+              TPNativeHealth.isPendingUploadHistorical,
             isUploadingHistorical: TPNativeHealth.isUploadingHistorical,
             historicalUploadCurrentDay:
               TPNativeHealth.historicalUploadCurrentDay,
@@ -117,7 +104,7 @@ class AppWithNavigationState extends PureComponent {
         );
       } else if (uploaderType === "current") {
         dispatch(
-          uploaderStateSet({
+          healthStateSet({
             lastCurrentUploadUiDescription:
               TPNativeHealth.lastCurrentUploadUiDescription,
           })

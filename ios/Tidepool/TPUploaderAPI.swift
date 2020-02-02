@@ -35,12 +35,12 @@ class TPUploaderAPI: TPUploaderConfigInfo {
     func uploader() -> TPUploader {
         return _uploader!
     }
-    
+
     private init() {
         api = TPApi.sharedInstance
         dataController = TPDataController.sharedInstance
     }
-    
+
     private func configure() {
         _uploader = TPUploader(self)
     }
@@ -51,7 +51,7 @@ class TPUploaderAPI: TPUploaderConfigInfo {
     //
     // MARK: - TPUploaderConfigInfo protocol
     //
-    
+
     //
     // Service API functions
     //
@@ -60,7 +60,7 @@ class TPUploaderAPI: TPUploaderConfigInfo {
         DDLogInfo("\(#function) - TPUploaderConfigInfo protocol, returning: \(result)")
         return result
     }
-    
+
     func sessionToken() -> String? {
         let result = api.sessionToken
         DDLogInfo("\(#function) - TPUploaderConfigInfo protocol, returning: \(result ?? "nil")")
@@ -79,13 +79,13 @@ class TPUploaderAPI: TPUploaderConfigInfo {
         DDLogInfo("\(#function) - TPUploaderConfigInfo protocol, returning: \(result ?? "nil")")
         return result
     }
-    
+
     func currentUserId() -> String? {
         let result = dataController.currentUserId
         DDLogInfo("\(#function) - TPUploaderConfigInfo protocol, returning: \(result ?? "nil")")
         return result
     }
-    
+
     var currentUserName: String? {
         get {
             let result = dataController.currentUserFullName
@@ -99,7 +99,7 @@ class TPUploaderAPI: TPUploaderConfigInfo {
         DDLogInfo("\(#function) - TPUploaderConfigInfo protocol, returning: \(String(describing: result))")
         return result
     }
-    
+
     var bioSex: String? {
         get {
             DDLogInfo("\(#function) - TPUploaderConfigInfo protocol, returning: \(String(describing: dataController.bioSex))")
@@ -109,33 +109,52 @@ class TPUploaderAPI: TPUploaderConfigInfo {
             dataController.bioSex = newValue // TODO: health - also reflect this to AsyncStorage?
         }
     }
-    
+
     var nativeHealthBridge: TPNativeHealth?
+    
+    var isTurningInterfaceOn: Bool = false
     var isInterfaceOn: Bool = false
+    var interfaceTurnedOffError: Error? = nil
+
+    func onTurningOnInterface() {
+        DDLogInfo("onTurningOnInterface")
+        isInterfaceOn = false
+        isTurningInterfaceOn = true
+        interfaceTurnedOffError = nil
+        nativeHealthBridge?.onHealthKitInterfaceConfiguration()
+    }
 
     func onTurnOnInterface() {
+        DDLogInfo("onTurnOnInterface")
         isInterfaceOn = true
-        nativeHealthBridge?.onTurnOnInterface()
+        isTurningInterfaceOn = false
+        interfaceTurnedOffError = nil
+        nativeHealthBridge?.onHealthKitInterfaceConfiguration()
     }
-    
-    func onTurnOffInterface() {
+
+    func onTurnOffInterface(_ error: Error?) {
+        DDLogInfo("onTurnOffInterface, error: \(String(describing: error))")
+                
+        isTurningInterfaceOn = false
         isInterfaceOn = false
-        nativeHealthBridge?.onTurnOffInterface()
+        interfaceTurnedOffError = error
+        // TODO: uploader - if we're connected to internet, but, couldn't turn on interface due to network error, then retry up to n times .. need to distinguish network errors from other erros (e.g. not a dsa user, no user, etc)
+        nativeHealthBridge?.onHealthKitInterfaceConfiguration()
     }
 
     let uploadFramework: StaticString = "uploader"
     func logVerbose(_ str: String) {
         DDLogVerbose(str, file: uploadFramework, function: uploadFramework)
     }
-    
+
     func logError(_ str: String) {
         DDLogError(str, file: uploadFramework, function: uploadFramework)
     }
-    
+
     func logInfo(_ str: String) {
         DDLogInfo(str, file: uploadFramework, function: uploadFramework)
     }
-    
+
     func logDebug(_ str: String) {
         DDLogDebug(str, file: uploadFramework, function: uploadFramework)
     }

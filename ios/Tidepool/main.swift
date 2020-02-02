@@ -18,6 +18,8 @@ import CocoaLumberjack
 
 class App: UIApplication {
     override init() {
+        // setenv("CFNETWORK_DIAGNOSTICS", "3", 1) // NOTE: - don't check in or distribute TestFlight builds with this enabled!
+        
         // Set up Xcode and system logging
         DDTTYLogger.sharedInstance.logFormatter = LogFormatter()
         DDLog.add(DDTTYLogger.sharedInstance)
