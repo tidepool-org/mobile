@@ -75,6 +75,10 @@ target 'Tidepool' do
     installer.target_installation_results.pod_target_installation_results
       .each do |pod_name, target_installation_result|
 
+      target_installation_result.native_target.build_configurations.each do |config|
+        config.build_settings['SWIFT_VERSION'] = '5.0'
+      end
+
       if pod_name == 'ExpoKit'
         target_installation_result.native_target.build_configurations.each do |config|
           config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] ||= ['$(inherited)']
@@ -86,8 +90,6 @@ target 'Tidepool' do
 
         end
       end
-
-
 
       target_installation_result.native_target.build_configurations.each do |config|
         config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '11.0'
