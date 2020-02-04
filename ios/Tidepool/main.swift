@@ -38,13 +38,13 @@ class App: UIApplication {
         DDLog.add(fileLogger);
         
         // Set up log level
-        defaultDebugLevel = DDLogLevel.verbose
+        dynamicLogLevel = DDLogLevel.verbose
         let loggingEnabledObject = UserDefaults.standard.object(forKey: "LoggingEnabled")
         if loggingEnabledObject == nil || !(loggingEnabledObject! as AnyObject).boolValue {
-            defaultDebugLevel = DDLogLevel.off
+            dynamicLogLevel = DDLogLevel.off
         }
 #if DEBUG
-        defaultDebugLevel = DDLogLevel.verbose
+        dynamicLogLevel = DDLogLevel.verbose
 #endif
 
         DDLogVerbose("trace")
