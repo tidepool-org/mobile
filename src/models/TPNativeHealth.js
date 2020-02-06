@@ -2,13 +2,19 @@ import { NativeModules, NativeEventEmitter } from "react-native";
 
 class TPNativeHealthSingletonClass {
   constructor() {
-    this.shouldShowHealthKitUI = false;
+    this.healthKitInterfaceConfiguration = {
+      shouldShowHealthKitUI: false,
+      isHealthKitAuthorized: false,
+      isHealthKitInterfaceEnabledForCurrentUser: false,
+      isHealthKitInterfaceConfiguredForOtherUser: false,
+      currentHealthKitUsername: "",
+      hasPresentedSyncUI: false,
+      interfaceTurnedOffError: "",
+      isTurningInterfaceOn: false,
+      isInterfaceOn: false,
+    };
 
-    this.healthKitInterfaceEnabledForCurrentUser = false;
-    this.healthKitInterfaceConfiguredForOtherUser = false;
-    this.currentHealthKitUsername = "";
-    this.hasPresentedSyncUI = false;
-
+    this.isPendingUploadHistorical = false;
     this.isUploadingHistorical = false;
     this.historicalUploadCurrentDay = 0;
     this.historicalUploadTotalDays = 0;
@@ -21,12 +27,7 @@ class TPNativeHealthSingletonClass {
     try {
       this.nativeModule = NativeModules.TPNativeHealth;
 
-      this.shouldShowHealthKitUI = this.nativeModule.shouldShowHealthKitUI();
-      this.hasPresentedSyncUI = this.nativeModule.hasPresentedSyncUI();
-      this.healthKitInterfaceEnabledForCurrentUser = this.nativeModule.healthKitInterfaceEnabledForCurrentUser();
-      this.healthKitInterfaceConfiguredForOtherUser = this.nativeModule.healthKitInterfaceConfiguredForOtherUser();
-      this.currentHealthKitUsername = this.nativeModule.currentHealthKitUsername();
-
+      this.healthKitInterfaceConfiguration = this.nativeModule.healthKitInterfaceConfiguration();
       const uploaderProgress = this.nativeModule.uploaderProgress();
       this.isUploadingHistorical = uploaderProgress.isUploadingHistorical;
       this.historicalUploadCurrentDay =
@@ -38,8 +39,10 @@ class TPNativeHealthSingletonClass {
         uploaderProgress.lastCurrentUploadUiDescription;
 
       const events = new NativeEventEmitter(NativeModules.TPNativeHealth);
-      events.addListener("onTurnOnInterface", this.onTurnOnInterface);
-      events.addListener("onTurnOffInterface", this.onTurnOffInterface);
+      events.addListener(
+        "onHealthKitInterfaceConfiguration",
+        this.onHealthKitInterfaceConfiguration
+      );
       events.addListener(
         "onTurnOnHistoricalUpload",
         this.onTurnOnHistoricalUpload
@@ -54,9 +57,9 @@ class TPNativeHealthSingletonClass {
     }
   }
 
-  enableHealthKitInterface() {
+  enableHealthKitInterfaceAndAuthorize() {
     try {
-      this.nativeModule.enableHealthKitInterface();
+      this.nativeModule.enableHealthKitInterfaceAndAuthorize();
     } catch (error) {
       // console.log(`error: ${error}`);
     }
@@ -79,8 +82,13 @@ class TPNativeHealthSingletonClass {
     }
   }
 
+  startPendingUploadHistorical() {
+    this.isPendingUploadHistorical = true;
+  }
+
   startUploadingHistorical() {
     try {
+      this.isPendingUploadHistorical = false;
       this.historicalUploadCurrentDay = 0;
       this.historicalUploadTotalDays = 0;
       this.turnOffUploaderReason = "";
@@ -94,33 +102,20 @@ class TPNativeHealthSingletonClass {
 
   stopUploadingHistoricalAndReset() {
     try {
+      this.isPendingUploadHistorical = false;
       this.nativeModule.stopUploadingHistoricalAndReset();
     } catch (error) {
       // console.log(`error: ${error}`);
     }
   }
 
-  onTurnOnInterface = params => {
-    this.shouldShowHealthKitUI = params.shouldShowHealthKitUI;
-    this.healthKitInterfaceEnabledForCurrentUser =
-      params.healthKitInterfaceEnabledForCurrentUser;
-    this.healthKitInterfaceConfiguredForOtherUser =
-      params.healthKitInterfaceConfiguredForOtherUser;
-    this.currentHealthKitUsername = params.currentHealthKitUsername;
-    this.notify("onTurnOnInterface");
-  };
-
-  onTurnOffInterface = params => {
-    this.shouldShowHealthKitUI = params.shouldShowHealthKitUI;
-    this.healthKitInterfaceEnabledForCurrentUser =
-      params.healthKitInterfaceEnabledForCurrentUser;
-    this.healthKitInterfaceConfiguredForOtherUser =
-      params.healthKitInterfaceConfiguredForOtherUser;
-    this.currentHealthKitUsername = params.currentHealthKitUsername;
-    this.notify("onTurnOffInterface");
+  onHealthKitInterfaceConfiguration = params => {
+    this.healthKitInterfaceConfiguration = { ...params };
+    this.notify("onHealthKitInterfaceConfiguration");
   };
 
   onTurnOnHistoricalUpload = () => {
+    this.isPendingUploadHistorical = false;
     this.isUploadingHistorical = true;
     this.turnOffUploaderReason = "";
     this.turnOffUploaderError = "";
@@ -128,9 +123,8 @@ class TPNativeHealthSingletonClass {
   };
 
   onTurnOffHistoricalUpload = params => {
-    this.isUploadingHistorical = false;
+    this.isPendingUploadHistorical = false;
     this.turnOffUploaderReason = params.turnOffUploaderReason;
-
     let error = params.turnOffUploaderError;
     const errorPrefix = "error: ";
     const errorPrefixIndex = error.indexOf(errorPrefix);
@@ -145,6 +139,9 @@ class TPNativeHealthSingletonClass {
   onUploadStatsUpdated = params => {
     if (params.type === "historical") {
       this.isUploadingHistorical = params.isUploadingHistorical;
+      if (this.isUploadingHistorical) {
+        this.isPendingUploadHistorical = false;
+      }
       this.historicalUploadCurrentDay = params.historicalUploadCurrentDay;
       this.historicalUploadTotalDays = params.historicalUploadTotalDays;
       this.updateHistoricalUploadCurrentDayIfComplete();

@@ -27,6 +27,7 @@ class Drawer extends PureComponent {
       apiEnvironment,
       currentUser,
       health,
+      isOffline,
       navigateDebugSettings,
       navigateDrawerClose,
       navigateHealthSync,
@@ -73,13 +74,14 @@ class Drawer extends PureComponent {
                   <DrawerHealth
                     currentUser={item.currentUser}
                     health={health}
+                    isOffline={isOffline}
                   />
                 ),
               },
               {
                 data: [{ key: "healthSyncButtonDivider" }],
                 renderItem: () =>
-                  health.healthKitInterfaceEnabledForCurrentUser ? (
+                  health.isHealthKitInterfaceEnabledForCurrentUser ? (
                     <Divider />
                   ) : null,
               },
@@ -91,7 +93,7 @@ class Drawer extends PureComponent {
                   },
                 ],
                 renderItem: () =>
-                  health.healthKitInterfaceEnabledForCurrentUser ? (
+                  health.isHealthKitInterfaceEnabledForCurrentUser ? (
                     <DrawerHealthSyncButton
                       navigateHealthSync={navigateHealthSync}
                       navigateDrawerClose={navigateDrawerClose}
@@ -184,6 +186,7 @@ class Drawer extends PureComponent {
 Drawer.propTypes = {
   style: ViewPropTypes.style,
   health: PropTypes.object.isRequired,
+  isOffline: PropTypes.bool,
   navigateDrawerClose: PropTypes.func.isRequired,
   navigateHealthSync: PropTypes.func.isRequired,
   notesSwitchProfileAndFetchAsync: PropTypes.func.isRequired,
@@ -199,6 +202,7 @@ Drawer.propTypes = {
 
 Drawer.defaultProps = {
   style: null,
+  isOffline: false,
 };
 
 export default Drawer;

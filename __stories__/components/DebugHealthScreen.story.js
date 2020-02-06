@@ -14,8 +14,9 @@ const props = {
   },
   health: {
     shouldShowHealthKitUI: true,
-    healthKitInterfaceEnabledForCurrentUser: true,
-    healthKitInterfaceConfiguredForOtherUser: false,
+    isHealthKitAuthorized: false,
+    isHealthKitInterfaceEnabledForCurrentUser: false,
+    isHealthKitInterfaceConfiguredForOtherUser: false,
   },
   navigateGoBack: () => {},
 };

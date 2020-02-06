@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import HealthSyncScreen from "../screens/HealthSyncScreen";
 import { navigateGoBack } from "../actions/navigation";
-import { healthKitInterfaceSet } from "../actions/health";
+import { healthStateSet } from "../actions/health";
 import getRouteName from "../navigators/getRouteName";
 
 const mapStateToProps = state => {
@@ -12,6 +12,7 @@ const mapStateToProps = state => {
   return {
     currentUser: state.auth,
     health: state.health,
+    isOffline: state.offline.isOffline,
     isInitialSync,
   };
 };
@@ -20,7 +21,7 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       navigateGoBack,
-      healthKitInterfaceSet,
+      healthStateSet,
     },
     dispatch
   );

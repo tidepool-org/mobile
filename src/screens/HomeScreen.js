@@ -45,14 +45,19 @@ class HomeScreen extends PureComponent {
       notesFetch,
       currentUser,
       navigateDrawerClose,
-      health: { hasPresentedSyncUI, healthKitInterfaceEnabledForCurrentUser },
+      health: {
+        hasPresentedSyncUI,
+        isHealthKitInterfaceEnabledForCurrentUser,
+        isHealthKitAuthorized,
+      },
       navigateHealthSync,
     } = this.props;
 
     const shouldNavigateToInitialHealthSync =
       isCurrentRoute(HOME_ROUTE_NAME, { navigation }) &&
       !hasPresentedSyncUI &&
-      healthKitInterfaceEnabledForCurrentUser;
+      isHealthKitInterfaceEnabledForCurrentUser &&
+      isHealthKitAuthorized;
     if (shouldNavigateToInitialHealthSync) {
       navigateDrawerClose();
       navigateHealthSync({ isInitialSync: true });
@@ -228,7 +233,7 @@ class HomeScreen extends PureComponent {
                 onPressEmailLink={this.onPressTooltipEmailLink}
                 onPressOk={this.onPressTooltipOk}
               />
-)}
+            )}
             arrowSize={{ width: 0, height: 0 }}
             tooltipOriginOffset={{
               x: 0,

@@ -86,9 +86,9 @@ class TPNative: NSObject, MFMailComposeViewControllerDelegate {
             UserDefaults.standard.synchronize()
 
             if (enable) {
-                defaultDebugLevel = DDLogLevel.verbose
+                dynamicLogLevel = DDLogLevel.verbose
             } else {
-                defaultDebugLevel = DDLogLevel.off
+                dynamicLogLevel = DDLogLevel.off
                 self.clearLogFiles()
             }
         }

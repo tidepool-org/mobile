@@ -63,10 +63,10 @@ target 'Tidepool' do
   pod 'RollbarReactNative', :path => '../node_modules/rollbar-react-native'
   pod 'RNDeviceInfo', :path => '../node_modules/react-native-device-info'
 
-  pod 'TPHealthKitUploader', :git => 'https://github.com/tidepool-org/healthkit-uploader', :tag => '0.9.7'
-  pod 'SwiftyJSON', '4.2'
+  pod 'TPHealthKitUploader', :git => 'https://github.com/tidepool-org/healthkit-uploader', :tag => '0.9.9'
+  pod 'SwiftyJSON', '5.0.0'
   pod 'CocoaLumberjack/Swift', '3.5.3'
-  pod 'Alamofire', '4.7.3'
+  pod 'Alamofire', '4.9.1'
 
   post_install do |installer|
     installer.pods_project.main_group.tab_width = '2';
@@ -74,6 +74,10 @@ target 'Tidepool' do
 
     installer.target_installation_results.pod_target_installation_results
       .each do |pod_name, target_installation_result|
+
+      target_installation_result.native_target.build_configurations.each do |config|
+        config.build_settings['SWIFT_VERSION'] = '5.0'
+      end
 
       if pod_name == 'ExpoKit'
         target_installation_result.native_target.build_configurations.each do |config|
@@ -86,8 +90,6 @@ target 'Tidepool' do
 
         end
       end
-
-
 
       target_installation_result.native_target.build_configurations.each do |config|
         config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '11.0'

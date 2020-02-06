@@ -29,7 +29,7 @@ class TPDataController: NSObject
         currentUserIsDSAUser = false
     }
     
-    /// Call this at login/logout, token refresh(?), and upon enabling or disabling the HealthKit interface.
+    /// Call this at login/logout, token refresh(?), and upon enabling or disabling the HealthKit interface
     func configureHealthKitInterface() {
         DDLogInfo("Configure HK interface, user id: \(String(describing: self.currentUserId)), full name: \(String(describing: self.currentUserFullName)), is DSA user: \(String(describing: self.currentUserIsDSAUser))")
 
@@ -39,9 +39,9 @@ class TPDataController: NSObject
     /// Enables HealthKit for current viewable user
     ///
     /// Note: This sets the current tidepool user as the HealthKit user!
-    func enableHealthKitInterface() {
+    func enableHealthKitInterfaceAndAuthorize() {
         DDLogInfo("trace")
-        TPUploaderAPI.connector().uploader().enableHealthKitInterface()
+        TPUploaderAPI.connector().uploader().enableHealthKitInterfaceAndAuthorize()
     }
     
     /// Disables HealthKit for current user

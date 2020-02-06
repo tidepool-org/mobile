@@ -18,15 +18,15 @@ class DrawerHealth extends PureComponent {
   /* eslint-disable react/sort-comp */
   UNSAFE_componentWillReceiveProps(nextProps) {
     const {
-      health: { healthKitInterfaceEnabledForCurrentUser },
+      health: { isHealthKitInterfaceEnabledForCurrentUser },
     } = this.props;
     if (
-      healthKitInterfaceEnabledForCurrentUser !==
-      nextProps.health.healthKitInterfaceEnabledForCurrentUser
+      isHealthKitInterfaceEnabledForCurrentUser !==
+      nextProps.health.isHealthKitInterfaceEnabledForCurrentUser
     ) {
       this.setState({
         connectToHealthUserSetting:
-          nextProps.health.healthKitInterfaceEnabledForCurrentUser,
+          nextProps.health.isHealthKitInterfaceEnabledForCurrentUser,
       });
     }
   }
@@ -37,12 +37,12 @@ class DrawerHealth extends PureComponent {
   };
 
   onPressChangeToOtherUser = () => {
-    TPNativeHealth.enableHealthKitInterface();
+    TPNativeHealth.enableHealthKitInterfaceAndAuthorize();
   };
 
   onConnectToHealthValueChange = value => {
     if (value) {
-      this.enableHealthKitInterfaceForCurrentUser();
+      this.enableHealthKitInterfaceAndAuthorizeForCurrentUser();
       Metrics.track({ metric: "Connect to health on" });
     } else {
       TPNativeHealth.disableHealthKitInterface();
@@ -51,15 +51,15 @@ class DrawerHealth extends PureComponent {
     this.setState({ connectToHealthUserSetting: value });
   };
 
-  enableHealthKitInterfaceForCurrentUser() {
+  enableHealthKitInterfaceAndAuthorizeForCurrentUser() {
     const {
       health: {
-        healthKitInterfaceConfiguredForOtherUser,
+        isHealthKitInterfaceConfiguredForOtherUser,
         currentHealthKitUsername,
       },
     } = this.props;
 
-    if (healthKitInterfaceConfiguredForOtherUser) {
+    if (isHealthKitInterfaceConfiguredForOtherUser) {
       const username = currentHealthKitUsername || "Unknown";
       const message = `A different account (${username}) is currently associated with Health Data on this device`;
       Alert.alert("Are you sure?", message, [
@@ -74,7 +74,7 @@ class DrawerHealth extends PureComponent {
         },
       ]);
     } else {
-      TPNativeHealth.enableHealthKitInterface();
+      TPNativeHealth.enableHealthKitInterfaceAndAuthorize();
     }
   }
 
@@ -84,8 +84,9 @@ class DrawerHealth extends PureComponent {
       health,
       health: {
         shouldShowHealthKitUI,
-        healthKitInterfaceEnabledForCurrentUser,
+        isHealthKitInterfaceEnabledForCurrentUser,
       },
+      isOffline,
     } = this.props;
 
     if (!shouldShowHealthKitUI) {
@@ -96,7 +97,7 @@ class DrawerHealth extends PureComponent {
     const connectToHealthSwitchValue =
       connectToHealthUserSetting !== null
         ? connectToHealthUserSetting
-        : healthKitInterfaceEnabledForCurrentUser;
+        : isHealthKitInterfaceEnabledForCurrentUser;
 
     return (
       <glamorous.View style={style} height={80}>
@@ -117,6 +118,7 @@ class DrawerHealth extends PureComponent {
         </glamorous.View>
         <DrawerHealthStatus
           health={health}
+          isOffline={isOffline}
           style={style}
           connectToHealthUserSetting={connectToHealthSwitchValue}
         />
@@ -129,10 +131,12 @@ DrawerHealth.propTypes = {
   theme: ThemePropType.isRequired,
   style: ViewPropTypes.style,
   health: PropTypes.object.isRequired,
+  isOffline: PropTypes.bool,
 };
 
 DrawerHealth.defaultProps = {
   style: null,
+  isOffline: false,
 };
 
 export default withTheme(DrawerHealth);

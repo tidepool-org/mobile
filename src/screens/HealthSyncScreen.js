@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import {
+  ActivityIndicator,
   Alert,
   ProgressViewIOS,
   SafeAreaView,
@@ -16,6 +17,8 @@ import { TPNativeHealth } from "../models/TPNativeHealth";
 import Button from "../components/Button";
 
 import Colors from "../constants/Colors";
+
+const ACTIVITY_INDICATOR_VIEW_HEIGHT = 62;
 
 const styles = StyleSheet.create({
   headerRight: {
@@ -51,7 +54,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     ...PrimaryTheme.healthSyncTextSecondary,
   },
-  syncProgressBarView: {
+  syncProgressView: {
     padding: 10,
     width: 300,
     alignSelf: "center",
@@ -96,43 +99,43 @@ class HealthSyncScreen extends PureComponent {
 
   componentDidMount() {
     const {
-      healthKitInterfaceSet,
-      health: { isUploadingHistorical },
+      healthStateSet,
+      health: { isUploadingHistorical, isPendingUploadHistorical },
     } = this.props;
 
     TPNativeHealth.setHasPresentedSyncUI();
-    healthKitInterfaceSet({
+    healthStateSet({
       hasPresentedSyncUI: true,
     });
 
-    if (isUploadingHistorical) {
+    if (isUploadingHistorical || isPendingUploadHistorical) {
       this.setState({
         shouldShowSyncStatus: true,
       });
     }
   }
 
-  static getDerivedStateFromProps(props) {
+  /* eslint-disable react/no-did-update-set-state */
+  componentDidUpdate() {
     const {
-      health: { isUploadingHistorical },
-    } = props;
+      health: { isUploadingHistorical, isPendingUploadHistorical },
+    } = this.props;
 
-    if (isUploadingHistorical) {
-      return {
+    if (isUploadingHistorical || isPendingUploadHistorical) {
+      this.setState({
         shouldShowSyncStatus: true,
-      };
+      });
     }
-
-    return null;
   }
+  /* eslint-enable react/no-did-update-set-state */
 
   onPressCancelOrContinue = () => {
     const {
       navigateGoBack,
-      health: { isUploadingHistorical },
+      health: { isUploadingHistorical, isPendingUploadHistorical },
     } = this.props;
 
-    if (isUploadingHistorical) {
+    if (isUploadingHistorical || isPendingUploadHistorical) {
       Alert.alert("Stop Syncing?", null, [
         {
           text: "Cancel",
@@ -151,17 +154,17 @@ class HealthSyncScreen extends PureComponent {
     }
   };
 
+  // TODO: uploader - if the interface is off, and not turning on, then we
+  // failed to prepare upload (didn't get upload id), ideally we should retry
   onPressSync = () => {
-    TPNativeHealth.stopUploadingHistoricalAndReset(); // Reset uploader state so historical upload starts from beginning
-    TPNativeHealth.startUploadingHistorical();
+    const { healthStateSet } = this.props;
 
-    // Schedule this for next tick so it coalesces with other dispatched state
-    // changes that might have occurred above, to avoid a flash of complete or
-    // error status from previous sync
-    setImmediate(() => {
-      this.setState({
-        shouldShowSyncStatus: true,
-      });
+    healthStateSet({
+      isPendingUploadHistorical: true,
+    });
+
+    this.setState({
+      shouldShowSyncStatus: true,
     });
   };
 
@@ -182,6 +185,54 @@ class HealthSyncScreen extends PureComponent {
     );
   }
 
+  renderSyncProgressBarOrSpinner() {
+    const {
+      health: {
+        isInterfaceOn,
+        isTurningInterfaceOn,
+        historicalUploadCurrentDay,
+        historicalUploadTotalDays,
+        isUploadingHistorical,
+        turnOffUploaderReason,
+      },
+    } = this.props;
+
+    if (isInterfaceOn) {
+      let progress = 0;
+      // TODO: health -  Revisit this temporary work around for an issue where
+      // upload stats show 1 of 1 days before determining true total number of
+      // days!
+      if (
+        (isUploadingHistorical || turnOffUploaderReason) &&
+        historicalUploadTotalDays > 1
+      ) {
+        progress = historicalUploadCurrentDay / historicalUploadTotalDays;
+      }
+
+      return (
+        <ProgressViewIOS
+          progressTintColor={PrimaryTheme.progressTintColor}
+          trackTintColor={PrimaryTheme.trackTintColor}
+          progress={progress}
+          visible={false}
+        />
+      );
+    } else if (isTurningInterfaceOn) {
+      return (
+        <ActivityIndicator
+          style={{
+            height: ACTIVITY_INDICATOR_VIEW_HEIGHT,
+            alignSelf: "center",
+          }}
+          size="large"
+          color={PrimaryTheme.colors.activityIndicator}
+          animating
+        />
+      );
+    }
+    return null;
+  }
+
   renderSyncProgress() {
     const {
       health: {
@@ -190,22 +241,36 @@ class HealthSyncScreen extends PureComponent {
         historicalUploadTotalDays,
         turnOffUploaderReason,
         turnOffUploaderError,
+        interfaceTurnedOffError,
+        isInterfaceOn,
       },
+      isOffline,
     } = this.props;
 
     let syncProgressText = "";
-    let progress = 0;
-    // TODO: health -  Revisit this temporary work around for an issue where
-    // upload stats show 1 of 1 days before determining true total number of
-    // days!
-    if (
-      (isUploadingHistorical || turnOffUploaderReason) &&
-      historicalUploadTotalDays > 1
-    ) {
-      syncProgressText = `Day ${historicalUploadCurrentDay} of ${historicalUploadTotalDays}`;
-      progress = historicalUploadCurrentDay / historicalUploadTotalDays;
-    }
     let syncErrorText = turnOffUploaderError;
+    if (isInterfaceOn) {
+      syncErrorText = turnOffUploaderError;
+      // TODO: health -  Revisit this temporary work around for an issue where
+      // upload stats show 1 of 1 days before determining true total number of
+      // days!
+      if (isOffline) {
+        syncErrorText =
+          "Unable to upload. The Internet connection appears to be offline.";
+      } else if (
+        (isUploadingHistorical || turnOffUploaderReason) &&
+        historicalUploadTotalDays > 1
+      ) {
+        syncProgressText = `Day ${historicalUploadCurrentDay} of ${historicalUploadTotalDays}`;
+      } else if (
+        turnOffUploaderReason === "complete" &&
+        historicalUploadTotalDays <= 1
+      ) {
+        syncProgressText = "No data available to upload";
+      }
+    } else {
+      syncErrorText = interfaceTurnedOffError;
+    }
 
     // Ensure that the text contents has at least the numberOfLines specified in
     // the text so that enough space is reserved in layout regardless of text
@@ -214,12 +279,8 @@ class HealthSyncScreen extends PureComponent {
     syncErrorText = `${syncErrorText}\n \n \n \n `;
 
     return (
-      <View style={styles.syncProgressBarView}>
-        <ProgressViewIOS
-          progressTintColor={PrimaryTheme.progressTintColor}
-          trackTintColor={PrimaryTheme.trackTintColor}
-          progress={progress}
-        />
+      <View style={styles.syncProgressView}>
+        {this.renderSyncProgressBarOrSpinner()}
         <View>
           <Text style={styles.syncProgressText} numberOfLines={1}>
             {syncProgressText}
@@ -236,23 +297,32 @@ class HealthSyncScreen extends PureComponent {
 
   renderSyncStatus() {
     const {
-      health: { turnOffUploaderReason },
+      health: { turnOffUploaderReason, isTurningInterfaceOn, isInterfaceOn },
     } = this.props;
 
     let primaryText = "";
     let syncProgressExplanation = "";
     let buttonTitle = "";
-    if (turnOffUploaderReason === "complete") {
-      primaryText = "Sync Complete";
-      buttonTitle = "Continue";
-    } else if (turnOffUploaderReason === "error") {
+
+    if (isInterfaceOn) {
+      if (turnOffUploaderReason === "complete") {
+        primaryText = "Sync Complete";
+        buttonTitle = "Continue";
+      } else if (turnOffUploaderReason === "error") {
+        primaryText = "Sync Error";
+        buttonTitle = "Continue";
+      } else {
+        primaryText = "Syncing Now";
+        syncProgressExplanation =
+          "Please stay on this screen and keep your phone unlocked while we sync.";
+        buttonTitle = "Cancel";
+      }
+    } else if (isTurningInterfaceOn) {
+      primaryText = "Preparing to upload";
+      buttonTitle = "Cancel";
+    } else {
       primaryText = "Sync Error";
       buttonTitle = "Continue";
-    } else {
-      primaryText = "Syncing Now";
-      syncProgressExplanation =
-        "Please stay on this screen and keep your phone unlocked while we sync.";
-      buttonTitle = "Cancel";
     }
 
     // Ensure that the text contents has at least the numberOfLines specified in
@@ -367,9 +437,14 @@ class HealthSyncScreen extends PureComponent {
 
 HealthSyncScreen.propTypes = {
   health: PropTypes.object.isRequired,
+  isOffline: PropTypes.bool,
   navigateGoBack: PropTypes.func.isRequired,
-  healthKitInterfaceSet: PropTypes.func.isRequired,
+  healthStateSet: PropTypes.func.isRequired,
   isInitialSync: PropTypes.bool.isRequired,
+};
+
+HealthSyncScreen.defaultProps = {
+  isOffline: false,
 };
 
 export default HealthSyncScreen;

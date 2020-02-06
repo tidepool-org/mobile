@@ -14,11 +14,13 @@ git:
 matrix:
   include:
     - language: objective-c
+      os: osx
       osx_image: xcode11.3
       before_install:
         - brew update
         - brew install yarn
         - gem install xcpretty-travis-formatter
+        - gem install cocoapods -v '1.8.4'
         - openssl aes-256-cbc -K $encrypted_4beaf9ef68f9_key -iv $encrypted_4beaf9ef68f9_iv
           -in secret-files.tar.enc -out secret-files.tar -d
         - tar xvf secret-files.tar

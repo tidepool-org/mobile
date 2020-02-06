@@ -18,12 +18,9 @@ class DrawerHealthStatus extends PureComponent {
   }
 
   renderHealthExplanation() {
-    const { theme, connectToHealthUserSetting } = this.props;
-    let explanation =
+    const { theme } = this.props;
+    const explanation =
       "Allow Tidepool Mobile to read diabetes-related data from Apple Health";
-    if (connectToHealthUserSetting) {
-      explanation = "Connecting to Health";
-    }
 
     return (
       <glamorous.View flexDirection="row" marginLeft={16}>
@@ -46,13 +43,20 @@ class DrawerHealthStatus extends PureComponent {
         historicalUploadCurrentDay,
         historicalUploadTotalDays,
         lastCurrentUploadUiDescription,
+        isInterfaceOn,
+        isTurningInterfaceOn,
+        interfaceTurnedOffError,
       },
+      isOffline,
     } = this.props;
 
     let line1Text = "";
     let line2Text = "";
 
-    if (isUploadingHistorical) {
+    if (isOffline) {
+      line1Text =
+        "Unable to upload. The Internet connection appears to be offline.";
+    } else if (isUploadingHistorical) {
       // TODO: health -  Revisit this temporary work around for an issue where
       // upload stats show 1 of 1 days before determining true total number of
       // days!
@@ -60,8 +64,12 @@ class DrawerHealthStatus extends PureComponent {
       if (historicalUploadTotalDays > 1) {
         line2Text = `Day ${historicalUploadCurrentDay} of ${historicalUploadTotalDays}`;
       }
-    } else {
+    } else if (isInterfaceOn) {
       line1Text = lastCurrentUploadUiDescription;
+    } else if (isTurningInterfaceOn) {
+      line1Text = "Preparing to upload...";
+    } else {
+      line1Text = interfaceTurnedOffError;
     }
 
     return (
@@ -84,13 +92,13 @@ class DrawerHealthStatus extends PureComponent {
 
   render() {
     const {
-      health: { healthKitInterfaceEnabledForCurrentUser },
+      health: { isHealthKitInterfaceEnabledForCurrentUser },
       style,
     } = this.props;
 
     return (
       <glamorous.View style={style}>
-        {healthKitInterfaceEnabledForCurrentUser
+        {isHealthKitInterfaceEnabledForCurrentUser
           ? this.renderStatus()
           : this.renderHealthExplanation()}
       </glamorous.View>
@@ -102,11 +110,12 @@ DrawerHealthStatus.propTypes = {
   theme: ThemePropType.isRequired,
   style: ViewPropTypes.style,
   health: PropTypes.object.isRequired,
-  connectToHealthUserSetting: PropTypes.bool.isRequired,
+  isOffline: PropTypes.bool,
 };
 
 DrawerHealthStatus.defaultProps = {
   style: null,
+  isOffline: false,
 };
 
 export default withTheme(DrawerHealthStatus);

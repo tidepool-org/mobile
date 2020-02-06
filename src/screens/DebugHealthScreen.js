@@ -64,15 +64,15 @@ class DebugHealthScreen extends PureComponent {
   /* eslint-disable react/sort-comp */
   UNSAFE_componentWillReceiveProps(nextProps) {
     const {
-      health: { healthKitInterfaceEnabledForCurrentUser },
+      health: { isHealthKitInterfaceEnabledForCurrentUser },
     } = this.props;
     if (
-      healthKitInterfaceEnabledForCurrentUser !==
-      nextProps.health.healthKitInterfaceEnabledForCurrentUser
+      isHealthKitInterfaceEnabledForCurrentUser !==
+      nextProps.health.isHealthKitInterfaceEnabledForCurrentUser
     ) {
       this.setState({
         connectToHealthUserSetting:
-          nextProps.health.healthKitInterfaceEnabledForCurrentUser,
+          nextProps.health.isHealthKitInterfaceEnabledForCurrentUser,
       });
     }
   }
@@ -87,12 +87,12 @@ class DebugHealthScreen extends PureComponent {
   };
 
   onPressChangeToOtherUser = () => {
-    TPNativeHealth.enableHealthKitInterface();
+    TPNativeHealth.enableHealthKitInterfaceAndAuthorize();
   };
 
   onConnectToHealthValueChange = value => {
     if (value) {
-      this.enableHealthKitInterfaceForCurrentUser();
+      this.enableHealthKitInterfaceAndAuthorizeForCurrentUser();
     } else {
       TPNativeHealth.disableHealthKitInterface();
     }
@@ -111,15 +111,15 @@ class DebugHealthScreen extends PureComponent {
     TPNativeHealth.refreshUploadStats();
   };
 
-  enableHealthKitInterfaceForCurrentUser() {
+  enableHealthKitInterfaceAndAuthorizeForCurrentUser() {
     const {
       health: {
-        healthKitInterfaceConfiguredForOtherUser,
+        isHealthKitInterfaceConfiguredForOtherUser,
         currentHealthKitUsername,
       },
     } = this.props;
 
-    if (healthKitInterfaceConfiguredForOtherUser) {
+    if (isHealthKitInterfaceConfiguredForOtherUser) {
       const username = currentHealthKitUsername || "Unknown";
       const message = `A different account (${username}) is currently associated with Health Data on this device`;
       Alert.alert("Are you sure?", message, [
@@ -134,14 +134,14 @@ class DebugHealthScreen extends PureComponent {
         },
       ]);
     } else {
-      TPNativeHealth.enableHealthKitInterface();
+      TPNativeHealth.enableHealthKitInterfaceAndAuthorize();
     }
   }
 
   renderGlobalConnectToHealthSwitch() {
     const { connectToHealthUserSetting } = this.state;
     const {
-      health: { healthKitInterfaceEnabledForCurrentUser },
+      health: { isHealthKitInterfaceEnabledForCurrentUser },
     } = this.props;
 
     return (
@@ -155,7 +155,7 @@ class DebugHealthScreen extends PureComponent {
         value={
           connectToHealthUserSetting !== null
             ? connectToHealthUserSetting
-            : healthKitInterfaceEnabledForCurrentUser
+            : isHealthKitInterfaceEnabledForCurrentUser
         }
       />
     );
@@ -190,10 +190,23 @@ class DebugHealthScreen extends PureComponent {
     const {
       health: {
         shouldShowHealthKitUI,
-        healthKitInterfaceEnabledForCurrentUser,
-        healthKitInterfaceConfiguredForOtherUser,
+        isHealthKitInterfaceEnabledForCurrentUser,
+        isHealthKitInterfaceConfiguredForOtherUser,
+        currentHealthKitUsername,
+        hasPresentedSyncUI,
+        interfaceTurnedOffError,
+        isTurningInterfaceOn,
+        isInterfaceOn,
+        isHealthKitAuthorized,
       },
     } = this.props;
+
+    let uploaderPreflightStatus = interfaceTurnedOffError;
+    if (isInterfaceOn) {
+      uploaderPreflightStatus = "success";
+    } else if (isTurningInterfaceOn) {
+      uploaderPreflightStatus = "getting upload id";
+    }
 
     return (
       <CardItem bordered>
@@ -214,7 +227,7 @@ class DebugHealthScreen extends PureComponent {
             </Left>
             <Right style={styles.right}>
               <Text style={styles.statsText}>
-                {healthKitInterfaceEnabledForCurrentUser.toString()}
+                {isHealthKitInterfaceEnabledForCurrentUser.toString()}
               </Text>
             </Right>
           </Row>
@@ -224,8 +237,44 @@ class DebugHealthScreen extends PureComponent {
             </Left>
             <Right style={styles.right}>
               <Text style={styles.statsText}>
-                {healthKitInterfaceConfiguredForOtherUser.toString()}
+                {isHealthKitInterfaceConfiguredForOtherUser.toString()}
               </Text>
+            </Right>
+          </Row>
+          <Row>
+            <Left style={styles.left}>
+              <Text style={styles.statsText}>Current Health user:</Text>
+            </Left>
+            <Right style={styles.right}>
+              <Text style={styles.statsText}>{currentHealthKitUsername}</Text>
+            </Right>
+          </Row>
+          <Row>
+            <Left style={styles.left}>
+              <Text style={styles.statsText}>Has presented initial sync:</Text>
+            </Left>
+            <Right style={styles.right}>
+              <Text style={styles.statsText}>
+                {hasPresentedSyncUI.toString()}
+              </Text>
+            </Right>
+          </Row>
+          <Row>
+            <Left style={styles.left}>
+              <Text style={styles.statsText}>HealthKit authorized:</Text>
+            </Left>
+            <Right style={styles.right}>
+              <Text style={styles.statsText}>
+                {isHealthKitAuthorized.toString()}
+              </Text>
+            </Right>
+          </Row>
+          <Row>
+            <Left style={styles.left}>
+              <Text style={styles.statsText}>Uploader preflight status:</Text>
+            </Left>
+            <Right style={styles.right}>
+              <Text style={styles.statsText}>{uploaderPreflightStatus}</Text>
             </Right>
           </Row>
         </Grid>
@@ -323,12 +372,12 @@ class DebugHealthScreen extends PureComponent {
     const {
       health: {
         shouldShowHealthKitUI,
-        healthKitInterfaceEnabledForCurrentUser,
+        isHealthKitInterfaceEnabledForCurrentUser,
         isUploadingHistorical,
       },
     } = this.props;
 
-    if (shouldShowHealthKitUI && healthKitInterfaceEnabledForCurrentUser) {
+    if (shouldShowHealthKitUI && isHealthKitInterfaceEnabledForCurrentUser) {
       return (
         <Card>
           <CardItem header bordered style={{ paddingBottom: 0 }}>
@@ -381,11 +430,11 @@ class DebugHealthScreen extends PureComponent {
     const {
       health: {
         shouldShowHealthKitUI,
-        healthKitInterfaceEnabledForCurrentUser,
+        isHealthKitInterfaceEnabledForCurrentUser,
       },
     } = this.props;
 
-    if (shouldShowHealthKitUI && healthKitInterfaceEnabledForCurrentUser) {
+    if (shouldShowHealthKitUI && isHealthKitInterfaceEnabledForCurrentUser) {
       return (
         <Card>
           <CardItem header bordered>

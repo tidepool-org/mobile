@@ -50,13 +50,19 @@ class TidepoolApi {
     } = await this.refreshTokenPromise({
       sessionToken: previousSessionToken,
     })
-      .then(response => ({
-        sessionToken: response.sessionToken,
-        userId: response.userId,
-      }))
-      .catch(error => ({
-        errorMessage: error.message,
-      }));
+      .then(response => {
+        // console.log({ response });
+        return {
+          sessionToken: response.sessionToken,
+          userId: response.userId,
+        };
+      })
+      .catch(error => {
+        // console.log({ error });
+        return {
+          errorMessage: error.message,
+        };
+      });
 
     this.sessionToken = sessionToken;
 
@@ -631,18 +637,8 @@ class TidepoolApi {
             );
           }
         })
-        .catch(error => {
-          // console.log(`refreshTokenPromise error: ${error}`);
-          if (
-            error.response &&
-            (error.response.status === 400 || error.response.status === 401)
-          ) {
-            reject(new Error("Unable to refresh token."));
-          } else if (error.code === "ECONNABORTED") {
-            reject(new Error("Request timed out!"));
-          } else {
-            reject(new Error("Check your Internet connection!"));
-          }
+        .catch(() => {
+          reject(new Error(" "));
         });
     });
   }
@@ -676,14 +672,15 @@ class TidepoolApi {
         })
         .catch(error => {
           if (
+            error &&
             error.response &&
             (error.response.status === 400 || error.response.status === 401)
           ) {
             reject(new Error("Wrong email or password!"));
-          } else if (error.code === "ECONNABORTED") {
+          } else if (error && error.code === "ECONNABORTED") {
             reject(new Error("Request timed out!"));
           } else {
-            reject(new Error("Check your Internet connection!"));
+            reject(new Error("Unable to log in"));
           }
         });
     });

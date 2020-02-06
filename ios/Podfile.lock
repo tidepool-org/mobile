@@ -1,5 +1,5 @@
 PODS:
-  - Alamofire (4.7.3)
+  - Alamofire (4.9.1)
   - Amplitude-iOS (4.7.1)
   - boost-for-react-native (1.63.0)
   - CocoaLumberjack (3.5.3):
@@ -308,7 +308,7 @@ PODS:
   - RollbarReactNative (0.7.0):
     - React
     - Rollbar (~> 1.5.0)
-  - SwiftyJSON (4.2.0)
+  - SwiftyJSON (5.0.0)
   - TPHealthKitUploader (0.9.2)
   - UMBarCodeScannerInterface (5.0.0)
   - UMCameraInterface (5.0.0)
@@ -328,7 +328,7 @@ PODS:
   - Yoga (1.14.0)
 
 DEPENDENCIES:
-  - Alamofire (= 4.7.3)
+  - Alamofire (= 4.9.1)
   - CocoaLumberjack/Swift (= 3.5.3)
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - EXAppLoaderProvider (from `../node_modules/expo-app-loader-provider/ios`)
@@ -373,8 +373,8 @@ DEPENDENCIES:
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - RNDeviceInfo (from `../node_modules/react-native-device-info`)
   - RollbarReactNative (from `../node_modules/rollbar-react-native`)
-  - SwiftyJSON (= 4.2)
-  - TPHealthKitUploader (from `https://github.com/tidepool-org/healthkit-uploader`, tag `0.9.7`)
+  - SwiftyJSON (= 5.0.0)
+  - TPHealthKitUploader (from `https://github.com/tidepool-org/healthkit-uploader`, tag `0.9.9`)
   - UMBarCodeScannerInterface (from `../node_modules/unimodules-barcode-scanner-interface/ios`)
   - UMCameraInterface (from `../node_modules/unimodules-camera-interface/ios`)
   - UMConstantsInterface (from `../node_modules/unimodules-constants-interface/ios`)
@@ -391,7 +391,6 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
-    - Alamofire
     - Amplitude-iOS
     - boost-for-react-native
     - CocoaLumberjack
@@ -402,6 +401,8 @@ SPEC REPOS:
     - JKBigInteger2
     - lottie-ios
     - Rollbar
+  trunk:
+    - Alamofire
     - SwiftyJSON
 
 EXTERNAL SOURCES:
@@ -501,7 +502,7 @@ EXTERNAL SOURCES:
     :path: "../node_modules/rollbar-react-native"
   TPHealthKitUploader:
     :git: https://github.com/tidepool-org/healthkit-uploader
-    :tag: 0.9.7
+    :tag: 0.9.9
   UMBarCodeScannerInterface:
     :path: !ruby/object:Pathname
     path: "../node_modules/unimodules-barcode-scanner-interface/ios"
@@ -547,10 +548,10 @@ CHECKOUT OPTIONS:
     :tag: ios/2.14.2
   TPHealthKitUploader:
     :git: https://github.com/tidepool-org/healthkit-uploader
-    :tag: 0.9.7
+    :tag: 0.9.9
 
 SPEC CHECKSUMS:
-  Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
+  Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
   Amplitude-iOS: a0347ab05f2d196e6bbb22cc6f62eea33b5a035b
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   CocoaLumberjack: 2f44e60eb91c176d471fdba43b9e3eae6a721947
@@ -601,7 +602,7 @@ SPEC CHECKSUMS:
   RNDeviceInfo: 88099e84466f053bae3f34c307b506738b2b6946
   Rollbar: 5060e3fc9fa28ae75e70c61e95b1b31b2b22710c
   RollbarReactNative: 25ee22263928c9c7f3ba89ecc9af03e71a5c1ec8
-  SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
+  SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   TPHealthKitUploader: bb9227c9ef991342b74cc750aaa133d4a5e89d12
   UMBarCodeScannerInterface: 3802c8574ef119c150701d679ab386e2266d6a54
   UMCameraInterface: 985d301f688ed392f815728f0dd906ca34b7ccb1
@@ -617,6 +618,6 @@ SPEC CHECKSUMS:
   UMTaskManagerInterface: a98e37a576a5220bf43b8faf33cfdc129d2f441d
   Yoga: ba3d99dbee6c15ea6bbe3783d1f0cb1ffb79af0f
 
-PODFILE CHECKSUM: e2350e6cbe0ccf07e3b18ecc80f4711d1c873f71
+PODFILE CHECKSUM: 28f8306977462125e49241a547ecf12adbc56993
 
 COCOAPODS: 1.8.4

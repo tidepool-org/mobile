@@ -18,6 +18,8 @@ import CocoaLumberjack
 
 class App: UIApplication {
     override init() {
+        // setenv("CFNETWORK_DIAGNOSTICS", "3", 1) // NOTE: - don't check in or distribute TestFlight builds with this enabled!
+        
         // Set up Xcode and system logging
         DDTTYLogger.sharedInstance.logFormatter = LogFormatter()
         DDLog.add(DDTTYLogger.sharedInstance)
@@ -36,13 +38,13 @@ class App: UIApplication {
         DDLog.add(fileLogger);
         
         // Set up log level
-        defaultDebugLevel = DDLogLevel.verbose
+        dynamicLogLevel = DDLogLevel.verbose
         let loggingEnabledObject = UserDefaults.standard.object(forKey: "LoggingEnabled")
         if loggingEnabledObject == nil || !(loggingEnabledObject! as AnyObject).boolValue {
-            defaultDebugLevel = DDLogLevel.off
+            dynamicLogLevel = DDLogLevel.off
         }
 #if DEBUG
-        defaultDebugLevel = DDLogLevel.verbose
+        dynamicLogLevel = DDLogLevel.verbose
 #endif
 
         DDLogVerbose("trace")
