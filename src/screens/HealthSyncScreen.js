@@ -100,7 +100,7 @@ class HealthSyncScreen extends PureComponent {
   componentDidMount() {
     const {
       healthStateSet,
-      health: { isUploadingHistorical, isPendingUploadHistorical },
+      health: { isUploadingHistorical, isHistoricalUploadPending },
     } = this.props;
 
     TPNativeHealth.setHasPresentedSyncUI();
@@ -108,7 +108,7 @@ class HealthSyncScreen extends PureComponent {
       hasPresentedSyncUI: true,
     });
 
-    if (isUploadingHistorical || isPendingUploadHistorical) {
+    if (isUploadingHistorical || isHistoricalUploadPending) {
       this.setState({
         shouldShowSyncStatus: true,
       });
@@ -118,10 +118,10 @@ class HealthSyncScreen extends PureComponent {
   /* eslint-disable react/no-did-update-set-state */
   componentDidUpdate() {
     const {
-      health: { isUploadingHistorical, isPendingUploadHistorical },
+      health: { isUploadingHistorical, isHistoricalUploadPending },
     } = this.props;
 
-    if (isUploadingHistorical || isPendingUploadHistorical) {
+    if (isUploadingHistorical || isHistoricalUploadPending) {
       this.setState({
         shouldShowSyncStatus: true,
       });
@@ -132,10 +132,10 @@ class HealthSyncScreen extends PureComponent {
   onPressCancelOrContinue = () => {
     const {
       navigateGoBack,
-      health: { isUploadingHistorical, isPendingUploadHistorical },
+      health: { isUploadingHistorical, isHistoricalUploadPending },
     } = this.props;
 
-    if (isUploadingHistorical || isPendingUploadHistorical) {
+    if (isUploadingHistorical || isHistoricalUploadPending) {
       Alert.alert("Stop Syncing?", null, [
         {
           text: "Cancel",
@@ -157,11 +157,8 @@ class HealthSyncScreen extends PureComponent {
   // TODO: uploader - if the interface is off, and not turning on, then we
   // failed to prepare upload (didn't get upload id), ideally we should retry
   onPressSync = () => {
-    const { healthStateSet } = this.props;
-
-    healthStateSet({
-      isPendingUploadHistorical: true,
-    });
+    TPNativeHealth.stopUploadingHistoricalAndReset();
+    TPNativeHealth.startUploadingHistorical();
 
     this.setState({
       shouldShowSyncStatus: true,

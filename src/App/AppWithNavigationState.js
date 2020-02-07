@@ -35,8 +35,8 @@ class AppWithNavigationState extends PureComponent {
         ...TPNativeHealth.healthKitInterfaceConfiguration,
         turnOffUploaderReason: TPNativeHealth.turnOffUploaderReason,
         turnOffUploaderError: TPNativeHealth.turnOffUploaderError,
-        isPendingUploadHistorical:
-          TPNativeHealth.isPendingUploadHistorical,
+        isHistoricalUploadPending:
+          TPNativeHealth.isHistoricalUploadPending,
         isUploadingHistorical: TPNativeHealth.isUploadingHistorical,
         historicalUploadCurrentDay: TPNativeHealth.historicalUploadCurrentDay,
         historicalUploadTotalDays: TPNativeHealth.historicalUploadTotalDays,
@@ -61,8 +61,8 @@ class AppWithNavigationState extends PureComponent {
           ...TPNativeHealth.healthKitInterfaceConfiguration,
           turnOffUploaderReason: TPNativeHealth.turnOffUploaderReason,
           turnOffUploaderError: TPNativeHealth.turnOffUploaderError,
-          isPendingUploadHistorical:
-            TPNativeHealth.isPendingUploadHistorical,
+          isHistoricalUploadPending:
+            TPNativeHealth.isHistoricalUploadPending,
           isUploadingHistorical: TPNativeHealth.isUploadingHistorical,
           historicalUploadCurrentDay: TPNativeHealth.historicalUploadCurrentDay,
           historicalUploadTotalDays: TPNativeHealth.historicalUploadTotalDays,
@@ -78,8 +78,8 @@ class AppWithNavigationState extends PureComponent {
         healthStateSet({
           turnOffUploaderReason: TPNativeHealth.turnOffUploaderReason,
           turnOffUploaderError: TPNativeHealth.turnOffUploaderError,
-          isPendingUploadHistorical:
-            TPNativeHealth.isPendingUploadHistorical,
+          isHistoricalUploadPending:
+            TPNativeHealth.isHistoricalUploadPending,
           isUploadingHistorical: TPNativeHealth.isUploadingHistorical,
           historicalUploadCurrentDay: TPNativeHealth.historicalUploadCurrentDay,
           historicalUploadTotalDays: TPNativeHealth.historicalUploadTotalDays,
@@ -94,8 +94,8 @@ class AppWithNavigationState extends PureComponent {
           healthStateSet({
             turnOffUploaderReason: TPNativeHealth.turnOffUploaderReason,
             turnOffUploaderError: TPNativeHealth.turnOffUploaderError,
-            isPendingUploadHistorical:
-              TPNativeHealth.isPendingUploadHistorical,
+            isHistoricalUploadPending:
+              TPNativeHealth.isHistoricalUploadPending,
             isUploadingHistorical: TPNativeHealth.isUploadingHistorical,
             historicalUploadCurrentDay:
               TPNativeHealth.historicalUploadCurrentDay,

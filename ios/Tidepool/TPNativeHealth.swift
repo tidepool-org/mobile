@@ -22,6 +22,7 @@ import UIKit
 class TPNativeHealth: RCTEventEmitter {
     private let connector = TPUploaderAPI.connector()
     private let uploader = TPUploaderAPI.connector().uploader()
+    private var isHistoricalUploadPending = false;
 
     public override init() {
         super.init()
@@ -38,11 +39,15 @@ class TPNativeHealth: RCTEventEmitter {
     }
 
     @objc func enableHealthKitInterfaceAndAuthorize() -> NSNumber {
+        DDLogInfo("\(#function)")
+
         uploader.enableHealthKitInterfaceAndAuthorize()
         return NSNumber(value: true)
     }
 
     @objc func disableHealthKitInterface() -> NSNumber {
+        DDLogInfo("\(#function)")
+
         _ = stopUploadingHistoricalAndReset();
         uploader.disableHealthKitInterface()
         return NSNumber(value: true)
@@ -78,21 +83,50 @@ class TPNativeHealth: RCTEventEmitter {
     }
 
     @objc func startUploadingHistorical() -> NSNumber {
+        DDLogInfo("\(#function)")
+
         let dataCtl = TPDataController.sharedInstance
         guard let _ = dataCtl.currentUserId else {
             return NSNumber(value: false)
         }
-        uploader.startUploading(TPUploader.Mode.HistoricalAll)
+
+        if self.connector.isTurningInterfaceOn {
+            self.isHistoricalUploadPending = true
+        } else if self.connector.isInterfaceOn {
+            self.isHistoricalUploadPending = false
+            uploader.startUploading(TPUploader.Mode.HistoricalAll)
+        }
+
+        let body = self.createBodyForHistoricalStats()
+        DispatchQueue.main.async {
+            if self.isObserving {
+                self.sendEvent(withName: "onUploadStatsUpdated", body: body)
+            }
+        }
+
         return NSNumber(value: true)
     }
 
     @objc func stopUploadingHistoricalAndReset() -> NSNumber {
+        DDLogInfo("\(#function)")
+
+        self.isHistoricalUploadPending = false
         uploader.stopUploading(mode: .HistoricalAll, reason: .interfaceTurnedOff)
         uploader.resetPersistentStateForMode(.HistoricalAll)
+
+        let body = self.createBodyForHistoricalStats()
+        DispatchQueue.main.async {
+            if self.isObserving {
+                self.sendEvent(withName: "onUploadStatsUpdated", body: body)
+            }
+        }
+
         return NSNumber(value: true)
     }
 
     @objc func setHasPresentedSyncUI() -> NSNumber {
+        DDLogInfo("\(#function)")
+
         uploader.hasPresentedSyncUI = true
         return true
     }
@@ -121,26 +155,26 @@ class TPNativeHealth: RCTEventEmitter {
     }
 
     func onHealthKitInterfaceConfiguration() {
-        DDLogVerbose("trace")
-
-        guard isObserving else {
-            return
+        let body = self.healthKitInterfaceConfiguration()
+        if !self.connector.isTurningInterfaceOn {
+            if let error = self.connector.interfaceTurnedOffError {
+                if self.connector.isConnectedToNetwork() {
+                    // TODO: uploader - if interface turned off with an error, and we're connected, then retry up to n times
+                    let message = String("\(error.localizedDescription.prefix(50))")
+                    DDLogInfo(message)
+                    RollbarReactNative.warning(withMessage: message)
+                }
+            }
         }
         
         DispatchQueue.main.async {
-            let body = self.healthKitInterfaceConfiguration()
-            self.sendEvent(withName: "onHealthKitInterfaceConfiguration", body: body)
-
-            if !self.connector.isTurningInterfaceOn {
-                if let error = self.connector.interfaceTurnedOffError {
-                    if self.connector.isConnectedToNetwork() {
-                        // TODO: uploader - if interface turned off with an error, and we're connected, then retry up to n times
-                        let message = String("\(error.localizedDescription.prefix(50))")
-                        DDLogInfo(message)
-                        RollbarReactNative.warning(withMessage: message)
-                    }
-                }
+            if self.isObserving {
+                self.sendEvent(withName: "onHealthKitInterfaceConfiguration", body: body)
             }
+        }
+        
+        if self.connector.isInterfaceOn && self.isHistoricalUploadPending {
+            _ = self.startUploadingHistorical()
         }
     }
 
@@ -217,27 +251,18 @@ class TPNativeHealth: RCTEventEmitter {
     }
 
     @objc func handleStatsUpdated(_ note: Notification) {
-        DDLogVerbose("trace")
-
-        guard isObserving else {
-            return
+        let userInfo = note.userInfo!
+        let mode = userInfo["mode"] as! TPUploader.Mode
+        var body: Any? = nil
+        if mode == TPUploader.Mode.HistoricalAll {
+            body = self.createBodyForHistoricalStats()
+        } else {
+            body = self.createBodyForCurrentStats()
         }
-
         DispatchQueue.main.async {
-            let userInfo = note.userInfo!
-            let mode = userInfo["mode"] as! TPUploader.Mode
-            let type = userInfo["type"] as! String
-            DDLogInfo("Type: \(type), Mode: \(mode)")
-
-            var body: Any? = nil
-
-            if mode == TPUploader.Mode.HistoricalAll {
-                body = self.createBodyForHistoricalStats()
-            } else {
-                body = self.createBodyForCurrentStats()
+            if self.isObserving {
+                self.sendEvent(withName: "onUploadStatsUpdated", body: body)
             }
-
-            self.sendEvent(withName: "onUploadStatsUpdated", body: body)
         }
     }
 
@@ -247,6 +272,7 @@ class TPNativeHealth: RCTEventEmitter {
         return [
             "type": "historical",
             "isUploadingHistorical": isUploadingHistorical,
+            "isHistoricalUploadPending": self.isHistoricalUploadPending,
             "historicalUploadCurrentDay": progress.currentDayHistorical,
             "historicalUploadTotalDays": progress.totalDaysHistorical,
         ]
@@ -285,10 +311,6 @@ class TPNativeHealth: RCTEventEmitter {
                         lastType = stat.typeName
                     }
                 }
-                DDLogInfo("Mode: \(stat.mode.rawValue)")
-                DDLogInfo("Type: \(stat.typeName)")
-                DDLogInfo("Last successful upload time: \(String(describing: stat.lastSuccessfulUploadTime))")
-                DDLogInfo("")
             }
         }
         return lastType
