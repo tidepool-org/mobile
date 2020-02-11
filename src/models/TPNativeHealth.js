@@ -14,7 +14,7 @@ class TPNativeHealthSingletonClass {
       isInterfaceOn: false,
     };
 
-    this.isPendingUploadHistorical = false;
+    this.isHistoricalUploadPending = false;
     this.isUploadingHistorical = false;
     this.historicalUploadCurrentDay = 0;
     this.historicalUploadTotalDays = 0;
@@ -82,18 +82,12 @@ class TPNativeHealthSingletonClass {
     }
   }
 
-  startPendingUploadHistorical() {
-    this.isPendingUploadHistorical = true;
-  }
-
   startUploadingHistorical() {
     try {
-      this.isPendingUploadHistorical = false;
       this.historicalUploadCurrentDay = 0;
       this.historicalUploadTotalDays = 0;
       this.turnOffUploaderReason = "";
       this.turnOffUploaderError = "";
-      this.notify("onUploadStatsUpdated", "historical");
       this.nativeModule.startUploadingHistorical();
     } catch (error) {
       // console.log(`error: ${error}`);
@@ -102,7 +96,6 @@ class TPNativeHealthSingletonClass {
 
   stopUploadingHistoricalAndReset() {
     try {
-      this.isPendingUploadHistorical = false;
       this.nativeModule.stopUploadingHistoricalAndReset();
     } catch (error) {
       // console.log(`error: ${error}`);
@@ -115,7 +108,7 @@ class TPNativeHealthSingletonClass {
   };
 
   onTurnOnHistoricalUpload = () => {
-    this.isPendingUploadHistorical = false;
+    this.isHistoricalUploadPending = false;
     this.isUploadingHistorical = true;
     this.turnOffUploaderReason = "";
     this.turnOffUploaderError = "";
@@ -123,7 +116,7 @@ class TPNativeHealthSingletonClass {
   };
 
   onTurnOffHistoricalUpload = params => {
-    this.isPendingUploadHistorical = false;
+    this.isHistoricalUploadPending = false;
     this.turnOffUploaderReason = params.turnOffUploaderReason;
     let error = params.turnOffUploaderError;
     const errorPrefix = "error: ";
@@ -139,9 +132,7 @@ class TPNativeHealthSingletonClass {
   onUploadStatsUpdated = params => {
     if (params.type === "historical") {
       this.isUploadingHistorical = params.isUploadingHistorical;
-      if (this.isUploadingHistorical) {
-        this.isPendingUploadHistorical = false;
-      }
+      this.isHistoricalUploadPending = params.isHistoricalUploadPending;
       this.historicalUploadCurrentDay = params.historicalUploadCurrentDay;
       this.historicalUploadTotalDays = params.historicalUploadTotalDays;
       this.updateHistoricalUploadCurrentDayIfComplete();

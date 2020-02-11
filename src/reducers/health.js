@@ -10,7 +10,7 @@ const initialState = {
   interfaceTurnedOffError: "",
   isTurningInterfaceOn: false,
   isInterfaceOn: false,
-  isPendingUploadHistorical: false,
+  isHistoricalUploadPending: false,
   isUploadingHistorical: false,
   historicalUploadCurrentDay: 0,
   historicalUploadTotalDays: 0,
