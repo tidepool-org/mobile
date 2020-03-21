@@ -7,7 +7,7 @@ import { apiCacheExpirationLoadAndSetAsync } from "./apiCacheExpiration";
 import { graphRendererLoadAndSetAsync } from "./graphRenderer";
 import { navigateLaunch } from "./navigation";
 import getRouteName from "../navigators/getRouteName";
-import { HEALTH_SYNC_ROUTE_NAME } from "../navigators/routeNames";
+import { HEALTH_SYNC_ROUTE_NAME, DEBUG_HEALTH_ROUTE_NAME } from "../navigators/routeNames";
 import GraphTextMeshFactory from "../components/Graph/gl/GraphTextMeshFactory";
 import GraphCbgGl from "../components/Graph/gl/GraphCbgGl";
 import GraphSmbgGl from "../components/Graph/gl/GraphSmbgGl";
@@ -51,7 +51,7 @@ const appInitAsync = () => async (dispatch, getState) => {
       const { navigation } = getState();
       if (navigation) {
         const { routeName } = getRouteName({ navigation });
-        if (routeName !== HEALTH_SYNC_ROUTE_NAME) {
+        if (routeName !== HEALTH_SYNC_ROUTE_NAME && routeName !== DEBUG_HEALTH_ROUTE_NAME) {
           await dispatch(authRefreshTokenOrSignInAsync()); // This will navigateHome if refresh succeeds
         }
       }

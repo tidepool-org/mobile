@@ -18,6 +18,7 @@ import Foundation
 import MessageUI
 import TPHealthKitUploader
 import UIKit
+import Zip
 
 @objc(TPNative)
 class TPNative: NSObject, MFMailComposeViewControllerDelegate {
@@ -95,34 +96,69 @@ class TPNative: NSObject, MFMailComposeViewControllerDelegate {
     }
 
     @objc func emailUploaderLogs() -> Void {
-        DispatchQueue.main.async {
-            DDLog.flushLog()
+        DDLog.flushLog()
 
-            let logFilePaths = fileLogger.logFileManager.sortedLogFilePaths as [String]
-            var logFileDataArray = [Data]()
-            for logFilePath in logFilePaths {
-                let fileURL = NSURL(fileURLWithPath: logFilePath)
-                if let logFileData = try? NSData(contentsOf: fileURL as URL, options: NSData.ReadingOptions.mappedIfSafe) {
-                    // Insert at front to reverse the order, so that oldest logs appear first.
-                    logFileDataArray.insert(logFileData as Data, at: 0)
+        if MFMailComposeViewController.canSendMail() {
+            let appName = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as! String
+            let progressAlert = UIAlertController(title: "Creating \(appName).zip...", message: nil, preferredStyle: .alert)
+            let activityIndicator = UIActivityIndicatorView(style: .gray)
+            activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+            activityIndicator.isUserInteractionEnabled = false
+            activityIndicator.startAnimating()
+            progressAlert.view.addSubview(activityIndicator)
+            progressAlert.view.heightAnchor.constraint(equalToConstant: 95).isActive = true
+            activityIndicator.centerXAnchor.constraint(equalTo: progressAlert.view.centerXAnchor, constant: 0).isActive = true
+            activityIndicator.bottomAnchor.constraint(equalTo: progressAlert.view.bottomAnchor, constant: -20).isActive = true
+            UIApplication.shared.keyWindow?.rootViewController?.present(progressAlert, animated: true)
+
+            let composeVC = MFMailComposeViewController()
+            DispatchQueue.global(qos: .userInitiated).async {
+                let logFilePaths = fileLogger.logFileManager.sortedLogFilePaths as [String]
+                var logFileUrls = [URL]()
+                for logFilePath in logFilePaths {
+                    logFileUrls.append(URL(fileURLWithPath: logFilePath))
+                }
+                var success = true
+                do {
+                    let cachesDirectory = FileManager.default.urls(for:.cachesDirectory, in: .userDomainMask)[0]
+                    let zipFileUrl = cachesDirectory.appendingPathComponent("\(appName).zip")
+                    try Zip.zipFiles(paths: logFileUrls,
+                                    zipFilePath: zipFileUrl,
+                                    password: nil,
+                                    compression: .BestCompression,
+                                    progress: { (progress) -> () in })
+                    let attachmentData = NSMutableData()
+                    if let logFileData = try? NSData(contentsOf: zipFileUrl, options: NSData.ReadingOptions.mappedIfSafe)
+                    {
+                        attachmentData.append(logFileData as Data)
+                        composeVC.addAttachmentData(attachmentData as Data, mimeType: "application/zip", fileName: "\(appName).zip")
+                    }
+                }
+                catch {
+                    success = false
+                }
+                
+                DispatchQueue.main.async {
+                    progressAlert.dismiss(animated: true)
+                    if success {
+                        composeVC.mailComposeDelegate = self
+                        composeVC.setSubject("Logs for \(appName)")
+                        composeVC.setMessageBody("", isHTML: false)
+                        UIApplication.shared.keyWindow?.rootViewController?.present(composeVC, animated: true, completion:
+                            nil)
+                    } else {
+                        let errorAlert = UIAlertController(title: "Error", message: "Failed to create attachment. The .zip archive might be too large", preferredStyle: .alert)
+                        let action = UIAlertAction(title: "OK", style: .default)
+                        errorAlert.addAction(action)
+                            UIApplication.shared.keyWindow?.rootViewController?.present(errorAlert, animated: true, completion: nil)
+                    }
                 }
             }
-
-            if MFMailComposeViewController.canSendMail() {
-                let appName = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as! String
-                let composeVC = MFMailComposeViewController()
-                composeVC.mailComposeDelegate = self
-                composeVC.setSubject("Logs for \(appName)")
-                composeVC.setMessageBody("", isHTML: false)
-
-                let attachmentData = NSMutableData()
-                for logFileData in logFileDataArray {
-                    attachmentData.append(logFileData)
-                }
-                composeVC.addAttachmentData(attachmentData as Data, mimeType: "text/plain", fileName: "\(appName).txt")
-
-                UIApplication.shared.keyWindow?.rootViewController?.present(composeVC, animated: true, completion: nil)
-            }
+        } else {
+            let errorAlert = UIAlertController(title: "Error", message: "This device is not setup to send mail.", preferredStyle: .alert)
+            let action = UIAlertAction(title: "OK", style: .default)
+            errorAlert.addAction(action)
+                UIApplication.shared.keyWindow?.rootViewController?.present(errorAlert, animated: true, completion: nil)
         }
     }
 

@@ -11,7 +11,6 @@ class DebugSettingsHealthScreenListItem extends PureComponent {
 
   onPress = () => {
     const { navigateGoBack, navigateDebugHealthScreen } = this.props;
-
     navigateGoBack();
     setTimeout(() => {
       navigateDebugHealthScreen();

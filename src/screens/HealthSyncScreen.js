@@ -154,8 +154,6 @@ class HealthSyncScreen extends PureComponent {
     }
   };
 
-  // TODO: uploader - if the interface is off, and not turning on, then we
-  // failed to prepare upload (didn't get upload id), ideally we should retry
   onPressSync = () => {
     TPNativeHealth.stopUploadingHistoricalAndReset();
     TPNativeHealth.startUploadingHistorical();
@@ -190,18 +188,15 @@ class HealthSyncScreen extends PureComponent {
         historicalUploadCurrentDay,
         historicalUploadTotalDays,
         isUploadingHistorical,
-        turnOffUploaderReason,
+        turnOffHistoricalUploaderReason,
       },
     } = this.props;
 
     if (isInterfaceOn) {
       let progress = 0;
-      // TODO: health -  Revisit this temporary work around for an issue where
-      // upload stats show 1 of 1 days before determining true total number of
-      // days!
       if (
-        (isUploadingHistorical || turnOffUploaderReason) &&
-        historicalUploadTotalDays > 1
+        (isUploadingHistorical || turnOffHistoricalUploaderReason) &&
+        historicalUploadTotalDays > 0
       ) {
         progress = historicalUploadCurrentDay / historicalUploadTotalDays;
       }
@@ -236,8 +231,9 @@ class HealthSyncScreen extends PureComponent {
         isUploadingHistorical,
         historicalUploadCurrentDay,
         historicalUploadTotalDays,
-        turnOffUploaderReason,
-        turnOffUploaderError,
+        isUploadingHistoricalRetry,
+        turnOffHistoricalUploaderReason,
+        turnOffHistoricalUploaderError,
         interfaceTurnedOffError,
         isInterfaceOn,
       },
@@ -245,28 +241,38 @@ class HealthSyncScreen extends PureComponent {
     } = this.props;
 
     let syncProgressText = "";
-    let syncErrorText = turnOffUploaderError;
+    let syncErrorText = "";
     if (isInterfaceOn) {
-      syncErrorText = turnOffUploaderError;
-      // TODO: health -  Revisit this temporary work around for an issue where
-      // upload stats show 1 of 1 days before determining true total number of
-      // days!
       if (isOffline) {
-        syncErrorText =
-          "Unable to upload. The Internet connection appears to be offline.";
+        syncProgressText = "Upload paused while offline.";
+      } else if (isUploadingHistorical || turnOffHistoricalUploaderReason) {
+        if (historicalUploadTotalDays > 0) {
+          syncProgressText = `Day ${historicalUploadCurrentDay} of ${historicalUploadTotalDays}`;
+        }
+        if (turnOffHistoricalUploaderReason) {
+          if (syncProgressText) {
+            syncErrorText = turnOffHistoricalUploaderError;
+          } else {
+            syncProgressText = turnOffHistoricalUploaderError;
+          }
+        } else if (isUploadingHistoricalRetry) {
+          if (syncProgressText) {
+            syncErrorText = "Retrying...";
+          } else {
+            syncProgressText = "Retrying...";
+          }
+        }
       } else if (
-        (isUploadingHistorical || turnOffUploaderReason) &&
-        historicalUploadTotalDays > 1
+        turnOffHistoricalUploaderReason === "complete" &&
+        historicalUploadTotalDays === 0
       ) {
-        syncProgressText = `Day ${historicalUploadCurrentDay} of ${historicalUploadTotalDays}`;
-      } else if (
-        turnOffUploaderReason === "complete" &&
-        historicalUploadTotalDays <= 1
-      ) {
+        // TODO: health - In the case of a relatively new user with only a day
+        // or less of data to upload, this message will be confusing. We need to
+        // also report on total samples uploaded, or use fractional days
         syncProgressText = "No data available to upload";
       }
     } else {
-      syncErrorText = interfaceTurnedOffError;
+      syncProgressText = interfaceTurnedOffError;
     }
 
     // Ensure that the text contents has at least the numberOfLines specified in
@@ -294,7 +300,10 @@ class HealthSyncScreen extends PureComponent {
 
   renderSyncStatus() {
     const {
-      health: { turnOffUploaderReason, isTurningInterfaceOn, isInterfaceOn },
+      health: {
+        turnOffHistoricalUploaderReason,
+        isTurningInterfaceOn,
+        isInterfaceOn },
     } = this.props;
 
     let primaryText = "";
@@ -302,11 +311,11 @@ class HealthSyncScreen extends PureComponent {
     let buttonTitle = "";
 
     if (isInterfaceOn) {
-      if (turnOffUploaderReason === "complete") {
+      if (turnOffHistoricalUploaderReason === "complete") {
         primaryText = "Sync Complete";
         buttonTitle = "Continue";
-      } else if (turnOffUploaderReason === "error") {
-        primaryText = "Sync Error";
+      } else if (turnOffHistoricalUploaderReason === "error") {
+        primaryText = `Sync Error`;
         buttonTitle = "Continue";
       } else {
         primaryText = "Syncing Now";

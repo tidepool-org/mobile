@@ -1,5 +1,4 @@
 import React, { PureComponent } from "react";
-import PropTypes from "prop-types";
 import glamorous, { withTheme } from "glamorous-native";
 
 import { ThemePropType } from "../prop-types/theme";
@@ -11,11 +10,7 @@ class DebugSettingsLoggingListItemEmailLogs extends PureComponent {
   };
 
   onPress = () => {
-    const { navigateGoBack } = this.props;
-    setTimeout(() => {
-      navigateGoBack();
-      TPNative.emailUploaderLogs();
-    }, 50);
+    TPNative.emailUploaderLogs();
   };
 
   renderButtonText() {
@@ -67,7 +62,6 @@ class DebugSettingsLoggingListItemEmailLogs extends PureComponent {
 
 DebugSettingsLoggingListItemEmailLogs.propTypes = {
   theme: ThemePropType.isRequired,
-  navigateGoBack: PropTypes.func.isRequired,
 };
 
 export default withTheme(DebugSettingsLoggingListItemEmailLogs);

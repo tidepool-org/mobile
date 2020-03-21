@@ -63,15 +63,13 @@ class TPUploaderAPI: TPUploaderConfigInfo {
 
     func sessionToken() -> String? {
         let result = api.sessionToken
-        DDLogInfo("\(#function) - TPUploaderConfigInfo protocol, returning: \(result ?? "nil")")
+        let includeSensitiveInfo = TPSettings.sharedInstance.includeSensitiveInfo
+        if includeSensitiveInfo {
+            DDLogInfo("\(#function) - TPUploaderConfigInfo protocol, returning: \(result ?? "nil")")
+        } else {
+            DDLogInfo("\(#function) - TPUploaderConfigInfo protocol, returning: <redacted>")
+        }
         return result
-    }
-
-    // token expired? Log out to force token refresh, but should probably just do a refresh!
-    func authorizationErrorReceived() {
-//        service.logout()
-//        let notification = Notification(name: Notification.Name(rawValue: "serviceLoggedOut"), object: nil)
-//        NotificationCenter.default.post(notification)
     }
 
     func baseUrlString() -> String? {
@@ -106,28 +104,23 @@ class TPUploaderAPI: TPUploaderConfigInfo {
             return dataController.bioSex
         }
         set {
-            dataController.bioSex = newValue // TODO: health - also reflect this to AsyncStorage?
+            // TODO: uploader - also reflect this to AsyncStorage?
+            dataController.bioSex = newValue
         }
     }
 
     var nativeHealthBridge: TPNativeHealth?
     
-    var isTurningInterfaceOn: Bool = false
-    var isInterfaceOn: Bool = false
     var interfaceTurnedOffError: Error? = nil
 
     func onTurningOnInterface() {
         DDLogInfo("onTurningOnInterface")
-        isInterfaceOn = false
-        isTurningInterfaceOn = true
         interfaceTurnedOffError = nil
         nativeHealthBridge?.onHealthKitInterfaceConfiguration()
     }
 
     func onTurnOnInterface() {
         DDLogInfo("onTurnOnInterface")
-        isInterfaceOn = true
-        isTurningInterfaceOn = false
         interfaceTurnedOffError = nil
         nativeHealthBridge?.onHealthKitInterfaceConfiguration()
     }
@@ -135,11 +128,32 @@ class TPUploaderAPI: TPUploaderConfigInfo {
     func onTurnOffInterface(_ error: Error?) {
         DDLogInfo("onTurnOffInterface, error: \(String(describing: error))")
                 
-        isTurningInterfaceOn = false
-        isInterfaceOn = false
         interfaceTurnedOffError = error
-        // TODO: uploader - if we're connected to internet, but, couldn't turn on interface due to network error, then retry up to n times .. need to distinguish network errors from other erros (e.g. not a dsa user, no user, etc)
         nativeHealthBridge?.onHealthKitInterfaceConfiguration()
+    }
+
+    func samplesUploadLimits() -> [Int] {
+        return TPSettings.sharedInstance.samplesUploadLimits
+    }
+    
+    func uploaderTimeouts() -> [Int] {
+        return TPSettings.sharedInstance.uploaderTimeouts
+    }
+    
+    func deletesUploadLimits() -> [Int] {
+        return TPSettings.sharedInstance.deletesUploadLimits
+    }
+    
+    func supressUploadDeletes() -> Bool {
+        return TPSettings.sharedInstance.uploaderSuppressDeletes
+    }
+    
+    func simulateUpload() -> Bool {
+        return TPSettings.sharedInstance.uploaderSimulate
+    }
+    
+    func includeSensitiveInfo() -> Bool {
+        return TPSettings.sharedInstance.includeSensitiveInfo
     }
 
     let uploadFramework: StaticString = "uploader"

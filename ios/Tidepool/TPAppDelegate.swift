@@ -26,9 +26,17 @@ class TPAppDelegate: EXStandaloneAppDelegate {
     override func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool
     {
         DDLogVerbose("trace")
-
+        
         RollbarReactNative.initWithAccessToken("00788919100a467e8fb08144b427890e")
         TPSettings.sharedInstance.loadSettings()
+        
+        if TPSettings.sharedInstance.includeCFNetworkDiagnostics {
+            DDLogVerbose("Enabling CFNETWORK_DIAGNOSTICS")
+            setenv("CFNETWORK_DIAGNOSTICS", "3", 1)
+        } else {
+            DDLogVerbose("Disabling CFNETWORK_DIAGNOSTICS")
+            unsetenv("CFNETWORK_DIAGNOSTICS")
+        }
 
         // Occasionally log full date to help with deciphering logs!
         let dateString = DateFormatter().isoStringFromDate(Date())
@@ -38,6 +46,7 @@ class TPAppDelegate: EXStandaloneAppDelegate {
 
         let state = UIApplication.shared.applicationState
         if state == .background {
+            // TODO: background uploader - If we fail to refresh token, should we use a local notification to prompt the user to bring the app to foreground and log in, to get new valid token?
             DDLogInfo("launched in background")
             refreshTokenAndConfigureHealthKitInterface()
         } else {
@@ -57,6 +66,16 @@ class TPAppDelegate: EXStandaloneAppDelegate {
     override func applicationProtectedDataDidBecomeAvailable(_ application: UIApplication) {
         DDLogInfo("Device unlocked!")
         deviceIsLocked = false
+        
+        let connector = TPUploaderAPI.connector()
+        if connector.isConnectedToNetwork() {
+            if !connector.uploader().isInterfaceOn() {
+                TPDataController.sharedInstance.configureHealthKitInterface()
+            } else {
+                connector.uploader().resumeUploadingIfResumable()
+            }
+        }
+        
         // super.applicationProtectedDataDidBecomeAvailable(application) // super doesn't implement!
     }
 
@@ -66,14 +85,13 @@ class TPAppDelegate: EXStandaloneAppDelegate {
         deviceIsLocked = true
 
         // Stop historical upload since Health data will become unavailable. (Will resume again when available.)
-        // TODO: uploader - test this .. confirm that when unlocked, historical upload resumes
-        let message = "Sync stopped after device was locked."
+        let message = "Upload paused while device is locked."
         let error = NSError(domain: TPUploader.ErrorDomain, code: TPUploader.ErrorCodes.noProtectedHealthKitData.rawValue, userInfo: [NSLocalizedDescriptionKey: message])
-        TPUploaderAPI.connector().uploader().stopUploading(mode: .HistoricalAll, reason: .error(error: error))
+        TPUploaderAPI.connector().uploader().stopUploading(reason: .error(error: error))
 
         // super.applicationProtectedDataWillBecomeUnavailable(application) // super doesn't implement!
     }
-
+    
     override func applicationWillResignActive(_ application: UIApplication) {
         DDLogVerbose("trace")
         // super.applicationWillResignActive(application) // super doesn't implement!
@@ -100,13 +118,18 @@ class TPAppDelegate: EXStandaloneAppDelegate {
 
         let connector = TPUploaderAPI.connector()
         if connector.isConnectedToNetwork() {
-            TPDataController.sharedInstance.configureHealthKitInterface()
+            if !connector.uploader().isInterfaceOn() {
+                TPDataController.sharedInstance.configureHealthKitInterface()
+            } else {
+                connector.uploader().resumeUploadingIfResumable()
+            }
         }
 
         super.applicationWillEnterForeground(application)
     }
 
     override func applicationDidBecomeActive(_ application: UIApplication) {
+        DDLogVerbose("applicationDidBecomeActive")
         // Occasionally log full date to help with deciphering logs!
         let dateString = DateFormatter().isoStringFromDate(Date())
         DDLogVerbose("Log Date: \(dateString)")
@@ -122,15 +145,19 @@ class TPAppDelegate: EXStandaloneAppDelegate {
     @objc func reachabilityChanged(_ note: Notification) {
         DispatchQueue.main.async {
             let connector = TPUploaderAPI.connector()
+            let uploader = connector.uploader()
             if connector.isConnectedToNetwork() {
-                TPDataController.sharedInstance.configureHealthKitInterface()
+                if !uploader.isInterfaceOn() {
+                    TPDataController.sharedInstance.configureHealthKitInterface()
+                } else {
+                    uploader.resumeUploadingIfResumable()
+                }
             } else {
-                let uploader = connector.uploader()
                 if uploader.isUploadInProgressForMode(TPUploader.Mode.HistoricalAll) {
-                    let message = "Unable to upload. The Internet connection appears to be offline."
+                    let message = "Upload paused while offline."
                     let error = NSError(domain: TPUploader.ErrorDomain, code: TPUploader.ErrorCodes.noNetwork.rawValue, userInfo: [NSLocalizedDescriptionKey: message])
                     DDLogInfo(message)
-                    TPUploaderAPI.connector().uploader().stopUploading(mode: .HistoricalAll, reason: .error(error: error))
+                    TPUploaderAPI.connector().uploader().stopUploading(reason: .error(error: error))
                 }
             }
         }

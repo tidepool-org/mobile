@@ -31,7 +31,8 @@ class TPNativeHealth: RCTEventEmitter {
 
         NotificationCenter.default.addObserver(self, selector: #selector(TPNativeHealth.handleTurnOnUploader(_:)), name: Notification.Name(rawValue: TPUploaderNotifications.TurnOnUploader), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(TPNativeHealth.handleTurnOffUploader(_:)), name: Notification.Name(rawValue: TPUploaderNotifications.TurnOffUploader), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(TPNativeHealth.handleStatsUpdated(_:)), name: Notification.Name(rawValue: TPUploaderNotifications.Updated), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(TPNativeHealth.handleUploadRetry(_:)), name: Notification.Name(rawValue: TPUploaderNotifications.UploadRetry), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(TPNativeHealth.handleUploadSuccessful(_:)), name: Notification.Name(rawValue: TPUploaderNotifications.UploadSuccessful), object: nil)
     }
 
     override static func requiresMainQueueSetup() -> Bool {
@@ -58,26 +59,47 @@ class TPNativeHealth: RCTEventEmitter {
         if let error = connector.interfaceTurnedOffError {
             interfaceTurnedOffError = "Failed to prepare upload. \(error.localizedDescription)"
         }
+
         return [
             "shouldShowHealthKitUI": uploader.shouldShowHealthKitUI(),
             "isHealthKitAuthorized": uploader.isHealthKitAuthorized(),
             "isHealthKitInterfaceEnabledForCurrentUser": uploader.isHealthKitInterfaceEnabledForCurrentUser(),
             "isHealthKitInterfaceConfiguredForOtherUser": uploader.isHealthKitInterfaceConfiguredForOtherUser(),
             "currentHealthKitUsername": uploader.curHKUserName() ?? "",
+            "hasPresentedSyncUI": uploader.hasPresentedSyncUI,
             "interfaceTurnedOffError": interfaceTurnedOffError,
-            "isTurningInterfaceOn": connector.isTurningInterfaceOn,
-            "isInterfaceOn": connector.isInterfaceOn,
-            "hasPresentedSyncUI": uploader.hasPresentedSyncUI
+            "isTurningInterfaceOn": uploader.isTurningInterfaceOn(),
+            "isInterfaceOn": uploader.isInterfaceOn(),
+            "uploaderLimitsIndex": TPSettings.sharedInstance.uploaderLimitsIndex,
+            "uploaderTimeoutsIndex": TPSettings.sharedInstance.uploaderTimeoutsIndex,
+            "uploaderSuppressDeletes": TPSettings.sharedInstance.uploaderSuppressDeletes,
+            "uploaderSimulate": TPSettings.sharedInstance.uploaderSimulate,
+            "includeSensitiveInfo": TPSettings.sharedInstance.includeSensitiveInfo,
+            "includeCFNetworkDiagnostics": TPSettings.sharedInstance.includeCFNetworkDiagnostics,
+            "lastCurrentUploadUiDescription": lastCurrentUploadUiDescription()
         ]
     }
 
     @objc func uploaderProgress() -> NSDictionary {
         let isUploadingHistorical = self.uploader.isUploadInProgressForMode(TPUploader.Mode.HistoricalAll)
+        let isUploadingCurrent = self.uploader.isUploadInProgressForMode(TPUploader.Mode.Current)
+        let (historicalUploadLimitsIndex, historicalUploadMaxLimitsIndex) = self.uploader.retryInfoForMode(TPUploader.Mode.HistoricalAll)
+        let (currentUploadLimitsIndex, currentUploadMaxLimitsIndex) = self.uploader.retryInfoForMode(TPUploader.Mode.Current)
         let progress = self.uploader.uploaderProgress()
         return [
             "isUploadingHistorical": isUploadingHistorical,
+            "historicalUploadLimitsIndex": historicalUploadLimitsIndex,
+            "historicalUploadMaxLimitsIndex": historicalUploadMaxLimitsIndex,
             "historicalUploadCurrentDay": progress.currentDayHistorical,
             "historicalUploadTotalDays": progress.totalDaysHistorical,
+            "historicalUploadTotalSamples": progress.totalSamplesHistorical,
+            "historicalUploadTotalDeletes": progress.totalDeletesHistorical,
+            
+            "isUploadingCurrent": isUploadingCurrent,
+            "currentUploadLimitsIndex": currentUploadLimitsIndex,
+            "currentUploadMaxLimitsIndex": currentUploadMaxLimitsIndex,
+            "currentUploadTotalSamples": progress.totalSamplesCurrent,
+            "currentUploadTotalDeletes": progress.totalDeletesCurrent,
             "lastCurrentUploadUiDescription": lastCurrentUploadUiDescription()
         ]
     }
@@ -90,9 +112,12 @@ class TPNativeHealth: RCTEventEmitter {
             return NSNumber(value: false)
         }
 
-        if self.connector.isTurningInterfaceOn {
+        if !self.uploader.isInterfaceOn() {
+            TPDataController.sharedInstance.configureHealthKitInterface()
+        }
+        if self.uploader.isTurningInterfaceOn() {
             self.isHistoricalUploadPending = true
-        } else if self.connector.isInterfaceOn {
+        } else if self.uploader.isInterfaceOn() {
             self.isHistoricalUploadPending = false
             uploader.startUploading(TPUploader.Mode.HistoricalAll)
         }
@@ -128,14 +153,64 @@ class TPNativeHealth: RCTEventEmitter {
         DDLogInfo("\(#function)")
 
         uploader.hasPresentedSyncUI = true
+        connector.nativeHealthBridge?.onHealthKitInterfaceConfiguration()
+        return true
+    }
+    
+    @objc func setUploaderLimitsIndex(_ index: NSInteger) -> NSNumber {
+        DDLogInfo("\(#function)")
+
+        TPSettings.sharedInstance.setUploaderLimitsIndex(index)
+        connector.nativeHealthBridge?.onHealthKitInterfaceConfiguration()
+        return true
+    }
+    
+    @objc func setUploaderTimeoutsIndex(_ index: NSInteger) -> NSNumber {
+        DDLogInfo("\(#function)")
+
+        TPSettings.sharedInstance.setUploaderTimeoutsIndex(index)
+        connector.nativeHealthBridge?.onHealthKitInterfaceConfiguration()
+        return true
+    }
+    
+    @objc func setUploaderSuppressDeletes(_ suppress: Bool) -> NSNumber {
+        DDLogInfo("\(#function)")
+
+        TPSettings.sharedInstance.setUploaderSuppressDeletes(suppress)
+        connector.nativeHealthBridge?.onHealthKitInterfaceConfiguration()
+        return true
+    }
+    
+    @objc func setUploaderSimulate(_ simulate: Bool) -> NSNumber {
+        DDLogInfo("\(#function)")
+
+        TPSettings.sharedInstance.setUploaderSimulate(simulate)
+        connector.nativeHealthBridge?.onHealthKitInterfaceConfiguration()
+        return true
+    }
+    
+    @objc func setUploaderIncludeSensitiveInfo(_ includeSensitiveInfo: Bool) -> NSNumber {
+        DDLogInfo("\(#function)")
+
+        TPSettings.sharedInstance.setUploaderIncludeSensitiveInfo(includeSensitiveInfo)
+        connector.nativeHealthBridge?.onHealthKitInterfaceConfiguration()
+        return true
+    }
+    
+    @objc func setUploaderIncludeCFNetworkDiagnostics(_ includeCFNetworkDiagnostics: Bool) -> NSNumber {
+        DDLogInfo("\(#function)")
+
+        TPSettings.sharedInstance.setUploaderIncludeCFNetworkDiagnostics(includeCFNetworkDiagnostics)
+        connector.nativeHealthBridge?.onHealthKitInterfaceConfiguration()
         return true
     }
 
     override func supportedEvents() -> [String]! {
       return [
           "onHealthKitInterfaceConfiguration",
-          "onTurnOnHistoricalUpload",
-          "onTurnOffHistoricalUpload",
+          "onTurnOnUploader",
+          "onTurnOffUploader",
+          "onRetryUpload",
           "onUploadStatsUpdated"
           ]
     }
@@ -156,24 +231,23 @@ class TPNativeHealth: RCTEventEmitter {
 
     func onHealthKitInterfaceConfiguration() {
         let body = self.healthKitInterfaceConfiguration()
-        if !self.connector.isTurningInterfaceOn {
+        if !self.uploader.isTurningInterfaceOn() {
             if let error = self.connector.interfaceTurnedOffError {
                 if self.connector.isConnectedToNetwork() {
-                    // TODO: uploader - if interface turned off with an error, and we're connected, then retry up to n times
-                    let message = String("\(error.localizedDescription.prefix(50))")
+                    let message = String("Interface turned off error: \(error.localizedDescription.prefix(50))")
                     DDLogInfo(message)
                     RollbarReactNative.warning(withMessage: message)
                 }
             }
         }
-        
+
         DispatchQueue.main.async {
             if self.isObserving {
                 self.sendEvent(withName: "onHealthKitInterfaceConfiguration", body: body)
             }
         }
-        
-        if self.connector.isInterfaceOn && self.isHistoricalUploadPending {
+
+        if self.uploader.isInterfaceOn() && self.isHistoricalUploadPending {
             _ = self.startUploadingHistorical()
         }
     }
@@ -183,105 +257,211 @@ class TPNativeHealth: RCTEventEmitter {
 
         let userInfo = note.userInfo!
         let mode = userInfo["mode"] as! TPUploader.Mode
+        let modeValue = (mode == TPUploader.Mode.Current ? "current" : "historical")
         var message = ""
         if mode == TPUploader.Mode.HistoricalAll {
+            let (historicalUploadLimitsIndex, historicalUploadMaxLimitsIndex) = self.uploader.retryInfoForMode(TPUploader.Mode.HistoricalAll)
             message = "Started historical upload"
             DispatchQueue.main.async {
                 DDLogVerbose("handleTurnOnUploader disable idle timer")
                 UIApplication.shared.isIdleTimerDisabled = true
-
                 if self.isObserving {
-                    self.sendEvent(withName: "onTurnOnHistoricalUpload", body:[
+                    self.sendEvent(withName: "onTurnOnUploader", body:[
+                        "mode": modeValue,
+                        "historicalUploadLimitsIndex": historicalUploadLimitsIndex,
+                        "historicalUploadMaxLimitsIndex": historicalUploadMaxLimitsIndex,
                         "hasPresentedSyncUI": self.uploader.hasPresentedSyncUI
                     ])
                 }
             }
         } else {
             message = "Started current upload"
+            let (currentUploadLimitsIndex, currentUploadMaxLimitsIndex) = self.uploader.retryInfoForMode(TPUploader.Mode.Current)
+            DispatchQueue.main.async {
+                if self.isObserving {
+                    self.sendEvent(withName: "onTurnOnUploader", body:[
+                        "mode": modeValue,
+                        "currentUploadLimitsIndex": currentUploadLimitsIndex,
+                        "currentUploadMaxLimitsIndex": currentUploadMaxLimitsIndex
+                    ])
+                }
+            }
         }
         RollbarReactNative.info(withMessage: message)
     }
 
     @objc func handleTurnOffUploader(_ note: Notification) {
         DDLogVerbose("trace")
-        
+
         let userInfo = note.userInfo!
         let mode = userInfo["mode"] as! TPUploader.Mode
-        let type = userInfo["type"] as! String
+        let modeValue = (mode == TPUploader.Mode.Current ? "current" : "historical")
         let reason = userInfo["reason"] as! TPUploader.StoppedReason
-        DDLogInfo("Type: \(type), Mode: \(mode), Reason: \(reason)")
 
-        var body = [String: String]()
+        var body = [String: Any]()
         switch reason {
         case .interfaceTurnedOff:
-            body = ["turnOffUploaderReason": "turned off", "turnOffUploaderError": ""]
-            break
+            body = ["turnOffUploaderReason": "turned off", "turnOffUploaderError": "", "mode": modeValue]
         case .uploadingComplete:
-            body = ["turnOffUploaderReason": "complete", "turnOffUploaderError": ""]
-            break
+            body = ["turnOffUploaderReason": "complete", "turnOffUploaderError": "", "mode": modeValue]
         case .error(let error):
-            // TODO: uploader - retry up to n times, and each time a batch of samples is successfully uploaded, reset retry count
-            // TODO: uploader - auto resume once connected again?
             var message = ""
             if !self.connector.isConnectedToNetwork() {
-                message = "Unable to upload. The Internet connection appears to be offline."
+                message = "Upload paused while offline."
             } else {
-                message = String("\(type) upload error: \(error.localizedDescription.prefix(50))")
+                message = String("upload error: \(error.localizedDescription.prefix(50))")
             }
-            body = ["turnOffUploaderReason": "error", "turnOffUploaderError": message]
-            break
-        default:
-            break
+            body = ["turnOffUploaderReason": "error", "turnOffUploaderError": message, "mode": modeValue]
         }
         var message = ""
         if mode == TPUploader.Mode.HistoricalAll {
+            self.isHistoricalUploadPending = false
+            let (historicalUploadLimitsIndex, historicalUploadMaxLimitsIndex) = self.uploader.retryInfoForMode(TPUploader.Mode.HistoricalAll)
+            body["historicalUploadLimitsIndex"] = historicalUploadLimitsIndex
+            body["historicalUploadMaxLimitsIndex"] = historicalUploadMaxLimitsIndex
+            if historicalUploadLimitsIndex == historicalUploadMaxLimitsIndex {
+                body["historicalUploadMaxRetryLimitReached"] = true
+            }
             message = "Stopped historical upload"
             DispatchQueue.main.async {
                 DDLogVerbose("handleTurnOffUploader enable idle timer")
                 UIApplication.shared.isIdleTimerDisabled = false
-
                 if self.isObserving {
-                    self.sendEvent(withName: "onTurnOffHistoricalUpload", body: body)
+                    self.sendEvent(withName: "onTurnOffUploader", body: body)
                 }
             }
         } else {
             message = "Stopped current upload"
+            let (currentUploadLimitsIndex, currentUploadMaxLimitsIndex) = self.uploader.retryInfoForMode(TPUploader.Mode.Current)
+            body["currentUploadLimitsIndex"] = currentUploadLimitsIndex
+            body["currentUploadMaxLimitsIndex"] = currentUploadMaxLimitsIndex
+            if currentUploadLimitsIndex == currentUploadMaxLimitsIndex {
+                body["currentUploadMaxRetryLimitReached"] = true
+            }
+            DispatchQueue.main.async {
+                if self.isObserving {
+                    self.sendEvent(withName: "onTurnOffUploader", body: body)
+                }
+            }
         }
+        DDLogInfo("Mode: \(mode), Reason: \(reason), body: \(body)")
         RollbarReactNative.info(withMessage: message, data: body)
     }
 
-    @objc func handleStatsUpdated(_ note: Notification) {
+    
+    @objc func handleUploadRetry(_ note: Notification) {
+        DDLogVerbose("trace")
+
         let userInfo = note.userInfo!
         let mode = userInfo["mode"] as! TPUploader.Mode
-        var body: Any? = nil
-        if mode == TPUploader.Mode.HistoricalAll {
-            body = self.createBodyForHistoricalStats()
-        } else {
-            body = self.createBodyForCurrentStats()
+        let modeValue = (mode == TPUploader.Mode.Current ? "current" : "historical")
+        let reason = userInfo["reason"] as? TPUploader.StoppedReason
+        let (historicalUploadLimitsIndex, historicalUploadMaxLimitsIndex) = self.uploader.retryInfoForMode(TPUploader.Mode.HistoricalAll)
+        let (currentUploadLimitsIndex, currentUploadMaxLimitsIndex) = self.uploader.retryInfoForMode(TPUploader.Mode.Current)
+        var body = [String: Any]()
+        var errorMessage = ""
+        var reasonMessage = ""
+        var rollbarLogMessage = ""
+        var isRetry = true
+        switch reason {
+        case .error(let error):
+            rollbarLogMessage = "Retrying upload"
+            reasonMessage = "error"
+            errorMessage = String("upload error: \(error.localizedDescription.prefix(50))")
+        default:
+            rollbarLogMessage = "Retry successful"
+            reasonMessage = "success"
+            isRetry = false
+            break
         }
+        if mode == .HistoricalAll {
+            body = [
+                "retryHistoricalUploadReason": reasonMessage,
+                "retryHistoricalUploadError": errorMessage,
+                "isUploadingHistoricalRetry": isRetry,
+                "historicalUploadLimitsIndex": historicalUploadLimitsIndex,
+                "historicalUploadMaxLimitsIndex": historicalUploadMaxLimitsIndex,
+                "mode": modeValue]
+        } else {
+            body = [
+                "retryCurrentUploadReason": reasonMessage,
+                "retryCurrentUploadError": errorMessage,
+                "isUploadingCurrentRetry": isRetry,
+                "currentUploadLimitsIndex": currentUploadLimitsIndex,
+                "currentUploadMaxLimitsIndex": currentUploadMaxLimitsIndex,
+                "mode": modeValue]
+        }
+        if !isRetry {
+            if mode == TPUploader.Mode.HistoricalAll {
+                body.merge(self.createBodyForHistoricalStats(), uniquingKeysWith: {
+                    (first, _) in first
+                })
+            } else {
+                body.merge(self.createBodyForCurrentStats(), uniquingKeysWith: {
+                    (first, _) in first
+                })
+            }
+        }
+
         DispatchQueue.main.async {
             if self.isObserving {
-                self.sendEvent(withName: "onUploadStatsUpdated", body: body)
+                self.sendEvent(withName: "onRetryUpload", body: body)
+            }
+        }
+
+        DDLogInfo("Mode: \(mode), Info: \(body)")
+        RollbarReactNative.info(withMessage: rollbarLogMessage, data: body)
+    }
+    
+    @objc func handleUploadSuccessful(_ note: Notification) {
+        let userInfo = note.userInfo!
+        let mode = userInfo["mode"] as! TPUploader.Mode
+        let type = userInfo["type"] as? String
+        if type == "All" {
+            var body = [String: Any]()
+            if mode == TPUploader.Mode.HistoricalAll {
+                body = self.createBodyForHistoricalStats()
+            } else {
+                body = self.createBodyForCurrentStats()
+            }
+
+            DispatchQueue.main.async {
+                if self.isObserving {
+                    self.sendEvent(withName: "onUploadStatsUpdated", body: body)
+                }
             }
         }
     }
 
-    func createBodyForHistoricalStats() -> Any? {
+    func createBodyForHistoricalStats() -> [String: Any] {
         let isUploadingHistorical = self.uploader.isUploadInProgressForMode(TPUploader.Mode.HistoricalAll)
+        let (historicalUploadLimitsIndex, historicalUploadMaxLimitsIndex) = self.uploader.retryInfoForMode(TPUploader.Mode.HistoricalAll)
         let progress = self.uploader.uploaderProgress()
         return [
-            "type": "historical",
+            "mode": "historical",
             "isUploadingHistorical": isUploadingHistorical,
             "isHistoricalUploadPending": self.isHistoricalUploadPending,
+            "historicalUploadLimitsIndex": historicalUploadLimitsIndex,
+            "historicalUploadMaxLimitsIndex": historicalUploadMaxLimitsIndex,
             "historicalUploadCurrentDay": progress.currentDayHistorical,
             "historicalUploadTotalDays": progress.totalDaysHistorical,
+            "historicalUploadTotalSamples": progress.totalSamplesHistorical,
+            "historicalUploadTotalDeletes": progress.totalDeletesHistorical,
         ]
     }
 
-    func createBodyForCurrentStats() -> Any? {
+    func createBodyForCurrentStats() -> [String: Any] {
+        let isUploadingCurrent = self.uploader.isUploadInProgressForMode(TPUploader.Mode.Current)
+        let (currentUploadLimitsIndex, currentUploadMaxLimitsIndex) = self.uploader.retryInfoForMode(TPUploader.Mode.Current)
+        let progress = self.uploader.uploaderProgress()
         return [
-            "type": "current",
-            "lastCurrentUploadUiDescription": lastCurrentUploadUiDescription()
+            "mode": "current",
+            "isUploadingCurrent": isUploadingCurrent,
+            "currentUploadLimitsIndex": currentUploadLimitsIndex,
+            "currentUploadMaxLimitsIndex": currentUploadMaxLimitsIndex,
+            "currentUploadTotalSamples": progress.totalSamplesCurrent,
+            "currentUploadTotalDeletes": progress.totalDeletesCurrent,
+            "lastCurrentUploadUiDescription": lastCurrentUploadUiDescription(),
         ]
     }
 

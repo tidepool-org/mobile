@@ -326,6 +326,7 @@ PODS:
   - UMSensorsInterface (5.0.0)
   - UMTaskManagerInterface (5.0.0)
   - Yoga (1.14.0)
+  - Zip (1.1.0)
 
 DEPENDENCIES:
   - Alamofire (= 4.9.1)
@@ -374,7 +375,7 @@ DEPENDENCIES:
   - RNDeviceInfo (from `../node_modules/react-native-device-info`)
   - RollbarReactNative (from `../node_modules/rollbar-react-native`)
   - SwiftyJSON (= 5.0.0)
-  - TPHealthKitUploader (from `https://github.com/tidepool-org/healthkit-uploader`, tag `1.0.0`)
+  - TPHealthKitUploader (from `https://github.com/tidepool-org/healthkit-uploader`, tag `1.0.1`)
   - UMBarCodeScannerInterface (from `../node_modules/unimodules-barcode-scanner-interface/ios`)
   - UMCameraInterface (from `../node_modules/unimodules-camera-interface/ios`)
   - UMConstantsInterface (from `../node_modules/unimodules-constants-interface/ios`)
@@ -388,6 +389,7 @@ DEPENDENCIES:
   - UMSensorsInterface (from `../node_modules/unimodules-sensors-interface/ios`)
   - UMTaskManagerInterface (from `../node_modules/unimodules-task-manager-interface/ios`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
+  - Zip (= 1.1.0)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -404,6 +406,7 @@ SPEC REPOS:
   trunk:
     - Alamofire
     - SwiftyJSON
+    - Zip
 
 EXTERNAL SOURCES:
   DoubleConversion:
@@ -502,7 +505,7 @@ EXTERNAL SOURCES:
     :path: "../node_modules/rollbar-react-native"
   TPHealthKitUploader:
     :git: https://github.com/tidepool-org/healthkit-uploader
-    :tag: 1.0.0
+    :tag: 1.0.1
   UMBarCodeScannerInterface:
     :path: !ruby/object:Pathname
     path: "../node_modules/unimodules-barcode-scanner-interface/ios"
@@ -548,7 +551,7 @@ CHECKOUT OPTIONS:
     :tag: ios/2.14.2
   TPHealthKitUploader:
     :git: https://github.com/tidepool-org/healthkit-uploader
-    :tag: 1.0.0
+    :tag: 1.0.1
 
 SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
@@ -617,7 +620,8 @@ SPEC CHECKSUMS:
   UMSensorsInterface: d708a892ef1500bdd9fc3ff03f7836c66d1634d3
   UMTaskManagerInterface: a98e37a576a5220bf43b8faf33cfdc129d2f441d
   Yoga: ba3d99dbee6c15ea6bbe3783d1f0cb1ffb79af0f
+  Zip: 8877eede3dda76bcac281225c20e71c25270774c
 
-PODFILE CHECKSUM: 2002996259284225ea98622e62fdf10e9b1d9f23
+PODFILE CHECKSUM: 7ca2a7067b94fe421dc01529ad9a8c639363d01a
 
 COCOAPODS: 1.8.4

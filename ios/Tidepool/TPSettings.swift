@@ -23,6 +23,12 @@ let kUserDefaultsCurrentEnvironmentKey = "SCurrentService"
 let kUserDefaultsConnectToHealthTipHasBeenShownKey = "ConnectToHealthCelebrationHasBeenShown"
 let kUserDefaultsAddNoteTipHasBeenShownKey = "AddNoteTipHasBeenShown"
 let kUserDefaultsNeedUploaderTipHasBeenShownKey = "NeedUploaderTipHasBeenShown"
+let kUserDefaultsUploaderLimitsIndex = "UploaderLimitsIndex"
+let kUserDefaultsUploaderTimeoutsIndex = "UploaderTimeoutsIndex"
+let kUserDefaultsUploaderSuppressDeletes = "UploaderSuppressDeletes"
+let kUserDefaultsUploaderSimulate = "UploaderSimulate"
+let kUserDefaultsUploaderIncludeSensitiveInfo = "UploaderIncludeSensitiveInfo"
+let kUserDefaultsUploaderIncludeCFNetworkDiagnostics = "UploaderIncludeCFNetworkDiagnostics"
 
 let kAsyncStorageApiEnvironmentKey = "API_ENVIRONMENT_KEY"
 let kAsyncStorageAuthUserKey = "AUTH_USER_KEY"
@@ -36,8 +42,32 @@ class TPSettings {
     var currentUserFullName: String?
     var currentUserIsDSAUser: Bool = false
 
+    var uploaderLimitsIndex: Int = 0
+    var samplesUploadLimits: [Int] = []
+    var deletesUploadLimits: [Int] = []
+    var uploaderSuppressDeletes: Bool = false
+    var uploaderSimulate: Bool = false
+    var includeSensitiveInfo: Bool = false
+    var includeCFNetworkDiagnostics: Bool = false
+
+    var uploaderTimeoutsIndex: Int = 0
+    var uploaderTimeouts: [Int] = []
+
     private let userDefaults: UserDefaults
     private let asyncStorage: RCTAsyncLocalStorage
+    
+    private let availableSamplesUploadLimits = [
+                    [2000, 1000, 500, 250],
+                    [500, 100, 50, 10],
+                    [100, 50, 25, 5]]
+    private let availableDeletesUploadLimits = [
+                    [500, 50, 10, 1],
+                    [50, 5, 1, 1],
+                    [5, 1, 1, 1]]
+    private let availableTimeouts = [
+                    [60, 90, 180, 300],
+                    [90, 180, 300, 300],
+                    [180, 300, 300, 300]]
 
     init() {
         userDefaults = UserDefaults.standard
@@ -48,7 +78,21 @@ class TPSettings {
     }
 
     func loadSettings() {
-        // migrateLegacySettings(); // TODO: health - upgrade - we should consider enabling this so that upgrade from 2.x will preserve session token and other settings
+        // migrateLegacySettings(); // TODO: upgrade - we should consider enabling this so that upgrade from 2.x will preserve session token and other settings
+
+        uploaderLimitsIndex = userDefaults.integer(forKey: kUserDefaultsUploaderLimitsIndex)
+        uploaderLimitsIndex = min(uploaderLimitsIndex, availableSamplesUploadLimits.count - 1)
+        samplesUploadLimits = availableSamplesUploadLimits[uploaderLimitsIndex]
+        deletesUploadLimits = availableDeletesUploadLimits[uploaderLimitsIndex]
+
+        uploaderTimeoutsIndex = userDefaults.integer(forKey: kUserDefaultsUploaderTimeoutsIndex)
+        uploaderTimeoutsIndex = min(uploaderTimeoutsIndex, availableTimeouts.count - 1)
+        uploaderTimeouts = availableTimeouts[uploaderTimeoutsIndex]
+        
+        uploaderSuppressDeletes = userDefaults.bool(forKey: kUserDefaultsUploaderSuppressDeletes)
+        uploaderSimulate = userDefaults.bool(forKey: kUserDefaultsUploaderSimulate)
+        includeSensitiveInfo = userDefaults.bool(forKey: kUserDefaultsUploaderIncludeSensitiveInfo)
+        includeCFNetworkDiagnostics = userDefaults.bool(forKey: kUserDefaultsUploaderIncludeCFNetworkDiagnostics)
 
         getValuesForAyncStorageKeys(keys: [kAsyncStorageApiEnvironmentKey, kAsyncStorageAuthUserKey]) { (values: [String?]) in
             // kAsyncStorageApiEnvironmentKey
@@ -83,6 +127,39 @@ class TPSettings {
         }
     }
     
+    func setUploaderLimitsIndex(_ index: NSInteger) {
+        uploaderLimitsIndex = min(index, availableSamplesUploadLimits.count - 1)
+        samplesUploadLimits = availableSamplesUploadLimits[uploaderLimitsIndex]
+        deletesUploadLimits = availableDeletesUploadLimits[uploaderLimitsIndex]
+        userDefaults.set(uploaderLimitsIndex, forKey: kUserDefaultsUploaderLimitsIndex)
+    }
+    
+    func setUploaderTimeoutsIndex(_ index: NSInteger) {
+        uploaderTimeoutsIndex = min(index, availableTimeouts.count - 1)
+        uploaderTimeouts = availableTimeouts[uploaderTimeoutsIndex]
+        userDefaults.set(uploaderTimeoutsIndex, forKey: kUserDefaultsUploaderTimeoutsIndex)
+    }
+    
+    func setUploaderSuppressDeletes(_ suppress: Bool) {
+        uploaderSuppressDeletes = suppress
+        userDefaults.set(uploaderSuppressDeletes, forKey: kUserDefaultsUploaderSuppressDeletes)
+    }
+    
+    func setUploaderSimulate(_ simulate: Bool) {
+        uploaderSimulate = simulate
+        userDefaults.set(uploaderSimulate, forKey: kUserDefaultsUploaderSimulate)
+    }
+
+    func setUploaderIncludeSensitiveInfo(_ includeSensitiveInfo: Bool) {
+        self.includeSensitiveInfo = includeSensitiveInfo
+        userDefaults.set(includeSensitiveInfo, forKey: kUserDefaultsUploaderIncludeSensitiveInfo)
+    }
+    
+    func setUploaderIncludeCFNetworkDiagnostics(_ includeCFNetworkDiagnostics: Bool) {
+        self.includeCFNetworkDiagnostics = includeCFNetworkDiagnostics
+        userDefaults.set(includeCFNetworkDiagnostics, forKey: kUserDefaultsUploaderIncludeCFNetworkDiagnostics)
+    }
+
     func getValuesForAyncStorageKeys(keys: [String], values: @escaping ([String?]) -> Void) -> Void {
         asyncStorage .multiGet(keys) { (multiGetResponsePair: [Any]?) -> Void in
             var valuesArray: [String?] = []

@@ -10,11 +10,8 @@ class DebugSettingsResetFirstTimeSettingsListItem extends PureComponent {
   };
 
   onPress = () => {
-    const { firstTimeTipsResetTips, navigateGoBack } = this.props;
-    navigateGoBack();
-    setTimeout(() => {
-      firstTimeTipsResetTips();
-    }, 50);
+    const { firstTimeTipsResetTips } = this.props;
+    firstTimeTipsResetTips();
   };
 
   renderButtonText() {
@@ -66,7 +63,6 @@ class DebugSettingsResetFirstTimeSettingsListItem extends PureComponent {
 
 DebugSettingsResetFirstTimeSettingsListItem.propTypes = {
   theme: ThemePropType.isRequired,
-  navigateGoBack: PropTypes.func.isRequired,
   firstTimeTipsResetTips: PropTypes.func.isRequired,
 };
 
