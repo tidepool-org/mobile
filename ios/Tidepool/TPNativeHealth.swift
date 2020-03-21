@@ -263,7 +263,7 @@ class TPNativeHealth: RCTEventEmitter {
             let (historicalUploadLimitsIndex, historicalUploadMaxLimitsIndex) = self.uploader.retryInfoForMode(TPUploader.Mode.HistoricalAll)
             message = "Started historical upload"
             DispatchQueue.main.async {
-                DDLogVerbose("handleTurnOnUploader disable idle timer")
+                DDLogVerbose("Disable idle timer")
                 UIApplication.shared.isIdleTimerDisabled = true
                 if self.isObserving {
                     self.sendEvent(withName: "onTurnOnUploader", body:[
@@ -324,7 +324,7 @@ class TPNativeHealth: RCTEventEmitter {
             }
             message = "Stopped historical upload"
             DispatchQueue.main.async {
-                DDLogVerbose("handleTurnOffUploader enable idle timer")
+                DDLogVerbose("Enable idle timer")
                 UIApplication.shared.isIdleTimerDisabled = false
                 if self.isObserving {
                     self.sendEvent(withName: "onTurnOffUploader", body: body)
