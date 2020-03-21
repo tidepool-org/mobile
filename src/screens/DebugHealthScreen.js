@@ -180,6 +180,12 @@ class DebugHealthScreen extends PureComponent {
     }
   };
 
+  onClose = () => {
+    const { navigateDebugSettings, navigateGoBack } = this.props;
+    navigateGoBack()
+    navigateDebugSettings()
+  }
+
   timeChanged = () => {
     TPNativeHealth.refreshUploadStats();
   };
@@ -976,11 +982,9 @@ class DebugHealthScreen extends PureComponent {
   }
 
   render() {
-    const { navigateGoBack } = this.props;
-
     return (
       <ThemeProvider theme={this.theme}>
-        <Modal visible animationType="slide" onRequestClose={navigateGoBack}>
+        <Modal visible animationType="slide" onRequestClose={this.onClose}>
           <StatusBar barStyle="dark-content" />
           <SafeAreaView
             style={{
@@ -993,7 +997,7 @@ class DebugHealthScreen extends PureComponent {
               justifyContent="space-between"
               padding={8}
             >
-              <glamorous.TouchableOpacity onPress={navigateGoBack}>
+              <glamorous.TouchableOpacity onPress={this.onClose}>
                 <glamorous.Image
                   source={require("../../assets/images/modal-close-button.png")}
                   width={32}
@@ -1025,6 +1029,7 @@ class DebugHealthScreen extends PureComponent {
 DebugHealthScreen.propTypes = {
   currentUser: UserPropType.isRequired,
   health: PropTypes.object.isRequired,
+  navigateDebugSettings: PropTypes.func.isRequired,
   navigateGoBack: PropTypes.func.isRequired,
 };
 

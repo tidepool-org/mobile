@@ -7,9 +7,10 @@ import { connect } from "react-redux";
 import { AppNavigator } from "../navigators/AppNavigator";
 import { HOME_ROUTE_NAME, SIGN_IN_ROUTE_NAME } from "../navigators/routeNames";
 import getRouteName from "../navigators/getRouteName";
+import { TPNative } from "../models/TPNative";
 import { TPNativeHealth } from "../models/TPNativeHealth";
 import { healthStateSet } from "../actions/health";
-
+import { navigateDebugSettings } from "../actions/navigation";
 import { authRefreshToken } from "../actions/auth";
 // import { Logger } from "../models/Logger";
 
@@ -27,7 +28,8 @@ class AppWithNavigationState extends PureComponent {
 
     AppState.addEventListener("change", this.onAppStateChange);
     BackHandler.addEventListener("hardwareBackPress", this.onBackPress);
-    TPNativeHealth.addListener(this.onHealthEvent);
+    TPNative.addListener(this.onNativeEvent);
+    TPNativeHealth.addListener(this.onNativeHealthEvent);
 
     // Do initial dispatch of health state when mounting. Further updates are by way of TPNativeHealth events
     dispatch(
@@ -62,10 +64,18 @@ class AppWithNavigationState extends PureComponent {
   componentWillUnmount() {
     AppState.removeEventListener("change", this.onAppStateChange);
     BackHandler.removeEventListener("hardwareBackPress", this.onBackPress);
-    TPNativeHealth.removeListener(this.onHealthEvent);
+    TPNative.removeListener(this.onNativeEvent);
+    TPNativeHealth.removeListener(this.onNativeHealthEvent);
   }
 
-  onHealthEvent = (eventName, uploaderType) => {
+  onNativeEvent = (eventName) => {
+    const { dispatch } = this.props;
+    if (eventName === "onShareDidEndPreview") {
+      dispatch(navigateDebugSettings())
+    }
+  }
+
+  onNativeHealthEvent = (eventName, uploaderType) => {
     const { dispatch } = this.props;
 
     if (eventName === "onHealthKitInterfaceConfiguration") {

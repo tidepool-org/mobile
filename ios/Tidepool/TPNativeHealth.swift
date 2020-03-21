@@ -38,7 +38,31 @@ class TPNativeHealth: RCTEventEmitter {
     override static func requiresMainQueueSetup() -> Bool {
         return true
     }
+    
+    override func supportedEvents() -> [String]! {
+      return [
+          "onHealthKitInterfaceConfiguration",
+          "onTurnOnUploader",
+          "onTurnOffUploader",
+          "onRetryUpload",
+          "onUploadStatsUpdated"
+          ]
+    }
 
+    var isObserving: Bool = false
+
+    override func startObserving() -> Void {
+        DDLogVerbose("trace")
+
+        isObserving = true
+    }
+
+    override func stopObserving() -> Void {
+        DDLogVerbose("trace")
+
+        isObserving = false
+    }
+    
     @objc func enableHealthKitInterfaceAndAuthorize() -> NSNumber {
         DDLogInfo("\(#function)")
 
@@ -203,30 +227,6 @@ class TPNativeHealth: RCTEventEmitter {
         TPSettings.sharedInstance.setUploaderIncludeCFNetworkDiagnostics(includeCFNetworkDiagnostics)
         connector.nativeHealthBridge?.onHealthKitInterfaceConfiguration()
         return true
-    }
-
-    override func supportedEvents() -> [String]! {
-      return [
-          "onHealthKitInterfaceConfiguration",
-          "onTurnOnUploader",
-          "onTurnOffUploader",
-          "onRetryUpload",
-          "onUploadStatsUpdated"
-          ]
-    }
-
-    var isObserving: Bool = false
-
-    override func startObserving() -> Void {
-        DDLogVerbose("trace")
-
-        isObserving = true
-    }
-
-    override func stopObserving() -> Void {
-        DDLogVerbose("trace")
-
-        isObserving = false
     }
 
     func onHealthKitInterfaceConfiguration() {

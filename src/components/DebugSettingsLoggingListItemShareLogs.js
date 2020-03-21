@@ -1,16 +1,21 @@
 import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
 import glamorous, { withTheme } from "glamorous-native";
 
 import { ThemePropType } from "../prop-types/theme";
 import { TPNative } from "../models/TPNative";
 
-class DebugSettingsLoggingListItemEmailLogs extends PureComponent {
+class DebugSettingsLoggingListItemShareLogs extends PureComponent {
   state = {
     isUnderlayVisible: false,
   };
 
   onPress = () => {
-    TPNative.emailUploaderLogs();
+    const { navigateGoBack } = this.props;
+    setTimeout(() => {
+      navigateGoBack();
+      TPNative.shareUploaderLogs();
+    }, 50);
   };
 
   renderButtonText() {
@@ -28,7 +33,7 @@ class DebugSettingsLoggingListItemEmailLogs extends PureComponent {
         numberOfLines={1}
         color={titleColor}
       >
-        Email uploader logs
+        Share uploader logs
       </glamorous.Text>
     );
   }
@@ -60,8 +65,9 @@ class DebugSettingsLoggingListItemEmailLogs extends PureComponent {
   }
 }
 
-DebugSettingsLoggingListItemEmailLogs.propTypes = {
+DebugSettingsLoggingListItemShareLogs.propTypes = {
+  navigateGoBack: PropTypes.func.isRequired,
   theme: ThemePropType.isRequired,
 };
 
-export default withTheme(DebugSettingsLoggingListItemEmailLogs);
+export default withTheme(DebugSettingsLoggingListItemShareLogs);
