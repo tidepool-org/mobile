@@ -55,41 +55,41 @@ class TPNativeHealthSingletonClass {
       const uploaderProgress = this.nativeModule.uploaderProgress();
 
       this.isUploadingHistorical = uploaderProgress.isUploadingHistorical;
-      this.isHistoricalUploadPending = uploaderProgress.isHistoricalUploadPending;
-      this.historicalUploadLimitsIndex = uploaderProgress.historicalUploadLimitsIndex;
-      this.historicalUploadMaxLimitsIndex = uploaderProgress.historicalUploadMaxLimitsIndex;
-      this.historicalUploadCurrentDay = uploaderProgress.historicalUploadCurrentDay;
-      this.historicalUploadTotalDays = uploaderProgress.historicalUploadTotalDays;
-      this.historicalUploadTotalSamples = uploaderProgress.historicalUploadTotalSamples;
-      this.historicalUploadTotalDeletes = uploaderProgress.historicalUploadTotalDeletes;
+      this.isHistoricalUploadPending =
+        uploaderProgress.isHistoricalUploadPending;
+      this.historicalUploadLimitsIndex =
+        uploaderProgress.historicalUploadLimitsIndex;
+      this.historicalUploadMaxLimitsIndex =
+        uploaderProgress.historicalUploadMaxLimitsIndex;
+      this.historicalUploadCurrentDay =
+        uploaderProgress.historicalUploadCurrentDay;
+      this.historicalUploadTotalDays =
+        uploaderProgress.historicalUploadTotalDays;
+      this.historicalUploadTotalSamples =
+        uploaderProgress.historicalUploadTotalSamples;
+      this.historicalUploadTotalDeletes =
+        uploaderProgress.historicalUploadTotalDeletes;
 
       this.isUploadingCurrent = uploaderProgress.isUploadingCurrent;
       this.currentUploadLimitsIndex = uploaderProgress.currentUploadLimitsIndex;
-      this.currentUploadMaxLimitsIndex = uploaderProgress.currentUploadMaxLimitsIndex;
-      this.currentUploadTotalSamples = uploaderProgress.currentUploadTotalSamples;
-      this.currentUploadTotalDeletes = uploaderProgress.currentUploadTotalDeletes;
-      this.lastCurrentUploadUiDescription = uploaderProgress.lastCurrentUploadUiDescription;
+      this.currentUploadMaxLimitsIndex =
+        uploaderProgress.currentUploadMaxLimitsIndex;
+      this.currentUploadTotalSamples =
+        uploaderProgress.currentUploadTotalSamples;
+      this.currentUploadTotalDeletes =
+        uploaderProgress.currentUploadTotalDeletes;
+      this.lastCurrentUploadUiDescription =
+        uploaderProgress.lastCurrentUploadUiDescription;
 
       const events = new NativeEventEmitter(NativeModules.TPNativeHealth);
       events.addListener(
         "onHealthKitInterfaceConfiguration",
         this.onHealthKitInterfaceConfiguration
       );
-      events.addListener(
-        "onTurnOnUploader",
-        this.onTurnOnUploader
-      );
-      events.addListener(
-        "onTurnOffUploader",
-        this.onTurnOffUploader
-      );
-      events.addListener(
-        "onRetryUpload",
-        this.onRetryUpload
-      );
-      events.addListener(
-        "onUploadStatsUpdated",
-        this.onUploadStatsUpdated);
+      events.addListener("onTurnOnUploader", this.onTurnOnUploader);
+      events.addListener("onTurnOffUploader", this.onTurnOffUploader);
+      events.addListener("onRetryUpload", this.onRetryUpload);
+      events.addListener("onUploadStatsUpdated", this.onUploadStatsUpdated);
     } catch (error) {
       // console.log(`error: ${error}`);
     }
@@ -161,7 +161,9 @@ class TPNativeHealthSingletonClass {
 
   setUploaderIncludeCFNetworkDiagnostics(includeCFNetworkDiagnostics) {
     try {
-      this.nativeModule.setUploaderIncludeCFNetworkDiagnostics(includeCFNetworkDiagnostics);
+      this.nativeModule.setUploaderIncludeCFNetworkDiagnostics(
+        includeCFNetworkDiagnostics
+      );
     } catch (error) {
       // console.log(`error: ${error}`);
     }
@@ -233,7 +235,8 @@ class TPNativeHealthSingletonClass {
       this.isHistoricalUploadPending = false;
       this.isUploadingHistoricalRetry = false;
       this.historicalUploadLimitsIndex = params.historicalUploadLimitsIndex;
-      this.historicalUploadMaxLimitsIndex = params.historicalUploadMaxLimitsIndex;
+      this.historicalUploadMaxLimitsIndex =
+        params.historicalUploadMaxLimitsIndex;
       this.turnOffHistoricalUploaderReason = params.turnOffUploaderReason;
       this.turnOffHistoricalUploaderError = error;
       this.updateHistoricalUploadCurrentDayIfComplete();
@@ -260,7 +263,8 @@ class TPNativeHealthSingletonClass {
       this.retryHistoricalUploadReason = params.retryHistoricalUploadReason;
       this.retryHistoricalUploadError = error;
       this.historicalUploadLimitsIndex = params.historicalUploadLimitsIndex;
-      this.historicalUploadMaxLimitsIndex = params.historicalUploadMaxLimitsIndex;
+      this.historicalUploadMaxLimitsIndex =
+        params.historicalUploadMaxLimitsIndex;
     } else {
       let error = params.retryCurrentUploadError;
       const errorPrefix = "error: ";
@@ -275,6 +279,10 @@ class TPNativeHealthSingletonClass {
       this.currentUploadMaxLimitsIndex = params.currentUploadMaxLimitsIndex;
     }
     this.notify("onRetryUpload", params.mode);
+
+    if (!this.isUploadingCurrentRetry) {
+      this.onUploadStatsUpdated(params);
+    }
   };
 
   onUploadStatsUpdated = params => {
@@ -287,14 +295,16 @@ class TPNativeHealthSingletonClass {
       this.historicalUploadTotalSamples = params.historicalUploadTotalSamples;
       this.historicalUploadTotalDeletes = params.historicalUploadTotalDeletes;
       this.historicalUploadLimitsIndex = params.historicalUploadLimitsIndex;
-      this.historicalUploadMaxLimitsIndex = params.historicalUploadMaxLimitsIndex;
+      this.historicalUploadMaxLimitsIndex =
+        params.historicalUploadMaxLimitsIndex;
     } else if (params.mode === "current") {
       this.isUploadingCurrent = params.isUploadingCurrent;
       this.currentUploadTotalSamples = params.currentUploadTotalSamples;
       this.currentUploadTotalDeletes = params.currentUploadTotalDeletes;
       this.currentUploadLimitsIndex = params.currentUploadLimitsIndex;
       this.currentUploadMaxLimitsIndex = params.currentUploadMaxLimitsIndex;
-      this.lastCurrentUploadUiDescription = params.lastCurrentUploadUiDescription;
+      this.lastCurrentUploadUiDescription =
+        params.lastCurrentUploadUiDescription;
     }
     this.notify("onUploadStatsUpdated", params.mode);
   };
@@ -304,20 +314,30 @@ class TPNativeHealthSingletonClass {
       const uploaderProgress = this.nativeModule.uploaderProgress();
 
       this.isUploadingHistorical = uploaderProgress.isUploadingHistorical;
-      this.historicalUploadLimitsIndex = uploaderProgress.historicalUploadLimitsIndex;
-      this.historicalUploadMaxLimitsIndex = uploaderProgress.historicalUploadMaxLimitsIndex;
-      this.historicalUploadCurrentDay = uploaderProgress.historicalUploadCurrentDay;
-      this.historicalUploadTotalDays = uploaderProgress.historicalUploadTotalDays;
+      this.historicalUploadLimitsIndex =
+        uploaderProgress.historicalUploadLimitsIndex;
+      this.historicalUploadMaxLimitsIndex =
+        uploaderProgress.historicalUploadMaxLimitsIndex;
+      this.historicalUploadCurrentDay =
+        uploaderProgress.historicalUploadCurrentDay;
+      this.historicalUploadTotalDays =
+        uploaderProgress.historicalUploadTotalDays;
       this.updateHistoricalUploadCurrentDayIfComplete();
-      this.historicalUploadTotalSamples = uploaderProgress.historicalUploadTotalSamples;
-      this.historicalUploadTotalDeletes = uploaderProgress.historicalUploadTotalDeletes;
+      this.historicalUploadTotalSamples =
+        uploaderProgress.historicalUploadTotalSamples;
+      this.historicalUploadTotalDeletes =
+        uploaderProgress.historicalUploadTotalDeletes;
 
       this.isUploadingCurrent = uploaderProgress.isUploadingCurrent;
       this.currentUploadLimitsIndex = uploaderProgress.currentUploadLimitsIndex;
-      this.currentUploadMaxLimitsIndex = uploaderProgress.currentUploadMaxLimitsIndex;
-      this.currentUploadTotalSamples = uploaderProgress.currentUploadTotalSamples;
-      this.currentUploadTotalDeletes = uploaderProgress.currentUploadTotalDeletes;
-      this.lastCurrentUploadUiDescription = uploaderProgress.lastCurrentUploadUiDescription;
+      this.currentUploadMaxLimitsIndex =
+        uploaderProgress.currentUploadMaxLimitsIndex;
+      this.currentUploadTotalSamples =
+        uploaderProgress.currentUploadTotalSamples;
+      this.currentUploadTotalDeletes =
+        uploaderProgress.currentUploadTotalDeletes;
+      this.lastCurrentUploadUiDescription =
+        uploaderProgress.lastCurrentUploadUiDescription;
 
       this.notify("onUploadStatsUpdated", "historical");
       this.notify("onUploadStatsUpdated", "current");

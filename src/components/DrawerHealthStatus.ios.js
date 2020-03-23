@@ -41,6 +41,7 @@ class DrawerHealthStatus extends PureComponent {
       health: {
         isUploadingHistorical,
         isUploadingHistoricalRetry,
+        historicalUploadTotalSamples,
         historicalUploadCurrentDay,
         historicalUploadTotalDays,
         lastCurrentUploadUiDescription,
@@ -53,15 +54,18 @@ class DrawerHealthStatus extends PureComponent {
 
     let line1Text = "";
     let line2Text = "";
+    const useItemCountInsteadOfDayCount = false;
 
     if (isOffline) {
       line1Text = "Upload paused while offline.";
     } else if (isUploadingHistoricalRetry) {
       line1Text = "Syncing Now";
-      line2Text = "Retrying..."
+      line2Text = "Retrying...";
     } else if (isUploadingHistorical) {
       line1Text = "Syncing Now";
-      if (historicalUploadCurrentDay > 0) {
+      if (useItemCountInsteadOfDayCount) {
+        line2Text = `Uploaded ${historicalUploadTotalSamples} items`;
+      } else if (historicalUploadCurrentDay > 0) {
         line2Text = `Day ${historicalUploadCurrentDay} of ${historicalUploadTotalDays}`;
       }
     } else if (isInterfaceOn) {

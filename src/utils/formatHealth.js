@@ -5,6 +5,7 @@ const formatHealthSyncStatus = ({ health, isOffline, isDrawer }) => {
     isTurningInterfaceOn,
     interfaceTurnedOffError,
     isUploadingHistorical,
+    historicalUploadTotalSamples,
     historicalUploadCurrentDay,
     historicalUploadTotalDays,
     turnOffHistoricalUploaderReason,
@@ -25,10 +26,13 @@ const formatHealthSyncStatus = ({ health, isOffline, isDrawer }) => {
     syncStatusText = interfaceTurnedOffError;
   }
 
+  const useItemCountInsteadOfDayCount = false
   if (isInterfaceOn && isDrawer && !isUploadingHistorical) {
     syncStatusText = lastCurrentUploadUiDescription;
     syncProgressText = "";
-  } else if (historicalUploadTotalDays > 0) {
+  } else if (useItemCountInsteadOfDayCount) {
+    syncProgressText = `Uploaded ${historicalUploadTotalSamples} items`;
+  } else if (historicalUploadCurrentDay > 0) {
     syncProgressText = `Day ${historicalUploadCurrentDay} of ${historicalUploadTotalDays}`;
   } else if (turnOffHistoricalUploaderReason === "complete") {
       // TODO: health - In the case of a relatively new user with only a day

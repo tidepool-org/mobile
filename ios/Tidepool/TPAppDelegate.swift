@@ -139,6 +139,12 @@ class TPAppDelegate: EXStandaloneAppDelegate {
 
     override func applicationWillTerminate(_ application: UIApplication) {
         DDLogVerbose("trace")
+        
+        let message = "Stop upload due to applicationWillTerminate."
+        let error = NSError(domain: TPUploader.ErrorDomain, code: TPUploader.ErrorCodes.applicationWillTerminate.rawValue, userInfo: [NSLocalizedDescriptionKey: message])
+        DDLogInfo(message)
+        TPUploaderAPI.connector().uploader().stopUploading(reason: .error(error: error))
+        
         // super.applicationWillTerminate(application) // super doesn't implement!
     }
 

@@ -229,6 +229,7 @@ class HealthSyncScreen extends PureComponent {
     const {
       health: {
         isUploadingHistorical,
+        historicalUploadTotalSamples,
         historicalUploadCurrentDay,
         historicalUploadTotalDays,
         isUploadingHistoricalRetry,
@@ -243,10 +244,13 @@ class HealthSyncScreen extends PureComponent {
     let syncProgressText = "";
     let syncErrorText = "";
     if (isInterfaceOn) {
+      const useItemCountInsteadOfDayCount = false;
       if (isOffline) {
         syncProgressText = "Upload paused while offline.";
       } else if (isUploadingHistorical || turnOffHistoricalUploaderReason) {
-        if (historicalUploadTotalDays > 0) {
+        if (useItemCountInsteadOfDayCount) {
+          syncProgressText = `Uploaded ${historicalUploadTotalSamples} items`;
+        } else if (historicalUploadCurrentDay > 0) {
           syncProgressText = `Day ${historicalUploadCurrentDay} of ${historicalUploadTotalDays}`;
         }
         if (turnOffHistoricalUploaderReason) {
@@ -303,7 +307,8 @@ class HealthSyncScreen extends PureComponent {
       health: {
         turnOffHistoricalUploaderReason,
         isTurningInterfaceOn,
-        isInterfaceOn },
+        isInterfaceOn,
+      },
     } = this.props;
 
     let primaryText = "";
