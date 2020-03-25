@@ -23,13 +23,10 @@ class DebugSettingsScreen extends PureComponent {
     const {
       selectedApiEnvironment,
       apiEnvironmentSetAndSaveAsync,
-      navigateGoBack,
     } = this.props;
 
     if (newSelectedApiEnvironment !== selectedApiEnvironment) {
       apiEnvironmentSetAndSaveAsync(newSelectedApiEnvironment);
-    } else {
-      navigateGoBack();
     }
   };
 
@@ -37,14 +34,11 @@ class DebugSettingsScreen extends PureComponent {
     const {
       selectedApiCacheExpiration,
       apiCacheExpirationSetAndSaveAsync,
-      navigateGoBack,
     } = this.props;
 
     if (newselectedApiCacheExpiration !== selectedApiCacheExpiration) {
       apiCacheExpirationSetAndSaveAsync(newselectedApiCacheExpiration);
     }
-
-    navigateGoBack();
   };
 
   // onGraphRendererSelected = newSelectedGraphRenderer => {

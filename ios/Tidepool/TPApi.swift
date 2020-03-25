@@ -96,7 +96,6 @@ class TPApi {
                 if let error = response.result.error {
                     let message = "Refresh token failed, error: \(error)"
                     DDLogError(message)
-                    // TODO: handle network offline!
                 }
                 completion(false, response.response?.statusCode ?? 0)
             }

@@ -1,5 +1,4 @@
 import React, { PureComponent } from "react";
-import PropTypes from "prop-types";
 import glamorous, { withTheme } from "glamorous-native";
 
 import { ThemePropType } from "../prop-types/theme";
@@ -11,11 +10,7 @@ class DebugSettingsLoggingListItemEnable extends PureComponent {
   };
 
   onPress = () => {
-    const { navigateGoBack } = this.props;
-    setTimeout(() => {
-      navigateGoBack();
-      TPNative.enableUploaderLogging(!TPNative.isUploaderLoggingEnabled());
-    }, 50);
+    TPNative.enableUploaderLogging(!TPNative.isUploaderLoggingEnabled());
   };
 
   renderName() {
@@ -69,7 +64,6 @@ class DebugSettingsLoggingListItemEnable extends PureComponent {
 
 DebugSettingsLoggingListItemEnable.propTypes = {
   theme: ThemePropType.isRequired,
-  navigateGoBack: PropTypes.func.isRequired,
 };
 
 export default withTheme(DebugSettingsLoggingListItemEnable);

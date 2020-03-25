@@ -15,14 +15,35 @@
 
 import CocoaLumberjack
 import Foundation
-import MessageUI
 import TPHealthKitUploader
 import UIKit
+import Zip
 
 @objc(TPNative)
-class TPNative: NSObject, MFMailComposeViewControllerDelegate {
-    @objc static func requiresMainQueueSetup() -> Bool {
+class TPNative: RCTEventEmitter, UIDocumentInteractionControllerDelegate {
+    override static func requiresMainQueueSetup() -> Bool {
         return true
+    }
+    
+    override func supportedEvents() -> [String]! {
+      return [
+          "onShareWillBeginPreview",
+          "onShareDidEndPreview"
+          ]
+    }
+
+    var isObserving: Bool = false
+
+    override func startObserving() -> Void {
+        DDLogVerbose("trace")
+
+        isObserving = true
+    }
+
+    override func stopObserving() -> Void {
+        DDLogVerbose("trace")
+
+        isObserving = false
     }
 
     @objc func setUser(_ userId: String, username: String, userFullName: String, isDSAUser: Bool, sessionToken: String) -> Void {
@@ -94,42 +115,81 @@ class TPNative: NSObject, MFMailComposeViewControllerDelegate {
         }
     }
 
-    @objc func emailUploaderLogs() -> Void {
-        DispatchQueue.main.async {
-            DDLog.flushLog()
+    @objc func shareUploaderLogs() -> Void {
+        DDLog.flushLog()
 
-            let logFilePaths = fileLogger.logFileManager.sortedLogFilePaths as [String]
-            var logFileDataArray = [Data]()
-            for logFilePath in logFilePaths {
-                let fileURL = NSURL(fileURLWithPath: logFilePath)
-                if let logFileData = try? NSData(contentsOf: fileURL as URL, options: NSData.ReadingOptions.mappedIfSafe) {
-                    // Insert at front to reverse the order, so that oldest logs appear first.
-                    logFileDataArray.insert(logFileData as Data, at: 0)
+        // Delay so we aren't presenting new view controller while Debug UI view controller is transitioning
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+            let appName = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as! String
+            let progressAlert = UIAlertController(title: "Creating \(appName) logs.zip...", message: nil, preferredStyle: .alert)
+            let activityIndicator = UIActivityIndicatorView(style: .gray)
+            activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+            activityIndicator.isUserInteractionEnabled = false
+            activityIndicator.startAnimating()
+            progressAlert.view.addSubview(activityIndicator)
+            progressAlert.view.heightAnchor.constraint(equalToConstant: 95).isActive = true
+            activityIndicator.centerXAnchor.constraint(equalTo: progressAlert.view.centerXAnchor, constant: 0).isActive = true
+            activityIndicator.bottomAnchor.constraint(equalTo: progressAlert.view.bottomAnchor, constant: -20).isActive = true
+            UIApplication.shared.keyWindow?.rootViewController?.present(progressAlert, animated: true)
+
+            let documentInteractionController = UIDocumentInteractionController()
+            DispatchQueue.global(qos: .userInitiated).async {
+                let logFilePaths = fileLogger.logFileManager.sortedLogFilePaths as [String]
+                var logFileUrls = [URL]()
+                for logFilePath in logFilePaths {
+                    logFileUrls.append(URL(fileURLWithPath: logFilePath))
+                }
+                var successfullyCreatedZip = true
+                let directory = FileManager.default.urls(for:.cachesDirectory, in: .userDomainMask)[0]
+                let zipFileUrl = directory.appendingPathComponent("\(appName) logs.zip")
+                do {
+                    try Zip.zipFiles(paths: logFileUrls,
+                                    zipFilePath: zipFileUrl,
+                                    password: nil,
+                                    compression: .BestCompression,
+                                    progress: { (progress) -> () in })
+                }
+                catch {
+                    successfullyCreatedZip = false
+                }
+
+                DispatchQueue.main.async {
+                    progressAlert.dismiss(animated: true)
+                    if successfullyCreatedZip {
+                        documentInteractionController.delegate = self
+                        documentInteractionController.url = zipFileUrl
+                        documentInteractionController.presentPreview(animated: true)
+                    } else {
+                        let errorAlert = UIAlertController(title: "Error", message: "Failed to create attachment. The .zip archive might be too large", preferredStyle: .alert)
+                        let action = UIAlertAction(title: "OK", style: .default)
+                        errorAlert.addAction(action)
+                            UIApplication.shared.keyWindow?.rootViewController?.present(errorAlert, animated: true, completion: nil)
+                    }
                 }
             }
-
-            if MFMailComposeViewController.canSendMail() {
-                let appName = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as! String
-                let composeVC = MFMailComposeViewController()
-                composeVC.mailComposeDelegate = self
-                composeVC.setSubject("Logs for \(appName)")
-                composeVC.setMessageBody("", isHTML: false)
-
-                let attachmentData = NSMutableData()
-                for logFileData in logFileDataArray {
-                    attachmentData.append(logFileData)
-                }
-                composeVC.addAttachmentData(attachmentData as Data, mimeType: "text/plain", fileName: "\(appName).txt")
-
-                UIApplication.shared.keyWindow?.rootViewController?.present(composeVC, animated: true, completion: nil)
+        })
+    }
+    
+    func documentInteractionControllerViewControllerForPreview(_ controller: UIDocumentInteractionController) -> UIViewController {
+        return UIApplication.shared.keyWindow!.rootViewController!
+    }
+    
+    func documentInteractionControllerWillBeginPreview(_ controller: UIDocumentInteractionController) {
+        DispatchQueue.main.async {
+            if self.isObserving {
+                self.sendEvent(withName: "onShareWillBeginPreview", body: nil)
             }
         }
     }
 
-    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-        controller.dismiss(animated: true, completion: nil)
+    func documentInteractionControllerDidEndPreview(_ controller: UIDocumentInteractionController) {
+        DispatchQueue.main.async {
+            if self.isObserving {
+                self.sendEvent(withName: "onShareDidEndPreview", body: nil)
+            }
+        }
     }
-
+    
     fileprivate func clearLogFiles() {
         // Clear log files
         let logFileInfos = fileLogger.logFileManager.unsortedLogFileInfos

@@ -6,13 +6,13 @@ import glamorous, { withTheme } from "glamorous-native";
 import { ThemePropType } from "../prop-types/theme";
 import Colors from "../constants/Colors";
 import DebugSettingsLoggingListItemEnable from "./DebugSettingsLoggingListItemEnable";
-import DebugSettingsLoggingListItemEmailLogs from "./DebugSettingsLoggingListItemEmailLogs";
+import DebugSettingsLoggingListItemShareLogs from "./DebugSettingsLoggingListItemShareLogs";
 
 const ITEM_ENABLE_HEALTH_LOGGING = "ITEM_ENABLE_HEALTH_LOGGING";
-const ITEM_EMAIL_HEALTH_LOGS = "ITEM_EMAIL_HEALTH_LOGS";
+const ITEM_SHARE_HEALTH_LOGS = "ITEM_SHARE_HEALTH_LOGS";
 
 class DebugSettingsLoggingList extends PureComponent {
-  data = [ITEM_ENABLE_HEALTH_LOGGING, ITEM_EMAIL_HEALTH_LOGS];
+  data = [ITEM_ENABLE_HEALTH_LOGGING, ITEM_SHARE_HEALTH_LOGS];
 
   renderSeparator = () => (
     <glamorous.View
@@ -36,9 +36,9 @@ class DebugSettingsLoggingList extends PureComponent {
             navigateGoBack={navigateGoBack}
           />
         );
-      case ITEM_EMAIL_HEALTH_LOGS:
+      case ITEM_SHARE_HEALTH_LOGS:
         return (
-          <DebugSettingsLoggingListItemEmailLogs
+          <DebugSettingsLoggingListItemShareLogs
             key={item}
             navigateGoBack={navigateGoBack}
           />

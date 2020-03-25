@@ -12,17 +12,14 @@ class DebugSettingsForceLogListItem extends PureComponent {
   };
 
   onPress = () => {
-    const { navigateGoBack, logLevel } = this.props;
-    setTimeout(() => {
-      navigateGoBack();
-      if (logLevel === Logger.LOG_LEVEL_WARNING) {
-        TPNative.testLogWarning(`test`);
-        Logger.logWarning(`test`);
-      } else if (logLevel === Logger.LOG_LEVEL_ERROR) {
-        TPNative.testLogError(`test`);
-        Logger.logError(`test`);
-      }
-    }, 50);
+    const { logLevel } = this.props;
+    if (logLevel === Logger.LOG_LEVEL_WARNING) {
+      TPNative.testLogWarning(`test`);
+      Logger.logWarning(`test`);
+    } else if (logLevel === Logger.LOG_LEVEL_ERROR) {
+      TPNative.testLogError(`test`);
+      Logger.logError(`test`);
+    }
   };
 
   renderButtonText() {
@@ -76,7 +73,6 @@ class DebugSettingsForceLogListItem extends PureComponent {
 
 DebugSettingsForceLogListItem.propTypes = {
   theme: ThemePropType.isRequired,
-  navigateGoBack: PropTypes.func.isRequired,
   logLevel: PropTypes.string.isRequired,
 };
 

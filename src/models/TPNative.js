@@ -1,8 +1,24 @@
-import { NativeModules } from "react-native";
+import { NativeModules, NativeEventEmitter } from "react-native";
 
 class TPNativeSingletonClass {
   constructor() {
-    this.TPNativeModule = NativeModules.TPNative;
+    this.listeners = [];
+
+    try {
+      this.TPNativeModule = NativeModules.TPNative;
+
+      const events = new NativeEventEmitter(NativeModules.TPNative);
+      events.addListener(
+        "onShareWillBeginPreview",
+        this.onShareWillBeginPreview
+      );
+      events.addListener(
+        "onShareDidEndPreview",
+        this.onShareDidEndPreview
+      );
+    } catch (error) {
+      // console.log(`error: ${error}`);
+    }
   }
 
   clearUser() {
@@ -76,12 +92,35 @@ class TPNativeSingletonClass {
     }
   }
 
-  emailUploaderLogs() {
+  shareUploaderLogs() {
     try {
-      this.TPNativeModule.emailUploaderLogs();
+      this.TPNativeModule.shareUploaderLogs();
     } catch (error) {
       // console.log(`error: ${error}`);
     }
+  }
+
+  onShareWillBeginPreview = () => {
+    this.notify("onShareWillBeginPreview");
+  };
+
+  onShareDidEndPreview = () => {
+    this.notify("onShareDidEndPreview");
+  };
+
+  addListener(listener) {
+    this.listeners.push(listener);
+  }
+
+  removeListener(listener) {
+    const index = this.listeners.indexOf(listener);
+    if (index > 0) {
+      this.listeners.splice(index, 1);
+    }
+  }
+
+  notify(eventName, eventParams) {
+    this.listeners.forEach(listener => listener(eventName, eventParams));
   }
 }
 

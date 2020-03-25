@@ -28,6 +28,6 @@ RCT_EXTERN_METHOD(testLogError:(NSString *)message)
 
 RCT_EXTERN__BLOCKING_SYNCHRONOUS_METHOD(isUploaderLoggingEnabled)
 RCT_EXTERN_METHOD(enableUploaderLogging:(BOOL)enable)
-RCT_EXTERN_METHOD(emailUploaderLogs)
+RCT_EXTERN_METHOD(shareUploaderLogs)
 
 @end

@@ -5,7 +5,7 @@ import glamorous, { withTheme } from "glamorous-native";
 import { ThemePropType } from "../prop-types/theme";
 import { TPNative } from "../models/TPNative";
 
-class DebugSettingsLoggingListItemEmailLogs extends PureComponent {
+class DebugSettingsLoggingListItemShareLogs extends PureComponent {
   state = {
     isUnderlayVisible: false,
   };
@@ -14,7 +14,7 @@ class DebugSettingsLoggingListItemEmailLogs extends PureComponent {
     const { navigateGoBack } = this.props;
     setTimeout(() => {
       navigateGoBack();
-      TPNative.emailUploaderLogs();
+      TPNative.shareUploaderLogs();
     }, 50);
   };
 
@@ -33,7 +33,7 @@ class DebugSettingsLoggingListItemEmailLogs extends PureComponent {
         numberOfLines={1}
         color={titleColor}
       >
-        Email uploader logs
+        Share uploader logs
       </glamorous.Text>
     );
   }
@@ -65,9 +65,9 @@ class DebugSettingsLoggingListItemEmailLogs extends PureComponent {
   }
 }
 
-DebugSettingsLoggingListItemEmailLogs.propTypes = {
-  theme: ThemePropType.isRequired,
+DebugSettingsLoggingListItemShareLogs.propTypes = {
   navigateGoBack: PropTypes.func.isRequired,
+  theme: ThemePropType.isRequired,
 };
 
-export default withTheme(DebugSettingsLoggingListItemEmailLogs);
+export default withTheme(DebugSettingsLoggingListItemShareLogs);

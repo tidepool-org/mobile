@@ -1,7 +1,7 @@
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
-import { navigateGoBack } from "../actions/navigation";
+import { navigateDebugSettings, navigateGoBack } from "../actions/navigation";
 
 import DebugHealthScreen from "../screens/DebugHealthScreen";
 
@@ -14,6 +14,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
+      navigateDebugSettings,
       navigateGoBack,
     },
     dispatch

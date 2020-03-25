@@ -40,6 +40,8 @@ class DrawerHealthStatus extends PureComponent {
       theme,
       health: {
         isUploadingHistorical,
+        isUploadingHistoricalRetry,
+        historicalUploadTotalSamples,
         historicalUploadCurrentDay,
         historicalUploadTotalDays,
         lastCurrentUploadUiDescription,
@@ -52,16 +54,18 @@ class DrawerHealthStatus extends PureComponent {
 
     let line1Text = "";
     let line2Text = "";
+    const useItemCountInsteadOfDayCount = false;
 
     if (isOffline) {
-      line1Text =
-        "Unable to upload. The Internet connection appears to be offline.";
+      line1Text = "Upload paused while offline.";
+    } else if (isUploadingHistoricalRetry) {
+      line1Text = "Syncing Now";
+      line2Text = "Retrying...";
     } else if (isUploadingHistorical) {
-      // TODO: health -  Revisit this temporary work around for an issue where
-      // upload stats show 1 of 1 days before determining true total number of
-      // days!
-      line1Text = "Syncing Health data…";
-      if (historicalUploadTotalDays > 1) {
+      line1Text = "Syncing Now";
+      if (useItemCountInsteadOfDayCount) {
+        line2Text = `Uploaded ${historicalUploadTotalSamples} items`;
+      } else if (historicalUploadCurrentDay > 0) {
         line2Text = `Day ${historicalUploadCurrentDay} of ${historicalUploadTotalDays}`;
       }
     } else if (isInterfaceOn) {
