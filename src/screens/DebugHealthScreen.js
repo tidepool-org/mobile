@@ -33,6 +33,7 @@ import PrimaryTheme from "../themes/PrimaryTheme";
 import Colors from "../constants/Colors";
 import getTheme from "../../native-base-theme/components";
 import commonColor from "../../native-base-theme/variables/commonColor";
+import { formatDateForNoteList } from "../utils/formatDate";
 
 const styles = StyleSheet.create({
   uploadButton: { marginRight: 0, paddingLeft: 0 },
@@ -106,27 +107,50 @@ class DebugHealthScreen extends PureComponent {
 
   onUploaderSuppressDeletesValueChange = value => {
     TPNativeHealth.setUploaderSuppressDeletes(value);
-  }
+  };
 
   onUploaderSimulateValueChange = value => {
     TPNativeHealth.setUploaderSimulate(value);
-  }
+  };
 
   onUploaderIncludeSensitiveInfoValueChange = value => {
     TPNativeHealth.setUploaderIncludeSensitiveInfo(value);
-  }
+  };
 
   onUploaderIncludeCFNetworkDiagnosticsValueChange = value => {
-    Alert.alert("Relaunch Required", "Changing CFNetwork Diagnostics requires a relaunch of the app.", [
-      {
-        text: "OK",
-      },
-    ]);
+    Alert.alert(
+      "Relaunch Required",
+      "Changing CFNetwork Diagnostics requires a relaunch of the app.",
+      [
+        {
+          text: "OK",
+        },
+      ]
+    );
     this.setState({
       restartRequiredForCFNetworkDiagnosticChange: true,
     });
     TPNativeHealth.setUploaderIncludeCFNetworkDiagnostics(value);
-  }
+  };
+
+  onPressResetButton = () => {
+    Alert.alert(
+      "Reset Current?",
+      "Reset persistent state of Current uploader so it will start fresh from 4 hours in the past",
+      [
+        {
+          text: "Cancel",
+          style: "cancel",
+        },
+        {
+          text: "OK",
+          onPress: () => {
+            TPNativeHealth.resetCurrentUploader();
+          },
+        },
+      ]
+    );
+  };
 
   onPressUploadButton = () => {
     TPNativeHealth.startUploadingHistorical();
@@ -134,10 +158,7 @@ class DebugHealthScreen extends PureComponent {
 
   onPressCancelButton = () => {
     const {
-      health: {
-        isUploadingHistorical,
-        isHistoricalUploadPending,
-      },
+      health: { isUploadingHistorical, isHistoricalUploadPending },
     } = this.props;
 
     if (isUploadingHistorical || isHistoricalUploadPending) {
@@ -158,33 +179,34 @@ class DebugHealthScreen extends PureComponent {
 
   onPressCancelButton = () => {
     const {
-      health: {
-        isUploadingHistorical,
-        isHistoricalUploadPending,
-      },
+      health: { isUploadingHistorical, isHistoricalUploadPending },
     } = this.props;
 
     if (isUploadingHistorical || isHistoricalUploadPending) {
-      Alert.alert("Stop Syncing?", "Stop syncing and reset historical uploader for fresh upload", [
-        {
-          text: "Cancel",
-          style: "cancel",
-        },
-        {
-          text: "OK",
-          onPress: () => {
-            TPNativeHealth.stopUploadingHistoricalAndReset();
+      Alert.alert(
+        "Stop Syncing?",
+        "Stop syncing and reset historical uploader for fresh upload",
+        [
+          {
+            text: "Cancel",
+            style: "cancel",
           },
-        },
-      ]);
+          {
+            text: "OK",
+            onPress: () => {
+              TPNativeHealth.stopUploadingHistoricalAndReset();
+            },
+          },
+        ]
+      );
     }
   };
 
   onClose = () => {
     const { navigateDebugSettings, navigateGoBack } = this.props;
-    navigateGoBack()
-    navigateDebugSettings()
-  }
+    navigateGoBack();
+    navigateDebugSettings();
+  };
 
   timeChanged = () => {
     TPNativeHealth.refreshUploadStats();
@@ -380,19 +402,27 @@ class DebugHealthScreen extends PureComponent {
 
   renderUploaderOptions() {
     const {
-      health: { uploaderSuppressDeletes, uploaderSimulate, includeSensitiveInfo, includeCFNetworkDiagnostics },
+      health: {
+        uploaderSuppressDeletes,
+        uploaderSimulate,
+        includeSensitiveInfo,
+        includeCFNetworkDiagnostics,
+      },
     } = this.props;
 
     return (
       <>
-        <Grid style={{paddingTop: 8}}>
+        <Grid style={{ paddingTop: 8 }}>
           <Row>
             <Left styles={styles.left}>
               <Text>Suppress deletes</Text>
             </Left>
             <Right style={styles.right}>
               <Switch
-                style={{transform: [{ scaleX: 0.75 }, { scaleY: 0.75 }], marginRight: -6}}
+                style={{
+                  transform: [{ scaleX: 0.75 }, { scaleY: 0.75 }],
+                  marginRight: -6,
+                }}
                 trackColor={{ true: Colors.brightBlue, false: null }}
                 onValueChange={this.onUploaderSuppressDeletesValueChange}
                 value={uploaderSuppressDeletes}
@@ -407,7 +437,10 @@ class DebugHealthScreen extends PureComponent {
             </Left>
             <Right style={styles.right}>
               <Switch
-                style={{transform: [{ scaleX: 0.75 }, { scaleY: 0.75 }], marginRight: -6}}
+                style={{
+                  transform: [{ scaleX: 0.75 }, { scaleY: 0.75 }],
+                  marginRight: -6,
+                }}
                 trackColor={{ true: Colors.brightBlue, false: null }}
                 onValueChange={this.onUploaderSimulateValueChange}
                 value={uploaderSimulate}
@@ -422,7 +455,10 @@ class DebugHealthScreen extends PureComponent {
             </Left>
             <Right style={styles.right}>
               <Switch
-                style={{transform: [{ scaleX: 0.75 }, { scaleY: 0.75 }], marginRight: -6}}
+                style={{
+                  transform: [{ scaleX: 0.75 }, { scaleY: 0.75 }],
+                  marginRight: -6,
+                }}
                 trackColor={{ true: Colors.brightBlue, false: null }}
                 onValueChange={this.onUploaderIncludeSensitiveInfoValueChange}
                 value={includeSensitiveInfo}
@@ -433,20 +469,31 @@ class DebugHealthScreen extends PureComponent {
         <Grid>
           <Row>
             <Left styles={styles.left}>
-              <Text>{`Include CFNetwork diagnostics${this.state.restartRequiredForCFNetworkDiagnosticChange ? " (restart required)" : ""}`}</Text>
+              <Text>
+                {`Include CFNetwork diagnostics${
+                  this.state.restartRequiredForCFNetworkDiagnosticChange
+                    ? " (restart required)"
+                    : ""
+                }`}
+              </Text>
             </Left>
             <Right style={styles.right}>
               <Switch
-                style={{transform: [{ scaleX: 0.75 }, { scaleY: 0.75 }], marginRight: -6}}
+                style={{
+                  transform: [{ scaleX: 0.75 }, { scaleY: 0.75 }],
+                  marginRight: -6,
+                }}
                 trackColor={{ true: Colors.brightBlue, false: null }}
-                onValueChange={this.onUploaderIncludeCFNetworkDiagnosticsValueChange}
+                onValueChange={
+                  this.onUploaderIncludeCFNetworkDiagnosticsValueChange
+                }
                 value={includeCFNetworkDiagnostics}
               />
             </Right>
           </Row>
         </Grid>
       </>
-    )
+    );
   }
 
   renderUploaderTimeoutsist() {
@@ -461,8 +508,8 @@ class DebugHealthScreen extends PureComponent {
         </ListItem>
         <ListItem
           onPress={() => {
-              TPNativeHealth.setUploaderTimeoutsIndex(0)
-            }}
+            TPNativeHealth.setUploaderTimeoutsIndex(0);
+          }}
         >
           <Left style={styles.left}>
             <Grid>
@@ -471,19 +518,14 @@ class DebugHealthScreen extends PureComponent {
               </Row>
             </Grid>
           </Left>
-          <Right
-            style={styles.right}
-          >
-            <Radio
-              selected={uploaderTimeoutsIndex === 0}
-              disabled
-            />
+          <Right style={styles.right}>
+            <Radio selected={uploaderTimeoutsIndex === 0} disabled />
           </Right>
         </ListItem>
         <ListItem
           onPress={() => {
-              TPNativeHealth.setUploaderTimeoutsIndex(1)
-            }}
+            TPNativeHealth.setUploaderTimeoutsIndex(1);
+          }}
         >
           <Left style={styles.left}>
             <Grid>
@@ -498,8 +540,8 @@ class DebugHealthScreen extends PureComponent {
         </ListItem>
         <ListItem
           onPress={() => {
-              TPNativeHealth.setUploaderTimeoutsIndex(2)
-            }}
+            TPNativeHealth.setUploaderTimeoutsIndex(2);
+          }}
         >
           <Left style={styles.left}>
             <Grid>
@@ -528,8 +570,8 @@ class DebugHealthScreen extends PureComponent {
         </ListItem>
         <ListItem
           onPress={() => {
-        TPNativeHealth.setUploaderLimitsIndex(0)
-      }}
+            TPNativeHealth.setUploaderLimitsIndex(0);
+          }}
         >
           <Left style={styles.left}>
             <Grid>
@@ -541,19 +583,14 @@ class DebugHealthScreen extends PureComponent {
               </Row>
             </Grid>
           </Left>
-          <Right
-            style={styles.right}
-          >
-            <Radio
-              selected={uploaderLimitsIndex === 0}
-              disabled
-            />
+          <Right style={styles.right}>
+            <Radio selected={uploaderLimitsIndex === 0} disabled />
           </Right>
         </ListItem>
         <ListItem
           onPress={() => {
-        TPNativeHealth.setUploaderLimitsIndex(1)
-      }}
+            TPNativeHealth.setUploaderLimitsIndex(1);
+          }}
         >
           <Grid>
             <Row>
@@ -575,8 +612,8 @@ class DebugHealthScreen extends PureComponent {
         </ListItem>
         <ListItem
           onPress={() => {
-        TPNativeHealth.setUploaderLimitsIndex(2)
-      }}
+            TPNativeHealth.setUploaderLimitsIndex(2);
+          }}
         >
           <Grid>
             <Row>
@@ -597,7 +634,7 @@ class DebugHealthScreen extends PureComponent {
           </Grid>
         </ListItem>
       </List>
-    )
+    );
   }
 
   renderUploaderSettingsCardItem() {
@@ -632,10 +669,16 @@ class DebugHealthScreen extends PureComponent {
         historicalUploadTotalDays,
         historicalUploadTotalSamples,
         historicalUploadTotalDeletes,
+        historicalUploadEarliestSampleTime, // TODO: my - 0 - use this
+        historicalUploadLatestSampleTime,
       },
     } = this.props;
 
-    if (isUploadingHistorical || (turnOffHistoricalUploaderReason && turnOffHistoricalUploaderReason !== "turned off")) {
+    if (
+      isUploadingHistorical ||
+      (turnOffHistoricalUploaderReason &&
+        turnOffHistoricalUploaderReason !== "turned off")
+    ) {
       let totalDaysStatsText = "";
       if (historicalUploadTotalDays > 0) {
         totalDaysStatsText = `Uploaded ${historicalUploadCurrentDay} of ${historicalUploadTotalDays} days`;
@@ -643,24 +686,35 @@ class DebugHealthScreen extends PureComponent {
       const totalCountsStatsText = `Uploaded ${historicalUploadTotalSamples} samples, ${historicalUploadTotalDeletes} deletes`;
       return (
         <Grid>
-          {
-            totalCountsStatsText ? (
+          {totalCountsStatsText ? (
+            <Row>
+              <Text style={styles.statsText}>{totalCountsStatsText}</Text>
+            </Row>
+          ) : null}
+          {totalDaysStatsText ? (
+            <Row>
+              <Text style={styles.statsText}>{totalDaysStatsText}</Text>
+            </Row>
+          ) : null}
+          {historicalUploadEarliestSampleTime &&
+          historicalUploadLatestSampleTime ? (
+            <>
               <Row>
                 <Text style={styles.statsText}>
-                  {totalCountsStatsText}
+                  {`earliest sample: ${formatDateForNoteList(
+                    historicalUploadEarliestSampleTime
+                  )}`}
                 </Text>
               </Row>
-            ) : null
-          }
-          {
-            totalDaysStatsText ? (
               <Row>
                 <Text style={styles.statsText}>
-                  {totalDaysStatsText}
+                  {`latest sample: ${formatDateForNoteList(
+                    historicalUploadLatestSampleTime
+                  )}`}
                 </Text>
               </Row>
-            ) : null
-          }
+            </>
+          ) : null}
         </Grid>
       );
     }
@@ -686,15 +740,15 @@ class DebugHealthScreen extends PureComponent {
       },
     } = this.props;
 
-    let uploadStatusText = "Not uploading"
+    let uploadStatusText = "Not uploading";
     if (isUploadingHistoricalRetry) {
-      uploadStatusText = `Retrying due to: ${retryHistoricalUploadError}`
+      uploadStatusText = `Retrying due to: ${retryHistoricalUploadError}`;
     } else if (isUploadingHistorical) {
-      uploadStatusText = "Uploading..."
+      uploadStatusText = "Uploading...";
     } else if (isHistoricalUploadPending) {
-      uploadStatusText = "Upload pending..."
+      uploadStatusText = "Upload pending...";
     } else if (isTurningInterfaceOn) {
-      uploadStatusText = "Preparing"
+      uploadStatusText = "Preparing";
     }
 
     return (
@@ -704,66 +758,57 @@ class DebugHealthScreen extends PureComponent {
             <Text style={styles.statsText}>{uploadStatusText}</Text>
           </Left>
         </Row>
-        {
-          !isUploadingHistorical ?
-          (
+        {!isUploadingHistorical ? (
+          <Row>
+            <Left style={styles.left}>
+              <Text style={styles.statsText}>Stopped reason:</Text>
+            </Left>
+            <Right style={styles.right}>
+              <Text style={styles.statsText}>
+                {turnOffHistoricalUploaderReason}
+              </Text>
+            </Right>
+          </Row>
+        ) : null}
+        {turnOffHistoricalUploaderError &&
+        turnOffHistoricalUploaderReason !== "turned off" ? (
+          <>
             <Row>
-              <Left style={styles.left}>
-                <Text style={styles.statsText}>Stopped reason:</Text>
-              </Left>
-              <Right style={styles.right}>
-                <Text style={styles.statsText}>{turnOffHistoricalUploaderReason}</Text>
-              </Right>
+              <Text style={styles.statsText}>Stopped error:</Text>
             </Row>
-          ) : null
-        }
-        {
-          turnOffHistoricalUploaderError && turnOffHistoricalUploaderReason !== "turned off" ?
-          (
+            <Row>
+              <Text style={styles.statsText}>
+                {turnOffHistoricalUploaderError}
+              </Text>
+            </Row>
+          </>
+        ) : null}
+        {isUploadingHistorical ||
+        (turnOffHistoricalUploaderReason &&
+          turnOffHistoricalUploaderReason !== "turned off") ? (
             <>
               <Row>
-                <Text style={styles.statsText}>Stopped error:</Text>
-              </Row>
-              <Row>
-                <Text style={styles.statsText}>{turnOffHistoricalUploaderError}</Text>
-              </Row>
-            </>
-          ) : null
-        }
-        {
-          isUploadingHistorical || (turnOffHistoricalUploaderReason && turnOffHistoricalUploaderReason !== "turned off") ?
-          (
-            <>
-              <Row>
-                <Text style={styles.statsText}>{`Limits index: ${historicalUploadLimitsIndex}, maxIndex: ${historicalUploadMaxLimitsIndex}`}</Text>
+                <Text style={styles.statsText}>
+                  {`Limits index: ${historicalUploadLimitsIndex}, maxIndex: ${historicalUploadMaxLimitsIndex}`}
+                </Text>
               </Row>
             </>
-          ) : null
-        }
-        {
-            uploaderSuppressDeletes ?
-            (
-              <Row>
-                <Text style={styles.statsText}>Suppress deletes</Text>
-              </Row>
-            ) : null
-        }
-        {
-          uploaderSimulate ?
-          (
-            <Row>
-              <Text style={styles.statsText}>Simulate upload</Text>
-            </Row>
-          ) : null
-        }
-        {
-          includeSensitiveInfo ?
-          (
-            <Row>
-              <Text style={styles.statsText}>Include sensitive info in logs</Text>
-            </Row>
-          ) : null
-        }
+        ) : null}
+        {uploaderSuppressDeletes ? (
+          <Row>
+            <Text style={styles.statsText}>Suppress deletes</Text>
+          </Row>
+        ) : null}
+        {uploaderSimulate ? (
+          <Row>
+            <Text style={styles.statsText}>Simulate upload</Text>
+          </Row>
+        ) : null}
+        {includeSensitiveInfo ? (
+          <Row>
+            <Text style={styles.statsText}>Include sensitive info in logs</Text>
+          </Row>
+        ) : null}
       </Grid>
     );
   }
@@ -790,7 +835,11 @@ class DebugHealthScreen extends PureComponent {
               <Row>
                 <Button
                   transparent
-                  disabled={isUploadingHistorical || isHistoricalUploadPending || (!isInterfaceOn && !isTurningInterfaceOn)}
+                  disabled={
+                    isUploadingHistorical ||
+                    isHistoricalUploadPending ||
+                    (!isInterfaceOn && !isTurningInterfaceOn)
+                  }
                   onPress={this.onPressUploadButton}
                 >
                   <Text>Start upload</Text>
@@ -798,7 +847,9 @@ class DebugHealthScreen extends PureComponent {
                 <Button
                   transparent
                   onPress={this.onPressCancelButton}
-                  disabled={!isUploadingHistorical && !isHistoricalUploadPending}
+                  disabled={
+                    !isUploadingHistorical && !isHistoricalUploadPending
+                  }
                 >
                   <Text>Cancel</Text>
                 </Button>
@@ -835,13 +886,13 @@ class DebugHealthScreen extends PureComponent {
       },
     } = this.props;
 
-    let uploadStatusText = "Current uploader not on"
+    let uploadStatusText = "Current uploader not on";
     if (isUploadingCurrentRetry) {
-      uploadStatusText = `Retrying due to: ${retryCurrentUploadError}`
+      uploadStatusText = `Retrying due to: ${retryCurrentUploadError}`;
     } else if (isUploadingCurrent) {
-      uploadStatusText = "Current uploader is on"
+      uploadStatusText = "Current uploader is on";
     } else if (isTurningInterfaceOn) {
-      uploadStatusText = "Preparing"
+      uploadStatusText = "Preparing";
     }
 
     return (
@@ -851,66 +902,57 @@ class DebugHealthScreen extends PureComponent {
             <Text style={styles.statsText}>{uploadStatusText}</Text>
           </Left>
         </Row>
-        {
-          !isUploadingCurrent ?
-          (
+        {!isUploadingCurrent ? (
+          <Row>
+            <Left style={styles.left}>
+              <Text style={styles.statsText}>Stopped reason:</Text>
+            </Left>
+            <Right style={styles.right}>
+              <Text style={styles.statsText}>
+                {turnOffCurrentUploaderReason}
+              </Text>
+            </Right>
+          </Row>
+        ) : null}
+        {turnOffCurrentUploaderError &&
+        turnOffCurrentUploaderReason !== "turned off" ? (
+          <>
             <Row>
-              <Left style={styles.left}>
-                <Text style={styles.statsText}>Stopped reason:</Text>
-              </Left>
-              <Right style={styles.right}>
-                <Text style={styles.statsText}>{turnOffCurrentUploaderReason}</Text>
-              </Right>
+              <Text style={styles.statsText}>Stopped error:</Text>
             </Row>
-          ) : null
-        }
-        {
-          turnOffCurrentUploaderError && turnOffCurrentUploaderReason !== "turned off" ?
-          (
+            <Row>
+              <Text style={styles.statsText}>
+                {turnOffCurrentUploaderError}
+              </Text>
+            </Row>
+          </>
+        ) : null}
+        {isUploadingCurrent ||
+        (turnOffCurrentUploaderError &&
+          turnOffCurrentUploaderReason !== "turned off") ? (
             <>
               <Row>
-                <Text style={styles.statsText}>Stopped error:</Text>
-              </Row>
-              <Row>
-                <Text style={styles.statsText}>{turnOffCurrentUploaderError}</Text>
-              </Row>
-            </>
-          ) : null
-        }
-        {
-          isUploadingCurrent || (turnOffCurrentUploaderError && turnOffCurrentUploaderReason !== "turned off") ?
-          (
-            <>
-              <Row>
-                <Text style={styles.statsText}>{`Limits index: ${currentUploadLimitsIndex}, maxIndex: ${currentUploadMaxLimitsIndex}`}</Text>
+                <Text style={styles.statsText}>
+                  {`Limits index: ${currentUploadLimitsIndex}, maxIndex: ${currentUploadMaxLimitsIndex}`}
+                </Text>
               </Row>
             </>
-          ) : null
-        }
-        {
-            uploaderSuppressDeletes ?
-            (
-              <Row>
-                <Text style={styles.statsText}>Suppress deletes</Text>
-              </Row>
-            ) : null
-        }
-        {
-          uploaderSimulate ?
-          (
-            <Row>
-              <Text style={styles.statsText}>Simulate upload</Text>
-            </Row>
-          ) : null
-        }
-        {
-          includeSensitiveInfo ?
-          (
-            <Row>
-              <Text style={styles.statsText}>Include sensitive info in logs</Text>
-            </Row>
-          ) : null
-        }
+        ) : null}
+        {uploaderSuppressDeletes ? (
+          <Row>
+            <Text style={styles.statsText}>Suppress deletes</Text>
+          </Row>
+        ) : null}
+        {uploaderSimulate ? (
+          <Row>
+            <Text style={styles.statsText}>Simulate upload</Text>
+          </Row>
+        ) : null}
+        {includeSensitiveInfo ? (
+          <Row>
+            <Text style={styles.statsText}>Include sensitive info in logs</Text>
+          </Row>
+        ) : null}
       </Grid>
     );
   }
@@ -922,23 +964,53 @@ class DebugHealthScreen extends PureComponent {
         isUploadingCurrent,
         currentUploadTotalSamples,
         currentUploadTotalDeletes,
+        currentUploadEarliestSampleTime,
+        currentUploadLatestSampleTime,
+        currentStartAnchorTime,
         lastCurrentUploadUiDescription,
       },
     } = this.props;
 
-    if (isUploadingCurrent || (turnOffCurrentUploaderReason && turnOffCurrentUploaderReason !== "turned off")) {
+    if (
+      isUploadingCurrent ||
+      (turnOffCurrentUploaderReason &&
+        turnOffCurrentUploaderReason !== "turned off")
+    ) {
       const totalCountsStatsText = `Uploaded ${currentUploadTotalSamples} samples, ${currentUploadTotalDeletes} deletes`;
       return (
         <Grid>
-          {
-            totalCountsStatsText ? (
+          {totalCountsStatsText ? (
+            <Row>
+              <Text style={styles.statsText}>{totalCountsStatsText}</Text>
+            </Row>
+          ) : null}
+          {currentStartAnchorTime ? (
+            <Row>
+              <Text style={styles.statsText}>
+                {`start anchor: ${formatDateForNoteList(
+                  currentStartAnchorTime
+                )}`}
+              </Text>
+            </Row>
+          ) : null}
+          {currentUploadEarliestSampleTime && currentUploadLatestSampleTime ? (
+            <>
               <Row>
                 <Text style={styles.statsText}>
-                  {totalCountsStatsText}
+                  {`earliest sample: ${formatDateForNoteList(
+                    currentUploadEarliestSampleTime
+                  )}`}
                 </Text>
               </Row>
-            ) : null
-          }
+              <Row>
+                <Text style={styles.statsText}>
+                  {`latest sample: ${formatDateForNoteList(
+                    currentUploadLatestSampleTime
+                  )}`}
+                </Text>
+              </Row>
+            </>
+          ) : null}
           <Row>
             <Text style={styles.statsText}>
               {lastCurrentUploadUiDescription}
@@ -953,9 +1025,7 @@ class DebugHealthScreen extends PureComponent {
 
   renderCurrentHealthCard() {
     const {
-      health: {
-        shouldShowHealthKitUI,
-      },
+      health: { shouldShowHealthKitUI },
     } = this.props;
 
     if (shouldShowHealthKitUI) {
@@ -965,6 +1035,11 @@ class DebugHealthScreen extends PureComponent {
             <Grid>
               <Row>
                 <Text style={styles.headerStyle}>Current</Text>
+              </Row>
+              <Row>
+                <Button transparent onPress={this.onPressResetButton}>
+                  <Text>Reset</Text>
+                </Button>
               </Row>
             </Grid>
           </CardItem>
