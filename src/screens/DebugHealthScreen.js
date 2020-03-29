@@ -734,7 +734,6 @@ class DebugHealthScreen extends PureComponent {
         retryHistoricalUploadError,
         historicalUploadLimitsIndex,
         historicalUploadMaxLimitsIndex,
-        uploaderSuppressDeletes,
         uploaderSimulate,
         includeSensitiveInfo,
       },
@@ -758,7 +757,7 @@ class DebugHealthScreen extends PureComponent {
             <Text style={styles.statsText}>{uploadStatusText}</Text>
           </Left>
         </Row>
-        {!isUploadingHistorical ? (
+        {!isUploadingHistorical && turnOffHistoricalUploaderReason ? (
           <Row>
             <Left style={styles.left}>
               <Text style={styles.statsText}>Stopped reason:</Text>
@@ -794,17 +793,19 @@ class DebugHealthScreen extends PureComponent {
               </Row>
             </>
         ) : null}
-        {uploaderSuppressDeletes ? (
+        {isUploadingHistorical ? (
           <Row>
-            <Text style={styles.statsText}>Suppress deletes</Text>
+            <Text style={styles.statsText}>
+              Historical always suppresses deletes
+            </Text>
           </Row>
         ) : null}
-        {uploaderSimulate ? (
+        {isUploadingHistorical && uploaderSimulate ? (
           <Row>
             <Text style={styles.statsText}>Simulate upload</Text>
           </Row>
         ) : null}
-        {includeSensitiveInfo ? (
+        {isUploadingHistorical && includeSensitiveInfo ? (
           <Row>
             <Text style={styles.statsText}>Include sensitive info in logs</Text>
           </Row>
@@ -902,7 +903,7 @@ class DebugHealthScreen extends PureComponent {
             <Text style={styles.statsText}>{uploadStatusText}</Text>
           </Left>
         </Row>
-        {!isUploadingCurrent ? (
+        {!isUploadingCurrent && turnOffCurrentUploaderReason ? (
           <Row>
             <Left style={styles.left}>
               <Text style={styles.statsText}>Stopped reason:</Text>
@@ -938,17 +939,17 @@ class DebugHealthScreen extends PureComponent {
               </Row>
             </>
         ) : null}
-        {uploaderSuppressDeletes ? (
+        {isUploadingCurrent && uploaderSuppressDeletes ? (
           <Row>
             <Text style={styles.statsText}>Suppress deletes</Text>
           </Row>
         ) : null}
-        {uploaderSimulate ? (
+        {isUploadingCurrent && uploaderSimulate ? (
           <Row>
             <Text style={styles.statsText}>Simulate upload</Text>
           </Row>
         ) : null}
-        {includeSensitiveInfo ? (
+        {isUploadingCurrent && includeSensitiveInfo ? (
           <Row>
             <Text style={styles.statsText}>Include sensitive info in logs</Text>
           </Row>
