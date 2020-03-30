@@ -26,6 +26,8 @@ class TPNativeHealthSingletonClass {
     this.historicalUploadTotalDays = 0;
     this.historicalUploadTotalSamples = 0;
     this.historicalUploadTotalDeletes = 0;
+    this.historicalUploadEarliestSampleTime = "";
+    this.historicalUploadLatestSampleTime = "";
     this.turnOffHistoricalUploaderReason = "";
     this.turnOffHistoricalUploaderError = "";
     this.isUploadingHistoricalRetry = false;
@@ -37,6 +39,9 @@ class TPNativeHealthSingletonClass {
     this.isUploadingCurrent = false;
     this.currentUploadTotalSamples = 0;
     this.currentUploadTotalDeletes = 0;
+    this.currentUploadEarliestSampleTime = "";
+    this.currentUploadLatestSampleTime = "";
+    this.currentStartAnchorTime = "";
     this.turnOffCurrentUploaderReason = "";
     this.turnOffCurrentUploaderError = "";
     this.isUploadingCurrentRetry = false;
@@ -52,34 +57,6 @@ class TPNativeHealthSingletonClass {
       this.nativeModule = NativeModules.TPNativeHealth;
 
       this.healthKitInterfaceConfiguration = this.nativeModule.healthKitInterfaceConfiguration();
-      const uploaderProgress = this.nativeModule.uploaderProgress();
-
-      this.isUploadingHistorical = uploaderProgress.isUploadingHistorical;
-      this.isHistoricalUploadPending =
-        uploaderProgress.isHistoricalUploadPending;
-      this.historicalUploadLimitsIndex =
-        uploaderProgress.historicalUploadLimitsIndex;
-      this.historicalUploadMaxLimitsIndex =
-        uploaderProgress.historicalUploadMaxLimitsIndex;
-      this.historicalUploadCurrentDay =
-        uploaderProgress.historicalUploadCurrentDay;
-      this.historicalUploadTotalDays =
-        uploaderProgress.historicalUploadTotalDays;
-      this.historicalUploadTotalSamples =
-        uploaderProgress.historicalUploadTotalSamples;
-      this.historicalUploadTotalDeletes =
-        uploaderProgress.historicalUploadTotalDeletes;
-
-      this.isUploadingCurrent = uploaderProgress.isUploadingCurrent;
-      this.currentUploadLimitsIndex = uploaderProgress.currentUploadLimitsIndex;
-      this.currentUploadMaxLimitsIndex =
-        uploaderProgress.currentUploadMaxLimitsIndex;
-      this.currentUploadTotalSamples =
-        uploaderProgress.currentUploadTotalSamples;
-      this.currentUploadTotalDeletes =
-        uploaderProgress.currentUploadTotalDeletes;
-      this.lastCurrentUploadUiDescription =
-        uploaderProgress.lastCurrentUploadUiDescription;
 
       const events = new NativeEventEmitter(NativeModules.TPNativeHealth);
       events.addListener(
@@ -191,6 +168,14 @@ class TPNativeHealthSingletonClass {
     }
   }
 
+  resetCurrentUploader() {
+    try {
+      this.nativeModule.resetCurrentUploader();
+    } catch (error) {
+      // console.log(`error: ${error}`);
+    }
+  }
+
   onHealthKitInterfaceConfiguration = params => {
     this.healthKitInterfaceConfiguration = { ...params };
     this.notify("onHealthKitInterfaceConfiguration");
@@ -294,6 +279,10 @@ class TPNativeHealthSingletonClass {
       this.updateHistoricalUploadCurrentDayIfComplete();
       this.historicalUploadTotalSamples = params.historicalUploadTotalSamples;
       this.historicalUploadTotalDeletes = params.historicalUploadTotalDeletes;
+      this.historicalUploadEarliestSampleTime =
+        params.historicalUploadEarliestSampleTime;
+      this.historicalUploadLatestSampleTime =
+        params.historicalUploadLatestSampleTime;
       this.historicalUploadLimitsIndex = params.historicalUploadLimitsIndex;
       this.historicalUploadMaxLimitsIndex =
         params.historicalUploadMaxLimitsIndex;
@@ -301,6 +290,10 @@ class TPNativeHealthSingletonClass {
       this.isUploadingCurrent = params.isUploadingCurrent;
       this.currentUploadTotalSamples = params.currentUploadTotalSamples;
       this.currentUploadTotalDeletes = params.currentUploadTotalDeletes;
+      this.currentUploadEarliestSampleTime =
+        params.currentUploadEarliestSampleTime;
+      this.currentUploadLatestSampleTime = params.currentUploadLatestSampleTime;
+      this.currentStartAnchorTime = params.currentStartAnchorTime;
       this.currentUploadLimitsIndex = params.currentUploadLimitsIndex;
       this.currentUploadMaxLimitsIndex = params.currentUploadMaxLimitsIndex;
       this.lastCurrentUploadUiDescription =
@@ -327,6 +320,10 @@ class TPNativeHealthSingletonClass {
         uploaderProgress.historicalUploadTotalSamples;
       this.historicalUploadTotalDeletes =
         uploaderProgress.historicalUploadTotalDeletes;
+      this.historicalUploadEarliestSampleTime =
+        uploaderProgress.historicalUploadEarliestSampleTime;
+      this.historicalUploadLatestSampleTime =
+        uploaderProgress.historicalUploadLatestSampleTime;
 
       this.isUploadingCurrent = uploaderProgress.isUploadingCurrent;
       this.currentUploadLimitsIndex = uploaderProgress.currentUploadLimitsIndex;
@@ -336,6 +333,11 @@ class TPNativeHealthSingletonClass {
         uploaderProgress.currentUploadTotalSamples;
       this.currentUploadTotalDeletes =
         uploaderProgress.currentUploadTotalDeletes;
+      this.currentUploadEarliestSampleTime =
+        uploaderProgress.currentUploadEarliestSampleTime;
+      this.currentUploadLatestSampleTime =
+        uploaderProgress.currentUploadLatestSampleTime;
+      this.currentStartAnchorTime = uploaderProgress.currentStartAnchorTime;
       this.lastCurrentUploadUiDescription =
         uploaderProgress.lastCurrentUploadUiDescription;
 

@@ -34,6 +34,7 @@ RCT_EXTERN__BLOCKING_SYNCHRONOUS_METHOD(setUploaderIncludeCFNetworkDiagnostics: 
 
 RCT_EXTERN_METHOD(startUploadingHistorical)
 RCT_EXTERN_METHOD(stopUploadingHistoricalAndReset)
+RCT_EXTERN_METHOD(resetCurrentUploader)
 
 RCT_EXTERN__BLOCKING_SYNCHRONOUS_METHOD(uploaderProgress)
 
