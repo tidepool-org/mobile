@@ -133,6 +133,29 @@ class DebugHealthScreen extends PureComponent {
     TPNativeHealth.setUploaderIncludeCFNetworkDiagnostics(value);
   };
 
+  onUploaderShouldLogHealthDataValueChange = value => {
+    if (value) {
+      Alert.alert(
+        "Log Health data?",
+        "Enabling this will log Health data for read, gather, and upload phases of the uploader. This is a lot of data. Are you sure?",
+        [
+          {
+            text: "Cancel",
+            style: "cancel",
+          },
+          {
+            text: "OK",
+            onPress: () => {
+              TPNativeHealth.setUploaderShouldLogHealthData(value);
+            },
+          },
+        ]
+      );
+    } else {
+      TPNativeHealth.setUploaderShouldLogHealthData(value);
+    }
+  };
+
   onPressResetButton = () => {
     Alert.alert(
       "Reset Current?",
@@ -407,6 +430,7 @@ class DebugHealthScreen extends PureComponent {
         uploaderSimulate,
         includeSensitiveInfo,
         includeCFNetworkDiagnostics,
+        shouldLogHealthData,
       },
     } = this.props;
 
@@ -488,6 +512,24 @@ class DebugHealthScreen extends PureComponent {
                   this.onUploaderIncludeCFNetworkDiagnosticsValueChange
                 }
                 value={includeCFNetworkDiagnostics}
+              />
+            </Right>
+          </Row>
+        </Grid>
+        <Grid>
+          <Row>
+            <Left styles={styles.left}>
+              <Text>Log Health data</Text>
+            </Left>
+            <Right style={styles.right}>
+              <Switch
+                style={{
+                  transform: [{ scaleX: 0.75 }, { scaleY: 0.75 }],
+                  marginRight: -6,
+                }}
+                trackColor={{ true: Colors.brightBlue, false: null }}
+                onValueChange={this.onUploaderShouldLogHealthDataValueChange}
+                value={shouldLogHealthData}
               />
             </Right>
           </Row>
@@ -669,7 +711,7 @@ class DebugHealthScreen extends PureComponent {
         historicalUploadTotalDays,
         historicalUploadTotalSamples,
         historicalUploadTotalDeletes,
-        historicalUploadEarliestSampleTime, // TODO: my - 0 - use this
+        historicalUploadEarliestSampleTime,
         historicalUploadLatestSampleTime,
       },
     } = this.props;

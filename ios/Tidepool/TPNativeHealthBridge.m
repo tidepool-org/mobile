@@ -31,6 +31,7 @@ RCT_EXTERN__BLOCKING_SYNCHRONOUS_METHOD(setUploaderSuppressDeletes: (BOOL)suppre
 RCT_EXTERN__BLOCKING_SYNCHRONOUS_METHOD(setUploaderSimulate: (BOOL)simulate)
 RCT_EXTERN__BLOCKING_SYNCHRONOUS_METHOD(setUploaderIncludeSensitiveInfo: (BOOL)includeSensitiveInfo)
 RCT_EXTERN__BLOCKING_SYNCHRONOUS_METHOD(setUploaderIncludeCFNetworkDiagnostics: (BOOL)includeCFNetworkDiagnostics)
+RCT_EXTERN__BLOCKING_SYNCHRONOUS_METHOD(setUploaderShouldLogHealthData: (BOOL)shouldLogHealthData)
 
 RCT_EXTERN_METHOD(startUploadingHistorical)
 RCT_EXTERN_METHOD(stopUploadingHistoricalAndReset)

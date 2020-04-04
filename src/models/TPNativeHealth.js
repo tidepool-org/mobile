@@ -18,6 +18,7 @@ class TPNativeHealthSingletonClass {
       uploaderSimulate: false,
       includeSensitiveInfo: false,
       includeCFNetworkDiagnostics: false,
+      shouldLogHealthData: false,
     };
 
     this.isUploadingHistorical = false;
@@ -141,6 +142,14 @@ class TPNativeHealthSingletonClass {
       this.nativeModule.setUploaderIncludeCFNetworkDiagnostics(
         includeCFNetworkDiagnostics
       );
+    } catch (error) {
+      // console.log(`error: ${error}`);
+    }
+  }
+
+  setUploaderShouldLogHealthData(shouldLogHealthData) {
+    try {
+      this.nativeModule.setUploaderShouldLogHealthData(shouldLogHealthData);
     } catch (error) {
       // console.log(`error: ${error}`);
     }
