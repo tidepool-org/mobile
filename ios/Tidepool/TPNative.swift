@@ -114,12 +114,12 @@ class TPNative: RCTEventEmitter, UIDocumentInteractionControllerDelegate {
             }
         }
     }
-
+    
     @objc func shareUploaderLogs() -> Void {
         DDLog.flushLog()
 
         // Delay so we aren't presenting new view controller while Debug UI view controller is transitioning
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(750), execute: {
             let appName = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as! String
             let progressAlert = UIAlertController(title: "Creating \(appName) logs.zip...", message: nil, preferredStyle: .alert)
             let activityIndicator = UIActivityIndicatorView(style: .gray)
@@ -134,20 +134,37 @@ class TPNative: RCTEventEmitter, UIDocumentInteractionControllerDelegate {
 
             let documentInteractionController = UIDocumentInteractionController()
             DispatchQueue.global(qos: .userInitiated).async {
-                let logFilePaths = fileLogger.logFileManager.sortedLogFilePaths as [String]
-                var logFileUrls = [URL]()
-                for logFilePath in logFilePaths {
-                    logFileUrls.append(URL(fileURLWithPath: logFilePath))
-                }
-                var successfullyCreatedZip = true
                 let directory = FileManager.default.urls(for:.cachesDirectory, in: .userDomainMask)[0]
                 let zipFileUrl = directory.appendingPathComponent("\(appName) logs.zip")
+                var successfullyCreatedZip = false
                 do {
-                    try Zip.zipFiles(paths: logFileUrls,
-                                    zipFilePath: zipFileUrl,
-                                    password: nil,
-                                    compression: .BestCompression,
-                                    progress: { (progress) -> () in })
+                    let logFilePaths = fileLogger.logFileManager.sortedLogFilePaths as [String]
+                    var fileUrls = [URL]()
+                    for logFilePath in logFilePaths {
+                        let fileURL = URL(fileURLWithPath: logFilePath)
+                        if let _ = try? fileURL.checkResourceIsReachable(),
+                           let resources = try? fileURL.resourceValues(forKeys:[.fileSizeKey]),
+                           let fileSize = resources.fileSize,
+                           fileSize > 0
+                        {
+                            fileUrls.append(URL(fileURLWithPath: logFilePath))
+                        }
+                    }
+                    for dataLogURL in TPDataLogger.sharedInstance.dataLogURLs() {
+                        if let _ = try? dataLogURL.checkResourceIsReachable(),
+                           let resources = try? dataLogURL.resourceValues(forKeys:[.fileSizeKey]),
+                           let fileSize = resources.fileSize,
+                           fileSize > 0
+                        {
+                            fileUrls.append(dataLogURL)
+                        }
+                    }
+                    try Zip.zipFiles(paths: fileUrls,
+                                     zipFilePath: zipFileUrl,
+                                     password: nil,
+                                     compression: .BestCompression,
+                                     progress: { (progress) -> () in })
+                    successfullyCreatedZip = true
                 }
                 catch {
                     successfullyCreatedZip = false

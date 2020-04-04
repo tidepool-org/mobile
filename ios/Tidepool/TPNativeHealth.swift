@@ -100,6 +100,7 @@ class TPNativeHealth: RCTEventEmitter {
             "uploaderSimulate": TPSettings.sharedInstance.uploaderSimulate,
             "includeSensitiveInfo": TPSettings.sharedInstance.includeSensitiveInfo,
             "includeCFNetworkDiagnostics": TPSettings.sharedInstance.includeCFNetworkDiagnostics,
+            "shouldLogHealthData": TPSettings.sharedInstance.shouldLogHealthData,
             "lastCurrentUploadUiDescription": lastCurrentUploadUiDescription()
         ]
     }
@@ -246,6 +247,14 @@ class TPNativeHealth: RCTEventEmitter {
         DDLogInfo("\(#function)")
 
         TPSettings.sharedInstance.setUploaderIncludeCFNetworkDiagnostics(includeCFNetworkDiagnostics)
+        connector.nativeHealthBridge?.onHealthKitInterfaceConfiguration()
+        return true
+    }
+    
+    @objc func setUploaderShouldLogHealthData(_ shouldLogHealthData: Bool) -> NSNumber {
+        DDLogInfo("\(#function)")
+
+        TPSettings.sharedInstance.setUploaderShouldLogHealthData(shouldLogHealthData)
         connector.nativeHealthBridge?.onHealthKitInterfaceConfiguration()
         return true
     }

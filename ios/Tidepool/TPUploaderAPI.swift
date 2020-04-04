@@ -15,6 +15,7 @@
 
 import CocoaLumberjack
 import Foundation
+import HealthKit
 import TPHealthKitUploader
 
 /// The singleton of this class, accessed and initialized via TPUploaderAPI.connector(), initializes the uploader interface and provides it with the necessary callback functions.
@@ -47,6 +48,7 @@ class TPUploaderAPI: TPUploaderConfigInfo {
 
     private let api: TPApi
     private let dataController: TPDataController
+    private let settings = TPSettings.sharedInstance
 
     //
     // MARK: - TPUploaderConfigInfo protocol
@@ -63,7 +65,7 @@ class TPUploaderAPI: TPUploaderConfigInfo {
 
     func sessionToken() -> String? {
         let result = api.sessionToken
-        let includeSensitiveInfo = TPSettings.sharedInstance.includeSensitiveInfo
+        let includeSensitiveInfo = settings.includeSensitiveInfo
         if includeSensitiveInfo {
             DDLogInfo("\(#function) - TPUploaderConfigInfo protocol, returning: \(result ?? "nil")")
         } else {
@@ -133,27 +135,27 @@ class TPUploaderAPI: TPUploaderConfigInfo {
     }
 
     func samplesUploadLimits() -> [Int] {
-        return TPSettings.sharedInstance.samplesUploadLimits
+        return settings.samplesUploadLimits
     }
     
     func uploaderTimeouts() -> [Int] {
-        return TPSettings.sharedInstance.uploaderTimeouts
+        return settings.uploaderTimeouts
     }
     
     func deletesUploadLimits() -> [Int] {
-        return TPSettings.sharedInstance.deletesUploadLimits
+        return settings.deletesUploadLimits
     }
     
     func supressUploadDeletes() -> Bool {
-        return TPSettings.sharedInstance.uploaderSuppressDeletes
+        return settings.uploaderSuppressDeletes
     }
     
     func simulateUpload() -> Bool {
-        return TPSettings.sharedInstance.uploaderSimulate
+        return settings.uploaderSimulate
     }
     
     func includeSensitiveInfo() -> Bool {
-        return TPSettings.sharedInstance.includeSensitiveInfo
+        return settings.includeSensitiveInfo
     }
 
     let uploadFramework: StaticString = "uploader"
@@ -171,5 +173,21 @@ class TPUploaderAPI: TPUploaderConfigInfo {
 
     func logDebug(_ str: String) {
         DDLogDebug(str, file: uploadFramework, function: uploadFramework)
+    }
+    
+    func openDataLogs(mode: TPUploader.Mode, isFresh: Bool) {
+        TPDataLogger.sharedInstance.openDataLogs(mode: mode, isFresh: isFresh)
+    }
+    
+    func logData(mode: TPUploader.Mode, phase: HKDataLogPhase, isRetry: Bool, samples: [[String: AnyObject]]?, deletes: [[String: AnyObject]]?) {
+        if settings.shouldLogHealthData {
+            TPDataLogger.sharedInstance.logData(mode: mode, phase: phase, isRetry: isRetry, samples: samples, deletes: deletes)
+        }
+    }
+        
+    func logData(mode: TPUploader.Mode, phase: HKDataLogPhase, isRetry: Bool, samples: [HKSample]?, deletes: [HKDeletedObject]?) {
+        if settings.shouldLogHealthData {
+            TPDataLogger.sharedInstance.logData(mode: mode, phase: phase, isRetry: isRetry, samples: samples, deletes: deletes)
+        }
     }
 }

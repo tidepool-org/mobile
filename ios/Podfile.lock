@@ -9,6 +9,7 @@ PODS:
     - CocoaLumberjack/Core
   - Crashlytics (3.13.4):
     - Fabric (~> 1.10.2)
+  - CSV.swift (2.4.3)
   - DoubleConversion (1.1.6)
   - EXAppLoaderProvider (8.0.0)
   - EXConstants (8.0.0):
@@ -331,6 +332,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire (= 4.9.1)
   - CocoaLumberjack/Swift (= 3.5.3)
+  - CSV.swift (= 2.4.3)
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - EXAppLoaderProvider (from `../node_modules/expo-app-loader-provider/ios`)
   - EXConstants (from `../node_modules/expo-constants/ios`)
@@ -375,7 +377,7 @@ DEPENDENCIES:
   - RNDeviceInfo (from `../node_modules/react-native-device-info`)
   - RollbarReactNative (from `../node_modules/rollbar-react-native`)
   - SwiftyJSON (= 5.0.0)
-  - TPHealthKitUploader (from `https://github.com/tidepool-org/healthkit-uploader`, tag `1.0.6`)
+  - TPHealthKitUploader (from `https://github.com/tidepool-org/healthkit-uploader`, tag `1.0.7`)
   - UMBarCodeScannerInterface (from `../node_modules/unimodules-barcode-scanner-interface/ios`)
   - UMCameraInterface (from `../node_modules/unimodules-camera-interface/ios`)
   - UMConstantsInterface (from `../node_modules/unimodules-constants-interface/ios`)
@@ -405,6 +407,7 @@ SPEC REPOS:
     - Rollbar
   trunk:
     - Alamofire
+    - CSV.swift
     - SwiftyJSON
     - Zip
 
@@ -505,7 +508,7 @@ EXTERNAL SOURCES:
     :path: "../node_modules/rollbar-react-native"
   TPHealthKitUploader:
     :git: https://github.com/tidepool-org/healthkit-uploader
-    :tag: 1.0.6
+    :tag: 1.0.7
   UMBarCodeScannerInterface:
     :path: !ruby/object:Pathname
     path: "../node_modules/unimodules-barcode-scanner-interface/ios"
@@ -551,7 +554,7 @@ CHECKOUT OPTIONS:
     :tag: ios/2.14.2
   TPHealthKitUploader:
     :git: https://github.com/tidepool-org/healthkit-uploader
-    :tag: 1.0.6
+    :tag: 1.0.7
 
 SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
@@ -559,6 +562,7 @@ SPEC CHECKSUMS:
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   CocoaLumberjack: 2f44e60eb91c176d471fdba43b9e3eae6a721947
   Crashlytics: 2dfd686bcb918dc10ee0e76f7f853fe42c7bd552
+  CSV.swift: d38741b349c067b4a6db42237cb0e2974d21ccac
   DoubleConversion: 5805e889d232975c086db112ece9ed034df7a0b2
   EXAppLoaderProvider: ebdb6bc2632c1ccadbe49f5e4104d8d690969c49
   EXConstants: 4051b16c17ef3defa03c541d42811dc92b249146
@@ -622,6 +626,6 @@ SPEC CHECKSUMS:
   Yoga: ba3d99dbee6c15ea6bbe3783d1f0cb1ffb79af0f
   Zip: 8877eede3dda76bcac281225c20e71c25270774c
 
-PODFILE CHECKSUM: 1d0616389b0603651d65f18bcf7facac8b866e2a
+PODFILE CHECKSUM: e4603c49b3e1b6b53c295ae979da76511854da57
 
 COCOAPODS: 1.8.4

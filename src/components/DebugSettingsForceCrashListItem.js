@@ -1,4 +1,6 @@
 import React, { PureComponent } from "react";
+import { Alert } from "react-native";
+
 import glamorous, { withTheme } from "glamorous-native";
 
 import { ThemePropType } from "../prop-types/theme";
@@ -10,7 +12,18 @@ class DebugSettingsForceCrashListItem extends PureComponent {
   };
 
   onPress = () => {
-    TPNative.testNativeCrash();
+    Alert.alert("Force Crash?", "", [
+      {
+        text: "Cancel",
+        style: "cancel",
+      },
+      {
+        text: "OK",
+        onPress: () => {
+          TPNative.testNativeCrash();
+        },
+      },
+    ]);
   };
 
   renderButtonText() {

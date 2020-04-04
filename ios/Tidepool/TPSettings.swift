@@ -29,6 +29,7 @@ let kUserDefaultsUploaderSuppressDeletes = "UploaderSuppressDeletes"
 let kUserDefaultsUploaderSimulate = "UploaderSimulate"
 let kUserDefaultsUploaderIncludeSensitiveInfo = "UploaderIncludeSensitiveInfo"
 let kUserDefaultsUploaderIncludeCFNetworkDiagnostics = "UploaderIncludeCFNetworkDiagnostics"
+let kUserDefaultsUploaderShouldLogHealthData = "kUserDefaultsUploaderShouldLogHealthData"
 
 let kAsyncStorageApiEnvironmentKey = "API_ENVIRONMENT_KEY"
 let kAsyncStorageAuthUserKey = "AUTH_USER_KEY"
@@ -49,6 +50,7 @@ class TPSettings {
     var uploaderSimulate: Bool = false
     var includeSensitiveInfo: Bool = false
     var includeCFNetworkDiagnostics: Bool = false
+    var shouldLogHealthData: Bool = false
 
     var uploaderTimeoutsIndex: Int = 0
     var uploaderTimeouts: [Int] = []
@@ -93,6 +95,7 @@ class TPSettings {
         uploaderSimulate = userDefaults.bool(forKey: kUserDefaultsUploaderSimulate)
         includeSensitiveInfo = userDefaults.bool(forKey: kUserDefaultsUploaderIncludeSensitiveInfo)
         includeCFNetworkDiagnostics = userDefaults.bool(forKey: kUserDefaultsUploaderIncludeCFNetworkDiagnostics)
+        shouldLogHealthData = userDefaults.bool(forKey: kUserDefaultsUploaderShouldLogHealthData)
 
         getValuesForAyncStorageKeys(keys: [kAsyncStorageApiEnvironmentKey, kAsyncStorageAuthUserKey]) { (values: [String?]) in
             // kAsyncStorageApiEnvironmentKey
@@ -158,6 +161,11 @@ class TPSettings {
     func setUploaderIncludeCFNetworkDiagnostics(_ includeCFNetworkDiagnostics: Bool) {
         self.includeCFNetworkDiagnostics = includeCFNetworkDiagnostics
         userDefaults.set(includeCFNetworkDiagnostics, forKey: kUserDefaultsUploaderIncludeCFNetworkDiagnostics)
+    }
+    
+    func setUploaderShouldLogHealthData(_ shouldLogHealthData: Bool) {
+        self.shouldLogHealthData = shouldLogHealthData
+        userDefaults.set(shouldLogHealthData, forKey: kUserDefaultsUploaderShouldLogHealthData)
     }
 
     func getValuesForAyncStorageKeys(keys: [String], values: @escaping ([String?]) -> Void) -> Void {
