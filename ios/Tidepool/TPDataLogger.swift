@@ -128,7 +128,7 @@ class TPDataLogger {
                 var type = ""
                 var value = 0.0
                 let uploaderSampleType = sample["type"] as! String
-                if uploaderSampleType == "cbg" || type == "smbg" {
+                if uploaderSampleType == "cbg" || uploaderSampleType == "smbg" {
                     type = "BloodGlucose"
                     value = sample["value"] as! Double
                 } else if uploaderSampleType == "food" {
