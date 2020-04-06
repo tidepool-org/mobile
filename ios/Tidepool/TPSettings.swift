@@ -63,7 +63,7 @@ class TPSettings {
                     [500, 100, 50, 10],
                     [100, 50, 25, 5]]
     private let availableDeletesUploadLimits = [
-                    [500, 50, 10, 1],
+                    [100, 50, 10, 1],
                     [50, 5, 1, 1],
                     [5, 1, 1, 1]]
     private let availableTimeouts = [

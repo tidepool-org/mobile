@@ -621,7 +621,7 @@ class DebugHealthScreen extends PureComponent {
                 <Text>Samples: 2000, 1000, 500, 250</Text>
               </Row>
               <Row>
-                <Text>Deletes: 500, 50, 10, 1</Text>
+                <Text>Deletes: 100, 50, 10, 1</Text>
               </Row>
             </Grid>
           </Left>
