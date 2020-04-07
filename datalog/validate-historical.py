@@ -11,6 +11,7 @@ for all the Tidepool upload types from HealthKit data export (from apple_health_
 import argparse
 from datetime import datetime
 import pandas as pd
+import progressbar
 import time
 
 parser = argparse.ArgumentParser(
@@ -29,31 +30,112 @@ tidepool_file = args.tp
 hk_export_file = args.hk
 
 start_time = time.time()
-item_count = 0
-items_not_found_count = 0
+
 hk_export_file_df = pd.read_csv(hk_export_file, usecols=["type", "startDate"])
 tidepool_file_df = pd.read_csv(tidepool_file, usecols=["type", "startDate"])
 
-for hk_export_file_item in hk_export_file_df.itertuples():
-    item_count += 1
-    # TODO: Also add support for Workout (workoutActivityType in HK export)
-    if (hk_export_file_item.type == "DietaryCarbohydrates" or
-        hk_export_file_item.type == "InsulinDelivery" or
-        hk_export_file_item.type == "BloodGlucose"):
-        hk_export_file_item_exists_in_tidepool_file = False
-        exported_file_item_start_date = datetime.strptime(hk_export_file_item.startDate, "%Y-%m-%d %H:%M:%S %z")
-        for tidepool_file_item in tidepool_file_df.itertuples():
-            tidepool_file_item_start_date = datetime.strptime(tidepool_file_item.startDate, "%Y-%m-%d %H:%M:%S%z")
-            if (tidepool_file_item_start_date.timestamp() == exported_file_item_start_date.timestamp() and
-                tidepool_file_item.type == hk_export_file_item.type):
-                hk_export_file_item_exists_in_tidepool_file = True
-                break
-        if not hk_export_file_item_exists_in_tidepool_file:
-            items_not_found_count += 1
-            print("HK export item not found in Tidepool phase: ", hk_export_file_item)
+item_count = 0
+with progressbar.ProgressBar(widgets=[
+            "Preprocessing hk file: ",
+            progressbar.Counter(format='%(value)02d/%(max_value)d'),
+            " ",
+            progressbar.Percentage(),
+            " ",
+            progressbar.AdaptiveETA(),
+            " ",
+            progressbar.Bar()
+        ],
+        max_value=len(hk_export_file_df),
+        redirect_stdout=True) as bar:
+    timestamps = []
+    for item in hk_export_file_df.itertuples():
+        item_count += 1
+        bar.update(item_count)
+        if not isinstance(item.type, str) or len(item.type) == 0:
+            timestamps.append(0)
+            continue
+        try:
+            timestamp = datetime.strptime(item.startDate, "%Y-%m-%d %H:%M:%S %z").timestamp()
+        except:
+            timestamp = datetime.strptime(item.startDate, "%Y-%m-%d %H:%M:%S%z").timestamp()
+        timestamps.append(timestamp)
+    labels = list(hk_export_file_df)
+    hk_export_file_df["timestamp"] = timestamps
+    labels.append("timestamp")
+    hk_export_file_df = hk_export_file_df.reindex(labels=labels, axis='columns')
+    hk_export_file_df.sort_values(by='timestamp', ascending=True, inplace=True)
+
+item_count = 0
+with progressbar.ProgressBar(widgets=[
+            "Preprocessing tp file: ",
+            progressbar.Counter(format='%(value)02d/%(max_value)d'),
+            " ",
+            progressbar.Percentage(),
+            " ",
+            progressbar.AdaptiveETA(),
+            " ",
+            progressbar.Bar()
+        ],
+        max_value=len(tidepool_file_df),
+        redirect_stdout=True) as bar:
+    timestamps = []
+    for item in tidepool_file_df.itertuples():
+        item_count += 1
+        bar.update(item_count)
+        if not isinstance(item.type, str) or len(item.type) == 0:
+            timestamps.append(0)
+            continue
+        try:
+            timestamp = datetime.strptime(item.startDate, "%Y-%m-%d %H:%M:%S%z").timestamp()
+        except:
+            timestamp = datetime.strptime(item.startDate, "%Y-%m-%d %H:%M:%S %z").timestamp()
+        timestamps.append(timestamp)
+    labels = list(tidepool_file_df)
+    tidepool_file_df["timestamp"] = timestamps
+    labels.append("timestamp")
+    tidepool_file_df = tidepool_file_df.reindex(labels=labels, axis='columns')
+    tidepool_file_df.sort_values(by='timestamp', ascending=True, inplace=True)
+
+items_not_found_count = 0
+item_count = 0
+with progressbar.ProgressBar(widgets=[
+            "Validating tp file: ",
+            progressbar.Counter(format='%(value)02d/%(max_value)d'),
+            " ",
+            progressbar.Percentage(),
+            " ",
+            progressbar.AdaptiveETA(),
+            " ",
+            progressbar.Bar()
+        ],
+        max_value=len(hk_export_file_df),
+        redirect_stdout=True) as bar:
+    tidepool_file_df_start_row = 0
+    tidepool_file_df_next_row = 0
+    for hk_export_file_item in hk_export_file_df.itertuples():
+        item_count += 1
+        bar.update(item_count)
+        if hk_export_file_item.timestamp == 0:
+            continue
+        # TODO: Also add support for Workout (workoutActivityType in HK export)
+        if (hk_export_file_item.type == "DietaryCarbohydrates" or
+            hk_export_file_item.type == "InsulinDelivery" or
+            hk_export_file_item.type == "BloodGlucose"):
+            hk_export_file_item_exists_in_tidepool_file = False
+            for tidepool_file_item in tidepool_file_df.iloc[tidepool_file_df_start_row:].itertuples():
+                if tidepool_file_item.timestamp < hk_export_file_item.timestamp:
+                    tidepool_file_df_next_row += 1
+                    continue
+                if (tidepool_file_item.timestamp == hk_export_file_item.timestamp and
+                    tidepool_file_item.type == hk_export_file_item.type):
+                    hk_export_file_item_exists_in_tidepool_file = True
+                    break
+            tidepool_file_df_start_row = tidepool_file_df_next_row
+            if not hk_export_file_item_exists_in_tidepool_file:
+                items_not_found_count += 1
+                print(f"HK export item not found in Tidepool phase: {hk_export_file_item}")
 
 if items_not_found_count > 0:
-    print("ERROR: %d items not found" % items_not_found_count)
+    print(f"ERROR: {items_not_found_count} items not found, out of {item_count} items")
 else:
-    print("Success! All items found")
-print("Finished in %s seconds" % int(time.time() - start_time))
+    print(f"Success! All items found, out of {item_count} items")
