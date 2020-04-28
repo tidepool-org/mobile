@@ -24,7 +24,7 @@ class TPNativeHealthSingletonClass {
     this.isUploadingHistorical = false;
     this.isHistoricalUploadPending = false;
     this.historicalUploadCurrentDay = 0;
-    this.historicalUploadTotalDays = 0;
+    this.historicalTotalDaysCount = 0;
     this.historicalUploadTotalSamples = 0;
     this.historicalUploadTotalDeletes = 0;
     this.historicalUploadEarliestSampleTime = "";
@@ -36,6 +36,7 @@ class TPNativeHealthSingletonClass {
     this.retryHistoricalUploadError = "";
     this.historicalUploadLimitsIndex = 0;
     this.historicalUploadMaxLimitsIndex = 0;
+    this.historicalTotalSamplesCount = 0;
 
     this.isUploadingCurrent = false;
     this.currentUploadTotalSamples = 0;
@@ -66,6 +67,7 @@ class TPNativeHealthSingletonClass {
       );
       events.addListener("onTurnOnUploader", this.onTurnOnUploader);
       events.addListener("onTurnOffUploader", this.onTurnOffUploader);
+      events.addListener("onUploadHistoricalPending", this.onUploadHistoricalPending);
       events.addListener("onRetryUpload", this.onRetryUpload);
       events.addListener("onUploadStatsUpdated", this.onUploadStatsUpdated);
     } catch (error) {
@@ -157,12 +159,14 @@ class TPNativeHealthSingletonClass {
 
   startUploadingHistorical() {
     try {
+      this.historicalTotalSamplesCount = 0;
+      this.historicalTotalDaysCount = 0;
       this.historicalUploadCurrentDay = 0;
-      this.historicalUploadTotalDays = 0;
       this.historicalUploadTotalSamples = 0;
       this.historicalUploadTotalDeletes = 0;
       this.turnOffHistoricalUploaderReason = "";
       this.turnOffHistoricalUploaderError = "";
+      this.nativeModule.stopUploadingHistoricalAndReset();
       this.nativeModule.startUploadingHistorical();
     } catch (error) {
       // console.log(`error: ${error}`);
@@ -185,39 +189,35 @@ class TPNativeHealthSingletonClass {
     }
   }
 
-  onHealthKitInterfaceConfiguration = params => {
+  onHealthKitInterfaceConfiguration = (params) => {
     this.healthKitInterfaceConfiguration = { ...params };
     this.notify("onHealthKitInterfaceConfiguration");
   };
 
-  onTurnOnUploader = params => {
+  onTurnOnUploader = (params) => {
     if (params.mode === "historical") {
       this.isUploadingHistorical = true;
-      this.isHistoricalUploadPending = false;
-      this.hasPresentedSyncUI = params.hasPresentedSyncUI;
       this.isUploadingHistoricalRetry = false;
-      this.historicalUploadLimitsIndex = 0;
-      this.historicalUploadMaxLimitsIndex = 0;
-      this.historicalUploadCurrentDay = 0;
-      this.historicalUploadTotalDays = 0;
-      this.historicalUploadTotalSamples = 0;
-      this.historicalUploadTotalDeletes = 0;
+      this.isHistoricalUploadPending = false;
+      this.historicalUploadLimitsIndex = params.historicalUploadLimitsIndex;
+      this.historicalUploadMaxLimitsIndex = params.historicalUploadMaxLimitsIndex;
+      this.historicalTotalSamplesCount = params.historicalTotalSamplesCount;
+      this.historicalTotalDaysCount = params.historicalTotalDaysCount;
       this.turnOffHistoricalUploaderReason = "";
       this.turnOffHistoricalUploaderError = "";
     } else {
       this.isUploadingCurrent = true;
       this.isUploadingCurrentRetry = false;
-      this.currentUploadLimitsIndex = 0;
-      this.currentUploadMaxLimitsIndex = 0;
-      this.currentUploadTotalSamples = 0;
-      this.currentUploadTotalDeletes = 0;
+      this.currentUploadLimitsIndex = params.currentUploadLimitsIndex;
+      this.currentUploadMaxLimitsIndex = params.currentUploadMaxLimitsIndex;
+      this.currentStartAnchorTime = params.currentStartAnchorTime;
       this.turnOffCurrentUploaderReason = "";
       this.turnOffCurrentUploaderError = "";
     }
     this.notify("onTurnOnUploader", params.mode);
   };
 
-  onTurnOffUploader = params => {
+  onTurnOffUploader = (params) => {
     let error = params.turnOffUploaderError;
     const errorPrefix = "error: ";
     const errorPrefixIndex = error.indexOf(errorPrefix);
@@ -233,7 +233,7 @@ class TPNativeHealthSingletonClass {
         params.historicalUploadMaxLimitsIndex;
       this.turnOffHistoricalUploaderReason = params.turnOffUploaderReason;
       this.turnOffHistoricalUploaderError = error;
-      this.updateHistoricalUploadCurrentDayIfComplete();
+      this.updateHistoricalStatsIfComplete();
     } else {
       this.isUploadingCurrent = false;
       this.isUploadingCurrentRetry = false;
@@ -245,7 +245,16 @@ class TPNativeHealthSingletonClass {
     this.notify("onTurnOffUploader", params.mode);
   };
 
-  onRetryUpload = params => {
+  onUploadHistoricalPending = (params) => {
+    this.isHistoricalUploadPending = true
+    this.historicalTotalSamplesCount = params.historicalTotalSamplesCount;
+    this.historicalTotalDaysCount = params.historicalTotalDaysCount;
+    this.turnOffHistoricalUploaderReason = "";
+    this.turnOffHistoricalUploaderError = "";
+    this.notify("onUploadHistoricalPending", params.mode);
+  }
+
+  onRetryUpload = (params) => {
     if (params.mode === "historical") {
       let error = params.retryHistoricalUploadError;
       const errorPrefix = "error: ";
@@ -257,8 +266,7 @@ class TPNativeHealthSingletonClass {
       this.retryHistoricalUploadReason = params.retryHistoricalUploadReason;
       this.retryHistoricalUploadError = error;
       this.historicalUploadLimitsIndex = params.historicalUploadLimitsIndex;
-      this.historicalUploadMaxLimitsIndex =
-        params.historicalUploadMaxLimitsIndex;
+      this.historicalUploadMaxLimitsIndex = params.historicalUploadMaxLimitsIndex;
     } else {
       let error = params.retryCurrentUploadError;
       const errorPrefix = "error: ";
@@ -279,34 +287,29 @@ class TPNativeHealthSingletonClass {
     }
   };
 
-  onUploadStatsUpdated = params => {
+  onUploadStatsUpdated = (params) => {
     if (params.mode === "historical") {
       this.isUploadingHistorical = params.isUploadingHistorical;
-      this.isHistoricalUploadPending = params.isHistoricalUploadPending;
+      this.historicalTotalDaysCount = params.historicalTotalDaysCount;
+      this.historicalTotalSamplesCount = params.historicalTotalSamplesCount;
       this.historicalUploadCurrentDay = params.historicalUploadCurrentDay;
-      this.historicalUploadTotalDays = params.historicalUploadTotalDays;
-      this.updateHistoricalUploadCurrentDayIfComplete();
+      this.updateHistoricalStatsIfComplete();
       this.historicalUploadTotalSamples = params.historicalUploadTotalSamples;
       this.historicalUploadTotalDeletes = params.historicalUploadTotalDeletes;
-      this.historicalUploadEarliestSampleTime =
-        params.historicalUploadEarliestSampleTime;
-      this.historicalUploadLatestSampleTime =
-        params.historicalUploadLatestSampleTime;
+      this.historicalUploadEarliestSampleTime = params.historicalUploadEarliestSampleTime;
+      this.historicalUploadLatestSampleTime = params.historicalUploadLatestSampleTime;
       this.historicalUploadLimitsIndex = params.historicalUploadLimitsIndex;
-      this.historicalUploadMaxLimitsIndex =
-        params.historicalUploadMaxLimitsIndex;
+      this.historicalUploadMaxLimitsIndex = params.historicalUploadMaxLimitsIndex;
     } else if (params.mode === "current") {
       this.isUploadingCurrent = params.isUploadingCurrent;
       this.currentUploadTotalSamples = params.currentUploadTotalSamples;
       this.currentUploadTotalDeletes = params.currentUploadTotalDeletes;
-      this.currentUploadEarliestSampleTime =
-        params.currentUploadEarliestSampleTime;
+      this.currentUploadEarliestSampleTime = params.currentUploadEarliestSampleTime;
       this.currentUploadLatestSampleTime = params.currentUploadLatestSampleTime;
       this.currentStartAnchorTime = params.currentStartAnchorTime;
       this.currentUploadLimitsIndex = params.currentUploadLimitsIndex;
       this.currentUploadMaxLimitsIndex = params.currentUploadMaxLimitsIndex;
-      this.lastCurrentUploadUiDescription =
-        params.lastCurrentUploadUiDescription;
+      this.lastCurrentUploadUiDescription = params.lastCurrentUploadUiDescription;
     }
     this.notify("onUploadStatsUpdated", params.mode);
   };
@@ -316,39 +319,25 @@ class TPNativeHealthSingletonClass {
       const uploaderProgress = this.nativeModule.uploaderProgress();
 
       this.isUploadingHistorical = uploaderProgress.isUploadingHistorical;
-      this.historicalUploadLimitsIndex =
-        uploaderProgress.historicalUploadLimitsIndex;
-      this.historicalUploadMaxLimitsIndex =
-        uploaderProgress.historicalUploadMaxLimitsIndex;
-      this.historicalUploadCurrentDay =
-        uploaderProgress.historicalUploadCurrentDay;
-      this.historicalUploadTotalDays =
-        uploaderProgress.historicalUploadTotalDays;
-      this.updateHistoricalUploadCurrentDayIfComplete();
-      this.historicalUploadTotalSamples =
-        uploaderProgress.historicalUploadTotalSamples;
-      this.historicalUploadTotalDeletes =
-        uploaderProgress.historicalUploadTotalDeletes;
-      this.historicalUploadEarliestSampleTime =
-        uploaderProgress.historicalUploadEarliestSampleTime;
-      this.historicalUploadLatestSampleTime =
-        uploaderProgress.historicalUploadLatestSampleTime;
+      this.historicalUploadLimitsIndex = uploaderProgress.historicalUploadLimitsIndex;
+      this.historicalUploadMaxLimitsIndex = uploaderProgress.historicalUploadMaxLimitsIndex;
+      this.historicalUploadCurrentDay = uploaderProgress.historicalUploadCurrentDay;
+      this.historicalTotalDaysCount = uploaderProgress.historicalTotalDaysCount;
+      this.updateHistoricalStatsIfComplete();
+      this.historicalUploadTotalSamples = uploaderProgress.historicalUploadTotalSamples;
+      this.historicalUploadTotalDeletes = uploaderProgress.historicalUploadTotalDeletes;
+      this.historicalUploadEarliestSampleTime = uploaderProgress.historicalUploadEarliestSampleTime;
+      this.historicalUploadLatestSampleTime =uploaderProgress.historicalUploadLatestSampleTime;
 
       this.isUploadingCurrent = uploaderProgress.isUploadingCurrent;
       this.currentUploadLimitsIndex = uploaderProgress.currentUploadLimitsIndex;
-      this.currentUploadMaxLimitsIndex =
-        uploaderProgress.currentUploadMaxLimitsIndex;
-      this.currentUploadTotalSamples =
-        uploaderProgress.currentUploadTotalSamples;
-      this.currentUploadTotalDeletes =
-        uploaderProgress.currentUploadTotalDeletes;
-      this.currentUploadEarliestSampleTime =
-        uploaderProgress.currentUploadEarliestSampleTime;
-      this.currentUploadLatestSampleTime =
-        uploaderProgress.currentUploadLatestSampleTime;
+      this.currentUploadMaxLimitsIndex = uploaderProgress.currentUploadMaxLimitsIndex;
+      this.currentUploadTotalSamples = uploaderProgress.currentUploadTotalSamples;
+      this.currentUploadTotalDeletes = uploaderProgress.currentUploadTotalDeletes;
+      this.currentUploadEarliestSampleTime = uploaderProgress.currentUploadEarliestSampleTime;
+      this.currentUploadLatestSampleTime = uploaderProgress.currentUploadLatestSampleTime;
       this.currentStartAnchorTime = uploaderProgress.currentStartAnchorTime;
-      this.lastCurrentUploadUiDescription =
-        uploaderProgress.lastCurrentUploadUiDescription;
+      this.lastCurrentUploadUiDescription = uploaderProgress.lastCurrentUploadUiDescription;
 
       this.notify("onUploadStatsUpdated", "historical");
       this.notify("onUploadStatsUpdated", "current");
@@ -357,9 +346,10 @@ class TPNativeHealthSingletonClass {
     }
   }
 
-  updateHistoricalUploadCurrentDayIfComplete() {
+  updateHistoricalStatsIfComplete() {
     if (this.turnOffHistoricalUploaderReason === "complete") {
-      this.historicalUploadCurrentDay = this.historicalUploadTotalDays;
+      this.historicalUploadCurrentDay = this.historicalTotalDaysCount;
+      this.historicalUploadTotalSamples = this.historicalTotalSamplesCount;
     }
   }
 
@@ -375,7 +365,7 @@ class TPNativeHealthSingletonClass {
   }
 
   notify(eventName, eventParams) {
-    this.listeners.forEach(listener => listener(eventName, eventParams));
+    this.listeners.forEach((listener) => listener(eventName, eventParams));
   }
 }
 

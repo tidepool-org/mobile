@@ -41,18 +41,14 @@ class AppWithNavigationState extends PureComponent {
         isHistoricalUploadPending: TPNativeHealth.isHistoricalUploadPending,
         isUploadingHistoricalRetry: TPNativeHealth.isUploadingHistoricalRetry,
         historicalUploadLimitsIndex: TPNativeHealth.historicalUploadLimitsIndex,
-        historicalUploadMaxLimitsIndex:
-          TPNativeHealth.historicalUploadMaxLimitsIndex,
+        historicalUploadMaxLimitsIndex: TPNativeHealth.historicalUploadMaxLimitsIndex,
         historicalUploadCurrentDay: TPNativeHealth.historicalUploadCurrentDay,
-        historicalUploadTotalDays: TPNativeHealth.historicalUploadTotalDays,
-        historicalUploadTotalSamples:
-          TPNativeHealth.historicalUploadTotalSamples,
-        historicalUploadTotalDeletes:
-          TPNativeHealth.historicalUploadTotalDeletes,
-        turnOffHistoricalUploaderReason:
-          TPNativeHealth.turnOffHistoricalUploaderReason,
-        turnOffHistoricalUploaderError:
-          TPNativeHealth.turnOffHistoricalUploaderError,
+        historicalTotalDaysCount: TPNativeHealth.historicalTotalDaysCount,
+        historicalTotalSamplesCount: TPNativeHealth.historicalTotalSamplesCount,
+        historicalUploadTotalSamples: TPNativeHealth.historicalUploadTotalSamples,
+        historicalUploadTotalDeletes: TPNativeHealth.historicalUploadTotalDeletes,
+        turnOffHistoricalUploaderReason: TPNativeHealth.turnOffHistoricalUploaderReason,
+        turnOffHistoricalUploaderError: TPNativeHealth.turnOffHistoricalUploaderError,
 
         isUploadingCurrent: TPNativeHealth.isUploadingCurrent,
         isUploadingCurrentRetry: TPNativeHealth.isUploadingCurrentRetry,
@@ -60,11 +56,9 @@ class AppWithNavigationState extends PureComponent {
         currentUploadMaxLimitsIndex: TPNativeHealth.currentUploadMaxLimitsIndex,
         currentUploadTotalSamples: TPNativeHealth.currentUploadTotalSamples,
         currentUploadTotalDeletes: TPNativeHealth.currentUploadTotalDeletes,
-        turnOffCurrentUploaderReason:
-          TPNativeHealth.turnOffCurrentUploaderReason,
+        turnOffCurrentUploaderReason: TPNativeHealth.turnOffCurrentUploaderReason,
         turnOffCurrentUploaderError: TPNativeHealth.turnOffCurrentUploaderError,
-        lastCurrentUploadUiDescription:
-          TPNativeHealth.lastCurrentUploadUiDescription,
+        lastCurrentUploadUiDescription: TPNativeHealth.lastCurrentUploadUiDescription,
       })
     );
   }
@@ -94,25 +88,19 @@ class AppWithNavigationState extends PureComponent {
           isUploadingHistorical: TPNativeHealth.isUploadingHistorical,
           isHistoricalUploadPending: TPNativeHealth.isHistoricalUploadPending,
           historicalUploadCurrentDay: TPNativeHealth.historicalUploadCurrentDay,
-          historicalUploadTotalDays: TPNativeHealth.historicalUploadTotalDays,
-          historicalUploadTotalSamples:
-            TPNativeHealth.historicalUploadTotalSamples,
-          historicalUploadTotalDeletes:
-            TPNativeHealth.historicalUploadTotalDeletes,
-          turnOffHistoricalUploaderReason:
-            TPNativeHealth.turnOffHistoricalUploaderReason,
-          turnOffHistoricalUploaderError:
-            TPNativeHealth.turnOffHistoricalUploaderError,
+          historicalTotalDaysCount: TPNativeHealth.historicalTotalDaysCount,
+          historicalTotalSamplesCount: TPNativeHealth.historicalTotalSamplesCount,
+          historicalUploadTotalSamples: TPNativeHealth.historicalUploadTotalSamples,
+          historicalUploadTotalDeletes: TPNativeHealth.historicalUploadTotalDeletes,
+          turnOffHistoricalUploaderReason: TPNativeHealth.turnOffHistoricalUploaderReason,
+          turnOffHistoricalUploaderError: TPNativeHealth.turnOffHistoricalUploaderError,
 
           isUploadingCurrent: TPNativeHealth.isUploadingCurrent,
           currentUploadTotalSamples: TPNativeHealth.currentUploadTotalSamples,
           currentUploadTotalDeletes: TPNativeHealth.currentUploadTotalDeletes,
-          turnOffCurrentUploaderReason:
-            TPNativeHealth.turnOffCurrentUploaderReason,
-          turnOffCurrentUploaderError:
-            TPNativeHealth.turnOffCurrentUploaderError,
-          lastCurrentUploadUiDescription:
-            TPNativeHealth.lastCurrentUploadUiDescription,
+          turnOffCurrentUploaderReason: TPNativeHealth.turnOffCurrentUploaderReason,
+          turnOffCurrentUploaderError: TPNativeHealth.turnOffCurrentUploaderError,
+          lastCurrentUploadUiDescription: TPNativeHealth.lastCurrentUploadUiDescription,
         })
       );
     } else if (
@@ -120,27 +108,20 @@ class AppWithNavigationState extends PureComponent {
       eventName === "onTurnOffUploader"
     ) {
       if (uploaderType === "historical") {
-        dispatch(
+          dispatch(
           healthStateSet({
             isUploadingHistorical: TPNativeHealth.isUploadingHistorical,
             isHistoricalUploadPending: TPNativeHealth.isHistoricalUploadPending,
-            isUploadingHistoricalRetry:
-              TPNativeHealth.isUploadingHistoricalRetry,
-            historicalUploadLimitsIndex:
-              TPNativeHealth.historicalUploadLimitsIndex,
-            historicalUploadMaxLimitsIndex:
-              TPNativeHealth.historicalUploadMaxLimitsIndex,
-            historicalUploadCurrentDay:
-              TPNativeHealth.historicalUploadCurrentDay,
-            historicalUploadTotalDays: TPNativeHealth.historicalUploadTotalDays,
-            historicalUploadTotalSamples:
-              TPNativeHealth.historicalUploadTotalSamples,
-            historicalUploadTotalDeletes:
-              TPNativeHealth.historicalUploadTotalDeletes,
-            turnOffHistoricalUploaderReason:
-              TPNativeHealth.turnOffHistoricalUploaderReason,
-            turnOffHistoricalUploaderError:
-              TPNativeHealth.turnOffHistoricalUploaderError,
+            isUploadingHistoricalRetry: TPNativeHealth.isUploadingHistoricalRetry,
+            historicalUploadLimitsIndex: TPNativeHealth.historicalUploadLimitsIndex,
+            historicalUploadMaxLimitsIndex: TPNativeHealth.historicalUploadMaxLimitsIndex,
+            historicalUploadCurrentDay: TPNativeHealth.historicalUploadCurrentDay,
+            historicalTotalDaysCount: TPNativeHealth.historicalTotalDaysCount,
+            historicalTotalSamplesCount: TPNativeHealth.historicalTotalSamplesCount,
+            historicalUploadTotalSamples: TPNativeHealth.historicalUploadTotalSamples,
+            historicalUploadTotalDeletes: TPNativeHealth.historicalUploadTotalDeletes,
+            turnOffHistoricalUploaderReason: TPNativeHealth.turnOffHistoricalUploaderReason,
+            turnOffHistoricalUploaderError: TPNativeHealth.turnOffHistoricalUploaderError,
           })
         );
       } else {
@@ -149,14 +130,11 @@ class AppWithNavigationState extends PureComponent {
             isUploadingCurrent: TPNativeHealth.isUploadingCurrent,
             isUploadingCurrentRetry: TPNativeHealth.isUploadingCurrentRetry,
             currentUploadLimitsIndex: TPNativeHealth.currentUploadLimitsIndex,
-            currentUploadMaxLimitsIndex:
-              TPNativeHealth.currentUploadMaxLimitsIndex,
+            currentUploadMaxLimitsIndex: TPNativeHealth.currentUploadMaxLimitsIndex,
             currentUploadTotalSamples: TPNativeHealth.currentUploadTotalSamples,
             currentUploadTotalDeletes: TPNativeHealth.currentUploadTotalDeletes,
-            turnOffCurrentUploaderReason:
-              TPNativeHealth.turnOffCurrentUploaderReason,
-            turnOffUploaderCurrentError:
-              TPNativeHealth.turnOffUploaderCurrentError,
+            turnOffCurrentUploaderReason: TPNativeHealth.turnOffCurrentUploaderReason,
+            turnOffUploaderCurrentError: TPNativeHealth.turnOffUploaderCurrentError,
           })
         );
       }
@@ -164,16 +142,11 @@ class AppWithNavigationState extends PureComponent {
       if (uploaderType === "historical") {
         dispatch(
           healthStateSet({
-            isUploadingHistoricalRetry:
-              TPNativeHealth.isUploadingHistoricalRetry,
-            historicalUploadLimitsIndex:
-              TPNativeHealth.historicalUploadLimitsIndex,
-            historicalUploadMaxLimitsIndex:
-              TPNativeHealth.historicalUploadMaxLimitsIndex,
-            retryHistoricalUploadReason:
-              TPNativeHealth.retryHistoricalUploadReason,
-            retryHistoricalUploadError:
-              TPNativeHealth.retryHistoricalUploadError,
+            isUploadingHistoricalRetry: TPNativeHealth.isUploadingHistoricalRetry,
+            historicalUploadLimitsIndex: TPNativeHealth.historicalUploadLimitsIndex,
+            historicalUploadMaxLimitsIndex: TPNativeHealth.historicalUploadMaxLimitsIndex,
+            retryHistoricalUploadReason: TPNativeHealth.retryHistoricalUploadReason,
+            retryHistoricalUploadError: TPNativeHealth.retryHistoricalUploadError,
           })
         );
       } else {
@@ -182,13 +155,22 @@ class AppWithNavigationState extends PureComponent {
             isUploadingCurrent: TPNativeHealth.isUploadingCurrent,
             isUploadingCurrentRetry: TPNativeHealth.isUploadingCurrentRetry,
             currentUploadLimitsIndex: TPNativeHealth.currentUploadLimitsIndex,
-            currentUploadMaxLimitsIndex:
-              TPNativeHealth.currentUploadMaxLimitsIndex,
+            currentUploadMaxLimitsIndex: TPNativeHealth.currentUploadMaxLimitsIndex,
             retryCurrentUploadReason: TPNativeHealth.retryCurrentUploadReason,
             retryCurrentUploadError: TPNativeHealth.retryCurrentUploadError,
           })
         );
       }
+    } else if (eventName === "onUploadHistoricalPending") {
+      dispatch(
+        healthStateSet({
+          isHistoricalUploadPending: TPNativeHealth.isHistoricalUploadPending,
+          historicalTotalDaysCount: TPNativeHealth.historicalTotalDaysCount,
+          historicalTotalSamplesCount: TPNativeHealth.historicalTotalSamplesCount,
+          turnOffHistoricalUploaderReason: TPNativeHealth.turnOffHistoricalUploaderReason,
+          turnOffHistoricalUploaderError: TPNativeHealth.turnOffHistoricalUploaderError,
+})
+      );
     } else if (eventName === "onUploadStatsUpdated") {
       if (uploaderType === "historical") {
         // If we get a stats updated event we might have missed onTurnOnUploader
@@ -198,25 +180,17 @@ class AppWithNavigationState extends PureComponent {
           healthStateSet({
             isUploadingHistorical: TPNativeHealth.isUploadingHistorical,
             isHistoricalUploadPending: TPNativeHealth.isHistoricalUploadPending,
-            historicalUploadLimitsIndex:
-              TPNativeHealth.historicalUploadLimitsIndex,
-            historicalUploadMaxLimitsIndex:
-              TPNativeHealth.historicalUploadMaxLimitsIndex,
-            historicalUploadCurrentDay:
-              TPNativeHealth.historicalUploadCurrentDay,
-            historicalUploadTotalDays: TPNativeHealth.historicalUploadTotalDays,
-            historicalUploadTotalSamples:
-              TPNativeHealth.historicalUploadTotalSamples,
-            historicalUploadTotalDeletes:
-              TPNativeHealth.historicalUploadTotalDeletes,
-            historicalUploadEarliestSampleTime:
-              TPNativeHealth.historicalUploadEarliestSampleTime,
-            historicalUploadLatestSampleTime:
-              TPNativeHealth.historicalUploadLatestSampleTime,
-            turnOffHistoricalUploaderReason:
-              TPNativeHealth.turnOffHistoricalUploaderReason,
-            turnOffHistoricalUploaderError:
-              TPNativeHealth.turnOffHistoricalUploaderError,
+            historicalUploadLimitsIndex: TPNativeHealth.historicalUploadLimitsIndex,
+            historicalUploadMaxLimitsIndex: TPNativeHealth.historicalUploadMaxLimitsIndex,
+            historicalUploadCurrentDay: TPNativeHealth.historicalUploadCurrentDay,
+            historicalTotalDaysCount: TPNativeHealth.historicalTotalDaysCount,
+            historicalTotalSamplesCount: TPNativeHealth.historicalTotalSamplesCount,
+            historicalUploadTotalSamples: TPNativeHealth.historicalUploadTotalSamples,
+            historicalUploadTotalDeletes: TPNativeHealth.historicalUploadTotalDeletes,
+            historicalUploadEarliestSampleTime: TPNativeHealth.historicalUploadEarliestSampleTime,
+            historicalUploadLatestSampleTime: TPNativeHealth.historicalUploadLatestSampleTime,
+            turnOffHistoricalUploaderReason: TPNativeHealth.turnOffHistoricalUploaderReason,
+            turnOffHistoricalUploaderError: TPNativeHealth.turnOffHistoricalUploaderError,
           })
         );
       } else {
@@ -224,21 +198,15 @@ class AppWithNavigationState extends PureComponent {
           healthStateSet({
             isUploadingCurrent: TPNativeHealth.isUploadingCurrent,
             currentUploadLimitsIndex: TPNativeHealth.currentUploadLimitsIndex,
-            currentUploadMaxLimitsIndex:
-              TPNativeHealth.currentUploadMaxLimitsIndex,
+            currentUploadMaxLimitsIndex: TPNativeHealth.currentUploadMaxLimitsIndex,
             currentUploadTotalSamples: TPNativeHealth.currentUploadTotalSamples,
             currentUploadTotalDeletes: TPNativeHealth.currentUploadTotalDeletes,
-            currentUploadEarliestSampleTime:
-              TPNativeHealth.currentUploadEarliestSampleTime,
-            currentUploadLatestSampleTime:
-              TPNativeHealth.currentUploadLatestSampleTime,
+            currentUploadEarliestSampleTime: TPNativeHealth.currentUploadEarliestSampleTime,
+            currentUploadLatestSampleTime: TPNativeHealth.currentUploadLatestSampleTime,
             currentStartAnchorTime: TPNativeHealth.currentStartAnchorTime,
-            turnOffCurrentUploaderReason:
-              TPNativeHealth.turnOffCurrentUploaderReason,
-            turnOffCurrentUploaderError:
-              TPNativeHealth.turnOffCurrentUploaderReason,
-            lastCurrentUploadUiDescription:
-              TPNativeHealth.lastCurrentUploadUiDescription,
+            turnOffCurrentUploaderReason: TPNativeHealth.turnOffCurrentUploaderReason,
+            turnOffCurrentUploaderError: TPNativeHealth.turnOffCurrentUploaderReason,
+            lastCurrentUploadUiDescription: TPNativeHealth.lastCurrentUploadUiDescription,
           })
         );
       }

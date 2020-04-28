@@ -40,10 +40,11 @@ class DrawerHealthStatus extends PureComponent {
       theme,
       health: {
         isUploadingHistorical,
+        isHistoricalUploadPending,
         isUploadingHistoricalRetry,
         historicalUploadTotalSamples,
         historicalUploadCurrentDay,
-        historicalUploadTotalDays,
+        historicalTotalDaysCount,
         lastCurrentUploadUiDescription,
         isInterfaceOn,
         isTurningInterfaceOn,
@@ -54,24 +55,25 @@ class DrawerHealthStatus extends PureComponent {
 
     let line1Text = "";
     let line2Text = "";
-    const useItemCountInsteadOfDayCount = false;
+    const useDaysProgress = false;
 
     if (isOffline) {
       line1Text = "Upload paused while offline.";
-    } else if (isUploadingHistoricalRetry) {
-      line1Text = "Syncing Now";
-      line2Text = "Retrying...";
+    } else if (isTurningInterfaceOn || isHistoricalUploadPending) {
+      line1Text = "Preparing to upload";
     } else if (isUploadingHistorical) {
       line1Text = "Syncing Now";
-      if (useItemCountInsteadOfDayCount) {
-        line2Text = `Uploaded ${historicalUploadTotalSamples} items`;
-      } else if (historicalUploadCurrentDay > 0) {
-        line2Text = `Day ${historicalUploadCurrentDay} of ${historicalUploadTotalDays}`;
+      if (isUploadingHistoricalRetry) {
+        line2Text = "Retrying upload";
+      } else if (useDaysProgress) {
+          if (historicalUploadCurrentDay > 0) {
+            line2Text = `Day ${historicalUploadCurrentDay.toLocaleString()} of ${historicalTotalDaysCount.toLocaleString()}`;
+          }
+      } else if (historicalUploadTotalSamples > 0) {
+        line2Text = `Uploaded ${historicalUploadTotalSamples.toLocaleString()} items`;
       }
     } else if (isInterfaceOn) {
       line1Text = lastCurrentUploadUiDescription;
-    } else if (isTurningInterfaceOn) {
-      line1Text = "Preparing to upload...";
     } else {
       line1Text = interfaceTurnedOffError;
     }

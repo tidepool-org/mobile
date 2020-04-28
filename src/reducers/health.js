@@ -14,7 +14,7 @@ const initialState = {
   isUploadingHistorical: false,
   isHistoricalUploadPending: false,
   historicalUploadCurrentDay: 0,
-  historicalUploadTotalDays: 0,
+  historicalTotalDaysCount: 0,
   historicalUploadTotalSamples: 0,
   historicalUploadTotalDeletes: 0,
   turnOffHistoricalUploaderReason: "",
@@ -24,6 +24,7 @@ const initialState = {
   retryHistoricalUploadError: "",
   historicalUploadLimitsIndex: 0,
   historicalUploadMaxLimitsIndex: 0,
+  historicalTotalSamplesCount: 0,
 
   isUploadingCurrent: false,
   currentUploadTotalSamples: 0,

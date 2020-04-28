@@ -22,7 +22,6 @@ import UIKit
 class TPNativeHealth: RCTEventEmitter {
     private let connector = TPUploaderAPI.connector()
     private let uploader = TPUploaderAPI.connector().uploader()
-    private var isHistoricalUploadPending = false;
 
     public override init() {
         super.init()
@@ -33,6 +32,7 @@ class TPNativeHealth: RCTEventEmitter {
         NotificationCenter.default.addObserver(self, selector: #selector(TPNativeHealth.handleTurnOffUploader(_:)), name: Notification.Name(rawValue: TPUploaderNotifications.TurnOffUploader), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(TPNativeHealth.handleUploadRetry(_:)), name: Notification.Name(rawValue: TPUploaderNotifications.UploadRetry), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(TPNativeHealth.handleUploadSuccessful(_:)), name: Notification.Name(rawValue: TPUploaderNotifications.UploadSuccessful), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(TPNativeHealth.handleUploadHistoricalPending(_:)), name: Notification.Name(rawValue: TPUploaderNotifications.UploadHistoricalPending), object: nil)
     }
 
     override static func requiresMainQueueSetup() -> Bool {
@@ -45,7 +45,8 @@ class TPNativeHealth: RCTEventEmitter {
           "onTurnOnUploader",
           "onTurnOffUploader",
           "onRetryUpload",
-          "onUploadStatsUpdated"
+          "onUploadStatsUpdated",
+          "onUploadHistoricalPending",
           ]
     }
 
@@ -79,9 +80,9 @@ class TPNativeHealth: RCTEventEmitter {
     }
 
     @objc func healthKitInterfaceConfiguration() -> NSDictionary {
-        var interfaceTurnedOffError = ""
-        if let error = connector.interfaceTurnedOffError {
-            interfaceTurnedOffError = "Failed to prepare upload. \(error.localizedDescription)"
+        var interfaceTurnedOffError = uploader.interfaceTurnedOffError
+        if interfaceTurnedOffError.count > 0 {
+            interfaceTurnedOffError = "Failed to prepare upload. \(interfaceTurnedOffError)"
         }
 
         return [
@@ -115,8 +116,9 @@ class TPNativeHealth: RCTEventEmitter {
             "isUploadingHistorical": isUploadingHistorical,
             "historicalUploadLimitsIndex": historicalUploadLimitsIndex,
             "historicalUploadMaxLimitsIndex": historicalUploadMaxLimitsIndex,
+            "historicalTotalSamplesCount": progress.historicalTotalSamplesCount,
+            "historicalTotalDaysCount": progress.totalDaysHistorical,
             "historicalUploadCurrentDay": progress.currentDayHistorical,
-            "historicalUploadTotalDays": progress.totalDaysHistorical,
             "historicalUploadTotalSamples": progress.totalSamplesHistorical,
             "historicalUploadTotalDeletes": progress.totalDeletesHistorical,
             "historicalUploadEarliestSampleTime": progress.historicalUploadEarliestSampleTime != nil ? ISO8601DateFormatter().string(from: progress.historicalUploadEarliestSampleTime!) : "",
@@ -143,15 +145,7 @@ class TPNativeHealth: RCTEventEmitter {
         }
 
         DispatchQueue.main.async {
-            if !self.uploader.isInterfaceOn() {
-                TPDataController.sharedInstance.configureHealthKitInterface()
-            }
-            if self.uploader.isTurningInterfaceOn() {
-                self.isHistoricalUploadPending = true
-            } else if self.uploader.isInterfaceOn() {
-                self.isHistoricalUploadPending = false
-                self.uploader.startUploading(TPUploader.Mode.HistoricalAll)
-            }
+            self.uploader.startUploading(TPUploader.Mode.HistoricalAll)
 
             let body = self.createBodyForHistoricalStats()
             if self.isObserving {
@@ -166,7 +160,6 @@ class TPNativeHealth: RCTEventEmitter {
         DDLogInfo("\(#function)")
 
         DispatchQueue.main.async {
-            self.isHistoricalUploadPending = false
             self.uploader.stopUploading(mode: .HistoricalAll, reason: .interfaceTurnedOff)
             self.uploader.resetPersistentStateForMode(.HistoricalAll)
             let body = self.createBodyForHistoricalStats()
@@ -263,9 +256,10 @@ class TPNativeHealth: RCTEventEmitter {
         DispatchQueue.main.async {
             let body = self.healthKitInterfaceConfiguration()
             if !self.uploader.isTurningInterfaceOn() {
-                if let error = self.connector.interfaceTurnedOffError {
+                let interfaceTurnedOffError = self.uploader.interfaceTurnedOffError
+                if interfaceTurnedOffError.count > 0 {
                     if self.connector.isConnectedToNetwork() {
-                        let message = String("Interface turned off error: \(error.localizedDescription.prefix(50))")
+                        let message = String("Interface turned off error: \(interfaceTurnedOffError)")
                         DDLogInfo(message)
                         RollbarReactNative.warning(withMessage: message)
                     }
@@ -274,10 +268,6 @@ class TPNativeHealth: RCTEventEmitter {
 
             if self.isObserving {
                 self.sendEvent(withName: "onHealthKitInterfaceConfiguration", body: body)
-            }
-
-            if self.uploader.isInterfaceOn() && self.isHistoricalUploadPending {
-                _ = self.startUploadingHistorical()
             }
         }
     }
@@ -290,29 +280,34 @@ class TPNativeHealth: RCTEventEmitter {
         let modeValue = (mode == TPUploader.Mode.Current ? "current" : "historical")
         var message = ""
         if mode == TPUploader.Mode.HistoricalAll {
+            let progress = self.uploader.uploaderProgress()
             let (historicalUploadLimitsIndex, historicalUploadMaxLimitsIndex) = self.uploader.retryInfoForMode(TPUploader.Mode.HistoricalAll)
             message = "Started historical upload"
             DispatchQueue.main.async {
                 DDLogVerbose("Disable idle timer")
                 UIApplication.shared.isIdleTimerDisabled = true
                 if self.isObserving {
-                    self.sendEvent(withName: "onTurnOnUploader", body:[
+                    self.sendEvent(withName: "onTurnOnUploader", body: [
                         "mode": modeValue,
                         "historicalUploadLimitsIndex": historicalUploadLimitsIndex,
                         "historicalUploadMaxLimitsIndex": historicalUploadMaxLimitsIndex,
+                        "historicalTotalSamplesCount": progress.historicalTotalSamplesCount,
+                        "historicalTotalDaysCount": progress.totalDaysHistorical,
                         "hasPresentedSyncUI": self.uploader.hasPresentedSyncUI
                     ])
                 }
             }
         } else {
             message = "Started current upload"
+            let progress = self.uploader.uploaderProgress()
             let (currentUploadLimitsIndex, currentUploadMaxLimitsIndex) = self.uploader.retryInfoForMode(TPUploader.Mode.Current)
             DispatchQueue.main.async {
                 if self.isObserving {
-                    self.sendEvent(withName: "onTurnOnUploader", body:[
+                    self.sendEvent(withName: "onTurnOnUploader", body: [
                         "mode": modeValue,
                         "currentUploadLimitsIndex": currentUploadLimitsIndex,
-                        "currentUploadMaxLimitsIndex": currentUploadMaxLimitsIndex
+                        "currentUploadMaxLimitsIndex": currentUploadMaxLimitsIndex,
+                        "currentStartAnchorTime": progress.currentStartDate != nil ? ISO8601DateFormatter().string(from: progress.currentStartDate!) : "",
                     ])
                 }
             }
@@ -345,7 +340,6 @@ class TPNativeHealth: RCTEventEmitter {
         }
         var message = ""
         if mode == TPUploader.Mode.HistoricalAll {
-            self.isHistoricalUploadPending = false
             let (historicalUploadLimitsIndex, historicalUploadMaxLimitsIndex) = self.uploader.retryInfoForMode(TPUploader.Mode.HistoricalAll)
             body["historicalUploadLimitsIndex"] = historicalUploadLimitsIndex
             body["historicalUploadMaxLimitsIndex"] = historicalUploadMaxLimitsIndex
@@ -377,8 +371,25 @@ class TPNativeHealth: RCTEventEmitter {
         DDLogInfo("Mode: \(mode), Reason: \(reason), body: \(body)")
         RollbarReactNative.info(withMessage: message, data: body)
     }
+    
+    @objc func handleUploadHistoricalPending(_ note: Notification) {
+        DDLogVerbose("trace")
 
-
+        let progress = self.uploader.uploaderProgress()
+        DispatchQueue.main.async {
+            DDLogVerbose("Disable idle timer")
+            UIApplication.shared.isIdleTimerDisabled = true
+            if self.isObserving {
+                self.sendEvent(withName: "onUploadHistoricalPending", body: [
+                    "mode": "historical",
+                    "historicalTotalSamplesCount": progress.historicalTotalSamplesCount,
+                    "historicalTotalDaysCount": progress.totalDaysHistorical,
+                ])
+            }
+        }
+        RollbarReactNative.info(withMessage: "Started historical upload (pending)")
+    }
+    
     @objc func handleUploadRetry(_ note: Notification) {
         DDLogVerbose("trace")
 
@@ -392,7 +403,7 @@ class TPNativeHealth: RCTEventEmitter {
         var errorMessage = ""
         var reasonMessage = ""
         var rollbarLogMessage = ""
-        var isRetry = true
+        var isRetrySuccessful = false
         switch reason {
         case .error(let error):
             rollbarLogMessage = "Retrying upload"
@@ -401,14 +412,14 @@ class TPNativeHealth: RCTEventEmitter {
         default:
             rollbarLogMessage = "Retry successful"
             reasonMessage = "success"
-            isRetry = false
+            isRetrySuccessful = true
             break
         }
         if mode == .HistoricalAll {
             body = [
                 "retryHistoricalUploadReason": reasonMessage,
                 "retryHistoricalUploadError": errorMessage,
-                "isUploadingHistoricalRetry": isRetry,
+                "isUploadingHistoricalRetry": !isRetrySuccessful,
                 "historicalUploadLimitsIndex": historicalUploadLimitsIndex,
                 "historicalUploadMaxLimitsIndex": historicalUploadMaxLimitsIndex,
                 "mode": modeValue]
@@ -416,7 +427,7 @@ class TPNativeHealth: RCTEventEmitter {
             body = [
                 "retryCurrentUploadReason": reasonMessage,
                 "retryCurrentUploadError": errorMessage,
-                "isUploadingCurrentRetry": isRetry,
+                "isUploadingCurrentRetry": !isRetrySuccessful,
                 "currentUploadLimitsIndex": currentUploadLimitsIndex,
                 "currentUploadMaxLimitsIndex": currentUploadMaxLimitsIndex,
                 "mode": modeValue]
@@ -469,11 +480,11 @@ class TPNativeHealth: RCTEventEmitter {
         return [
             "mode": "historical",
             "isUploadingHistorical": isUploadingHistorical,
-            "isHistoricalUploadPending": self.isHistoricalUploadPending,
             "historicalUploadLimitsIndex": historicalUploadLimitsIndex,
             "historicalUploadMaxLimitsIndex": historicalUploadMaxLimitsIndex,
+            "historicalTotalSamplesCount": progress.historicalTotalSamplesCount,
+            "historicalTotalDaysCount": progress.totalDaysHistorical,
             "historicalUploadCurrentDay": progress.currentDayHistorical,
-            "historicalUploadTotalDays": progress.totalDaysHistorical,
             "historicalUploadTotalSamples": progress.totalSamplesHistorical,
             "historicalUploadTotalDeletes": progress.totalDeletesHistorical,
             "historicalUploadEarliestSampleTime": progress.historicalUploadEarliestSampleTime != nil ? ISO8601DateFormatter().string(from: progress.historicalUploadEarliestSampleTime!) : "",
@@ -500,12 +511,11 @@ class TPNativeHealth: RCTEventEmitter {
     }
 
     private func lastCurrentUploadUiDescription() -> String {
-        var description = "No data available to upload"
+        var description = "No recent reading available."
         let progress = self.uploader.uploaderProgress()
-        if let lastSuccessfulUpload = progress.lastSuccessfulCurrentUploadTime/*, let lastType = self.lastCurrentUploadType()*/
-        {
+        if let lastSuccessfulUpload = progress.lastSuccessfulCurrentUploadTime {
             let lastUploadTimeAgoInWords = lastSuccessfulUpload.timeAgoInWords(Date())
-            description = String(format: "Last reading %@", lastUploadTimeAgoInWords)
+            description = String(format: "Last reading %@.", lastUploadTimeAgoInWords)
         }
         return description
     }

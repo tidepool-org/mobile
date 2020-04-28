@@ -85,9 +85,7 @@ class TPApi {
         }
 
         // Post the request.
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         self.sendRequest(.get, endpoint:endpoint).responseJSON { response in
-            UIApplication.shared.isNetworkActivityIndicatorVisible = false
             if ( response.result.isSuccess ) {
                 DDLogInfo("Session token updated")
                 self.sessionToken = response.response!.allHeaderFields[self.kSessionTokenResponseId] as! String?

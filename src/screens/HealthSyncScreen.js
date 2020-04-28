@@ -155,7 +155,6 @@ class HealthSyncScreen extends PureComponent {
   };
 
   onPressSync = () => {
-    TPNativeHealth.stopUploadingHistoricalAndReset();
     TPNativeHealth.startUploadingHistorical();
 
     this.setState({
@@ -184,32 +183,15 @@ class HealthSyncScreen extends PureComponent {
     const {
       health: {
         isInterfaceOn,
-        isTurningInterfaceOn,
-        historicalUploadCurrentDay,
-        historicalUploadTotalDays,
+        isHistoricalUploadPending,
+        historicalUploadTotalSamples,
+        historicalTotalSamplesCount,
         isUploadingHistorical,
         turnOffHistoricalUploaderReason,
       },
     } = this.props;
 
-    if (isInterfaceOn) {
-      let progress = 0;
-      if (
-        (isUploadingHistorical || turnOffHistoricalUploaderReason) &&
-        historicalUploadTotalDays > 0
-      ) {
-        progress = historicalUploadCurrentDay / historicalUploadTotalDays;
-      }
-
-      return (
-        <ProgressViewIOS
-          progressTintColor={PrimaryTheme.progressTintColor}
-          trackTintColor={PrimaryTheme.trackTintColor}
-          progress={progress}
-          visible={false}
-        />
-      );
-    } else if (isTurningInterfaceOn) {
+    if (isHistoricalUploadPending) {
       return (
         <ActivityIndicator
           style={{
@@ -221,6 +203,27 @@ class HealthSyncScreen extends PureComponent {
           animating
         />
       );
+    } else if (
+      isInterfaceOn &&
+      (isUploadingHistorical || turnOffHistoricalUploaderReason) &&
+      historicalTotalSamplesCount > 0
+    ) {
+      let progress = 0;
+      if (
+        (isUploadingHistorical || turnOffHistoricalUploaderReason) &&
+        historicalTotalSamplesCount > 0
+      ) {
+        progress = historicalUploadTotalSamples / historicalTotalSamplesCount;
+      }
+
+      return (
+        <ProgressViewIOS
+          progressTintColor={PrimaryTheme.progressTintColor}
+          trackTintColor={PrimaryTheme.trackTintColor}
+          progress={progress}
+          visible={false}
+        />
+      );
     }
     return null;
   }
@@ -229,9 +232,10 @@ class HealthSyncScreen extends PureComponent {
     const {
       health: {
         isUploadingHistorical,
+        isHistoricalUploadPending,
         historicalUploadTotalSamples,
         historicalUploadCurrentDay,
-        historicalUploadTotalDays,
+        historicalTotalDaysCount,
         isUploadingHistoricalRetry,
         turnOffHistoricalUploaderReason,
         turnOffHistoricalUploaderError,
@@ -244,37 +248,38 @@ class HealthSyncScreen extends PureComponent {
     let syncProgressText = "";
     let syncErrorText = "";
     if (isInterfaceOn) {
-      const useItemCountInsteadOfDayCount = false;
+      const useDaysProgress = false;
       if (isOffline) {
         syncProgressText = "Upload paused while offline.";
+      } else if (isHistoricalUploadPending) {
+        syncProgressText = ""
       } else if (isUploadingHistorical || turnOffHistoricalUploaderReason) {
-        if (useItemCountInsteadOfDayCount) {
-          syncProgressText = `Uploaded ${historicalUploadTotalSamples} items`;
-        } else if (historicalUploadCurrentDay > 0) {
-          syncProgressText = `Day ${historicalUploadCurrentDay} of ${historicalUploadTotalDays}`;
-        }
-        if (turnOffHistoricalUploaderReason) {
-          if (syncProgressText) {
-            syncErrorText = turnOffHistoricalUploaderError;
-          } else {
-            syncProgressText = turnOffHistoricalUploaderError;
+        if (useDaysProgress) {
+          if (historicalUploadCurrentDay > 0) {
+            syncProgressText = `Day ${historicalUploadCurrentDay.toLocaleString()} of ${historicalTotalDaysCount.toLocaleString()}`;
           }
-        } else if (isUploadingHistoricalRetry) {
+        } else if (historicalUploadTotalSamples > 0) {
+            syncProgressText = `Uploaded ${historicalUploadTotalSamples.toLocaleString()} items`;
+        }
+        if (isUploadingHistoricalRetry) {
           if (syncProgressText) {
-            syncErrorText = "Retrying...";
+            syncErrorText = "Retrying";
           } else {
-            syncProgressText = "Retrying...";
+            syncProgressText = "Retrying";
+          }
+        } else if (turnOffHistoricalUploaderReason) {
+          if (
+            turnOffHistoricalUploaderReason === "complete" &&
+            historicalUploadTotalSamples === 0
+          ) {
+            syncProgressText = "No data available to upload.";
+          } else if (syncProgressText) {
+              syncErrorText = turnOffHistoricalUploaderError;
+            } else {
+              syncProgressText = turnOffHistoricalUploaderError;
+            }
           }
         }
-      } else if (
-        turnOffHistoricalUploaderReason === "complete" &&
-        historicalUploadTotalDays === 0
-      ) {
-        // TODO: health - In the case of a relatively new user with only a day
-        // or less of data to upload, this message will be confusing. We need to
-        // also report on total samples uploaded, or use fractional days
-        syncProgressText = "No data available to upload";
-      }
     } else {
       syncProgressText = interfaceTurnedOffError;
     }
@@ -305,35 +310,30 @@ class HealthSyncScreen extends PureComponent {
   renderSyncStatus() {
     const {
       health: {
-        turnOffHistoricalUploaderReason,
+        isUploadingHistorical,
+        isHistoricalUploadPending,
         isTurningInterfaceOn,
-        isInterfaceOn,
+        turnOffHistoricalUploaderReason,
       },
     } = this.props;
 
     let primaryText = "";
-    let syncProgressExplanation = "";
-    let buttonTitle = "";
+    let syncProgressExplanation =
+      "Please stay on this screen and keep your phone unlocked while we sync.";
+    let buttonTitle = "Continue";
 
-    if (isInterfaceOn) {
-      if (turnOffHistoricalUploaderReason === "complete") {
-        primaryText = "Sync Complete";
-        buttonTitle = "Continue";
-      } else if (turnOffHistoricalUploaderReason === "error") {
-        primaryText = `Sync Error`;
-        buttonTitle = "Continue";
-      } else {
-        primaryText = "Syncing Now";
-        syncProgressExplanation =
-          "Please stay on this screen and keep your phone unlocked while we sync.";
-        buttonTitle = "Cancel";
-      }
-    } else if (isTurningInterfaceOn) {
+    if (isTurningInterfaceOn || isHistoricalUploadPending) {
       primaryText = "Preparing to upload";
       buttonTitle = "Cancel";
-    } else {
-      primaryText = "Sync Error";
-      buttonTitle = "Continue";
+    } else if (isUploadingHistorical) {
+      primaryText = "Syncing Now";
+      buttonTitle = "Cancel";
+    } else if (turnOffHistoricalUploaderReason === "complete") {
+      primaryText = "Sync Complete";
+      syncProgressExplanation = "";
+    } else if (turnOffHistoricalUploaderReason === "error") {
+      primaryText = `Sync Error`;
+      syncProgressExplanation = "";
     }
 
     // Ensure that the text contents has at least the numberOfLines specified in
