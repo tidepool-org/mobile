@@ -10,8 +10,10 @@ import getRouteName from "../navigators/getRouteName";
 import { TPNative } from "../models/TPNative";
 import { TPNativeHealth } from "../models/TPNativeHealth";
 import { healthStateSet } from "../actions/health";
+import { ConnectionStatus } from "../models/ConnectionStatus";
 import { navigateDebugSettings } from "../actions/navigation";
 import { authRefreshToken } from "../actions/auth";
+import { offlineSet } from "../actions/offline";
 // import { Logger } from "../models/Logger";
 
 class AppWithNavigationState extends PureComponent {
@@ -28,6 +30,7 @@ class AppWithNavigationState extends PureComponent {
 
     AppState.addEventListener("change", this.onAppStateChange);
     BackHandler.addEventListener("hardwareBackPress", this.onBackPress);
+    ConnectionStatus.addListener(this.onConnectionStatusChange);
     TPNative.addListener(this.onNativeEvent);
     TPNativeHealth.addListener(this.onNativeHealthEvent);
     TPNativeHealth.refreshUploadStats();
@@ -68,6 +71,11 @@ class AppWithNavigationState extends PureComponent {
     BackHandler.removeEventListener("hardwareBackPress", this.onBackPress);
     TPNative.removeListener(this.onNativeEvent);
     TPNativeHealth.removeListener(this.onNativeHealthEvent);
+  }
+
+  onConnectionStatusChange = () => {
+    const { dispatch } = this.props;
+    dispatch(offlineSet(ConnectionStatus.isOffline));
   }
 
   onNativeEvent = eventName => {

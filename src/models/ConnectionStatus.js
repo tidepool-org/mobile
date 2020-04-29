@@ -2,11 +2,10 @@ import NetInfo from "@react-native-community/netinfo";
 
 class ConnectionStatusSingletonClass {
   constructor() {
-    this.connectionInfo = "unknown";
-    NetInfo.addEventListener(this.onConnectionChange);
+    NetInfo.addEventListener(this.onStatusChange);
 
-    this.isOnline = false;
-    this.isOffline = false;
+    this.isOnline = undefined;
+    this.isOffline = undefined;
     this.listeners = [];
   }
 
@@ -31,22 +30,17 @@ class ConnectionStatusSingletonClass {
   // Private
   //
 
-  onConnectionChange = connectionInfo => {
-    const previousConnectionInfo = this.connectionInfo;
-    this.connectionInfo = connectionInfo;
+  onStatusChange = status => {
     const wasOnline = this.isOnline;
     const wasOffline = this.isOffline;
-    const isOnline =
-      connectionInfo.type === "wifi" || connectionInfo.type === "cellular";
-    const isOffline = connectionInfo.type === "none";
+    const isOnline = status.isInternetReachable;
+    const isOffline = !isOnline
     this.isOnline = isOnline;
     this.isOffline = isOffline;
 
     if (wasOnline !== isOnline) {
       this.listeners.forEach(listener => {
         listener({
-          connectionInfo,
-          previousConnectionInfo,
           wasOnline,
           wasOffline,
           isOnline,
