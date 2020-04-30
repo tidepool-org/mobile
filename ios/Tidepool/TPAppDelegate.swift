@@ -38,7 +38,7 @@ class TPAppDelegate: EXStandaloneAppDelegate {
             unsetenv("CFNETWORK_DIAGNOSTICS")
         }
 
-        // Occasionally log full date to help with deciphering logs!
+        // Log full date to help with deciphering logs!
         let dateString = DateFormatter().isoStringFromDate(Date())
         DDLogVerbose("Log Date: \(dateString)")
 
@@ -62,33 +62,13 @@ class TPAppDelegate: EXStandaloneAppDelegate {
         return result
     }
 
-    fileprivate var deviceIsLocked = false
     override func applicationProtectedDataDidBecomeAvailable(_ application: UIApplication) {
-        DDLogInfo("Device unlocked!")
-        deviceIsLocked = false
-        
-        let connector = TPUploaderAPI.connector()
-        if connector.isConnectedToNetwork() {
-            if !connector.uploader().isInterfaceOn() {
-                TPDataController.sharedInstance.configureHealthKitInterface()
-            } else {
-                connector.uploader().resumeUploadingIfResumable()
-            }
-        }
-        
+        TPUploaderAPI.connector().uploader().applicationProtectedDataDidBecomeAvailable(application)        
         // super.applicationProtectedDataDidBecomeAvailable(application) // super doesn't implement!
     }
 
     override func applicationProtectedDataWillBecomeUnavailable(_ application: UIApplication) {
-        DDLogInfo("Device locked!")
-
-        deviceIsLocked = true
-
-        // Stop historical upload since Health data will become unavailable. (Will resume again when available.)
-        let message = "Upload paused while device is locked."
-        let error = NSError(domain: TPUploader.ErrorDomain, code: TPUploader.ErrorCodes.noProtectedHealthKitData.rawValue, userInfo: [NSLocalizedDescriptionKey: message])
-        TPUploaderAPI.connector().uploader().stopUploading(reason: .error(error: error))
-
+        TPUploaderAPI.connector().uploader().applicationProtectedDataWillBecomeUnavailable(application)
         // super.applicationProtectedDataWillBecomeUnavailable(application) // super doesn't implement!
     }
     
@@ -98,53 +78,22 @@ class TPAppDelegate: EXStandaloneAppDelegate {
     }
 
     override func applicationDidEnterBackground(_ application: UIApplication) {
-        DDLogVerbose("trace")
-
-        // Re-enable idle timer when the app enters background. (May have been disabled during historical sync/upload.)
-        DDLogVerbose("applicationDidEnterBackground enable idle timer")
-        UIApplication.shared.isIdleTimerDisabled = false
-
+        TPUploaderAPI.connector().uploader().applicationDidEnterBackground(application)
         // super.applicationDidEnterBackground(application) // super doesn't implement!
     }
 
     override func applicationWillEnterForeground(_ application: UIApplication) {
-        DDLogInfo("applicationWillEnterForeground")
-
-        // Disable idle timer if there is a historical sync in progress
-        if TPUploaderAPI.connector().uploader().isUploadInProgressForMode(TPUploader.Mode.HistoricalAll) {
-            DDLogVerbose("applicationWillEnterForeground disable idle timer")
-            UIApplication.shared.isIdleTimerDisabled = true
-        }
-
-        let connector = TPUploaderAPI.connector()
-        if connector.isConnectedToNetwork() {
-            if !connector.uploader().isInterfaceOn() {
-                TPDataController.sharedInstance.configureHealthKitInterface()
-            } else {
-                connector.uploader().resumeUploadingIfResumable()
-            }
-        }
-
+        TPUploaderAPI.connector().uploader().applicationWillEnterForeground(application)
         super.applicationWillEnterForeground(application)
     }
 
     override func applicationDidBecomeActive(_ application: UIApplication) {
-        DDLogVerbose("applicationDidBecomeActive")
-        // Occasionally log full date to help with deciphering logs!
-        let dateString = DateFormatter().isoStringFromDate(Date())
-        DDLogVerbose("Log Date: \(dateString)")
-
+        TPUploaderAPI.connector().uploader().applicationDidBecomeActive(application)
         // super.applicationDidBecomeActive(application) // super doesn't implement!
     }
 
     override func applicationWillTerminate(_ application: UIApplication) {
-        DDLogVerbose("trace")
-        
-        let message = "Stop upload due to applicationWillTerminate."
-        let error = NSError(domain: TPUploader.ErrorDomain, code: TPUploader.ErrorCodes.applicationWillTerminate.rawValue, userInfo: [NSLocalizedDescriptionKey: message])
-        DDLogInfo(message)
-        TPUploaderAPI.connector().uploader().stopUploading(reason: .error(error: error))
-        
+        TPUploaderAPI.connector().uploader().applicationWillTerminate(application)
         // super.applicationWillTerminate(application) // super doesn't implement!
     }
 
@@ -156,15 +105,13 @@ class TPAppDelegate: EXStandaloneAppDelegate {
                 if !uploader.isInterfaceOn() {
                     TPDataController.sharedInstance.configureHealthKitInterface()
                 } else {
-                    uploader.resumeUploadingIfResumable()
+                    uploader.resumeUploadingIfResumableOrPending()
                 }
             } else {
-                if uploader.isUploadInProgressForMode(TPUploader.Mode.HistoricalAll) {
-                    let message = "Upload paused while offline."
-                    let error = NSError(domain: TPUploader.ErrorDomain, code: TPUploader.ErrorCodes.noNetwork.rawValue, userInfo: [NSLocalizedDescriptionKey: message])
-                    DDLogInfo(message)
-                    TPUploaderAPI.connector().uploader().stopUploading(reason: .error(error: error))
-                }
+                let message = "Upload paused while offline."
+                let error = NSError(domain: TPUploader.ErrorDomain, code: TPUploader.ErrorCodes.noNetwork.rawValue, userInfo: [NSLocalizedDescriptionKey: message])
+                DDLogInfo(message)
+                TPUploaderAPI.connector().uploader().stopUploading(reason: .error(error: error))
             }
         }
     }

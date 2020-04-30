@@ -708,7 +708,7 @@ class DebugHealthScreen extends PureComponent {
         turnOffHistoricalUploaderReason,
         isUploadingHistorical,
         historicalUploadCurrentDay,
-        historicalUploadTotalDays,
+        historicalTotalDaysCount,
         historicalUploadTotalSamples,
         historicalUploadTotalDeletes,
         historicalUploadEarliestSampleTime,
@@ -721,19 +721,22 @@ class DebugHealthScreen extends PureComponent {
       (turnOffHistoricalUploaderReason &&
         turnOffHistoricalUploaderReason !== "turned off")
     ) {
+      const useDaysProgress = false;
+      const samplesUploadedCountText = `Uploaded ${historicalUploadTotalSamples.toLocaleString()} samples`;
+      const deletesFoundCountText = `Found ${historicalUploadTotalDeletes.toLocaleString()} deletes`;
       let totalDaysStatsText = "";
-      if (historicalUploadTotalDays > 0) {
-        totalDaysStatsText = `Uploaded ${historicalUploadCurrentDay} of ${historicalUploadTotalDays} days`;
+      if (useDaysProgress && historicalTotalDaysCount > 0) {
+        totalDaysStatsText = `Uploaded ${historicalUploadCurrentDay.toLocaleString()} of ${historicalTotalDaysCount.toLocaleString()} days`;
       }
-      const totalCountsStatsText = `Uploaded ${historicalUploadTotalSamples} samples, ${historicalUploadTotalDeletes} deletes`;
       return (
         <Grid>
-          {totalCountsStatsText ? (
-            <Row>
-              <Text style={styles.statsText}>{totalCountsStatsText}</Text>
-            </Row>
-          ) : null}
-          {totalDaysStatsText ? (
+          <Row>
+            <Text style={styles.statsText}>{samplesUploadedCountText}</Text>
+          </Row>
+          <Row>
+            <Text style={styles.statsText}>{deletesFoundCountText}</Text>
+          </Row>
+          {useDaysProgress ? (
             <Row>
               <Text style={styles.statsText}>{totalDaysStatsText}</Text>
             </Row>
@@ -778,18 +781,20 @@ class DebugHealthScreen extends PureComponent {
         historicalUploadMaxLimitsIndex,
         uploaderSimulate,
         includeSensitiveInfo,
+        historicalTotalDaysCount,
+        historicalTotalSamplesCount,
       },
     } = this.props;
 
     let uploadStatusText = "Not uploading";
     if (isUploadingHistoricalRetry) {
       uploadStatusText = `Retrying due to: ${retryHistoricalUploadError}`;
-    } else if (isUploadingHistorical) {
-      uploadStatusText = "Uploading...";
-    } else if (isHistoricalUploadPending) {
-      uploadStatusText = "Upload pending...";
     } else if (isTurningInterfaceOn) {
-      uploadStatusText = "Preparing";
+      uploadStatusText = "Preparing to upload";
+    } else if (isHistoricalUploadPending) {
+      uploadStatusText = "Counting samples to upload";
+    } else if (isUploadingHistorical) {
+      uploadStatusText = "Uploading";
     }
 
     return (
@@ -799,7 +804,31 @@ class DebugHealthScreen extends PureComponent {
             <Text style={styles.statsText}>{uploadStatusText}</Text>
           </Left>
         </Row>
-        {!isUploadingHistorical && turnOffHistoricalUploaderReason ? (
+        {isUploadingHistorical || isHistoricalUploadPending || (turnOffHistoricalUploaderReason && turnOffHistoricalUploaderReason !== "turned off") ? (
+          <>
+            <Row>
+              <Left style={styles.left}>
+                <Text style={styles.statsText}>Total samples to upload:</Text>
+              </Left>
+              <Right style={styles.right}>
+                <Text style={styles.statsText}>
+                  {historicalTotalSamplesCount.toLocaleString()}
+                </Text>
+              </Right>
+            </Row>
+            <Row>
+              <Left style={styles.left}>
+                <Text style={styles.statsText}>Total days to upload:</Text>
+              </Left>
+              <Right style={styles.right}>
+                <Text style={styles.statsText}>
+                  {historicalTotalDaysCount.toLocaleString()}
+                </Text>
+              </Right>
+            </Row>
+          </>
+      ) : null}
+        {!isUploadingHistorical && !isHistoricalUploadPending && turnOffHistoricalUploaderReason ? (
           <Row>
             <Left style={styles.left}>
               <Text style={styles.statsText}>Stopped reason:</Text>
@@ -935,7 +964,7 @@ class DebugHealthScreen extends PureComponent {
     } else if (isUploadingCurrent) {
       uploadStatusText = "Current uploader is on";
     } else if (isTurningInterfaceOn) {
-      uploadStatusText = "Preparing";
+      uploadStatusText = "Preparing to upload";
     }
 
     return (
@@ -1019,7 +1048,7 @@ class DebugHealthScreen extends PureComponent {
       (turnOffCurrentUploaderReason &&
         turnOffCurrentUploaderReason !== "turned off")
     ) {
-      const totalCountsStatsText = `Uploaded ${currentUploadTotalSamples} samples, ${currentUploadTotalDeletes} deletes`;
+      const totalCountsStatsText = `Uploaded ${currentUploadTotalSamples.toLocaleString()} samples, ${currentUploadTotalDeletes.toLocaleString()} deletes`;
       return (
         <Grid>
           {totalCountsStatsText ? (

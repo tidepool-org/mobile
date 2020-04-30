@@ -112,25 +112,20 @@ class TPUploaderAPI: TPUploaderConfigInfo {
     }
 
     var nativeHealthBridge: TPNativeHealth?
-    
-    var interfaceTurnedOffError: Error? = nil
 
     func onTurningOnInterface() {
         DDLogInfo("onTurningOnInterface")
-        interfaceTurnedOffError = nil
         nativeHealthBridge?.onHealthKitInterfaceConfiguration()
     }
 
     func onTurnOnInterface() {
         DDLogInfo("onTurnOnInterface")
-        interfaceTurnedOffError = nil
         nativeHealthBridge?.onHealthKitInterfaceConfiguration()
     }
 
     func onTurnOffInterface(_ error: Error?) {
         DDLogInfo("onTurnOffInterface, error: \(String(describing: error))")
                 
-        interfaceTurnedOffError = error
         nativeHealthBridge?.onHealthKitInterfaceConfiguration()
     }
 

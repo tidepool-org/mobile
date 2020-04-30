@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     ...PrimaryTheme.healthSyncTextSecondary,
   },
-  syncProgressText: {
+  line1Text: {
     marginTop: 10,
     alignSelf: "center",
     ...PrimaryTheme.healthSyncTextSecondary,
@@ -155,7 +155,6 @@ class HealthSyncScreen extends PureComponent {
   };
 
   onPressSync = () => {
-    TPNativeHealth.stopUploadingHistoricalAndReset();
     TPNativeHealth.startUploadingHistorical();
 
     this.setState({
@@ -184,32 +183,15 @@ class HealthSyncScreen extends PureComponent {
     const {
       health: {
         isInterfaceOn,
-        isTurningInterfaceOn,
-        historicalUploadCurrentDay,
-        historicalUploadTotalDays,
+        isHistoricalUploadPending,
+        historicalUploadTotalSamples,
+        historicalTotalSamplesCount,
         isUploadingHistorical,
         turnOffHistoricalUploaderReason,
       },
     } = this.props;
 
-    if (isInterfaceOn) {
-      let progress = 0;
-      if (
-        (isUploadingHistorical || turnOffHistoricalUploaderReason) &&
-        historicalUploadTotalDays > 0
-      ) {
-        progress = historicalUploadCurrentDay / historicalUploadTotalDays;
-      }
-
-      return (
-        <ProgressViewIOS
-          progressTintColor={PrimaryTheme.progressTintColor}
-          trackTintColor={PrimaryTheme.trackTintColor}
-          progress={progress}
-          visible={false}
-        />
-      );
-    } else if (isTurningInterfaceOn) {
+    if (isHistoricalUploadPending) {
       return (
         <ActivityIndicator
           style={{
@@ -221,6 +203,27 @@ class HealthSyncScreen extends PureComponent {
           animating
         />
       );
+    } else if (
+      isInterfaceOn &&
+      (isUploadingHistorical || turnOffHistoricalUploaderReason) &&
+      historicalTotalSamplesCount > 0
+    ) {
+      let progress = 0;
+      if (
+        (isUploadingHistorical || turnOffHistoricalUploaderReason) &&
+        historicalTotalSamplesCount > 0
+      ) {
+        progress = historicalUploadTotalSamples / historicalTotalSamplesCount;
+      }
+
+      return (
+        <ProgressViewIOS
+          progressTintColor={PrimaryTheme.progressTintColor}
+          trackTintColor={PrimaryTheme.trackTintColor}
+          progress={progress}
+          visible={false}
+        />
+      );
     }
     return null;
   }
@@ -229,9 +232,11 @@ class HealthSyncScreen extends PureComponent {
     const {
       health: {
         isUploadingHistorical,
+        isHistoricalUploadPending,
+        historicalTotalSamplesCount,
         historicalUploadTotalSamples,
         historicalUploadCurrentDay,
-        historicalUploadTotalDays,
+        historicalTotalDaysCount,
         isUploadingHistoricalRetry,
         turnOffHistoricalUploaderReason,
         turnOffHistoricalUploaderError,
@@ -241,61 +246,69 @@ class HealthSyncScreen extends PureComponent {
       isOffline,
     } = this.props;
 
-    let syncProgressText = "";
-    let syncErrorText = "";
+    let line1Text = "";
+    let line2Text = "";
     if (isInterfaceOn) {
-      const useItemCountInsteadOfDayCount = false;
-      if (isOffline) {
-        syncProgressText = "Upload paused while offline.";
-      } else if (isUploadingHistorical || turnOffHistoricalUploaderReason) {
-        if (useItemCountInsteadOfDayCount) {
-          syncProgressText = `Uploaded ${historicalUploadTotalSamples} items`;
-        } else if (historicalUploadCurrentDay > 0) {
-          syncProgressText = `Day ${historicalUploadCurrentDay} of ${historicalUploadTotalDays}`;
+      const useDaysProgress = false;
+      if (isOffline || isUploadingHistorical || turnOffHistoricalUploaderReason) {
+        if (isOffline && !isHistoricalUploadPending) {
+          line1Text = "Upload paused while offline.";
         }
-        if (turnOffHistoricalUploaderReason) {
-          if (syncProgressText) {
-            syncErrorText = turnOffHistoricalUploaderError;
-          } else {
-            syncProgressText = turnOffHistoricalUploaderError;
+        let progressText = "";
+        if (useDaysProgress) {
+          if (historicalUploadCurrentDay > 0) {
+            progressText = `Day ${historicalUploadCurrentDay.toLocaleString()} of ${historicalTotalDaysCount.toLocaleString()}`;
           }
-        } else if (isUploadingHistoricalRetry) {
-          if (syncProgressText) {
-            syncErrorText = "Retrying...";
+        } else if (historicalUploadTotalSamples > 0) {
+          progressText = `Uploaded ${new Intl.NumberFormat(undefined, { style: 'percent'}).format(historicalUploadTotalSamples / historicalTotalSamplesCount)}`;
+        }
+        if (progressText) {
+          if (line1Text) {
+            line2Text = line1Text;
+          }
+          line1Text = progressText;
+        }
+        if (isUploadingHistoricalRetry) {
+          if (line1Text) {
+            line2Text = "Retrying";
           } else {
-            syncProgressText = "Retrying...";
+            line1Text = "Retrying";
           }
         }
-      } else if (
-        turnOffHistoricalUploaderReason === "complete" &&
-        historicalUploadTotalDays === 0
-      ) {
-        // TODO: health - In the case of a relatively new user with only a day
-        // or less of data to upload, this message will be confusing. We need to
-        // also report on total samples uploaded, or use fractional days
-        syncProgressText = "No data available to upload";
-      }
+        if (!isOffline && turnOffHistoricalUploaderReason) {
+          if (
+            turnOffHistoricalUploaderReason === "complete" &&
+            historicalUploadTotalSamples === 0
+          ) {
+            line1Text = "No data available to upload.";
+          } else if (line1Text) {
+              line2Text = turnOffHistoricalUploaderError;
+            } else {
+              line1Text = turnOffHistoricalUploaderError;
+            }
+          }
+        }
     } else {
-      syncProgressText = interfaceTurnedOffError;
+      line1Text = interfaceTurnedOffError;
     }
 
     // Ensure that the text contents has at least the numberOfLines specified in
     // the text so that enough space is reserved in layout regardless of text
     // contents so that layout doesn't jump around
-    syncProgressText = `${syncProgressText}\n `;
-    syncErrorText = `${syncErrorText}\n \n \n \n `;
+    line1Text = `${line1Text}\n `;
+    line2Text = `${line2Text}\n \n \n \n `;
 
     return (
       <View style={styles.syncProgressView}>
         {this.renderSyncProgressBarOrSpinner()}
         <View>
-          <Text style={styles.syncProgressText} numberOfLines={1}>
-            {syncProgressText}
+          <Text style={styles.line1Text} numberOfLines={1}>
+            {line1Text}
           </Text>
         </View>
         <View>
-          <Text style={styles.syncProgressText} numberOfLines={4}>
-            {syncErrorText}
+          <Text style={styles.line1Text} numberOfLines={4}>
+            {line2Text}
           </Text>
         </View>
       </View>
@@ -305,35 +318,34 @@ class HealthSyncScreen extends PureComponent {
   renderSyncStatus() {
     const {
       health: {
-        turnOffHistoricalUploaderReason,
+        isUploadingHistorical,
+        isHistoricalUploadPending,
         isTurningInterfaceOn,
-        isInterfaceOn,
+        turnOffHistoricalUploaderReason,
       },
+      isOffline,
     } = this.props;
 
     let primaryText = "";
-    let syncProgressExplanation = "";
-    let buttonTitle = "";
+    let syncProgressExplanation =
+      "Please stay on this screen and keep your phone unlocked while we sync.";
+    let buttonTitle = "Continue";
 
-    if (isInterfaceOn) {
-      if (turnOffHistoricalUploaderReason === "complete") {
-        primaryText = "Sync Complete";
-        buttonTitle = "Continue";
-      } else if (turnOffHistoricalUploaderReason === "error") {
-        primaryText = `Sync Error`;
-        buttonTitle = "Continue";
-      } else {
-        primaryText = "Syncing Now";
-        syncProgressExplanation =
-          "Please stay on this screen and keep your phone unlocked while we sync.";
-        buttonTitle = "Cancel";
-      }
-    } else if (isTurningInterfaceOn) {
+    if (isTurningInterfaceOn || isHistoricalUploadPending) {
       primaryText = "Preparing to upload";
       buttonTitle = "Cancel";
-    } else {
+    } else if (isOffline) {
+      primaryText = "Paused";
+      buttonTitle = "Cancel";
+      syncProgressExplanation = "";
+    } else if (isUploadingHistorical) {
+      primaryText = "Syncing Now";
+      buttonTitle = "Cancel";
+    } else if (turnOffHistoricalUploaderReason === "complete") {
+      primaryText = "Sync Complete";
+    } else if (turnOffHistoricalUploaderReason === "error") {
       primaryText = "Sync Error";
-      buttonTitle = "Continue";
+      syncProgressExplanation = "";
     }
 
     // Ensure that the text contents has at least the numberOfLines specified in

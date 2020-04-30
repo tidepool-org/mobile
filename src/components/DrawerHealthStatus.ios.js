@@ -40,10 +40,12 @@ class DrawerHealthStatus extends PureComponent {
       theme,
       health: {
         isUploadingHistorical,
+        isHistoricalUploadPending,
         isUploadingHistoricalRetry,
+        historicalTotalSamplesCount,
         historicalUploadTotalSamples,
         historicalUploadCurrentDay,
-        historicalUploadTotalDays,
+        historicalTotalDaysCount,
         lastCurrentUploadUiDescription,
         isInterfaceOn,
         isTurningInterfaceOn,
@@ -54,26 +56,30 @@ class DrawerHealthStatus extends PureComponent {
 
     let line1Text = "";
     let line2Text = "";
-    const useItemCountInsteadOfDayCount = false;
+    const useDaysProgress = false;
 
-    if (isOffline) {
+    if (isTurningInterfaceOn || isHistoricalUploadPending) {
+      line1Text = "Preparing to upload";
+    } else if (isOffline) {
       line1Text = "Upload paused while offline.";
-    } else if (isUploadingHistoricalRetry) {
-      line1Text = "Syncing Now";
-      line2Text = "Retrying...";
+    } else if (isTurningInterfaceOn || isHistoricalUploadPending) {
+      line1Text = "Preparing to upload";
     } else if (isUploadingHistorical) {
       line1Text = "Syncing Now";
-      if (useItemCountInsteadOfDayCount) {
-        line2Text = `Uploaded ${historicalUploadTotalSamples} items`;
-      } else if (historicalUploadCurrentDay > 0) {
-        line2Text = `Day ${historicalUploadCurrentDay} of ${historicalUploadTotalDays}`;
-      }
+    } else if (isUploadingHistoricalRetry) {
+      line1Text = "Retrying upload";
     } else if (isInterfaceOn) {
       line1Text = lastCurrentUploadUiDescription;
-    } else if (isTurningInterfaceOn) {
-      line1Text = "Preparing to upload...";
     } else {
       line1Text = interfaceTurnedOffError;
+    }
+
+    if (isUploadingHistorical && historicalUploadTotalSamples) {
+      if (useDaysProgress) {
+        line2Text = `Day ${historicalUploadCurrentDay.toLocaleString()} of ${historicalTotalDaysCount.toLocaleString()}`;
+      } else {
+        line2Text = `Uploaded ${new Intl.NumberFormat(undefined, { style: 'percent'}).format(historicalUploadTotalSamples / historicalTotalSamplesCount)}`;
+      }
     }
 
     return (
