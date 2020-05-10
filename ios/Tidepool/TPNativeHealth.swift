@@ -102,6 +102,7 @@ class TPNativeHealth: RCTEventEmitter {
             "includeSensitiveInfo": TPSettings.sharedInstance.includeSensitiveInfo,
             "includeCFNetworkDiagnostics": TPSettings.sharedInstance.includeCFNetworkDiagnostics,
             "shouldLogHealthData": TPSettings.sharedInstance.shouldLogHealthData,
+            "useLocalNotificationDebug": TPSettings.sharedInstance.useLocalNotificationDebug,
             "lastCurrentUploadUiDescription": lastCurrentUploadUiDescription()
         ]
     }
@@ -121,6 +122,7 @@ class TPNativeHealth: RCTEventEmitter {
             "historicalUploadCurrentDay": progress.currentDayHistorical,
             "historicalUploadTotalSamples": progress.totalSamplesHistorical,
             "historicalUploadTotalDeletes": progress.totalDeletesHistorical,
+            "historicalEndAnchorTime": progress.historicalEndDate != nil ? ISO8601DateFormatter().string(from: progress.historicalEndDate!) : "",
             "historicalUploadEarliestSampleTime": progress.historicalUploadEarliestSampleTime != nil ? ISO8601DateFormatter().string(from: progress.historicalUploadEarliestSampleTime!) : "",
             "historicalUploadLatestSampleTime": progress.historicalUploadLatestSampleTime != nil ? ISO8601DateFormatter().string(from: progress.historicalUploadLatestSampleTime!) : "",
 
@@ -129,9 +131,9 @@ class TPNativeHealth: RCTEventEmitter {
             "currentUploadMaxLimitsIndex": currentUploadMaxLimitsIndex,
             "currentUploadTotalSamples": progress.totalSamplesCurrent,
             "currentUploadTotalDeletes": progress.totalDeletesCurrent,
+            "currentStartAnchorTime": progress.currentStartDate != nil ? ISO8601DateFormatter().string(from: progress.currentStartDate!) : "",
             "currentUploadEarliestSampleTime": progress.currentUploadEarliestSampleTime != nil ? ISO8601DateFormatter().string(from: progress.currentUploadEarliestSampleTime!) : "",
             "currentUploadLatestSampleTime": progress.currentUploadLatestSampleTime != nil ? ISO8601DateFormatter().string(from: progress.currentUploadLatestSampleTime!) : "",
-            "currentStartAnchorTime": progress.currentStartDate != nil ? ISO8601DateFormatter().string(from: progress.currentStartDate!) : "",
             "lastCurrentUploadUiDescription": lastCurrentUploadUiDescription()
         ]
     }
@@ -251,6 +253,14 @@ class TPNativeHealth: RCTEventEmitter {
         connector.nativeHealthBridge?.onHealthKitInterfaceConfiguration()
         return true
     }
+    
+    @objc func setUploaderUseLocalNotificationDebug(_ useLocalNotificationDebug: Bool) -> NSNumber {
+        DDLogInfo("\(#function)")
+
+        TPSettings.sharedInstance.setUploaderUseLocalNotificationDebug(useLocalNotificationDebug)
+        connector.nativeHealthBridge?.onHealthKitInterfaceConfiguration()
+        return true
+    }
 
     func onHealthKitInterfaceConfiguration() {
         DispatchQueue.main.async {
@@ -278,6 +288,7 @@ class TPNativeHealth: RCTEventEmitter {
         let userInfo = note.userInfo!
         let mode = userInfo["mode"] as! TPUploader.Mode
         let modeValue = (mode == TPUploader.Mode.Current ? "current" : "historical")
+        let progress = self.uploader.uploaderProgress()
         var message = ""
         if mode == TPUploader.Mode.HistoricalAll {
             let progress = self.uploader.uploaderProgress()
@@ -293,13 +304,13 @@ class TPNativeHealth: RCTEventEmitter {
                         "historicalUploadMaxLimitsIndex": historicalUploadMaxLimitsIndex,
                         "historicalTotalSamplesCount": progress.historicalTotalSamplesCount,
                         "historicalTotalDaysCount": progress.totalDaysHistorical,
+                        "historicalEndAnchorTime": progress.historicalEndDate != nil ? ISO8601DateFormatter().string(from: progress.historicalEndDate!) : "",
                         "hasPresentedSyncUI": self.uploader.hasPresentedSyncUI
                     ])
                 }
             }
         } else {
             message = "Started current upload"
-            let progress = self.uploader.uploaderProgress()
             let (currentUploadLimitsIndex, currentUploadMaxLimitsIndex) = self.uploader.retryInfoForMode(TPUploader.Mode.Current)
             DispatchQueue.main.async {
                 if self.isObserving {
@@ -324,17 +335,19 @@ class TPNativeHealth: RCTEventEmitter {
         let reason = userInfo["reason"] as! TPUploader.StoppedReason
 
         var body = [String: Any]()
+        var error: NSError?
         switch reason {
         case .interfaceTurnedOff:
             body = ["turnOffUploaderReason": "turned off", "turnOffUploaderError": "", "mode": modeValue]
         case .uploadingComplete:
             body = ["turnOffUploaderReason": "complete", "turnOffUploaderError": "", "mode": modeValue]
-        case .error(let error):
+        case .error(let errorParam):
+            error = errorParam as NSError?
             var message = ""
             if !self.connector.isConnectedToNetwork() {
                 message = "Upload paused while offline."
             } else {
-                message = String("upload error: \(error.localizedDescription.prefix(50))")
+                message = String("upload error: \(errorParam.localizedDescription.prefix(50))")
             }
             body = ["turnOffUploaderReason": "error", "turnOffUploaderError": message, "mode": modeValue]
         }
@@ -382,6 +395,7 @@ class TPNativeHealth: RCTEventEmitter {
             if self.isObserving {
                 self.sendEvent(withName: "onUploadHistoricalPending", body: [
                     "mode": "historical",
+                    "historicalEndAnchorTime": progress.historicalEndDate != nil ? ISO8601DateFormatter().string(from: progress.historicalEndDate!) : "",
                     "historicalTotalSamplesCount": progress.historicalTotalSamplesCount,
                     "historicalTotalDaysCount": progress.totalDaysHistorical,
                 ])
@@ -489,6 +503,7 @@ class TPNativeHealth: RCTEventEmitter {
             "historicalUploadTotalDeletes": progress.totalDeletesHistorical,
             "historicalUploadEarliestSampleTime": progress.historicalUploadEarliestSampleTime != nil ? ISO8601DateFormatter().string(from: progress.historicalUploadEarliestSampleTime!) : "",
             "historicalUploadLatestSampleTime": progress.historicalUploadLatestSampleTime != nil ? ISO8601DateFormatter().string(from: progress.historicalUploadLatestSampleTime!) : "",
+            "historicalEndAnchorTime": progress.historicalEndDate != nil ? ISO8601DateFormatter().string(from: progress.historicalEndDate!) : "",
         ]
     }
 

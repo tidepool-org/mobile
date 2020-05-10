@@ -30,6 +30,8 @@ let kUserDefaultsUploaderSimulate = "UploaderSimulate"
 let kUserDefaultsUploaderIncludeSensitiveInfo = "UploaderIncludeSensitiveInfo"
 let kUserDefaultsUploaderIncludeCFNetworkDiagnostics = "UploaderIncludeCFNetworkDiagnostics"
 let kUserDefaultsUploaderShouldLogHealthData = "kUserDefaultsUploaderShouldLogHealthData"
+let kUserDefaultsUploaderUseLocalNotificationDebug = "kUserDefaultsUploaderUseLocalNotificationDebug"
+let kUserDefaultsUseLocalNotificationDebug = "UseLocalNotificationDebug"
 
 let kAsyncStorageApiEnvironmentKey = "API_ENVIRONMENT_KEY"
 let kAsyncStorageAuthUserKey = "AUTH_USER_KEY"
@@ -51,6 +53,7 @@ class TPSettings {
     var includeSensitiveInfo: Bool = false
     var includeCFNetworkDiagnostics: Bool = false
     var shouldLogHealthData: Bool = false
+    var useLocalNotificationDebug: Bool = false
 
     var uploaderTimeoutsIndex: Int = 0
     var uploaderTimeouts: [Int] = []
@@ -59,13 +62,13 @@ class TPSettings {
     private let asyncStorage: RCTAsyncLocalStorage
     
     private let availableSamplesUploadLimits = [
-                    [2000, 1000, 500, 250],
-                    [500, 100, 50, 10],
-                    [100, 50, 25, 5]]
+                    [2400, 1200, 600, 240],
+                    [600, 240, 120, 60],
+                    [240, 120, 60, 24]]
     private let availableDeletesUploadLimits = [
-                    [100, 50, 10, 1],
-                    [50, 5, 1, 1],
-                    [5, 1, 1, 1]]
+                    [120, 60, 24, 12],
+                    [60, 24, 12, 12],
+                    [24, 12, 12, 12]]
     private let availableTimeouts = [
                     [60, 90, 180, 300],
                     [90, 180, 300, 300],
@@ -96,6 +99,7 @@ class TPSettings {
         includeSensitiveInfo = userDefaults.bool(forKey: kUserDefaultsUploaderIncludeSensitiveInfo)
         includeCFNetworkDiagnostics = userDefaults.bool(forKey: kUserDefaultsUploaderIncludeCFNetworkDiagnostics)
         shouldLogHealthData = userDefaults.bool(forKey: kUserDefaultsUploaderShouldLogHealthData)
+        useLocalNotificationDebug = userDefaults.bool(forKey: kUserDefaultsUseLocalNotificationDebug)
 
         getValuesForAyncStorageKeys(keys: [kAsyncStorageApiEnvironmentKey, kAsyncStorageAuthUserKey]) { (values: [String?]) in
             // kAsyncStorageApiEnvironmentKey
@@ -136,7 +140,7 @@ class TPSettings {
         deletesUploadLimits = availableDeletesUploadLimits[uploaderLimitsIndex]
         userDefaults.set(uploaderLimitsIndex, forKey: kUserDefaultsUploaderLimitsIndex)
     }
-    
+
     func setUploaderTimeoutsIndex(_ index: NSInteger) {
         uploaderTimeoutsIndex = min(index, availableTimeouts.count - 1)
         uploaderTimeouts = availableTimeouts[uploaderTimeoutsIndex]
@@ -152,7 +156,7 @@ class TPSettings {
         uploaderSimulate = simulate
         userDefaults.set(uploaderSimulate, forKey: kUserDefaultsUploaderSimulate)
     }
-
+    
     func setUploaderIncludeSensitiveInfo(_ includeSensitiveInfo: Bool) {
         self.includeSensitiveInfo = includeSensitiveInfo
         userDefaults.set(includeSensitiveInfo, forKey: kUserDefaultsUploaderIncludeSensitiveInfo)
@@ -166,6 +170,16 @@ class TPSettings {
     func setUploaderShouldLogHealthData(_ shouldLogHealthData: Bool) {
         self.shouldLogHealthData = shouldLogHealthData
         userDefaults.set(shouldLogHealthData, forKey: kUserDefaultsUploaderShouldLogHealthData)
+    }
+    
+    func setUploaderUseLocalNotificationDebug(_ useLocalNotificaitionDebug: Bool) {
+        if useLocalNotificaitionDebug {
+            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
+            }
+        }
+
+        self.useLocalNotificationDebug = useLocalNotificaitionDebug
+        userDefaults.set(useLocalNotificationDebug, forKey: kUserDefaultsUseLocalNotificationDebug)
     }
 
     func getValuesForAyncStorageKeys(keys: [String], values: @escaping ([String?]) -> Void) -> Void {

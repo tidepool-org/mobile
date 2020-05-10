@@ -8,7 +8,6 @@ import {
   StyleSheet,
   Switch,
 } from "react-native";
-
 import {
   Button,
   Card,
@@ -24,7 +23,6 @@ import {
   StyleProvider,
   Text,
 } from "native-base";
-
 import glamorous, { ThemeProvider } from "glamorous-native";
 
 import { TPNativeHealth } from "../models/TPNativeHealth";
@@ -155,6 +153,29 @@ class DebugHealthScreen extends PureComponent {
       TPNativeHealth.setUploaderShouldLogHealthData(value);
     }
   };
+
+  onUploaderUseLocalNotificationDebug = value => {
+    if (value) {
+      Alert.alert(
+        "Use local debug notifications?",
+        "Enabling this will turn on local debug notifications on your device to assist in debugging background uploader behavior.",
+        [
+          {
+            text: "Cancel",
+            style: "cancel",
+          },
+          {
+            text: "OK",
+            onPress: () => {
+              TPNativeHealth.setUploaderUseLocalNotificationDebug(value);
+            },
+          },
+        ]
+      );
+    } else {
+      TPNativeHealth.setUploaderUseLocalNotificationDebug(value);
+    }
+  }
 
   onPressResetButton = () => {
     Alert.alert(
@@ -431,6 +452,7 @@ class DebugHealthScreen extends PureComponent {
         includeSensitiveInfo,
         includeCFNetworkDiagnostics,
         shouldLogHealthData,
+        useLocalNotificationDebug,
       },
     } = this.props;
 
@@ -534,6 +556,24 @@ class DebugHealthScreen extends PureComponent {
             </Right>
           </Row>
         </Grid>
+        <Grid>
+          <Row>
+            <Left styles={styles.left}>
+              <Text>Use local debug notifications</Text>
+            </Left>
+            <Right style={styles.right}>
+              <Switch
+                style={{
+                  transform: [{ scaleX: 0.75 }, { scaleY: 0.75 }],
+                  marginRight: -6,
+                }}
+                trackColor={{ true: Colors.brightBlue, false: null }}
+                onValueChange={this.onUploaderUseLocalNotificationDebug}
+                value={useLocalNotificationDebug}
+              />
+            </Right>
+          </Row>
+        </Grid>
       </>
     );
   }
@@ -608,7 +648,7 @@ class DebugHealthScreen extends PureComponent {
     return (
       <List>
         <ListItem itemHeader first>
-          <Text>Uploader limits</Text>
+          <Text>Uploader limits (delete limits are used for both samples and deletes when in background)</Text>
         </ListItem>
         <ListItem
           onPress={() => {
@@ -618,10 +658,10 @@ class DebugHealthScreen extends PureComponent {
           <Left style={styles.left}>
             <Grid>
               <Row>
-                <Text>Samples: 2000, 1000, 500, 250</Text>
+                <Text>Samples: 2400, 1200, 600, 240</Text>
               </Row>
               <Row>
-                <Text>Deletes: 100, 50, 10, 1</Text>
+                <Text>Deletes: 120, 60, 24, 12</Text>
               </Row>
             </Grid>
           </Left>
@@ -639,10 +679,10 @@ class DebugHealthScreen extends PureComponent {
               <Left style={styles.left}>
                 <Grid>
                   <Row>
-                    <Text>Samples: 500, 100, 50, 10</Text>
+                    <Text>Samples: 600, 240, 120, 60</Text>
                   </Row>
                   <Row>
-                    <Text>Deletes: 50, 5, 1, 1</Text>
+                    <Text>Deletes: 60, 24, 12, 12</Text>
                   </Row>
                 </Grid>
               </Left>
@@ -662,10 +702,10 @@ class DebugHealthScreen extends PureComponent {
               <Left style={styles.left}>
                 <Grid>
                   <Row>
-                    <Text>Samples: 100, 50, 25, 5</Text>
+                    <Text>Samples: 240, 120, 60, 24</Text>
                   </Row>
                   <Row>
-                    <Text>Deletes: 5, 1, 1, 1</Text>
+                    <Text>Deletes: 24, 12, 12, 12</Text>
                   </Row>
                 </Grid>
               </Left>
@@ -713,6 +753,7 @@ class DebugHealthScreen extends PureComponent {
         historicalUploadTotalDeletes,
         historicalUploadEarliestSampleTime,
         historicalUploadLatestSampleTime,
+        historicalEndAnchorTime,
       },
     } = this.props;
 
@@ -739,6 +780,15 @@ class DebugHealthScreen extends PureComponent {
           {useDaysProgress ? (
             <Row>
               <Text style={styles.statsText}>{totalDaysStatsText}</Text>
+            </Row>
+          ) : null}
+          {historicalEndAnchorTime ? (
+            <Row>
+              <Text style={styles.statsText}>
+                {`end anchor: ${formatDateForNoteList(
+                  historicalEndAnchorTime
+                )}`}
+              </Text>
             </Row>
           ) : null}
           {historicalUploadEarliestSampleTime &&

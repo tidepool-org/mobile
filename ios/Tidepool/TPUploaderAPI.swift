@@ -185,4 +185,23 @@ class TPUploaderAPI: TPUploaderConfigInfo {
             TPDataLogger.sharedInstance.logData(mode: mode, phase: phase, isRetry: isRetry, samples: samples, deletes: deletes)
         }
     }
+    
+    func showLocalNotificationDebug(title: String, body: String?, sound: UNNotificationSound?) {
+        
+        DispatchQueue.main.async {
+            let useLocalNotificationDebug = TPSettings.sharedInstance.useLocalNotificationDebug
+            let isBackground = UIApplication.shared.applicationState == .background
+            let logMessage = "\(useLocalNotificationDebug ? "enabled" : "disabled") local notification: background: \(isBackground ? "background" : "not background"), title:\(title), body: \(body ?? "")"
+            if useLocalNotificationDebug {
+                let content = UNMutableNotificationContent()
+                content.title = title
+                content.body = body ?? ""
+                content.sound = sound
+                let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: nil)
+                UNUserNotificationCenter.current().add(request)
+            }
+            DDLogInfo(logMessage)
+            DDLogVerbose("Log Date: \(DateFormatter().isoStringFromDate(Date()))")
+        }
+    }
 }
