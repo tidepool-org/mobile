@@ -173,6 +173,7 @@ class AppWithNavigationState extends PureComponent {
       dispatch(
         healthStateSet({
           isHistoricalUploadPending: TPNativeHealth.isHistoricalUploadPending,
+          historicalEndAnchorTime: TPNativeHealth.historicalEndAnchorTime,
           historicalTotalDaysCount: TPNativeHealth.historicalTotalDaysCount,
           historicalTotalSamplesCount: TPNativeHealth.historicalTotalSamplesCount,
           turnOffHistoricalUploaderReason: TPNativeHealth.turnOffHistoricalUploaderReason,
@@ -197,6 +198,7 @@ class AppWithNavigationState extends PureComponent {
             historicalUploadTotalDeletes: TPNativeHealth.historicalUploadTotalDeletes,
             historicalUploadEarliestSampleTime: TPNativeHealth.historicalUploadEarliestSampleTime,
             historicalUploadLatestSampleTime: TPNativeHealth.historicalUploadLatestSampleTime,
+            historicalEndAnchorTime: TPNativeHealth.historicalEndAnchorTime,
             turnOffHistoricalUploaderReason: TPNativeHealth.turnOffHistoricalUploaderReason,
             turnOffHistoricalUploaderError: TPNativeHealth.turnOffHistoricalUploaderError,
           })

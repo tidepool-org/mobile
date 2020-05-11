@@ -38,18 +38,15 @@ class TPAppDelegate: EXStandaloneAppDelegate {
             unsetenv("CFNETWORK_DIAGNOSTICS")
         }
 
-        // Log full date to help with deciphering logs!
-        let dateString = DateFormatter().isoStringFromDate(Date())
-        DDLogVerbose("Log Date: \(dateString)")
-
         let result = super.application(application, didFinishLaunchingWithOptions: launchOptions)
 
         let state = UIApplication.shared.applicationState
         if state == .background {
             // TODO: background uploader - If we fail to refresh token, should we use a local notification to prompt the user to bring the app to foreground and log in, to get new valid token?
-            DDLogInfo("launched in background")
-            refreshTokenAndConfigureHealthKitInterface()
+            TPUploaderAPI.connector().showLocalNotificationDebug(title: "Launched in background", body: nil, sound: nil)
+            backgroundRefreshTokenAndConfigureHealthKitInterface()
         } else {
+            DDLogVerbose("Log Date: \(DateFormatter().isoStringFromDate(Date()))")
             TPDataController.sharedInstance.configureHealthKitInterface()
             if !registeredForReachability {
                 registeredForReachability = true
@@ -116,12 +113,17 @@ class TPAppDelegate: EXStandaloneAppDelegate {
         }
     }
 
-    fileprivate func refreshTokenAndConfigureHealthKitInterface() {
+    fileprivate func backgroundRefreshTokenAndConfigureHealthKitInterface() {
         let api = TPApi.sharedInstance
         if api.sessionToken != nil {
+            // Do refresh token and configure in parallel for background launches since if we have a previous persistent auth token it is likely to still be valid (but we also want periodic refresh), and we want to get to the upload request as soon as possible in the limited time (less than 30s) that we have for background task
+            
+            // Configure HealthKit Interface
+            TPDataController.sharedInstance.configureHealthKitInterface()
+
             api.refreshToken() { (succeeded, statusCode) in
                 if succeeded {
-                    DDLogInfo("Refresh token succeeded, statusCode: \(statusCode)")
+                    TPUploaderAPI.connector().showLocalNotificationDebug(title: "Refresh token succeeded", body: "status code: \(statusCode)", sound: nil)
 
                     // Get auth user from AsyncStorage and update the sessionToken
                     let settings = TPSettings.sharedInstance
@@ -133,11 +135,12 @@ class TPAppDelegate: EXStandaloneAppDelegate {
                             [kAsyncStorageAuthUserKey, json.rawString()!],
                         ])
                     }
-
-                    // Configure HealthKit Interface (uses new auth user, etc)
-                    TPDataController.sharedInstance.configureHealthKitInterface()
                 } else {
-                    DDLogInfo("Refresh token failed, statusCode: \(statusCode)")
+                    var sound: UNNotificationSound?
+                    if #available(iOS 12.0, *) {
+                        sound = UNNotificationSound.defaultCritical
+                    }
+                    TPUploaderAPI.connector().showLocalNotificationDebug(title: "Refresh token failed", body: "status code: \(statusCode)", sound: sound)
                 }
             }
         }
