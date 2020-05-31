@@ -2,7 +2,7 @@ env:
   global:
     - IOS_APP_NAME=Tidepool
     - IOS_CODE_SIGN_IDENTITY='iPhone Distribution: Tidepool Project (75U4X84TEG)''
-    - IOS_PROFILE_NAME=orgtidepoolblipnotesRN_AppStore
+    - IOS_PROFILE_NAME=Tidepool_Mobile_App_Store
     - IOS_DEVELOPMENT_TEAM='Tidepool Project'
     - secure: xryOkFcyrYb4+nCpBXEtdhB44++/GFHMU3VmITm/o60nR3Tcq0ADzGCVaH8XvqUjUJaBmo2Zu5waGz15r/wUb7Yi9aH6VQ0C74kcxlX26ZcKQjelpnz4D4l1CyYZVtesOWliqPVC32HtSGBJI5Qpez9SWRfKatNsvBX9D0e9MKNaEi33GX/jpMIhU3XoQV62r0KFiuINVXpmVB2a9VLh61zoq3BTsb6f4xlCSiRpas0Hg28Rty9PdqvGPsr+NFgm6QVEECj+doVhvQPFxOHdEf1Ptvn0/VJndVDZ4D5bmYR98/dqYCdQ3AGWAg7ASLM3rAqzCkuBBFQFfAqhsKqs+gfRHC+qrrPMjReIW9s/Yp/lz0kezDIdcuTIAym30gYTIlzSFNzh5SoNa9qTVYsvU9ZHbx4lsY4t0cyihsMam3tgz3/CuLF32NYyvW37M1H4xVEH7EhzoBKhtPASVOjsZvtzuWSd3zr1N6PhllpndapU+DQZhlU2tOnfbtXkIxMJEpXChF0AgGRYil9A8g5Zmw9U/Rzp7r65/HCl3Qt0Ack+T+I5dqh9MBKxeGNLTylaRJvTlcip5hZB8Wc1OBy9hTvXkIaScMzxPjAzwyDq3Ufz/yepQxjS5Gm7CBQLyTiMR2qdtxn9b9IjtpdqGx+lJRiy+bgpuJ9JgWby7QpN+HU=
     - secure: THaNfrIoHfefYKKfu279HgY9PhJ7LKMNEnUexD7VbYEgGC2vxsY0nGRR0lPmg1LDRpOaeCuRuuu0no4CiUrAA2tgJpFlDcD6ct6hnjGwYCoI9dDADQ2HFQvPlri366KRpS+rTPih9THf0nfwLBy9UBDHJVAU4l0COvf34JsYAd2S6JzVCFu4Eg8BsAN2UMh0pAINgNNj7uSOAe4wu6npMnEPpKS5ig/0DNHXa8cvUZTqbuo7qEzp5ATdEkVRSxtH/iBMF1MBOiDunYq8bVhwqXs8bZxVmalsGc1maOBlrWnf1fML/5hRp2Q7mrIg5kCr7WMInKxrqeovgTJqaZklxJlxHiBl36t1isRbHHBHuX9C9joz0jHB41dHQl7/rF9UXdyLHuJATdGl1/xtgCC156Ta0CbVWtgRjwivnlstL1ZMUI4JJ6wSd8egWuyQhNDW0ryfvd9nbYFA/p2hRu4qkQ2BQ7c0kxioyO/T8HtK2MFthdL0MHp5MBZ5WdlcHdnHCLxyR//MAJBbncFR6w+SuR8V3Jx1WgQSQXarGKX5c+4zHWdAXgYmGy9+QGKsNkwDptVbpArvN/Cdusq8r3HCiidvpV3OR/EVvLCHc4DbWwxLxhBiwNyWcMAr91Dc8kKmybl4aHmXw59iN01+N3vm9qLFjY+bGggMDRQd22R0NqM=
@@ -21,7 +21,7 @@ matrix:
         - brew install yarn
         - gem install xcpretty-travis-formatter
         - gem install cocoapods -v '1.8.4'
-        - openssl aes-256-cbc -K $encrypted_4beaf9ef68f9_key -iv $encrypted_4beaf9ef68f9_iv
+        - openssl aes-256-cbc -K $encrypted_4f3b16254c24_key -iv $encrypted_4f3b16254c24_iv
           -in secret-files.tar.enc -out secret-files.tar -d
         - tar xvf secret-files.tar
         - echo $TRAVIS_BUILD_DIR
@@ -48,10 +48,10 @@ matrix:
         - security import ../tidepool-ios-distribution-cert.p12 -k ~/Library/Keychains/ios-build.keychain
           -P $IOS_KEY_PASSWORD -T /usr/bin/codesign
         - "security set-key-partition-list -S apple-tool:,apple: -s -k travis ~/Library/Keychains/ios-build.keychain"
-        - uuid=`grep UUID -A1 -a ../orgtidepoolblipnotesRN_AppStore.mobileprovision |
+        - uuid=`grep UUID -A1 -a ../Tidepool_Mobile_App_Store.mobileprovision |
           grep -io "[-A-F0-9]\{36\}"`
         - mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
-        - cp ../orgtidepoolblipnotesRN_AppStore.mobileprovision ~/Library/MobileDevice/Provisioning\
+        - cp ../Tidepool_Mobile_App_Store.mobileprovision ~/Library/MobileDevice/Provisioning\
           Profiles/$uuid.mobileprovision
         - xcodebuild archive -workspace $IOS_APP_NAME.xcworkspace -scheme $IOS_APP_NAME
           -configuration Release -archivePath $IOS_APP_NAME.xcarchive | xcpretty -f `xcpretty-travis-formatter`
@@ -76,7 +76,7 @@ matrix:
           - google-gdk-license-.+
       before_install:
         - yes | sdkmanager "platforms;android-28"
-        - openssl aes-256-cbc -K $encrypted_4beaf9ef68f9_key -iv $encrypted_4beaf9ef68f9_iv
+        - openssl aes-256-cbc -K $encrypted_4f3b16254c24_key -iv $encrypted_4f3b16254c24_iv
           -in secret-files.tar.enc -out secret-files.tar -d
         - tar xvf secret-files.tar
         - echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf
@@ -118,5 +118,5 @@ deploy:
     repo: tidepool-org/mobile
     tags: true
 before_install:
-  - openssl aes-256-cbc -K $encrypted_4beaf9ef68f9_key -iv $encrypted_4beaf9ef68f9_iv
+  - openssl aes-256-cbc -K $encrypted_4f3b16254c24_key -iv $encrypted_4f3b16254c24_iv
     -in secret-files.tar.enc -out secret-files.tar -d
