@@ -198,7 +198,12 @@ class TPUploaderAPI: TPUploaderConfigInfo {
                 content.body = body ?? ""
                 content.sound = sound
                 let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: nil)
-                UNUserNotificationCenter.current().add(request)
+                UNUserNotificationCenter.current().add(request, withCompletionHandler: {
+                    (error) in
+                    if let error = error {
+                        DDLogInfo("Error showing local notification: \(error.localizedDescription)")
+                    }
+                })
             }
             DDLogInfo(logMessage)
             DDLogVerbose("Log Date: \(DateFormatter().isoStringFromDate(Date()))")

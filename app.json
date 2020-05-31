@@ -19,7 +19,7 @@
     },
     "scheme": "exp",
     "ios": {
-      "bundleIdentifier": "org.tidepool.blipnotesRN",
+      "bundleIdentifier": "org.tidepool.blipnotes",
       "icon": "./assets/images/Icon-App-512x512@2x.png",
       "config": {
         "usesNonExemptEncryption": false

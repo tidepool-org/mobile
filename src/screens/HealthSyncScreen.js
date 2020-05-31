@@ -211,6 +211,7 @@ class HealthSyncScreen extends PureComponent {
       let progress = 0;
       if (
         (isUploadingHistorical || turnOffHistoricalUploaderReason) &&
+        historicalUploadTotalSamples > 0 &&
         historicalTotalSamplesCount > 0
       ) {
         progress = historicalUploadTotalSamples / historicalTotalSamplesCount;
@@ -250,7 +251,11 @@ class HealthSyncScreen extends PureComponent {
     let line2Text = "";
     if (isInterfaceOn) {
       const useDaysProgress = false;
-      if (isOffline || isUploadingHistorical || turnOffHistoricalUploaderReason) {
+      if (
+        isOffline ||
+        isUploadingHistorical ||
+        turnOffHistoricalUploaderReason
+      ) {
         if (isOffline && !isHistoricalUploadPending) {
           line1Text = "Upload paused while offline.";
         }
@@ -260,7 +265,11 @@ class HealthSyncScreen extends PureComponent {
             progressText = `Day ${historicalUploadCurrentDay.toLocaleString()} of ${historicalTotalDaysCount.toLocaleString()}`;
           }
         } else if (historicalUploadTotalSamples > 0) {
-          progressText = `Uploaded ${new Intl.NumberFormat(undefined, { style: 'percent'}).format(historicalUploadTotalSamples / historicalTotalSamplesCount)}`;
+          progressText = `Uploaded ${new Intl.NumberFormat(undefined, {
+            style: "percent",
+          }).format(
+            historicalUploadTotalSamples / historicalTotalSamplesCount
+          )}`;
         }
         if (progressText) {
           if (line1Text) {
@@ -282,12 +291,12 @@ class HealthSyncScreen extends PureComponent {
           ) {
             line1Text = "No data available to upload.";
           } else if (line1Text) {
-              line2Text = turnOffHistoricalUploaderError;
-            } else {
-              line1Text = turnOffHistoricalUploaderError;
-            }
+            line2Text = turnOffHistoricalUploaderError;
+          } else {
+            line1Text = turnOffHistoricalUploaderError;
           }
         }
+      }
     } else {
       line1Text = interfaceTurnedOffError;
     }

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19E287" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+    <entity name="User" representedClassName=".User" syncable="YES">
+        <attribute name="accountIsDSA" optional="YES" attributeType="Boolean" usesScalarValueType="NO"/>
+        <attribute name="biologicalSex" optional="YES" attributeType="String"/>
+        <attribute name="email" optional="YES" attributeType="String"/>
+        <attribute name="fullName" optional="YES" attributeType="String"/>
+        <attribute name="token" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
+        <attribute name="uploadId" optional="YES" attributeType="String"/>
+        <attribute name="userid" attributeType="String"/>
+        <attribute name="username" attributeType="String"/>
+        <fetchIndex name="byUseridIndex">
+            <fetchIndexElement property="userid" type="Binary" order="ascending"/>
+        </fetchIndex>
+    </entity>
+    <elements>
+        <element name="User" positionX="-386.703125" positionY="78.54296875" width="128" height="165"/>
+    </elements>
+</model>

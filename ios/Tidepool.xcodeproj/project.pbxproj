@@ -19,6 +19,9 @@
 		4D9E27EC243659140043EDF7 /* TPDataLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9E27EB243659130043EDF7 /* TPDataLogger.swift */; };
 		4DB2757F2367E62E00AE891B /* TPNativeHealth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB2757D2367E62D00AE891B /* TPNativeHealth.swift */; };
 		4DB275802367E62E00AE891B /* TPNativeHealthBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DB2757E2367E62E00AE891B /* TPNativeHealthBridge.m */; };
+		4DF1DB6D2478416B008F6A1D /* LegacyUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF1DB6B2478416B008F6A1D /* LegacyUser.swift */; };
+		4DF1DB6E2478416B008F6A1D /* LegacyDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF1DB6C2478416B008F6A1D /* LegacyDataController.swift */; };
+		4DF1DB792478532B008F6A1D /* Tidepool.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4DF1DB772478532B008F6A1D /* Tidepool.xcdatamodeld */; };
 		4DFFF0712314B8F70007E093 /* TPUploaderAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFFF0702314B8F70007E093 /* TPUploaderAPI.swift */; };
 		4DFFF0762314BB110007E093 /* TPApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFFF0742314BB110007E093 /* TPApi.swift */; };
 		4DFFF0772314BB110007E093 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFFF0752314BB110007E093 /* Reachability.swift */; };
@@ -50,6 +53,9 @@
 		4D9E27EB243659130043EDF7 /* TPDataLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TPDataLogger.swift; sourceTree = "<group>"; };
 		4DB2757D2367E62D00AE891B /* TPNativeHealth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TPNativeHealth.swift; sourceTree = "<group>"; };
 		4DB2757E2367E62E00AE891B /* TPNativeHealthBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPNativeHealthBridge.m; sourceTree = "<group>"; };
+		4DF1DB6B2478416B008F6A1D /* LegacyUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LegacyUser.swift; sourceTree = "<group>"; };
+		4DF1DB6C2478416B008F6A1D /* LegacyDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LegacyDataController.swift; sourceTree = "<group>"; };
+		4DF1DB782478532B008F6A1D /* Tidepool_v1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Tidepool_v1.xcdatamodel; sourceTree = "<group>"; };
 		4DFFF0702314B8F70007E093 /* TPUploaderAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TPUploaderAPI.swift; sourceTree = "<group>"; };
 		4DFFF0722314B9950007E093 /* TPDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TPDataController.swift; sourceTree = "<group>"; };
 		4DFFF0742314BB110007E093 /* TPApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TPApi.swift; sourceTree = "<group>"; };
@@ -87,6 +93,16 @@
 				C4A88D15726AD99E8A257BC7 /* libPods-Tidepool.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4DF1DAC92478327E008F6A1D /* LegacyDataModel */ = {
+			isa = PBXGroup;
+			children = (
+				4DF1DB772478532B008F6A1D /* Tidepool.xcdatamodeld */,
+				4DF1DB6C2478416B008F6A1D /* LegacyDataController.swift */,
+				4DF1DB6B2478416B008F6A1D /* LegacyUser.swift */,
+			);
+			path = LegacyDataModel;
 			sourceTree = "<group>";
 		};
 		5B29BC350A332C58878A9F13 /* Pods */ = {
@@ -134,6 +150,7 @@
 				B56386501DB9693800A0598C /* Assets.xcassets */,
 				4D0DF5FD2328BB8E004F6ED6 /* Tidepool.entitlements */,
 				4D08D68023133AB200CBB2F7 /* Tidepool-Bridging-Header.h */,
+				4DF1DAC92478327E008F6A1D /* LegacyDataModel */,
 				B563865B1DB96A5E00A0598C /* Supporting */,
 			);
 			path = Tidepool;
@@ -347,12 +364,15 @@
 				4D08D6872313472A00CBB2F7 /* TPNative.swift in Sources */,
 				4D08D68923134E8800CBB2F7 /* TPNativeBridge.m in Sources */,
 				4D0DF5FA23247D41004F6ED6 /* TPSettings.swift in Sources */,
+				4DF1DB792478532B008F6A1D /* Tidepool.xcdatamodeld in Sources */,
 				4DFFF07E231D887C0007E093 /* TPAppDelegate.swift in Sources */,
 				4DFFF0772314BB110007E093 /* Reachability.swift in Sources */,
 				4DFFF0712314B8F70007E093 /* TPUploaderAPI.swift in Sources */,
 				4DFFF0792314C9BA0007E093 /* TPDataController.swift in Sources */,
 				4DFFF0762314BB110007E093 /* TPApi.swift in Sources */,
 				4D466CAE2348FE840026406B /* LogFormatter.swift in Sources */,
+				4DF1DB6E2478416B008F6A1D /* LegacyDataController.swift in Sources */,
+				4DF1DB6D2478416B008F6A1D /* LegacyUser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -493,9 +513,9 @@
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_CFLAGS = "$(inherited)";
 				OTHER_LDFLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = org.tidepool.blipnotesRN;
+				PRODUCT_BUNDLE_IDENTIFIER = org.tidepool.blipnotes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "org.tidepool.blipnotesRN AppStore";
+				PROVISIONING_PROFILE_SPECIFIER = "Tidepool Mobile (App Store)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "Tidepool/Tidepool-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -523,9 +543,9 @@
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_CFLAGS = "$(inherited)";
 				OTHER_LDFLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = org.tidepool.blipnotesRN;
+				PRODUCT_BUNDLE_IDENTIFIER = org.tidepool.blipnotes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "org.tidepool.blipnotesRN AppStore";
+				PROVISIONING_PROFILE_SPECIFIER = "Tidepool Mobile (App Store)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Tidepool/Tidepool-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -555,6 +575,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		4DF1DB772478532B008F6A1D /* Tidepool.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				4DF1DB782478532B008F6A1D /* Tidepool_v1.xcdatamodel */,
+			);
+			currentVersion = 4DF1DB782478532B008F6A1D /* Tidepool_v1.xcdatamodel */;
+			path = Tidepool.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = B56386391DB9693800A0598C /* Project object */;
 }

@@ -13,13 +13,12 @@
  * not, you can obtain one from Tidepool Project at tidepool.org.
  */
 
+import CocoaLumberjack
+import CoreData
 import Foundation
 import SwiftyJSON
 import TPHealthKitUploader
 
-let kUserDefaultsLastLegacySettingsMigrationVersionKey = "LastLegacySettingsMigrationVersionKey"
-let kUserDefaultsSessionTokenKey = "SToken"
-let kUserDefaultsCurrentEnvironmentKey = "SCurrentService"
 let kUserDefaultsConnectToHealthTipHasBeenShownKey = "ConnectToHealthCelebrationHasBeenShown"
 let kUserDefaultsAddNoteTipHasBeenShownKey = "AddNoteTipHasBeenShown"
 let kUserDefaultsNeedUploaderTipHasBeenShownKey = "NeedUploaderTipHasBeenShown"
@@ -35,6 +34,11 @@ let kUserDefaultsUseLocalNotificationDebug = "UseLocalNotificationDebug"
 
 let kAsyncStorageApiEnvironmentKey = "API_ENVIRONMENT_KEY"
 let kAsyncStorageAuthUserKey = "AUTH_USER_KEY"
+
+let kUserDefaultsSettingsMigrationVersionKey = "SettingsMigrationVersionKey"
+
+let kUserDefaultsLegacySessionTokenKey = "SToken"
+let kUserDefaultsLegacyCurrentEnvironmentKey = "SCurrentService"
 
 class TPSettings {
     static let sharedInstance = TPSettings()
@@ -77,13 +81,15 @@ class TPSettings {
     init() {
         userDefaults = UserDefaults.standard
 
+        
+        
         let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         let asyncLocalStorageUrl = documentsDirectory.appendingPathComponent("RCTAsyncLocalStorage", isDirectory: true)
         asyncStorage = RCTAsyncLocalStorage(storageDirectory: asyncLocalStorageUrl.path)!
     }
 
     func loadSettings() {
-        // migrateLegacySettings(); // TODO: upgrade - we should consider enabling this so that upgrade from 2.x will preserve session token and other settings
+        migrate();
 
         uploaderLimitsIndex = userDefaults.integer(forKey: kUserDefaultsUploaderLimitsIndex)
         uploaderLimitsIndex = min(uploaderLimitsIndex, availableSamplesUploadLimits.count - 1)
@@ -121,7 +127,7 @@ class TPSettings {
                 self.currentUserFullName = nil
             }
             self.currentUserIsDSAUser = json["patient"].exists()
-
+            
             let api = TPApi.sharedInstance
             api.environment = self.currentEnvironment
             api.sessionToken = self.currentUserSessionToken
@@ -204,25 +210,65 @@ class TPSettings {
         asyncStorage.multiSet(keyValuePairs)  { (_: [Any]?) -> Void in }
     }
     
-    private func migrateLegacySettings() {
-        let lastMigrationVersion = userDefaults.integer(forKey: kUserDefaultsLastLegacySettingsMigrationVersionKey)
+    private func migrate() {
+        let lastMigrationVersion = userDefaults.integer(forKey: kUserDefaultsSettingsMigrationVersionKey)
         if lastMigrationVersion == 0 {
-            migrateLegacySettingsToVersion(1)
+            migrateToVersion(1)
         }
     }
 
-    private func migrateLegacySettingsToVersion(_ version: Int) {
+    private func migrateToVersion(_ version: Int) {
         if version == 1 {
-            var currentEnvironment = UserDefaults.standard.string(forKey: kUserDefaultsCurrentEnvironmentKey)
-            if currentEnvironment?.isEmpty ?? true {
-                currentEnvironment = "Production"
-            }
-            setValuesForAyncStorageKeys(keyValuePairs: [
-                [kAsyncStorageApiEnvironmentKey, currentEnvironment!],
-            ])
+            if let legacySessionToken = UserDefaults.standard.string(forKey: kUserDefaultsLegacySessionTokenKey),
+               let legacyCurrentUser = LegacyDataController.sharedInstance.currentUser,
+               let legacyCurrentUserId = legacyCurrentUser.userid,
+               let legacyCurrentUserUsername = legacyCurrentUser.username,
+               let legacyCurrentUserFullName = legacyCurrentUser.fullName,
+               let legacyCurrentUserIsDSAUser = legacyCurrentUser.accountIsDSA {
+               let legacyCurrentEnvironment = UserDefaults.standard.string(forKey: kUserDefaultsLegacyCurrentEnvironmentKey) ?? "Production"
+                
+                // Only migrate previous session if we have all the needed properties and a valid environment
+                
+                if legacyCurrentEnvironment == "Development" ||
+                   legacyCurrentEnvironment == "Staging" ||
+                   legacyCurrentEnvironment == "Production" {
 
-            userDefaults.set(version, forKey: kUserDefaultsLastLegacySettingsMigrationVersionKey)
-            userDefaults.synchronize()
+                    setValuesForAyncStorageKeys(keyValuePairs: [
+                        [kAsyncStorageApiEnvironmentKey, legacyCurrentEnvironment],
+                    ])
+
+                    var jsonValue = ""
+                    if legacyCurrentUserIsDSAUser.boolValue {
+                        jsonValue = """
+                        {
+                          "username" : "\(legacyCurrentUserUsername)",
+                          "userId" : "\(legacyCurrentUserId)",
+                          "fullName" : "\(legacyCurrentUserFullName)",
+                          "sessionToken" : "\(legacySessionToken)",
+                          "patient" : {}
+                        }
+                        """
+                    } else {
+                        jsonValue = """
+                        {
+                          "username" : "\(legacyCurrentUserUsername)",
+                          "userId" : "\(legacyCurrentUserId)",
+                          "fullName" : "\(legacyCurrentUserFullName)",
+                          "sessionToken" : "\(legacySessionToken)"
+                        }
+                        """
+                    }
+                    setValuesForAyncStorageKeys(keyValuePairs: [
+                        [kAsyncStorageAuthUserKey, jsonValue],
+                    ])
+
+                    DDLogInfo("Migrated legacy session")
+                }
+            } else {
+                DDLogInfo("Unable to Migrate legacy session")
+            }
         }
+        userDefaults.set(version, forKey: kUserDefaultsSettingsMigrationVersionKey)
+        userDefaults.synchronize()
     }
 }

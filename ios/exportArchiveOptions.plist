@@ -10,7 +10,7 @@
         <string>iOS Distribution</string>
         <key>provisioningProfiles</key>
         <dict>
-            <key>org.tidepool.blipnotesRN</key>
+            <key>org.tidepool.blipnotes</key>
             <string>d5a1a9c0-4b92-4d75-aa90-784d4131dd95</string>
         </dict>
 </dict>
