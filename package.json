@@ -72,7 +72,7 @@
     "eslint-plugin-prettier": "3.1.2",
     "eslint-plugin-react": "7.17.0",
     "eslint-plugin-react-native": "3.8.1",
-    "expo-cli": "3.11.3",
+    "expo-cli": "3.21.3",
     "faker": "4.1.0",
     "flow-bin": "0.115.0",
     "jest-expo": "36.0.0",
