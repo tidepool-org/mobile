@@ -11,8 +11,9 @@ class ConnectHealthTooltipContent extends PureComponent {
       <glamorous.View padding={4} flexDirection="row">
         <glamorous.Image
           source={require("../../../assets/images/first-time-health-icon.png")}
-          width={25}
-          height={22}
+          marginTop={-3}
+          width={50}
+          height={50}
           alignSelf="center"
         />
         <glamorous.Text

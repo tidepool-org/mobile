@@ -11,6 +11,7 @@ import {
   View,
 } from "react-native";
 import { ThemeProvider } from "glamorous-native";
+import Hyperlink from "react-native-hyperlink";
 
 import PrimaryTheme from "../themes/PrimaryTheme";
 import { TPNativeHealth } from "../models/TPNativeHealth";
@@ -19,6 +20,8 @@ import Button from "../components/Button";
 import Colors from "../constants/Colors";
 
 const ACTIVITY_INDICATOR_VIEW_HEIGHT = 62;
+const INSTRUCTIONS_LINK =
+  "https://support.tidepool.org/hc/en-us/articles/360034537092-Verify-Tidepool-Mobile-Apple-Health-Permissions";
 
 const styles = StyleSheet.create({
   headerRight: {
@@ -44,7 +47,7 @@ const styles = StyleSheet.create({
   },
   introManualSyncSecondaryText: {
     paddingTop: 20,
-    paddingBottom: 40,
+    paddingBottom: 20,
     alignSelf: "center",
     textAlign: "center",
     ...PrimaryTheme.healthSyncTextSecondary,
@@ -62,6 +65,7 @@ const styles = StyleSheet.create({
   syncProgressExplanation: {
     width: 300,
     alignSelf: "center",
+    textAlign: "center",
     paddingBottom: 20,
     ...PrimaryTheme.healthSyncTextSecondary,
   },
@@ -162,23 +166,6 @@ class HealthSyncScreen extends PureComponent {
     });
   };
 
-  static renderBulletedTextView(text) {
-    return (
-      <View style={{ flexDirection: "row" }}>
-        <Text style={PrimaryTheme.healthSyncTextSecondary}>{"\u2022"}</Text>
-        <Text
-          style={{
-            ...PrimaryTheme.healthSyncTextSecondary,
-            flex: 1,
-            paddingLeft: 5,
-          }}
-        >
-          {text}
-        </Text>
-      </View>
-    );
-  }
-
   renderSyncProgressBarOrSpinner() {
     const {
       health: {
@@ -250,7 +237,11 @@ class HealthSyncScreen extends PureComponent {
     let line2Text = "";
     if (isInterfaceOn) {
       const useDaysProgress = false;
-      if (isOffline || isUploadingHistorical || turnOffHistoricalUploaderReason) {
+      if (
+        isOffline ||
+        isUploadingHistorical ||
+        turnOffHistoricalUploaderReason
+      ) {
         if (isOffline && !isHistoricalUploadPending) {
           line1Text = "Upload paused while offline.";
         }
@@ -260,7 +251,11 @@ class HealthSyncScreen extends PureComponent {
             progressText = `Day ${historicalUploadCurrentDay.toLocaleString()} of ${historicalTotalDaysCount.toLocaleString()}`;
           }
         } else if (historicalUploadTotalSamples > 0) {
-          progressText = `Uploaded ${new Intl.NumberFormat(undefined, { style: 'percent'}).format(historicalUploadTotalSamples / historicalTotalSamplesCount)}`;
+          progressText = `Uploaded ${new Intl.NumberFormat(undefined, {
+            style: "percent",
+          }).format(
+            historicalUploadTotalSamples / historicalTotalSamplesCount
+          )}`;
         }
         if (progressText) {
           if (line1Text) {
@@ -282,12 +277,12 @@ class HealthSyncScreen extends PureComponent {
           ) {
             line1Text = "No data available to upload.";
           } else if (line1Text) {
-              line2Text = turnOffHistoricalUploaderError;
-            } else {
-              line1Text = turnOffHistoricalUploaderError;
-            }
+            line2Text = turnOffHistoricalUploaderError;
+          } else {
+            line1Text = turnOffHistoricalUploaderError;
           }
         }
+      }
     } else {
       line1Text = interfaceTurnedOffError;
     }
@@ -328,7 +323,7 @@ class HealthSyncScreen extends PureComponent {
 
     let primaryText = "";
     let syncProgressExplanation =
-      "Please stay on this screen and keep your phone unlocked while we sync.";
+      "Stay on this screen during sync or sync will be paused.";
     let buttonTitle = "Continue";
 
     if (isTurningInterfaceOn || isHistoricalUploadPending) {
@@ -410,15 +405,23 @@ class HealthSyncScreen extends PureComponent {
             We suggest using a manual sync if you are having trouble seeing your
             diabetes data in Tidepool Mobile or on the web.
           </Text>
-          <Text style={PrimaryTheme.healthSyncTextSecondary}>
-            Before syncing:
-          </Text>
-          {HealthSyncScreen.renderBulletedTextView("Open the Health app")}
-          {HealthSyncScreen.renderBulletedTextView("Tap the Sources tab")}
-          {HealthSyncScreen.renderBulletedTextView("Tap Tidepool")}
-          {HealthSyncScreen.renderBulletedTextView(
-            "Turn on any switches you want to sync with Tidepool (blood glucose, nutrition, insulin, etc)"
-          )}
+          <Hyperlink
+            linkDefault
+            linkStyle={PrimaryTheme.hyperlink}
+            linkText={(url) => (url === INSTRUCTIONS_LINK ? "here" : url)}
+          >
+            <Text>
+              <Text style={styles.introManualSyncSecondaryText}>
+                Be sure you have authorized Tidepool to read your data from
+                Apple Health. You can find more detailed instructions
+              </Text>
+              <Text> </Text>
+              <Text style={styles.introManualSyncSecondaryText}>
+                {INSTRUCTIONS_LINK}
+              </Text>
+              <Text>.</Text>
+            </Text>
+          </Hyperlink>
         </View>
         <View>
           <Button

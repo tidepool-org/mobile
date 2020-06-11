@@ -64,7 +64,7 @@
 	<key>NSContactsUsageDescription</key>
 	<string>Allow Tidepool to access your contacts</string>
 	<key>NSHealthShareUsageDescription</key>
-	<string>Tidepool reads diabetes data (blood glucose, nutrition, insulin, etc) from Health so you can view that data in Tidepool.</string>
+	<string>We use blood glucose, carbohydrates, insulin delivery, workout, and sex to help you keep track of diabetes-related data from all sources. This enables you to view data you care about in your Tidepool account. You also have the choice to donate your data anonymously.</string>
 	<key>NSHealthUpdateUsageDescription</key>
 	<string>Tidepool writes diabetes data to HealthKit so you can view data you‘ve uploaded to Tidepool using other apps on your iPhone.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
