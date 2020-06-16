@@ -39,6 +39,7 @@
     "react-native-device-info": "3.1.4",
     "react-native-email-link": "1.6.4",
     "react-native-hr-component": "2.0.2",
+    "react-native-hyperlink": "0.0.19",
     "react-native-local-mongodb": "2.2.9",
     "react-native-picker-select": "6.3.0",
     "react-native-switch": "1.5.0",
