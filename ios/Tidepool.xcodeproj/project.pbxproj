@@ -16,6 +16,8 @@
 		4D466CB02348FFC30026406B /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D466CAF2348FFC30026406B /* main.swift */; };
 		4D8027D321E417D2003C8B10 /* LaunchScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D8027D221E417D2003C8B10 /* LaunchScreen.m */; };
 		4D8027D621E41806003C8B10 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D8027D421E41806003C8B10 /* LaunchScreen.storyboard */; };
+		4D8BDE1C24B2609D00387387 /* Service-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4D8BDE1B24B2609D00387387 /* Service-Info.plist */; };
+		4D9737C124A2DD250018BA83 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4D9737C024A2DD250018BA83 /* GoogleService-Info.plist */; };
 		4D9E27EC243659140043EDF7 /* TPDataLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9E27EB243659130043EDF7 /* TPDataLogger.swift */; };
 		4DB2757F2367E62E00AE891B /* TPNativeHealth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB2757D2367E62D00AE891B /* TPNativeHealth.swift */; };
 		4DB275802367E62E00AE891B /* TPNativeHealthBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DB2757E2367E62E00AE891B /* TPNativeHealthBridge.m */; };
@@ -50,6 +52,8 @@
 		4D8027D121E417D2003C8B10 /* LaunchScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchScreen.h; sourceTree = "<group>"; };
 		4D8027D221E417D2003C8B10 /* LaunchScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchScreen.m; sourceTree = "<group>"; };
 		4D8027D521E41806003C8B10 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		4D8BDE1B24B2609D00387387 /* Service-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Service-Info.plist"; sourceTree = "<group>"; };
+		4D9737C024A2DD250018BA83 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4D9E27EB243659130043EDF7 /* TPDataLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TPDataLogger.swift; sourceTree = "<group>"; };
 		4DB2757D2367E62D00AE891B /* TPNativeHealth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TPNativeHealth.swift; sourceTree = "<group>"; };
 		4DB2757E2367E62E00AE891B /* TPNativeHealthBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPNativeHealthBridge.m; sourceTree = "<group>"; };
@@ -150,6 +154,8 @@
 				B56386501DB9693800A0598C /* Assets.xcassets */,
 				4D0DF5FD2328BB8E004F6ED6 /* Tidepool.entitlements */,
 				4D08D68023133AB200CBB2F7 /* Tidepool-Bridging-Header.h */,
+				4D9737C024A2DD250018BA83 /* GoogleService-Info.plist */,
+				4D8BDE1B24B2609D00387387 /* Service-Info.plist */,
 				4DF1DAC92478327E008F6A1D /* LegacyDataModel */,
 				B563865B1DB96A5E00A0598C /* Supporting */,
 			);
@@ -189,6 +195,7 @@
 				AA38385B7D8D0854176B72FC /* [CP] Copy Pods Resources */,
 				19D233B7204FDD7D0087ED51 /* Bundle Expo Assets */,
 				4D8027D821E42806003C8B10 /* Update bundle version based on git commit count on current branch */,
+				4D9737C224A622900018BA83 /* Upload dSYM */,
 			);
 			buildRules = (
 			);
@@ -246,6 +253,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				B501732B1DC01252003445D9 /* EXShell.plist in Resources */,
+				4D8BDE1C24B2609D00387387 /* Service-Info.plist in Resources */,
+				4D9737C124A2DD250018BA83 /* GoogleService-Info.plist in Resources */,
 				B5CFBF4F1EDE419400B4BE24 /* EXBuildConstants.plist in Resources */,
 				B56386671DB9994300A0598C /* EXSDKVersions.plist in Resources */,
 				B5DB04801F3A684600E91581 /* shell-app-manifest.json in Resources */,
@@ -307,6 +316,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "COMMITS=$(git rev-list HEAD --count)\nCOMMITS=$((COMMITS * 100)) # Multiply by 100 so we could do manual releases, manually bumping build number if needed. When it ends in 00, it should correspond to git commit number on current branch\ndefaults write \"${BUILT_PRODUCTS_DIR}/${INFOPLIST_PATH%.*}\" \"CFBundleVersion\" \"${COMMITS}\"\n";
+		};
+		4D9737C224A622900018BA83 /* Upload dSYM */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			name = "Upload dSYM";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if grep -q \"GOOGLE_APP_ID\" \"$BUILT_PRODUCTS_DIR/Tidepool.app/GoogleService-Info.plist\"\nthen\n    echo \"Uploading dSYM to Crashlytics\"    \n    \"${PODS_ROOT}/FirebaseCrashlytics/run\"\nelse\n    echo \"Empty GoogleService-Info.plist, NOT Uploading dSYM to Crashlytics\"\nfi\n";
 		};
 		AA38385B7D8D0854176B72FC /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;

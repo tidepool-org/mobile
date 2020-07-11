@@ -3,8 +3,6 @@ import DeviceInfo from "react-native-device-info";
 import { Client, Configuration } from "rollbar-react-native";
 import Constants from "expo-constants";
 
-const POST_CLIENT_ITEM_ACCESS_TOKEN = "00788919100a467e8fb08144b427890e";
-
 /* eslint-disable no-console */
 
 class LoggerSingletonClass {
@@ -81,7 +79,7 @@ class LoggerSingletonClass {
     if (this.useRollbar) {
       try {
         this.rollbar = new Client(
-          new Configuration(POST_CLIENT_ITEM_ACCESS_TOKEN, {
+          new Configuration(process.env.ROLLBAR_POST_CLIENT_TOKEN, {
             endpoint: "https://api.rollbar.com/api/1/item/",
             captureIp: true,
             reportLevel: this.reportLevel || this.LOG_LEVEL_DEFAULT,

@@ -39,20 +39,6 @@
 	<string>1</string>
 	<key>EXAnalyticsDisabled</key>
 	<true/>
-	<key>Fabric</key>
-	<dict>
-		<key>APIKey</key>
-		<string></string>
-		<key>Kits</key>
-		<array>
-			<dict>
-				<key>KitInfo</key>
-				<dict/>
-				<key>KitName</key>
-				<string>Crashlytics</string>
-			</dict>
-		</array>
-	</dict>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSRequiresIPhoneOS</key>
@@ -72,7 +58,7 @@
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Allow Tidepool to access your microphone</string>
 	<key>NSMotionUsageDescription</key>
-	<string>Allow Tidepool to access your device's accelerometer</string>
+	<string>Allow Tidepool to access your device&apos;s accelerometer</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Give Tidepool permission to save photos</string>
 	<key>NSPhotoLibraryUsageDescription</key>

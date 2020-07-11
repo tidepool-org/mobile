@@ -15,6 +15,7 @@
 
 import UIKit
 import CocoaLumberjack
+import Firebase
 import MessageUI
 import SwiftyJSON
 import TPHealthKitUploader
@@ -26,10 +27,25 @@ class TPAppDelegate: EXStandaloneAppDelegate {
     override func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool
     {
         DDLogVerbose("trace")
-        
-        RollbarReactNative.initWithAccessToken("00788919100a467e8fb08144b427890e")
+
+        if let path = Bundle.main.path(forResource: "Service-Info", ofType: "plist"), let serviceInfo = NSDictionary(contentsOfFile: path), let rollbarAccessToken =  serviceInfo["ROLLBAR_POST_CLIENT_TOKEN"] as? String {
+            DDLogInfo("We have Service-Info!")
+            RollbarReactNative.initWithAccessToken(rollbarAccessToken)
+        } else {
+            DDLogInfo("No Service-Info!")
+        }
+
+        if let path = Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist"), let googleServiceInfo = NSDictionary(contentsOfFile: path), let _ =  googleServiceInfo["GOOGLE_APP_ID"] as? String {
+            DDLogInfo("We have GoogleService-Info!")
+            
+            // Do this after Rollbar init since we're using Firebase for crash reporting
+            FirebaseApp.configure()
+        } else {
+            DDLogInfo("No GoogleService-Info!")
+        }
+
         TPSettings.sharedInstance.loadSettings()
-        
+
         if TPSettings.sharedInstance.includeCFNetworkDiagnostics {
             DDLogVerbose("Enabling CFNETWORK_DIAGNOSTICS")
             setenv("CFNETWORK_DIAGNOSTICS", "3", 1)
@@ -60,7 +76,7 @@ class TPAppDelegate: EXStandaloneAppDelegate {
     }
 
     override func applicationProtectedDataDidBecomeAvailable(_ application: UIApplication) {
-        TPUploaderAPI.connector().uploader().applicationProtectedDataDidBecomeAvailable(application)        
+        TPUploaderAPI.connector().uploader().applicationProtectedDataDidBecomeAvailable(application)
         // super.applicationProtectedDataDidBecomeAvailable(application) // super doesn't implement!
     }
 
@@ -68,7 +84,7 @@ class TPAppDelegate: EXStandaloneAppDelegate {
         TPUploaderAPI.connector().uploader().applicationProtectedDataWillBecomeUnavailable(application)
         // super.applicationProtectedDataWillBecomeUnavailable(application) // super doesn't implement!
     }
-    
+
     override func applicationWillResignActive(_ application: UIApplication) {
         DDLogVerbose("trace")
         // super.applicationWillResignActive(application) // super doesn't implement!
@@ -117,7 +133,7 @@ class TPAppDelegate: EXStandaloneAppDelegate {
         let api = TPApi.sharedInstance
         if api.sessionToken != nil {
             // Do refresh token and configure in parallel for background launches since if we have a previous persistent auth token it is likely to still be valid (but we also want periodic refresh), and we want to get to the upload request as soon as possible in the limited time (less than 30s) that we have for background task
-            
+
             // Configure HealthKit Interface
             TPDataController.sharedInstance.configureHealthKitInterface()
 
