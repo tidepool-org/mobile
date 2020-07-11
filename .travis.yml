@@ -54,8 +54,8 @@ matrix:
         - mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
         - cp ../Tidepool_Mobile_App_Store.mobileprovision ~/Library/MobileDevice/Provisioning\
           Profiles/$uuid.mobileprovision
-        - cp ../Service-Info.plist Service-Info.plist
-        - cp ../GoogleService-Info.plist GoogleService-Info.plist
+        - cp ../Service-Info.plist Tidepool/Service-Info.plist
+        - cp ../GoogleService-Info.plist Tidepool/GoogleService-Info.plist
         - xcodebuild archive -workspace $IOS_APP_NAME.xcworkspace -scheme $IOS_APP_NAME
           -configuration Release -archivePath $IOS_APP_NAME.xcarchive | xcpretty -f `xcpretty-travis-formatter`
         - xcodebuild -exportArchive -exportOptionsPlist exportArchiveOptions.plist -archivePath
