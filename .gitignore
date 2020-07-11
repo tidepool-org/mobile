@@ -246,3 +246,11 @@ npm-debug.*
 web-build/
 web-report/
 
+# Services
+google-services.json
+services.json
+Service-Info.plist
+GoogleService-Info.plist
+
+# Travis secret file
+secret-files.tar
