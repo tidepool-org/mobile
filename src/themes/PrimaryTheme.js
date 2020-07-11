@@ -208,6 +208,9 @@ const PrimaryTheme = {
     color: Colors.white,
     ...FontStyles.mediumSmallSemiboldFont,
   },
+  hyperlink: {
+    color: Colors.brightBlue,
+  },
 };
 
 export default PrimaryTheme;

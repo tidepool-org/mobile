@@ -57,7 +57,11 @@ with progressbar.ProgressBar(widgets=[
         try:
             timestamp = datetime.strptime(item.startDate, "%Y-%m-%d %H:%M:%S %z").timestamp()
         except:
-            timestamp = datetime.strptime(item.startDate, "%Y-%m-%d %H:%M:%S%z").timestamp()
+            try:
+                timestamp = datetime.strptime(item.startDate, "%Y-%m-%d %H:%M:%S%z").timestamp()
+            except:
+                timestamps.append(0)
+                continue
         timestamps.append(timestamp)
     labels = list(hk_export_file_df)
     hk_export_file_df["timestamp"] = timestamps
