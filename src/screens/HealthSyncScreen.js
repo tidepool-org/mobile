@@ -198,6 +198,7 @@ class HealthSyncScreen extends PureComponent {
       let progress = 0;
       if (
         (isUploadingHistorical || turnOffHistoricalUploaderReason) &&
+        historicalUploadTotalSamples > 0 &&
         historicalTotalSamplesCount > 0
       ) {
         progress = historicalUploadTotalSamples / historicalTotalSamplesCount;
@@ -323,7 +324,7 @@ class HealthSyncScreen extends PureComponent {
 
     let primaryText = "";
     let syncProgressExplanation =
-      "Stay on this screen during sync or sync will be paused.";
+      "Your data will continue to upload while you’re using the Tidepool Mobile app. If you close the app, the sync will automatically resume the next time you open it.";
     let buttonTitle = "Continue";
 
     if (isTurningInterfaceOn || isHistoricalUploadPending) {
@@ -346,7 +347,7 @@ class HealthSyncScreen extends PureComponent {
     // Ensure that the text contents has at least the numberOfLines specified in
     // the text so that enough space is reserved in layout regardless of text
     // contents so that layout doesn't jump around
-    syncProgressExplanation = `${syncProgressExplanation}\n \n `;
+    syncProgressExplanation = `${syncProgressExplanation}\n \n \n \n \n`;
 
     return (
       <>
@@ -355,7 +356,7 @@ class HealthSyncScreen extends PureComponent {
         </View>
         {this.renderSyncProgress()}
         <View>
-          <Text style={styles.syncProgressExplanation} numberOfLines={2}>
+          <Text style={styles.syncProgressExplanation} numberOfLines={5}>
             {syncProgressExplanation}
           </Text>
           <Button

@@ -3,20 +3,10 @@ def isRunningOnTravis = System.getenv("CI") == "true"
 buildscript {
   repositories {
     google()
-    maven { url 'https://maven.fabric.io/public' }
-  }
-
-  dependencies {
-    classpath 'io.fabric.tools:gradle:1.31.0'
   }
 }
 apply plugin: 'com.android.application'
-apply plugin: 'io.fabric'
 apply plugin: 'devicefarm'
-
-repositories {
-  maven { url 'https://maven.fabric.io/public' }
-}
 
 def getVersionCode = { ->
     try {
@@ -167,11 +157,15 @@ dependencies {
   implementation 'de.greenrobot:eventbus:2.4.0'
 
   implementation 'com.squareup.picasso:picasso:2.5.2'
-  implementation 'com.google.android.gms:play-services-gcm:15.0.1'
+  implementation 'com.google.android.gms:play-services-gcm:17.0.0'
   implementation 'com.google.android.gms:play-services-analytics:16.0.1'
   implementation 'com.google.android.gms:play-services-maps:15.0.1'
   implementation 'com.google.android.gms:play-services-auth:15.0.1'
   implementation 'com.google.android.gms:play-services-location:15.0.1'
+  implementation 'com.google.firebase:firebase-messaging:20.2.3'
+  implementation 'com.google.firebase:firebase-iid:20.1.5'
+  implementation 'com.google.firebase:firebase-analytics:17.4.4'
+  implementation 'com.google.firebase:firebase-crashlytics:17.1.1'
   implementation "com.madgag.spongycastle:core:1.53.0.0"
   implementation "com.madgag.spongycastle:prov:1.53.0.0"
   debugImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta1'
@@ -282,3 +276,4 @@ dependencies {
 
 // This has to be down here for some reason
 apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'

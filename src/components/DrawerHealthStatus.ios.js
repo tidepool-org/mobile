@@ -74,11 +74,17 @@ class DrawerHealthStatus extends PureComponent {
       line1Text = interfaceTurnedOffError;
     }
 
-    if (isUploadingHistorical && historicalUploadTotalSamples) {
+    if (
+      isUploadingHistorical &&
+      historicalUploadTotalSamples > 0 &&
+      historicalTotalSamplesCount > 0
+    ) {
       if (useDaysProgress) {
         line2Text = `Day ${historicalUploadCurrentDay.toLocaleString()} of ${historicalTotalDaysCount.toLocaleString()}`;
       } else {
-        line2Text = `Uploaded ${new Intl.NumberFormat(undefined, { style: 'percent'}).format(historicalUploadTotalSamples / historicalTotalSamplesCount)}`;
+        line2Text = `Uploaded ${new Intl.NumberFormat(undefined, {
+          style: "percent",
+        }).format(historicalUploadTotalSamples / historicalTotalSamplesCount)}`;
       }
     }
 

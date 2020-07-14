@@ -1,27 +1,32 @@
 package host.exp.exponent;
 
-import com.facebook.react.ReactPackage;
-
-import org.unimodules.core.interfaces.Package;
-
-import java.util.Arrays;
-import java.util.List;
-
-import expo.loaders.provider.interfaces.AppLoaderPackagesProviderInterface;
-import host.exp.exponent.generated.BasePackageList;
-import okhttp3.OkHttpClient;
+import android.content.Context;
+import android.content.res.AssetManager;
 import android.os.Handler;
 import com.facebook.react.modules.storage.ReactDatabaseSupplier;
+import com.facebook.react.ReactPackage;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.rollbar.notifier.config.Config;
 import com.rollbar.notifier.config.ConfigBuilder;
 import com.rollbar.notifier.config.ConfigProvider;
 import com.rollbar.RollbarReactNative;
+import expo.loaders.provider.interfaces.AppLoaderPackagesProviderInterface;
+import java.io.InputStream;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
+import host.exp.exponent.generated.BasePackageList;
+import okhttp3.OkHttpClient;
+import org.json.JSONObject;
+import org.unimodules.core.interfaces.Package;
 
 // Needed for `react-native link`
 // import com.facebook.react.ReactApplication;
 
 public class MainApplication extends ExpoApplication implements AppLoaderPackagesProviderInterface<ReactPackage> {
+
+  private FirebaseAnalytics mFirebaseAnalytics;
 
   @Override
   public boolean isDebug() {
@@ -32,7 +37,15 @@ public class MainApplication extends ExpoApplication implements AppLoaderPackage
   public void onCreate() {
     super.onCreate();
 
-    RollbarReactNative.init(this, "00788919100a467e8fb08144b427890e", "unspecified");
+    mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+
+    try {
+      String servicesFile = AssetJSONFile("services.json", getApplicationContext());
+      JSONObject json = new JSONObject(servicesFile);
+      String ROLLBAR_POST_CLIENT_TOKEN = json.getString("ROLLBAR_POST_CLIENT_TOKEN");
+      System.out.println("ROLLBAR_POST_CLIENT_TOKEN" + ROLLBAR_POST_CLIENT_TOKEN);
+      RollbarReactNative.init(this, ROLLBAR_POST_CLIENT_TOKEN, "unspecified");
+    } catch (Exception e) { }
   }
 
   // Needed for `react-native link`
@@ -58,7 +71,7 @@ public class MainApplication extends ExpoApplication implements AppLoaderPackage
 
   @Override
   public String gcmSenderId() {
-    return getString(R.string.gcm_defaultSenderId);
+    return "";
   }
 
   public static OkHttpClient.Builder okHttpClientBuilder(OkHttpClient.Builder builder) {
@@ -103,7 +116,7 @@ public class MainApplication extends ExpoApplication implements AppLoaderPackage
     handler.postDelayed(new Runnable() {
       @Override
       public void run() {
-        throw new RuntimeException("testNativeCrash");
+        throw new RuntimeException("Test Crash");
       }
     }, 500);
   }
@@ -114,5 +127,15 @@ public class MainApplication extends ExpoApplication implements AppLoaderPackage
 
   public void testLogError(String message) {
      RollbarReactNative.error(message);
+  }
+
+  private static String AssetJSONFile(String filename, Context context) throws IOException {
+      AssetManager assetManager = context.getAssets();
+      InputStream stream = assetManager.open(filename);
+      byte[] buffer = new byte[stream.available()];
+      stream.read(buffer);
+      stream.close();
+
+      return new String(buffer);
   }
 }

@@ -335,28 +335,6 @@
       android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
       android:theme="@style/Base.Theme.AppCompat">
     </activity>
-
-
-    <!-- ADD FABRIC CONFIG HERE -->
-    <!-- BEGIN FABRIC CONFIG -->
-    <meta-data
-      android:name="io.fabric.ApiKey"
-      android:value="310a9ba63f367e9d97590907af96678814f57495"/>
-    <!-- END FABRIC CONFIG -->
-
-    <!-- ADD GOOGLE MAPS CONFIG HERE -->
-    <!-- BEGIN GOOGLE MAPS CONFIG -->
-    <meta-data
-      android:name="com.google.android.geo.API_KEY"
-      android:value="AIzaSyCPyKmt6in3JwAsogYikNNjor8qgU9stRQ"/>
-    <!-- END GOOGLE MAPS CONFIG -->
-
-    <!-- ADD BRANCH CONFIG HERE -->
-
-    <!-- The Facebook SDK runs FacebookInitProvider on startup and crashes if there isn't an ID here -->
-    <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="fb0"/>
-
-    <meta-data android:name="standaloneStripeScheme" android:value="5268ac74-2a8e-4525-9e79-ec027ab60f71" />
   </application>
 
 </manifest>
