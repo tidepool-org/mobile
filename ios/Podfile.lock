@@ -454,7 +454,7 @@ DEPENDENCIES:
   - RNDeviceInfo (from `../node_modules/react-native-device-info`)
   - RollbarReactNative (from `../node_modules/rollbar-react-native`)
   - SwiftyJSON (= 5.0.0)
-  - TPHealthKitUploader (from `https://github.com/tidepool-org/healthkit-uploader`, tag `1.1.3`)
+  - TPHealthKitUploader (from `https://github.com/tidepool-org/healthkit-uploader`, tag `1.1.4`)
   - UMBarCodeScannerInterface (from `../node_modules/unimodules-barcode-scanner-interface/ios`)
   - UMCameraInterface (from `../node_modules/unimodules-camera-interface/ios`)
   - UMConstantsInterface (from `../node_modules/unimodules-constants-interface/ios`)
@@ -597,7 +597,7 @@ EXTERNAL SOURCES:
     :path: "../node_modules/rollbar-react-native"
   TPHealthKitUploader:
     :git: https://github.com/tidepool-org/healthkit-uploader
-    :tag: 1.1.3
+    :tag: 1.1.4
   UMBarCodeScannerInterface:
     :path: !ruby/object:Pathname
     path: "../node_modules/unimodules-barcode-scanner-interface/ios"
@@ -643,7 +643,7 @@ CHECKOUT OPTIONS:
     :tag: ios/2.14.2
   TPHealthKitUploader:
     :git: https://github.com/tidepool-org/healthkit-uploader
-    :tag: 1.1.3
+    :tag: 1.1.4
 
 SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
@@ -727,6 +727,6 @@ SPEC CHECKSUMS:
   Yoga: ba3d99dbee6c15ea6bbe3783d1f0cb1ffb79af0f
   Zip: 8877eede3dda76bcac281225c20e71c25270774c
 
-PODFILE CHECKSUM: db024c3507d381491a998ba6f7fe56f326387ed1
+PODFILE CHECKSUM: 7a90b454792304dcbc371a7fdf787d6cbfd67388
 
 COCOAPODS: 1.8.4
