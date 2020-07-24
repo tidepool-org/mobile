@@ -14,7 +14,7 @@
  */
 
 import CocoaLumberjack
-import Crashlytics
+import Firebase
 import Foundation
 import TPHealthKitUploader
 import UIKit
@@ -85,7 +85,7 @@ class TPNative: RCTEventEmitter, UIDocumentInteractionControllerDelegate {
 
     @objc func testNativeCrash() -> Void {
         DispatchQueue.main.async(execute: {
-            Crashlytics.sharedInstance().crash()
+            fatalError();
         })
     }
 
