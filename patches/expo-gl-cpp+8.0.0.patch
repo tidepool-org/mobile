@@ -1,0 +1,92 @@
+diff --git a/node_modules/expo-gl-cpp/.DS_Store b/node_modules/expo-gl-cpp/.DS_Store
+new file mode 100644
+index 0000000..fa4c563
+Binary files /dev/null and b/node_modules/expo-gl-cpp/.DS_Store differ
+diff --git a/node_modules/expo-gl-cpp/cpp/EXJSUtils.h b/node_modules/expo-gl-cpp/cpp/EXJSUtils.h
+index d2274bb..2eef94c 100644
+--- a/node_modules/expo-gl-cpp/cpp/EXJSUtils.h
++++ b/node_modules/expo-gl-cpp/cpp/EXJSUtils.h
+@@ -8,6 +8,13 @@
+ #include <JavaScriptCore/JSObjectRef.h>
+ #include <JavaScriptCore/JSStringRef.h>
+ 
++#ifdef __APPLE__
++#include <EXGL_CPP/EXiOSUtils.h>
++#endif
++
++#ifdef __ANDROID__
++#include <android/log.h>
++#endif
+ 
+ // Whether JavaScriptCore has JSTypedArray.h
+ #ifdef __APPLE__
+@@ -17,7 +24,6 @@
+ #include <JavaScriptCore/JSTypedArray.h>
+ #endif
+ 
+-
+ #ifdef __cplusplus
+ extern "C" {
+ #endif
+@@ -25,7 +31,15 @@ extern "C" {
+ 
+ // Most of these are adapted from phoboslab/Ejecta on GitHub
+ // (https://github.com/phoboslab/Ejecta).
+-
++#ifdef __APPLE__
++static bool iosVersionChecked = false;
++static int32_t TagTypeNumber = 0;
++static int64_t DoubleEncodeOffset = 0;
++#else
++#define TagTypeNumber 0xffff0000
++#define DoubleEncodeOffset (1ll << 48)
++#endif
++#define ValueTrue 0x7
+ 
+ static inline double EXJSValueToNumberFast(JSContextRef ctx, JSValueRef v)
+ {
+@@ -36,9 +50,14 @@ static inline double EXJSValueToNumberFast(JSContextRef ctx, JSValueRef v)
+     struct { int32_t asInt; int32_t tag; } asBits;
+   } taggedValue = { .asInt64 = (int64_t)v };
+ 
+-#define DoubleEncodeOffset 0x1000000000000ll
+-#define TagTypeNumber 0xffff0000
+-#define ValueTrue 0x7
++#ifdef __APPLE__
++  if (!iosVersionChecked) {
++    bool newJsc = EXiOSGetOperatingSystemVersion().majorVersion >= 14;
++    TagTypeNumber = newJsc ? 0xfffe0000 : 0xffff0000;
++    DoubleEncodeOffset = newJsc ? 1ll << 49 : 1ll << 48;
++    iosVersionChecked = true;
++  }
++#endif
+ 
+   if( (taggedValue.asBits.tag & TagTypeNumber) == TagTypeNumber ) {
+     return taggedValue.asBits.asInt;
+@@ -76,7 +95,6 @@ void EXJSConsoleLog(JSContextRef ctx, const char *msg);
+ 
+ char *EXJSValueToUTF8CStringMalloc(JSContextRef ctx, JSValueRef v, JSValueRef *exception);
+ 
+-
+ void EXJSObjectSetValueWithUTF8CStringName(JSContextRef ctx,
+                                            JSObjectRef obj,
+                                            const char *name,
+@@ -87,6 +105,18 @@ void EXJSObjectSetFunctionWithUTF8CStringName(JSContextRef ctx,
+                                               const char *name,
+                                               JSObjectCallAsFunctionCallback func);
+ 
++#define EXGL_DEBUG     // Whether debugging is on
++
++#ifdef EXGL_DEBUG
++#ifdef __ANDROID__
++#define EXGLSysLog(fmt, ...) __android_log_print(ANDROID_LOG_DEBUG, "EXGL", fmt, ##__VA_ARGS__)
++#endif
++#ifdef __APPLE__
++#define EXGLSysLog(fmt, ...) EXiOSLog("EXGL: " fmt, ##__VA_ARGS__)
++#endif
++#else
++#define EXGLSysLog(...)
++#endif
+ 
+ #define _EXJS_COMMA() ,
+ #define _EXJS_EMPTY()
