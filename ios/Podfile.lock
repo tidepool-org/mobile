@@ -4,41 +4,42 @@ PODS:
   - DoubleConversion (1.1.6)
   - EXApplication (4.0.2):
     - ExpoModulesCore
-  - EXConstants (12.1.3):
+  - EXConstants (13.0.2):
     - ExpoModulesCore
-  - EXFileSystem (13.0.3):
+  - EXFileSystem (13.1.4):
     - ExpoModulesCore
   - EXFont (10.0.5):
     - ExpoModulesCore
-  - EXGL (11.0.3):
+  - EXGL (11.1.2):
     - EXGL_CPP
     - ExpoModulesCore
-  - EXGL_CPP (11.0.1):
+  - EXGL_CPP (11.1.1):
     - React-jsi
   - EXJSONUtils (0.2.1)
   - EXKeepAwake (10.0.2):
     - ExpoModulesCore
-  - EXLinearGradient (10.0.3):
-    - ExpoModulesCore
-  - EXMailComposer (11.0.3):
+  - EXMailComposer (11.1.1):
     - ExpoModulesCore
   - EXManifests (0.2.4):
     - EXJSONUtils
-  - Expo (43.0.0):
+  - Expo (44.0.6):
     - ExpoModulesCore
-  - ExpoModulesCore (0.4.10):
+  - ExpoLinearGradient (11.0.3):
+    - ExpoModulesCore
+  - ExpoModulesCore (0.6.5):
     - React-Core
-  - EXSplashScreen (0.13.5):
+    - ReactCommon/turbomodule/core
+  - EXSplashScreen (0.14.2):
     - ExpoModulesCore
     - React-Core
-  - EXStructuredHeaders (2.0.0)
-  - EXUpdates (0.10.15):
+  - EXStructuredHeaders (2.1.1)
+  - EXUpdates (0.11.7):
     - EXManifests
     - ExpoModulesCore
     - EXStructuredHeaders
     - EXUpdatesInterface
     - React-Core
-  - EXUpdatesInterface (0.4.0)
+  - EXUpdatesInterface (0.5.2)
   - FBLazyVector (0.64.3)
   - FBReactNativeSpec (0.64.3):
     - RCT-Folly (= 2020.01.13.00)
@@ -355,9 +356,9 @@ PODS:
     - React-perflogger (= 0.64.3)
   - RNDeviceInfo (2.3.1):
     - React
-  - RNGestureHandler (1.10.3):
+  - RNGestureHandler (2.1.3):
     - React-Core
-  - RNReanimated (2.2.4):
+  - RNReanimated (2.3.3):
     - DoubleConversion
     - FBLazyVector
     - FBReactNativeSpec
@@ -383,10 +384,9 @@ PODS:
     - React-RCTNetwork
     - React-RCTSettings
     - React-RCTText
-    - React-RCTVibration
     - ReactCommon/turbomodule/core
     - Yoga
-  - RNScreens (3.8.0):
+  - RNScreens (3.10.2):
     - React-Core
     - React-RCTImage
   - Rollbar (1.5.2)
@@ -407,10 +407,10 @@ DEPENDENCIES:
   - EXGL_CPP (from `../node_modules/expo-gl-cpp/cpp`)
   - EXJSONUtils (from `../node_modules/expo-json-utils/ios`)
   - EXKeepAwake (from `../node_modules/expo-keep-awake/ios`)
-  - EXLinearGradient (from `../node_modules/expo-linear-gradient/ios`)
   - EXMailComposer (from `../node_modules/expo-mail-composer/ios`)
   - EXManifests (from `../node_modules/expo-manifests/ios`)
   - Expo (from `../node_modules/expo/ios`)
+  - ExpoLinearGradient (from `../node_modules/expo-linear-gradient/ios`)
   - ExpoModulesCore (from `../node_modules/expo-modules-core/ios`)
   - EXSplashScreen (from `../node_modules/expo-splash-screen/ios`)
   - EXStructuredHeaders (from `../node_modules/expo-structured-headers/ios`)
@@ -505,14 +505,14 @@ EXTERNAL SOURCES:
     :path: "../node_modules/expo-json-utils/ios"
   EXKeepAwake:
     :path: "../node_modules/expo-keep-awake/ios"
-  EXLinearGradient:
-    :path: "../node_modules/expo-linear-gradient/ios"
   EXMailComposer:
     :path: "../node_modules/expo-mail-composer/ios"
   EXManifests:
     :path: "../node_modules/expo-manifests/ios"
   Expo:
     :path: "../node_modules/expo/ios"
+  ExpoLinearGradient:
+    :path: "../node_modules/expo-linear-gradient/ios"
   ExpoModulesCore:
     :path: "../node_modules/expo-modules-core/ios"
   EXSplashScreen:
@@ -593,22 +593,22 @@ SPEC CHECKSUMS:
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   DoubleConversion: cf9b38bf0b2d048436d9a82ad2abe1404f11e7de
   EXApplication: 54fe5bd6268d697771645e8f1aef8b806a65247a
-  EXConstants: 6d585d93723b18d7a8c283591a335609e3bc153e
-  EXFileSystem: 99aac7962c11c680681819dd9cbca24e20e5b1e7
+  EXConstants: 88bf79622fbd9b476c96d8ec57fe97ca44fe8e3c
+  EXFileSystem: 08a3033ac372b6346becf07839e1ccef26fb1058
   EXFont: 2597c10ac85a69d348d44d7873eccf5a7576ef5e
-  EXGL: e3def34c0735591c89f62e6649b157d0985c3a8b
-  EXGL_CPP: 23709fa188f51702294bf93e19a4fe6dec4f0472
+  EXGL: 0131b79b7d895ffb2569e12a83c9ff8c355c2988
+  EXGL_CPP: 85d2d2802b369b6bbd6278eae58df0918137d967
   EXJSONUtils: 5ee0d5cf76da70ad86f0be1a41cc70f47d69e06f
   EXKeepAwake: bf48d7f740a5cd2befed6cf9a49911d385c6c47d
-  EXLinearGradient: 4d727eacb53d19ef25b02dd810e0199b453489ce
-  EXMailComposer: 2a4ef087e055e3a9a1d138c300c5ae48a3978d0d
+  EXMailComposer: 290c110c14c1a022de752e85b8a9eea820a3ee5c
   EXManifests: d3464cd2278f4a19cd80c1aa673231570b534c11
-  Expo: f3357f1f9796d0b4d396d0be84c49933671db4ad
-  ExpoModulesCore: c9438f6add0fb7b04b7c64eb97a833d2752a7834
-  EXSplashScreen: 57f329dbf25c5c12800feed79068a056453dc772
-  EXStructuredHeaders: 873e7f329c2f6279c1b1e0229df59c9861560b53
-  EXUpdates: 061b67c33f0e7f8fd335bbb48697c4a4fc8a5157
-  EXUpdatesInterface: e1c01b4f5ec76bd1d6cc714938f9edf5ef6379b9
+  Expo: 534e51e607aba8229293297da5585f4b26f50fa1
+  ExpoLinearGradient: fd591c223c81f6779036ed4cef4deb20ecb87c50
+  ExpoModulesCore: 32c0ccb47f477d330ee93db72505380adf0de09a
+  EXSplashScreen: 21669e598804ee810547dbb6692c8deb5dd8dbf3
+  EXStructuredHeaders: 4993087b2010dbcc510f5d92555b36f523425e8d
+  EXUpdates: a83e036243b0f6ece53a8c1cb883b6751c88a5f8
+  EXUpdatesInterface: 13270752afb8c61f83a09117e6b04a682b2db9eb
   FBLazyVector: c71c5917ec0ad2de41d5d06a5855f6d5eda06971
   FBReactNativeSpec: 67008b3b9804c4b8f1b2dc82afb04efc43491ee9
   Flipper: d3da1aa199aad94455ae725e9f3aa43f3ec17021
@@ -645,14 +645,14 @@ SPEC CHECKSUMS:
   React-runtimeexecutor: 493d9abb8b23c3f84e19ae221eeba92cadcb70dc
   ReactCommon: 8fea6422328e2fc093e25c9fac67adbcf0f04fb4
   RNDeviceInfo: 74ee98a0b3ef57604ea9953f03eca549a9335160
-  RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
-  RNReanimated: 024eff8202342abf4b24e11575a16afc441dabfe
-  RNScreens: 6e1ea5787989f92b0671049b808aef64fa1ef98c
+  RNGestureHandler: e1099204721a17a89c81fcd1cc2e92143dc040fb
+  RNReanimated: 0e5ef4a7e4e79f84efbe5b40771c31044c51e7d0
+  RNScreens: d6da2b9e29cf523832c2542f47bf1287318b1868
   Rollbar: 5060e3fc9fa28ae75e70c61e95b1b31b2b22710c
   RollbarReactNative: 90812f66d5ecbfd7cdccbb2f0b666c0888b7ee47
   Yoga: e6ecf3fa25af9d4c87e94ad7d5d292eedef49749
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: fa91c4804a16a7631081dfb52651d5be8f6533f9
+PODFILE CHECKSUM: 5b085c82df37c3bb0f17fee7a3c8ca4f4ab7a214
 
 COCOAPODS: 1.12.1
