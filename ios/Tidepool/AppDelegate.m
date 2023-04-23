@@ -1,17 +1,38 @@
-// Copyright 2015-present 650 Industries. All rights reserved.
-
 #import "AppDelegate.h"
-#import "ExpoKit.h"
-#import "EXViewController.h"
-#import "NativeNotifications.h"
 
-#import "EXKernel.h"
 #import <React/RCTBridge.h>
-#import <RollbarReactNative/RollbarReactNative.h>
+#import <React/RCTBundleURLProvider.h>
+#import <React/RCTRootView.h>
 
-@interface AppDelegate ()
+#import <UMCore/UMModuleRegistry.h>
+#import <UMReactNativeAdapter/UMNativeModulesProxy.h>
+#import <UMReactNativeAdapter/UMModuleRegistryAdapter.h>
+#import <EXSplashScreen/EXSplashScreenService.h>
+#import <UMCore/UMModuleRegistryProvider.h>
 
-@property (nonatomic, strong) EXViewController *rootViewController;
+#if DEBUG
+#import <FlipperKit/FlipperClient.h>
+#import <FlipperKitLayoutPlugin/FlipperKitLayoutPlugin.h>
+#import <FlipperKitUserDefaultsPlugin/FKUserDefaultsPlugin.h>
+#import <FlipperKitNetworkPlugin/FlipperKitNetworkPlugin.h>
+#import <SKIOSNetworkPlugin/SKIOSNetworkAdapter.h>
+#import <FlipperKitReactPlugin/FlipperKitReactPlugin.h>
+
+static void InitializeFlipper(UIApplication *application) {
+  FlipperClient *client = [FlipperClient sharedClient];
+  SKDescriptorMapper *layoutDescriptorMapper = [[SKDescriptorMapper alloc] initWithDefaults];
+  [client addPlugin:[[FlipperKitLayoutPlugin alloc] initWithRootNode:application withDescriptorMapper:layoutDescriptorMapper]];
+  [client addPlugin:[[FKUserDefaultsPlugin alloc] initWithSuiteName:nil]];
+  [client addPlugin:[FlipperKitReactPlugin new]];
+  [client addPlugin:[[FlipperKitNetworkPlugin alloc] initWithNetworkAdapter:[SKIOSNetworkAdapter new]]];
+  [client start];
+}
+#endif
+
+@interface AppDelegate () <RCTBridgeDelegate>
+
+@property (nonatomic, strong) UMModuleRegistryAdapter *moduleRegistryAdapter;
+@property (nonatomic, strong) NSDictionary *launchOptions;
 
 @end
 
@@ -19,50 +40,60 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    BOOL result = [super application:application didFinishLaunchingWithOptions:launchOptions];
+#if DEBUG
+  InitializeFlipper(application);
+#endif
+  
+  self.moduleRegistryAdapter = [[UMModuleRegistryAdapter alloc] initWithModuleRegistryProvider:[[UMModuleRegistryProvider alloc] init]];
+  self.launchOptions = launchOptions;
+  self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+  #ifdef DEBUG
+    [self initializeReactNativeApp];
+  #else
+    EXUpdatesAppController *controller = [EXUpdatesAppController sharedInstance];
+    controller.delegate = self;
+    [controller startAndShowLaunchScreen:self.window];
+  #endif
 
-    [RollbarReactNative initWithAccessToken:@"00788919100a467e8fb08144b427890e"];
+  [super application:application didFinishLaunchingWithOptions:launchOptions];
 
-    return result;
+  return YES;
 }
 
-#pragma mark - NativeNotifications
-
-- (void)setEnvironment:(NSString *)environment
+- (RCTBridge *)initializeReactNativeApp
 {
-  _environment = environment;
-  [[Rollbar currentConfiguration] setEnvironment:environment];
-}
+  RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:self.launchOptions];
+  RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge moduleName:@"main" initialProperties:nil];
+  rootView.backgroundColor = [[UIColor alloc] initWithRed:1.0f green:1.0f blue:1.0f alpha:1];
 
-- (void)setUser:(NSString *)userId username:(NSString *)username userFullName:(NSString *)userFullName
+  self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+  UIViewController *rootViewController = [UIViewController new];
+  rootViewController.view = rootView;
+  self.window.rootViewController = rootViewController;
+  [self.window makeKeyAndVisible];
+
+  return bridge;
+ }
+
+- (NSArray<id<RCTBridgeModule>> *)extraModulesForBridge:(RCTBridge *)bridge
 {
-  _userId = userId;
-  _username = username;
-  _userFullName = userFullName;
-  [[Rollbar currentConfiguration] setPersonId:_userId username:_userFullName email:_username];
+  NSArray<id<RCTBridgeModule>> *extraModules = [_moduleRegistryAdapter extraModulesForBridge:bridge];
+  // If you'd like to export some custom RCTBridgeModules that are not Expo modules, add them here!
+  return extraModules;
 }
 
-- (void)clearUser {
-  _userId = nil;
-  _username = nil;
-  _userFullName = nil;
-  [[Rollbar currentConfiguration] setPersonId:_userId username:_userFullName email:_username];
+- (NSURL *)sourceURLForBridge:(RCTBridge *)bridge {
+ #ifdef DEBUG
+  return [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
+ #else
+  return [[EXUpdatesAppController sharedInstance] launchAssetUrl];
+ #endif
 }
 
-- (void)testNativeCrash {
-  dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)),
-                 dispatch_get_main_queue(),
-                 ^{
-                   @throw NSInternalInconsistencyException;
-                 });
-}
-
-- (void)testLogWarning:(NSString *)message {
-  [RollbarReactNative warningWithMessage:message];
-}
-
-- (void)testLogError:(NSString *)message {
-  [RollbarReactNative errorWithMessage:message];
+- (void)appController:(EXUpdatesAppController *)appController didStartWithSuccess:(BOOL)success {
+  appController.bridge = [self initializeReactNativeApp];
+  EXSplashScreenService *splashScreenService = (EXSplashScreenService *)[UMModuleRegistryProvider getSingletonModuleForClass:[EXSplashScreenService class]];
+  [splashScreenService showSplashScreenFor:self.window.rootViewController];
 }
 
 @end

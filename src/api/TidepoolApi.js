@@ -1007,7 +1007,7 @@ class TidepoolApi {
     let sourceVersion;
     if (Constants.appOwnership === "expo") {
       const systemName = Platform.OS === "ios" ? "iOS" : "Android";
-      sourceVersion = `${systemName} ${Constants.manifest.version} (Expo)`;
+      sourceVersion = `${systemName} ${Updates.manifest.version} (Expo)`;
     } else {
       sourceVersion = `${DeviceInfo.getSystemName()} ${DeviceInfo.getVersion()} (${DeviceInfo.getBuildNumber()})`;
     }

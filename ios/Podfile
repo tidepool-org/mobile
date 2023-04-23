@@ -1,139 +1,93 @@
-source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '10.0'
+platform :ios, '13.7'
 
-target 'Tidepool' do
-  pod 'ExpoKit',
-    :git => "http://github.com/expo/expo.git",
-    :tag => "ios/2.12.1",
-    :subspecs => [
-      "Core"
-    ],
-    :inhibit_warnings => true
+require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
+require_relative '../node_modules/react-native/scripts/react_native_pods'
 
-  # Install unimodules
-  require_relative '../node_modules/react-native-unimodules/cocoapods.rb'
-  use_unimodules!(
-    modules_paths: ['../node_modules'],
-    exclude: [
-      'expo-face-detector',
-      'expo-payments-stripe',
-      'expo-ads-admob',
-      'expo-ads-facebook',
-      'expo-analytics-amplitude',
-      'expo-analytics-segment',
-      'expo-app-auth',
-      'expo-av',
-      'expo-background-fetch',
-      'expo-barcode-scanner',
-      'expo-brightness',
-      'expo-calendar',
-      'expo-camera',
-      'expo-contacts',
-      'expo-crypto',
-      'expo-document-picker',
-      'expo-facebook',
-      'expo-google-sign-in',
-      'expo-haptics',
-      'expo-image-manipulator',
-      'expo-image-picker',
-      'expo-intent-launcher',
-      'expo-local-authentication',
-      'expo-localization',
-      # 'expo-location', # Need to keep this for now since there's a runtime dependency on it (even though we don't use it)
-      'expo-media-library',
-      'expo-print',
-      'expo-random',
-      'expo-secure-store',
-      'expo-sensors',
-      'expo-sharing',
-      'expo-sms',
-      'expo-speech',
-      'expo-sqlite',
-      'expo-task-manager',
-      'expo-web-browers',
-      'expo-barcode-scanner-interface',
-      'expo-camera-interface'
-    ],
-  )
+def add_flipper_pods!(versions = {})
+  versions['Flipper'] ||= '~> 0.33.1'
+  versions['DoubleConversion'] ||= '1.1.7'
+  versions['Flipper-Folly'] ||= '~> 2.1'
+  versions['Flipper-Glog'] ||= '0.3.6'
+  versions['Flipper-PeerTalk'] ||= '~> 0.0.4'
+  versions['Flipper-RSocket'] ||= '~> 1.0'
 
-  pod 'React',
-    :path => "../node_modules/react-native",
-    :inhibit_warnings => true,
-    :subspecs => [
-      "Core",
-      "ART",
-      "RCTActionSheet",
-      "RCTAnimation",
-      "RCTCameraRoll",
-      "RCTGeolocation",
-      "RCTImage",
-      "RCTNetwork",
-      "RCTText",
-      "RCTVibration",
-      "RCTWebSocket",
-      "DevSupport",
-      "CxxBridge"
-    ]
-  pod 'yoga',
-    :path => "../node_modules/react-native/ReactCommon/yoga",
-    :inhibit_warnings => true
-  pod 'DoubleConversion',
-    :podspec => "../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec",
-    :inhibit_warnings => true
-  pod 'Folly',
-    :podspec => "../node_modules/react-native/third-party-podspecs/Folly.podspec",
-    :inhibit_warnings => true
-  pod 'glog',
-    :podspec => "../node_modules/react-native/third-party-podspecs/glog.podspec",
-    :inhibit_warnings => true
+  pod 'FlipperKit', versions['Flipper'], :configuration => 'Debug'
+  pod 'FlipperKit/FlipperKitLayoutPlugin', versions['Flipper'], :configuration => 'Debug'
+  pod 'FlipperKit/SKIOSNetworkPlugin', versions['Flipper'], :configuration => 'Debug'
+  pod 'FlipperKit/FlipperKitUserDefaultsPlugin', versions['Flipper'], :configuration => 'Debug'
+  pod 'FlipperKit/FlipperKitReactPlugin', versions['Flipper'], :configuration => 'Debug'
 
-  pod 'RollbarReactNative', :path => '../node_modules/rollbar-react-native'
-  pod 'RNDeviceInfo', :path => '../node_modules/react-native-device-info'
+  # List all transitive dependencies for FlipperKit pods
+  # to avoid them being linked in Release builds
+  pod 'Flipper', versions['Flipper'], :configuration => 'Debug'
+  pod 'Flipper-DoubleConversion', versions['DoubleConversion'], :configuration => 'Debug'
+  pod 'Flipper-Folly', versions['Flipper-Folly'], :configuration => 'Debug'
+  pod 'Flipper-Glog', versions['Flipper-Glog'], :configuration => 'Debug'
+  pod 'Flipper-PeerTalk', versions['Flipper-PeerTalk'], :configuration => 'Debug'
+  pod 'Flipper-RSocket', versions['Flipper-RSocket'], :configuration => 'Debug'
+  pod 'FlipperKit/Core', versions['Flipper'], :configuration => 'Debug'
+  pod 'FlipperKit/CppBridge', versions['Flipper'], :configuration => 'Debug'
+  pod 'FlipperKit/FBCxxFollyDynamicConvert', versions['Flipper'], :configuration => 'Debug'
+  pod 'FlipperKit/FBDefines', versions['Flipper'], :configuration => 'Debug'
+  pod 'FlipperKit/FKPortForwarding', versions['Flipper'], :configuration => 'Debug'
+  pod 'FlipperKit/FlipperKitHighlightOverlay', versions['Flipper'], :configuration => 'Debug'
+  pod 'FlipperKit/FlipperKitLayoutTextSearchable', versions['Flipper'], :configuration => 'Debug'
+  pod 'FlipperKit/FlipperKitNetworkPlugin', versions['Flipper'], :configuration => 'Debug'
+end
 
-  post_install do |installer|
-    installer.pods_project.main_group.tab_width = '2';
-    installer.pods_project.main_group.indent_width = '2';
-
-    installer.target_installation_results.pod_target_installation_results
-      .each do |pod_name, target_installation_result|
-
-      if pod_name == 'ExpoKit'
-        target_installation_result.native_target.build_configurations.each do |config|
-          config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] ||= ['$(inherited)']
-          config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] << 'EX_DETACHED=1'
-
-          # Enable Google Maps support
-          config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] << 'HAVE_GOOGLE_MAPS=1'
-          config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] << 'HAVE_GOOGLE_MAPS_UTILS=1'
-
-        end
-      end
-
-
-
-      target_installation_result.native_target.build_configurations.each do |config|
-        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '10.0'
-      end
-
-
-      # Can't specify this in the React podspec because we need to use those podspecs for detached
-      # projects which don't reference ExponentCPP.
-      if pod_name.start_with?('React')
-        target_installation_result.native_target.build_configurations.each do |config|
-          config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '10.0'
-          config.build_settings['HEADER_SEARCH_PATHS'] ||= ['$(inherited)']
-        end
-      end
-
-      # Build React Native with RCT_DEV enabled and RCT_ENABLE_INSPECTOR and
-      # RCT_ENABLE_PACKAGER_CONNECTION disabled
-      next unless pod_name == 'React'
-      target_installation_result.native_target.build_configurations.each do |config|
-        config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] ||= ['$(inherited)']
-        config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] << 'RCT_DEV=1'
-        config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] << 'RCT_ENABLE_INSPECTOR=0'
-        config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] << 'ENABLE_PACKAGER_CONNECTION=0'
+# Post Install processing for Flipper
+def flipper_post_install(installer)
+  installer.pods_project.targets.each do |target|
+    if target.name == 'YogaKit'
+      target.build_configurations.each do |config|
+        config.build_settings['SWIFT_VERSION'] = '4.1'
       end
     end
+  end
+end
+
+target 'Tidepool' do
+  # Pods for Tidepool
+  pod 'FBLazyVector', :path => "../node_modules/react-native/Libraries/FBLazyVector"
+  pod 'FBReactNativeSpec', :path => "../node_modules/react-native/Libraries/FBReactNativeSpec"
+  pod 'RCTRequired', :path => "../node_modules/react-native/Libraries/RCTRequired"
+  pod 'RCTTypeSafety', :path => "../node_modules/react-native/Libraries/TypeSafety"
+  pod 'React', :path => '../node_modules/react-native/'
+  pod 'React-Core', :path => '../node_modules/react-native/'
+  pod 'React-CoreModules', :path => '../node_modules/react-native/React/CoreModules'
+  pod 'React-Core/DevSupport', :path => '../node_modules/react-native/'
+  pod 'React-RCTActionSheet', :path => '../node_modules/react-native/Libraries/ActionSheetIOS'
+  pod 'React-RCTAnimation', :path => '../node_modules/react-native/Libraries/NativeAnimation'
+  pod 'React-RCTBlob', :path => '../node_modules/react-native/Libraries/Blob'
+  pod 'React-RCTImage', :path => '../node_modules/react-native/Libraries/Image'
+  pod 'React-RCTLinking', :path => '../node_modules/react-native/Libraries/LinkingIOS'
+  pod 'React-RCTNetwork', :path => '../node_modules/react-native/Libraries/Network'
+  pod 'React-RCTSettings', :path => '../node_modules/react-native/Libraries/Settings'
+  pod 'React-RCTText', :path => '../node_modules/react-native/Libraries/Text'
+  pod 'React-RCTVibration', :path => '../node_modules/react-native/Libraries/Vibration'
+  pod 'React-Core/RCTWebSocket', :path => '../node_modules/react-native/'
+
+  pod 'React-cxxreact', :path => '../node_modules/react-native/ReactCommon/cxxreact'
+  pod 'React-jsi', :path => '../node_modules/react-native/ReactCommon/jsi'
+  pod 'React-jsiexecutor', :path => '../node_modules/react-native/ReactCommon/jsiexecutor'
+  pod 'React-jsinspector', :path => '../node_modules/react-native/ReactCommon/jsinspector'
+  pod 'React-callinvoker', :path => "../node_modules/react-native/ReactCommon/callinvoker"
+  pod 'ReactCommon/turbomodule/core', :path => "../node_modules/react-native/ReactCommon"
+  pod 'Yoga', :path => '../node_modules/react-native/ReactCommon/yoga', :modular_headers => true
+
+  pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
+  pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
+  pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
+
+ 
+  use_native_modules!
+
+  # Enables Flipper.
+  #
+  # Note that if you have use_frameworks! enabled, Flipper will not work and
+  # you should disable these next few lines.
+  add_flipper_pods!
+  post_install do |installer|
+    flipper_post_install(installer)
   end
 end
