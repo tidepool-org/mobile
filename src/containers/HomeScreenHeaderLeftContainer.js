@@ -6,7 +6,6 @@ import { navigateDrawerOpen } from "../actions/navigation";
 import { firstTimeTipsShowTip } from "../actions/firstTimeTips";
 
 const mapStateToProps = state => ({
-  navigation: state.navigation,
   notesFetch: state.notesFetch,
   currentUser: state.auth,
 });

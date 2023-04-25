@@ -1,90 +1,86 @@
-import React, { PureComponent } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Image, TouchableOpacity } from "react-native";
+import { useNavigation } from '@react-navigation/native';
 
 import FirstTimeTips from "../models/FirstTimeTips";
 import Tooltip from "./Tooltip";
 import ConnectHealthTooltipContent from "./Tooltips/ConnectHealthTooltipContent";
 import Metrics from "../models/Metrics";
 
-class HomeScreenHeaderLeft extends PureComponent {
-  state = {
-    toolTipVisible: false,
-  };
+const HomeScreenHeaderLeft = (props) => {
+  const [toolTipVisible, setToolTipVisible] = useState(false);
+  const navigation = useNavigation();
 
-  componentDidUpdate() {
-    const { navigation, notesFetch, currentUser } = this.props;
-    this.showTipIfNeeded({ navigation, notesFetch, currentUser });
-  }
+  useEffect(() => {
+    showTipIfNeeded();
+    return () => {
+      if (showTipTimeoutId) {
+        clearTimeout(showTipTimeoutId);
+      }
+    };
+  }, [props]);
 
-  componentWillUnmount() {
-    if (this.showTipTimeoutId) {
-      clearTimeout(this.showTipTimeoutId);
-    }
-  }
-
-  onPress = () => {
-    const { navigateDrawerOpen } = this.props;
-    navigateDrawerOpen();
+  const onPress = () => {
+    props.navigateDrawerOpen(navigation);
     Metrics.track({ metric: "Clicked Hamburger (Home Screen)" });
-    // TODO: metrics - we also need "Viewed Hamburger Menu (Hamburger)" (for when menu is opened, even via gesture)
-    this.hideTipIfNeeded();
+    hideTipIfNeeded();
   };
 
-  showTipIfNeeded(params) {
+  let showTipTimeoutId = null;
+
+  const showTipIfNeeded = () => {
+    const { notesFetch, currentUser } = props;
     if (
-      FirstTimeTips.shouldShowTip(FirstTimeTips.TIP_CONNECT_TO_HEALTH, params)
+      FirstTimeTips.shouldShowTip(
+        FirstTimeTips.TIP_CONNECT_TO_HEALTH,
+        { navigation, notesFetch, currentUser }
+      )
     ) {
-      const { firstTimeTipsShowTip } = this.props;
-      this.showTipTimeoutId = setTimeout(() => {
-        firstTimeTipsShowTip(FirstTimeTips.TIP_CONNECT_TO_HEALTH, true);
-        this.setState({ toolTipVisible: true });
+      props.firstTimeTipsShowTip(FirstTimeTips.TIP_CONNECT_TO_HEALTH, true);
+      showTipTimeoutId = setTimeout(() => {
+        setToolTipVisible(true);
       }, 50);
     }
-  }
+  };
 
-  hideTipIfNeeded() {
+  const hideTipIfNeeded = () => {
     if (FirstTimeTips.currentTip === FirstTimeTips.TIP_CONNECT_TO_HEALTH) {
-      const { firstTimeTipsShowTip } = this.props;
-      firstTimeTipsShowTip(FirstTimeTips.TIP_CONNECT_TO_HEALTH, false);
-      this.setState({ toolTipVisible: false });
+      props.firstTimeTipsShowTip(FirstTimeTips.TIP_CONNECT_TO_HEALTH, false);
+      setToolTipVisible(false);
     }
-  }
+  };
 
-  render() {
-    const { toolTipVisible } = this.state;
-    return (
-      <Tooltip
-        isVisible={toolTipVisible}
-        placement="bottom"
-        content={<ConnectHealthTooltipContent />}
-        arrowStyle={{
-          marginLeft: -5,
+  return (
+    <Tooltip
+      isVisible={toolTipVisible}
+      placement="bottom"
+      content={<ConnectHealthTooltipContent />}
+      arrowStyle={{
+        marginLeft: -5,
+      }}
+      tooltipOriginOffset={{
+        x: 8,
+        y: 4,
+      }}
+    >
+      <TouchableOpacity
+        style={{
+          padding: 10,
+          marginLeft: 6,
         }}
-        tooltipOriginOffset={{
-          x: 8,
-          y: 4,
-        }}
+        onPress={onPress}
       >
-        <TouchableOpacity
-          style={{
-            padding: 10,
-            marginLeft: 6,
-          }}
-          onPress={this.onPress}
-        >
-          <Image
-            tintColor="white"
-            source={require("../../assets/images/menu-button.png")}
-          />
-        </TouchableOpacity>
-      </Tooltip>
-    );
-  }
-}
+        <Image
+          tintColor="white"
+          source={require("../../assets/images/menu-button.png")}
+        />
+      </TouchableOpacity>
+    </Tooltip>
+  );
+};
 
 HomeScreenHeaderLeft.propTypes = {
-  navigation: PropTypes.object.isRequired,
   notesFetch: PropTypes.object.isRequired,
   currentUser: PropTypes.object.isRequired,
   navigateDrawerOpen: PropTypes.func.isRequired,
