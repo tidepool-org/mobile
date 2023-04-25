@@ -1,1 +1,1 @@
-../../../Rollbar/Rollbar/RollbarKSCrashInstallation.h
+../../../Rollbar/Rollbar/Notifier/RollbarKSCrashInstallation.h

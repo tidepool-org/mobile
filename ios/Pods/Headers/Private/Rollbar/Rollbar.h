@@ -1,1 +1,1 @@
-../../../Rollbar/Rollbar/Rollbar.h
+../../../Rollbar/RollbarFramework/Rollbar.h

@@ -56,7 +56,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-
+#include <sys/time.h>
 
 // ============================================================================
 #pragma mark - Constants -
@@ -1414,6 +1414,7 @@ static void writeError(const KSCrashReportWriter* const writer,
                 writer->beginObject(writer, KSCrashField_NSException);
                 {
                     writer->addStringElement(writer, KSCrashField_Name, crash->NSException.name);
+                    writer->addStringElement(writer, KSCrashField_UserInfo, crash->NSException.userInfo);
                     writeAddressReferencedByString(writer, KSCrashField_ReferencedObject, crash->crashReason);
                 }
                 writer->endContainer(writer);
@@ -1529,10 +1530,14 @@ static void writeReportInfo(const KSCrashReportWriter* const writer,
 {
     writer->beginObject(writer, key);
     {
+        struct timeval tp;
+        gettimeofday(&tp, NULL);
+        int64_t microseconds = ((int64_t)tp.tv_sec) * 1000000 + tp.tv_usec;
+        
         writer->addStringElement(writer, KSCrashField_Version, KSCRASH_REPORT_VERSION);
         writer->addStringElement(writer, KSCrashField_ID, reportID);
         writer->addStringElement(writer, KSCrashField_ProcessName, processName);
-        writer->addIntegerElement(writer, KSCrashField_Timestamp, time(NULL));
+        writer->addIntegerElement(writer, KSCrashField_Timestamp, microseconds);
         writer->addStringElement(writer, KSCrashField_Type, type);
     }
     writer->endContainer(writer);
@@ -1767,7 +1772,9 @@ void kscrashreport_writeStandardReport(const KSCrash_MonitorContext* const monit
         if(g_userSectionWriteCallback != NULL)
         {
             ksfu_flushBufferedWriter(&bufferedWriter);
-            g_userSectionWriteCallback(writer);
+            if (monitorContext->currentSnapshotUserReported == false) {
+                g_userSectionWriteCallback(writer);
+            }
         }
         writer->endContainer(writer);
         ksfu_flushBufferedWriter(&bufferedWriter);

@@ -88,7 +88,7 @@ static volatile bool g_isEnabled = false;
 #pragma mark - Utility -
 // ============================================================================
 
-const char* cString(NSString* str)
+static const char* cString(NSString* str)
 {
     return str == NULL ? NULL : strdup(str.UTF8String);
 }
@@ -361,7 +361,11 @@ static NSString* getReceiptUrlPath()
     NSString* path = nil;
 #if KSCRASH_HOST_IOS
     // For iOS 6 compatibility
+#ifdef __IPHONE_11_0
+    if (@available(iOS 7, *)) {
+#else
     if ([[UIDevice currentDevice].systemVersion compare:@"7" options:NSNumericSearch] != NSOrderedAscending) {
+#endif
 #endif
         path = [NSBundle mainBundle].appStoreReceiptURL.path;
 #if KSCRASH_HOST_IOS

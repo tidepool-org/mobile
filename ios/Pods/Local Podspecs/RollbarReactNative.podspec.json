@@ -1,6 +1,6 @@
 {
   "name": "RollbarReactNative",
-  "version": "0.5.0",
+  "version": "0.9.3",
   "summary": "RollbarReactNative",
   "description": "RollbarReactNative is a library for interacting with the Rollbar\nerror monitoring system in React Native apps.",
   "homepage": "https://rollbar.com",
@@ -13,15 +13,15 @@
   },
   "source": {
     "git": "https://github.com/author/RollbarReactNative.git",
-    "tag": "v0.5.0"
+    "tag": "v0.8.0"
   },
   "requires_arc": true,
   "dependencies": {
-    "React": [
+    "React-Core": [
 
     ],
     "Rollbar": [
-      "~> 1.5.0"
+      "~> 1.12.8"
     ]
   },
   "source_files": "ios/RollbarReactNative.{h,m}",

@@ -50,6 +50,15 @@
 #include <stdlib.h>
 #include <string.h>
 
+typedef enum
+{
+    KSApplicationStateNone,
+    KSApplicationStateDidBecomeActive,
+    KSApplicationStateWillResignActiveActive,
+    KSApplicationStateDidEnterBackground,
+    KSApplicationStateWillEnterForeground,
+    KSApplicationStateWillTerminate
+} KSApplicationState;
 
 // ============================================================================
 #pragma mark - Globals -
@@ -60,10 +69,11 @@ static volatile bool g_installed = 0;
 
 static bool g_shouldAddConsoleLogToReport = false;
 static bool g_shouldPrintPreviousLog = false;
-char g_consoleLogPath[KSFU_MAX_PATH_LENGTH];
+static char g_consoleLogPath[KSFU_MAX_PATH_LENGTH];
 static KSCrashMonitorType g_monitoring = KSCrashMonitorTypeProductionSafeMinimal;
 static char g_lastCrashReportFilePath[KSFU_MAX_PATH_LENGTH];
-
+static KSReportWrittenCallback g_reportWrittenCallback;
+static KSApplicationState g_lastApplicationState = KSApplicationStateNone;
 
 // ============================================================================
 #pragma mark - Utility -
@@ -77,11 +87,31 @@ static void printPreviousLog(const char* filePath)
     {
         printf("\nvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv Previous Log vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv\n\n");
         printf("%s\n", data);
+        free(data);
         printf("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n");
         fflush(stdout);
     }
 }
 
+static void notifyOfBeforeInstallationState(void)
+{
+    KSLOG_DEBUG("Notifying of pre-installation state");
+    switch (g_lastApplicationState)
+    {
+        case KSApplicationStateDidBecomeActive:
+            return kscrash_notifyAppActive(true);
+        case KSApplicationStateWillResignActiveActive:
+            return kscrash_notifyAppActive(false);
+        case KSApplicationStateDidEnterBackground:
+            return kscrash_notifyAppInForeground(false);
+        case KSApplicationStateWillEnterForeground:
+            return kscrash_notifyAppInForeground(true);
+        case KSApplicationStateWillTerminate:
+            return kscrash_notifyAppTerminate();
+        default:
+            return;
+    }
+}
 
 // ============================================================================
 #pragma mark - Callbacks -
@@ -93,9 +123,10 @@ static void printPreviousLog(const char* filePath)
  */
 static void onCrash(struct KSCrash_MonitorContext* monitorContext)
 {
-    KSLOG_DEBUG("Updating application state to note crash.");
-    kscrashstate_notifyAppCrash();
-
+    if (monitorContext->currentSnapshotUserReported == false) {
+        KSLOG_DEBUG("Updating application state to note crash.");
+        kscrashstate_notifyAppCrash();
+    }
     monitorContext->consoleLogPath = g_shouldAddConsoleLogToReport ? g_consoleLogPath : NULL;
 
     if(monitorContext->crashedDuringCrashHandling)
@@ -105,9 +136,14 @@ static void onCrash(struct KSCrash_MonitorContext* monitorContext)
     else
     {
         char crashReportFilePath[KSFU_MAX_PATH_LENGTH];
-        kscrs_getNextCrashReportPath(crashReportFilePath);
+        int64_t reportID = kscrs_getNextCrashReport(crashReportFilePath);
         strncpy(g_lastCrashReportFilePath, crashReportFilePath, sizeof(g_lastCrashReportFilePath));
         kscrashreport_writeStandardReport(monitorContext, crashReportFilePath);
+
+        if(g_reportWrittenCallback)
+        {
+            g_reportWrittenCallback(reportID);
+        }
     }
 }
 
@@ -150,6 +186,9 @@ KSCrashMonitorType kscrash_install(const char* appName, const char* const instal
     KSCrashMonitorType monitors = kscrash_setMonitoring(g_monitoring);
 
     KSLOG_DEBUG("Installation complete.");
+
+    notifyOfBeforeInstallationState();
+
     return monitors;
 }
 
@@ -178,6 +217,11 @@ void kscrash_setDeadlockWatchdogInterval(double deadlockWatchdogInterval)
 #endif
 }
 
+void kscrash_setSearchQueueNames(bool searchQueueNames)
+{
+    ksccd_setSearchQueueNames(searchQueueNames);
+}
+
 void kscrash_setIntrospectMemory(bool introspectMemory)
 {
     kscrashreport_setIntrospectMemory(introspectMemory);
@@ -191,6 +235,11 @@ void kscrash_setDoNotIntrospectClasses(const char** doNotIntrospectClasses, int 
 void kscrash_setCrashNotifyCallback(const KSReportWriteCallback onCrashNotify)
 {
     kscrashreport_setUserSectionWriteCallback(onCrashNotify);
+}
+
+void kscrash_setReportWrittenCallback(const KSReportWrittenCallback onReportWrittenNotify)
+{
+    g_reportWrittenCallback = onReportWrittenNotify;
 }
 
 void kscrash_setAddConsoleLogToReport(bool shouldAddConsoleLogToReport)
@@ -229,19 +278,40 @@ void kscrash_reportUserException(const char* name,
     }
 }
 
+void kscrash_notifyObjCLoad(void)
+{
+    kscrashstate_notifyObjCLoad();
+}
+
 void kscrash_notifyAppActive(bool isActive)
 {
-    kscrashstate_notifyAppActive(isActive);
+    if (g_installed)
+    {
+        kscrashstate_notifyAppActive(isActive);
+    }
+    g_lastApplicationState = isActive
+        ? KSApplicationStateDidBecomeActive
+        : KSApplicationStateWillResignActiveActive;
 }
 
 void kscrash_notifyAppInForeground(bool isInForeground)
 {
-    kscrashstate_notifyAppInForeground(isInForeground);
+    if (g_installed)
+    {
+        kscrashstate_notifyAppInForeground(isInForeground);
+    }
+    g_lastApplicationState = isInForeground
+        ? KSApplicationStateWillEnterForeground
+        : KSApplicationStateDidEnterBackground;
 }
 
 void kscrash_notifyAppTerminate(void)
 {
-    kscrashstate_notifyAppTerminate();
+    if (g_installed)
+    {
+        kscrashstate_notifyAppTerminate();
+    }
+    g_lastApplicationState = KSApplicationStateWillTerminate;
 }
 
 void kscrash_notifyAppCrash(void)
@@ -292,4 +362,9 @@ int64_t kscrash_addUserReport(const char* report, int reportLength)
 void kscrash_deleteAllReports()
 {
     kscrs_deleteAllReports();
+}
+
+void kscrash_deleteReportWithID(int64_t reportID)
+{
+    kscrs_deleteReportWithID(reportID);
 }

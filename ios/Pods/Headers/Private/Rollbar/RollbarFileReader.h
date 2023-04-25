@@ -1,1 +1,1 @@
-../../../Rollbar/Rollbar/RollbarFileReader.h
+../../../Rollbar/Rollbar/Notifier/RollbarFileReader.h

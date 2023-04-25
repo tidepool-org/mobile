@@ -2,8 +2,8 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Keyboard, StatusBar } from "react-native";
 import glamorous, { ThemeProvider } from "glamorous-native";
-import addHours from "date-fns/add_hours";
-import subHours from "date-fns/sub_hours";
+import addHours from "date-fns/addHours";
+import subHours from "date-fns/subHours";
 
 import PrimaryTheme from "../themes/PrimaryTheme";
 import Colors from "../constants/Colors";

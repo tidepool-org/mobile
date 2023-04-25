@@ -1,5 +1,5 @@
-import differenceInMinutes from "date-fns/difference_in_minutes";
-import differenceInCalendarDays from "date-fns/difference_in_calendar_days";
+import differenceInMinutes from "date-fns/differenceInMinutes";
+import differenceInCalendarDays from "date-fns/differenceInCalendarDays";
 
 class SignificantTimeChangeNotification {
   constructor() {

@@ -1,1 +1,1 @@
-../../../Rollbar/Rollbar/RollbarTelemetryType.h
+../../../Rollbar/Rollbar/Notifier_DTOs/RollbarTelemetryType.h

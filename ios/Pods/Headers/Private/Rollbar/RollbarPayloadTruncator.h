@@ -1,1 +1,1 @@
-../../../Rollbar/Rollbar/RollbarPayloadTruncator.h
+../../../Rollbar/Rollbar/Notifier/RollbarPayloadTruncator.h

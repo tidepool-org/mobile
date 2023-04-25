@@ -1,8 +1,8 @@
 /* eslint import/no-extraneous-dependencies: 0 */
 import React from "react";
 import { Linking } from "react-native";
-import { storiesOf } from "@storybook/react-native";
-import { withKnobs, select } from "@storybook/addon-knobs";
+import { storiesOf, addDecorator } from "@storybook/react-native";
+import { withControls} from "@storybook/addon-controls"
 
 import StoryContainerComponent from "../utils/StoryContainerComponent";
 import Graph from "../../src/components/Graph/Graph";
@@ -60,10 +60,7 @@ const onZoomStart = () => {};
 const onZoomEnd = () => {};
 
 const stories = storiesOf("Graph", module);
-stories.addDecorator(withKnobs);
-const rendererLabel = "Renderer";
-const rendererOptions = [GRAPH_RENDERER_THREE_JS, GRAPH_RENDERER_SVG];
-const defaultRenderer = GRAPH_RENDERER_THREE_JS;
+addDecorator(withControls);
 
 const props = {
   isLoading,
@@ -74,33 +71,27 @@ const props = {
   onZoomEnd,
 };
 
-const selectGraphRenderer = () => {
-  const graphRenderer = select(rendererLabel, rendererOptions, defaultRenderer);
+const Template = (args) => (
+  <StoryContainerComponent behaviors={[]}>
+    <Graph {...args} />
+  </StoryContainerComponent>
+);
 
-  return graphRenderer;
+export const OfflineNotAvailable = Template.bind({});
+OfflineNotAvailable.args = {
+  ...props,
+  isOffline: true,
+  isAvailableOffline: false,
+  graphRenderer: GRAPH_RENDERER_THREE_JS,
 };
 
-stories.add("offline, not available offline", () => (
-  <StoryContainerComponent behaviors={[]}>
-    <Graph
-      {...props}
-      isOffline
-      isAvailableOffline={false}
-      graphRenderer={selectGraphRenderer()}
-    />
-  </StoryContainerComponent>
-));
-
-stories.add("offline, available offline", () => (
-  <StoryContainerComponent behaviors={[]}>
-    <Graph
-      {...props}
-      isOffline
-      isAvailableOffline
-      graphRenderer={selectGraphRenderer()}
-    />
-  </StoryContainerComponent>
-));
+export const OfflineAvailable = Template.bind({});
+OfflineAvailable.args = {
+  ...props,
+  isOffline: true,
+  isAvailableOffline: true,
+  graphRenderer: GRAPH_RENDERER_THREE_JS,
+};
 
 stories.add("isLoading, default scale", () => (
   <StoryContainerComponent behaviors={[]}>

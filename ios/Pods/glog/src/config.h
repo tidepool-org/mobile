@@ -32,7 +32,7 @@
 #define HAVE_LIBUNWIND_H 1
 
 /* define if you have google gflags library */
-/* #undef HAVE_LIB_GFLAGS */
+/* #undef HAVE_LIB_GFLAGS_DISABLED */
 
 /* define if you have google gmock library */
 /* #undef HAVE_LIB_GMOCK */
@@ -160,7 +160,7 @@
 /* #undef PTHREAD_CREATE_JOINABLE */
 
 /* The size of `void *', as computed by sizeof. */
-#define SIZEOF_VOID_P 4
+#define SIZEOF_VOID_P 8
 
 /* Define to 1 if you have the ANSI C header files. */
 /* #undef STDC_HEADERS */

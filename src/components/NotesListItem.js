@@ -9,8 +9,8 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import glamorous, { withTheme } from "glamorous-native";
-import addHours from "date-fns/add_hours";
-import subHours from "date-fns/sub_hours";
+import addHours from "date-fns/addHours";
+import subHours from "date-fns/subHours";
 
 import Urls from "../constants/Urls";
 import {

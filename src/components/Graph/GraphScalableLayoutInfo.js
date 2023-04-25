@@ -1,4 +1,4 @@
-import subSeconds from "date-fns/sub_seconds";
+import subSeconds from "date-fns/subSeconds";
 
 // import Logger from "../../models/Logger";
 

@@ -1,7 +1,7 @@
 /* eslint import/no-extraneous-dependencies: 0 */
 import React from "react";
 import { storiesOf } from "@storybook/react-native";
-import subDays from "date-fns/sub_days";
+import subDays from "date-fns/subDays";
 import faker from "faker";
 
 import StoryContainerScreen from "../utils/StoryContainerScreen";

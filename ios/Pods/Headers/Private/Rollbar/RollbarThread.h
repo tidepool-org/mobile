@@ -1,1 +1,1 @@
-../../../Rollbar/Rollbar/RollbarThread.h
+../../../Rollbar/Rollbar/Notifier/RollbarThread.h

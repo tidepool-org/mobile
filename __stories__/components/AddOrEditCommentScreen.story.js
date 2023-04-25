@@ -2,11 +2,11 @@
 import React from "react";
 import { storiesOf } from "@storybook/react-native";
 import faker from "faker";
-import startOfToday from "date-fns/start_of_today";
-import startOfYesterday from "date-fns/start_of_yesterday";
-import setHours from "date-fns/set_hours";
-import setMinutes from "date-fns/set_minutes";
-import addMinutes from "date-fns/add_minutes";
+import startOfToday from "date-fns/startOfToday";
+import startOfYesterday from "date-fns/startOfYesterday";
+import setHours from "date-fns/setHours";
+import setMinutes from "date-fns/setMinutes";
+import addMinutes from "date-fns/addMinutes";
 
 import StoryContainerScreen from "../utils/StoryContainerScreen";
 import AddOrEditCommentScreen from "../../src/screens/AddOrEditCommentScreen";

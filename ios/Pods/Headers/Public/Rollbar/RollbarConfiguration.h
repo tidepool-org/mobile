@@ -1,1 +1,1 @@
-../../../Rollbar/Rollbar/RollbarConfiguration.h
+../../../Rollbar/Rollbar/Notifier/RollbarConfiguration.h

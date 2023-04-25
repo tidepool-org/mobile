@@ -1,1 +1,1 @@
-../../../Rollbar/Rollbar/NSJSONSerialization+Rollbar.h
+../../../Rollbar/Rollbar/Notifier/NSJSONSerialization+Rollbar.h

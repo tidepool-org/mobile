@@ -2,7 +2,7 @@
 import React from "react";
 import { storiesOf } from "@storybook/react-native";
 import faker from "faker";
-import subDays from "date-fns/sub_days";
+import subDays from "date-fns/subDays";
 
 import StoryContainerComponent from "../utils/StoryContainerComponent";
 import NotesList from "../../src/components/NotesList";

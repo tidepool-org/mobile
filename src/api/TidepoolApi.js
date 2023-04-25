@@ -1,6 +1,6 @@
 import { Platform } from "react-native";
 import axios from "axios";
-import uuidv4 from "uuid/v4";
+import { v4 as uuidv4 } from "uuid";
 import parse from "date-fns/parse";
 import DeviceInfo from "react-native-device-info";
 import Constants from "expo-constants";

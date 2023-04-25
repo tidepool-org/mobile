@@ -107,6 +107,16 @@ typedef enum
  */
 @property(nonatomic,readwrite,assign) double deadlockWatchdogInterval;
 
+/** If YES, attempt to fetch dispatch queue names for each running thread.
+ *
+ * WARNING: There is a chance that this will crash on a ksthread_getQueueName() call!
+ *
+ * Enable at your own risk.
+ *
+ * Default: NO
+ */
+@property(nonatomic,readwrite,assign) BOOL searchQueueNames;
+
 /** If YES, introspect memory contents during a crash.
  * Any Objective-C objects or C strings near the stack pointer or referenced by
  * cpu registers or exceptions will be recorded in the crash report, along with
@@ -172,6 +182,9 @@ typedef enum
 /** Exposes the uncaughtExceptionHandler if set from KSCrash. Is nil if debugger is running. **/
 @property (nonatomic, assign) NSUncaughtExceptionHandler *uncaughtExceptionHandler;
 
+/** Exposes the currentSnapshotUserReportedExceptionHandler if set from KSCrash. Is nil if debugger is running. **/
+@property (nonatomic, assign) NSUncaughtExceptionHandler *currentSnapshotUserReportedExceptionHandler;
+
 #pragma mark - Information -
 
 /** Total active time elapsed since the last crash. */
@@ -230,9 +243,29 @@ typedef enum
  */
 - (void) sendAllReportsWithCompletion:(KSCrashReportFilterCompletion) onCompletion;
 
+/** Get all unsent report IDs.
+ *
+ * @return An array with report IDs.
+ */
+- (NSArray*) reportIDs;
+
+/** Get report.
+ *
+ * @param reportID An ID of report.
+ *
+ * @return A dictionary with report fields. See KSCrashReportFields.h for available fields.
+ */
+- (NSDictionary*) reportWithID:(NSNumber*) reportID;
+
 /** Delete all unsent reports.
  */
 - (void) deleteAllReports;
+
+/** Delete report.
+ *
+ * @param reportID An ID of report to delete.
+ */
+- (void) deleteReportWithID:(NSNumber*) reportID;
 
 /** Report a custom, user defined exception.
  * This can be useful when dealing with scripting languages.

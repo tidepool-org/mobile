@@ -1,1 +1,1 @@
-../../../Rollbar/Rollbar/RollbarTelemetry.h
+../../../Rollbar/Rollbar/Notifier/RollbarTelemetry.h

@@ -13,15 +13,15 @@ import {
 } from "react-native";
 import glamorous, { ThemeProvider } from "glamorous-native";
 import { Header } from "react-navigation";
-import setYear from "date-fns/set_year";
-import setMonth from "date-fns/set_month";
-import setDate from "date-fns/set_date";
-import setSeconds from "date-fns/set_seconds";
-import setHours from "date-fns/set_hours";
-import setMinutes from "date-fns/set_minutes";
-import setMilliseconds from "date-fns/set_milliseconds";
-import getHours from "date-fns/get_hours";
-import getMinutes from "date-fns/get_minutes";
+import setYear from "date-fns/setYear";
+import setMonth from "date-fns/setMonth";
+import setDate from "date-fns/setDate";
+import setSeconds from "date-fns/setSeconds";
+import setHours from "date-fns/setHours";
+import setMinutes from "date-fns/setMinutes";
+import setMilliseconds from "date-fns/setMilliseconds";
+import getHours from "date-fns/getHours";
+import getMinutes from "date-fns/getMinutes";
 
 import PrimaryTheme from "../themes/PrimaryTheme";
 import Colors from "../constants/Colors";

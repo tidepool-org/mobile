@@ -1,5 +1,5 @@
 import format from "date-fns/format";
-import addSeconds from "date-fns/add_seconds";
+import addSeconds from "date-fns/addSeconds";
 
 const LOW_BG_LABEL_VALUE = 40;
 const HIGH_BG_LABEL_VALUE = 300;

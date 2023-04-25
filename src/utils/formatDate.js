@@ -1,7 +1,7 @@
 import format from "date-fns/format";
-import isYesterday from "date-fns/is_yesterday";
-import isToday from "date-fns/is_today";
-import isThisYear from "date-fns/is_this_year";
+import isYesterday from "date-fns/isYesterday";
+import isToday from "date-fns/isToday";
+import isThisYear from "date-fns/isThisYear";
 
 const formatDateForNoteList = date => {
   let dayString;

@@ -2,7 +2,7 @@
 import React from "react";
 import { Linking } from "react-native";
 import { storiesOf } from "@storybook/react-native";
-import { withKnobs, select } from "@storybook/addon-knobs";
+import { withControls, select } from "@storybook/addon-controls"
 
 import StoryContainerComponent from "../utils/StoryContainerComponent";
 import Graph from "../../src/components/Graph/Graph";
@@ -41,7 +41,7 @@ const onZoomStart = () => {};
 const onZoomEnd = () => {};
 
 const stories = storiesOf("Graph (Bolus)", module);
-stories.addDecorator(withKnobs);
+stories.addDecorator(withControls);
 const rendererLabel = "Renderer";
 const rendererOptions = [GRAPH_RENDERER_THREE_JS, GRAPH_RENDERER_SVG];
 const defaultRenderer = GRAPH_RENDERER_THREE_JS;
@@ -54,6 +54,7 @@ const props = {
   onZoomStart,
   onZoomEnd,
 };
+
 
 const selectGraphRenderer = () => {
   const graphRenderer = select(rendererLabel, rendererOptions, defaultRenderer);
@@ -88,8 +89,8 @@ const addStory = ({ name, eventTime, graphDataResponseJson }) => {
         graphRenderer={selectGraphRenderer()}
       />
     </StoryContainerComponent>
-  ));
-};
+));
+  };
 
 addStory({
   name: "interrupted extended bolus",
