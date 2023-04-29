@@ -12,10 +12,10 @@ import {
   GRAPH_RENDERER_THREE_JS,
 } from "../../src/components/Graph/helpers";
 import NotesFetchData from "../../src/models/NotesFetchData";
-
+import {useNavigation} from '@react-navigation/native'
 faker.seed(123);
 
-const navigation = {};
+const navigation = useNavigation();
 const graphRenderer = GRAPH_RENDERER_THREE_JS;
 const currentUser = {
   userId: "1",

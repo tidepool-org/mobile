@@ -10,16 +10,10 @@ import { commentsFetchAsync } from "../actions/commentsFetch";
 import { noteDeleteAsync } from "../actions/noteDelete";
 import { commentDeleteAsync } from "../actions/commentDelete";
 import { graphDataFetchAsync } from "../actions/graphDataFetch";
-import {
-  navigateEditNote,
-  navigateAddComment,
-  navigateEditComment,
-} from "../actions/navigation";
 import { firstTimeTipsShowTip } from "../actions/firstTimeTips";
 
 const mapStateToProps = state => ({
   isOffline: state.offline.isOffline,
-  navigation: state.navigation,
   notesFetch: state.notesFetch,
   currentUser: state.auth,
   notes: state.notesFetch.notes,
@@ -42,9 +36,6 @@ const mapDispatchToProps = dispatch =>
       commentsFetchAsync,
       commentDeleteAsync,
       graphDataFetchAsync,
-      navigateEditNote,
-      navigateAddComment,
-      navigateEditComment,
       firstTimeTipsShowTip,
     },
     dispatch

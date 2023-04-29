@@ -1,15 +1,9 @@
 import { AsyncStorage, Platform } from "react-native";
 
 import { HOME_ROUTE_NAME } from "../navigators/routeNames";
-import isDrawerOpen from "../navigators/isDrawerOpen";
-import isCurrentRoute from "../navigators/isCurrentRoute";
 import Logger from "./Logger";
 
 const FIRST_TIME_TIPS_SETTINGS_KEY = "FIRST_TIME_TIPS_SETTINGS_KEY";
-
-// TODO: We should handle upgrade from old iOS Tidepool Mobile legacy app and read the existing
-// settings, rather than effectively resetting first time tips on upgrade as we do now. Will need
-// to use another module to read the settings from UserDefaults.
 
 class FirstTimeTips {
   TIP_CONNECT_TO_HEALTH = "connectToHealth";
@@ -23,16 +17,23 @@ class FirstTimeTips {
     this.resetTips({ saveSettings: false });
   }
 
+  
+
   shouldShowTip(tip, { navigation, notesFetch, currentUser }) {
     let shouldShowTip = false;
+    
+    const currentRouteName = navigation.getCurrentRoute().name;
+    const isDrawerOpen = navigation.dangerouslyGetState().routes.some(
+      (route) => route.state && route.state.isDrawerOpen
+    );
 
     if (
       this.areSettingsLoaded &&
       !this.currentTip &&
       !notesFetch.fetching &&
       tip === this.getNextTip({ notesFetch, currentUser }) &&
-      !isDrawerOpen({ navigation }) &&
-      isCurrentRoute(HOME_ROUTE_NAME, { navigation })
+      !isDrawerOpen &&
+    currentRouteName === HOME_ROUTE_NAME
     ) {
       shouldShowTip = true;
     }

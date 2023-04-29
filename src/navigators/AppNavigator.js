@@ -1,45 +1,67 @@
 import React from "react";
-import { Animated, Easing } from "react-native";
-import { createStackNavigator } from "react-navigation";
+import { createStackNavigator } from "@react-navigation/stack";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 
 import LaunchScreen from "../screens/LaunchScreen";
 import SignInScreenContainer from "../containers/SignInScreenContainer";
-import MainDrawerNavigator from "./MainDrawerNavigator";
 import DebugSettingsScreenContainer from "../containers/DebugSettingsScreenContainer";
-import {
-  LAUNCH_ROUTE_NAME,
-  SIGN_IN_ROUTE_NAME,
-  DEBUG_SETTINGS_ROUTE_NAME,
-  MAIN_DRAWER_ROUTE_NAME,
-} from "./routeNames";
+import HomeScreenContainer from "../containers/HomeScreenContainer";
+import SwitchProfileScreenContainer from "../containers/SwitchProfileScreenContainer";
+import AddOrEditCommentScreenContainer from "../containers/AddOrEditCommentScreenContainer";
+import AddOrEditNoteScreenContainer from "../containers/AddOrEditNoteScreenContainer";
+import DrawerContainer from "../containers/DrawerContainer";
 
-const noTransitionConfig = () => ({
-  transitionSpec: {
-    duration: 0,
-    timing: Animated.timing,
-    easing: Easing.step0,
-  },
-});
+const Stack = createStackNavigator();
+const Drawer = createDrawerNavigator();
 
-const AppNavigator = createStackNavigator(
-  {
-    [LAUNCH_ROUTE_NAME]: {
-      screen: LaunchScreen,
-    },
-    [SIGN_IN_ROUTE_NAME]: {
-      screen: props => <SignInScreenContainer {...props} />,
-    },
-    [DEBUG_SETTINGS_ROUTE_NAME]: {
-      screen: () => <DebugSettingsScreenContainer />,
-    },
-    [MAIN_DRAWER_ROUTE_NAME]: {
-      screen: MainDrawerNavigator,
-    },
-  },
-  {
-    headerMode: "none",
-    transitionConfig: noTransitionConfig,
-  }
+const MainStackNavigator = () => (
+  <Stack.Navigator
+    headerMode="float"
+    screenOptions={{
+      headerBackTitle: "",
+      headerTruncatedBackTitle: "",
+    }}
+  >
+    <Stack.Screen name="Home" component={HomeScreenContainer} />
+    <Stack.Screen name="SwitchProfile" component={SwitchProfileScreenContainer} />
+    <Stack.Screen name="AddComment" component={AddOrEditCommentScreenContainer} />
+    <Stack.Screen name="EditComment" component={AddOrEditCommentScreenContainer} />
+  </Stack.Navigator>
 );
 
-export { AppNavigator };
+const MainDrawerNavigator = () => (
+  <Drawer.Navigator
+  drawerType="slide"
+  drawerWidth={270}
+  drawerContent={(props) => <DrawerContainer {...props} />}
+>
+  <Drawer.Screen name="MainStack" component={MainStackNavigator} />
+  {/* Add more drawer items if needed */}
+</Drawer.Navigator>
+);
+
+const MainModalNavigator = () => (
+  <Stack.Navigator
+    mode="modal"
+    headerMode="none"
+    screenOptions={{
+      cardStyle: { backgroundColor: "transparent" },
+      cardOverlayEnabled: true,
+    }}
+  >
+    <Stack.Screen name="MainDrawer" component={MainDrawerNavigator} />
+    <Stack.Screen name="AddNote" component={AddOrEditNoteScreenContainer} />
+    <Stack.Screen name="EditNote" component={AddOrEditNoteScreenContainer} />
+  </Stack.Navigator>
+);
+
+const AppNavigator = () => (
+  <Stack.Navigator headerMode="none">
+    <Stack.Screen name="Launch" component={LaunchScreen} />
+    <Stack.Screen name="SignIn" component={SignInScreenContainer} />
+    <Stack.Screen name="DebugSettings" component={DebugSettingsScreenContainer} />
+    <Stack.Screen name="MainModal" component={MainModalNavigator} />
+  </Stack.Navigator>
+);
+
+export default AppNavigator;
