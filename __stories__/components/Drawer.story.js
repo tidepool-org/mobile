@@ -4,7 +4,7 @@ import { storiesOf } from "@storybook/react-native";
 
 import StoryContainerComponent from "../utils/StoryContainerComponent";
 import Drawer from "../../src/components/Drawer";
-import { API_ENVIRONMENT_STAGING } from "../../src/api";
+import { API_ENVIRONMEN_QA2} from "../../src/api";
 
 const props = {
   notesSwitchProfileAndFetchAsync: () => {},
@@ -20,7 +20,7 @@ const props = {
     fullName: "Current User",
   },
   version: "3.1.1",
-  apiEnvironment: API_ENVIRONMENT_STAGING,
+  apiEnvironment: API_ENVIRONMENT_QA2,
 };
 
 storiesOf("Drawer", module).add("default", () => (

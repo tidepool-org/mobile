@@ -4,7 +4,7 @@ import { storiesOf } from "@storybook/react-native";
 
 import StoryContainerScreen from "../utils/StoryContainerScreen";
 import SignInScreen from "../../src/screens/SignInScreen";
-import { API_ENVIRONMENT_STAGING } from "../../src/api";
+import { API_ENVIRONMENT_QA2 } from "../../src/api";
 
 const props = {
   navigateSignUp: () => {},
@@ -14,7 +14,7 @@ const props = {
   authSignInAsync: () => {},
   signingIn: false,
   version: "3.1.1",
-  apiEnvironment: API_ENVIRONMENT_STAGING,
+  apiEnvironment: API_ENVIRONMENT_QA2,
   errorMessage: "",
 };
 

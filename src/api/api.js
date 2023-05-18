@@ -5,13 +5,13 @@ import Logger from "../models/Logger";
 
 const API_ENVIRONMENT_PRODUCTION = "Production";
 const API_ENVIRONMENT_INTEGRATION = "Integration";
-const API_ENVIRONMENT_STAGING = "Staging";
-const API_ENVIRONMENT_DEVELOPMENT = "Development";
+const API_ENVIRONMENT_QA2 = "QA2";
+const API_ENVIRONMENT_QA1 = "QA1";
 
-const BASE_URL_PRODUCTION = "https://api.tidepool.org";
-const BASE_URL_INTEGRATION = "https://int-api.tidepool.org";
-const BASE_URL_STAGING = "https://stg-api.tidepool.org";
-const BASE_URL_DEVELOPMENT = "https://dev-api.tidepool.org";
+const BASE_URL_PRODUCTION = "https://app.tidepool.org";
+const BASE_URL_INTEGRATION = "https://int.tidepool.org";
+const BASE_URL_QA2 = "https://qa2.development.tidepool.org";
+const BASE_URL_QA1 = "https://qa1.development.tidepool.org";
 
 let tidepoolApi = {};
 
@@ -27,11 +27,11 @@ const switchApiEnvironment = apiEnvironment => {
     case API_ENVIRONMENT_INTEGRATION:
       baseUrl = BASE_URL_INTEGRATION;
       break;
-    case API_ENVIRONMENT_STAGING:
-      baseUrl = BASE_URL_STAGING;
+    case API_ENVIRONMENT_QA2:
+      baseUrl = BASE_URL_QA2;
       break;
-    case API_ENVIRONMENT_DEVELOPMENT:
-      baseUrl = BASE_URL_DEVELOPMENT;
+    case API_ENVIRONMENT_QA1:
+      baseUrl = BASE_URL_QA1;
       break;
     default:
       baseUrl = BASE_URL_PRODUCTION;
@@ -56,7 +56,7 @@ export {
   api as default,
   API_ENVIRONMENT_PRODUCTION,
   API_ENVIRONMENT_INTEGRATION,
-  API_ENVIRONMENT_STAGING,
-  API_ENVIRONMENT_DEVELOPMENT,
+  API_ENVIRONMENT_QA2,
+  API_ENVIRONMENT_QA1,
   switchApiEnvironment,
 };

@@ -4,7 +4,7 @@ import { storiesOf } from "@storybook/react-native";
 
 import StoryContainerScreen from "../utils/StoryContainerScreen";
 import DebugSettingsScreen from "../../src/screens/DebugSettingsScreen";
-import { API_ENVIRONMENT_STAGING } from "../../src/api";
+import { API_ENVIRONMENT_QA2 } from "../../src/api";
 import { API_CACHE_EXPIRATION_180_DAYS } from "../../src/api/TidepoolApiCacheControl";
 import { GRAPH_RENDERER_THREE_JS } from "../../src/components/Graph/helpers";
 import Logger from "../../src/models/Logger";
@@ -17,7 +17,7 @@ const props = {
   firstTimeTipsResetTips: () => {},
   logLevelSetAndSaveAsync: () => {},
 
-  selectedApiEnvironment: API_ENVIRONMENT_STAGING,
+  selectedApiEnvironment: API_ENVIRONMENT_QA2,
   selectedApiCacheExpiration: API_CACHE_EXPIRATION_180_DAYS,
   selectedGraphRenderer: GRAPH_RENDERER_THREE_JS,
   selectedLogLevel: Logger.LOG_LEVEL_DEFAULT,

@@ -1,4 +1,5 @@
-import { THREE } from "expo-three";
+import { MeshBasicMaterial, LineDashedMaterial, Shape, ShapeGeometry, Mesh, Line, Geometry, Path } from "three";
+import { useFrame, useThree } from "@react-three/fiber/native";
 
 import GraphRenderLayerGl from "./GraphRenderLayerGl";
 import { convertHexColorStringToInt } from "../helpers";
@@ -11,13 +12,13 @@ class GraphBasalGl extends GraphRenderLayerGl {
     // FIXME: It seems that the LineDashedMaterial will clip dashes at the end, rather than hiding
     // them, if they don't fit. Ideally we want hide behavior, not clip (similar to the dashed
     // UIBezierPath in the old iOS Tidepool Mobile app).
-    this.suppressedLineMaterial = new THREE.LineDashedMaterial({
+    this.suppressedLineMaterial = new LineDashedMaterial({
       color: convertHexColorStringToInt(this.theme.graphBasalLineColor),
       linewidth: 2 * this.pixelRatio,
       dashSize: 4 * this.pixelRatio,
       gapSize: 2 * this.pixelRatio,
     });
-    this.basalRectMaterial = new THREE.MeshBasicMaterial({
+    this.basalRectMaterial = new MeshBasicMaterial({
       color: convertHexColorStringToInt(this.theme.graphBasalRectColor),
     });
   }
@@ -34,8 +35,8 @@ class GraphBasalGl extends GraphRenderLayerGl {
       shape.lineTo(width * this.pixelRatio, height * this.pixelRatio);
       shape.lineTo(0, height * this.pixelRatio);
       shape.moveTo(0, 0);
-      const geometry = new THREE.ShapeGeometry(shape);
-      const object = new THREE.Mesh(geometry, this.basalRectMaterial);
+      const geometry = new ShapeGeometry(shape);
+      const object = new Mesh(geometry, this.basalRectMaterial);
       this.addAutoScrollableObjectToScene(this.scene, object, {
         x: startTimeOffset,
         y: this.yAxisBottomOfBasal,
@@ -65,9 +66,9 @@ class GraphBasalGl extends GraphRenderLayerGl {
   renderSuppressedLine() {
     if (this.suppressedLinePath) {
       const points = this.suppressedLinePath.getPoints();
-      const geometry = new THREE.Geometry().setFromPoints(points);
+      const geometry = new Geometry().setFromPoints(points);
       const { contentOffsetX, pixelsPerSecond } = this;
-      const line = new THREE.Line(geometry, this.suppressedLineMaterial);
+      const line = new Line(geometry, this.suppressedLineMaterial);
       line.computeLineDistances();
       this.updateSuppressedLineMaterial();
       this.addAutoScrollableObjectToScene(this.scene, line, {
@@ -101,7 +102,7 @@ class GraphBasalGl extends GraphRenderLayerGl {
       };
       if (!this.suppressedLinePath) {
         // Start a new line
-        this.suppressedLinePath = new THREE.Path();
+        this.suppressedLinePath = new Path();
         this.suppressedLinePath.moveTo(
           suppressedStartPoint.x * this.pixelRatio,
           suppressedStartPoint.y * this.pixelRatio
@@ -234,7 +235,31 @@ class GraphBasalGl extends GraphRenderLayerGl {
         finish: true,
       });
     }
-  }
+    
 }
 
-export default GraphBasalGl;
+function GraphBasalGlWrapper(props) {
+  const { scene } = useThree();
+  const graphBasalGlRef = React.useRef();
+  const graphBasalGl = graphBasalGlRef.current;
+
+  React.useEffect(() => {
+    graphBasalGlRef.current = new GraphBasalGl(props);
+  }, []);
+
+  useFrame(() => {
+    if (graphBasalGl) {
+      graphBasalGl.renderSelf({
+        scene,
+        graphScalableLayoutInfo: props.graphScalableLayoutInfo,
+        contentOffsetX: props.contentOffsetX,
+        basalData: props.basalData,
+        maxBasalValue: props.maxBasalValue,
+      });
+    }
+  });
+
+  return null;
+}
+
+export default GraphBasalGlWrapper;

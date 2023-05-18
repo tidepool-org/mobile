@@ -9,13 +9,13 @@ import DebugSettingsApiEnvironmentListItem from "./DebugSettingsApiEnvironmentLi
 import {
   API_ENVIRONMENT_PRODUCTION,
   API_ENVIRONMENT_INTEGRATION,
-  API_ENVIRONMENT_STAGING,
-  API_ENVIRONMENT_DEVELOPMENT,
+  API_ENVIRONMENT_QA2,
+  API_ENVIRONMENT_QA1,
 } from "../api";
 
 const apiEnvironments = [
-  { name: API_ENVIRONMENT_DEVELOPMENT },
-  { name: API_ENVIRONMENT_STAGING },
+  { name: API_ENVIRONMENT_QA1 },
+  { name: API_ENVIRONMENT_QA2 },
   { name: API_ENVIRONMENT_INTEGRATION },
   { name: API_ENVIRONMENT_PRODUCTION },
 ];
