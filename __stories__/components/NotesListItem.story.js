@@ -1,7 +1,6 @@
 /* eslint import/no-extraneous-dependencies: 0 */
 import React from "react";
 import glamorous from "glamorous-native";
-import { storiesOf } from "@storybook/react-native";
 import faker from "faker";
 import startOfToday from "date-fns/start_of_today";
 import startOfYesterday from "date-fns/start_of_yesterday";
@@ -122,15 +121,23 @@ const props = {
   graphRenderer,
 };
 
-storiesOf("NotesListItem", module).add("default", () => (
+export default {
+  title: 'NotesListItem',
+};
+
+export const Default = () => (
   <StoryContainerComponent>
     <glamorous.ScrollView>
       <NotesListItem {...props} note={note} />
     </glamorous.ScrollView>
   </StoryContainerComponent>
-));
+);
 
-storiesOf("NotesListItem", module).add("initially expanded", () => {
+Default.story = {
+  name: 'default',
+};
+
+export const InitiallyExpanded = () => {
   const noteInitiallyExpanded = { ...note, initiallyExpanded: true };
   return (
     <StoryContainerComponent>
@@ -139,20 +146,32 @@ storiesOf("NotesListItem", module).add("initially expanded", () => {
       </glamorous.ScrollView>
     </StoryContainerComponent>
   );
-});
+};
 
-storiesOf("NotesListItem", module).add("today", () => (
+InitiallyExpanded.story = {
+  name: 'initially expanded',
+};
+
+export const Today = () => (
   <StoryContainerComponent>
     <glamorous.ScrollView>
       <NotesListItem {...props} note={noteToday} />
     </glamorous.ScrollView>
   </StoryContainerComponent>
-));
+);
 
-storiesOf("NotesListItem", module).add("yesterday", () => (
+Today.story = {
+  name: 'today',
+};
+
+export const Yesterday = () => (
   <StoryContainerComponent>
     <glamorous.ScrollView>
       <NotesListItem {...props} note={noteYesterday} />
     </glamorous.ScrollView>
   </StoryContainerComponent>
-));
+);
+
+Yesterday.story = {
+  name: 'yesterday',
+};

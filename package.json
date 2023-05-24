@@ -11,7 +11,9 @@
     "prestorybook": "cp storybook-entry.js index.js && rnstl",
     "test": "node node_modules/jest/bin/jest.js",
     "format": "prettier-eslint \"src/**/*.js\"",
-    "postinstall": "patch-package"
+    "postinstall": "patch-package",
+    "storybook-generate": "sb-rn-get-stories",
+    "storybook-watch": "sb-rn-watcher"
   },
   "dependencies": {
     "@react-three/fiber": "^8.13.0",
@@ -33,10 +35,12 @@
     "glamorous-native": "1.4.2",
     "prop-types": "15.7.2",
     "react": "18.0.0",
+    "react-dom": "^18.2.0",
     "react-native": "0.69.9",
     "react-native-device-info": "2.3.1",
     "react-native-local-mongodb": "2.2.9",
     "react-native-walkthrough-tooltip": "0.5.3",
+    "react-native-web": "~0.18.7",
     "react-navigation": "2.0.4",
     "react-navigation-redux-helpers": "1.1.2",
     "react-redux": "6.0.1",
@@ -53,11 +57,16 @@
     "react-native-web": "~0.18.7"
   },
   "devDependencies": {
-    "@storybook/addon-knobs": "5.1.11",
-    "@storybook/addon-ondevice-knobs": "5.1.11",
-    "@storybook/addon-storyshots": "5.1.11",
-    "@storybook/addons": "5.1.11",
-    "@storybook/react-native": "5.1.11",
+    "@babel/core": "^7.12.9",
+    "@react-native-async-storage/async-storage": "^1.18.1",
+    "@storybook/addon-actions": "6.5.0",
+    "@storybook/addon-controls": "6.5.0",
+    "@storybook/addon-ondevice-actions": "^6.5.3",
+    "@storybook/addon-storyshots": "6.5.0",
+    "@storybook/addons": "6.5.0",
+    "@storybook/cli": "^7.0.13",
+    "@storybook/core-common": "6.5.0",
+    "@storybook/react-native": "6.5.0",
     "babel-core": "6.26.3",
     "babel-eslint": "10.0.2",
     "babel-preset-expo": "~9.2.0",
@@ -83,9 +92,9 @@
     "react-dom": "18.0.0",
     "react-native-debugger-open": "0.3.19",
     "react-native-gesture-handler": "~2.5.0",
+    "react-native-safe-area-context": "^4.5.3",
     "react-native-storybook-loader": "1.8.0",
-    "react-test-renderer": "16.8.3",
-    "@babel/core": "^7.12.9"
+    "react-test-renderer": "16.8.3"
   },
   "config": {
     "react-native-storybook-loader": {

@@ -1,11 +1,9 @@
 /* eslint import/no-extraneous-dependencies: 0 */
-import React from "react";
-import { Linking } from "react-native";
-import { storiesOf } from "@storybook/react-native";
-import { withKnobs, select } from "@storybook/addon-knobs";
+import React from 'react';
+import { Linking } from 'react-native';
 
-import StoryContainerComponent from "../utils/StoryContainerComponent";
-import Graph from "../../src/components/Graph/Graph";
+import StoryContainerComponent from '../utils/StoryContainerComponent';
+import Graph from '../../src/components/Graph/Graph';
 import {
   makeYAxisLabelValues,
   makeYAxisBGBoundaryValues,
@@ -13,16 +11,17 @@ import {
   DEFAULT_HIGH_BG_BOUNDARY_VALUE,
   GRAPH_RENDERER_SVG,
   GRAPH_RENDERER_THREE_JS,
-} from "../../src/components/Graph/helpers";
-import Urls from "../../src/constants/Urls";
-import GraphData from "../../src/models/GraphData";
-import data1 from "../data/data-smbg-bolus-cbg-wizard-basal/start-2015-07-27T00-00-00.000Z-end-2015-07-28T16-00-00.000Z.json";
-import data2 from "../data/data-smbg-bolus-cbg-wizard-basal/start-2015-08-11T20-00-00.000Z-end-2015-08-13T12-00-00.000Z.json";
+} from '../../src/components/Graph/helpers';
+import Urls from '../../src/constants/Urls';
+import GraphData from '../../src/models/GraphData';
+import data1 from '../data/data-smbg-bolus-cbg-wizard-basal/start-2015-07-27T00-00-00.000Z-end-2015-07-28T16-00-00.000Z.json';
+import data2 from '../data/data-smbg-bolus-cbg-wizard-basal/start-2015-08-11T20-00-00.000Z-end-2015-08-13T12-00-00.000Z.json';
 
 const lowBGBoundary = 90;
 const highBGBoundary = 150;
+const isLoading = false;
 
-const eventTime1 = new Date("Mon Jul 27 2015 22:29:00 GMT-0500 (CDT)");
+const eventTime1 = new Date('Mon Jul 27 2015 22:29:00 GMT-0500 (CDT)');
 const eventTime1Seconds = eventTime1.getTime() / 1000;
 const graphData1 = new GraphData();
 graphData1.addResponseData(data1);
@@ -33,7 +32,7 @@ graphData1.process({
   highBGBoundary,
 });
 
-const eventTime2 = new Date("Wed Aug 12 2015 17:40:00 GMT-0500 (CDT)");
+const eventTime2 = new Date('Wed Aug 12 2015 17:40:00 GMT-0500 (CDT)');
 const eventTime2Seconds = eventTime2.getTime() / 1000;
 const graphData2 = new GraphData();
 graphData2.addResponseData(data2);
@@ -44,7 +43,6 @@ graphData2.process({
   highBGBoundary,
 });
 
-const isLoading = false;
 const yAxisLabelValues = makeYAxisLabelValues({
   lowBGBoundary: DEFAULT_LOW_BG_BOUNDARY_VALUE,
   highBGBoundary: DEFAULT_HIGH_BG_BOUNDARY_VALUE,
@@ -59,12 +57,6 @@ const navigateHowToUpload = () => {
 const onZoomStart = () => {};
 const onZoomEnd = () => {};
 
-const stories = storiesOf("Graph", module);
-stories.addDecorator(withKnobs);
-const rendererLabel = "Renderer";
-const rendererOptions = [GRAPH_RENDERER_THREE_JS, GRAPH_RENDERER_SVG];
-const defaultRenderer = GRAPH_RENDERER_THREE_JS;
-
 const props = {
   isLoading,
   yAxisLabelValues,
@@ -74,219 +66,206 @@ const props = {
   onZoomEnd,
 };
 
-const selectGraphRenderer = () => {
-  const graphRenderer = select(rendererLabel, rendererOptions, defaultRenderer);
+const defaultRenderer = GRAPH_RENDERER_THREE_JS;
 
-  return graphRenderer;
+const Template = (args) => (
+  <StoryContainerComponent behaviors={[]}>
+    <Graph {...args} />
+  </StoryContainerComponent>
+);
+
+export const OfflineNotAvailableOffline = Template.bind({});
+OfflineNotAvailableOffline.args = {
+  ...props,
+  isOffline: true,
+  isAvailableOffline: false,
+  graphRenderer: defaultRenderer,
 };
 
-stories.add("offline, not available offline", () => (
-  <StoryContainerComponent behaviors={[]}>
-    <Graph
-      {...props}
-      isOffline
-      isAvailableOffline={false}
-      graphRenderer={selectGraphRenderer()}
-    />
-  </StoryContainerComponent>
-));
+export const OfflineAvailableOffline = Template.bind({});
+OfflineAvailableOffline.args = {
+  ...props,
+  isOffline: true,
+  isAvailableOffline: true,
+  graphRenderer: defaultRenderer,
+};
 
-stories.add("offline, available offline", () => (
-  <StoryContainerComponent behaviors={[]}>
-    <Graph
-      {...props}
-      isOffline
-      isAvailableOffline
-      graphRenderer={selectGraphRenderer()}
-    />
-  </StoryContainerComponent>
-));
+export const IsLoadingDefaultScale = Template.bind({});
+IsLoadingDefaultScale.args = {
+  ...props,
+  isLoading: true,
+  graphRenderer: defaultRenderer,
+};
 
-stories.add("isLoading, default scale", () => (
-  <StoryContainerComponent behaviors={[]}>
-    <Graph {...props} isLoading graphRenderer={selectGraphRenderer()} />
-  </StoryContainerComponent>
-));
+export const NoDataThreeYAxisLabelsDefaultScale = Template.bind({});
+NoDataThreeYAxisLabelsDefaultScale.args = {
+  ...props,
+  graphRenderer: defaultRenderer,
+};
 
-stories.add("no data, three y-axis labels, default scale", () => (
-  <StoryContainerComponent behaviors={[]}>
-    <Graph {...props} graphRenderer={selectGraphRenderer()} />
-  </StoryContainerComponent>
-));
+export const NoDataFourYAxisLabelsDefaultScale = Template.bind({});
+NoDataFourYAxisLabelsDefaultScale.args = {
+  ...props,
+  yAxisLabelValues: makeYAxisLabelValues({
+    lowBGBoundary,
+    highBGBoundary,
+  }),
+  yAxisBGBoundaryValues: makeYAxisBGBoundaryValues({
+    lowBGBoundary,
+    highBGBoundary,
+  }),
+  graphRenderer: defaultRenderer,
+};
 
-stories.add("no data, four y-axis labels, default scale", () => (
-  <StoryContainerComponent behaviors={[]}>
-    <Graph
-      {...props}
-      yAxisLabelValues={makeYAxisLabelValues({
-        lowBGBoundary,
-        highBGBoundary,
-      })}
-      yAxisBGBoundaryValues={makeYAxisBGBoundaryValues({
-        lowBGBoundary,
-        highBGBoundary,
-      })}
-      graphRenderer={selectGraphRenderer()}
-    />
-  </StoryContainerComponent>
-));
+export const NoDataFourYAxisLabels10Scale = Template.bind({});
+NoDataFourYAxisLabels10Scale.args = {
+  ...props,
+  yAxisLabelValues: makeYAxisLabelValues({
+    lowBGBoundary,
+    highBGBoundary,
+  }),
+  yAxisBGBoundaryValues: makeYAxisBGBoundaryValues({
+    lowBGBoundary,
+    highBGBoundary,
+  }),
+  scale: 1.0,
+  graphRenderer: defaultRenderer,
+};
 
-stories.add("no data, four y-axis labels, 1.0 scale", () => (
-  <StoryContainerComponent behaviors={[]}>
-    <Graph
-      {...props}
-      yAxisLabelValues={makeYAxisLabelValues({
-        lowBGBoundary,
-        highBGBoundary,
-      })}
-      yAxisBGBoundaryValues={makeYAxisBGBoundaryValues({
-        lowBGBoundary,
-        highBGBoundary,
-      })}
-      scale={1.0}
-      graphRenderer={selectGraphRenderer()}
-    />
-  </StoryContainerComponent>
-));
+export const NoDataFourYAxisLabelsMaxScale = Template.bind({});
+NoDataFourYAxisLabelsMaxScale.args = {
+  ...props,
+  yAxisLabelValues: makeYAxisLabelValues({
+    lowBGBoundary,
+    highBGBoundary,
+  }),
+  yAxisBGBoundaryValues: makeYAxisBGBoundaryValues({
+    lowBGBoundary,
+    highBGBoundary,
+  }),
+  scale: 100.0,
+  graphRenderer: defaultRenderer,
+};
 
-stories.add("no data, four y-axis labels, max scale", () => (
-  <StoryContainerComponent behaviors={[]}>
-    <Graph
-      {...props}
-      yAxisLabelValues={makeYAxisLabelValues({
-        lowBGBoundary,
-        highBGBoundary,
-      })}
-      yAxisBGBoundaryValues={makeYAxisBGBoundaryValues({
-        lowBGBoundary,
-        highBGBoundary,
-      })}
-      scale={100.0}
-      graphRenderer={selectGraphRenderer()}
-    />
-  </StoryContainerComponent>
-));
 
-stories.add("data 1, three y-axis labels, default scale", () => (
-  <StoryContainerComponent behaviors={[]}>
-    <Graph
-      {...props}
-      eventTime={eventTime1}
-      cbgData={graphData1.cbgData}
-      smbgData={graphData1.smbgData}
-      basalData={graphData1.basalData}
-      maxBasalValue={graphData1.maxBasalValue}
-      bolusData={graphData1.bolusData}
-      maxBolusValue={graphData1.maxBolusValue}
-      minBolusScaleValue={graphData1.minBolusScaleValue}
-      wizardData={graphData1.wizardData}
-      graphRenderer={selectGraphRenderer()}
-    />
-  </StoryContainerComponent>
-));
+export const Data1ThreeYAxisLabelsDefaultScale = Template.bind({});
+Data1ThreeYAxisLabelsDefaultScale.args = {
+  ...props,
+  eventTime: eventTime1,
+  cbgData: graphData1.cbgData,
+  smbgData: graphData1.smbgData,
+  basalData: graphData1.basalData,
+  maxBasalValue: graphData1.maxBasalValue,
+  bolusData: graphData1.bolusData,
+  maxBolusValue: graphData1.maxBolusValue,
+  minBolusScaleValue: graphData1.minBolusScaleValue,
+  wizardData: graphData1.wizardData,
+  graphRenderer: defaultRenderer,
+};
 
-stories.add("data 1, four y-axis labels, default scale", () => (
-  <StoryContainerComponent behaviors={[]}>
-    <Graph
-      {...props}
-      yAxisLabelValues={makeYAxisLabelValues({
-        lowBGBoundary,
-        highBGBoundary,
-      })}
-      yAxisBGBoundaryValues={makeYAxisBGBoundaryValues({
-        lowBGBoundary,
-        highBGBoundary,
-      })}
-      eventTime={eventTime1}
-      cbgData={graphData1.cbgData}
-      smbgData={graphData1.smbgData}
-      basalData={graphData1.basalData}
-      maxBasalValue={graphData1.maxBasalValue}
-      bolusData={graphData1.bolusData}
-      maxBolusValue={graphData1.maxBolusValue}
-      minBolusScaleValue={graphData1.minBolusScaleValue}
-      wizardData={graphData1.wizardData}
-      graphRenderer={selectGraphRenderer()}
-    />
-  </StoryContainerComponent>
-));
+export const Data1FourYAxisLabelsDefaultScale = Template.bind({});
+Data1FourYAxisLabelsDefaultScale.args = {
+  ...props,
+  yAxisLabelValues: makeYAxisLabelValues({
+    lowBGBoundary,
+    highBGBoundary,
+  }),
+  yAxisBGBoundaryValues: makeYAxisBGBoundaryValues({
+    lowBGBoundary,
+    highBGBoundary,
+  }),
+  eventTime: eventTime1,
+  cbgData: graphData1.cbgData,
+  smbgData: graphData1.smbgData,
+  basalData: graphData1.basalData,
+  maxBasalValue: graphData1.maxBasalValue,
+  bolusData: graphData1.bolusData,
+  maxBolusValue: graphData1.maxBolusValue,
+  minBolusScaleValue: graphData1.minBolusScaleValue,
+  wizardData: graphData1.wizardData,
+  graphRenderer: defaultRenderer,
+};
 
-stories.add("data 1, four y-axis labels, 1.0 scale", () => (
-  <StoryContainerComponent behaviors={[]}>
-    <Graph
-      {...props}
-      yAxisLabelValues={makeYAxisLabelValues({
-        lowBGBoundary,
-        highBGBoundary,
-      })}
-      yAxisBGBoundaryValues={makeYAxisBGBoundaryValues({
-        lowBGBoundary,
-        highBGBoundary,
-      })}
-      eventTime={eventTime1}
-      cbgData={graphData1.cbgData}
-      smbgData={graphData1.smbgData}
-      basalData={graphData1.basalData}
-      maxBasalValue={graphData1.maxBasalValue}
-      bolusData={graphData1.bolusData}
-      maxBolusValue={graphData1.maxBolusValue}
-      minBolusScaleValue={graphData1.minBolusScaleValue}
-      wizardData={graphData1.wizardData}
-      scale={1.0}
-      graphRenderer={selectGraphRenderer()}
-    />
-  </StoryContainerComponent>
-));
+export const Data1FourYAxisLabels10Scale = Template.bind({});
+Data1FourYAxisLabels10Scale.args = {
+  ...props,
+  yAxisLabelValues: makeYAxisLabelValues({
+    lowBGBoundary,
+    highBGBoundary,
+  }),
+  yAxisBGBoundaryValues: makeYAxisBGBoundaryValues({
+    lowBGBoundary,
+    highBGBoundary,
+  }),
+  eventTime: eventTime1,
+  cbgData: graphData1.cbgData,
+  smbgData: graphData1.smbgData,
+  basalData: graphData1.basalData,
+  maxBasalValue: graphData1.maxBasalValue,
+  bolusData: graphData1.bolusData,
+  maxBolusValue: graphData1.maxBolusValue,
+  minBolusScaleValue: graphData1.minBolusScaleValue,
+  wizardData: graphData1.wizardData,
+  scale: 1.0,
+  graphRenderer: defaultRenderer,
+};
 
-stories.add("data 1, four y-axis labels, max scale", () => (
-  <StoryContainerComponent behaviors={[]}>
-    <Graph
-      {...props}
-      yAxisLabelValues={makeYAxisLabelValues({
-        lowBGBoundary,
-        highBGBoundary,
-      })}
-      yAxisBGBoundaryValues={makeYAxisBGBoundaryValues({
-        lowBGBoundary,
-        highBGBoundary,
-      })}
-      eventTime={eventTime1}
-      cbgData={graphData1.cbgData}
-      smbgData={graphData1.smbgData}
-      basalData={graphData1.basalData}
-      maxBasalValue={graphData1.maxBasalValue}
-      bolusData={graphData1.bolusData}
-      maxBolusValue={graphData1.maxBolusValue}
-      minBolusScaleValue={graphData1.minBolusScaleValue}
-      wizardData={graphData1.wizardData}
-      scale={100.0}
-      graphRenderer={selectGraphRenderer()}
-    />
-  </StoryContainerComponent>
-));
+export const Data1FourYAxisLabelsMaxScale = Template.bind({});
+Data1FourYAxisLabelsMaxScale.args = {
+  ...props,
+  yAxisLabelValues: makeYAxisLabelValues({
+    lowBGBoundary,
+    highBGBoundary,
+  }),
+  yAxisBGBoundaryValues: makeYAxisBGBoundaryValues({
+    lowBGBoundary,
+    highBGBoundary,
+  }),
+  eventTime: eventTime1,
+  cbgData: graphData1.cbgData,
+  smbgData: graphData1.smbgData,
+  basalData: graphData1.basalData,
+  maxBasalValue: graphData1.maxBasalValue,
+  bolusData: graphData1.bolusData,
+  maxBolusValue: graphData1.maxBolusValue,
+  minBolusScaleValue: graphData1.minBolusScaleValue,
+  wizardData: graphData1.wizardData,
+  scale: 100.0,
+  graphRenderer: defaultRenderer,
+};
 
-stories.add("data 2, four y-axis labels, default scale", () => (
-  <StoryContainerComponent behaviors={[]}>
-    <Graph
-      {...props}
-      yAxisLabelValues={makeYAxisLabelValues({
-        lowBGBoundary,
-        highBGBoundary,
-      })}
-      yAxisBGBoundaryValues={makeYAxisBGBoundaryValues({
-        lowBGBoundary,
-        highBGBoundary,
-      })}
-      eventTime={eventTime2}
-      cbgData={graphData2.cbgData}
-      smbgData={graphData2.smbgData}
-      basalData={graphData2.basalData}
-      maxBasalValue={graphData2.maxBasalValue}
-      bolusData={graphData2.bolusData}
-      maxBolusValue={graphData2.maxBolusValue}
-      minBolusScaleValue={graphData2.minBolusScaleValue}
-      wizardData={graphData2.wizardData}
-      graphRenderer={selectGraphRenderer()}
-    />
-  </StoryContainerComponent>
-));
+export const Data2FourYAxisLabelsDefaultScale = Template.bind({});
+Data2FourYAxisLabelsDefaultScale.args = {
+  ...props,
+  yAxisLabelValues: makeYAxisLabelValues({
+    lowBGBoundary,
+    highBGBoundary,
+  }),
+  yAxisBGBoundaryValues: makeYAxisBGBoundaryValues({
+    lowBGBoundary,
+    highBGBoundary,
+  }),
+  eventTime: eventTime2,
+  cbgData: graphData2.cbgData,
+  smbgData: graphData2.smbgData,
+  basalData: graphData2.basalData,
+  maxBasalValue: graphData2.maxBasalValue,
+  bolusData: graphData2.bolusData,
+  maxBolusValue: graphData2.maxBolusValue,
+  minBolusScaleValue: graphData2.minBolusScaleValue,
+  wizardData: graphData2.wizardData,
+  graphRenderer: defaultRenderer,
+};
+
+export default {
+  title: 'Graph',
+  component: Graph,
+  argTypes: {
+    graphRenderer: {
+      control: {
+        type: 'select',
+        options: [GRAPH_RENDERER_THREE_JS, GRAPH_RENDERER_SVG],
+      },
+    },
+  },
+};

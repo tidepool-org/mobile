@@ -1,6 +1,5 @@
 /* eslint import/no-extraneous-dependencies: 0 */
 import React from "react";
-import { storiesOf } from "@storybook/react-native";
 
 import StoryContainerScreen from "../utils/StoryContainerScreen";
 import SignInScreen from "../../src/screens/SignInScreen";
@@ -18,20 +17,36 @@ const props = {
   errorMessage: "",
 };
 
-storiesOf("SignInScreen", module).add("default", () => (
+export default {
+  title: 'SignInScreen',
+};
+
+export const Default = () => (
   <StoryContainerScreen>
     <SignInScreen {...props} />
   </StoryContainerScreen>
-));
+);
 
-storiesOf("SignInScreen", module).add("Sign in error", () => (
+Default.story = {
+  name: 'default',
+};
+
+export const SignInError = () => (
   <StoryContainerScreen>
     <SignInScreen {...props} errorMessage="Wrong email or password!" />
   </StoryContainerScreen>
-));
+);
 
-storiesOf("SignInScreen", module).add("Signing in", () => (
+SignInError.story = {
+  name: 'Sign in error',
+};
+
+export const SigningIn = () => (
   <StoryContainerScreen>
     <SignInScreen {...props} signingIn />
   </StoryContainerScreen>
-));
+);
+
+SigningIn.story = {
+  name: 'Signing in',
+};

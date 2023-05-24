@@ -1,6 +1,5 @@
 /* eslint import/no-extraneous-dependencies: 0 */
 import React from "react";
-import { storiesOf } from "@storybook/react-native";
 import glamorous from "glamorous-native";
 
 import StoryContainerComponent from "../utils/StoryContainerComponent";
@@ -8,15 +7,23 @@ import SearchBar from "../../src/components/SearchBar";
 
 const onChangeText = () => {};
 
-storiesOf("SearchBar", module).add("default", () => (
+export default {
+  title: 'SearchBar',
+};
+
+export const Default = () => (
   <StoryContainerComponent>
     <glamorous.View width={270}>
       <SearchBar placeholderText="Search" onChangeText={onChangeText} />
     </glamorous.View>
   </StoryContainerComponent>
-));
+);
 
-storiesOf("SearchBar", module).add("initial text", () => (
+Default.story = {
+  name: 'default',
+};
+
+export const InitialText = () => (
   <StoryContainerComponent>
     <glamorous.View width={270}>
       <SearchBar
@@ -26,4 +33,8 @@ storiesOf("SearchBar", module).add("initial text", () => (
       />
     </glamorous.View>
   </StoryContainerComponent>
-));
+);
+
+InitialText.story = {
+  name: 'initial text',
+};

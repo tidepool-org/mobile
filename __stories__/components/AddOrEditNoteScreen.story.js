@@ -1,31 +1,30 @@
 /* eslint import/no-extraneous-dependencies: 0 */
-import React from "react";
-import { storiesOf } from "@storybook/react-native";
-import faker from "faker";
+import React from 'react';
+import faker from 'faker';
 
-import StoryContainerScreen from "../utils/StoryContainerScreen";
-import AddOrEditNoteScreen from "../../src/screens/AddOrEditNoteScreen";
-import HashtagCollection from "../../src/models/HashtagCollection";
+import StoryContainerScreen from '../utils/StoryContainerScreen';
+import AddOrEditNoteScreen from '../../src/screens/AddOrEditNoteScreen';
+import HashtagCollection from '../../src/models/HashtagCollection';
 import {
   DEFAULT_LOW_BG_BOUNDARY_VALUE,
   DEFAULT_HIGH_BG_BOUNDARY_VALUE,
-} from "../../src/components/Graph/helpers";
+} from '../../src/components/Graph/helpers';
 
 faker.seed(123);
 
 const currentProfile = {
-  userId: "1",
-  username: "email@gmail.com",
-  fullName: "Jill Jellyfish",
+  userId: '1',
+  username: 'email@gmail.com',
+  fullName: 'Jill Jellyfish',
   lowBGBoundary: DEFAULT_LOW_BG_BOUNDARY_VALUE,
   highBGBoundary: DEFAULT_HIGH_BG_BOUNDARY_VALUE,
 };
-const timestampAddNote = new Date("Mon Jul 27 2015 22:29:00 GMT-0500 (CDT)");
+const timestampAddNote = new Date('Mon Jul 27 2015 22:29:00 GMT-0500 (CDT)');
 const note = {
-  id: "1",
-  timestamp: new Date("Mon Jul 27 2015 22:29:00 GMT-0500 (CDT)"),
+  id: '1',
+  timestamp: new Date('Mon Jul 27 2015 22:29:00 GMT-0500 (CDT)'),
   messageText: `#hashtag1 This should not show up in comments. ${faker.fake(
-    "{{lorem.paragraph}}"
+    '{{lorem.paragraph}}'
   )}`,
 };
 const hashtagCollection = new HashtagCollection();

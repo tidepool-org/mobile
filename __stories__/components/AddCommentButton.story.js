@@ -1,14 +1,21 @@
 /* eslint import/no-extraneous-dependencies: 0 */
-import React from "react";
-import { storiesOf } from "@storybook/react-native";
+import React from 'react';
 
-import StoryContainerComponent from "../utils/StoryContainerComponent";
-import AddCommentButton from "../../src/components/AddCommentButton";
+import StoryContainerComponent from '../utils/StoryContainerComponent';
+import AddCommentButton from '../../src/components/AddCommentButton';
 
 const onPress = () => {};
 
-storiesOf("AddCommentButton", module).add("default", () => (
+export default {
+  title: 'AddCommentButton',
+};
+
+export const Default = () => (
   <StoryContainerComponent>
     <AddCommentButton onPress={onPress} />
   </StoryContainerComponent>
-));
+);
+
+Default.story = {
+  name: 'default',
+};

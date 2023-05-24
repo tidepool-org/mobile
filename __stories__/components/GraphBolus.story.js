@@ -1,10 +1,8 @@
 /* eslint import/no-extraneous-dependencies: 0 */
 import React from "react";
 import { Linking } from "react-native";
-import { storiesOf } from "@storybook/react-native";
-import { withKnobs, select } from "@storybook/addon-knobs";
 
-import StoryContainerComponent from "../utils/StoryContainerComponent";
+import StoryContainerComponent from '../utils/StoryContainerComponent';
 import Graph from "../../src/components/Graph/Graph";
 import {
   makeYAxisLabelValues,
@@ -26,6 +24,7 @@ import data6 from "../data/data-smbg-bolus-cbg-wizard-basal/bolus/2018-04-26 ext
 const lowBGBoundary = 90;
 const highBGBoundary = 150;
 const isLoading = false;
+
 const yAxisLabelValues = makeYAxisLabelValues({
   lowBGBoundary: DEFAULT_LOW_BG_BOUNDARY_VALUE,
   highBGBoundary: DEFAULT_HIGH_BG_BOUNDARY_VALUE,
@@ -40,28 +39,16 @@ const navigateHowToUpload = () => {
 const onZoomStart = () => {};
 const onZoomEnd = () => {};
 
-const stories = storiesOf("Graph (Bolus)", module);
-stories.addDecorator(withKnobs);
-const rendererLabel = "Renderer";
-const rendererOptions = [GRAPH_RENDERER_THREE_JS, GRAPH_RENDERER_SVG];
 const defaultRenderer = GRAPH_RENDERER_THREE_JS;
 
-const props = {
-  isLoading,
-  yAxisLabelValues,
-  yAxisBGBoundaryValues,
-  navigateHowToUpload,
-  onZoomStart,
-  onZoomEnd,
-};
 
-const selectGraphRenderer = () => {
-  const graphRenderer = select(rendererLabel, rendererOptions, defaultRenderer);
+const Template = (args) => (
+  <StoryContainerComponent behaviors={[]}>
+    <Graph {...args} />
+  </StoryContainerComponent>
+);
 
-  return graphRenderer;
-};
-
-const addStory = ({ name, eventTime, graphDataResponseJson }) => {
+const processData = (eventTime, graphDataResponseJson) => {
   const eventTimeSeconds = eventTime.getTime() / 1000;
   const graphData = new GraphData();
   graphData.addResponseData(graphDataResponseJson);
@@ -72,57 +59,76 @@ const addStory = ({ name, eventTime, graphDataResponseJson }) => {
     highBGBoundary,
   });
 
-  stories.add(name, () => (
-    <StoryContainerComponent behaviors={[]}>
-      <Graph
-        {...props}
-        eventTime={eventTime}
-        cbgData={graphData.cbgData}
-        smbgData={graphData.smbgData}
-        basalData={graphData.basalData}
-        maxBasalValue={graphData.maxBasalValue}
-        bolusData={graphData.bolusData}
-        maxBolusValue={graphData.maxBolusValue}
-        minBolusScaleValue={graphData.minBolusScaleValue}
-        wizardData={graphData.wizardData}
-        graphRenderer={selectGraphRenderer()}
-      />
-    </StoryContainerComponent>
-  ));
+  return {
+    eventTime,
+    cbgData: graphData.cbgData,
+    smbgData: graphData.smbgData,
+    basalData: graphData.basalData,
+    maxBasalValue: graphData.maxBasalValue,
+    bolusData: graphData.bolusData,
+    maxBolusValue: graphData.maxBolusValue,
+    minBolusScaleValue: graphData.minBolusScaleValue,
+    wizardData: graphData.wizardData,
+  };
+}
+
+const commonProps = {
+  isLoading,
+  yAxisLabelValues,
+  yAxisBGBoundaryValues,
+  navigateHowToUpload,
+  onZoomStart,
+  onZoomEnd,
+  graphRenderer: defaultRenderer,
 };
 
-addStory({
-  name: "interrupted extended bolus",
-  eventTime: new Date("Mon Jan 20 2018 04:22:00 GMT-0500 (CDT)"),
-  graphDataResponseJson: data1,
-});
+export const InterruptedExtendedBolus = Template.bind({});
+InterruptedExtendedBolus.args = {
+  ...commonProps,
+  ...processData(new Date("Mon Jan 20 2018 04:22:00 GMT-0500 (CDT)"), data1),
+};
 
-addStory({
-  name: "extended bolus with an override",
-  eventTime: new Date("Mon Jan 25 2018 20:16:00 GMT-0500 (CDT)"),
-  graphDataResponseJson: data2,
-});
+export const ExtendedBolusOverride = Template.bind({});
+ExtendedBolusOverride.args = {
+  ...commonProps,
+  ...processData(new Date("Mon Jan 25 2018 20:16:00 GMT-0500 (CDT)"), data2),
+};
 
-addStory({
-  name: "interrupted bolus followed by a bolus underride",
-  eventTime: new Date("Mon Jan 26 2018 10:50:00 GMT-0500 (CDT)"),
-  graphDataResponseJson: data3,
-});
+export const InterruptedBolusFollowedByUnderride = Template.bind({});
+InterruptedBolusFollowedByUnderride.args = {
+  ...commonProps,
+  ...processData(new Date("Mon Jan 26 2018 10:50:00 GMT-0500 (CDT)"), data3),
+};
 
-addStory({
-  name: "underride and extended bolus",
-  eventTime: new Date("Mon Jan 26 2018 12:30:00 GMT-0500 (CDT)"),
-  graphDataResponseJson: data4,
-});
 
-addStory({
-  name: "series of extended boluses",
-  eventTime: new Date("Mon Apr 25 2018 14:48:00 GMT-0500 (CDT)"),
-  graphDataResponseJson: data5,
-});
+export const UnderrideAndExtendedBolus = Template.bind({});
+UnderrideAndExtendedBolus.args = {
+  ...commonProps,
+  ...processData(new Date("Mon Jan 26 2018 12:30:00 GMT-0500 (CDT)"), data4),
+};
 
-addStory({
-  name: "extended bolus with override",
-  eventTime: new Date("Mon Apr 26 2018 00:10:00 GMT-0500 (CDT)"),
-  graphDataResponseJson: data6,
-});
+export const SeriesOfExtendedBoluses = Template.bind({});
+SeriesOfExtendedBoluses.args = {
+  ...commonProps,
+  ...processData(new Date("Mon Apr 25 2018 14:48:00 GMT-0500 (CDT)"), data5),
+};
+
+export const ExtendedBolusWithOverride = Template.bind({});
+ExtendedBolusWithOverride.args = {
+  ...commonProps,
+  ...processData(new Date("Mon Apr 26 2018 00:10:00 GMT-0500 (CDT)"), data6),
+};
+
+
+export default {
+  title: 'Graph',
+  component: Graph,
+  argTypes: {
+    graphRenderer: {
+      control: {
+        type: 'select',
+        options: [GRAPH_RENDERER_THREE_JS, GRAPH_RENDERER_SVG],
+      },
+    },
+  },
+};

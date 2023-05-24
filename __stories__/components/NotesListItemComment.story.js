@@ -1,6 +1,5 @@
 /* eslint import/no-extraneous-dependencies: 0 */
 import React from "react";
-import { storiesOf } from "@storybook/react-native";
 import faker from "faker";
 import startOfToday from "date-fns/start_of_today";
 import setHours from "date-fns/set_hours";
@@ -29,7 +28,11 @@ const comment = {
 const onPressEditComment = () => {};
 const onPressDeleteComment = () => {};
 
-storiesOf("NotesListItemComment", module).add("default", () => (
+export default {
+  title: 'NotesListItemComment',
+};
+
+export const Default = () => (
   <StoryContainerComponent>
     <NotesListItemComment
       style={{ width: 300 }}
@@ -40,7 +43,11 @@ storiesOf("NotesListItemComment", module).add("default", () => (
       onPressDeleteComment={onPressDeleteComment}
     />
   </StoryContainerComponent>
-));
+);
+
+Default.story = {
+  name: 'default',
+};
 
 const commentWithLongUserFullName = {
   id: "1",
@@ -50,7 +57,7 @@ const commentWithLongUserFullName = {
   userFullName: "This is a really long full name for a user",
 };
 
-storiesOf("NotesListItemComment", module).add("long user full name", () => (
+export const LongUserFullName = () => (
   <StoryContainerComponent>
     <NotesListItemComment
       style={{ width: 300 }}
@@ -61,4 +68,8 @@ storiesOf("NotesListItemComment", module).add("long user full name", () => (
       onPressDeleteComment={onPressDeleteComment}
     />
   </StoryContainerComponent>
-));
+);
+
+LongUserFullName.story = {
+  name: 'long user full name',
+};

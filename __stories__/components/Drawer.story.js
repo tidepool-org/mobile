@@ -1,6 +1,5 @@
 /* eslint import/no-extraneous-dependencies: 0 */
 import React from "react";
-import { storiesOf } from "@storybook/react-native";
 
 import StoryContainerComponent from "../utils/StoryContainerComponent";
 import Drawer from "../../src/components/Drawer";
@@ -23,13 +22,21 @@ const props = {
   apiEnvironment: API_ENVIRONMENT_QA2,
 };
 
-storiesOf("Drawer", module).add("default", () => (
+export default {
+  title: 'Drawer',
+};
+
+export const Default = () => (
   <StoryContainerComponent>
     <Drawer style={{ width: 270, height: 400 }} {...props} />
   </StoryContainerComponent>
-));
+);
 
-storiesOf("Drawer", module).add("long user full name", () => (
+Default.story = {
+  name: 'default',
+};
+
+export const LongUserFullName = () => (
   <StoryContainerComponent>
     <Drawer
       style={{ width: 270, height: 400 }}
@@ -41,4 +48,8 @@ storiesOf("Drawer", module).add("long user full name", () => (
       }}
     />
   </StoryContainerComponent>
-));
+);
+
+LongUserFullName.story = {
+  name: 'long user full name',
+};

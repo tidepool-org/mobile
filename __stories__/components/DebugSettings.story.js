@@ -1,13 +1,12 @@
 /* eslint import/no-extraneous-dependencies: 0 */
-import React from "react";
-import { storiesOf } from "@storybook/react-native";
+import React from 'react';
 
-import StoryContainerScreen from "../utils/StoryContainerScreen";
-import DebugSettingsScreen from "../../src/screens/DebugSettingsScreen";
-import { API_ENVIRONMENT_QA2 } from "../../src/api";
-import { API_CACHE_EXPIRATION_180_DAYS } from "../../src/api/TidepoolApiCacheControl";
-import { GRAPH_RENDERER_THREE_JS } from "../../src/components/Graph/helpers";
-import Logger from "../../src/models/Logger";
+import StoryContainerScreen from '../utils/StoryContainerScreen';
+import DebugSettingsScreen from '../../src/screens/DebugSettingsScreen';
+import { API_ENVIRONMENT_QA2 } from '../../src/api';
+import { API_CACHE_EXPIRATION_180_DAYS } from '../../src/api/TidepoolApiCacheControl';
+import { GRAPH_RENDERER_THREE_JS } from '../../src/components/Graph/helpers';
+import Logger from '../../src/models/Logger';
 
 const props = {
   navigateGoBack: () => {},

@@ -1,6 +1,5 @@
 /* eslint import/no-extraneous-dependencies: 0 */
 import React from "react";
-import { storiesOf } from "@storybook/react-native";
 
 import StoryContainerComponent from "../utils/StoryContainerComponent";
 import SignInForm from "../../src/components/SignInForm";
@@ -12,20 +11,35 @@ const props = {
   signingIn: false,
 };
 
-storiesOf("SignInForm", module).add("default", () => (
+export default {
+  title: 'SignInForm',
+};
+
+export const Default = () => (
   <StoryContainerComponent>
     <SignInForm {...props} />
   </StoryContainerComponent>
-));
+);
 
-storiesOf("SignInForm", module).add("Sign in error", () => (
+Default.story = {
+  name: 'default',
+};
+
+export const SignInError = () => (
   <StoryContainerComponent>
     <SignInForm {...props} errorMessage="Wrong email or password!" />
   </StoryContainerComponent>
-));
+);
 
-storiesOf("SignInForm", module).add("Signing in", () => (
+SignInError.story = {
+  name: 'Sign in error',
+};
+export const SigningIn = () => (
   <StoryContainerComponent>
     <SignInForm {...props} signingIn />
   </StoryContainerComponent>
-));
+);
+
+SigningIn.story = {
+  name: 'Signing in',
+};

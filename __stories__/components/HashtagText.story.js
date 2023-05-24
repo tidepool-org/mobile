@@ -1,18 +1,21 @@
 /* eslint import/no-extraneous-dependencies: 0 */
-import React from "react";
-import { storiesOf } from "@storybook/react-native";
-import glamorous from "glamorous-native";
+import React from 'react';
+import glamorous from 'glamorous-native';
 
-import StoryContainerComponent from "../utils/StoryContainerComponent";
-import HashtagText from "../../src/components/HashtagText";
-import Colors from "../../src/constants/Colors";
-import FontStyles from "../../src/constants/FontStyles";
+import StoryContainerComponent from '../utils/StoryContainerComponent';
+import HashtagText from '../../src/components/HashtagText';
+import Colors from '../../src/constants/Colors';
+import FontStyles from '../../src/constants/FontStyles';
 
-const text1 = "#hash1 This some text with hash tags #hash2";
+const text1 = '#hash1 This some text with hash tags #hash2';
 const text2 =
-  "This is some more text with hash tags. This note is longer. It should be multi-line. See how long this note is? #multiline";
+  'This is some more text with hash tags. This note is longer. It should be multi-line. See how long this note is? #multiline';
 
-storiesOf("HashtagText", module).add("default", () => (
+export default {
+  title: 'HashtagText',
+};
+
+export const Default = () => (
   <StoryContainerComponent>
     <glamorous.View>
       <glamorous.Text>
@@ -43,4 +46,8 @@ storiesOf("HashtagText", module).add("default", () => (
       </glamorous.Text>
     </glamorous.View>
   </StoryContainerComponent>
-));
+);
+
+Default.story = {
+  name: 'default',
+};

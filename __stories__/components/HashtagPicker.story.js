@@ -1,6 +1,5 @@
 /* eslint import/no-extraneous-dependencies: 0 */
 import React from "react";
-import { storiesOf } from "@storybook/react-native";
 import glamorous from "glamorous-native";
 
 import StoryContainerComponent from "../utils/StoryContainerComponent";
@@ -45,42 +44,66 @@ const lotsOfHashtags = [
   "#hashtag20",
 ];
 
-storiesOf("HashtagPicker", module).add("default", () => (
+export default {
+  title: 'HashtagPicker',
+};
+
+export const Default = () => (
   <StoryContainerComponent>
     <glamorous.View height={64}>
       <HashtagPicker hashtags={defaultHashtags} onPress={onPress} />
     </glamorous.View>
   </StoryContainerComponent>
-));
+);
 
-storiesOf("HashtagPicker", module).add("one hashtag", () => (
+Default.story = {
+  name: 'default',
+};
+
+export const OneHashtag = () => (
   <StoryContainerComponent>
     <glamorous.View height={64}>
       <HashtagPicker hashtags={oneHashtag} onPress={onPress} />
     </glamorous.View>
   </StoryContainerComponent>
-));
+);
 
-storiesOf("HashtagPicker", module).add("two hashtags", () => (
+OneHashtag.story = {
+  name: 'one hashtag',
+};
+
+export const TwoHashtags = () => (
   <StoryContainerComponent>
     <glamorous.View height={64}>
       <HashtagPicker hashtags={twoHashTags} onPress={onPress} />
     </glamorous.View>
   </StoryContainerComponent>
-));
+);
 
-storiesOf("HashtagPicker", module).add("short and long hashtags", () => (
+TwoHashtags.story = {
+  name: 'two hashtags',
+};
+
+export const ShortAndLongHashtags = () => (
   <StoryContainerComponent>
     <glamorous.View height={64}>
       <HashtagPicker hashtags={shortAndLongHashtags} onPress={onPress} />
     </glamorous.View>
   </StoryContainerComponent>
-));
+);
 
-storiesOf("HashtagPicker", module).add("lots of hashtags", () => (
+ShortAndLongHashtags.story = {
+  name: 'short and long hashtags',
+};
+
+export const LotsOfHashtags = () => (
   <StoryContainerComponent>
     <glamorous.View height={64}>
       <HashtagPicker hashtags={lotsOfHashtags} onPress={onPress} />
     </glamorous.View>
   </StoryContainerComponent>
-));
+);
+
+LotsOfHashtags.story = {
+  name: 'lots of hashtags',
+};
