@@ -1,0 +1,39 @@
+{
+  "expo": {
+    "name": "Tidepool",
+    "slug": "Tidepool",
+    "privacy": "public",
+    "sdkVersion": "34.0.0",
+    "platforms": ["ios", "android"],
+    "version": "3.1.1",
+    "orientation": "portrait",
+    "icon": "./assets/images/Icon-App-512x512@2x.png",
+    "assetBundlePatterns": ["**/fonts/*", "**/images/*"],
+    "updates": {
+      "enabled": false
+    },
+    "isDetached": true,
+    "detach": {
+      "iosExpoViewUrl": "https://s3.amazonaws.com/exp-exponent-view-code/ios-v2.12.1-sdk34.0.0-9686ec09-2f6b-4b44-871d-c55a277381dd.tar.gz",
+      "androidExpoViewUrl": "https://s3.amazonaws.com/exp-exponent-view-code/android-v2.12.0-sdk34.0.0-997916d4-13c2-4ac7-a0cd-6df1b280bc3c.tar.gz"
+    },
+    "scheme": "exp",
+    "ios": {
+      "bundleIdentifier": "org.tidepool.blipnotesRN",
+      "icon": "./assets/images/Icon-App-512x512@2x.png",
+      "config": {
+        "usesNonExemptEncryption": false
+      },
+      "publishBundlePath": "ios/tidepool/Supporting/shell-app.bundle",
+      "publishManifestPath": "ios/tidepool/Supporting/shell-app-manifest.json"
+    },
+    "android": {
+      "package": "io.tidepool.urchin",
+      "icon": "./assets/images/Icon-App-512x512@2x.png",
+      "permissions": ["ACCESS_NETWORK_STATE", "ACCESS_WIFI_STATE", "INTERNET"],
+      "publishBundlePath": "android/app/src/main/assets/shell-app.bundle",
+      "publishManifestPath": "android/app/src/main/assets/shell-app-manifest.json"
+    },
+    "description": ""
+  }
+}
