@@ -1,13 +1,4 @@
+rootProject.name = 'mobile'
+apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)
 include ':app'
-
-// Import gradle helpers for unimodules.
-apply from: '../node_modules/react-native-unimodules/gradle.groovy'
-
-// Include unimodules.
-includeUnimodulesProjects(
-)
-
-include ':react-native-device-info'
-project(':react-native-device-info').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-device-info/android')
-include ':rollbar-react-native'
-project(':rollbar-react-native').projectDir = new File(rootProject.projectDir, '../node_modules/rollbar-react-native/android')
+includeBuild('../node_modules/@react-native/gradle-plugin')

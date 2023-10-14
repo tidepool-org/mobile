@@ -1,285 +1,123 @@
-def isRunningOnTravis = System.getenv("CI") == "true"
+apply plugin: "com.android.application"
+apply plugin: "com.facebook.react"
 
-buildscript {
-  repositories {
-    google()
-    maven { url 'https://maven.fabric.io/public' }
-  }
+/**
+ * This is the configuration block to customize your React Native Android app.
+ * By default you don't need to apply any configuration, just uncomment the lines you need.
+ */
+react {
+    /* Folders */
+    //   The root of your project, i.e. where "package.json" lives. Default is '..'
+    // root = file("../")
+    //   The folder where the react-native NPM package is. Default is ../node_modules/react-native
+    // reactNativeDir = file("../node_modules/react-native")
+    //   The folder where the react-native Codegen package is. Default is ../node_modules/@react-native/codegen
+    // codegenDir = file("../node_modules/@react-native/codegen")
+    //   The cli.js file which is the React Native CLI entrypoint. Default is ../node_modules/react-native/cli.js
+    // cliFile = file("../node_modules/react-native/cli.js")
 
-  dependencies {
-    classpath 'io.fabric.tools:gradle:1.26.1'
-  }
+    /* Variants */
+    //   The list of variants to that are debuggable. For those we're going to
+    //   skip the bundling of the JS bundle and the assets. By default is just 'debug'.
+    //   If you add flavors like lite, prod, etc. you'll have to list your debuggableVariants.
+    // debuggableVariants = ["liteDebug", "prodDebug"]
+
+    /* Bundling */
+    //   A list containing the node command and its flags. Default is just 'node'.
+    // nodeExecutableAndArgs = ["node"]
+    //
+    //   The command to run when bundling. By default is 'bundle'
+    // bundleCommand = "ram-bundle"
+    //
+    //   The path to the CLI configuration file. Default is empty.
+    // bundleConfig = file(../rn-cli.config.js)
+    //
+    //   The name of the generated asset file containing your JS bundle
+    // bundleAssetName = "MyApplication.android.bundle"
+    //
+    //   The entry file for bundle generation. Default is 'index.android.js' or 'index.js'
+    // entryFile = file("../js/MyApplication.android.js")
+    //
+    //   A list of extra flags to pass to the 'bundle' commands.
+    //   See https://github.com/react-native-community/cli/blob/main/docs/commands.md#bundle
+    // extraPackagerArgs = []
+
+    /* Hermes Commands */
+    //   The hermes compiler command to run. By default it is 'hermesc'
+    // hermesCommand = "$rootDir/my-custom-hermesc/bin/hermesc"
+    //
+    //   The list of flags to pass to the Hermes compiler. By default is "-O", "-output-source-map"
+    // hermesFlags = ["-O", "-output-source-map"]
 }
-apply plugin: 'com.android.application'
-apply plugin: 'io.fabric'
-apply plugin: 'devicefarm'
 
-repositories {
-  maven { url 'https://maven.fabric.io/public' }
-}
+/**
+ * Set this to true to Run Proguard on Release builds to minify the Java bytecode.
+ */
+def enableProguardInReleaseBuilds = false
 
-def getVersionCode = { ->
-    try {
-        def stdout = new ByteArrayOutputStream()
-        exec {
-            commandLine 'git', 'rev-list', '--count', 'HEAD'
-            standardOutput = stdout
-        }
-
-        // Multiply by 100 so we could do manual releases, manually bumping vesionCode if needed.
-        // When it ends in 00, it should correspond to git commit number on current branch
-        return Integer.parseInt(stdout.toString().trim()) * 100
-    }
-    catch (ignored) {
-        return -1;
-    }
-}
-
-def getPassword(String keyChain) {
-    def stdout = new ByteArrayOutputStream()
-    def stderr = new ByteArrayOutputStream()
-    exec {
-        commandLine 'security', '-q', 'find-generic-password', '-s', keyChain, '-w'
-        standardOutput = stdout
-        errorOutput = stderr
-        ignoreExitValue true
-    }
-    stdout.toString().trim()
-}
-
-def safeExtGet(prop, fallback) {
-  rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
-}
+/**
+ * The preferred build flavor of JavaScriptCore (JSC)
+ *
+ * For example, to use the international variant, you can use:
+ * `def jscFlavor = 'org.webkit:android-jsc-intl:+'`
+ *
+ * The international variant includes ICU i18n library and necessary data
+ * allowing to use e.g. `Date.toLocaleString` and `String.localeCompare` that
+ * give correct results when using with locales other than en-US. Note that
+ * this variant is about 6MiB larger per architecture than default.
+ */
+def jscFlavor = 'org.webkit:android-jsc:+'
 
 android {
-  compileSdkVersion safeExtGet("compileSdkVersion", 28)
+    ndkVersion rootProject.ext.ndkVersion
 
-  compileOptions {
-    sourceCompatibility JavaVersion.VERSION_1_8
-    targetCompatibility JavaVersion.VERSION_1_8
-  }
+    compileSdkVersion rootProject.ext.compileSdkVersion
 
-  defaultConfig {
-    applicationId 'io.tidepool.urchin'
-    minSdkVersion safeExtGet("minSdkVersion", 21)
-    targetSdkVersion safeExtGet("targetSdkVersion", 28)
-    versionCode getVersionCode()
-    versionName '3.1.1'
-    ndk {
-      // We use different `abiFilters` for distributing
-      // to be able to bundle old, incompatible SDKs.
-
-
-
-      abiFilters 'armeabi-v7a', 'x86', 'arm64-v8a', 'x86_64'
-
+    namespace "com.mobile"
+    defaultConfig {
+        applicationId "com.mobile"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
     }
-    multiDexEnabled true
-    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-    // Deprecated. Used by net.openid:appauth
-    manifestPlaceholders = [
-        'appAuthRedirectScheme': 'host.exp.exponent'
-    ]
-  }
-  dexOptions {
-    javaMaxHeapSize System.getenv("DISABLE_DEX_MAX_HEAP") ? null : "8g"
-  }
-
-  signingConfigs {
-    debug {
-      storeFile = file('../debug.keystore')
+    signingConfigs {
+        debug {
+            storeFile file('debug.keystore')
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
     }
-    release {
-      storeFile = isRunningOnTravis ? file("../../release-keystore.jks") : file(System.getenv("TIDEPOOL_KEYSTORE_FILE"))
-      storePassword = isRunningOnTravis ? System.getenv("keystore_password") : getPassword("tidepool_keystore_store_password")
-      signingConfigs.release.keyAlias = isRunningOnTravis ? System.getenv("keystore_alias") : System.getenv("TIDEPOOL_KEYSTORE_KEY_ALIAS")
-      signingConfigs.release.keyPassword = isRunningOnTravis ? System.getenv("keystore_alias_password") : getPassword("tidepool_keystore_key_password")
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+        }
+        release {
+            // Caution! In production, you need to generate your own keystore file.
+            // see https://reactnative.dev/docs/signed-apk-android.
+            signingConfig signingConfigs.debug
+            minifyEnabled enableProguardInReleaseBuilds
+            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+        }
     }
-  }
-  buildTypes {
-    debug {
-      debuggable true
-      ext.enableCrashlytics = false
-      signingConfig signingConfigs.debug
-    }
-    release {
-      minifyEnabled true
-      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-      zipAlignEnabled true
-      signingConfig signingConfigs.release
-    }
-  }
-  lintOptions {
-    abortOnError false
-  }
-  packagingOptions {
-    pickFirst "**"
-  }
 }
-
-devicefarm {
-  projectName System.getenv("DEVICEFARM_PROJECT_NAME")
-  devicePool System.getenv("DEVICEFARM_DEVICE_POOL")
-  executionTimeoutMinutes 40
-  authentication {
-
-    accessKey System.getenv("AWS_ACCESS_KEY_ID")
-    secretKey System.getenv("AWS_SECRET_ACCESS_KEY")
-  }
-}
-
-configurations.all {
-  resolutionStrategy {
-    force 'org.webkit:android-jsc:r245459'
-  }
-}
-
-// WHEN_PREPARING_SHELL_REMOVE_FROM_HERE
-
-apply from: 'expo.gradle'
-
-// WHEN_PREPARING_SHELL_REMOVE_TO_HERE
-
-apply from: "../../node_modules/react-native-unimodules/gradle.groovy"
 
 dependencies {
-  implementation fileTree(dir: 'libs', include: ['*.jar'])
+    // The version of react-native is set by the React Native Gradle Plugin
+    implementation("com.facebook.react:react-android")
 
-  implementation 'com.android.support:multidex:1.0.1'
+    debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}")
+    debugImplementation("com.facebook.flipper:flipper-network-plugin:${FLIPPER_VERSION}") {
+        exclude group:'com.squareup.okhttp3', module:'okhttp'
+    }
 
-  // Our dependencies
-  implementation "com.android.support:appcompat-v7:$supportLibVersion"
-  implementation project(':react-native-device-info')
-  implementation project(':rollbar-react-native')
-  implementation 'com.rollbar:rollbar-api:1.4.0'
-  implementation 'com.rollbar:rollbar-java:1.4.0'
-  implementation 'com.rollbar:rollbar-android:1.4.0@aar'
-
-  // Our dependencies from ExpoView
-  // DON'T ADD ANYTHING HERE THAT ISN'T IN EXPOVIEW. ONLY COPY THINGS FROM EXPOVIEW TO HERE.
-  implementation "com.android.support:appcompat-v7:$supportLibVersion"
-  implementation 'com.facebook.android:facebook-android-sdk:5.0.1'
-  implementation('com.facebook.android:audience-network-sdk:5.1.1') {
-    exclude module: 'play-services-ads'
-  }
-  compileOnly 'org.glassfish:javax.annotation:3.1.1'
-  implementation 'com.jakewharton:butterknife:9.0.0'
-  implementation 'de.greenrobot:eventbus:2.4.0'
-
-  implementation 'com.squareup.picasso:picasso:2.5.2'
-  implementation 'com.google.android.gms:play-services-gcm:15.0.1'
-  implementation 'com.google.android.gms:play-services-analytics:16.0.1'
-  implementation 'com.google.android.gms:play-services-maps:15.0.1'
-  implementation 'com.google.android.gms:play-services-auth:15.0.1'
-  implementation 'com.google.android.gms:play-services-location:15.0.1'
-  implementation 'com.google.android.gms:play-services-ads:15.0.1'
-  annotationProcessor 'com.raizlabs.android:DBFlow-Compiler:2.2.1'
-  implementation "com.raizlabs.android:DBFlow-Core:2.2.1"
-  implementation "com.raizlabs.android:DBFlow:2.2.1"
-  implementation "com.madgag.spongycastle:core:1.53.0.0"
-  implementation "com.madgag.spongycastle:prov:1.53.0.0"
-  debugImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta1'
-  // debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.4-beta1'
-  releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta1'
-  implementation 'com.facebook.device.yearclass:yearclass:2.1.0'
-  implementation 'commons-io:commons-io:1.4'
-  implementation 'me.leolin:ShortcutBadger:1.1.4@aar'
-  implementation 'com.theartofdev.edmodo:android-image-cropper:2.7.0'
-  implementation 'commons-codec:commons-codec:1.10'
-  implementation 'com.segment.analytics.android:analytics:4.3.0'
-  implementation 'com.google.zxing:core:3.3.3'
-  implementation 'net.openid:appauth:0.4.1'
-  implementation 'com.airbnb.android:lottie:2.5.6'
-  implementation('io.nlopez.smartlocation:library:3.2.11') {
-    transitive = false
-  }
-  implementation "com.android.support:exifinterface:${safeExtGet("supportLibVersion", "28.0.0")}"
-  implementation 'com.squareup.okio:okio:1.9.0'
-  implementation 'com.facebook.soloader:soloader:0.6.0'
-
-  // expo-file-system
-  implementation 'com.squareup.okhttp3:okhttp:3.10.0'
-  implementation 'com.squareup.okhttp3:okhttp-urlconnection:3.10.0'
-
-  // Testing
-  androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-  // We use a modified build of com.android.support.test:runner:1.0.1. Explanation in maven-test/README
-  androidTestImplementation 'com.android.support.test:runner:1.0.1'
-  androidTestImplementation "com.android.support:support-annotations:${safeExtGet("supportLibVersion", "28.0.0")}"
-  androidTestImplementation 'com.google.code.findbugs:jsr305:3.0.0'
-  androidTestImplementation 'com.android.support.test.uiautomator:uiautomator-v18:2.1.1'
-  androidTestImplementation 'com.azimolabs.conditionwatcher:conditionwatcher:0.2'
-
-  testImplementation 'junit:junit:4.12'
-  testImplementation 'org.mockito:mockito-core:1.10.19'
-  testImplementation 'org.robolectric:robolectric:3.8'
-  testImplementation 'com.android.support.test:runner:1.0.2-alpha1'
-  testImplementation 'com.android.support.test:rules:1.0.2-alpha1'
-
-
-  implementation('host.exp.exponent:expoview:34.0.0@aar') {
-    transitive = true
-    exclude group: 'com.squareup.okhttp3', module: 'okhttp'
-    exclude group: 'com.squareup.okhttp3', module: 'okhttp-urlconnection'
-  }
-
-
-
-
-  api 'org.webkit:android-jsc:r245459' // needs to be before react-native
-  api 'com.facebook.react:react-native:33.0.0'
-
-
-
-
-  addUnimodulesDependencies([
-      modulesPaths : [
-        '../../node_modules'
-      ],
-      configuration: 'api',
-      target       : 'react-native',
-      exclude      : [
-        'expo-face-detector',
-        'expo-payments-stripe',
-        'expo-ads-admob',
-        'expo-ads-facebook',
-        'expo-analytics-amplitude',
-        'expo-analytics-segment',
-        'expo-app-auth',
-        'expo-av',
-        'expo-background-fetch',
-        'expo-barcode-scanner',
-        'expo-brightness',
-        'expo-calendar',
-        'expo-camera',
-        'expo-contacts',
-        'expo-crypto',
-        'expo-document-picker',
-        'expo-facebook',
-        'expo-google-sign-in',
-        'expo-haptics',
-        'expo-image-manipulator',
-        'expo-image-picker',
-        'expo-intent-launcher',
-        'expo-local-authentication',
-        'expo-localization',
-        // 'expo-location', // Need to keep this for now since there's a runtime dependency on it (even though we don't use it)
-        'expo-media-library',
-        'expo-print',
-        'expo-random',
-        'expo-secure-store',
-        'expo-sensors',
-        'expo-sharing',
-        'expo-sms',
-        'expo-speech',
-        'expo-sqlite',
-        'expo-task-manager',
-        'expo-web-browers',
-        'expo-barcode-scanner-interface',
-        'expo-camera-interface'
-      ]
-  ])
+    debugImplementation("com.facebook.flipper:flipper-fresco-plugin:${FLIPPER_VERSION}")
+    if (hermesEnabled.toBoolean()) {
+        implementation("com.facebook.react:hermes-android")
+    } else {
+        implementation jscFlavor
+    }
 }
 
-// This has to be down here for some reason
-apply plugin: 'com.google.gms.google-services'
+apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
