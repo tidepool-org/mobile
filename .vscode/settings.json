@@ -1,14 +1,14 @@
 {
-  "cSpell.words": [
-    "carb",
-    "component",
-    "is",
-    "linewidth",
-    "scrollable",
-    "smbg",
-    "unmount",
-    "uploader",
-    "walkthrough",
-    "will"
+  "todohighlight.exclude": [
+    "**/node_modules/**",
+    "**/bower_components/**",
+    "**/dist/**",
+    "**/build/**",
+    "**/.vscode/**",
+    "**/.github/**",
+    "**/_output/**",
+    "**/*.min.*",
+    "**/*.map",
+    "**/.next/**"
   ]
 }
