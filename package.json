@@ -41,7 +41,7 @@
     "redux": "4.0.4",
     "redux-thunk": "2.3.0",
     "rollbar-react-native": "0.5.0",
-    "three": "0.107.0",
+    "three": "0.137.0",
     "three-bmfont-text": "2.3.0",
     "twitter-text": "3.0.0",
     "uuid": "3.3.2"
